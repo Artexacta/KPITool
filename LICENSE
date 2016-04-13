@@ -1,41 +1,52 @@
-KPITool is released under a dual license model, designed to meet the requirements of different 
-users and their needs for distribution and usage we offer KPITool under two flexible licenses. 
+KPITool is released under a dual license model, designed to meet 
+the requirements of different users and their needs for distribution 
+and usage we offer KPITool under two flexible licenses. 
 
 KPITool for personal use or non-profit organizations
 ====================================================
-This tool is free to use for personal or non-profit orgzanizations under the GNU General Public 
-License V3.0 show at the end of this document.  Under the terms of the license for personal or 
-non-profit organziations, this program is free software: you can redistribute it and/or modify it 
-under the terms of the GNU General Public License as published by the Free Software Foundation, 
-either version 3 of the License, or (at your option) any later version.
+This tool is free to use for personal or non-profit orgzanizations 
+under the GNU General Public License V3.0 show at the end of this 
+document.  Under the terms of the license for personal or non-profit 
+organziations, this program is free software: you can redistribute it 
+and/or modify it under the terms of the GNU General Public License as 
+published by the Free Software Foundation, either version 3 of the 
+License, or (at your option) any later version.
 
-Under the terms of the GNU General Public License, this program is distributed in the hope that 
-it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+Under the terms of the GNU General Public License, this program is 
+distributed in the hope that it will be useful, but WITHOUT ANY 
+WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+for more details.
 
 KPITool for commercial projects
 ==============================
-If you want to use KPITool for commercial purposes, then Artexacta can provide you with a 
-flexible commercial license. The Commercial License is an agreement with Artexacta S.R.L. (the 
-company that owns the copyrights and develops KPITool) for organizations that do not want to 
-release their application source code or want to use it commercially.
+If you want to use KPITool for commercial purposes, then Artexacta can 
+provide you with a flexible commercial license. The Commercial License is 
+an agreement with Artexacta S.R.L. (the company that owns the copyrights 
+and develops KPITool) for organizations that do not want to release their 
+application source code or want to use it commercially.
 
-Here are some easy to understand examples of when you would want to use a commercial distribution:
+Here are some easy to understand examples of when you would want to use a 
+commercial distribution:
 
-Selling software that includes KPITool to customers who install the software on their own machines.
-Selling software that requires customers to install KPITool on their own machines.
-Hosting KPITool on a server on the Internet and then selling services to customer.
-Using KPITool in a commercial for-profit organization to track the KPIs of the commercial organization.
+* Using KPITool in a commercial for-profit organization to track the KPIs 
+of the commercial organization.
+* Selling software that includes KPITool to customers who install the 
+software on their own machines. 
+* Selling software that requires customers to install KPITool on their own 
+machines. Hosting KPITool on a server on the Internet and then selling 
+services to customer.
 
 Specifically:
 
-If you include KPITool with an application that is not licensed under GPL license, you need a commercial 
-license for using KPITool. If you develop and distribute a commercial application and as part of 
-utilizing your application, the end-user must download a copy of KPITool; for each derivative work, you 
+If you include KPITool with an application that is not licensed under GPL 
+license, you need a commerciallicense for using KPITool. If you develop and 
+distribute a commercial application and as part of utilizing your application, 
+the end-user must download a copy of KPITool; for each derivative work, you 
 (or, in some cases, your end-user) need a commercial license for KPITool.
 
-The commercial license is private license by Artexacta S.R.L. and provides a direct legal relationship 
-with Artexacta S.R.L.
+The commercial license is private license by Artexacta S.R.L. and provides 
+a direct legal relationship with Artexacta S.R.L.
 
 =========================================================================================================
 
