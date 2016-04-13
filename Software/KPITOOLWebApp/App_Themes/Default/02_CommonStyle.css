@@ -1,0 +1,1523 @@
+﻿/*-----STYLE RESET-----*/
+html
+{
+    color: #000;
+    /*background: none repeat scroll 0 0 #FFF;*/
+}
+body, div, dl, dt, dd, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td
+{
+    margin: 0;
+    padding: 0;
+}
+img
+{
+    border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var
+{
+    font-style: normal;
+    font-weight: normal;
+}
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 100%;
+    font-family: 'Open Sans';
+    font-weight: 600;
+}
+sup
+{
+    vertical-align: text-top;
+}
+sub
+{
+    vertical-align: text-bottom;
+}
+input, textarea, select
+{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+fieldset
+{
+    border: 1px solid #AAAAAA;
+    padding: 10px;
+}
+/*CSSHACK to enable resizing for IE*/
+input, textarea, select
+{
+    font-size: 100%;
+}
+/*CSSHACK because legend doesn't inherit in IE */
+legend
+{
+    color: #000;
+}
+/*----------*/
+/*----------*/
+/*
+@font-face
+{
+    font-family: 'Verdana';
+    src: url('FontFaces/verdana.eot');
+    src: local('☺'), url('FontFaces/verdana.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+
+body
+{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    color: #676A6C;
+}
+
+h1
+{
+    font-size: 24px;
+}
+h2
+{
+    font-size: 18px;
+}
+h3
+{
+    font-size: 14px;
+}
+
+a
+{
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    /*color: #3873EA;*/
+    cursor: pointer;
+}
+
+a:hover
+{
+    text-decoration: underline;
+    /*color: #FACB00;*/
+}
+
+.appPage
+{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 10px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0px 0px 10px #AAA;
+    -webkit-box-shadow: 0px 0px 10px #AAA;
+    box-shadow: 0px 0px 10px #AAA;
+}
+.appFooter
+{
+    font-size: 0.8em;
+    border-left: solid 1px #999999;
+    border-right: solid 1px #999999;
+    background-color: #000000;
+    color: #f0f0f0;
+    text-align: center;
+    /*height: 30px;*/
+    width: 100%;
+    clear: both;
+}
+.FooterText
+{
+    font-size: 1em;
+    color: #f0f0f0;
+}
+
+p
+{
+    margin: 10px 0;
+}
+
+.relative
+{
+    position: relative;
+}
+
+.left
+{
+    float: left;
+}
+.right
+{
+    float: right;
+}
+
+/*----- Alignments -----*/
+.alignLeft
+{
+    text-align: left;
+}
+.alignRight
+{
+    text-align: right;
+}
+.alignCenter
+{
+    text-align: center;
+}
+/*---- HEADER ----*/
+
+#header
+{
+    background: #EEE none repeat scroll 0 0;
+    color: #333333;
+    margin: 0;
+    min-height: 52px;
+    overflow: hidden;
+}
+
+#logoContent
+{
+    /*float: left;
+    margin: 5px 10px 5px 10px;*/
+    display:block;
+    margin:10px;
+}
+
+#headerMnu
+{
+    float: right;
+    margin: 12px 10px 5px 10px;
+}
+
+#headerMnu .command
+{
+    border-left: 1px solid #454545;
+    margin-left: 10px;
+    padding-bottom: 1px;
+    padding-left: 10px;
+    padding-top: 1px;
+    display: inline-block;
+}
+
+/*---- MENU ----*/
+
+/*---- SYSTEM MESSAGES ----*/
+
+.systemMessages
+{
+    float: right;
+    position: absolute;
+    right: 1px;
+    text-align: right;
+    top: 3px;
+    width: 230px;
+    z-index: 7500;
+}
+
+.messagesContent
+{
+    background-color: #F5F5F5;
+    border: 1px solid #AAAAAA;
+    display: none;
+    height: 250px;
+    overflow: auto;
+    padding: 5px;
+    position: absolute;
+    text-align: left;
+    top: 19px;
+    width: 224px;
+    z-index: 100;
+}
+.messages > .header
+{
+    width: 236px;
+}
+.messages > .headerAlt
+{
+    background-color: #696969;
+    border-color: #AAAAAA #AAAAAA -moz-use-text-color;
+    border-style: solid solid none;
+    border-width: 1px 1px 0;
+    height: 16px;
+    overflow: visible;
+}
+
+.headerAlt #systemMessagesLink
+{
+    color: #FFF;
+}
+
+.header #systemMessagesLink
+{
+    color: #006400;
+}
+
+/*----- BODY -----*/
+#body
+{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    padding-top: -5px;
+}
+
+/*.appPage
+{
+    width: 960px;
+    margin: 0 auto;
+    margin-top: 10px;
+    -moz-border-radius: 5px;
+    -moz-box-shadow: 0px 0px 10px #AAA;
+    -webkit-box-shadow: 0px 0px 10px #AAA;
+}*/
+/*-----GENERAL LAYOUT-----*/
+
+.masterLeftColumn
+{
+    width: 15%;
+    float: left;
+    overflow: hidden;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+.frame
+{
+    border: 1px solid #bbb;
+    padding: 5px;
+    background-color: #EEEEEE;
+    -moz-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-radius: 3px;
+}
+
+.frameWarning
+{
+    border: 1px solid #bbb;
+    background-color: #FFFFCC;
+    -moz-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-radius: 3px;
+    clear:both;
+    font-family:Courier New;
+}
+
+.contentPanel
+{
+    padding-left: 10px;
+    width: 80%;
+}
+
+.columnContent
+{
+    background-color: #EEEEEE;
+/*    overflow: hidden;*/
+    padding: 5px 0px 5px 0px;
+}
+
+.columnHead, .columnHeadCollapsed
+{
+    background: none repeat scroll 0 0 #000000;
+    border: 1px solid #666666;
+    float: left;
+    padding-bottom: 3px;
+    width: 100%;
+}
+
+.columnHead > .title, .columnHeadCollapsed > .title
+{
+    color: #EEEEEE;
+    float: left;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-top: 4px;
+    /*text-shadow: 1px 1px #555555;*/
+}
+
+.columnHead > .commands, .columnHeadCollapsed > .commands
+{
+    color: #FFFFFF;
+    float: right;
+    font-size: 13px;
+    margin-right: 5px;
+    margin-top: 4px;
+}
+
+.contentMenu
+{
+    border-bottom: 1px solid #CCCCCC;
+    clear: both;
+    color: #616161;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    margin-top: -5px;
+    padding-top: 6px;
+}
+
+.contentMenu > a
+{
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.contentMenu > a:first-child
+{
+    margin-left: 5px;
+}
+
+.pageContent
+{
+    /*margin-right: 10px;
+    overflow: hidden;
+    width:77%;
+    float:left;*/
+    margin: 0 10px;
+}
+
+.widget
+{
+    border: 1px solid #DDDDDD;
+    background-color: #F9F9F9;
+    padding: 5px;
+    margin-bottom: 5px;
+    -moz-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-radius: 3px;
+}
+
+.widgetHead
+{
+    height: 25px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.widget .columnContent
+{
+    background-color: transparent;
+}
+
+.widgetHead > .title
+{
+    float: left;
+    font-size: 13px;
+    /*text-shadow: 1px 1px #fff;*/
+    margin-left: 5px;
+    margin-top: 4px;
+}
+
+.columnResize
+{
+    float: left !important;
+    clear: right !important;
+    margin-left: 0px !important;
+}
+
+/*---- SHORTCUT BAR ----*/
+
+.shortcutContentButton
+{
+    background-color: #ffffff;
+    padding: 5px 6px 6px 5px;
+    width: 90px; /*90+5+5 = 100*/
+    height: 90px; /*90+5+5 = 107*/
+    display: inline-block;
+    margin: 10px 5px 10px 5px;
+}
+
+a.shortcutButton
+{
+    border: 1px solid #DDDDDD;
+    background-color: #F9F9F9;
+    -moz-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    /*text-shadow: 1px 1px #fff;*/
+    color: #444444;
+}
+
+a.shortcutButton:hover
+{
+    border: 1px solid #9D9D9D;
+    background-color: #E4E7EA;
+    text-decoration: none;
+}
+
+.shortcutButton img
+{
+    margin-top: 5px;
+}
+
+
+/*-----ONE COLUMN LAYOUT-----*/
+.oneColumn
+{
+    width: 100%;
+    margin: 5px 0;
+    clear: both;
+    float: left;
+}
+
+/*-----TWO COLUMNS LAYOUT-----*/
+.twoColsLeft
+{
+    float: left;
+    width: 50%;
+    margin: 5px 0;
+}
+.twoColsRight
+{
+    float: right;
+    width: 49%;
+    margin: 5px 0 5px 10px;
+    clear: right;
+}
+
+/*-----THREE COLUMNS LAYOUT-----*/
+.threeColsLeft
+{
+    float: left;
+    width: 33%;
+    margin: 5px 0;
+}
+
+.threeColsCenter
+{
+	float: left;
+    width: 33%;
+    margin: 5px 5px 0 6px;
+}
+
+.threeColsRight
+{
+    float: right;
+    width: 33%;
+    margin: 5px 0;
+}
+
+/*-----TWO COLUMNS LAYOUT OTHER-----*/
+.oneColumLeft
+{
+    float: left;
+    width: 33%;
+    margin: 5px 0;
+}
+
+.twoColumRight
+{
+    float: right;
+    width: 66.3%;
+    margin: 5px 0 5px 5px;
+    clear: right;
+}
+
+/*---- FOOTER ----*/
+#footer
+{
+    border-top: 15px solid #E0E0E0;
+    height: 65px;
+    background-color: #6F6F6F;
+    margin-top: 10px;
+    text-align: center;
+    padding-top: 10px;
+    color: #E5E5E5;
+}
+
+#footer a
+{
+    color: #E5E5E5;
+}
+
+#artexactaLogo
+{
+    float: left;
+    margin-left: 10px;
+}
+
+#copyright
+{
+    text-align: center;
+    color: #E5E5E5;
+    display: inline-block;
+}
+
+#silvertrackLogo
+{
+    float: right;
+    margin-right: 10px;
+}
+
+/*-----FORMS STYLES-----*/
+.label
+{
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.inlineLabel
+{
+    display: inline;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.titleLabel
+{
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: large;
+    text-decoration: underline;
+}
+.subTitleLabel
+{
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: small;
+}
+
+
+
+.inlineText
+{
+    display: inline;
+    font-weight: normal;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+/*input[type="text"], input[type="password"], select
+{
+    border: solid 1px #AAA;
+    height: 20px;
+    width: 200px;
+}*/
+input[type="checkbox"]
+{
+    margin-right: 5px;
+}
+.listBox
+{
+    height: auto;
+}
+select:focus, input[type="text"]:focus, input[type="password"]:focus
+{
+    border: solid 1px #387DFE;
+}
+textarea
+{
+    border: solid 1px #AAA;
+    width: 200px;
+}
+textarea:focus
+{
+    border: solid 1px #387DFE;
+}
+
+.checkbox
+{
+    display: inline-block;
+    border: none;
+    margin-top: 5px;
+}
+.checkbox input
+{
+    margin-right: 3px;
+    width: auto;
+    height: auto;
+}
+.checkbox label
+{
+    margin-right: 15px;
+}
+.bigField
+{
+    width: 320px !important;
+}
+.biggerField
+{
+    width: 440px !important;
+}
+.mediumField
+{
+	width: 150px !important;
+}
+.normalField
+{
+    width: 200px !important;
+}
+.smallField
+{
+    width: 80px !important;
+}
+.tinyField
+{
+    width: 40px !important;
+}
+.error
+{
+    color: #D1604F;
+}
+
+.buttonsPanel
+{
+    margin: 15px 0 15px 0;
+    overflow: hidden;
+}
+
+.buttonsPanel > .secondaryButton
+{
+    display: block;
+    float: left;
+    padding-top: 3px;
+    margin-right: 10px;
+}
+
+.buttonsPanel > .button
+{
+    float: left;
+}
+
+.linkButtonTitle
+{
+    cursor: pointer;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    color: #FFCC00;
+    font-size: 14px;
+}
+.linkButton
+{
+    cursor: pointer;
+    color: #3873EA !important;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+}
+
+.button
+{
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px;
+    overflow: visible;
+    padding: 0 3px;
+    position: relative;
+    text-align: center;
+    text-decoration: none !important;
+    background: url("images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% #333333;
+    border: 1px solid #D3D3D3;
+    color: #FFFFFF;
+    font-weight: normal;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    top: 0px;
+    left: 1px;
+}
+
+.button:hover
+{
+    border: 1px solid #333333;
+    background: #dadada url(images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x;
+    font-weight: normal;
+    color: #FFF;
+}
+
+.button span
+{
+    padding: 2px 10px 3px;
+    display: block;
+}
+
+/*-----GRIDS-----*/
+.gridContainer
+{
+    overflow: auto;
+}
+/* In the div using this, please include style="width: xxx" */
+.gridCommandContainer
+{
+    padding: 5px 5px 4px 5px;
+    background-color: #f7f7f7;
+    border-top: solid 1px #DDDDDD;
+    border-left: solid 1px #DDDDDD;
+    border-right: solid 1px #DDDDDD;
+    border-bottom: none 0px;
+}
+.grid
+{
+    border: 1px solid #BBBBBB;
+    border-collapse: collapse;
+    border-spacing: 0;
+    float: left;
+    margin: 5px 0;
+    text-align: center;
+}
+.grid .head
+{
+    background-color: #000000;
+    color: #FFFFFF;
+    font-weight: bold !important;
+    /*text-transform: capitalize;*/
+    text-align: center;
+    vertical-align: middle;
+}
+.grid .head > th
+{
+    padding: 5px;
+    font-weight: bold !important;
+}
+.grid .row
+{
+    height: 20px;
+    background: #FFF;
+}
+.grid .altRow
+{
+    height: 20px;
+    background-color: #F5F5F5;
+}
+.grid tr > td
+{
+    padding: 0 5px;
+}
+.grid .foot
+{
+    height: 20px;
+    font-size: 10px;
+    background-color: #F5F5F5;
+    border-top: solid 1px #DEDEDE;
+}
+.gridRowsNumberSelector
+{
+    float: left;
+    margin-top: 5px;
+}
+.gridSelectColumns
+{
+    float: left;
+    margin-top: 5px;
+}
+
+/* Mask for Column Selector */
+.ColumnsSelector_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.ColumnsSelector_Panel
+{
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+    background-color: #FFF;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100; /*padding:10px;     background-color:#ededed;     border:solid 2px #dedede;*/
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+    overflow: auto;
+}
+
+/*-------- BREADCRUMBS -------------------*/
+.BreadcrumbCurrentNode
+{
+    color: #666;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+.BreadcrumbNode
+{
+    background-color: #909090;
+    border-bottom: solid 1px #AAA;
+    border-top: solid 2px #888;
+    color: #EEE;
+    font-size: 0.8em;
+    padding: 0px 3px 0px 3px;
+    height: 14px !important;
+    display: inline-block;
+}
+.BreadcrumbSeparator
+{
+    background-image: url("Images/neutral/BreadcrumbSeparator.png");
+    background-repeat: no-repeat;
+}
+
+/*-------- VALIDATION -----------*/
+.validation, .validators
+{
+    font-size: 1.0em;
+}
+
+
+/*-----------MULTI COMPANY SELECTOR-----------*/
+.companySelectionTabContainer
+{
+    margin-left: 5px;
+}
+
+.officeSelectionTabContainer
+{
+    margin-left: 5px;
+}
+/*-----------MULTI USER SELECTOR-----------*/
+.userSelectionTabContainer
+{
+    margin-left: 5px;
+}
+.tabStrip
+{
+}
+.defaultTab
+{
+    position: relative;
+    bottom: -1px;
+    border: solid 1px #DDDDDD;
+    margin-left: 1px;
+    padding: 5px !important;
+    background-color: #F5F5F5;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.selectedTab
+{
+    position: relative;
+    bottom: -1px;
+    border: solid 1px #AAA;
+    border-bottom: solid 1px #FFF;
+    margin-left: 1px;
+    padding: 5px !important;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.tabViewer
+{
+    border: 1px solid #AAA;
+    padding: 5px 10px;
+    height: 154px;
+}
+
+.pageIntro
+{
+    margin: 10px 5px 5px 5px;
+}
+
+
+.gridWithGridRow
+{
+    float: left;
+}
+
+.gridRow
+{
+    padding-left: 5px;
+    padding-top: 5px;
+    float: left;
+}
+
+.gridRowEnd
+{
+    float: none;
+    clear: both;
+}
+
+/* MESSAGES CONTROL */
+.messages
+{
+    float: right;
+    width: 250px;
+    padding: 2px;
+    position: relative;
+}
+.messagesContent
+{
+    display: none;
+    position: absolute;
+    left: inherit;
+    background-color: #f5f5f5;
+    border: solid 1px #aaa;
+    padding: 5px;
+    overflow: auto;
+    height: 250px;
+    width: 238px;
+    top: 19px;
+    z-index: 100;
+}
+.messages > .header
+{
+}
+.messages > .headerAlt
+{
+    border-top: solid 1px #aaa;
+    border-left: solid 1px #aaa;
+    border-right: solid 1px #aaa;
+    border-bottom: none 0px;
+    overflow: visible;
+    height: 16px;
+    background-color: #fff;
+}
+
+/* Mask for feedback panel */
+.feedback_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+.feedback_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100; /*padding:10px;     background-color:#ededed;     border:solid 2px #dedede;*/
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+
+
+/* Mask for SecurityContext Mask panel */
+.SecurityContext_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.SecurityContext_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+
+
+/*--------------------------------*/
+/* Mask for TimeRecord Mask panel */
+.TimeRecord_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.TimeRecord_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100;
+    padding: 10px;
+    background-color: #ededed;
+    border: solid 2px #dedede;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+
+.DevolutionRecord_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100;
+    padding: 10px;
+    background-color: #ededed;
+    border: solid 2px #dedede;
+    -moz-border-radius-topleft: 7px;
+    border-top-left-radius: 7px;
+    -moz-border-radius-topright: 7px;
+    border-top-right-radius: 7px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+/* Mask for ExpensesRecord Mask panel */
+.DevolutionRecord_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+/* Mask for Annotation Mask panel */
+.Annotation_Mask
+{
+    position: absolute;
+    z-index: 7900;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.Annotation_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100;
+    padding: 10px;
+    background-color: #ededed;
+    border: solid 2px #dedede;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+
+/*-------------------------------*/
+/* Mask for Shortlist Mask panel */
+.AddShortlist_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.ShortlistAdd_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100;
+    padding: 10px;
+    background-color: #ededed;
+    border: solid 2px #dedede;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+
+/* Mask for Add Company in Edit Shortlist Mask panel */
+.AddCompanyToShortlist_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+
+.AddCompanyToShortlist_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100;
+    padding: 10px;
+    background-color: #ededed;
+    border: solid 2px #dedede;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}
+
+/** Confirm control */
+.DisplayNone
+{
+    display: none;
+}
+
+/** Lists */
+
+/** Phone List */
+.phonesList > ul
+{
+    list-style-image: url(./Icons/phoneSmall.png);
+    list-style-position: inside;
+}
+.emailsList > ul
+{
+    list-style-image: url(./Icons/emailSmall.png);
+    list-style-position: inside;
+}
+
+/*------------------------------------------*/
+/* Styles for ActivityCheckList UserControl */
+.checkboxItem
+{
+    display: none;
+}
+.checkItemContainer
+{
+    display: block;
+    clear: both;
+    margin: 2px 0px 2px 0px;
+    overflow: hidden;
+}
+.clear
+{
+    clear: both;
+}
+.checkItemContainerLabel
+{
+    display: inline-table;
+    float: left;
+}
+.checkItem
+{
+    float: left;
+    display: inline-table;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.checkItem_disabled
+{
+    cursor: default !important;
+}
+.checked
+{
+    background-image: url(checked.png);
+}
+.checked_disabled
+{
+    background-image: url(checked_disabled.png);
+}
+.unchecked
+{
+    background-image: url(unchecked.png);
+}
+.unchecked_disabled
+{
+    background-image: url(unchecked_disabled.png);
+}
+.cmdDeleteCheckItem
+{
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}
+.checkItemContainerLabel
+{
+    cursor: pointer;
+}
+.checkItemContainerLabel_disabled
+{
+    cursor: default !important;
+    margin-left: 5px !important;
+}
+
+/*Body for EmptyMastePage*/
+#mainBody, #EmptyHtml
+{
+    background: none repeat scroll 0 0 #FFF !important;
+    margin: 0;
+}
+
+/*-------- FORM HINTS-----------*/
+.hint
+{
+    position: absolute;
+    border: 1px solid #387DFE;
+    padding: 10px 12px;
+    background-color: #f7f7f7;
+    width: 200px;
+    display: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    z-index: 100;
+}
+.hint .hint-pointer
+{
+    position: absolute;
+    left: -10px;
+    top: 5px;
+    width: 10px;
+    height: 19px;
+    background: url(Images/neutral/hint_pointer.gif) left top no-repeat;
+    z-index: 100;
+}
+
+.tooltip
+{
+    z-index: 99999;
+}
+.help
+{
+    width: 27px;
+    height: 27px;
+    background-image: url('images/Help.png');
+}
+.miniHelp
+{
+    width: 20px;
+    height: 20px;
+    background-image: url('images/miniHelp.png');
+}
+.miniHelp:hover
+{
+    background-image: url('images/miniHelphover.png');
+}
+.help:hover
+{
+    background-image: url('images/Helphover.png');
+}
+/*---- HEADER ----*/
+
+/*---- MENU ----*/
+.menu, .menu > .rmRootGroup
+{
+    background: #000000 !important;
+    color: #fff !important;
+    box-shadow: 0 0 10px #DDDDDD;
+}
+
+.menu > ul.menu
+{
+    display: inline-block;
+    margin: 0px 0px 0px 5px;
+    padding: 0px;
+    list-style: none outside none;
+}
+
+ul.menu > li
+{
+    height: 41px;
+    display: inline-block;
+    border-left: 1px solid #F7F7F7;
+    border-right: 1px solid #D0D0D0;
+    margin: 0px 0px 0px 0px;
+    float: left;
+    clear: right;
+    overflow: hidden;
+}
+
+ul.menu > li > a, ul.menu > li > a:hover
+{
+    display: inline-block;
+    padding: 12px 5px 13px 10px;
+    color: #454545;
+    font-weight: 700;
+    height: 100%;/*
+    text-shadow: 1px 1px #fff;
+    */text-decoration: none;
+}
+
+.menu
+{
+    float: left;
+}
+
+.menu > ul
+{
+    border-width: 0px !important;
+}
+.cellClass
+{
+    padding-bottom: 3px;
+    vertical-align: top;
+    white-space: nowrap;
+    padding-right: 3px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    color: #000000;
+}
+/*-- TABLAS DE DATOS --*/
+.dataTable
+{
+    background-color: #EEEEEE;
+    width: 100%;
+}
+.dataTable .dataTableLabel
+{
+    font-weight: bold;
+    width: 150px;
+    font-size: 0.9em;
+    vertical-align: top;
+}
+.dataTable .dataTableInfo
+{
+    width: 250px;
+    font-size: 0.9em;
+    vertical-align: top;
+}
+.dataTable .dataDetails
+{
+    font-size: 0.9em;
+    vertical-align: top;
+}
+.dataTable .alternateRow
+{
+    background-color: #F7F7F7;
+}
+.dataTable td
+{
+    padding: 2px 3px;
+}
+/****DOCUMENTS****/
+.toggleButtonDiv
+{
+    width: 20px;
+    float: left;
+}
+.titleDiv
+{
+    width: 700px;
+    float: none;
+}
+.inlineDescription
+{
+    font-style: italic;
+    padding-left: 5px;
+}
+.fileList
+{
+    padding-left: 20px;
+}
+.spaceDocumentDiv
+{
+    padding-top: 15px;
+}
+
+.tabla
+{
+	clear: none;
+    overflow: auto;
+    padding: 5px;
+    width: 100%;
+}
+
+.fila
+{ 
+	clear:both;
+}
+
+div.fila > div {
+    float: left;
+    height: 25px;
+    padding-right: 10px;
+    padding-top: 3px;
+    height: 100%;
+}
+.RadComboBoxDropDown_Default .rcbHovered {
+    background: none repeat scroll 0 0 #3873EA !important;
+    color: #FFFFFF !important;
+}
+.viewWrap
+{
+    background: #D8D8D8 repeat-x scroll 0 0;
+    padding: 15px;
+}
+
+.ReportViewer_background
+{
+	background-color: #FFFFFF;
+}
+.rgDataDiv
+{
+	height:100% !important;	
+}
+
+.rcbHeader ul,
+.rcbFooter ul,
+.rcbItem ul, .rcbHovered ul, .rcbDisabled ul
+{
+    width: 100%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.col1, .col2, .col3
+{
+    float: left;
+    margin: 0;
+    padding: 0 5px 0 0;
+    line-height: 14px;
+}
+
+/* Mask for feedback panel */
+.feedback_Mask
+{
+    position: absolute;
+    z-index: 8000;
+    background-color: #000;
+    display: none;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+}
+.feedback_Panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 8100; /*padding:10px;     background-color:#ededed;     border:solid 2px #dedede;*/
+    -moz-border-radius-topleft: 7px;
+    border-top-left-radius: 7px;
+    -moz-border-radius-topright: 7px;
+    border-top-right-radius: 7px;
+    -moz-box-shadow: 0px 0px 15px #FFF;
+    -webkit-box-shadow: 0px 0px 15px #FFF;
+    box-shadow: 0px 0px 15px #FFF;
+}

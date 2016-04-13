@@ -1,0 +1,35 @@
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+
+@keyframes pulse {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.7, 1.7, 1.7);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@media (max-width: 991px) {
+    @keyframes pulse {
+      0% {
+        transform: scale3d(1, 1, 1);
+      }
+
+      50% {
+        transform: scale3d(1.2, 1.2, 1.2);
+      }
+
+      100% {
+        transform: scale3d(1, 1, 1);
+      }
+    }
+}
+
+.pulse {
+  animation-name: pulse;
+}

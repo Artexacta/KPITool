@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<changes>
+  <change version="1.0.0" date="Sep/01/2013">
+    <![CDATA[ 
+            Added basic elements, like Base UI and Security.
+    ]]>
+  </change>
+</changes>

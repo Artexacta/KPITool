@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="EmptyMasterPage.master.cs" Inherits="EmptyMasterPage" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <asp:Literal ID="JqueryAndMainMenuScript" runat="server"></asp:Literal>
+        <asp:ContentPlaceHolder id="head" runat="server">
+        </asp:ContentPlaceHolder>
+    </head>
+    <body class="login-content">
+        <form id="form1" runat="server" class="login-content">
+            <asp:ContentPlaceHolder id="cp" runat="server">
+        
+            </asp:ContentPlaceHolder>
+        </form>
+    </body>
+</html>

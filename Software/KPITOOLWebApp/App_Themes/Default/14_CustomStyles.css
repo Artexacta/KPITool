@@ -1,0 +1,401 @@
+﻿/* General Fixes */
+a:focus {
+    outline: none !important;
+}
+
+.menuImage {
+    max-width: 100%;
+}
+
+.grey-bck p {
+    background: #CECECE;
+    padding: 2px 10px;
+    min-height: 20px;
+}
+
+.cyan-bck p {
+    background: #16F2F9;
+    padding: 2px 10px;
+    min-height: 20px;
+}
+
+.green-bck p {
+    background: #A0FC37;
+    padding: 2px 10px;
+    min-height: 20px;
+}
+
+.border-right {
+    border-style: none solid solid solid !important;
+}
+/* Login Fixes */
+#loginLogoContainer {
+    margin: 30px 0 !important;
+}
+
+    #loginLogoContainer h2, #loginLogoContainer h3 {
+        margin: 10px 0;
+    }
+
+small a {
+    font-family: 'Open Sans';
+}
+
+    small a:hover {
+        color: #23527C;
+    }
+
+.validation, .validators {
+    font-size: 85%;
+}
+
+.form-group {
+    margin: 8px 0 !important;
+}
+
+/* Navbar and Menu Fixes */
+.profile-element img {
+    background: #FFFFFF;
+}
+
+.profile-element #ctl00_Label1 {
+    color: #FFFFFF;
+}
+
+.nav-second-level li a {
+    font-size: 10px !important;
+}
+
+.nav.navbar-top-links a {
+    font-size: 12px !important;
+    color: #999C9E;
+    font-family: 'Open Sans';
+    font-weight: 600;
+}
+
+.notificationButton {
+    float: none !important;
+    margin: 0 !important;
+}
+
+.languages span {
+    color: #999C9E;
+    font-family: 'Open Sans';
+    margin: 0 5px;
+}
+
+    .languages span.selected {
+        font-weight: bold;
+    }
+
+/*Main Fixes (User Controls, Grids)*/
+.CSearch {
+    float: none !important;
+    width: 100% !important;
+    overflow: hidden;
+}
+
+    .CSearch .SearchContainer {
+        border: 1px solid #E5E6E7 !important;
+        width: 80% !important;
+        border-radius: 1px;
+        height: 30px;
+    }
+
+        .CSearch .SearchContainer .SearchBox {
+            width: 85% !important;
+            height: 28px;
+        }
+
+        .CSearch .SearchContainer .SearchButton {
+            width: 5% !important;
+            height: auto !important;
+            padding: 6px 2px 0px 0px !important;
+        }
+
+.miniHelp {
+    background-image: none !important;
+    font-size: 17px;
+    padding: 6px 2px;
+    width: auto !important;
+    height: auto !important;
+    color: #676A6C;
+}
+
+.table-responsive {
+    margin-top: 15px;
+    width: 100% !important;
+}
+
+.table > tbody > tr > th {
+    vertical-align: middle !important;
+    font-weight: bold !important;
+    text-align: center !important;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+.img-buttons {
+    font-size: 18px !important;
+}
+
+.min-letter {
+    font-size: 10px !important;
+}
+
+.center-arrows {
+    text-align: center;
+    margin-top: 120px;
+}
+
+    .center-arrows a {
+        font-size: 20px;
+        color: #1AB394;
+    }
+
+.vertMargin {
+    margin: 15px 0;
+}
+
+/* Frame Fixes */
+.frame {
+    background: #F5F5F5 !important;
+    border-color: #E7EAEC !important;
+    width: 100% !important;
+}
+
+
+/* Footer Fixes */
+.footer {
+    font-size: 10px;
+}
+
+    .footer a {
+        color: #676A6C;
+    }
+
+        .footer a:hover {
+            color: #676A6C;
+        }
+
+.footerImage {
+    margin-top: 5px;
+}
+
+/* Telerik Skin fixes */
+
+.RadComboBox_aetemplate, .RadInput_aetemplate input {
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #E5E6E7 !important;
+    border-radius: 1px;
+    color: inherit;
+    display: block !important;
+    padding: 6px 12px !important;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100% !important;
+    font-size: 14px;
+}
+
+.RadComboBoxDropDown_aetemplate .rcbScroll, .RadCalendar_aetemplate, .RadCalendarPopupShadows, .RadComboBoxDropDown_aetemplate, rcbMoreResults {
+    background: #FFFFFF;
+}
+
+.RadComboBox_aetemplate a {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #000000;
+    margin-top: 8px;
+}
+
+.RadInput_aetemplate, .RadPicker_aetemplate, .RadPicker_aetemplate .rcTable {
+    width: 100% !important;
+    display: block !important;
+    height: auto !important;
+}
+
+.RadCalendar .rcFastPrev, .RadCalendar .rcPrev, .RadCalendar .rcNext, .RadCalendar .rcFastNext, .rcCalPopup {
+    color: #676A6C;
+    font-weight: bold;
+    text-indent: 0 !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.rgHeader {
+    font-weight: bold !important;
+}
+
+.rgEditRow td {
+    background-color: #FFFFFF !important;
+    border: 0 !important;
+}
+
+.rgExpXLS {
+    color: #FFFFFF;
+    background-color: #1AB394 !important;
+    font-size: 14px !important;
+    padding: 0 8px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* iframe Styles*/
+iframe {
+    width: 100%;
+    border: none;
+    font-family: 'Open Sans';
+}
+
+/* Popover Style */
+.popover {
+    width: 280px !important;
+    font-size: 10px !important;
+    max-height: 175px !important;
+    overflow-y: scroll;
+}
+
+    .popover ul {
+        margin: 0 !important;
+        list-style: none;
+        padding: 0 !important;
+    }
+
+        .popover ul li {
+            padding: 10px 0;
+        }
+
+            .popover ul li:hover {
+                background: rgba(103,106,108,0.1);
+                cursor: pointer;
+            }
+
+            .popover ul li a {
+                color: #676A6C !important;
+                font-size: 10px !important;
+            }
+
+                .popover ul li a:hover {
+                    color: #676A6C !important;
+                }
+
+.myCustomBg {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 2001;
+    display: none;
+    overflow: hidden;
+    outline: 0px none;
+    background: rgba(0,0,0,0.6);
+}
+
+.myCustomModal {
+    position: relative;
+    width: 60%;
+    z-index: 2500;
+    margin: 10% auto;
+    background: #FFFFFF;
+}
+
+    .myCustomModal .middle-box {
+        margin-top: 0 !important;
+    }
+
+    .myCustomModal .modal-footer .btn {
+        margin-bottom: 0 !important;
+    }
+/* Messages Count*/
+.count-info .label {
+    right: -6px !important;
+    top: -15px !important;
+}
+/* Landing Page */
+.landing-page .navbar-default .navbar-brand {
+    margin-top: 0 !important;
+    background: none !important;
+}
+
+.landing-page .navbar.navbar-scroll .navbar-brand:hover {
+    background: none !important;
+}
+
+.landing-page .navbar.navbar-scroll .navbar-brand img {
+    max-width: 80% !important;
+}
+
+.landing-page .carousel-image {
+    top: 110px !important;
+}
+/*Responsive Fixes*/
+@media (max-width: 768px) {
+    .CSearch .SearchContainer {
+        width: 75% !important;
+    }
+
+        .CSearch .SearchContainer .SearchBox {
+            width: 70% !important;
+        }
+
+        .CSearch .SearchContainer .SearchButton {
+            width: 10% !important;
+        }
+
+    .miniHelp {
+        font-size: 25px !important;
+        padding: 2px 5px !important;
+    }
+
+    #ctl00_cp_DeleteRolImageButton {
+        font-size: 18px !important;
+        margin: 1px 7px 0 !important;
+    }
+
+    #ctl00_cp_SearchButton {
+        margin: 14px auto;
+        display: block;
+        width: 50%;
+    }
+
+    .footer {
+        text-align: center !important;
+    }
+
+    .footerImage {
+        text-align: center !important;
+    }
+}
+
+
+.table > thead > tr > th {
+    font-weight:bold;
+}
+
+.table-rigth-border {
+    border-right: 1px solid #DDDDDD;
+}
+
+.table.initial-test-condition > tbody > tr > td:first-child, .table.initial-test-condition > tbody > tr > td:nth-child(5),
+.table.initial-test-condition > tbody > tr > td.cell-text-left
+{
+    text-align: left !important;
+}
+
+h1 + em, h2 + em, h3 + em, h4 + em, h5 + em, h6 + em {
+    display:block;
+}
+
+.em {
+    font-style: italic;
+}
+
+.table-test-calculations th{
+    background-color: #F5F5F6;
+}

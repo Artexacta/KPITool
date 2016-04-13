@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+
+This is a hierarchical menue definition, where each menu is specified as follows:
+
+A Menu node can have other children Menu nodes and each node has the following
+attributes defined:
+
+resourceFile:  The name of the Global Resource file where we can find the menu text
+resourceItem:  The name of the Global Resource item where we can find the menu text
+url:           The URL for the menu.  This is optional.
+public:        true/false indicates if access to the menu is public.
+class:         if the menu is not public, the name of the class that the user 
+               must have for the menu to be visible.
+-->
+
+<Home>
+  <!-- First Menu: Inicio -->
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="MenuHome"
+				url="~/MainPage.aspx"
+				public="true"
+        icon="zmdi zmdi-home">
+  </Menu>
+
+  <!-- Second Menu: Seguridad -->
+  <Menu resourceFile="InitMasterPage"
+		  resourceItem="MenuSecurity"
+		  public="true"
+		  class="SECURITY"
+      icon="fa fa-user-secret">
+    <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuUserList"
+			  public="false"
+			  class="SECURITY"
+			  url="~/Security/UserList.aspx">
+    </Menu>
+    <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuAssignRoles"
+			  public="false"
+			  class="SECURITY"
+			  url="~/Security/AssignRoles.aspx">
+    </Menu>
+    <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuAssignRolesByUser"
+			  public="false"
+			  class="SECURITY"
+			  url="~/Security/AssignRolesByUser.aspx">
+    </Menu>
+    <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuDefinePermissionRole"
+			  public="false"
+			  class="SECURITY"
+			  url="~/Security/DefinePermissionsByRol.aspx">
+    </Menu>
+    <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuDefinePermissionUser"
+			  public="false"
+			  class="SECURITY"
+			  url="~/Security/DefinePermissionsByUser.aspx">
+    </Menu>
+    <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuListaEventosBitacora"
+			  public="false"
+			  class="SECURITY"
+			  url="~/Bitacora/ListaEventosBitacora.aspx">
+    </Menu>
+  </Menu>
+  
+
+  <!-- Fifth Menu: My Account -->
+  <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuAccount"
+			  public="true"
+        icon="zmdi zmdi-account">
+    <Menu resourceFile="InitMasterPage"
+					resourceItem="MenuChangePassword"
+					public="true"
+					url="~/Security/ChangePassword.aspx">
+    </Menu>
+    <!--<Menu resourceFile="InitMasterPage"
+					resourceItem="MenuPreferences"
+					public="true"
+					url="~/UserConfiguration/UserConfiguration.aspx">
+    </Menu>-->
+  </Menu>
+  
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="ProjectMenu"
+				url="~/Project/ProjectList.aspx"
+				public="true"
+        icon="zmdi zmdi-book">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="ActivityMenu"
+				url="~/Activity/ActivitiesList.aspx"
+				public="true"
+        icon="zmdi zmdi-format-list-bulleted">
+  </Menu>
+  
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="KpiMenu"
+				url="~/Kpi/KpiList.aspx"
+				public="true"
+        icon="zmdi zmdi-trending-up">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="KpiDashboardMenu"
+				url="~/Kpis/KpiDashboard.aspx"
+				public="true"
+        icon="zmdi zmdi-view-dashboard">
+  </Menu>
+
+  <!-- Sixth Menu: About -->
+  <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuAbout"
+			  public="true"
+        icon="zmdi zmdi-info-outline">
+    <Menu resourceFile="InitMasterPage"
+					resourceItem="MenuCredits"
+					public="true"
+					url="~/About/Credits.aspx">
+    </Menu>
+    <Menu resourceFile="InitMasterPage"
+					resourceItem="MenuChanges"
+					public="true"
+					url="~/About/VersionInformation.aspx">
+    </Menu>
+  </Menu>
+
+</Home>

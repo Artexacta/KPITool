@@ -1,0 +1,188 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs"  Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Register Src="UserControls/Messages.ascx" TagName="Messages" TagPrefix="msg" %>
+<%@ Register Src="~/UserControls/ToolTipManager/ToolTipManager.ascx" TagName="ToolTipManager" TagPrefix="artexacta" %>
+<%@ Register Src="~/UserControls/LanguageSelector.ascx" TagPrefix="lang" TagName="LanguageSelector" %>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <asp:Literal ID="JqueryAndMainMenuScript" runat="server"></asp:Literal>
+    <%--<link href="App_Themes/Default/CommonStyle.css" rel="stylesheet" type="text/css" />--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <!-- MASKS AND GENERAL CHECKS ----------------------------------------------------------------->
+        <div id="TOP"></div>
+        <!-- Do not remove div#mask, because you'll need it to fill the whole screen -->
+        <div id="feedback_Mask" class="feedback_Mask"></div>
+        <!-- Javascript must be enabled -->
+        <noscript>
+            <style type="text/css">
+                #aspnetForm {
+                    display: none;
+                }
+            </style>
+            <div class="noscriptmsg">
+                <asp:Literal ID="NoJScriptLabel" runat="server"
+                    Text="<%$ Resources: InitMasterPage, NoJScriptLabel %>"></asp:Literal>
+            </div>
+        </noscript>
+        <!-- =========================================================================================-->
+        <header id="header" class="clearfix" data-spy="affix" data-offset-top="65">
+            <ul class="header-inner">
+                <!-- Logo -->
+                <li class="logo">
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/logo.png" AlternateText="logo" CssClass="menuImage hidden-xs"/>
+                    <div id="menu-trigger"><i class="zmdi zmdi-menu" style="margin-top: 8px;"></i></div>
+                </li>
+                <li>
+                    <msg:Messages ID="MessagesContent" runat="server" />
+                </li> 
+                <li>
+                    <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Security/ChangePassword.aspx" runat="server" Text="<i class='zmdi zmdi-key'></i> Change Password" />
+                </li>
+                <li>
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutPageUrl="~/Authentication/Login.aspx" OnLoggingOut="LoginStatus1_LoggingOut" />
+                </li> 
+            </ul>
+        </header>
+        <aside id="sidebar">
+            <asp:Literal ID="sideMenu" runat="server"></asp:Literal>
+        </aside>
+        <section id="content">
+            <div class="container">
+                <asp:ContentPlaceHolder ID="cp" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </section>
+        <footer id="footer">
+
+                            <div class="col-md-12">
+                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/About/Credits.aspx"
+                                    CssClass="FooterText"
+                                    Text="Credits">
+                                </asp:HyperLink>
+                                &nbsp;|&nbsp;
+                                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/About/Credits.aspx"
+                                    CssClass="FooterText"
+                                    Text="News and Changes">
+                                </asp:HyperLink>
+                                &nbsp;|&nbsp;
+                                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/ResetSystem.aspx"
+                                    CssClass="FooterText"
+                                    Text="Manage System">
+                                </asp:HyperLink>
+                            </div>
+                            <div class="col-md-12">
+                                <a href="#" id="feedbackHyperLink" class="FooterText">
+                                    <asp:Literal ID="SubmitfeedbackLabel" runat="server" Text="<%$ Resources: InitMasterPage, SubmitFeedbackLabel %>"></asp:Literal>
+                                </a>
+                    </div>
+                            <div class="col-md-12 footerImage">
+                                Powered by 
+                            <a class="FooterText font-bold" href="http://www.artexacta.com" target="_blank">Artexacta S.R.L.</a>
+                                <a href="http://www.artexacta.com" target="_blank">
+                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/ArtexactaLogo30px.png" Width="20px" />
+                                </a>
+
+                                <div style="clear: both"></div>
+                            </div>
+        </footer>
+
+        <asp:HiddenField ID="CurrentUserIDHiddenField" runat="server" />
+        <%-- <artexacta:ToolTipManager ID="ToolTipManagerControl" runat="server"
+            NoApplyToSelector="*[class|=ru], *[class|=Rad],*[class|=Rad]"
+            ShouldDisplayToolTipWS="~/ToolTipWS/ToolTipUse.asmx/ShouldDisplayToolTip" />--%>
+
+
+        <!-- Feedback Panel -->
+        <div id="feedbackPanel" class="feedback_Panel frame">
+            <div class="columnHead">
+                <asp:Label ID="Label2" runat="server" Text="<%$ Resources: InitMasterPage, EnterFeedbackTitle %>"
+                    CssClass="title" />
+                <div class="commands">
+                    <a href="#" class="secondaryButton" id="cancelFeedbackButton">
+                        <asp:Literal ID="CloseLabel" runat="server" Text="<%$ Resources: Glossary, CloseLabel %>"></asp:Literal>
+                    </a>
+                </div>
+            </div>
+            <div class="columnContent">
+                <br />
+                <asp:Literal ID="FeedbackIframeCode" runat="server" Visible="false"></asp:Literal>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#ctl00_LoginStatus1").prepend('<i class="zmdi zmdi-run"></i>');
+
+                updateOnResize();
+
+                $("#feedbackPanel").hide();
+
+                // Handler to show the columns selector
+                $("#feedbackHyperLink").click(function (e) {
+
+                    $.scrollTo($('#TOP'), 800);
+
+                    e.preventDefault();
+
+                    var maskWinH = $(document).height();
+                    var maskWinW = $(window).width();
+                    $("#feedback_Mask").css({ 'width': maskWinW, 'height': maskWinH });
+                    $("#feedback_Mask").css('top', 0);
+                    $("#feedback_Mask").css('left', 0);
+                    $('#feedback_Mask').fadeIn(200);
+                    $('#feedback_Mask').fadeTo('fast', 0.8);
+                    $("#feedback_Mask").fadeIn(500);
+
+                    var winH = $(window).height();
+                    var winW = $(window).width();
+                    $("#feedbackPanel").css('top', winH / 2 - $("#feedbackPanel").height() / 2);
+                    $("#feedbackPanel").css('left', winW / 2 - $("#feedbackPanel").width() / 2);
+                    $("#feedbackPanel").fadeIn(500);
+
+                    return false;
+                });
+
+                $("#cancelFeedbackButton").click(function (e) {
+                    e.preventDefault();
+                    $("#feedbackPanel, #feedback_Mask").fadeOut(500);
+                });
+            });
+
+            function updateOnResize() {
+                var newWidth = $(".pageContent").outerWidth() - $(".twoColsRight").outerWidth() - 10;
+                $(".twoColsLeft").css("clear", "none");
+                $(".twoColsRight").removeClass("columnResize");
+                if (newWidth < 240) {
+                    newWidth = 240;
+                    $(".twoColsLeft").css("clear", "left");
+                    $(".twoColsRight").addClass("columnResize");
+                }
+                $(".twoColsLeft").css("width", newWidth);
+                $(".twoColsLeft .gridcontainer").css("width", newWidth - 12);
+                if ($(window).width() <= 535) {
+                    $(".pageContent").addClass("columnResize");
+                } else {
+                    $(".pageContent").removeClass("columnResize");
+                }
+            }
+            $(window).resize(function () {
+                updateOnResize();
+            });
+            $(window).load(function () {
+                updateOnResize();
+            });
+
+        </script>
+    </form>
+</body>
+</html>

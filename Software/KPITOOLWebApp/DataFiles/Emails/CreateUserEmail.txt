@@ -1,0 +1,16 @@
+﻿<p> Su cuenta fue creada en nuestro sitio Web con la siguiente informaci&oacute;n: </p>
+<blockquote>
+  <p>Cuenta: <%UserName%>
+  </p>
+</blockquote>
+<p>Para activar esta cuenta es necesario ingresar en el sistema el siguiente c&oacute;digo de validaci&oacute;n: </p>
+<p>C&oacute;digo de Validaci&oacute;n: <%ValidationCode%>
+  </p>
+<p>Puede ingresar este c&oacute;digo de validaci&oacute;n autom&aacute;ticamente pinchando el siguiente v&iacute;nculo:</p>
+<blockquote>
+  <p><%Link%></p>
+</blockquote>
+
+<p>Gracias por crear una cuenta con nuestro sitio. </p>
+
+<p>Si usted no se registró en nuestro sitio por favor ignore este email. </p>

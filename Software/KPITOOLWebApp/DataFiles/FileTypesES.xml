@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FileTypes>
+  <Type extension=".png" description="Imagen"
+        icon="icon_png.jpg" medIcon="Image-PNG-iconMed.png" largeIcon="Image-PNG-iconLarge.png"
+        customIcon="icon_png.jpg" customMedIcon="Image-PNG-iconMed.png" customLargeIcon="Image-PNG-iconLarge.png"
+        provider="INTERNALIMAGE" image="true"/>
+  <Type extension=".avi" description="Película"
+        icon="movie-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="movie-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".bmp" description="Imagen"
+        icon="bmp-icon.jpg" medIcon="Image-BMP-iconMed.png" largeIcon="Image-BMP-iconLarge.png"
+        customIcon="bmp-icon.jpg" medCustomIcon="Image-BMP-iconMed.png" largeCustomIcon="Image-BMP-iconLarge.png"
+        provider="INTERNALIMAGE" image="true"/>
+  <Type extension=".xls" description="Documento Excel"
+        icon="excel-icon.jpg" medIcon="excel-medIcon.gif" largeIcon="excel-iconLarge.jpg"
+        customIcon="excel-icon.jpg" medCustomIcon="excel-medIcon.gif" largeCustomIcon="excel-iconLarge.jpg"
+        provider="IFILTER" image="false"/>
+  <Type extension=".gif" description="Imagen"
+        icon="gif-icon.jpg" medIcon="Image-GIF-iconMed.png" largeIcon="Image-GIF-iconLarge.png"
+        customIcon="gif-icon.jpg" medCustomIcon="Image-GIF-iconMed.png" largeCustomIcon="Image-GIF-iconLarge.png"
+        provider="INTERNALIMAGE" image="true"/>
+  <Type extension=".html" description="Página Web"
+        icon="html-icon.jpg" medIcon="html-iconMed.png" largeIcon="html-iconLarge.png"
+        customIcon="html-icon.jpg" medCustomIcon="html-iconMed.png" largeCustomIcon="html-iconLarge.png"
+        provider="HTML" image="false"/>
+  <Type extension=".htm" description="Página Web"
+        icon="html-icon.jpg" medIcon="html-iconMed.png" largeIcon="html-iconLarge.png"
+        customIcon="html-icon.jpg" medCustomIcon="html-iconMed.png" largeCustomIcon="html-iconLarge.png"
+        provider="HTML" image="false"/>
+  <Type extension=".jpg" description="Imagen"
+        icon="jpg-icon.gif" medIcon="Image-JPEG-iconMed.png" largeIcon="Image-JPEG-iconLarge.png"
+        customIcon="jpg-icon.gif" medCustomIcon="Image-JPEG-iconMed.png" largeCustomIcon="Image-JPEG-iconLarge.png"
+        provider="INTERNALIMAGE" image="true"/>
+  <Type extension=".mp3" description="Archivo de Audio"
+        icon="audio-icon.gif" medIcon="audio-iconMed.png" largeIcon="audio-iconLarge.png"
+        customIcon="audio-icon.gif" medCustomIcon="audio-iconMed.png" largeCustomIcon="audio-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".mpg" description="Película"
+        icon="movie-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="movie-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".odp" description="Presentación de Open Office"
+        icon="odp-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="odp-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".ods" description="Hoja Electrónica de Open Office"
+        icon="ods-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="ods-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".odt" description="Documento de Texto de Open Office"
+        icon="odt-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="odt-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".pdf" description="Documento PDF de Acrobat"
+        icon="pdf-icon.gif" medIcon="pdf-medIcon.png" largeIcon="pdf-largeIcon.png"
+        customIcon="pdf-icon.gif" medCustomIcon="pdf-medIcon.png" largeCustomIcon="pdf-largeIcon.png"
+        provider="PDFBox" image="false"/>
+  <Type extension=".ppt" description="Presentación de Microsoft Power Point"
+        icon="powerpoint-icon.jpg" medIcon="powerpoint_iconMed.png" largeIcon="powerpoint-iconLarge.png"
+        customIcon="powerpoint-icon.jpg" medCustomIcon="powerpoint_iconMed.png" largeCustomIcon="powerpoint-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".pps" description="Presentación de Microsoft Power Point"
+        icon="powerpoint-icon.jpg" medIcon="powerpoint_iconMed.png" largeIcon="powerpoint-iconLarge.png"
+        customIcon="powerpoint-icon.jpg" medCustomIcon="powerpoint_iconMed.png" largeCustomIcon="powerpoint-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".txt" description="Documento de Texto"
+        icon="text-icon.jpg" medIcon="text-iconMed.png" largeIcon="text-iconLarge.png"
+        customIcon="text-icon.jpg" medCustomIcon="text-iconMed.png" largeCustomIcon="text-iconLarge.png"
+        provider="RAW" image="false"/>
+  <Type extension=".text" description="Documento de Texto"
+        icon="text-icon.jpg" medIcon="text-iconMed.png" largeIcon="text-iconLarge.png"
+        customIcon="text-icon.jpg" medCustomIcon="text-iconMed.png" largeCustomIcon="text-iconLarge.png"
+        provider="RAW" image="false"/>
+  <Type extension=".tif" description="Imagen"
+        icon="tif-icon.jpg" medIcon="Image-TIFF-iconMed.png" largeIcon="Image-TIFF-iconLarge.png"
+        customIcon="tif-icon.jpg" medCustomIcon="Image-TIFF-iconMed.png" largeCustomIcon="Image-TIFF-iconLarge.png"
+        provider="INTERNALIMAGE" image="true"/>
+  <Type extension=".vsd" description="Documento de Microsoft Visio"
+        icon="visio-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="visio-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".wav" description="Archivo de Audio"
+        icon="audio-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="audio-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".doc" description="Documento de Microsoft Word"
+        icon="word-icon.jpg" medIcon="word_medIcon.gif" largeIcon="word-iconLarge.png"
+        customIcon="word-icon.jpg" medCustomIcon="word_medIcon.gif" largeCustomIcon="word-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".dot" description="Plantilla de Microsoft Word"
+        icon="word-icon.jpg" medIcon="word_medIcon.gif" largeIcon="word-iconLarge.png"
+        customIcon="word-icon.jpg" medCustomIcon="word_medIcon.gif" largeCustomIcon="word-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".chm" description="Archivo de Ayuda de Microsoft"
+        icon="chm-icon.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="chm-icon.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".zip" description="Archivo Comprimido"
+        icon="zip-icon.gif" medIcon="Mimetypes-Compressed-Files-iconMed.png" largeIcon="Mimetypes-Compressed-Files-iconLarge.png"
+        customIcon="zip-icon.gif" medCustomIcon="Mimetypes-Compressed-Files-iconMed.png" largeCustomIcon="Mimetypes-Compressed-Files-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".csv" description="Archivo de Valores Separados por Coma"
+        icon="csv-icon.gif" medIcon="Mimetypes-text-csv-iconMed.png" largeIcon="Mimetypes-text-csv-iconLarge.png"
+        customIcon="csv-icon.gif" medCustomIcon="Mimetypes-text-csv-iconMed.png" largeCustomIcon="Mimetypes-text-csv-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".gz" description="Archivo Comprimido"
+        icon="zip-icon.gif" medIcon="Mimetypes-Compressed-Files-iconMed.png" largeIcon="Mimetypes-Compressed-Files-iconLarge.png"
+        customIcon="zip-icon.gif" medCustomIcon="Mimetypes-Compressed-Files-iconMed.png" largeCustomIcon="Mimetypes-Compressed-Files-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".rtf" description="Formato de Texto Rico"
+        icon="rtf-icon.gif" medIcon="rtf-iconMed.png" largeIcon="rtf-iconLarge.png"
+        customIcon="zip-icon.gif" medCustomIcon="Mimetypes-Compressed-Files-iconMed.png" largeCustomIcon="Mimetypes-Compressed-Files-iconLarge.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".docx" description="Documento de Microsoft Word 2007"
+        icon="word-icon.jpg" medIcon="word_medIcon.gif" largeIcon="word-iconLarge.png"
+        customIcon="docx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".docm" description="Documento de Microsoft Word 2007"
+        icon="word-icon.jpg" medIcon="word_medIcon.gif" largeIcon="word-iconLarge.png"
+        customIcon="docm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".dotx" description="Plantilla de Microsoft Word 2007"
+        icon="dotx.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="dotx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".dotm" description="Plantilla de Microsoft Word 2007"
+        icon="dotm.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="dotm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".xlsx" description="Documento de Microsoft Excel 2007"
+        icon="excel-icon.jpg" medIcon="excel-medIcon.gif" largeIcon="excel-iconLarge.jpg"
+        customIcon="xlsx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".xlsm" description="Documento de Microsoft Excel 2007"
+        icon="xlsm.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="xlsm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".xltx" description="Plantilla de Microsoft Excel 2007"
+        icon="xltx.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="xltx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".xltm" description="Plantilla de Microsoft Excel 2007"
+        icon="xltm.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="xltm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".pptx" description="Presentación de Microsoft Power Point 2007"
+        icon="pptx.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="pptx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".pptm" description="Presentación de Microsoft Power Point 2007"
+        icon="pptm.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="pptm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".potx" description="Plantilla de Microsoft Power Point 2007"
+        icon="potx.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="potx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".potm" description="Plantilla de Microsoft Power Point 2007"
+        icon="potm.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="potm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".ppsx" description="Presentación de Microsoft Power Point 2007"
+        icon="ppsx.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="ppsx.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".ppsm" description="Presentación de Microsoft Power Point 2007"
+        icon="ppsm.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="ppsm.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".xps" description="Documento XPS"
+        icon="xps.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="xps.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".mpp" description="Documento Project"
+        icon="mpp.gif" medIcon="generic-medIcon.jpg" largeIcon="generic-largeIcon.png"
+        customIcon="mpp.gif" medCustomIcon="generic-medIcon.jpg" largeCustomIcon="generic-largeIcon.png"
+        provider="IFILTER" image="false"/>
+  <Type extension=".sql" description="Sql Script"
+        icon="sql-icon.jpg" medIcon="Mimetypes-text-x-sql-iconMed.png" largeIcon="Mimetypes-text-x-sql-iconLarge.png"
+        customIcon="sql-icon.jpg" medCustomIcon="Mimetypes-text-x-sql-iconMed.png" largeCustomIcon="Mimetypes-text-x-sql-iconLarge.png"
+        provider="IFILTER" image="false"/>
+</FileTypes>

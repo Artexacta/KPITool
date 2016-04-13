@@ -1,0 +1,253 @@
+﻿.menuImage {
+    max-width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+
+.header-inner li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+    .header-inner li a:hover {
+        color: #000000;
+        text-decoration: none;
+    }
+
+    .header-inner li a i.zmdi {
+        font-size: 22px;
+        line-height: 62px;
+        margin: 0 2px 0 15px;
+    }
+
+.FooterText {
+    color: #A2A2A2;
+    text-decoration: none;
+}
+
+    .FooterText:hover {
+        color: #A2A2A2;
+        text-decoration: none;
+    }
+
+.count-info {
+    position: relative;
+}
+
+    .count-info .label-primary {
+        position: absolute;
+        top: -15px;
+        left: 6px;
+        z-index: 10;
+        opacity: 0.7;
+    }
+
+.rotate-minus-90 {
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+    /* IE */
+    -ms-transform: rotate(-90deg);
+    /* Opera */
+    -o-transform: rotate(-90deg);
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.datos-campana.table > tbody > tr > td:first-child {
+    padding-left: 10px;
+    vertical-align: middle;
+}
+
+.datos-campana.table > tbody > tr > td, datos-campana.table > tbody > tr > th {
+    vertical-align: middle;
+}
+
+.datos-campana.table > tbody > tr > td, .datos-campana.table > thead > tr > th {
+    text-align: center;
+}
+
+.datos-campana.table th {
+    font-weight: bold;
+}
+
+.datos-campana.table .descripcion {
+    text-align: left;
+}
+
+
+
+.bold {
+    font-weight: bold;
+}
+
+.table-striped:not(.i-table) > tbody > tr:nth-of-type(2n+1) td {
+    background-color: #fcfcfc !important;
+}
+
+.center-circle {
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.pie-overviews {
+    margin-bottom: 0px;
+}
+
+.poi-title {
+    bottom: -15px;
+}
+
+/*Modal Styles*/
+.myCustomBg {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: 2001;
+    display: none;
+    overflow: hidden;
+    outline: 0px none;
+    background: rgba(0,0,0,0.6);
+}
+
+.myCustomModal {
+    position: relative;
+    width: 60%;
+    z-index: 2500;
+    margin: 5% auto;
+    background: #FFFFFF;
+}
+
+    .myCustomModal .middle-box {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .myCustomModal .modal-footer .btn {
+        margin-bottom: 0 !important;
+    }
+
+/* Botones */
+.viewBtn {
+    color: #000000;
+    font-size: 25px;
+}
+/*Animation*/
+.pulse {
+    -webkit-animation: pulse 2s linear infinite;
+	-moz-animation: pulse 2s linear infinite;
+	-ms-animation: pulse 2s linear infinite;
+	animation: pulse 2s linear infinite;
+}
+
+/* ContextualHelp */
+
+iframe {
+    width: 100%;
+    border: none;
+    font-family: 'Open Sans';
+}
+
+.popover {
+    width: 280px !important;
+    font-size: 10px !important;
+    max-height: 175px !important;
+    overflow-y: scroll;
+}
+
+    .popover ul {
+        margin: 0 !important;
+        list-style: none;
+        padding: 0 !important;
+    }
+
+        .popover ul li {
+            padding: 10px 0;
+        }
+
+            .popover ul li:hover {
+                background: rgba(103,106,108,0.1);
+                cursor: pointer;
+            }
+
+            .popover ul li a {
+                color: #676A6C !important;
+                font-size: 10px !important;
+            }
+
+                .popover ul li a:hover {
+                    color: #676A6C !important;
+                }
+
+
+
+/*Searches*/
+/** Columns */
+.rcbHeader ul,
+.rcbFooter ul,
+.rcbItem ul,
+.rcbHovered ul,
+.rcbDisabled ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+    list-style-type: none;
+}
+
+.radcol {
+    margin: 0;
+    padding: 0 5px 0 0;
+    width: 50%;
+    line-height: 14px;
+    float: left;
+}
+.rcbEmptyMessage {
+    color: rgb(158, 158, 158) !important;
+    font-style: normal !important;
+}
+.RadComboBox_Default, .RadComboBox_Default .rcbInput, .RadComboBoxDropDown_Default {
+    font-family: Roboto, sans-serif !important;
+}
+/*.RadComboBox_Default, .RadComboBox_Default * {
+    border-color: rgb(232, 232, 232) !important;
+}*/
+.rcbInputCell, .rcbArrowCellRight {
+    padding: 6px 12px !important;
+    background-image: none !important;
+    border: 1px solid rgb(232, 232, 232) !important;
+}
+.rcbArrowCellRight {
+    padding: 6px 6px !important;
+}
+.rcbArrowCellRight a {
+    background: url(img/radcombobox-arrow-down.png) no-repeat center;
+}
+
+.rcbArrowCellRight a::before {
+    content: '\f2f9';
+}
+.rcbItem:hover {
+    background: rgba(0,0,0,.075);
+}
+
+*:not(a).disabled{
+    position: relative;
+    cursor: not-allowed;
+}
+
+*:not(a).disabled::before{
+    content: '';
+    position: absolute;
+    background: white;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.add-menu.is-chrome .shift-cmd, .add-menu.is-ie kbd {
+    display:none !important;
+}

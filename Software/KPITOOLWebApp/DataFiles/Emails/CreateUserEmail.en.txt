@@ -1,0 +1,16 @@
+﻿<p> Your account was created on our Web site with the following information: </p>
+<blockquote>
+  <p>Account: <%UserName%>
+  </p>
+</blockquote>
+<p>To activate this account is necessary to enter the system the following validation code: </p>
+<p>Validation Code: <%ValidationCode%>
+  </p>
+<p>You can enter this validation code automatically by clicking the link below:</p>
+<blockquote>
+  <p><%Link%></p>
+</blockquote>
+
+<p>Thank you for creating an account on our site. </p>
+
+<p>If you have not registered on our site please ignore this email. </p>

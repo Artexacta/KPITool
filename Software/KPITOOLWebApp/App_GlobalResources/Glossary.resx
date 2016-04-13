@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllLabel" xml:space="preserve">
+    <value>[All]</value>
+  </data>
+  <data name="DocumentTypeLabel" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="ImageTypeLabel" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="LanguageError" xml:space="preserve">
+    <value>There is an error with the selected language</value>
+  </data>
+  <data name="NoteTypeLabel" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="ReportTypeLabel" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="UnknowkFileType" xml:space="preserve">
+    <value>Unkown File Type</value>
+  </data>
+  <data name="UnkownFileSize" xml:space="preserve">
+    <value>Unkown File Size</value>
+  </data>
+  <data name="ComboBoxNoMatchesText" xml:space="preserve">
+    <value>No matches</value>
+  </data>
+  <data name="ItemsLoadedFromWebServiceMessage" xml:space="preserve">
+    <value>Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; out of &lt;b&gt;{1}&lt;/b&gt;</value>
+  </data>
+  <data name="ErrorLoadingDataFromWebServiceMessage" xml:space="preserve">
+    <value>Error loading data from web service</value>
+  </data>
+  <data name="GenericNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="GenericYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="CorrectTheErrorsFirst" xml:space="preserve">
+    <value>Please correct the following error(s) first:</value>
+  </data>
+  <data name="NameFormatREV" xml:space="preserve">
+    <value>Name can contain letters, numbers and standard punctuation marks.</value>
+  </data>
+  <data name="NameFormatREVLength" xml:space="preserve">
+    <value>User Name must not exceed  50 characters.</value>
+  </data>
+  <data name="SelectLabel" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectAllLabel" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="ErrorLabel" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MessageLabel" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="WarningLabel" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="SystemMessagesTitle" xml:space="preserve">
+    <value>System Messages</value>
+  </data>
+  <data name="GenericCancelLabel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="UploadButton" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteLabel" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EditLabel" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="InsertLabel" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="UpdateLabel" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="CloseLabel" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="MyFavoriteReportsTitle" xml:space="preserve">
+    <value>My Favorite Reports</value>
+  </data>
+  <data name="MyPendingRequestTitle" xml:space="preserve">
+    <value>My Pending Requests</value>
+  </data>
+  <data name="MyRepliesTitle" xml:space="preserve">
+    <value>My Replies</value>
+  </data>
+  <data name="TextHelpLink" xml:space="preserve">
+    <value>[What&amp;nbsp;is&amp;nbsp;this?]</value>
+  </data>
+  <data name="PhysicalPathErrorMessage" xml:space="preserve">
+    <value>An error has ocurred while getting physical path</value>
+  </data>
+  <data name="UrlPathErrorMessage" xml:space="preserve">
+    <value>An error has ocurred while getting URL path</value>
+  </data>
+  <data name="GenericSaveLabel" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Button_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Between" xml:space="preserve">
+    <value>Between</value>
+  </data>
+  <data name="EqualsTo" xml:space="preserve">
+    <value>Equal To</value>
+  </data>
+  <data name="GreaterThan" xml:space="preserve">
+    <value>&gt;</value>
+  </data>
+  <data name="LessThan" xml:space="preserve">
+    <value>&lt;</value>
+  </data>
+  <data name="AndLabel" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="AdvancedSearchLabel" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelectCountryLabel" xml:space="preserve">
+    <value>Type a country...</value>
+  </data>
+  <data name="SelectIsicLabel" xml:space="preserve">
+    <value>Type ISIC Code or description...</value>
+  </data>
+  <data name="rqrIsicCode" xml:space="preserve">
+    <value>The ISIC code is required.</value>
+  </data>
+  <data name="SurveyTypeLabel" xml:space="preserve">
+    <value>Survey</value>
+  </data>
+  <data name="SelectUnspscLabel" xml:space="preserve">
+    <value>Type UNSPSC Code or description...</value>
+  </data>
+  <data name="rqrUnspscCode" xml:space="preserve">
+    <value>The UNSPSC code is required.</value>
+  </data>
+  <data name="SelectValidValueRadCombo" xml:space="preserve">
+    <value>You can select only existing value in the list</value>
+  </data>
+  <data name="ErrorForAllLabel" xml:space="preserve">
+    <value>Error for everyone</value>
+  </data>
+  <data name="MessageForAllLabel" xml:space="preserve">
+    <value>Message for everyone</value>
+  </data>
+  <data name="WarningForAllLabel" xml:space="preserve">
+    <value>Warning for everyone</value>
+  </data>
+  <data name="CompanyTypeLabel" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="ProductTypeLabel" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="ServiceTypeLabel" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="SelectRegionLabel" xml:space="preserve">
+    <value>Select a region...</value>
+  </data>
+  <data name="ExportExcel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
+  <data name="SelectSubRegionLabel" xml:space="preserve">
+    <value>Select a sub-region...</value>
+  </data>
+  <data name="NextButton" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="PreviousButton" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="TakeTourLabel" xml:space="preserve">
+    <value>Take a tour</value>
+  </data>
+  <data name="RequiredLabel" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>WBT</value>
+  </data>
+  <data name="WelcomeLabel" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="PasswordRecoverySubject" xml:space="preserve">
+    <value>Password Recovery</value>
+  </data>
+</root>

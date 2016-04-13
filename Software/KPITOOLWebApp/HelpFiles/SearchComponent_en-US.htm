@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Search</title>
+</head>
+<body style="font-family: 'Open Sans'; font-size: 12px;">
+    <div class="container">
+        <div class="col-md-12">
+            <h5 style="font-size: 15px; color: #676A6C;">About Search</h5>
+            <p>
+                The system provides a search component for differents places in the site. This search component is a 
+                powerful Google-like searcher that it would normally find what the user is looking for. Please observe
+                the following rules for its use:
+            </p>
+            <ul>
+                <li>All you need to do is to type the search criteria in the text box of the search.
+                    <img src="SearchComponent_simple.gif" alt="general example" class="img-responsive" />
+                </li>
+                <li>To apply a more refined search feel free to use the advanced search form (if available)
+                    <img src="SearchComponent_advanced.gif" alt="advanced search example" class="img-responsive" />
+                </li>
+                <li>Or type the criteria for each of the columns
+                    <img src="SearchComponent_specific.gif" alt="specific search example" class="img-responsive" />
+                </li>
+            </ul>
+            <p>Depending on the type of column, the specific search has different rules:</p>
+            <ul>
+                <li><b>Numeric Search</b>: you can use the greater than, lower than and between operators. The 
+                equal operator is implied when no operator is used. Here are some examples:<br />
+                    <ul>
+                        <li>
+                            <pre>@id 100</pre>
+                        </li>
+                        <li>
+                            <pre>@height &gt; 25</pre>
+                        </li>
+                        <li>
+                            <pre>@age &lt; 10</pre>
+                        </li>
+                        <li>
+                            <pre>@number 30:40</pre>
+                        </li>
+                    </ul>
+                    <br />
+                </li>
+                <li><b>Date Search</b>: it should be used just like the Numeric Search except that dates should be
+                    represented in the international standard date notation which is:
+                    <p align="center">YYYY-MM-DD</p>
+                    where YYYY is the year in the usual Gregorian calendar, MM is the month of the year between 01 
+                    (January) and 12 (December), and DD is the day of the month between 01 and 31.<br />
+                    For example, the fourth day of February in the year 1995 is written in the standard notation as
+                    <p align="center">1995-02-04</p>
+                    Additionally, you can use functions ($year, $month and $day) to 
+                    be applied to the date column. For example, to search for the people for which
+                    their birthday is on May, 5th:
+                    <ul>
+                        <li>
+                            <pre>$day(@birth) 5 and $month(@birth) 5</pre>
+                        </li>
+                    </ul>
+                    Of course, you can always use the comparisons with these functions.
+                    <br />
+                    <br />
+                </li>
+                <li><b>String Search</b>: There are two types of strings, the indexed strings and not indexed strings.
+                    The first ones mean that the system knows even how to understand these strings; for example:
+                    <ul>
+                        <li>
+                            <pre>Mark Twain</pre>
+                        </li>
+                    </ul>
+                    Should find all ocurrences of 'Mark Twain' as well as 'Twain, Mark'. 
+                    <br />
+                    NOT indexed strings can only use a wildcard '*' at the beginning or at the end of a string:
+                    <ul>
+                        <li>
+                            <pre>@name Mar*</pre>
+                        </li>
+                    </ul>
+                    <br />
+                </li>
+                <li><b>Boolean Search</b>: These are the most simple type of columns. The only values allowed here 
+                    are: true (or 1) and false (or 0)
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

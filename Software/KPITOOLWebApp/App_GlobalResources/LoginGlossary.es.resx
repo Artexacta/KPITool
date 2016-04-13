@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountDisabledMessage" xml:space="preserve">
+    <value>Este usuario fue deshabilitado por el adminsitrador local del sistema. Por favor contacte a su administrador local y solicite la habilitación de este usuario.</value>
+  </data>
+  <data name="AccountDisabledReturnLinkText" xml:space="preserve">
+    <value>Pinche aquí para retornar a la página de login</value>
+  </data>
+  <data name="AccountDisabledTitle" xml:space="preserve">
+    <value>El usuario está deshabilitado</value>
+  </data>
+  <data name="BotonResetear" xml:space="preserve">
+    <value>Resetear</value>
+  </data>
+  <data name="CantRememberPasswordLabel" xml:space="preserve">
+    <value>No puede recordar su contraseña?</value>
+  </data>
+  <data name="ChangePasswordTitle" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="ConfirmAccountButtonLabel" xml:space="preserve">
+    <value>Confirmar Usuario</value>
+  </data>
+  <data name="ConfirmationLink" xml:space="preserve">
+    <value>Validar mi Usuario</value>
+  </data>
+  <data name="ConfirmationTitle" xml:space="preserve">
+    <value>Confirmación </value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirme contraseña:</value>
+  </data>
+  <data name="ConfirmPasswordIsRequiredMessage" xml:space="preserve">
+    <value>Debe confirmar la nueva contraseña.</value>
+  </data>
+  <data name="ContextIdErrorMessage" xml:space="preserve">
+    <value>No se pudo determinar el Id de Contexto</value>
+  </data>
+  <data name="ContextLabel" xml:space="preserve">
+    <value>Contexto:</value>
+  </data>
+  <data name="CreateUserLink" xml:space="preserve">
+    <value>Crear usuario</value>
+  </data>
+  <data name="CreateUserLiteral" xml:space="preserve">
+    <value>No tiene una usuario? :</value>
+  </data>
+  <data name="CreateUserTitle" xml:space="preserve">
+    <value>Añadir nuevo usuario</value>
+  </data>
+  <data name="CurrentPasswordLabel" xml:space="preserve">
+    <value>Contraseña actual:</value>
+  </data>
+  <data name="DontHaveAccountLabel" xml:space="preserve">
+    <value>No tiene un usuario:</value>
+  </data>
+  <data name="EmailAddressLabel" xml:space="preserve">
+    <value>Dirección de Correo Electrónico:</value>
+  </data>
+  <data name="EmailAddressRequiredErrorMessage" xml:space="preserve">
+    <value>Se requiere la dirección de correo electrónico</value>
+  </data>
+  <data name="EmailConfirmationCodeLabel" xml:space="preserve">
+    <value>Enviar Código por Correo</value>
+  </data>
+  <data name="EnterConfirmationLabel" xml:space="preserve">
+    <value>Por favor ingrese el código de confirmación del correo enviado por el sistema:</value>
+  </data>
+  <data name="ExistingUserLabel" xml:space="preserve">
+    <value>Ya existe un usuario utilizando este correo que pertenece a un usuario válido.</value>
+  </data>
+  <data name="GoToLoginPage" xml:space="preserve">
+    <value>Retornar a la página de login.</value>
+  </data>
+  <data name="ICantRememberMyCodeLabel" xml:space="preserve">
+    <value>No puedo recordar mi código</value>
+  </data>
+  <data name="InvalidUserNameErrorMessage" xml:space="preserve">
+    <value>Usuario inválido</value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Entrar</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Ingreso</value>
+  </data>
+  <data name="LoginWithUserLabel" xml:space="preserve">
+    <value>Coloque sus credenciales</value>
+  </data>
+  <data name="MensajeEmailInexistente" xml:space="preserve">
+    <value>El correo electrónico indicado no existe en el sistema</value>
+  </data>
+  <data name="MensajeEmailInvalido" xml:space="preserve">
+    <value>Correo electrónico inválido.</value>
+  </data>
+  <data name="MensajeEmailRequerido" xml:space="preserve">
+    <value>Correo electrónico requerido.</value>
+  </data>
+  <data name="MensajeEnvioMail" xml:space="preserve">
+    <value>Se envió un correo electrónico a la dirección indicada con una nueva contraseña.</value>
+  </data>
+  <data name="MensajeErrorContraseñaVacia" xml:space="preserve">
+    <value>Ocurrio un error al generar la nueva contraseña. Intente nuevamente o comuníquese con el Administrador del Sistema.</value>
+  </data>
+  <data name="MensajeErrores" xml:space="preserve">
+    <value>Corrija los siguientes errores para continuar:</value>
+  </data>
+  <data name="MensajeIngreseMail" xml:space="preserve">
+    <value>Por favor ingrese la dirección de correo electrónico que utilizó para registrarse en el sistema</value>
+  </data>
+  <data name="MensajeNoEnvioMail" xml:space="preserve">
+    <value>No se pudo enviar el correo electrónico.</value>
+  </data>
+  <data name="MensajeUsuarioNoEncontrado" xml:space="preserve">
+    <value>No se encontró el usuario indicado.</value>
+  </data>
+  <data name="MessageGoToMainPage" xml:space="preserve">
+    <value>Ir a la Página Principal</value>
+  </data>
+  <data name="NeedToEnterValidationLabel" xml:space="preserve">
+    <value>Necesita ingresar su código de validación?</value>
+  </data>
+  <data name="NewPasswordFormatErrorMessage" xml:space="preserve">
+    <value>Error en la constraseña. Debe contener por lo menos 7 caracteres, al menos una letra en mayúsculas, una en minúsculas, un número y un caracter especial no alfanumérico.</value>
+  </data>
+  <data name="NewPasswordIsRequiredMessage" xml:space="preserve">
+    <value>La nueva contraseña es requerida.</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>Nueva contraseña:</value>
+  </data>
+  <data name="NotAuthorizedMessage" xml:space="preserve">
+    <value>No esta autorizado para realizar esta operación. Por favor contacte al administrador del sistema para que pueda darle los permisos o roles apropiados.</value>
+  </data>
+  <data name="NotAuthorizedTitle" xml:space="preserve">
+    <value>Sin autorización</value>
+  </data>
+  <data name="PasswordIsRequiredMessage" xml:space="preserve">
+    <value>La contraseña es requerida.</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Contraseña:</value>
+  </data>
+  <data name="PasswordLengthErrorMessage" xml:space="preserve">
+    <value>El password puede contener como máximo 50 caracteres</value>
+  </data>
+  <data name="PasswordRequiredErrorMessage" xml:space="preserve">
+    <value>La contraseña es requerida</value>
+  </data>
+  <data name="PasswordsMustMatchMessage" xml:space="preserve">
+    <value>La confirmación y la nueva contraseña deben ser iguales.</value>
+  </data>
+  <data name="RecoverPasswordLink" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
+  <data name="RecoverPasswordTitle" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
+  <data name="RememberMeCheckBox" xml:space="preserve">
+    <value>Acordarse de mí</value>
+  </data>
+  <data name="ResendConfirmationEmailLiteral" xml:space="preserve">
+    <value>Ingrese el correo con el que solia conectarse al sistema.</value>
+  </data>
+  <data name="ResendConfirmationTitle" xml:space="preserve">
+    <value>Volver a mandar confirmación</value>
+  </data>
+  <data name="SaveContextIdErrorMessage" xml:space="preserve">
+    <value>No se pudo grabar el Id de Contexto</value>
+  </data>
+  <data name="SuccessCreatedMessageLabel" xml:space="preserve">
+    <value>Su usuario se creó con éxito.&lt;br /&gt;&lt;br /&gt;Necesitará verificar su correo electrónico&lt;br/&gt;antes de que este usuario se pueda utilizar.&lt;br /&gt;Se envió un correo electrónico a la dirección de correo&lt;br/&gt;que indicó.  Siga las instrucciones en este correo para &lt;br/&gt;completar la validación.</value>
+  </data>
+  <data name="TituloConfirmacion" xml:space="preserve">
+    <value>Confirmación de Contraseña</value>
+  </data>
+  <data name="TituloConfirmarReseteo" xml:space="preserve">
+    <value>Confirmar Reseteo de Cuenta</value>
+  </data>
+  <data name="TituloEmail" xml:space="preserve">
+    <value>Correo electrónico:</value>
+  </data>
+  <data name="TituloResetarContraseña" xml:space="preserve">
+    <value>Resetear Contraseña</value>
+  </data>
+  <data name="UserIdErrorMessage" xml:space="preserve">
+    <value>No se pudo determinar el Id de Usuario o Usuario No Autorizado</value>
+  </data>
+  <data name="UserIsLockedMessage" xml:space="preserve">
+    <value>El usuario ha sido bloqueado debido a que ingresó una contraseña errónea 5 veces consecutivas, por su seguridad se ha bloqueado el usuario por 5 minutos, por favor intente de nuevo en 5 minutos o contacte al administrador del sistema.</value>
+  </data>
+  <data name="UserIsLockedTitle" xml:space="preserve">
+    <value>Usuario bloqueado</value>
+  </data>
+  <data name="UserIsUnlockedMessage" xml:space="preserve">
+    <value>El usuario ha sido desbloqueado. Por favor inicie su sesión otra vez.</value>
+  </data>
+  <data name="UserIsUnlockedTitle" xml:space="preserve">
+    <value>Usuario desbloqueado</value>
+  </data>
+  <data name="UserNameLabel" xml:space="preserve">
+    <value>Código de Usuario</value>
+  </data>
+  <data name="UserNameLengthErrorMessage" xml:space="preserve">
+    <value>El nombre de usuario puede contener como máximo 50 caracteres</value>
+  </data>
+  <data name="UserNameRequiredErrorMessage" xml:space="preserve">
+    <value>El nombre de usuario es requerido</value>
+  </data>
+  <data name="UserNameTooLongErrorMessage" xml:space="preserve">
+    <value>El usuario debe contener como máximo 100 caracteres</value>
+  </data>
+  <data name="UserNotApprovedMessage" xml:space="preserve">
+    <value>Su cuenta ha sido confirmada en nuestro sistema sin embargo aún no puede ser utilizada. Un oficial verificará la información proporcionada y dará de alta su cuenta en el sistema prontamente.  Por favor revise su E-mail en los siguientes días para conocer los detalles de esta operación</value>
+  </data>
+  <data name="UserNotApprovedTitle" xml:space="preserve">
+    <value>Usuario no aprobado</value>
+  </data>
+  <data name="ValidationCodeLabel" xml:space="preserve">
+    <value>Código de validación:</value>
+  </data>
+  <data name="ValidationCodeLengthErrorMessage" xml:space="preserve">
+    <value>El Código de Validación debe contener como máximo 100 caracteres</value>
+  </data>
+  <data name="ValidationCodeRequiredErrorMessage" xml:space="preserve">
+    <value>El Código de Validación es requerido</value>
+  </data>
+  <data name="ValidUserEmailLabel" xml:space="preserve">
+    <value>Se necesita un email válido en el sistema para poder crear un usuario. Por favor contacte al administrador del sistema.</value>
+  </data>
+  <data name="WelcomeMessage" xml:space="preserve">
+    <value>Este es el sistema de facturación que MSC Bolivia pone a disposición de sus administradores.
+&lt;br /&gt;&lt;br /&gt;Puede acceder con el codigo de usuario y contraseña que se le da en MSC Bolivia</value>
+  </data>
+</root>
