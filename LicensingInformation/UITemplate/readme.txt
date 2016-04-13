@@ -1,0 +1,1 @@
+Licensing information for the UI Template
