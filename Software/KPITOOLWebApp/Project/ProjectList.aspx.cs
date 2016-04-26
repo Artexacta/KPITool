@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
-using System.Web.UI.WebControls;
 
 public partial class Project_ProjectList : System.Web.UI.Page
 {
