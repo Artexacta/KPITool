@@ -1,0 +1,82 @@
+% of taxpayers and/or trade operators who think it is easier now than in the past to deal with the organization ;PERCEPTION;NA;NA
+Taxpayer and/or trade operator satisfaction index ;PERCEPTION;NA;NA
+Educational seminars/courses ;COUNT;NA;NA
+Training hours performed to taxpayers and/or trade operators ;COUNT;NA;NA
+Pending administrative appeals ;GENINT;MIN;AVG
+Pending judicial appeals;GENINT;MIN;AVG
+Pending appeals in the inner courts;GENINT;MIN;AVG
+Pending appeals in the outer courts;GENINT;MIN;AVG
+Pending appeals for court cases that are silly or ridiculous;GENINT;MIN;AVG
+Average length of administrative appeal cases ;TTP;NA;NA
+Average length of judicial appeal cases ;TTP;NA;NA
+Average length of inner court appeal cases ;TTP;NA;NA
+Average length of outer appeal cases ;TTP;NA;NA
+Average length of court cases that are silly or ridiculous ;TTP;NA;NA
+% of administrative appeals that are resolved within established deadlines;GENPER;MAX;AVG
+% of tax assessments appealed in the administrative jurisdiction ;GENPER;MIN;AVG
+% of tax assessments appealed in the judicial courts ;GENPER;MIN;AVG
+% of appeals won in administrative jurisdiction ;GENPER;MAX;AVG
+ % of appeals won in judicial courts ;GENPER;MAX;AVG
+% of cases recommended for prosecution ;GENPER;MIN;AVG
+% pending appeal cases in administrative jurisdiction older than 3 years ;GENPER;MIN;AVG
+% pending appeal cases in administrative jurisdiction older than 5 years ;GENPER;MIN;AVG
+% pending appeal cases in judicial courts older than 3 years ;GENPER;MIN;AVG
+% pending appeal cases in judicial courts older than 5 years ;GENPER;MIN;AVG
+% of staff in core operational functions ;GENPER;MAX;AVG
+% of staff with university degree ;GENPER;MAX;AVG
+% of staff with high-school diploma ;GENPER;MAX;AVG
+% of total staff working in headquarters ;GENPER;MIN;AVG
+Average number of hours of training received per employee ;GENDEC;MAX;AVG
+Percentage of staff hired through a competitive process ;GENPER;MAX;AVG
+Average number of days required for the HR function to fill a single open position within the tax administration ;GENINT;MIN;AVG
+Employee Turnover Rate (ETR);GENPER;MIN;AVG
+Salary Competitiveness Ratio (SCR) ;GENPER;MAX;AVG
+Time to Hire ;GENTIME;MIN;AVG
+Employee Satisfaction Index ;PERCEPTION;NA;NA
+Absenteeism Rate ;GENPER;MIN;AVG
+IT Expense as a Percentage of Total Revenue;GENPER;MIN;AVG
+Support Ticket Closure Rate;GENPER;MAX;AVG
+% of urgent changes.  ;GENPER;MIN;AVG
+Number of change order requests per project.;GENINT;MIN;AVG
+Trouble Report Closure Rate for Software Development.;GENPER;MAX;AVG
+System Usability Scale (SUS).  ;GENINT;MAX;AVG
+Server Availability ;AVAIL;NA;NA
+% of Service Desk Availability;AVAIL;NA;NA
+Average taxpayer or trade operator wait time for service ;TTP;NA;NA
+Average time to respond to written taxpayer or trade operator requests ;TTP;NA;NA
+Level of satisfaction of taxpayers or trade operator visits to the tax or customs office ;PERCEPTION;NA;NA
+Total number of calls received in Service Desk ;COUNT;NA;NA
+Total number of problems reported in Service Desk ;COUNT;NA;NA
+Service Desk average call length ;TTP;NA;NA
+Service Desk customer rating ;PERCEPTION;NA;NA
+Total number of complaints received ;COUNT;NA;NA
+Percentage of customer issues that were solved by the first phone call ;GENPER;MAX;AVG
+Average number of calls / service requests per employee of call center / Service Desk ;GENDEC;MAX;AVG
+% of issues handled ;GENPER;MAX;AVG
+% of issues reported resolved ;GENPER;MAX;AVG
+% of incidents resolved without any escalation ;GENPER;MAX;AVG
+% of escalated service requests ;GENPER;MIN;AVG
+Number of open Service Desk requests older than 7 days ;GENINT;MIN;AVG
+Average queue time per call ;TTP;NA;NA
+Share of taxes collected through voluntary compliance of taxpayers ;GENPER;MAX;AVG
+Total tax revenue ;REVENUE;NA;NA
+Total revenue from sales tax ;REVENUE;NA;NA
+Total revenue from income tax ;REVENUE;NA;NA
+Total revenue from FED (Federal Excise Duty) ;REVENUE;NA;NA
+Total revenue from other taxes ;REVENUE;NA;NA
+Total LTU share for total tax collected ;GENPER;MAX;AVG
+Total RTO share for total tax collected ;GENPER;MAX;AVG
+Total LTU share for sales tax collected ;GENPER;MAX;AVG
+Total RTO share for sales tax collected ;GENPER;MAX;AVG
+Total LTU share for income taxes collected ;GENPER;MAX;AVG
+Total RTO share for incomes taxes collected ;GENPER;MAX;AVG
+Cost-of-collection ;GENDEC;MIN;AVG
+Reliability and accuracy of tax revenue forecasting ;GENPER;MAX;AVG
+% of payments that are processed electronically ;GENPER;MAX;AVG
+% of refunds that are processed electronically ;GENPER;MAX;AVG
+% of returns filed manually on paper ;GENPER;MIN;AVG
+Number of accumulated pending tax refund cases ;GENINT;MIN;AVG
+Percent of papers pushed;GENPER;MAX;AVG
+Average times arrived at work in time;COUNT;NA;NA
+Total revenue collected;REVENUE;NA;NA
+Number of bugs fixed;COUNT;NA;NA
