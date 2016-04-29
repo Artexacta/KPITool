@@ -14,7 +14,7 @@
         text-decoration: none;
     }
 
-    .header-inner li a i.zmdi {
+    .header-inner li i.zmdi {
         font-size: 22px;
         line-height: 62px;
         margin: 0 2px 0 15px;

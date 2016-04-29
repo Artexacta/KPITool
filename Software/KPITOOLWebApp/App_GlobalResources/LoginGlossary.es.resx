@@ -256,7 +256,7 @@
     <value>La contraseña es requerida.</value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
-    <value>Contraseña:</value>
+    <value>Contraseña</value>
   </data>
   <data name="PasswordLengthErrorMessage" xml:space="preserve">
     <value>El password puede contener como máximo 50 caracteres</value>
@@ -316,7 +316,7 @@
     <value>Usuario desbloqueado</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
-    <value>Código de Usuario</value>
+    <value>Nombre de Usuario</value>
   </data>
   <data name="UserNameLengthErrorMessage" xml:space="preserve">
     <value>El nombre de usuario puede contener como máximo 50 caracteres</value>
@@ -348,5 +348,14 @@
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Este es el sistema de facturación que MSC Bolivia pone a disposición de sus administradores.
 &lt;br /&gt;&lt;br /&gt;Puede acceder con el codigo de usuario y contraseña que se le da en MSC Bolivia</value>
+  </data>
+  <data name="EmailHint" xml:space="preserve">
+    <value>Ingrese su correo electrónico</value>
+  </data>
+  <data name="LoginLink" xml:space="preserve">
+    <value>Ir al Login</value>
+  </data>
+  <data name="RecoverPasswordSuccessMessage" xml:space="preserve">
+    <value>Se envió su nueva contraseña al correo electronico ingresado.</value>
   </data>
 </root>

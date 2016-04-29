@@ -1,8 +1,8 @@
-﻿<%@ Page Title="<%$ Resources: LoginGlossary, TituloResetarContraseña %>" Language="C#" MasterPageFile="~/EmptyMasterPage.master" 
+﻿<%@ Page Title="<%$ Resources: LoginGlossary, TituloResetarContraseña %>" Language="C#" MasterPageFile="~/EmptyMasterPage.master"
     AutoEventWireup="true" CodeFile="ResetearContrasena.aspx.cs" Inherits="Authentication_ResetearContrasena" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <style type="text/css">
+   <!-- <style type="text/css">
         #headerMnu
         {
             float: right;
@@ -42,11 +42,55 @@
             margin-right: 5px;
             font-size: large;
         }
-    </style>
+    </style> -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" Runat="Server">
-    <div class="appPage">
-        <div id="header">
+
+
+    <div class="lc-block toggled" id="l-login">
+        <div class="lcb-float"><i class="zmdi zmdi-key"></i></div>
+        <div id="loginContainer">
+            <div style="margin-bottom: 15px; margin-top: 15px;">
+                <div id="loginLogoContainer">
+                    <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Images/logo.png" Width="150" />
+                    <h3>
+                        <asp:Literal ID="Literal1" Text="<%$ Resources: LoginGlossary, TituloResetarContraseña %>" runat="server" />
+                    </h3>
+                    <br />  
+                    <div class="form-group">
+                            
+                        <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-control"
+                            placeholder="<%$ Resources: LoginGlossary, EmailHint %>"></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="FormatRegularExpressionValidator" runat="server"
+                            Display="Dynamic"
+                            ControlToValidate="EmailTextBox" ErrorMessage="<%$ Resources: LoginGlossary, MensajeEmailInvalido %>"
+                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                        </asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="EmailRequiredFieldValidator" runat="server"
+                            ControlToValidate="EmailTextBox"
+                            Display="Dynamic"
+                            ErrorMessage="<%$ Resources: LoginGlossary, MensajeEmailRequerido %>">
+                        </asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="CustomValidator1" runat="server"
+                            Display="Dynamic"
+                            ErrorMessage="<%$ Resources: LoginGlossary, MensajeEmailInexistente %>"
+                            OnServerValidate="CustomValidator1_ServerValidate">
+                        </asp:CustomValidator>
+                    </div>
+
+                    <asp:Label ID="ErrorLabel" runat="server" />
+
+                    <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click"
+                        Text="<%$ Resources: LoginGlossary, BotonResetear %>"
+                        CssClass="btn btn-block btn-primary" />
+                    <asp:HyperLink runat="server" CssClass="text-center block"
+                        NavigateUrl="~/Authentication/Login.aspx"
+                        Text="<%$ Resources: LoginGlossary, LoginLink %>"></asp:HyperLink>
+                </div>
+            </div>
+        </div>
+    </div>
+        <%--<div id="header">
             <div id="logoContent" style="vertical-align: middle;">
                 <asp:Image ID="imgHeaderLogo" runat="server" ImageUrl="~/Images/logo.png" AlternateText="logo"
                     Height="53" Style="float: left;" />
@@ -54,53 +98,7 @@
                     font-size: 21px; margin-left: 10px; margin-top: 15px; text-shadow: 1px 1px #fff;"
                     Text="<%$ Resources: Glossary, ProjectName %>" runat="server" />
             </div>
-        </div>
-        <div id="bodyIn">
-            <span class="pageTitle">
-                <asp:Literal ID="MessageLiteral" runat="server" Text="<% $  Resources : LoginGlossary, TituloResetarContraseña %>">
-                </asp:Literal>
-            </span>
-
-            <asp:Panel ID="Panel1" runat="server">
-                <table style="width: 600px">
-                    <tr>
-                        <td colspan="2" style="padding-top: 5px; padding-bottom: 10px">
-                            <asp:Label ID="MensajeLabel" runat="server" Text="<%$ Resources: LoginGlossary, MensajeIngreseMail %>"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <asp:Label ID="EmailLabel" runat="server" Text="<%$ Resources: LoginGlossary, TituloEmail %>"></asp:Label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="EmailTextBox" runat="server" Height="22px" Width="270px"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="FormatRegularExpressionValidator" runat="server"
-                                ControlToValidate="EmailTextBox" ErrorMessage="<%$ Resources: LoginGlossary, MensajeEmailInvalido %>"
-                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">*</asp:RegularExpressionValidator>
-                            <asp:RequiredFieldValidator ID="EmailRequiredFieldValidator" runat="server" ControlToValidate="EmailTextBox"
-                                ErrorMessage="<%$ Resources: LoginGlossary, MensajeEmailRequerido %>">*</asp:RequiredFieldValidator>
-                            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="<%$ Resources: LoginGlossary, MensajeEmailInexistente %>"
-                                OnServerValidate="CustomValidator1_ServerValidate">*</asp:CustomValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="<%$ Resources: LoginGlossary, MensajeErrores %>" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="padding-top: 10px">
-                            <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click" Text="<%$ Resources: LoginGlossary, BotonResetear %>"
-                                CssClass="button" />
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-
-            <br />
-            <asp:Label ID="ErrorLabel" runat="server" />
-            <br />
-        </div>
-    </div>
+        </div>--%>
+     
 </asp:Content>
 

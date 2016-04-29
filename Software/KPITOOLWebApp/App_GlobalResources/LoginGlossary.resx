@@ -221,7 +221,7 @@ An email has been sent to the email address you&lt;br/&gt;provided. Follow the i
     <value>User is unlocked</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
-    <value>User Name:</value>
+    <value>User Name</value>
   </data>
   <data name="UserNameRequiredErrorMessage" xml:space="preserve">
     <value>User Name is required</value>
@@ -257,7 +257,7 @@ An email has been sent to the email address you&lt;br/&gt;provided. Follow the i
     <value>Login with your user name</value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
-    <value>Password:</value>
+    <value>Password</value>
   </data>
   <data name="PasswordRequiredErrorMessage" xml:space="preserve">
     <value>Password is required</value>
@@ -305,45 +305,54 @@ An email has been sent to the email address you&lt;br/&gt;provided. Follow the i
     <value>Enter your Username...</value>
   </data>
   <data name="BotonResetear" xml:space="preserve">
-    <value>a</value>
+    <value>Reset Password</value>
   </data>
   <data name="MensajeEmailInexistente" xml:space="preserve">
-    <value>a</value>
+    <value>Email entered does not exist</value>
   </data>
   <data name="MensajeEmailInvalido" xml:space="preserve">
-    <value>a</value>
+    <value>Email is invalid</value>
   </data>
   <data name="MensajeEmailRequerido" xml:space="preserve">
-    <value>a</value>
+    <value>Email is required</value>
   </data>
   <data name="MensajeEnvioMail" xml:space="preserve">
-    <value>a</value>
+    <value>We send you a message to email address</value>
   </data>
   <data name="MensajeErrorContraseñaVacia" xml:space="preserve">
-    <value>a</value>
+    <value>Error generating new password</value>
   </data>
   <data name="MensajeErrores" xml:space="preserve">
-    <value>a</value>
+    <value>Correct the errors below to continue:</value>
   </data>
   <data name="MensajeIngreseMail" xml:space="preserve">
-    <value>a</value>
+    <value>Please enter your email address</value>
   </data>
   <data name="MensajeNoEnvioMail" xml:space="preserve">
-    <value>a</value>
+    <value>Could not send email.</value>
   </data>
   <data name="MensajeUsuarioNoEncontrado" xml:space="preserve">
-    <value>a</value>
+    <value>There are no user registered with this email</value>
   </data>
   <data name="PasswordLengthErrorMessage" xml:space="preserve">
     <value>a</value>
   </data>
   <data name="TituloEmail" xml:space="preserve">
-    <value>a</value>
+    <value>Email</value>
   </data>
   <data name="TituloResetarContraseña" xml:space="preserve">
-    <value>a</value>
+    <value>Recover Passoword</value>
   </data>
   <data name="UserIdErrorMessage" xml:space="preserve">
-    <value>a</value>
+    <value>Cannot find user id </value>
+  </data>
+  <data name="EmailHint" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="LoginLink" xml:space="preserve">
+    <value>Go to Login</value>
+  </data>
+  <data name="RecoverPasswordSuccessMessage" xml:space="preserve">
+    <value>New password was sent to your email</value>
   </data>
 </root>

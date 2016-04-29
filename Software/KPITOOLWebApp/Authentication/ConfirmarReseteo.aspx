@@ -45,26 +45,21 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" Runat="Server">
-    <div class="appPage">
-        <div id="header">
-            <div id="logoContent" style="vertical-align: middle;">
-                <asp:Image ID="imgHeaderLogo" runat="server" ImageUrl="~/Images/logo.png" AlternateText="logo"
-                    Height="53" Style="float: left;" />
-                <asp:Label ID="Label1" Style="float: left; font-family: Verdana, Geneva, sans-serif;
-                    font-size: 21px; margin-left: 10px; margin-top: 15px; text-shadow: 1px 1px #fff;"
-                    Text="<%$ Resources: Glossary, ProjectName %>" runat="server" />
-            </div>
-        </div>
-        <div id="bodyIn">
-            <span class="pageTitle">
-                <asp:Literal ID="MessageLiteral" runat="server" Text="<% $  Resources : LoginGlossary, TituloResetarContraseña %>">
-                </asp:Literal>
-            </span>
-            <br />
-            <div>
-                <asp:Label ID="Label2" runat="server" Text="Se envió su nueva contraseña al correo electronico ingresado."></asp:Label>
-                &nbsp;<asp:LinkButton ID="LoginLinkButton" runat="server" Text="Ir a la página de inicio"
+    <div class="lc-block toggled" id="l-login">
+        <div class="lcb-float"><i class="zmdi zmdi-notifications"></i></div>
+        <div id="loginContainer">
+            <div style="margin-bottom: 15px; margin-top: 15px;">
+                <div id="loginLogoContainer">
+                    <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Images/logo.png" Width="150" />
+                    <h3>
+                        <asp:Literal ID="Literal1" Text="<%$  Resources : LoginGlossary, TituloResetarContraseña %>" runat="server" />
+                    </h3>
+                    <br />  
+                    <asp:Label ID="Label2" runat="server" Text="<%$ Resources: LoginGlossary, RecoverPasswordSuccessMessage %>"></asp:Label>
+                    <br />
+                    <asp:LinkButton ID="LoginLinkButton" runat="server" Text="<%$ Resources: LoginGlossary, LoginLink %>"
                     OnClick="LoginLinkButton_Click"></asp:LinkButton>
+                </div>
             </div>
         </div>
     </div>

@@ -91,6 +91,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             // lblUseName.Text = HttpContext.Current.User.Identity.Name;
 
+            LoginStatus1.LogoutText = "<i class='zmdi zmdi-run'></i> <span class='hidden-xs'>" + Resources.InitMasterPage.Logout;
             LoadMainMenuScript();
             ConstructMenu();
             ConstructFeedbackIFrame();
