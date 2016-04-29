@@ -19,6 +19,14 @@ public partial class Authentication_ResetearContrasena : System.Web.UI.Page
 
     }
 
+
+    protected override void InitializeCulture()
+    {
+        base.InitializeCulture();
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+
+    }
+
     protected void ResetButton_Click(object sender, EventArgs e)
     {
         if (!Page.IsValid)

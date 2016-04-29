@@ -145,6 +145,6 @@
     <value>Recurso no definido {resourceItem} en el archivo {resourceFile} para el ítem {item} del menu.</value>
   </data>
   <data name="ReturnEmailName" xml:space="preserve">
-    <value>Aplicacion</value>
+    <value>KPI Tool</value>
   </data>
 </root>

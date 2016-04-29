@@ -10810,6 +10810,7 @@ a.thumbnail.active {
   vertical-align: middle;
   position: relative;
   padding: 45px 30px 30px;
+margin-top: 70px;
 }
 .lc-block:not(.toggled) {
   display: none;
@@ -12270,4 +12271,7 @@ a.thumbnail.active {
 }
 .mCSB_inside > .mCSB_container {
   margin-right: 0;
+}
+.block{
+    display:block;
 }

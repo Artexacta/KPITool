@@ -1,0 +1,28 @@
+﻿.header-inner .form-control {
+    display: inline-block;
+}
+
+.header-inner select {
+    width: 65px;
+}
+
+.logo {
+    text-align:center;
+    background-color:white;
+}
+
+.login-language-selector a{
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .header-inner .hidden-xs:not(.menuImage), .login-form .hidden-xs:not(.menuImage){
+        display: inline !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .menuImage {
+        display: none !important;
+    }
+}

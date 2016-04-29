@@ -23,6 +23,14 @@ public partial class EmptyMasterPage : System.Web.UI.MasterPage
         scriptText.Append(ResolveUrl("~/Images/favicon.png"));
         scriptText.Append("\" type=\"image/png\" >\n");
 
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/jquery.min.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap.min.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
         JqueryAndMainMenuScript.Text = scriptText.ToString();
     }
 

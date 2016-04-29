@@ -12,6 +12,13 @@ public partial class Authentication_ConfirmarReseteo : System.Web.UI.Page
 
     }
 
+    protected override void InitializeCulture()
+    {
+        base.InitializeCulture();
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+
+    }
+
     protected void LoginLinkButton_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/Authentication/Login.aspx");
