@@ -19,9 +19,7 @@
                         <h3>
                             <asp:Literal ID="Literal1" Text="<%$ Resources: LoginGlossary, LoginTitle %>" runat="server" /></h3>
                         
-                        <div class="login-language-selector m-t-10 m-b-10">
-                            <app:LanguageSelector runat="server" />
-                        </div>
+                        
                     </div>
                     <div id="loginFormContainer">
                         <asp:Login ID="Login1" runat="server" OnLoggingIn="Login1_LoggingIn" OnLoggedIn="Login1_LoggedIn"
