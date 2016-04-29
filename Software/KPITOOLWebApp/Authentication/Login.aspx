@@ -11,13 +11,16 @@
         <div class="lc-block toggled" id="l-login">
             <div class="lcb-float"><i class="zmdi zmdi-pin-account"></i></div>
             <div id="loginContainer">
-                <div style="margin-bottom: 15px; margin-top: 15px;">
+                <div class="login-form" style="margin-bottom: 15px; margin-top: 15px;">
+                    
+
                     <div id="loginLogoContainer">
                         <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Images/logo.png" Width="150" />
                         <h3>
                             <asp:Literal ID="Literal1" Text="<%$ Resources: LoginGlossary, LoginTitle %>" runat="server" /></h3>
+                        
+                        
                     </div>
-
                     <div id="loginFormContainer">
                         <asp:Login ID="Login1" runat="server" OnLoggingIn="Login1_LoggingIn" OnLoggedIn="Login1_LoggedIn"
                             OnLoginError="Login1_LoginError" FailureText="Your login was not successful. Please try again." RenderOuterTable="false">

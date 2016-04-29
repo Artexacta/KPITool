@@ -16,7 +16,7 @@ class:         if the menu is not public, the name of the class that the user
 -->
 
 <Home>
-  <!-- First Menu: Inicio -->
+  <!-- Menu: Inicio -->
   <Menu resourceFile="InitMasterPage"
 				resourceItem="MenuHome"
 				url="~/MainPage.aspx"
@@ -24,12 +24,12 @@ class:         if the menu is not public, the name of the class that the user
         icon="zmdi zmdi-home">
   </Menu>
 
-  <!-- Second Menu: Seguridad -->
+  <!-- Menu: Seguridad -->
   <Menu resourceFile="InitMasterPage"
 		  resourceItem="MenuSecurity"
 		  public="true"
 		  class="SECURITY"
-      icon="fa fa-user-secret">
+      icon="zmdi zmdi-lock">
     <Menu resourceFile="InitMasterPage"
 			  resourceItem="MenuUserList"
 			  public="false"
@@ -60,20 +60,24 @@ class:         if the menu is not public, the name of the class that the user
 			  class="SECURITY"
 			  url="~/Security/DefinePermissionsByUser.aspx">
     </Menu>
-    <Menu resourceFile="InitMasterPage"
+    <!--<Menu resourceFile="InitMasterPage"
 			  resourceItem="MenuListaEventosBitacora"
 			  public="false"
 			  class="SECURITY"
 			  url="~/Bitacora/ListaEventosBitacora.aspx">
-    </Menu>
+    </Menu>-->
   </Menu>
   
-
-  <!-- Fifth Menu: My Account -->
+  <!-- Menu: My Account -->
   <Menu resourceFile="InitMasterPage"
 			  resourceItem="MenuAccount"
 			  public="true"
         icon="zmdi zmdi-account">
+    <Menu resourceFile="InitMasterPage"
+					resourceItem="MenuEditUser"
+					public="true"
+					url="~/Security/EditUser.aspx">
+    </Menu>
     <Menu resourceFile="InitMasterPage"
 					resourceItem="MenuChangePassword"
 					public="true"

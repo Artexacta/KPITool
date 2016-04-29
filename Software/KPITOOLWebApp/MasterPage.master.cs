@@ -91,6 +91,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             // lblUseName.Text = HttpContext.Current.User.Identity.Name;
 
+            LoginStatus1.LogoutText = "<i class='zmdi zmdi-run'></i> <span class='hidden-xs'>" + Resources.InitMasterPage.Logout;
             LoadMainMenuScript();
             ConstructMenu();
             ConstructFeedbackIFrame();
@@ -278,6 +279,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap-tour.min.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap3-typeahead.min.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        //scriptText.Append("<script src=\"");
+        //scriptText.Append(ResolveClientUrl("~/Scripts/typeahead.bundle.min.js"));
+        //scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
         /*scriptText.Append("<script src=\"");
         scriptText.Append(ResolveClientUrl("~/Scripts/jquery.caretPosition.js"));
@@ -324,6 +332,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         // to access the page. 
         string[] openPages = {
              "~/MainPage.aspx",
+             "~/Security/EditUser.aspx",
              "~/Test/TestUserControlForTest.aspx",
              "~/About/VersionInformation.aspx",
              "~/About/Credits.aspx",
@@ -335,6 +344,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Test/TestUpload.aspx",
              "~/Test/TestTooltip.aspx",
              "~/ResetSystem.aspx",
+             "~/Test/TestAddData.aspx",
 
              "~/Organization/EditOrganization.aspx",
              "~/Organization/OrganizationDetails.aspx"
@@ -369,7 +379,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Security/NewRole.aspx",
              "~/Security/UserList.aspx",
              "~/Security/CreateUser.aspx",
-             "~/Security/EditUser.aspx",
              "~/Security/UserIsLocked.aspx",
              "~/Security/UserIsUnlocked.aspx",
              "~/Bitacora/ListaEventosBitacora.aspx"

@@ -171,5 +171,55 @@ namespace Artexacta.App.Area.BLL
                 throw new Exception(Resources.Organization.MessageErrorDeleteArea);
             }
         }
+
+        public static Area GetAreaById(int areaId)
+        {
+            if (areaId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+
+            Area theData = null;
+            try
+            {
+                AreaTableAdapter localAdapter = new AreaTableAdapter();
+                AreaDS.AreaDataTable theTable = localAdapter.GetAreaById(areaId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    AreaDS.AreaRow theRow = theTable[0];
+                    theData = FillRecord(theRow);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía el area de id: " + areaId, exc);
+                throw exc;
+            }
+
+            return theData;
+        }
+
+        public static List<Area> GetAreasForAutocomplete(int organizationId, string filter)
+        {
+            List<Area> theList = new List<Area>();
+            Area theData = null;
+            try
+            {
+                AreaTableAdapter localAdapter = new AreaTableAdapter();
+                AreaDS.AreaDataTable theTable = localAdapter.GetAreasForAutocomplete(organizationId, filter);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (AreaDS.AreaRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return theList;
+        }
+
     }
 }

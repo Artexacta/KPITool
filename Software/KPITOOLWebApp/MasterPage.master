@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs"  Inherits="MasterPage" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="UserControls/Messages.ascx" TagName="Messages" TagPrefix="msg" %>
@@ -41,22 +41,28 @@
                 <!-- Logo -->
                 <li class="logo">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/logo.png" AlternateText="logo" CssClass="menuImage hidden-xs"/>
-                    <div id="menu-trigger"><i class="zmdi zmdi-menu" style="margin-top: 8px;"></i></div>
+                    <div id="menu-trigger"><i class="zmdi zmdi-menu" style="margin-top: -10px;margin-left: 4px;"></i></div>
                 </li>
                 <li>
                     <msg:Messages ID="MessagesContent" runat="server" />
                 </li> 
                 <li>
-                    <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Security/ChangePassword.aspx" runat="server" Text="<i class='zmdi zmdi-key'></i> Change Password" />
+                    <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Security/ChangePassword.aspx" runat="server">
+                        <i class='zmdi zmdi-key'></i> 
+                        <asp:Label runat="server" CssClass="hidden-xs" Text="<%$ Resources: InitMasterPage, ChangePassword %>"></asp:Label>
+                    </asp:HyperLink>
+                </li>
+                <li>
+                    <app:LanguageSelector ID="LanguageSelectorControl" runat="server" />
                 </li>
                 <li>
                     <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutPageUrl="~/Authentication/Login.aspx" OnLoggingOut="LoginStatus1_LoggingOut" />
                 </li> 
             </ul>
         </header>
-        <aside id="sidebar">
+        <nav id="sidebar">
             <asp:Literal ID="sideMenu" runat="server"></asp:Literal>
-        </aside>
+        </nav>
         <section id="content">
             <div class="container">
                 <asp:ContentPlaceHolder ID="cp" runat="server">
@@ -121,7 +127,7 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#ctl00_LoginStatus1").prepend('<i class="zmdi zmdi-run"></i>');
+                
 
                 updateOnResize();
 

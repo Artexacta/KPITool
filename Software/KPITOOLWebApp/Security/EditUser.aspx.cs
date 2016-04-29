@@ -41,12 +41,16 @@ public partial class Security_EditUser : System.Web.UI.Page
                 UsernameHiddenField.Value = initUserName;
             }
         }
+        else
+        {
+            UsernameHiddenField.Value = HttpContext.Current.User.Identity.Name;
+            MyAccountHiddenField.Value = "true";
+        }
         Session["USERID"] = null;
     }
 
     protected void GetUserDetails(string UserName)
     {
-
         if (String.IsNullOrEmpty(UserName))
         {
             log.Error("Se recibió un usuario vació o nulo.");
@@ -174,12 +178,18 @@ public partial class Security_EditUser : System.Web.UI.Page
             SystemMessages.DisplaySystemMessage("No se pudo modificar el Usuario " + userName + ".");
         }
 
-        Response.Redirect("~/Security/UserList.aspx");
+        if (MyAccountHiddenField.Value.Equals("false"))
+            Response.Redirect("~/Security/UserList.aspx");
+        else
+            Response.Redirect("~/MainPage.aspx");
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Security/UserList.aspx");
+        if (MyAccountHiddenField.Value.Equals("false"))
+            Response.Redirect("~/Security/UserList.aspx");
+        else
+            Response.Redirect("~/MainPage.aspx");
     }
 
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="<% $ Resources : LoginGlossary, RecoverPasswordTitle %>" Language="C#" MasterPageFile="~/SimpleMasterPage.master" 
+﻿<%@ Page Title="<% $ Resources : LoginGlossary, RecoverPasswordTitle %>" Language="C#" MasterPageFile="~/EmptyMasterPage.master" 
     AutoEventWireup="true" CodeFile="RecoverPassword.aspx.cs" Inherits="Authentication_RecoverPassword" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cp" Runat="Server">

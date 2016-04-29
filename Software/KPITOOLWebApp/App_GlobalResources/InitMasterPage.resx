@@ -148,7 +148,7 @@
     <value>About</value>
   </data>
   <data name="MenuAccount" xml:space="preserve">
-    <value>My Account</value>
+    <value>Manage my Account</value>
   </data>
   <data name="MenuAssignRoles" xml:space="preserve">
     <value>Assign Roles</value>
@@ -230,5 +230,17 @@
   </data>
   <data name="SubmitfeedbackLabel" xml:space="preserve">
     <value>Submit problem</value>
+  </data>
+  <data name="MenuEditUser" xml:space="preserve">
+    <value>Edit my user info</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="SelectLanguageLabel" xml:space="preserve">
+    <value>Select Language:</value>
   </data>
 </root>

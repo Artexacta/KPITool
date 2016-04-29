@@ -1,4 +1,5 @@
-﻿using Artexacta.App.Security.BLL;
+﻿using Artexacta.App.LoginSecurity;
+using Artexacta.App.Security.BLL;
 using Artexacta.App.User.BLL;
 using Artexacta.App.Utilities.SystemMessages;
 using log4net;
@@ -22,16 +23,6 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         if (!IsPostBack)
         {
             InitializeControls();
-            if (RoleDropDownList.Text == "Ninguno")
-            {
-                AddOutImageButton.Enabled = false;
-                DeleteRolImageButton.Visible = false;
-            }
-            else
-            {
-                AddOutImageButton.Enabled = true;
-                DeleteRolImageButton.Visible = true;
-            }
         }
     }
 
@@ -68,11 +59,12 @@ public partial class Security_AssignRoles : System.Web.UI.Page
             }
             InRoleListBox.DataBind();
 
-
             //Initialize the values for the NOT IN ROLE list box
             if (RoleDropDownList.Text == "Ninguno" || string.IsNullOrEmpty(RoleDropDownList.Text))
             {
                 OutRoleListBox.DataSource = theUsersAndRolesBLL.UsersNotInRoleNone();
+                AddOutImageButton.Enabled = false;
+                DeleteRolImageButton.Visible = false;
             }
             else
             {
@@ -80,6 +72,9 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                     OutRoleListBox.DataSource = "";
                 else
                     OutRoleListBox.DataSource = theUsersAndRolesBLL.GetUsersNotInRol(RoleDropDownList.Text);
+
+                AddOutImageButton.Enabled = true;
+                DeleteRolImageButton.Visible = false;
             }
             OutRoleListBox.DataBind();
         }
@@ -94,16 +89,6 @@ public partial class Security_AssignRoles : System.Web.UI.Page
     protected void RoleDropDownList_SelectedIndexChanged(object sender, EventArgs e)
     {
         EmployeeRolePanel.Visible = false;
-        if (RoleDropDownList.Text == "Ninguno")
-        {
-            AddOutImageButton.Enabled = false;
-            DeleteRolImageButton.Visible = false;
-        }
-        else
-        {
-            AddOutImageButton.Enabled = true;
-            DeleteRolImageButton.Visible = true;
-        }
         BindData();
     }
 
@@ -181,7 +166,6 @@ public partial class Security_AssignRoles : System.Web.UI.Page
 
     protected void InRoleListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-
         try
         {
             OutRoleListBox.ClearSelection();
@@ -194,6 +178,24 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                 theUser = Membership.GetUser(InRoleListBox.SelectedValue.ToString());
                 UserLabel.Text = theUser.UserName.ToString();
                 UserEmailLabel.Text = theUser.Email.ToString();
+
+                if (theUser.UserName.Equals(HttpContext.Current.User.Identity.Name))
+                {
+                    foreach (ListItem item in UserRoleCheckBoxList.Items)
+                        item.Enabled = false;
+
+                    SaveRolesButton.Visible = false;
+                    ResetRolesButton.Visible = false;
+                    AddInImageButton.Enabled = false;
+                    AddOutImageButton.Enabled = false;
+                }
+                else
+                {
+                    SaveRolesButton.Visible = true;
+                    ResetRolesButton.Visible = (!LoginSecurity.IsUserAuthorizedPermission("RESET_USER_ACCOUNT"));
+                    AddInImageButton.Enabled = true;
+                    AddOutImageButton.Enabled = (RoleDropDownList.Text != "Ninguno" && !string.IsNullOrEmpty(RoleDropDownList.Text));
+                }
             }
             else
             {
@@ -209,7 +211,6 @@ public partial class Security_AssignRoles : System.Web.UI.Page
 
     protected void OutRoleListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-
         try
         {
             InRoleListBox.ClearSelection();
@@ -223,6 +224,24 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                 theUser = Membership.GetUser(OutRoleListBox.SelectedValue.ToString());
                 UserLabel.Text = theUser.UserName.ToString();
                 UserEmailLabel.Text = theUser.Email.ToString();
+
+                if (theUser.UserName.Equals(HttpContext.Current.User.Identity.Name))
+                {
+                    foreach (ListItem item in UserRoleCheckBoxList.Items)
+                        item.Enabled = false;
+
+                    SaveRolesButton.Visible = false;
+                    ResetRolesButton.Visible = false;
+                    AddInImageButton.Enabled = false;
+                    AddOutImageButton.Enabled = false;
+                }
+                else
+                {
+                    SaveRolesButton.Visible = true;
+                    ResetRolesButton.Visible = (!LoginSecurity.IsUserAuthorizedPermission("RESET_USER_ACCOUNT"));
+                    AddInImageButton.Enabled = true;
+                    AddOutImageButton.Enabled = true;
+                }
             }
             else
             {
@@ -274,7 +293,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         ListOfUsersToDeleteFromRol = GetUserIDs(InRoleListBox);
         if (ListOfUsersToDeleteFromRol == null)
         {
-            SystemMessages.DisplaySystemMessage("No existen usuarios en la lista.");
+            SystemMessages.DisplaySystemMessage("No existen usuarios seleccionados en la lista.");
             return;
         }
         string userType = "Normal";
@@ -372,7 +391,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         }
         else
         {
-            SystemMessages.DisplaySystemMessage("No existen usuarios en la lista.");
+            SystemMessages.DisplaySystemMessage("No existen usuarios seleccionados en la lista.");
         }
         BindData();
     }

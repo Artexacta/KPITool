@@ -42,16 +42,16 @@ namespace Artexacta.App.Organization.BLL
             return theNewRecord;
         }
 
-        public Organization GetOrganizationById(int organizationId)
+        public static Organization GetOrganizationById(int organizationId)
         {
             if (organizationId<=0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
             
             Organization theData = null;
-
             try
             {
-                OrganizationDS.OrganizationDataTable theTable = theAdapter.GetOrganizationById(organizationId);
+                OrganizationTableAdapter localAdapter = new OrganizationTableAdapter();
+                OrganizationDS.OrganizationDataTable theTable = localAdapter.GetOrganizationById(organizationId);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
@@ -191,5 +191,32 @@ namespace Artexacta.App.Organization.BLL
                 throw new Exception(Resources.Organization.MessageErrorDelete);
             }
         }
+
+        public static List<Organization> GetOrganizationsForAutocomplete(string filter)
+        {
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            List<Organization> theList = new List<Organization>();
+            Organization theData = null;
+            try
+            {
+                OrganizationTableAdapter localAdapter = new OrganizationTableAdapter();
+                OrganizationDS.OrganizationDataTable theTable = localAdapter.GetOrganizationsForAutocomplete(userName, filter);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (OrganizationDS.OrganizationRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return theList;
+        }
+
     }
 }

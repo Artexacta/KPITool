@@ -114,6 +114,7 @@
     <asp:HiddenField ID="UsernameHiddenField" runat="server" />
     <asp:HiddenField ID="UserIdHiddenField" runat="server" />
     <asp:HiddenField ID="EmailHiddenField" runat="server" />
+    <asp:HiddenField ID="MyAccountHiddenField" runat="server" Value="false" />
 
 </asp:Content>
 

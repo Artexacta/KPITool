@@ -145,6 +145,6 @@
     <value>Undefined resource {resourceItem} in file {resourceFile} for menu item {item}.</value>
   </data>
   <data name="ReturnEmailName" xml:space="preserve">
-    <value>a</value>
+    <value>KPI Tool</value>
   </data>
 </root>

@@ -222,4 +222,16 @@
   <data name="SubmitfeedbackLabel" xml:space="preserve">
     <value>Reportar problema</value>
   </data>
+  <data name="MenuEditUser" xml:space="preserve">
+    <value>Editar mi cuenta</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar Sessión</value>
+  </data>
+  <data name="SelectLanguageLabel" xml:space="preserve">
+    <value>Seleccione el idioma:</value>
+  </data>
 </root>

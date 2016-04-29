@@ -17,10 +17,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <asp:Label ID="RoleLabel" runat="server" AssociatedControlID="RoleDropDownList" Text="Rol: "></asp:Label>
-                            <telerik:RadComboBox ID="RoleDropDownList" runat="server" AutoPostBack="True" OnSelectedIndexChanged="RoleDropDownList_SelectedIndexChanged">
-                            </telerik:RadComboBox>
+                            <asp:DropDownList ID="RoleDropDownList" runat="server" CssClass="form-control m-b-10" AutoPostBack="true" 
+                                OnSelectedIndexChanged="RoleDropDownList_SelectedIndexChanged" />
+
                             <asp:LinkButton ID="DeleteRolImageButton" runat="server" Text="<i class='fa fa-user-times'></i>" CssClass="text-danger"
                                 OnClick="DeleteRolImageButton_Click" ToolTip="Eliminar Rol"
                                 OnClientClick="return confirm('¿Esta seguro de eliminar el rol?')" />
@@ -34,14 +35,14 @@
                             <asp:ListBox ID="InRoleListBox" runat="server" Height="250px" SelectionMode="Multiple" CssClass="form-control full-width"
                                 AutoPostBack="True" OnSelectedIndexChanged="InRoleListBox_SelectedIndexChanged"></asp:ListBox>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2">
-                            <div class="center-arrows">
+                        <div class="col-md-2 col-sm-2 col-xs-2" style="margin-top: 18px; ">
+                            <div style="text-align: center; ">
                                 <p>
-                                    <asp:LinkButton ID="AddInImageButton" runat="server" Text="<i class='fa fa-arrow-right'></i>"
+                                    <asp:LinkButton ID="AddInImageButton" runat="server" Text="<i class='fa fa-arrow-left'></i>"
                                         OnClick="AddInImageButton_Click" ToolTip="Mover Usuario a Rol" />
                                 </p>
                                 <p>
-                                    <asp:LinkButton ID="AddOutImageButton" runat="server" Text="<i class='fa fa-arrow-left'></i>"
+                                    <asp:LinkButton ID="AddOutImageButton" runat="server" Text="<i class='fa fa-arrow-right'></i>"
                                         OnClick="AddOutImageButton_Click" ToolTip="Mover cuenta fuera del Rol" />
                                 </p>
                             </div>
@@ -72,7 +73,7 @@
                                     <asp:Label ID="RolesLabel" runat="server" Text="Roles para el Usuario"></asp:Label><br />
                                 </p>
                                 <div style="margin: 15px 0;">
-                                    <asp:CheckBoxList ID="UserRoleCheckBoxList" runat="server">
+                                    <asp:CheckBoxList ID="UserRoleCheckBoxList" runat="server" BackColor="Transparent">
                                     </asp:CheckBoxList>
                                 </div>
                                 <div class="text-center" style="margin: 15px 0;">
@@ -90,12 +91,12 @@
                         <div class="col-md-12">
                             <div class="text-center" style="margin-top: 15px;">
                                 <asp:LinkButton ID="AddNewRoleLinkButton" runat="server" OnClick="AddNewRoleLinkButton_Click"
-                                    CssClass="btn btn-primary">
-					<i class="fa fa-plus"></i> Adicionar Nuevo Rol	
+                                    CssClass="btn btn-primary" Visible="false">
+					                <i class="fa fa-plus"></i> Adicionar Nuevo Rol	
                                 </asp:LinkButton>
                                 <asp:LinkButton ID="AddNewUserLinkButton" runat="server" OnClick="AddNewUserLinkButton_Click"
                                     CssClass="btn btn-primary">
-					<i class="fa fa-plus"></i> Adicionar Nuevo Usuario	
+					                <i class="fa fa-plus"></i> Adicionar Nuevo Usuario	
                                 </asp:LinkButton>
                             </div>
                         </div>
@@ -104,10 +105,18 @@
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('.RadComboBox input[text]').addClass("form-control");
-                        $(':checkbox').iCheck({
-                            checkboxClass: 'icheckbox_square-green',
-                            radioClass: 'iradio_square-green',
+
+                        $('input:checkbox').each(function () {
+                            var attr = $(this).attr('checked');
+                            if (typeof attr == typeof undefined || attr != 'checked') {
+                                $(this).removeClass("icheckbox_square-green");
+                                $(this).removeClass("iradio_square-green");
+                            } else {
+                                $(this).addClass("icheckbox_square-green");
+                                $(this).addClass("iradio_square-green");
+                            }
                         });
+
                         $('.icheckbox_square-green').css("margin-right", "10px");
                     });
                 </script>

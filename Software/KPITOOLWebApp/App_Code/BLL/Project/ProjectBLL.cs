@@ -8,7 +8,7 @@ using ProjectDSTableAdapters;
 namespace Artexacta.App.Project.BLL
 {
     /// <summary>
-    /// Summary description for AreaBLL
+    /// Summary description for ProjectBLL
     /// </summary>
     /// 
 
@@ -147,5 +147,57 @@ namespace Artexacta.App.Project.BLL
                 throw new Exception(Resources.Organization.MessageErrorDeleteProject);
             }
         }
+
+        public static Project GetProjectById(int areaId)
+        {
+            if (areaId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
+
+            Project theData = null;
+            try
+            {
+                ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectById(areaId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    ProjectDS.ProjectsRow theRow = theTable[0];
+                    theData = FillRecord(theRow);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía el proyecto de id: " + areaId, exc);
+                throw exc;
+            }
+
+            return theData;
+        }
+
+        public static List<Project> GetProjectsForAutocomplete(int organizationId, int areaId, string filter)
+        {
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            List<Project> theList = new List<Project>();
+            Project theData = null;
+            try
+            {
+                ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetPorjectsForAutocomplete(userName, organizationId, areaId, filter);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (ProjectDS.ProjectsRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+            return theList;
+        }
+
     }
 }

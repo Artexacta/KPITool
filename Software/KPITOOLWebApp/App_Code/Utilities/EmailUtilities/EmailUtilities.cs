@@ -137,7 +137,7 @@ namespace Artexacta.App.Utilities.Email
         /// <param name="message">The email text (in HTML format)</param>
         static public void SendEmail(string to, string subject, string message)
         {
-            string from = ConfigurationManager.AppSettings.Get("AdminEmailAddress");
+            string from = ConfigurationManager.AppSettings.Get("SenderEmailAddress");
             SendEmail(to, from, subject, message);
         }
 

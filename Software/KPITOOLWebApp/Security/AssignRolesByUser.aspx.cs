@@ -1,4 +1,5 @@
-﻿using Artexacta.App.User.BLL;
+﻿using Artexacta.App.LoginSecurity;
+using Artexacta.App.User.BLL;
 using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
@@ -151,7 +152,6 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
 
     protected void ResetRoles()
     {
-
         string[] RolesForUser = null;
         string selectedName = "";
         selectedName = UserLabel.Text.Trim();
@@ -210,7 +210,6 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
 
     protected void UserGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-
         string[] RolesForUser = null;
         try
         {
@@ -221,6 +220,20 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
             theUser = Membership.GetUser(UserGridView.SelectedValue.ToString());
             UserLabel.Text = theUser.UserName.ToString();
             UserEmailLabel.Text = theUser.Email.ToString();
+
+            if (theUser.UserName.Equals(HttpContext.Current.User.Identity.Name))
+            {
+                foreach (ListItem item in UserRoleCheckBoxList.Items)
+                    item.Enabled = false;
+
+                SaveRolesButton.Visible = false;
+                ResetRolesButton.Visible = false;
+            }
+            else
+            {
+                SaveRolesButton.Visible = true;
+                ResetRolesButton.Visible = (!LoginSecurity.IsUserAuthorizedPermission("RESET_USER_ACCOUNT"));
+            }
         }
         catch (Exception q)
         {
