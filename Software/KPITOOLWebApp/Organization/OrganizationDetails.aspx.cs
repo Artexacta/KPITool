@@ -1,11 +1,14 @@
-﻿using Artexacta.App.FRTWB;
-using log4net;
+﻿using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Artexacta.App.Organization.BLL;
+using Artexacta.App.Organization;
+using Artexacta.App.Utilities.SystemMessages;
+using Artexacta.App.Area;
 
 public partial class Organization_OrganizationDetails : System.Web.UI.Page
 {
@@ -47,26 +50,40 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
     private void LoadData()
     {
         int organizationId = OrganizationId;
+
         if (organizationId <= 0)
         {
             Response.Redirect(ParentPage);
             return;
         }
-        Organization objOrganization = FrtwbSystem.Instance.Organizations[organizationId];
 
-        OrganizationNameLiteral.Text = objOrganization.Name;
+        OrganizationBLL theBLL = new OrganizationBLL();
+        Organization organization = null;
 
-        AreasGridView.DataSource = objOrganization.Areas.Values;
-        AreasGridView.DataBind();
+        try
+        {
+            organization = theBLL.GetOrganizationById(organizationId);
+        }
+        catch (Exception exc)
+        {
+            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            Response.Redirect(ParentPage);
+        }
 
-        ProjectsGridView.DataSource = objOrganization.Projects.Values;
-        ProjectsGridView.DataBind();
+        if (organization != null)
+        {
+            OrganizationNameLiteral.Text = organization.Name;
+            AreasGridView.DataBind();
 
-        ActivitiesGridView.DataSource = objOrganization.Activities.Values;
-        ActivitiesGridView.DataBind();
+            //ProjectsGridView.DataSource = objOrganization.Projects.Values;
+            //ProjectsGridView.DataBind();
 
-        KpisGridView.DataSource = objOrganization.Kpis.Values;
-        KpisGridView.DataBind();
+            //ActivitiesGridView.DataSource = objOrganization.Activities.Values;
+            //ActivitiesGridView.DataBind();
+
+            //KpisGridView.DataSource = objOrganization.Kpis.Values;
+            //KpisGridView.DataBind();
+        }
     }
 
     private void ProcessSessionParametes()
@@ -76,6 +93,7 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
             ParentPage = Session["ParentPage"].ToString();
         }
         Session["ParentPage"] = null;
+
         if (Session["OrganizationId"] != null && !string.IsNullOrEmpty(Session["OrganizationId"].ToString()))
         {
             int id = 0;
@@ -145,67 +163,77 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
     {
         OperationHiddenField.Value = "VIEW";
     }
+   
     protected void ActivitiesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-        if (img == null)
-            return;
+        //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
+        //if (img == null)
+        //    return;
 
-        if (e.Row.DataItem is Activity)
-        {
-            Activity objActivity = (Activity)e.Row.DataItem;
-            if (objActivity != null && objActivity.Kpis.Count > 0)
-            {
-                List<Kpi> kpis = objActivity.Kpis.Values.ToList();
-                Kpi objKpi = kpis[0];
-                if (objKpi.KpiValues.Count > 0)
-                {
-                    img.KpiId = objKpi.ObjectId;
-                    img.Visible = true;
-                }
-            }
-        }
+        //if (e.Row.DataItem is Activity)
+        //{
+        //    Activity objActivity = (Activity)e.Row.DataItem;
+        //    if (objActivity != null && objActivity.Kpis.Count > 0)
+        //    {
+        //        List<Kpi> kpis = objActivity.Kpis.Values.ToList();
+        //        Kpi objKpi = kpis[0];
+        //        if (objKpi.KpiValues.Count > 0)
+        //        {
+        //            img.KpiId = objKpi.ObjectId;
+        //            img.Visible = true;
+        //        }
+        //    }
+        //}
     }
     protected void ProjectsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-        if (img == null)
-            return;
+        //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
+        //if (img == null)
+        //    return;
 
-        if (e.Row.DataItem is Project)
-        {
-            Project objProject = (Project)e.Row.DataItem;
-            if (objProject != null && objProject.Kpis.Count > 0)
-            {
-                List<Kpi> kpis = objProject.Kpis.Values.ToList();
-                Kpi objKpi = kpis[0];
-                if (objKpi.KpiValues.Count > 0)
-                {
-                    img.KpiId = objKpi.ObjectId;
-                    img.Visible = true;
-                }
-            }
-        }
+        //if (e.Row.DataItem is Project)
+        //{
+        //    Project objProject = (Project)e.Row.DataItem;
+        //    if (objProject != null && objProject.Kpis.Count > 0)
+        //    {
+        //        List<Kpi> kpis = objProject.Kpis.Values.ToList();
+        //        Kpi objKpi = kpis[0];
+        //        if (objKpi.KpiValues.Count > 0)
+        //        {
+        //            img.KpiId = objKpi.ObjectId;
+        //            img.Visible = true;
+        //        }
+        //    }
+        //}
     }
     protected void AreasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
+        
         if (img == null)
             return;
 
         if (e.Row.DataItem is Area)
         {
-            Area objArea = (Area)e.Row.DataItem;
-            if (objArea != null && objArea.Kpis.Count > 0)
-            {
-                List<Kpi> kpis = objArea.Kpis.Values.ToList();
-                Kpi objKpi = kpis[0];
-                if (objKpi.KpiValues.Count > 0)
-                {
-                    img.KpiId = objKpi.ObjectId;
-                    img.Visible = true;
-                }
-            }
+            //Area objArea = (Area)e.Row.DataItem;
+            //if (objArea != null && objArea.Kpis.Count > 0)
+            //{
+            //    List<Kpi> kpis = objArea.Kpis.Values.ToList();
+            //    Kpi objKpi = kpis[0];
+            //    if (objKpi.KpiValues.Count > 0)
+            //    {
+            //        img.KpiId = objKpi.ObjectId;
+            //        img.Visible = true;
+            //    }
+            //}
+        }
+    }
+    protected void AreasObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            e.ExceptionHandled = true;
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
         }
     }
 }

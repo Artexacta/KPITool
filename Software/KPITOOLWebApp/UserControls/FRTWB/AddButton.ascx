@@ -39,7 +39,9 @@
                     <asp:Label ID="OrganizationNameLb" runat="server" AssociatedControlID="OrganizationName" Text="Organization Name:"></asp:Label>
                     <asp:TextBox ID="OrganizationName" runat="server" CssClass="form-control" MaxLength="100" Text="" />
                     <asp:RequiredFieldValidator ID="OrganizationNameValidator" runat="server" ControlToValidate="OrganizationName"
-                        ErrorMessage="The name is required" Display="Dynamic" ValidationGroup="OrganizationValidator" />
+                        ErrorMessage="<% $Resources: Organization, MessageNameRequired %>" Display="Dynamic" ValidationGroup="OrganizationValidator" />
+                    <asp:CustomValidator ID="ExistsOrganizationCustomValidator" runat="server" ErrorMessage="<% $Resources: Organization, MessageNameExists %>"
+                        Display="Dynamic" ValidationGroup="OrganizationValidator" OnServerValidate="ExistsOrganizationCustomValidator_ServerValidate" ></asp:CustomValidator>
                 </div>
             </div>
         </div>

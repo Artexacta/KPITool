@@ -12,15 +12,15 @@
                         <app:AddButton ID="TheAddButton" runat="server" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
-                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" DefaultButton="SearchImageButton">
-                            <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>                            
+                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" >
+                            <%--<asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>                            
                             <span class="input-group-addon last">
                                 <asp:LinkButton ID="SearchButton" runat="server" Style="color: #000" OnClick="SearchButton_Click">
                                     <i class="zmdi zmdi-search"></i>
                                 </asp:LinkButton>
                                 <asp:ImageButton ID="SearchImageButton" runat="server" OnClick="SearchButton_Click"
-                                    ImageUrl="~/Images/Neutral/pixel.gif" Style="display: none" />
-                            </span>
+                                    ImageUrl="~/Images/Neutral/pixel.gif" Style="display: none" /></span>--%>
+                             <%--<app:SearchControl ID="OrganizationSearchControl" runat="server" />--%>
                         </asp:Panel>
                     </div>
                 </div>
@@ -58,25 +58,25 @@
                             <ItemTemplate>
                                 <div class="row">
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="ViewOrganization" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
+                                        <asp:LinkButton ID="ViewOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             CssClass="viewBtn detailsBtn" CommandName="ViewOrganization">
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="EditOrganization" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
+                                        <asp:LinkButton ID="EditOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             CssClass="viewBtn editBtn" CommandName="EditOrganization">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 disabled">
-                                        <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
+                                        <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             CssClass="viewBtn shareBtn">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
+                                        <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             OnClientClick="return confirm('Are you sure you want to delete selected Organization?')"
                                             CssClass="viewBtn deleteBtn" CommandName="DeleteOrganization">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
@@ -88,30 +88,29 @@
                                 </div>
                                 <div class="row m-b-15">
                                     <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
-                                        This organization does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o" id=""></i> icon above
+                                        This organization does not have any objects. Create one by clicking on the 
+                                        <i class="zmdi zmdi-plus-circle-o" id=""></i> icon above
                                     </asp:Panel>
                                     <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-11 m-t-5" Visible="false">
-                                        
-
                                         This organization has 
                                         <asp:Label ID="AreasLabel" runat="server" Visible="false"></asp:Label>
                                         <asp:Literal ID="AndLiteral1" runat="server" Visible="false"></asp:Literal>
 
                                         <asp:LinkButton ID="ProjectsButton" runat="server" Visible="false"
-                                            CommandName="ViewProjects" CommandArgument='<%# Eval("ObjectId") %>'>
+                                            CommandName="ViewProjects" CommandArgument='<%# Eval("OrganizationId") %>'>
                                         </asp:LinkButton>
                                         <asp:Literal ID="AndLiteral2" runat="server" Visible="false"></asp:Literal>
 
                                         <asp:LinkButton ID="ActivitiesButton" runat="server" Visible="false"
-                                            CommandName="ViewActivities" CommandArgument='<%# Eval("ObjectId") %>'>
+                                            CommandName="ViewActivities" CommandArgument='<%# Eval("OrganizationId") %>'>
                                         </asp:LinkButton>
                                         <asp:Literal ID="AndLiteral3" runat="server" Visible="false"></asp:Literal>
 
                                         <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
-                                            CommandName="ViewKPIs" CommandArgument='<%# Eval("ObjectId") %>'>
+                                            CommandName="ViewKPIs" CommandArgument='<%# Eval("OrganizationId") %>'>
                                         </asp:LinkButton>
                                     </asp:Panel>
                                 </div>
@@ -128,10 +127,10 @@
                                 </asp:Panel>
                             </FooterTemplate>
                         </asp:Repeater>
-
                         <br />
                         <div style="overflow: hidden">
-                            <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">Show tips for this page</a>
+                            <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">
+                                Show tips for this page</a>
                         </div>
                     </div>
                 </div>
@@ -215,49 +214,6 @@
             }
         </script>
     </asp:PlaceHolder>
-    <%--    <div id="addModal" class="myCustomBg">
-        <div class="myCustomModal">
-            <div class="modal-header">
-                <h4 class="modal-title">Add Organization</h4>
-            </div>
-            <div class="modal-body">
-                <div class="middle-box">
-                    <div class="form-group">
-                        <asp:Label ID="OrganizationNameLb" runat="server" AssociatedControlID="OrganizationName" Text="Organization Name:"></asp:Label>
-                        <asp:TextBox ID="OrganizationName" runat="server" CssClass="form-control" MaxLength="100" Text="" />
-                        <asp:RequiredFieldValidator ID="OrganizationNameValidator" runat="server" ControlToValidate="OrganizationName"
-                            ErrorMessage="The name is required" Display="Dynamic" ValidationGroup="OrganizationValidator" />
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer btn-colors">
-                <asp:LinkButton ID="AddOrganization" runat="server" CssClass="btn btn-primary" ValidationGroup="OrganizationValidator" OnClick="AddOrganization_Click">Create Organization</asp:LinkButton>
-                <a class="btn btn-danger" href="javascript:cerrarModal();">Cancel</a>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        function cerrarModal() {
-            $(".myCustomBg").css("display", "none");
-            $("#<%= OrganizationName.ClientID %>").val("");
-        }
-        function openModal() {
-            if ($("#<%= OrganizationsExists.ClientID %>").val() == "false") {
-                openAddModal();
-            } else {
-                $("#btn-behavior").attr("href", "#");
-                $("#btn-behavior").attr("aria-expanded", "false");
-                $("#btn-behavior").attr("data-toggle", "dropdown");
-                $("#btn-behavior").addClass("dropdown-toggle");
-                $("#btn-behavior").click();
-            }
-        }
-        function openAddModal() {
-            $("#addModal").css("display", "block");
-            $("#<%= OrganizationName.ClientID %>").val("");
-            return false;
-        }
-    </script>
-    <asp:HiddenField ID="OrganizationsExists" runat="server" Value="false" />--%>
+   
 </asp:Content>
 

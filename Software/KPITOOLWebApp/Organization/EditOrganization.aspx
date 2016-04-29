@@ -36,6 +36,8 @@
                         <div class="col-md-9">
                             <div class="form-group">
                                 <asp:TextBox ID="OrganizationNameTextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ControlToValidate="OrganizationNameTextBox"
+                                    ErrorMessage="<% $Resources: Organization, MessageNameRequired %>" Display="Dynamic" ValidationGroup="EditOrganizationValidator" />
                             </div>
                         </div>
                     </div>
@@ -53,27 +55,33 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-9">
-                            <asp:Repeater ID="AreasRepeater" runat="server">
+                            <asp:Repeater ID="AreasRepeater" runat="server" DataSourceID="AreasObjectDataSource" >
                                 <ItemTemplate>
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <asp:LinkButton ID="DeleteArea" data-id='<%# ((Artexacta.App.FRTWB.Area) Eval("value")).ObjectId %>' runat="server" CssClass="viewBtn" OnClick="DeleteArea_Click"><i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="DeleteArea" data-id='<%# Eval("AreaId") %>' runat="server" CssClass="viewBtn" OnClick="DeleteArea_Click"><i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i></asp:LinkButton>
                                         </div>
                                         <div class="col-md-11">
-                                            <p style="padding-top: 2px;"><%# ((Artexacta.App.FRTWB.Area) Eval("value")).Name %></p>
+                                            <p style="padding-top: 2px;"><%# Eval("Name") %></p>
                                         </div>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
+                            <asp:ObjectDataSource ID="AreasObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" 
+                                SelectMethod="GetAreasByOrganization" TypeName="Artexacta.App.Area.BLL.AreaBLL" OnSelected="AreasObjectDataSource_Selected">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="OrganizationIdHiddenField" Name="organizationId" PropertyName="Value" Type="Int32" />
+                                </SelectParameters>
+                            </asp:ObjectDataSource>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <asp:LinkButton ID="SaveOrganizationButton" runat="server" CssClass="btn btn-primary"                                
-                               OnClick="SaveOrganizationButton_Click">
+                            <asp:LinkButton ID="SaveOrganizationButton" runat="server" CssClass="btn btn-primary"
+                                OnClick="SaveOrganizationButton_Click" ValidationGroup="EditOrganizationValidator">
                                 Save
                             </asp:LinkButton>
-                            <asp:HyperLink runat="server" NavigateUrl="~/MainPage.aspx" CssClass="btn btn-danger">Back to Organization List</asp:HyperLink>
+                            <asp:HyperLink runat="server" NavigateUrl="~/MainPage.aspx" CssClass="btn btn-danger" >Back to Organization List</asp:HyperLink>
                         </div>
                     </div>
                 </div>

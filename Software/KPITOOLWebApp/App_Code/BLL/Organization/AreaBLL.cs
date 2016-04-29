@@ -1,0 +1,175 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using log4net;
+using AreaDSTableAdapters;
+
+namespace Artexacta.App.Area.BLL
+{
+    /// <summary>
+    /// Summary description for AreaBLL
+    /// </summary>
+    /// 
+
+    [System.ComponentModel.DataObject]
+    public class AreaBLL
+    {
+        private static readonly ILog log = LogManager.GetLogger("Standard");
+
+        AreaTableAdapter _theAdapter = null;
+
+        protected AreaTableAdapter theAdapter
+        {
+            get
+            {
+                if (_theAdapter == null)
+                    _theAdapter = new AreaTableAdapter();
+                return _theAdapter;
+            }
+        }
+
+        public AreaBLL()
+        {
+        }
+
+        private static Area FillRecord(AreaDS.AreaRow row)
+        {
+            Area theNewRecord = new Area(
+                row.areaID,
+                row.organizationID,
+                row.name);
+
+            return theNewRecord;
+        }
+
+        public List<Area> GetAreasByOrganization(int organizationId)
+        {
+            if (organizationId<=0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            List<Area> theList = new List<Area>();
+            Area theData = null;
+
+            try
+            {
+                AreaDS.AreaDataTable theTable = theAdapter.GetAreasByOrganization(organizationId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (AreaDS.AreaRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía las areas de la organización de id =" + organizationId.ToString(), exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
+        public Area GetAreaByOrganizationAndName(int organizationId, string name)
+        {
+            if (organizationId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException(Resources.Organization.MessageEmptyNameArea);
+
+            Area theData = null;
+            
+            try
+            {
+                AreaDS.AreaDataTable theTable = theAdapter.GetAreaByOrganizationAndArea(organizationId, name);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    AreaDS.AreaRow theRow = theTable[0];
+                    theData = FillRecord(theRow);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía el area de nombre: " + name, exc);
+                throw exc;
+            }
+
+            return theData;
+        }
+
+        public static int InsertArea(int organizationId, string name)
+        {
+            if (organizationId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException(Resources.Organization.MessageEmptyNameArea);
+
+            AreaTableAdapter localAdapter = new AreaTableAdapter();
+
+            int? areaId =0;
+
+            try
+            {
+                localAdapter.InsertArea(organizationId, name, ref areaId);
+            }
+            catch (Exception exc)
+            {
+                log.Error(Resources.Organization.MessageErrorCreateArea, exc);
+                throw exc;
+            }
+
+            if ((int)areaId <= 0)
+            {
+                log.Error(Resources.Organization.MessageErrorCreateArea);
+                throw new ArgumentException(Resources.Organization.MessageErrorCreateArea);
+            }
+
+            return (int)areaId;
+        }
+
+        public static void UpdateArea(int areaId, string name)
+        {
+            if (areaId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+            
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException(Resources.Organization.MessageEmptyNameArea);
+
+            AreaTableAdapter localAdapter = new AreaTableAdapter();
+
+            try
+            {
+                localAdapter.UpdateArea(areaId, name);
+            }
+            catch (Exception exc)
+            {
+                log.Error(Resources.Organization.MessageErrorUpdateArea, exc);
+                throw exc;
+            }
+        }
+
+        public static void DeleteArea(int areaId)
+        {
+            if (areaId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+
+            AreaTableAdapter localAdapter = new AreaTableAdapter();
+
+            try
+            {
+                localAdapter.DeleteArea(areaId);
+            }
+            catch (Exception exc)
+            {
+                log.Error(Resources.Organization.MessageErrorDeleteArea, exc);
+                throw new Exception(Resources.Organization.MessageErrorDeleteArea);
+            }
+        }
+    }
+}

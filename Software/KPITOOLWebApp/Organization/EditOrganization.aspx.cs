@@ -1,5 +1,4 @@
-﻿using Artexacta.App.FRTWB;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Artexacta.App.Organization.BLL;
+using Artexacta.App.Organization;
+using Artexacta.App.Area.BLL;
 
 public partial class Organization_EditOrganization : System.Web.UI.Page
 {
@@ -40,17 +42,34 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
         if (!IsPostBack)
         {
             ProcessSessionParametes();
+
             int organizationId = this.OrganizationId;
+
             if (organizationId <= 0)
             {
                 Response.Redirect("~/MainPage.aspx");
                 return;
             }
-            Organization organization = FrtwbSystem.Instance.Organizations[organizationId];
-            OrganizationNameLit.Text = organization.Name;
-            OrganizationNameTextBox.Text = organization.Name;
-            AreasRepeater.DataSource = organization.Areas;
-            AreasRepeater.DataBind();
+
+            OrganizationBLL theBLL = new OrganizationBLL();
+            Organization organization = null;
+
+            try
+            {
+                organization = theBLL.GetOrganizationById(organizationId);
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                return;
+            }
+
+            if (organization != null)
+            {
+                OrganizationNameLit.Text = organization.Name;
+                OrganizationNameTextBox.Text = organization.Name;
+                AreasRepeater.DataBind();
+            }
         }
     }
 
@@ -76,23 +95,34 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
     protected void DeleteArea_Click(object sender, EventArgs e)
     {
         LinkButton btnClick = (LinkButton)sender;
-        int key = Convert.ToInt32(btnClick.Attributes["data-id"]);
-        Organization organization = FrtwbSystem.Instance.Organizations[OrganizationId];
-        organization.Areas.Remove(key);
-        AreasRepeater.DataSource = organization.Areas;
+        int areaId = Convert.ToInt32(btnClick.Attributes["data-id"]);
+
+        try
+        {
+            AreaBLL.DeleteArea(areaId);
+        }
+        catch (Exception ex)
+        {
+            SystemMessages.DisplaySystemErrorMessage(ex.Message);
+            return;
+        }
+
         AreasRepeater.DataBind();
 
-        SystemMessages.DisplaySystemMessage("New Area was deleted from current Organization");
+        SystemMessages.DisplaySystemMessage(Resources.Organization.MessageDeleteAreaOk);
     }
     protected void AddArea_Click(object sender, EventArgs e)
     {
-        Area area = new Area();
-        area.Name = AreaName.Text;
-        Organization organization = FrtwbSystem.Instance.Organizations[OrganizationId];
-        area.Owner = organization;
-        organization.Areas.Add(area.ObjectId, area);
-        FrtwbSystem.Instance.Areas.Add(area.ObjectId, area);
-        AreasRepeater.DataSource = organization.Areas;
+        try
+        {
+            AreaBLL.InsertArea(OrganizationId,AreaName.Text);
+        }
+        catch (Exception ex)
+        {
+            SystemMessages.DisplaySystemErrorMessage(ex.Message);
+            return;
+        }
+        
         AreasRepeater.DataBind();
 
         SystemMessages.DisplaySystemMessage("New Area was added to current Organization");
@@ -101,7 +131,6 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
     {
         Organization organization = new Organization();
         organization.Name = OrganizationName.Text;
-        FrtwbSystem.Instance.Organizations.Add(organization.ObjectId, organization);
 
         SystemMessages.DisplaySystemMessage("Organization was modified");
 
@@ -110,11 +139,42 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
     protected void SaveOrganizationButton_Click(object sender, EventArgs e)
     {
-        Organization obj = FrtwbSystem.Instance.Organizations[OrganizationId];
-        if (obj == null)
-            return;
+        //Create the organizacion in the database
+        if (OrganizationId == 0)
+        {
+            try
+            {
+                OrganizationBLL.InsertOrganization(OrganizationName.Text);
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                return;
+            }
+            SystemMessages.DisplaySystemMessage(Resources.Organization.MessageCreateOk);
+        }
+        else
+        {
+            try
+            {
+                OrganizationBLL.UpdateOrganization(OrganizationId, OrganizationNameTextBox.Text);
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                return;
+            }
+            SystemMessages.DisplaySystemMessage(Resources.Organization.MessageUpdateOk);
+        }
 
-        obj.Name = OrganizationNameTextBox.Text;
         Response.Redirect("~/MainPage.aspx");
+    }
+    protected void AreasObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            e.ExceptionHandled = true;
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
+        }
     }
 }

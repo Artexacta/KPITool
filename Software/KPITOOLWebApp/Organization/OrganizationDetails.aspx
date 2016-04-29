@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="Organization" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="OrganizationDetails.aspx.cs" Inherits="Organization_OrganizationDetails" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cp" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
 
     <div class="row">
         <div class="col-md-1">
             <div class="page-header">
-                 <app:AddButton ID="TheAddButton" runat="server" />
+                <app:AddButton ID="TheAddButton" runat="server" />
             </div>
         </div>
         <div class="col-md-11">
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="container">        
+    <div class="container">
 
         <div class="tile">
             <div class="t-header">
@@ -27,13 +27,13 @@
             <div class="t-body tb-padding">
                 <div class="row">
                     <div class="col-sm-12">
-                        <asp:GridView ID="AreasGridView" runat="server" AutoGenerateColumns="false"
+                        <asp:GridView ID="AreasGridView" runat="server" AutoGenerateColumns="False"
                             CssClass="table table-striped m-b-15 i-table tbl-summary"
                             GridLines="None"
-                            OnRowDataBound="AreasGridView_RowDataBound">
+                            OnRowDataBound="AreasGridView_RowDataBound" DataSourceID="AreasObjectDataSource">
                             <EmptyDataTemplate>
                                 <p class="text-center">
-                                    There are no Areas registered for this Organzation
+                                    There are no Areas registered for this Organization
                                 </p>
                             </EmptyDataTemplate>
                             <Columns>
@@ -45,25 +45,32 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField HeaderText="Area Name" DataField="Name" />
-                                <asp:TemplateField HeaderText="KPIs">
-                                    <ItemTemplate><asp:Label ID="KpiLabel" runat="server" Text='<%# Eval("NumerOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumerOfKpis")) == 0 %>'></asp:Label>
+                               <%-- <asp:TemplateField HeaderText="KPIs">
+                                    <ItemTemplate>
+                                        <asp:Label ID="KpiLabel" runat="server" Text='<%# Eval("NumerOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumerOfKpis")) == 0 %>'></asp:Label>
                                         <asp:LinkButton ID="KpiButton" runat="server" Text='<%# Eval("NumerOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumerOfKpis")) > 0 %>'></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="120px">
                                     <ItemTemplate>
-                                        <app:KpiImage ID="ImageOfKpi" runat="server"  Visible="false" />
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
                                     </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
                             </Columns>
                         </asp:GridView>
+                        <asp:ObjectDataSource ID="AreasObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" 
+                            SelectMethod="GetAreasByOrganization" TypeName="Artexacta.App.Area.BLL.AreaBLL" OnSelected="AreasObjectDataSource_Selected">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="OrganizationIdHiddenField" Name="organizationId" PropertyName="Value" Type="Int32" />
+                            </SelectParameters>
+                        </asp:ObjectDataSource>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container">        
+    <div class="container">
 
         <div class="tile">
             <div class="t-header">
@@ -93,13 +100,14 @@
                                 </asp:TemplateField>
                                 <asp:BoundField HeaderText="Project Name" DataField="Name" />
                                 <asp:TemplateField HeaderText="KPIs">
-                                    <ItemTemplate><asp:Label ID="KpiLabel" runat="server" Text='<%# Eval("NumerOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumerOfKpis")) == 0 %>'></asp:Label>
+                                    <ItemTemplate>
+                                        <asp:Label ID="KpiLabel" runat="server" Text='<%# Eval("NumerOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumerOfKpis")) == 0 %>'></asp:Label>
                                         <asp:LinkButton ID="KpiButton" runat="server" Text='<%# Eval("NumerOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumerOfKpis")) > 0 %>'></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="120px">
                                     <ItemTemplate>
-                                        <app:KpiImage ID="ImageOfKpi" runat="server"  Visible="false" />
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -110,7 +118,7 @@
         </div>
     </div>
 
-    <div class="container">        
+    <div class="container">
 
         <div class="tile">
             <div class="t-header">
@@ -147,7 +155,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="120px">
                                     <ItemTemplate>
-                                        <app:KpiImage ID="ImageOfKpi" runat="server"  Visible="false" />
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -158,8 +166,8 @@
         </div>
     </div>
 
-    
-    <div class="container">        
+
+    <div class="container">
 
         <div class="tile">
             <div class="t-header">
@@ -190,10 +198,9 @@
                                 <asp:TemplateField HeaderText="Progress">
                                     <ItemTemplate>
                                         <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("Progress") %>' aria-valuemin="0" aria-valuemax="100" 
+                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("Progress") %>' aria-valuemin="0" aria-valuemax="100"
                                                 style='<%# "width:" + Eval("Progress") + "%" %>'>
-                                                
-                                            </div>                                            
+                                            </div>
                                         </div>
                                         <div class="text-center">
                                             <asp:Literal ID="ProgressLiteral" runat="server" Text='<%# Eval("Progress") %>'></asp:Literal>%
