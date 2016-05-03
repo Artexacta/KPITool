@@ -20,13 +20,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <asp:Label ID="SelectLabel" runat="server" Text="Seleccionar Rol:"></asp:Label>
-                            <telerik:RadComboBox ID="RoleDropDownList" runat="server" AutoPostBack="True" DataSourceID="RoleObjectDataSource" Height="30"
-                                OnDataBound="RoleDropDownList_DataBound" OnSelectedIndexChanged="RoleDropDownList_SelectedIndexChanged" Skin="aetemplate" EnableEmbeddedSkins="false">
-                            </telerik:RadComboBox>
+
+                            <asp:DropDownList ID="RoleDropDownList" runat="server" DataSourceID="RoleObjectDataSource" AutoPostBack="true" CssClass="form-control m-b-10" 
+                                 OnSelectedIndexChanged="RoleDropDownList_SelectedIndexChanged" OnDataBound="RoleDropDownList_DataBound" />
+
                             <asp:LinkButton ID="AddNewRoleLinkButton" runat="server" CausesValidation="False"
-                                OnClick="AddNewRoleLinkButton_Click" CssClass="btn btn-primary min-letter">
+                                OnClick="AddNewRoleLinkButton_Click" CssClass="btn btn-primary min-letter" Visible="false">
 								<i class="fa fa-plus"></i> Adicionar Nuevo Rol
                             </asp:LinkButton>
+                            <div style="clear: both; margin-bottom: 10px; "></div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +55,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="" SortExpression="RoleHasPermission">
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("RoleHasPermission") %>' />
+                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("RoleHasPermission") %>' CssClass="i-checks" />
                                     </ItemTemplate>
                                     <HeaderTemplate>
                                         <asp:LinkButton ID="SelectAllLinkButton" runat="server" OnClick="SelectAllLinkButton_Click"
@@ -61,7 +63,8 @@
                                             <i class="fa fa-caret-down"></i> Seleccionar Todo
                                         </asp:LinkButton>
                                     </HeaderTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <HeaderStyle Width="200px" />
+                                    <ItemStyle HorizontalAlign="Center" Width="200px" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="PermissionID" SortExpression="PermissionID" Visible="False">
                                     <ItemTemplate>
@@ -69,7 +72,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="Description" HeaderText="Descripción del permiso" SortExpression="Description"
-                                    ItemStyle-Width="350px" ItemStyle-HorizontalAlign="Center" />
+                                    ItemStyle-HorizontalAlign="Center" />
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -88,10 +91,17 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                $(':checkbox').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
+                $('.i-checks').find('input:checkbox').each(function () {
+                    var attr = $(this).attr('checked');
+                    if (typeof attr == typeof undefined || attr != 'checked') {
+                        $(this).removeClass("icheckbox_square-green");
+                        $(this).removeClass("iradio_square-green");
+                    } else {
+                        $(this).addClass("icheckbox_square-green");
+                        $(this).addClass("iradio_square-green");
+                    }
                 });
+
                 $("#ctl00_cp_AddNewRoleLinkButton").css("margin-top", "5px");
             });
         </script>

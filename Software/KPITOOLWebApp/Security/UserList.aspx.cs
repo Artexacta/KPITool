@@ -36,6 +36,19 @@ public partial class Security_UserList : System.Web.UI.Page
         }
     }
 
+    protected void UserGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            string userName = DataBinder.Eval(e.Row.DataItem, "UserName").ToString();
+            if (userName.Equals(HttpContext.Current.User.Identity.Name))
+            {
+                LinkButton deleteImageButton = (LinkButton)e.Row.FindControl("DeleteImageButton");
+                deleteImageButton.Visible = false;
+            }
+        }
+    }
+
     protected void UserGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (UserGridView.SelectedDataKey == null)
@@ -171,6 +184,7 @@ public partial class Security_UserList : System.Web.UI.Page
     {
         OperationHiddenField.Value = "BLOCK";
     }
+
     protected void ResetImageButton_Click(object sender, EventArgs e)
     {
         OperationHiddenField.Value = "RESET";

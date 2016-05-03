@@ -59,6 +59,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
+                                <div style="clear: both; margin-bottom: 10px; "></div>
                                 <asp:GridView ID="EmployeeGridView" runat="server" AllowPaging="True" AutoGenerateColumns="False"
                                     DataKeyNames="UserId,FullName" DataSourceID="UserObjectDataSource" OnDataBound="EmployeeGridView_DataBound"
                                     OnRowDataBound="EmployeeGridView_RowDataBound" OnSelectedIndexChanged="EmployeeGridView_SelectedIndexChanged"
@@ -140,10 +141,10 @@
                                 <div class="text-center" style="margin-top: 15px;">
                                     <asp:LinkButton ID="SavePermissionsButton" runat="server" OnClick="SavePermissionsButton_Click"
                                         CssClass="btn btn-primary">
-							<i class="fa fa-floppy-o"></i> Grabar permisos	
+							            <i class="fa fa-floppy-o"></i> Grabar permisos	
                                     </asp:LinkButton>
                                     <asp:LinkButton ID="ResetButton" runat="server" OnClick="ResetButton_Click" CssClass="btn btn-info">
-							<i class="fa fa-refresh"></i> Resetear permisos
+							            <i class="fa fa-refresh"></i> Resetear permisos
                                     </asp:LinkButton>
                                 </div>
                             </asp:Panel>
@@ -152,9 +153,15 @@
                     </div>
                     <script type="text/javascript">
                         $(document).ready(function () {
-                            $(':checkbox').iCheck({
-                                checkboxClass: 'icheckbox_square-green',
-                                radioClass: 'iradio_square-green',
+                            $('.i-checks').find('input:checkbox').each(function () {
+                                var attr = $(this).attr('checked');
+                                if (typeof attr == typeof undefined || attr != 'checked') {
+                                    $(this).removeClass("icheckbox_square-green");
+                                    $(this).removeClass("iradio_square-green");
+                                } else {
+                                    $(this).addClass("icheckbox_square-green");
+                                    $(this).addClass("iradio_square-green");
+                                }
                             });
                         });
                     </script>
@@ -164,10 +171,8 @@
                     SelectMethod="GetUsersBySearchParameters" TypeName="Artexacta.App.User.BLL.UserBLL"
                     OldValuesParameterFormatString="original_{0}">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="UserNameHiddenField" Name="Username" PropertyName="Value"
-                            Type="String" />
-                        <asp:ControlParameter ControlID="FullnameHiddenField" Name="Fullname" PropertyName="Value"
-                            Type="String" />
+                        <asp:ControlParameter ControlID="UserNameHiddenField" Name="Username" PropertyName="Value" Type="String" />
+                        <asp:ControlParameter ControlID="FullnameHiddenField" Name="Fullname" PropertyName="Value" Type="String" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
                 <asp:HiddenField ID="FullnameHiddenField" runat="server" />
@@ -177,8 +182,7 @@
                     OnSelected="UserPermissionsObjectDataSource_Selected" SelectMethod="GetPermissionsForUser"
                     TypeName="Artexacta.App.Permissions.User.BLL.PermissionUserBLL">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="SelectedUserIdHiddenField" Name="UserId" PropertyName="Value"
-                            Type="Int32" />
+                        <asp:ControlParameter ControlID="SelectedUserIdHiddenField" Name="UserId" PropertyName="Value" Type="Int32" />
                     </SelectParameters>
                 </asp:ObjectDataSource>
             </div>

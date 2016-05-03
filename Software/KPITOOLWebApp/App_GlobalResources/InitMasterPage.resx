@@ -240,4 +240,7 @@
   <data name="SelectLanguageLabel" xml:space="preserve">
     <value>Select Language:</value>
   </data>
+  <data name="MenuEditUser" xml:space="preserve">
+    <value>Edit my account</value>
+  </data>
 </root>

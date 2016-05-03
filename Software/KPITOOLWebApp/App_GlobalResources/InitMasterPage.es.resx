@@ -222,6 +222,9 @@
   <data name="SubmitfeedbackLabel" xml:space="preserve">
     <value>Reportar problema</value>
   </data>
+  <data name="MenuEditUser" xml:space="preserve">
+    <value>Editar mi cuenta</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Cambiar Contraseña</value>
   </data>

@@ -38,6 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <div style="clear: both; margin-bottom: 10px; "></div>
                     <asp:Panel ID="UserPanel" runat="server" CssClass="table-responsive">
                         <asp:GridView ID="UserGridView" runat="server" AutoGenerateColumns="False" DataSourceID="UsersObjectDataSource"
                             DataKeyNames="UserName" OnSelectedIndexChanged="UserGridView_SelectedIndexChanged"
@@ -48,7 +49,7 @@
                             <EmptyDataRowStyle CssClass="gridNoData" />
                             <RowStyle CssClass="" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Seleccionar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="80px">
+                                <asp:TemplateField HeaderText="Seleccionar" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="80px">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="SelectImageButton" runat="server" CommandName="Select" CssClass="text-success" Text="<i class='fa fa-pencil'></i>"
                                             CausesValidation="false" />
@@ -69,6 +70,7 @@
                             </Columns>
                         </asp:GridView>
                     </asp:Panel>
+                    <div style="clear: both; margin-bottom: 20px; "></div>
                 </div>
                 <div class="col-md-12">
                     <asp:Panel ID="EmployeeRolePanel" runat="server" CssClass="frame" Visible="false">
@@ -92,7 +94,7 @@
                             <p>
                                 <asp:Label ID="RolesLabel" runat="server" Text="Roles para el Usuario"></asp:Label>
                             </p>
-                            <asp:CheckBoxList ID="UserRoleCheckBoxList" runat="server">
+                            <asp:CheckBoxList ID="UserRoleCheckBoxList" runat="server" BackColor="Transparent">
                             </asp:CheckBoxList>
                         </div>
                         <div class="text-center" style="margin-top:15px;">
@@ -109,10 +111,17 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                $(':checkbox').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
+                $('input:checkbox').each(function () {
+                    var attr = $(this).attr('checked');
+                    if (typeof attr == typeof undefined || attr != 'checked') {
+                        $(this).removeClass("icheckbox_square-green");
+                        $(this).removeClass("iradio_square-green");
+                    } else {
+                        $(this).addClass("icheckbox_square-green");
+                        $(this).addClass("iradio_square-green");
+                    }
                 });
+
                 $('.icheckbox_square-green').css("margin-right", "10px");
             });
         </script>

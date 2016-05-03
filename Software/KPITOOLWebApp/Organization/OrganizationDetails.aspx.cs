@@ -57,12 +57,10 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
             return;
         }
 
-        OrganizationBLL theBLL = new OrganizationBLL();
         Organization organization = null;
-
         try
         {
-            organization = theBLL.GetOrganizationById(organizationId);
+            organization = OrganizationBLL.GetOrganizationById(organizationId);
         }
         catch (Exception exc)
         {

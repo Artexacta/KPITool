@@ -130,25 +130,25 @@
     <value>unkown-icon.gif</value>
   </data>
   <data name="ChangeUserEmail" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/ChangeUserEmail.en.txt</value>
+    <value>/DataFiles/Emails/ChangeUserEmail.en.txt</value>
   </data>
   <data name="ConfirmResetPassword" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/ConfirmResetPassword.en.txt</value>
+    <value>/DataFiles/Emails/ConfirmResetPassword.en.txt</value>
   </data>
   <data name="CreateUserEmail" xml:space="preserve">
-    <value>~/DataFiles/EmailTemplates/CreateUserEmail.en.txt</value>
+    <value>~/DataFiles/Emails/CreateUserEmail.en.txt</value>
   </data>
   <data name="DeletedUsersNotConfirmedError" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/DeletedUsersNotConfirmedError.en.txt</value>
+    <value>/DataFiles/Emails/DeletedUsersNotConfirmedError.en.txt</value>
   </data>
   <data name="DeletedUsersNotConfirmedOK" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/DeletedUsersNotConfirmedOK.en.txt</value>
+    <value>/DataFiles/Emails/DeletedUsersNotConfirmedOK.en.txt</value>
   </data>
   <data name="ApproveRequest" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/ApproveRequest.en.txt</value>
+    <value>/DataFiles/Emails/ApproveRequest.en.txt</value>
   </data>
   <data name="DenyRequest" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/DenyRequest.en.txt</value>
+    <value>/DataFiles/Emails/DenyRequest.en.txt</value>
   </data>
   <data name="NoteReportBobyLocation" xml:space="preserve">
     <value>~/DataFiles/ReportTemplates/NoteReportBodyEN.txt</value>
@@ -157,52 +157,52 @@
     <value>~/DataFiles/ReportTemplates/NoteReportHeaderEN.txt</value>
   </data>
   <data name="ResendCode" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/ResendCode.en.txt</value>
+    <value>/DataFiles/Emails/ResendCode.en.txt</value>
   </data>
   <data name="ResetPassword" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/ResetPassword.en.txt</value>
+    <value>/DataFiles/Emails/ResetPassword.en.txt</value>
   </data>
   <data name="AccountConfirmationOK" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/AccountConfirmationOK.en.txt</value>
+    <value>/DataFiles/Emails/AccountConfirmationOK.en.txt</value>
   </data>
   <data name="AdmEmailResetPassword" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/AdmResetPassword.en.txt</value>
+    <value>/DataFiles/Emails/AdmResetPassword.en.txt</value>
   </data>
   <data name="CompanyRegisteredOK" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/CompanyCreatedOK.en.txt</value>
+    <value>/DataFiles/Emails/CompanyCreatedOK.en.txt</value>
   </data>
   <data name="UserInvitationSentOK" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/UserInvitationSentOK.en.txt</value>
+    <value>/DataFiles/Emails/UserInvitationSentOK.en.txt</value>
   </data>
   <data name="EmailIpaMessageSent" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/Reply/IpaMessageSent.en.txt</value>
+    <value>/DataFiles/Emails/Reply/IpaMessageSent.en.txt</value>
   </data>
   <data name="EmailInvestorMessageSent" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/Reply/InvestorMessageSent.en.txt</value>
+    <value>/DataFiles/Emails/Reply/InvestorMessageSent.en.txt</value>
   </data>
   <data name="EmailReplyReSent" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/Reply/InvestorReplyReSent.en.txt</value>
+    <value>/DataFiles/Emails/Reply/InvestorReplyReSent.en.txt</value>
   </data>
   <data name="EmailReplySent" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/Reply/InvestorReplySent.en.txt</value>
+    <value>/DataFiles/Emails/Reply/InvestorReplySent.en.txt</value>
   </data>
   <data name="EmailRequestDeleted" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/Request/InvestorRequestDeleted.en.txt</value>
+    <value>/DataFiles/Emails/Request/InvestorRequestDeleted.en.txt</value>
   </data>
   <data name="EmailRequestSent" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/Request/IpaRequestSent.en.txt</value>
+    <value>/DataFiles/Emails/Request/IpaRequestSent.en.txt</value>
   </data>
   <data name="EmailInvitation" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/EmailInvitation.en.txt</value>
+    <value>/DataFiles/Emails/EmailInvitation.en.txt</value>
   </data>
   <data name="AssignmentSTL" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/AssignmentSTL.en.txt</value>
+    <value>/DataFiles/Emails/AssignmentSTL.en.txt</value>
   </data>
   <data name="AssignmentUser" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/AssignmentUser.en.txt</value>
+    <value>/DataFiles/Emails/AssignmentUser.en.txt</value>
   </data>
   <data name="AssignCompaniesUser" xml:space="preserve">
-    <value>/DataFiles/EmailTemplates/AssignCompaniesUser.en.txt</value>
+    <value>/DataFiles/Emails/AssignCompaniesUser.en.txt</value>
   </data>
   <data name="UnknownFileType" xml:space="preserve">
     <value>Unkown File Type</value>

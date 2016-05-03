@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.Configuration;
+using Artexacta.App.Utilities.SystemMessages;
 
 public partial class Security_CreateUser : System.Web.UI.Page
 {
@@ -24,11 +25,8 @@ public partial class Security_CreateUser : System.Web.UI.Page
 
         //Obtener el control de mensajes
         Label theMessageLabel = (Label)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("MessageLabel");
-
         if (theMessageLabel != null)
-        {
             theMessageLabel.Text = "";
-        }
     }
 
     protected void CreateUserWizard1_CreatingUser(object sender, LoginCancelEventArgs e)
@@ -87,7 +85,6 @@ public partial class Security_CreateUser : System.Web.UI.Page
 
         // Se creó el usuario y hay que generar el código:
         string userName = CreateUserWizard1.UserName;
-
         try
         {
             // Store the confirmation string in the user's additional info for later verification
@@ -127,12 +124,19 @@ public partial class Security_CreateUser : System.Web.UI.Page
 
             UserBLL.InsertUserRecord(CreateUserWizard1.UserName, fullName, CellPhone,
                 Address, PhoneNumber, PhoneArea, PhoneCode, Email);
+
+            SystemMessages.DisplaySystemMessage("Se registró correctamente el usuario.");
         }
         catch (Exception q)
         {
             Session["ErrorMessage"] = "Error al crear el usuario. Por favor contactese con el administrador del sistema o intente nuevamente. " + q.Message;
             Response.Redirect("~/FatalError.aspx");
         }
+    }
+
+    protected void CreateUserWizard1_CreateUserError(object sender, CreateUserErrorEventArgs e)
+    {
+        SystemMessages.DisplaySystemErrorMessage("Ocurrió un error al crear nuevo usuario.");
     }
 
     protected void CreateUserWizard1_SendingMail(object sender, MailMessageEventArgs e)
@@ -147,8 +151,7 @@ public partial class Security_CreateUser : System.Web.UI.Page
                 Configuration.GetReturnEmailAddress(), Configuration.GetReturnEmailName());
             e.Message.Body = e.Message.Body.Replace("<%UserName%>", CreateUserWizard1.UserName);
             e.Message.Body = e.Message.Body.Replace("<%Contraseña%>", CreateUserWizard1.Password);
-            e.Message.Body = e.Message.Body.Replace("<%Link%>",
-                "<a href=\"" + confirmURL + "\">" + confirmURL + "</a>");
+            e.Message.Body = e.Message.Body.Replace("<%Link%>", "<a href=\"" + confirmURL + "\">" + confirmURL + "</a>");
             e.Message.Subject = Configuration.GetCreationEmailSubject();
             e.Message.IsBodyHtml = true;
         }
@@ -156,7 +159,14 @@ public partial class Security_CreateUser : System.Web.UI.Page
         {
             log.Error("Failed to construct a confirmation email for the creation of an account for user " + CreateUserWizard1.UserName, q);
             e.Cancel = true;
+            SystemMessages.DisplaySystemErrorMessage("Ocurrió un error al enviar el email de confirmación al usuario.");
         }
+    }
+
+    protected void CreateUserWizard1_SendMailError(object sender, SendMailErrorEventArgs e)
+    {
+        SystemMessages.DisplaySystemWarningMessage("No se pudo enviar la notificación de creación de cuenta al nuevo usuario.");
+        e.Handled = true;
     }
 
     protected void CreateUserWizard1_CancelUser(object sender, EventArgs e)

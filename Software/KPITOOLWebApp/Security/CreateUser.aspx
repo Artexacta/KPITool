@@ -22,8 +22,8 @@
                             <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" OnCreatedUser="CreateUserWizard1_CreatedUser"
                                 OnCreatingUser="CreateUserWizard1_CreatingUser" CreateUserButtonText="Crear Usuario"
                                 CreateUserButtonStyle-CssClass="button" CancelButtonStyle-CssClass="button" CancelButtonText="Cancelar"
-                                DisplayCancelButton="True" OnSendingMail="CreateUserWizard1_SendingMail" OnCancelButtonClick="CreateUserWizard1_CancelUser"
-                                CancelDestinationPageUrl="~/Security/UserList.aspx">
+                                DisplayCancelButton="True" OnCreateUserError="CreateUserWizard1_CreateUserError" OnSendingMail="CreateUserWizard1_SendingMail" 
+                                OnSendMailError="CreateUserWizard1_SendMailError" OnCancelButtonClick="CreateUserWizard1_CancelUser" CancelDestinationPageUrl="~/Security/UserList.aspx" >
                                 <CreateUserButtonStyle CssClass="button"></CreateUserButtonStyle>
                                 <MailDefinition BodyFileName="<%$ Resources: Files, CreateUserEmail %>">
                                 </MailDefinition>
@@ -155,11 +155,11 @@
                                             <div class="text-center" style="margin-top: 15px;">
                                                 <asp:LinkButton ID="StepNextButton" runat="server" CommandName="MoveNext" CssClass="btn btn-primary"
                                                     ValidationGroup="CreateUserWizard1">
-										<i class="fa fa-plus"></i> Crear Usuario
+										            <i class="fa fa-plus"></i> Crear Usuario
                                                 </asp:LinkButton>
                                                 <asp:LinkButton ID="CancelButton" runat="server" CausesValidation="False" CommandName="Cancel"
                                                     CssClass="btn btn-danger" ValidationGroup="CreateUserWizard1">
-										<i class="fa fa-times"></i> Cancelar	
+										            <i class="fa fa-times"></i> Cancelar	
                                                 </asp:LinkButton>
                                             </div>
                                         </CustomNavigationTemplate>

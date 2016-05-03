@@ -30,13 +30,14 @@
                                 DisplayContextualHelp="true" CssSearch="CSearch" CssSearchError="CSearchErrorPanel"
                                 CssSearchHelp="CSearchHelpPanel" ImageErrorUrl="~/Images/neutral/exclamation.png"
                                 ImageHelpUrl="~/Images/neutral/Help.png" />
+                            <div style="clear: both; margin-bottom: 10px; "></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="table-responsive">
                         <asp:GridView ID="UserGridView" runat="server" AutoGenerateColumns="False" DataSourceID="UserObjectDataSource"
-                            DataKeyNames="UserName" OnSelectedIndexChanged="UserGridView_SelectedIndexChanged"
+                            DataKeyNames="Username" OnRowDataBound="UserGridView_RowDataBound" OnSelectedIndexChanged="UserGridView_SelectedIndexChanged"
                             CssClass="table table-striped table-bordered table-hover" GridLines="None">
                             <HeaderStyle CssClass="rgHeader head" />
                             <FooterStyle CssClass="foot" />
@@ -55,8 +56,7 @@
                                 <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="DeleteImageButton" runat="server" CommandName="Select" CssClass="text-danger img-buttons" Text="<i class='fa fa-trash-o'></i>"
-                                            OnClick="DeleteImageButton_Click"
-                                            OnClientClick="return confirm('¿Está seguro de eliminar el usuario?')" />
+                                            OnClick="DeleteImageButton_Click" OnClientClick="return confirm('¿Está seguro de eliminar el usuario?')" />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="50px"></ItemStyle>
                                     <ItemStyle VerticalAlign="Middle"></ItemStyle>
@@ -123,9 +123,15 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#modal_chSearch").html('<i class="fa fa-question-circle"></i>');
-                $('.i-checks > :checkbox').iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
+                $('.i-checks').find('input:checkbox').each(function () {
+                    var attr = $(this).attr('checked');
+                    if (typeof attr == typeof undefined || attr != 'checked') {
+                        $(this).removeClass("icheckbox_square-green");
+                        $(this).removeClass("iradio_square-green");
+                    } else {
+                        $(this).addClass("icheckbox_square-green");
+                        $(this).addClass("iradio_square-green");
+                    }
                 });
             });
         </script>
