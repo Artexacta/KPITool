@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="Projects" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProjectList.aspx.cs" Inherits="Project_ProjectList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cp" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
@@ -11,8 +11,10 @@
                         <app:AddButton ID="TheAddButton" runat="server" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
-                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" DefaultButton="SearchImageButton">
-                            <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
+                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group">
+
+
+                            <%--<asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
                             <div class="input-group-addon last" style="cursor: pointer">
 
                                 <a class="dropdown-toggle" id="advanced-search" style="color: #000; display: block">
@@ -57,9 +59,9 @@
                                 </asp:LinkButton>
                                 <asp:ImageButton ID="SearchImageButton" runat="server" OnClick="SearchButton_Click"
                                     ImageUrl="~/Images/Neutral/pixel.gif" Style="display: none" />
-                            </span>
+                            </span>--%>
                         </asp:Panel>
-                        <asp:Label ID="OwnerObjectLabel" runat="server" style="font-size: 10px"></asp:Label>
+                        <asp:Label ID="OwnerObjectLabel" runat="server" Style="font-size: 10px"></asp:Label>
                     </div>
                 </div>
             </div>
@@ -68,7 +70,7 @@
         </div>
     </div>
 
-    <asp:Panel ID="ProjectsPanel" runat="server"  CssClass="container">
+    <asp:Panel ID="ProjectsPanel" runat="server" CssClass="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -77,29 +79,29 @@
                     </div>
                     <div class="t-body tb-padding" id="ProjectList">
                         <asp:Repeater ID="ProjectsRepeater" runat="server" OnItemDataBound="ProjectsRepeater_ItemDataBound"
-                            OnItemCommand="ProjectsRepeater_ItemCommand">
+                            DataSourceID="ProjectsObjectDataSource" OnItemCommand="ProjectsRepeater_ItemCommand">
                             <ItemTemplate>
                                 <div class="row">
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="ViewProject" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
+                                        <asp:LinkButton ID="ViewProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
                                             CssClass="viewBtn detailsBtn" CommandName="ViewProject">
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="EditProject" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
+                                        <asp:LinkButton ID="EditProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
                                             CssClass="viewBtn editBtn" CommandName="EditProject">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 disabled">
-                                        <asp:LinkButton ID="ShareProject" CommandArgument='<%# Eval("ObjectId") %>' runat="server" 
-                                            CssClass="viewBtn shareBtn" >
+                                        <asp:LinkButton ID="ShareProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
+                                            CssClass="viewBtn shareBtn">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="DeleteProject" data-id='<%# Eval("ObjectId") %>' CommandArgument='<%# Eval("ObjectId") %>' 
+                                        <asp:LinkButton ID="DeleteProject" data-id='<%# Eval("ProjectID") %>' CommandArgument='<%# Eval("ProjectID") %>'
                                             CommandName="DeleteProject" runat="server" CssClass="viewBtn deleteBtn"
                                             OnClientClick="return confirm('Are you sure you want to delete selected Project?')">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
@@ -109,42 +111,42 @@
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
                                             (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("Owner")) %>'
+                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# Eval("Owner") %>'
                                                 CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("ObjectId") %>'></asp:LinkButton>
+                                                CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
                                             )
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row m-b-20">
-                                    <asp:Panel runat="server" id="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" visible="false">
-                                        This project does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i> icon above
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
+                                        This project does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
                                     </asp:Panel>
-                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
+                                    <%-- <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
                                     </asp:Panel>
-                                    <asp:Panel runat="server" id="detailsContainer" class="col-md-11 m-t-5" visible="false">
+                                   <asp:Panel runat="server" id="detailsContainer" class="col-md-11 m-t-5" visible="false">
                                         This project has 
                                         <asp:LinkButton ID="ActivitiesButton" runat="server" Visible="false"
-                                            CommandName="ViewActivities" CommandArgument='<%# Eval("ObjectId") %>'>
+                                            CommandName="ViewActivities" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
                                         <asp:Literal ID="AndLiteral" runat="server" Visible="false" Text="and"></asp:Literal>
 
                                         <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
-                                            CommandName="ViewKPIs" CommandArgument='<%# Eval("ObjectId") %>'>
+                                            CommandName="ViewKPIs" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
-                                    </asp:Panel>
+                                    </asp:Panel>--%>
                                 </div>
                             </ItemTemplate>
-                            <FooterTemplate>                                
+                            <FooterTemplate>
                                 <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# ProjectsRepeater.Items.Count == 0 %>'>
                                     <div class="col-md-12 text-center">
-                                        -- There are no Projects registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i> icon above --
+                                        -- There are no Projects registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above --
                                     </div>
                                 </asp:Panel>
                             </FooterTemplate>
                         </asp:Repeater>
-                        
+
                         <br />
                         <div style="overflow: hidden">
                             <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">Show tips for this page</a>
@@ -155,24 +157,19 @@
         </div>
     </asp:Panel>
     <asp:HiddenField ID="ForceShowTour" runat="server" Value="false" />
+    <asp:ObjectDataSource ID="ProjectsObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetProjectBySearch" TypeName="Artexacta.App.Project.BLL.ProjectBLL" OnSelected="ProjectsObjectDataSource_Selected">
+        <SelectParameters>
+            <asp:Parameter DefaultValue="1=1" Name="whereClause" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+
+
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#clearSelection").click(function () {
-                $find("<%= ObjectsComboBox.ClientID %>").clearSelection();
-                $("#clearSelection").hide();
-                return false;
-            });
+
             $(".rcbArrowCellRight a").html("V");
 
-            $("#advanced-search").click(function () {
-                if($("#advanced-search-panel").is(":visible")){
-                    $("#advanced-search-panel").slideUp(500, function () { $("#advanced-search-icon").removeClass("zmdi-chevron-up").addClass("zmdi-chevron-down"); });
-                } else {
-                    $("#advanced-search-panel").slideDown(500, function () { $("#advanced-search-icon").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up"); });
-                }
-                
-            });
-            
             $("#showTourBtn").click(function () {
                 var storageKeys = Object.keys(localStorage);
                 for (var i in storageKeys) {
@@ -186,17 +183,9 @@
             });
             showTour();
         });
-        $telerik.$(document).ready(function () {
-            if ($find("<%= ObjectsComboBox.ClientID %>").get_value() != "")
-                $("#clearSelection").show();
-        });
-
-        function onObjectSelected(sender, args) {
-            $("#clearSelection").show();
-        }
 
         function showTour() {
-            
+
             var tour = new Tour({
                 name: "ProjectListPageTour",
                 steps: [
