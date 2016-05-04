@@ -3817,6 +3817,10 @@ tbody.collapse.in {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
 }
+.btn-addData > .dropdown-menu {
+    min-width: 250px;
+    padding: 4px;
+}
 .dropdown-menu.pull-right {
   right: 0;
   left: auto;
@@ -3924,7 +3928,7 @@ tbody.collapse.in {
 .btn-group-vertical {
   position: relative;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: initial;
 }
 .btn-group > .btn,
 .btn-group-vertical > .btn {
@@ -4003,8 +4007,8 @@ tbody.collapse.in {
   padding-right: 12px;
 }
 .btn-group.open .dropdown-toggle {
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .btn-group.open .dropdown-toggle.btn-link {
   -webkit-box-shadow: none;
