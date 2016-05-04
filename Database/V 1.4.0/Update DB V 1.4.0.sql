@@ -500,8 +500,1197 @@ END
 
 
 
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_ACT_GetActivityById]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_ACT_GetActivityById]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_ACT_GetActivityById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_ACT_GetActivityByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_ACT_GetActivityByOrganization]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_ACT_GetActivityByOrganization]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchActivitiess]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_AUTOCOMPLETE_SearchActivitiess]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchActivitiess]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchAreas]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_AUTOCOMPLETE_SearchAreas]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchAreas]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchOrganizations]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_AUTOCOMPLETE_SearchOrganizations]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchOrganizations]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchPeople]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_AUTOCOMPLETE_SearchPeople]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchPeople]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchProjects]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_AUTOCOMPLETE_SearchProjects]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchProjects]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_DeleteCategory]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_DeleteCategory]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_DeleteCategory]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_DeleteCategoryItem]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_DeleteCategoryItem]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_DeleteCategoryItem]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetAllCategories]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_GetAllCategories]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_GetAllCategories]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetCategoryById]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_GetCategoryById]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_GetCategoryById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetCategoryItemById]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_GetCategoryItemById]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_GetCategoryItemById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetCategoryItemsByCategoryId]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_GetCategoryItemsByCategoryId]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_GetCategoryItemsByCategoryId]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_UpdateCategory]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_UpdateCategory]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_UpdateCategory]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_UpdateCategoryItem]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CATEGORY_UpdateCategoryItem]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_CATEGORY_UpdateCategoryItem]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_KPI_GetKPIById]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_KPI_GetKPIById]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_KPI_GetKPIById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_KPI_GetKPIsByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_KPI_GetKPIsByOrganization]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_KPI_GetKPIsByOrganization]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_ORG_GetAreasByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_ORG_GetAreasByOrganization]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_ORG_GetAreasByOrganization]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_PEOPLE_GetPersonById]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_PEOPLE_GetPersonById]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_PEOPLE_GetPersonById]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_PROJ_GetProjectsByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_PROJ_GetProjectsByOrganization]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_PROJ_GetProjectsByOrganization]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_InsertOperationForRole]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_SEG_InsertOperationForRole]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_SEG_InsertOperationForRole]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_InsertOperationForUser]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_SEG_InsertOperationForUser]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_SEG_InsertOperationForUser]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_IsPermissionAllowedForRole]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_SEG_IsPermissionAllowedForRole]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_SEG_IsPermissionAllowedForRole]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_IsPermissionAllowedForUser]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_SEG_IsPermissionAllowedForUser]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_SEG_IsPermissionAllowedForUser]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_IsUserAllowedToPerformPermission]    Script Date: 05/04/2016 10:30:50 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_SEG_IsUserAllowedToPerformPermission]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_SEG_IsUserAllowedToPerformPermission]
+GO
+
+USE [KPIDB]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_ACT_GetActivityById]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
 
 
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	Get persona by id
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ACT_GetActivityById]
+	@intActivityId AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [activityID]
+		  ,[name]
+		  ,[organizationID]
+		  ,[areaID]
+		  ,[projectID]
+	FROM [dbo].[tbl_Activity] 
+	WHERE [activityID] = @intActivityId
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_ACT_GetActivityByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 02/05/2016
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ACT_GetActivityByOrganization]
+	@intOrganizationId INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [a].[activityID]
+		  ,[a].[name]
+		  ,[a].[organizationID]
+		  ,[a].[areaID]
+		  ,[a].[projectID]
+		  ,[kpi].[numberKPIs]
+	FROM [dbo].[tbl_Activity] [a] 
+	LEFT OUTER JOIN (SELECT COUNT([kpiID]) [numberKPIs]
+						   ,[organizationID]
+						   ,[activityID]
+					 FROM [dbo].[tbl_KPI] 
+					 GROUP BY [organizationID], [activityID]) [kpi] 
+	ON [a].[organizationID] = [kpi].[organizationID] AND [a].[activityID] = [kpi].[activityID] 
+	WHERE [a].[organizationID] = @intOrganizationId
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchActivitiess]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	Get activities for autocomplete
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchActivitiess]
+	@varUserName AS VARCHAR(50),
+	@intOrganizationId AS INT,
+	@intAreaId AS INT,
+	@intProjectId AS INT,
+	@varFilter AS VARCHAR(250)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [a].[activityID]
+		  ,[a].[name]
+		  ,[a].[organizationID]
+		  ,[a].[areaID]
+		  ,[a].[projectID]
+	FROM [dbo].[tbl_Activity] [a] 
+	INNER JOIN [dbo].[tbl_SEG_ObjectPermissions] [op] ON [a].[activityID] = [op].[objectID] 
+	WHERE [op].[objectTypeID] = 'ACTIVITY' 
+	AND [op].[username] = @varUserName
+	AND [a].[name] LIKE CASE @varFilter WHEN '' THEN [a].[name] ELSE '%' + @varFilter + '%' END 
+	AND [a].[organizationID] = @intOrganizationId 
+	AND ISNULL([a].[areaID],0) = CASE WHEN ISNULL(@intAreaId,0) = 0 THEN ISNULL([a].[areaID],0) ELSE ISNULL(@intAreaId,0) END 
+	AND ISNULL([a].[projectID],0) = CASE WHEN ISNULL(@intProjectId,0) = 0 THEN ISNULL([a].[projectID],0) ELSE ISNULL(@intProjectId,0) END 
+	ORDER BY [a].[name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchAreas]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 25/04/2016
+-- Description:	Get areas for autocomplete
+-- ===============================================
+CREATE PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchAreas]
+	@intOrganizationId AS INT,
+	@varFilter AS VARCHAR(250)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    IF(@varFilter IS NULL)
+		SELECT @varFilter = ''
+	
+	SELECT TOP 10 [areaID]
+		  ,[organizationID]
+		  ,[name]
+	FROM [dbo].[tbl_Area] 
+	WHERE [name] LIKE CASE @varFilter WHEN '' THEN [name] ELSE '%' + @varFilter + '%' END 
+	AND [organizationID] = @intOrganizationId 
+	ORDER BY [name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchOrganizations]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- ===============================================
+-- Author:		Marcela Martinez
+-- Create date: 25/04/2016
+-- Description:	Get organizations for autocomplete
+-- ===============================================
+CREATE PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchOrganizations]
+	@varUserName AS VARCHAR(50),
+	@varFilter AS VARCHAR(250)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    IF(@varFilter IS NULL)
+		SELECT @varFilter = ''
+	
+	SELECT [or].[organizationID]
+		  ,[or].[name]
+	FROM [dbo].[tbl_Organization] [or] 
+	INNER JOIN [dbo].[tbl_SEG_ObjectPermissions] [op] ON [or].[organizationID] = [op].[objectID] 
+	WHERE [op].[objectTypeID] = 'ORGANIZATION' 
+	AND [op].[username] = @varUserName
+	AND [or].[name] LIKE CASE @varFilter WHEN '' THEN [or].[name] ELSE '%' + @varFilter + '%' END 
+	ORDER BY [or].[name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchPeople]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	Get people for autocomplete
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchPeople]
+	@varUserName AS VARCHAR(50),
+	@intOrganizationId AS INT,
+	@intAreaId AS INT,
+	@varFilter AS VARCHAR(250)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [p].[personID]
+		  ,[p].[id]
+		  ,[p].[name]
+		  ,[p].[organizationID]
+		  ,[p].[areaID]
+	FROM [dbo].[tbl_People] [p] 
+	INNER JOIN [dbo].[tbl_SEG_ObjectPermissions] [op] ON [p].[personID] = [op].[objectID] 
+	WHERE [op].[objectTypeID] = 'PERSON' 
+	AND [op].[username] = @varUserName
+	AND [p].[name] LIKE CASE @varFilter WHEN '' THEN [p].[name] ELSE '%' + @varFilter + '%' END 
+	AND [p].[organizationID] = @intOrganizationId 
+	AND ISNULL([p].[areaID],0) = CASE WHEN ISNULL(@intAreaId,0) = 0 THEN ISNULL([p].[areaID],0) ELSE ISNULL(@intAreaId,0) END 
+	ORDER BY [p].[name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_AUTOCOMPLETE_SearchProjects]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 29/04/2016
+-- Description:	Get projects for autocomplete
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_AUTOCOMPLETE_SearchProjects]
+	@varUserName AS VARCHAR(50),
+	@intOrganizationId AS INT,
+	@intAreaId AS INT,
+	@varFilter AS VARCHAR(250)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    IF(@varFilter IS NULL)
+		SELECT @varFilter = ''
+	
+	SELECT [p].[projectID]
+		  ,[p].[name]
+		  ,[p].[organizationID]
+		  ,[p].[areaID]
+	FROM [dbo].[tbl_Project] [p] 
+	INNER JOIN [dbo].[tbl_SEG_ObjectPermissions] [op] ON [p].[projectID] = [op].[objectID] 
+	WHERE [op].[objectTypeID] = 'PROJECT' 
+	AND [op].[username] = @varUserName
+	AND [p].[name] LIKE CASE @varFilter WHEN '' THEN [p].[name] ELSE '%' + @varFilter + '%' END 
+	AND [p].[organizationID] = @intOrganizationId 
+	AND ISNULL([p].[areaID],0) = CASE WHEN ISNULL(@intAreaId,0) = 0 THEN ISNULL([p].[areaID],0) ELSE ISNULL(@intAreaId,0) END 
+	ORDER BY [p].[name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_DeleteCategory]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	Delete category
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_DeleteCategory]
+	@varCategoryId varchar(20)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	
+	-- We detect if the SP was called from an active transation and 
+	-- we save it to use it later.  In the SP, @TranCounter = 0
+	-- means that there are no active transations and that this SP
+	-- started one. @TranCounter > 0 means that a transation was started
+	-- before we started this SP
+	DECLARE @TranCounter INT;
+	SET @TranCounter = @@TRANCOUNT;
+	IF @TranCounter > 0
+		-- We called this SP when an active transaction already exists.
+		-- We create a savepoint to be able to only roll back this 
+		-- transaction if there is some error.
+		SAVE TRANSACTION DeleteCategoryPS;     
+	ELSE
+		-- This SP starts its own transaction and there was no previous transaction
+		BEGIN TRANSACTION;
+
+	BEGIN TRY
+		
+		DELETE FROM [dbo].[tbl_KPITargetCategories] 
+		WHERE [categoryID] = @varCategoryId 
+		
+		DELETE FROM [dbo].[tbl_KPIMeasurementCategories] 
+		WHERE [categoryID] = @varCategoryId
+		
+		DELETE FROM [dbo].[tbl_KPICategories] 
+		WHERE [categoryID] = @varCategoryId
+		
+		DELETE FROM [dbo].[tbl_CategoryItem] 
+		WHERE [categoryID] = @varCategoryId
+		
+		DELETE FROM [dbo].[tbl_Category] 
+		WHERE [categoryID] = @varCategoryId 
+	    
+	    -- We arrived here without errors; we should commit the transation we started
+		-- but we should not commit if there was a previous transaction started
+		IF @TranCounter = 0
+			-- @TranCounter = 0 means that no other transaction was started before this transaction 
+			-- and that we shouold hence commit this transaction
+			COMMIT TRANSACTION;
+		
+	END TRY
+	BEGIN CATCH
+
+		-- There was an error.  We need to determine what type of rollback we must perform
+
+		DECLARE @ErrorMessage NVARCHAR(4000);
+		DECLARE @ErrorSeverity INT;
+		DECLARE @ErrorState INT;
+
+		SELECT @ErrorMessage = ERROR_MESSAGE();
+		SELECT @ErrorSeverity = ERROR_SEVERITY();
+		SELECT @ErrorState = ERROR_STATE();
+
+		IF @TranCounter = 0
+			-- We have only the transaction that we started in this SP.  Rollback
+			-- all the tranaction.
+			ROLLBACK TRANSACTION;
+		ELSE
+			-- A transaction was started before this SP was called.  We must
+			-- rollback only the changes we made in this SP.
+
+			-- We see XACT_STATE and the possible results are 0, 1, or -1.
+			-- If it is 1, the transaction is valid and we can do a commit. But since we are in the 
+			-- CATCH we don't do the commit. We need to rollback to the savepoint
+			-- If it is -1 the transaction is not valid and we must do a full rollback... we can't
+			-- do a rollback to a savepoint
+			-- XACT_STATE = 0 means that there is no transaciton and a rollback would cause an error
+			-- See http://msdn.microsoft.com/en-us/library/ms189797(SQL.90).aspx
+			IF XACT_STATE() = 1
+				-- If the transaction is still valid then we rollback to the restore point defined before
+				ROLLBACK TRANSACTION DeleteCategoryPS;
+
+				-- If the transaction is not valid we cannot do a commit or a rollback to a savepoint
+				-- because a rollback is not allowed. Hence, we must simply return to the caller and 
+				-- they will be respnsible to rollback the transaction
+
+				-- If there is no tranaction then there is nothing left to do
+
+		-- After doing the correpsonding rollback, we must propagate the error information to the SP that called us 
+		-- See http://msdn.microsoft.com/en-us/library/ms175976(SQL.90).aspx
+
+		-- The database can return values from 0 to 256 but raise error
+		-- will only allow us to use values from 1 to 127
+		IF(@ErrorState < 1 OR @ErrorState > 127)
+			SELECT @ErrorState = 1
+			
+		RAISERROR (@ErrorMessage, -- Message text.
+				   @ErrorSeverity, -- Severity.
+				   @ErrorState -- State.
+				   );
+	END CATCH
+	    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_DeleteCategoryItem]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	Delete category item
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_DeleteCategoryItem]
+	@varCategoryItemId VARCHAR(20),
+	@varCategoryId AS VARCHAR(20)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	
+	-- We detect if the SP was called from an active transation and 
+	-- we save it to use it later.  In the SP, @TranCounter = 0
+	-- means that there are no active transations and that this SP
+	-- started one. @TranCounter > 0 means that a transation was started
+	-- before we started this SP
+	DECLARE @TranCounter INT;
+	SET @TranCounter = @@TRANCOUNT;
+	IF @TranCounter > 0
+		-- We called this SP when an active transaction already exists.
+		-- We create a savepoint to be able to only roll back this 
+		-- transaction if there is some error.
+		SAVE TRANSACTION DeleteCategoryItemPS;     
+	ELSE
+		-- This SP starts its own transaction and there was no previous transaction
+		BEGIN TRANSACTION;
+
+	BEGIN TRY
+		
+		DELETE FROM [dbo].[tbl_KPITargetCategories] 
+		WHERE [categoryItemID] = @varCategoryItemId 
+		
+		DELETE FROM [dbo].[tbl_KPIMeasurementCategories] 
+		WHERE [categoryItemID] = @varCategoryItemId
+		
+		DELETE FROM [dbo].[tbl_CategoryItem] 
+		WHERE [categoryItemID] = @varCategoryItemId 
+		AND [categoryID] = @varCategoryId
+	    
+	    
+	    -- We arrived here without errors; we should commit the transation we started
+		-- but we should not commit if there was a previous transaction started
+		IF @TranCounter = 0
+			-- @TranCounter = 0 means that no other transaction was started before this transaction 
+			-- and that we shouold hence commit this transaction
+			COMMIT TRANSACTION;
+		
+	END TRY
+	BEGIN CATCH
+
+		-- There was an error.  We need to determine what type of rollback we must perform
+
+		DECLARE @ErrorMessage NVARCHAR(4000);
+		DECLARE @ErrorSeverity INT;
+		DECLARE @ErrorState INT;
+
+		SELECT @ErrorMessage = ERROR_MESSAGE();
+		SELECT @ErrorSeverity = ERROR_SEVERITY();
+		SELECT @ErrorState = ERROR_STATE();
+
+		IF @TranCounter = 0
+			-- We have only the transaction that we started in this SP.  Rollback
+			-- all the tranaction.
+			ROLLBACK TRANSACTION;
+		ELSE
+			-- A transaction was started before this SP was called.  We must
+			-- rollback only the changes we made in this SP.
+
+			-- We see XACT_STATE and the possible results are 0, 1, or -1.
+			-- If it is 1, the transaction is valid and we can do a commit. But since we are in the 
+			-- CATCH we don't do the commit. We need to rollback to the savepoint
+			-- If it is -1 the transaction is not valid and we must do a full rollback... we can't
+			-- do a rollback to a savepoint
+			-- XACT_STATE = 0 means that there is no transaciton and a rollback would cause an error
+			-- See http://msdn.microsoft.com/en-us/library/ms189797(SQL.90).aspx
+			IF XACT_STATE() = 1
+				-- If the transaction is still valid then we rollback to the restore point defined before
+				ROLLBACK TRANSACTION DeleteCategoryItemPS;
+
+				-- If the transaction is not valid we cannot do a commit or a rollback to a savepoint
+				-- because a rollback is not allowed. Hence, we must simply return to the caller and 
+				-- they will be respnsible to rollback the transaction
+
+				-- If there is no tranaction then there is nothing left to do
+
+		-- After doing the correpsonding rollback, we must propagate the error information to the SP that called us 
+		-- See http://msdn.microsoft.com/en-us/library/ms175976(SQL.90).aspx
+
+		-- The database can return values from 0 to 256 but raise error
+		-- will only allow us to use values from 1 to 127
+		IF(@ErrorState < 1 OR @ErrorState > 127)
+			SELECT @ErrorState = 1
+			
+		RAISERROR (@ErrorMessage, -- Message text.
+				   @ErrorSeverity, -- Severity.
+				   @ErrorState -- State.
+				   );
+	END CATCH
+	    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetAllCategories]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 29/04/2016
+-- Description:	Get all categories
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_GetAllCategories] 
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [categoryID]
+		  ,[name]
+	FROM [dbo].[tbl_Category] 
+	ORDER BY [name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetCategoryById]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 29/04/2016
+-- Description:	Get category by id
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_GetCategoryById] 
+	@intCategoryId AS VARCHAR(20)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [categoryID]
+		  ,[name]
+	FROM [dbo].[tbl_Category] 
+	WHERE [categoryID] = @intCategoryId
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetCategoryItemById]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_GetCategoryItemById]
+	@varCategoryItemId AS VARCHAR(20),
+	@varCategoryId AS VARCHAR(20)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [categoryItemID]
+		  ,[categoryID]
+		  ,[name]
+	FROM [dbo].[tbl_CategoryItem] 
+	WHERE [categoryItemID] = @varCategoryItemId 
+	AND [categoryID] = @varCategoryId
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_GetCategoryItemsByCategoryId]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_GetCategoryItemsByCategoryId]
+	@varCategoryId AS VARCHAR(20)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [categoryItemID]
+		  ,[categoryID]
+		  ,[name]
+	FROM [dbo].[tbl_CategoryItem] 
+	WHERE [categoryID] = @varCategoryId 
+	ORDER BY [name]
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_UpdateCategory]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_UpdateCategory]
+	@varCategoryName NVARCHAR(250),
+	@varCategoryId varchar(20)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    UPDATE [dbo].[tbl_Category]
+    SET [name] = @varCategoryName 
+    WHERE [categoryID] = @varCategoryId 
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CATEGORY_UpdateCategoryItem]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_CATEGORY_UpdateCategoryItem]
+	@varCategoryItemId AS VARCHAR(20),
+	@varCategoryId AS VARCHAR(20),
+	@varName AS NVARCHAR(250)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    UPDATE [dbo].[tbl_CategoryItem]
+	SET [name] = @varName 
+	WHERE [categoryItemID] = @varCategoryItemId 
+    AND [categoryID] = @varCategoryId
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_KPI_GetKPIById]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 03/05/2016
+-- Description:	Get KPI by id
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_KPI_GetKPIById]
+	 @intKPIId INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [kpiID]
+		  ,[name]
+		  ,[organizationID]
+		  ,[areaID]
+		  ,[projectID]
+		  ,[activityID]
+		  ,[personID]
+		  ,[unitID]
+		  ,[directionID]
+		  ,[strategyID]
+		  ,[startDate]
+		  ,[reportingUnitID]
+		  ,[targetPeriod]
+		  ,[allowsCategories]
+		  ,[currency]
+		  ,[currencyUnitID]
+		  ,[kpiTypeID]
+	FROM [dbo].[tbl_KPI] 
+	WHERE [kpiID] = @intKPIId
+    
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_KPI_GetKPIsByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 02/04/2016
+-- Description:	Get KPIs by organization
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_KPI_GetKPIsByOrganization]
+	 @intOrganizationId INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [kpiID]
+		  ,[name]
+		  ,[organizationID]
+		  ,[areaID]
+		  ,[projectID]
+		  ,[activityID]
+		  ,[personID]
+		  ,[unitID]
+		  ,[directionID]
+		  ,[strategyID]
+		  ,[startDate]
+		  ,[reportingUnitID]
+		  ,[targetPeriod]
+		  ,[allowsCategories]
+		  ,[currency]
+		  ,[currencyUnitID]
+		  ,[kpiTypeID]
+	FROM [dbo].[tbl_KPI] 
+	WHERE [organizationID] = @intOrganizationId
+	
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_ORG_GetAreasByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+-- =============================================
+-- Author:		Gabriela Sanchez
+-- Create date: April 29 2016
+-- Description:	Get areas by organization
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_ORG_GetAreasByOrganization]
+	 @intOrganizationId INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+	
+	SELECT [a].[areaID]
+		  ,[a].[organizationID]
+		  ,[a].[name]
+		  ,[kpi].[numberKPIs]
+	FROM [dbo].[tbl_Area] [a] 
+	LEFT OUTER JOIN (SELECT COUNT([kpiID]) [numberKPIs]
+						   ,[organizationID]
+						   ,[areaID]
+					 FROM [dbo].[tbl_KPI] 
+					 GROUP BY [organizationID], [areaID]) [kpi] 
+	ON [a].[organizationID] = [kpi].[organizationID] AND [a].[areaID] = [kpi].[areaID] 
+	WHERE [a].[organizationID] = @intOrganizationId
+
+
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_PEOPLE_GetPersonById]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Marcela Martinez
+-- Create date: 30/04/2016
+-- Description:	Get persona by id
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_PEOPLE_GetPersonById]
+	@intPersonId AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT [personID]
+		  ,[id]
+		  ,[name]
+		  ,[organizationID]
+		  ,[areaID]
+	FROM [dbo].[tbl_People] 
+	WHERE [personID] = @intPersonId
+    
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_PROJ_GetProjectsByOrganization]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Gabriela Sanchez V.
+-- Create date: April 29 2016
+-- Description:	List all projects by organization
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_PROJ_GetProjectsByOrganization]
+	@intOrganizationId INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT [p].[projectID]
+		  ,[p].[name]
+		  ,[p].[organizationID]
+		  ,[p].[areaID]
+		  ,[kpi].[numberKPIs]
+	FROM [dbo].[tbl_Project] [p] 
+	LEFT OUTER JOIN (SELECT COUNT([kpiID]) [numberKPIs]
+						   ,[organizationID]
+						   ,[projectID]
+					 FROM [dbo].[tbl_KPI] 
+					 GROUP BY [organizationID], [projectID]) [kpi] 
+	ON [p].[organizationID] = [kpi].[organizationID] AND [p].[projectID] = [kpi].[projectID] 
+	WHERE [p].[organizationID] = @intOrganizationId
+
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_InsertOperationForRole]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+CREATE PROCEDURE [dbo].[usp_SEG_InsertOperationForRole]
+	@intPermissionID int,
+	@varRole varchar(100)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF NOT EXISTS(
+					SELECT * 
+						FROM [dbo].[tbl_SEG_AccessRole] 
+						WHERE [permissionid] = @intPermissionID AND [role] = @varRole
+				  ) 
+	BEGIN
+		INSERT INTO [dbo].[tbl_SEG_AccessRole]([permissionid], [role])
+			VALUES (@intPermissionID, @varRole)
+	END
+END
+
+
+
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_InsertOperationForUser]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+CREATE PROCEDURE [dbo].[usp_SEG_InsertOperationForUser]
+	@intPermissionID int,
+	@intUserID int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF NOT EXISTS(
+					SELECT * 
+						FROM [dbo].[tbl_SEG_AccessUser] 
+						WHERE [permissionID] = @intPermissionID AND [userID] = @intUserID
+				  ) 
+	BEGIN
+		INSERT INTO [dbo].[tbl_SEG_AccessUser]([permissionID], [userID])
+			VALUES (@intPermissionID, @intUserID)
+	END
+END
+
+
+
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_IsPermissionAllowedForRole]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[usp_SEG_IsPermissionAllowedForRole]
+	@intPermissionID int,
+	@varRole varchar(100)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT COUNT([permissionid]) AS [OC] 
+	FROM [dbo].[tbl_SEG_AccessRole] [ar]
+	WHERE [ar].[permissionid] = @intPermissionID 
+	AND [ar].[role] = @varRole
+	
+END
+
+
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_IsPermissionAllowedForUser]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[usp_SEG_IsPermissionAllowedForUser]
+	@intPermissionID int,
+	@intUserId int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    SELECT COUNT([permissionId]) AS [OC] 
+	FROM [dbo].[tbl_SEG_AccessUser] [au]
+	WHERE [au].[permissionid] = @intPermissionID 
+	AND [au].[userid] = @intUserId
+	
+END
+
+
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_SEG_IsUserAllowedToPerformPermission]    Script Date: 05/04/2016 10:30:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- ==============================================================================================================
+/* 
+* Get 1 if the user is allowed to perform permission and 0 otherwise
+* Variables: @varMnemonic,  @intUserID
+* Created by: Javier Viscarra Vargas
+* Date: 10/Nov/2008
+*/
+CREATE PROCEDURE [dbo].[usp_SEG_IsUserAllowedToPerformPermission] 
+	@varMnemonic varchar(100),
+	@intUser int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT COUNT(*) [count]
+	FROM [dbo].[tbl_SEG_Permission] [os], [dbo].[tbl_SEG_AccessUser] [au]
+	WHERE [os].[permissionID] = [au].[permissionID]
+	AND [os].[mnemonic] = @varMnemonic
+	AND [au].[userID] = @intUser
+		
+END
 
 GO
 
