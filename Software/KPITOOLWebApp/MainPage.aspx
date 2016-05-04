@@ -9,7 +9,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-md-1">
-                        <app:AddButton ID="TheAddButton" runat="server" />
+                        <app:AddButton ID="TheAddButton" runat="server" ClientIDMode="Static" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
                         <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" >
@@ -57,32 +57,32 @@
                             OnItemCommand="OrganizationsRepeater_ItemCommand">
                             <ItemTemplate>
                                 <div class="row">
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="ViewOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             CssClass="viewBtn detailsBtn" CommandName="ViewOrganization">
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="EditOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             CssClass="viewBtn editBtn" CommandName="EditOrganization">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1 disabled">
+                                    <div class="col-md-1 col-sm-1 col-xs-3 disabled">
                                         <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             CssClass="viewBtn shareBtn">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
                                             OnClientClick="return confirm('Are you sure you want to delete selected Organization?')"
                                             CssClass="viewBtn deleteBtn" CommandName="DeleteOrganization">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
                                         <p style="font-size: 14px; padding-top: 2px;"><%# Eval("Name") %></p>
                                     </div>
                                 </div>
@@ -128,16 +128,36 @@
                             </FooterTemplate>
                         </asp:Repeater>
                         <br />
+                        <app:TourSettings runat="server" ID="Settings">
+                            <Items>
+                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    Content="<%$ Resources: MainPage, TourStep1 %>"
+                                    Element="#TheAddButton" />
+                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    Content="<%$ Resources: MainPage, TourStep2 %>"
+                                    Element="#OrganizationList .editBtn:first" />
+                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    Content="<%$ Resources: MainPage, TourStep3 %>"
+                                    Element="#OrganizationList .detailsBtn:first" />
+                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    Content="<%$ Resources: MainPage, TourStep4 %>"
+                                    Element="#OrganizationList .shareBtn:first" />
+                            </Items>
+                        </app:TourSettings>
                         <div style="overflow: hidden">
-                            <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">
-                                Show tips for this page</a>
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
+                            <%--<a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">
+                                Show tips for this page</a>--%>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </asp:Panel>
-    <asp:HiddenField ID="ResetTourHiddenField" runat="server" Value="false" />
+    
+
+   <%-- <asp:HiddenField ID="ResetTourHiddenField" runat="server" Value="false" />
     <asp:HiddenField ID="ShowTourHiddenField" runat="server" Value="false" />
     <asp:HiddenField ID="ForceShowTour" runat="server" Value="false" />
     <asp:PlaceHolder ID="ScriptBlock" runat="server">
@@ -213,7 +233,7 @@
                 }
             }
         </script>
-    </asp:PlaceHolder>
+    </asp:PlaceHolder>--%>
    
 </asp:Content>
 

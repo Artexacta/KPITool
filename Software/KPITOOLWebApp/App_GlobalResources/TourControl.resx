@@ -17,14 +17,13 @@
     <resheader name="version">2.0</resheader>
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Name1">this is my long string</data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
+        [base64 mime encoded serialized .NET Framework object]
     </data>
     <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
+        [base64 mime encoded string representing a byte array form of the .NET Framework object]
     </data>
                 
     There are any number of "resheader" rows that contain simple 
@@ -46,7 +45,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,7 +59,6 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -69,16 +67,9 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
@@ -87,10 +78,9 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -117,55 +107,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllLabel" xml:space="preserve">
-    <value>[Todo]</value>
-  </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Cerrar</value>
-  </data>
-  <data name="ComboBoxNoMatchesText" xml:space="preserve">
-    <value>No hay coincidencias</value>
-  </data>
-  <data name="ErrorForAllLabel" xml:space="preserve">
-    <value>Error para todos</value>
-  </data>
-  <data name="ErrorLabel" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="ErrorLoadingDataFromWebServiceMessage" xml:space="preserve">
-    <value>Error al cargar datos del web service</value>
-  </data>
-  <data name="GenericSave" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="HelpTitle" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
-  <data name="ItemsLoadedFromWebServiceMessage" xml:space="preserve">
-    <value>Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; de &lt;b&gt;{1}&lt;/b&gt;</value>
-  </data>
-  <data name="MessageForAllLabel" xml:space="preserve">
-    <value>Mensaje para todos</value>
-  </data>
-  <data name="MessageLabel" xml:space="preserve">
-    <value>Mensaje</value>
-  </data>
-  <data name="PasswordRecoverySubject" xml:space="preserve">
-    <value>Nuevo Password</value>
-  </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Sistema de Facturación</value>
-  </data>
-  <data name="SystemMessagesTitle" xml:space="preserve">
-    <value>Mensajes del Sistema</value>
-  </data>
-  <data name="TourButtonLabel" xml:space="preserve">
-    <value>Mostrar ayuda para esta página</value>
-  </data>
-  <data name="WarningForAllLabel" xml:space="preserve">
-    <value>Advertencia para todos</value>
-  </data>
-  <data name="WarningLabel" xml:space="preserve">
-    <value>Advertencia</value>
-  </data>
 </root>

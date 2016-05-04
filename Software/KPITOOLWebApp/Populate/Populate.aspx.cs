@@ -75,7 +75,7 @@ public partial class Populate_Populate : System.Web.UI.Page
 
     private void PopulateDatabase()
     {
-        currentUser = "ivan";
+        currentUser = "admin";
         organizations = LoadFileIntoArray("Companies.txt");
         areas = LoadFileIntoArray("Areas.txt");
         projects = LoadFileIntoArray("Projects.txt");
