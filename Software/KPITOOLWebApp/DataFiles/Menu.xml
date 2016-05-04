@@ -24,7 +24,7 @@ class:         if the menu is not public, the name of the class that the user
         icon="zmdi zmdi-home">
   </Menu>
 
-  <!-- Menu: Seguridad -->
+  <!-- Menu: Security -->
   <Menu resourceFile="InitMasterPage"
 		  resourceItem="MenuSecurity"
 		  public="true"
@@ -66,6 +66,15 @@ class:         if the menu is not public, the name of the class that the user
 			  class="SECURITY"
 			  url="~/Bitacora/ListaEventosBitacora.aspx">
     </Menu>-->
+  </Menu>
+  
+  <!-- Menu: Categories -->
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="CategoryMenu"
+				url="~/Category/CategoriesList.aspx"
+				public="false" 
+        class="CATEGORY"
+        icon="zmdi zmdi-format-list-numbered">
   </Menu>
   
   <!-- Menu: My Account -->

@@ -234,4 +234,7 @@
   <data name="SelectLanguageLabel" xml:space="preserve">
     <value>Seleccione el idioma:</value>
   </data>
+  <data name="CategoryMenu" xml:space="preserve">
+    <value>Administrar Categorías</value>
+  </data>
 </root>

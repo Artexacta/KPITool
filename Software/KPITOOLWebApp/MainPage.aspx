@@ -69,9 +69,9 @@
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-3 disabled">
+                                    <div class="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
-                                            CssClass="viewBtn shareBtn">
+                                            CssClass="viewBtn shareBtn" CommandName="ShareOrganization">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>

@@ -7,6 +7,7 @@ using System.Transactions;
 using System.Data.SqlClient;
 using System.Configuration;
 using log4net;
+using KPIDSTableAdapters;
 
 namespace Artexacta.App.KPI.BLL
 {
@@ -18,8 +19,99 @@ namespace Artexacta.App.KPI.BLL
     {
         private static readonly ILog log = LogManager.GetLogger("Standard");
 
+        KPITableAdapter _theAdapter = null;
+
+        protected KPITableAdapter theAdapter
+        {
+            get
+            {
+                if (_theAdapter == null)
+                    _theAdapter = new KPITableAdapter();
+                return _theAdapter;
+            }
+        }
+
         public KPIBLL()
         {
+        }
+
+        private static KPI FillRecord(KPIDS.KPIRow row)
+        {
+            KPI theNewRecord = new KPI(
+                row.kpiID,
+                row.name,
+                row.IsorganizationIDNull() ? 0 : row.organizationID,
+                row.IsareaIDNull() ? 0 : row.areaID,
+                row.IsprojectIDNull() ? 0 : row.projectID,
+                row.IsactivityIDNull() ? 0 : row.activityID,
+                row.IspersonIDNull() ? 0 : row.personID,
+                row.unitID,
+                row.directionID,
+                row.strategyID,
+                row.IsstartDateNull() ? DateTime.MinValue : row.startDate,
+                row.reportingUnitID,
+                row.IstargetPeriodNull() ? 0 : row.targetPeriod,
+                row.allowsCategories,
+                row.IscurrencyNull() ? "" : row.currency,
+                row.IscurrencyUnitIDNull() ? "" : row.currencyUnitID,
+                row.kpiTypeID);
+
+            return theNewRecord;
+        }
+
+        public static KPI GetKPIById(int kpiId)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+
+            KPI theData = null;
+            try
+            {
+                KPITableAdapter localAdapter = new KPITableAdapter();
+                KPIDS.KPIDataTable theTable = localAdapter.GetKPIById(kpiId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    KPIDS.KPIRow theRow = theTable[0];
+                    theData = FillRecord(theRow);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía el KPI de id: " + kpiId, exc);
+                throw exc;
+            }
+
+            return theData;
+        }
+
+        public List<KPI> GetKPIsByOrganization(int organizationId)
+        {
+            if (organizationId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            List<KPI> theList = new List<KPI>();
+            KPI theData = null;
+
+            try
+            {
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIsByOrganization(organizationId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPIDS.KPIRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía los KPIs de la organización de id =" + organizationId.ToString(), exc);
+                throw exc;
+            }
+
+            return theList;
         }
 
         /// <summary>

@@ -39,7 +39,10 @@ namespace Artexacta.App.Project.BLL
                 row.projectID,
                 row.name,
                 row.organizationID,
-                row.areaID);
+                row.IsareaIDNull() ? 0 : row.areaID,
+                row.IsownerNull() ? "" : row.owner);
+             
+            theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
 
             return theNewRecord;
         }
@@ -74,15 +77,44 @@ namespace Artexacta.App.Project.BLL
             return theList;
         }
 
-        public static int InsertProject(int organizationId, int areaId, string name)
+        public List<Project> GetProjectBySearch(string whereClause)
         {
-            if (organizationId <= 0)
+            if (string.IsNullOrEmpty(whereClause))
+                whereClause = "1=1";
+
+            List<Project> theList = new List<Project>();
+            Project theData = null;
+
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                ProjectDS.ProjectsDataTable theTable = theAdapter.GetProjectBySearch(userName, whereClause);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (ProjectDS.ProjectsRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía los proyectos by search =" + whereClause, exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
+        public static int InsertProject(Project theClass)
+        {
+            if (theClass.OrganizationID <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
-            if (areaId <= 0)
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
-
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(theClass.Name))
                 throw new ArgumentException(Resources.Organization.MessageEmptyNameProject);
 
             ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
@@ -92,12 +124,12 @@ namespace Artexacta.App.Project.BLL
 
             try
             {
-                localAdapter.InsertProject(userName, organizationId, areaId, name, ref projectId);
+                localAdapter.InsertProject(userName, theClass.OrganizationID, theClass.AreaID, theClass.Name, ref projectId);
             }
             catch (Exception exc)
             {
                 log.Error(Resources.Organization.MessageErrorCreateProject, exc);
-                throw exc;
+                throw new Exception(Resources.Organization.MessageErrorCreateProject);
             }
 
             if ((int)projectId <= 0)
@@ -109,24 +141,30 @@ namespace Artexacta.App.Project.BLL
             return (int)projectId;
         }
 
-        public static void UpdateProject(int projectId, string name, int organizationId, int areaId)
+        public static void UpdateProject(Project theClass)
         {
-            if (projectId <= 0)
+            if (theClass.ProjectID <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
 
-            if (string.IsNullOrEmpty(name))
+            if (theClass.OrganizationID <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            if (string.IsNullOrEmpty(theClass.Name))
                 throw new ArgumentException(Resources.Organization.MessageEmptyNameProject);
 
             ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
 
             try
             {
-                localAdapter.UpdateProject(projectId, name, organizationId, areaId);
+                localAdapter.UpdateProject(theClass.ProjectID,
+                    theClass.Name,
+                    theClass.OrganizationID,
+                    theClass.AreaID);
             }
             catch (Exception exc)
             {
                 log.Error(Resources.Organization.MessageErrorUpdateProject, exc);
-                throw exc;
+                throw new Exception(Resources.Organization.MessageErrorUpdateProject);
             }
         }
 
@@ -148,16 +186,16 @@ namespace Artexacta.App.Project.BLL
             }
         }
 
-        public static Project GetProjectById(int areaId)
+        public static Project GetProjectById(int projectId)
         {
-            if (areaId <= 0)
+            if (projectId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
 
             Project theData = null;
             try
             {
                 ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
-                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectById(areaId);
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectById(projectId);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     ProjectDS.ProjectsRow theRow = theTable[0];
@@ -166,7 +204,7 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el proyecto de id: " + areaId, exc);
+                log.Error("Ocurrió un error mientras se obtenía el proyecto de id: " + projectId, exc);
                 throw exc;
             }
 
@@ -182,7 +220,7 @@ namespace Artexacta.App.Project.BLL
             try
             {
                 ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
-                ProjectDS.ProjectsDataTable theTable = localAdapter.GetPorjectsForAutocomplete(userName, organizationId, areaId, filter);
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectsForAutocomplete(userName, organizationId, areaId, filter);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (ProjectDS.ProjectsRow theRow in theTable)

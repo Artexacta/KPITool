@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MessageActivityProjectError" xml:space="preserve">
+    <value>The activity is not in the project.</value>
+  </data>
   <data name="MessageAreaOrganizationError" xml:space="preserve">
     <value>The area is not in the organization.</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="MessageDeleteOk" xml:space="preserve">
     <value>The organization was deleted successfuly.</value>
+  </data>
+  <data name="MessageDeleteProjectOK" xml:space="preserve">
+    <value>The project was deleted sucessfuly.</value>
   </data>
   <data name="MessageEmptyName" xml:space="preserve">
     <value>The name of organization cannot be empty.</value>
@@ -158,6 +164,9 @@
   </data>
   <data name="MessageErrorDeleteProject" xml:space="preserve">
     <value>Error to delete the project.</value>
+  </data>
+  <data name="MessageErrorProjectList" xml:space="preserve">
+    <value>Error to obtain the project list.</value>
   </data>
   <data name="MessageErrorUpdate" xml:space="preserve">
     <value>Error to update the organization.</value>

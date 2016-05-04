@@ -175,4 +175,8 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
         }
     }
+    protected void EditAreaLB_Click(object sender, EventArgs e)
+    {
+
+    }
 }

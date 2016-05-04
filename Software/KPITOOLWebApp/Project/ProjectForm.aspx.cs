@@ -1,5 +1,4 @@
-﻿using Artexacta.App.FRTWB;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Artexacta.App.Project;
+using Artexacta.App.Project.BLL;
 
 public partial class Project_ProjectForm : System.Web.UI.Page
 {
@@ -30,8 +31,6 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         }
     }
 
-    private Project currentObject;
-
     public string ParentPage
     {
         set { ParentPageHiddenField.Value = value; }
@@ -52,11 +51,11 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         ProcessSessionParametes();
         LoadProjectData();
 
-        OrganizationComboBox.DataSource = FrtwbSystem.Instance.Organizations.Values;
-        OrganizationComboBox.DataBind();
+        //OrganizationComboBox.DataSource = FrtwbSystem.Instance.Organizations.Values;
+        //OrganizationComboBox.DataBind();
 
-        AreaComboBox.DataSource = new List<Area>();
-        AreaComboBox.DataBind();
+        //AreaComboBox.DataSource = new List<Area>();
+        //AreaComboBox.DataBind();
     }
 
     private void ProcessSessionParametes()
@@ -66,6 +65,7 @@ public partial class Project_ProjectForm : System.Web.UI.Page
             ParentPage = Session["ParentPage"].ToString();
         }
         Session["ParentPage"] = null;
+
         if (Session["ProjectId"] != null && !string.IsNullOrEmpty(Session["ProjectId"].ToString()))
         {
             int projectId = 0;
@@ -82,164 +82,87 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         Session["ProjectId"] = null;
     }
 
-    private void LoadProjectData()
+    protected void LoadProjectData()
     {
-        int projectId = ProjectId;
-        if (projectId <= 0)
+        OrganizationControl.DataType = UserControls_FRTWB_AddDataControl.AddType.PRJ.ToString();
+
+        if (string.IsNullOrEmpty(ProjectIdHiddenField.Value) || ProjectIdHiddenField.Value == "0")
         {
-            TitleLiteral.Text = "Create Project";
-            Title = "Create Project";
-            return;
+            //Insert
+            OrganizationControl.OrganizationId = 0;
         }
-        try
+        else
         {
-            TitleLiteral.Text = "Edit Project";
-            Title = "Edit Project";
-            currentObject = FrtwbSystem.Instance.Projects[projectId];
-            ProjectNameTextBox.Text = currentObject.Name;
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error loading project data", ex);
-        }
-    }
+            //Update
+            Project theData = null;
+            try
+            {
+                theData = ProjectBLL.GetProjectById(Convert.ToInt32(ProjectIdHiddenField.Value));
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            }
 
-    protected void OrganizationComboBox_DataBound(object sender, EventArgs e)
-    {
-        OrganizationComboBox.Items.Insert(0, new ListItem("-- Select a Organization --", ""));
-        if (currentObject == null)
-            return;
-
-        string organizationId = currentObject.Owner is Organization ? currentObject.Owner.ObjectId.ToString() : 
-            currentObject.Owner.Owner.ObjectId.ToString();
-        ListItem item = OrganizationComboBox.Items.FindByValue(organizationId);
-        if (item != null)
-            item.Selected = true;
-
-        LoadAreaComboBox(organizationId);
-        
-    }
-
-    protected void OrganizationComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        LoadAreaComboBox(OrganizationComboBox.SelectedValue);
-    }
-
-    private void LoadAreaComboBox(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            AreaComboBox.DataSource = new List<Area>();
-            AreaComboBox.DataBind();
-            return;
-        }
-
-        try
-        {
-            Organization org = FrtwbSystem.Instance.Organizations[Convert.ToInt32(value)];
-            AreaComboBox.DataSource = org.Areas.Values;
-            AreaComboBox.DataBind();
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error loading areas from selected organization", ex);
-        }
-    }
-
-    protected void AreaComboBox_DataBound(object sender, EventArgs e)
-    {
-        AreaComboBox.Items.Insert(0, new ListItem("-- Select an Area --", ""));
-
-        if (currentObject == null)
-            return;
-
-        if(currentObject.Owner is Area){
-            string areaId =  currentObject.Owner.ObjectId.ToString();
-            ListItem item = OrganizationComboBox.Items.FindByValue(areaId);
-            if (item != null)
-                item.Selected = true;
+            if (theData != null)
+            {
+                ProjectNameTextBox.Text = theData.Name;
+                OrganizationControl.OrganizationId = theData.OrganizationID;
+                OrganizationControl.AreaId = theData.AreaID;
+            }
         }
     }
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
-        try
+        Project theProj = new Project();
+        theProj.Name = ProjectNameTextBox.Text;
+        theProj.OrganizationID = OrganizationControl.OrganizationId;
+        theProj.AreaID = OrganizationControl.AreaId;
+
+        if (string.IsNullOrEmpty(ProjectIdHiddenField.Value) || ProjectIdHiddenField.Value == "0")
         {
-            int projectId = this.ProjectId;
-            string projectName = ProjectNameTextBox.Text;
-            int organizationId = Convert.ToInt32(OrganizationComboBox.SelectedValue);
-            string area = AreaComboBox.SelectedValue;
-
-
-            Project objProject = null;
-            bool isNew = projectId == 0;
-
-            if (isNew)
+            //Insert
+            try
             {
-                objProject = new Project()
-                {
-                    Name = projectName
-                };
-                FrtwbSystem.Instance.Projects.Add(objProject.ObjectId, objProject);
+                ProjectBLL.InsertProject(theProj);
             }
-            else
+            catch (Exception ex)
             {
-                objProject = FrtwbSystem.Instance.Projects[projectId];
-                objProject.Name = projectName;
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
             }
-
-
-            Organization objOrg = FrtwbSystem.Instance.Organizations[organizationId];
-            if (!string.IsNullOrEmpty(area))
-            {
-                int areaId = Convert.ToInt32(area);
-                Area objArea = objOrg.Areas[areaId];
-                if (objProject.Owner != null && objProject.Owner != objArea)
-                {
-                    RemoveProjectFromOldOwner(objProject);
-                }
-                if(!objArea.Projects.ContainsKey(objProject.ObjectId))
-                    objArea.Projects.Add(objProject.ObjectId, objProject);
-                objProject.Owner = objArea;
-                
-            }
-            else
-            {
-                if (objProject.Owner != null && objProject.Owner != objOrg)
-                {
-                    RemoveProjectFromOldOwner(objProject);
-                }
-                if (!objOrg.Projects.ContainsKey(objProject.ObjectId))
-                    objOrg.Projects.Add(objProject.ObjectId, objProject);
-                objProject.Owner = objOrg;
-            }
-            
-            if (isNew)
-                SystemMessages.DisplaySystemMessage("Project was created");
-            else
-                SystemMessages.DisplaySystemMessage("Project was modified");
         }
-        catch (Exception ex)
+        else
         {
-            log.Error("Error saving project", ex);
-            return;
+            //Update
+            theProj.ProjectID = Convert.ToInt32(ProjectIdHiddenField.Value);
+            try
+            {
+                ProjectBLL.UpdateProject(theProj);
+            }
+            catch (Exception ex)
+            {
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
+            }
         }
+
         Response.Redirect("~/Project/ProjectList.aspx");
-
     }
 
     private void RemoveProjectFromOldOwner(Project objProject)
     {
-        if (objProject.Owner is Area)
-        {
-            Area oldArea = (Area)objProject.Owner;
-            oldArea.Projects.Remove(objProject.ObjectId);
-        }
-        else if (objProject.Owner is Organization)
-        {
-            Organization oldOrganization = (Organization)objProject.Owner;
-            oldOrganization.Projects.Remove(objProject.ObjectId);
-        }
+        //if (objProject.Owner is Area)
+        //{
+        //    Area oldArea = (Area)objProject.Owner;
+        //    oldArea.Projects.Remove(objProject.ObjectId);
+        //}
+        //else if (objProject.Owner is Organization)
+        //{
+        //    Organization oldOrganization = (Organization)objProject.Owner;
+        //    oldOrganization.Projects.Remove(objProject.ObjectId);
+        //}
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
