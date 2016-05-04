@@ -15,17 +15,20 @@ namespace Artexacta.App.Project
         public string Name { get; set; }
         public int OrganizationID { get; set; }
         public int AreaID { get; set; }
+        public string Owner { get; set; }
         
         public Project()
         {
         }
 
-        public Project(int projectId, string name, int organizationId, int areaId)
+        public Project(int projectId, string name, int organizationId, int areaId, string owner)
         {
             ProjectID = projectId;
             Name = name;
             OrganizationID = organizationId;
             AreaID = areaId;
+            Owner = owner;
         }
+
     }
 }

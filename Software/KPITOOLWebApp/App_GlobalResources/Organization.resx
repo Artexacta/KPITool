@@ -129,6 +129,9 @@
   <data name="MessageDeleteOk" xml:space="preserve">
     <value>The organization was deleted successfuly.</value>
   </data>
+  <data name="MessageDeleteProjectOK" xml:space="preserve">
+    <value>The project was deleted sucessfuly.</value>
+  </data>
   <data name="MessageEmptyName" xml:space="preserve">
     <value>The name of organization cannot be empty.</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="MessageErrorDeleteProject" xml:space="preserve">
     <value>Error to delete the project.</value>
+  </data>
+  <data name="MessageErrorProjectList" xml:space="preserve">
+    <value>Error to obtain the project list.</value>
   </data>
   <data name="MessageErrorUpdate" xml:space="preserve">
     <value>Error to update the organization.</value>
