@@ -39,7 +39,7 @@ namespace Artexacta.App.Area.BLL
                 row.areaID,
                 row.organizationID,
                 row.name);
-
+            theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
             return theNewRecord;
         }
 

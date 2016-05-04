@@ -214,6 +214,12 @@ public partial class MainPage : SqlViewStatePage
             Session["OrganizationId"] = organizationId;
             Response.Redirect("~/Organization/OrganizationDetails.aspx");
         }
+
+        if (e.CommandName.Equals("ShareOrganization"))
+        {
+            Session["ORGANIZATIONID"] = organizationId;
+            Response.Redirect("~/Organization/ShareOrganization.aspx");
+        }
     }
 
 }

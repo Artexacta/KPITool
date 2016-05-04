@@ -10,7 +10,6 @@ namespace Artexacta.App.Categories
     /// </summary>
     public class CategoryItem
     {
-
         private string _categoryItemID;
         private string _categoryItemName;
         private decimal? _target;
@@ -43,5 +42,12 @@ namespace Artexacta.App.Categories
             _categoryItemName = name;
             _target = target;
         }
+
+        public CategoryItem(string id, string name)
+        {
+            _categoryItemID = id;
+            _categoryItemName = name;
+        }
+
     }
 }
