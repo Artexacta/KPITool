@@ -41,6 +41,8 @@ namespace Artexacta.App.Project.BLL
                 row.organizationID,
                 row.IsareaIDNull() ? 0 : row.areaID,
                 row.IsownerNull() ? "" : row.owner);
+             
+            theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
 
             return theNewRecord;
         }
@@ -184,16 +186,16 @@ namespace Artexacta.App.Project.BLL
             }
         }
 
-        public static Project GetProjectById(int areaId)
+        public static Project GetProjectById(int projectId)
         {
-            if (areaId <= 0)
+            if (projectId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
 
             Project theData = null;
             try
             {
                 ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
-                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectById(areaId);
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectById(projectId);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     ProjectDS.ProjectsRow theRow = theTable[0];
@@ -202,7 +204,7 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el proyecto de id: " + areaId, exc);
+                log.Error("Ocurrió un error mientras se obtenía el proyecto de id: " + projectId, exc);
                 throw exc;
             }
 
@@ -218,7 +220,7 @@ namespace Artexacta.App.Project.BLL
             try
             {
                 ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
-                ProjectDS.ProjectsDataTable theTable = localAdapter.GetPorjectsForAutocomplete(userName, organizationId, areaId, filter);
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectsForAutocomplete(userName, organizationId, areaId, filter);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (ProjectDS.ProjectsRow theRow in theTable)

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MessageActivityProjectError" xml:space="preserve">
+    <value>La actividad no pertenece al proyecto.</value>
+  </data>
   <data name="MessageAreaOrganizationError" xml:space="preserve">
     <value>El área no pertenece a la organización.</value>
   </data>
@@ -181,7 +184,7 @@
     <value>El nombre de la organización es requerido.</value>
   </data>
   <data name="MessageProjectAreaError" xml:space="preserve">
-    <value>El proyecto no pertene al área.</value>
+    <value>El proyecto no pertenece al área.</value>
   </data>
   <data name="MessageProjectOrganizationError" xml:space="preserve">
     <value>El proyecto no pertenece a la organización.</value>

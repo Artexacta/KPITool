@@ -15,8 +15,8 @@ public partial class _Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            AddDataControl.DataType = UserControls_FRTWB_AddDataControl.AddType.PRJ.ToString();
-            AddDataControl.OrganizationId = 3;
+            AddDataControl.DataType = UserControls_FRTWB_AddDataControl.AddType.KPI.ToString();
+            //AddDataControl.KPIId = 312;
             DataTypeRadioButtonList.SelectedValue = AddDataControl.DataType;
         }
     }

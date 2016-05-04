@@ -43,5 +43,11 @@ namespace Artexacta.App.Categories
             _categoryName = name;
             _categoryItems = items;
         }
+
+        public Category(string id, string name)
+        {
+            _categoryID = id;
+            _categoryName = name;
+        }
     }
 }

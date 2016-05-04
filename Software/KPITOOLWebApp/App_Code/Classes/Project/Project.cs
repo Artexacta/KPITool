@@ -16,7 +16,10 @@ namespace Artexacta.App.Project
         public int OrganizationID { get; set; }
         public int AreaID { get; set; }
         public string Owner { get; set; }
-        
+        public int NumberOfKpis { get; set; }
+        public string OrganizationName { get; set; }
+        public string AreaName { get; set; }
+
         public Project()
         {
         }
@@ -30,5 +33,9 @@ namespace Artexacta.App.Project
             Owner = owner;
         }
 
+        public string NumberOfKpisForDisplay
+        {
+            get { return NumberOfKpis + " KPIs"; }
+        }
     }
 }

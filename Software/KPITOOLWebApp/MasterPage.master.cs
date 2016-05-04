@@ -204,6 +204,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
         if (LoginSecurity.IsUserAuthorizedPermission("ADMIN_TESTS"))
             theClases.Add("TESTS");
 
+        if (LoginSecurity.IsUserAuthorizedPermission("MANAGE_CATEGORIES"))
+            theClases.Add("CATEGORY");
+
         theVisibleMenu = Artexacta.App.Menu.MenuBLL.MenuBLL.RecursiveConstructionOfVisibleMenus(theMenu, theClases);
         string visibleXML = Artexacta.App.Menu.MenuBLL.MenuBLL.GetMenuXML(theVisibleMenu, 0);
         sideMenu.Text = visibleXML;
@@ -283,43 +286,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap3-typeahead.min.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
-        //scriptText.Append("<script src=\"");
-        //scriptText.Append(ResolveClientUrl("~/Scripts/typeahead.bundle.min.js"));
-        //scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        /*scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/jquery.caretPosition.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/jquery.tipTip.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/jquery-cookie.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/jquery.slimscroll.min.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/jquery.metisMenu.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/inspinia.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/pace.min.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
-
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/icheck.min.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");*/
-
         JqueryAndMainMenuScript.Text = scriptText.ToString();
     }
 
@@ -347,7 +313,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Test/TestAddData.aspx",
 
              "~/Organization/EditOrganization.aspx",
-             "~/Organization/OrganizationDetails.aspx"
+             "~/Organization/OrganizationDetails.aspx",
+             "~/Organization/ShareOrganization.aspx"
 
              ,"~/Project/ProjectForm.aspx"
              ,"~/Project/ProjectDetails.aspx"
@@ -388,6 +355,19 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             if (currentPage.Equals(securityPages[i]) &&
                 LoginSecurity.IsUserAuthorizedPermission("MANAGE_SECURITY"))
+                return true;
+        }
+
+        //CATEGORIES pages
+        string[] categoriesPages = new string[]{
+            "~/Category/CategoriesList.aspx",
+            "~/Category/CategoryDetails.aspx"
+        };
+
+        for (int i = 0; i < categoriesPages.Length; i++)
+        {
+            if (currentPage.Equals(categoriesPages[i]) &&
+                LoginSecurity.IsUserAuthorizedPermission("MANAGE_CATEGORIES"))
                 return true;
         }
 
