@@ -99,13 +99,43 @@
 </div>
 
 <script type="text/javascript">
+    function OrganizationTextBox_OnChange() {
+        if ($('#<%= OrganizationTextBox.ClientID %>').val() == "") {
+            $('#<%= OrganizationIdHiddenField.ClientID %>').val("0");
+            $("#<%= AreaTextBox.ClientID %>").val("");
+            $("#<%= AreaIdHiddenField.ClientID %>").val("0");
+            $("#<%= ProjectTextBox.ClientID %>").val("");
+            $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
+            var type = $("#<%= DataTypeHiddenField.ClientID %>").val();
+            if (type == "KPI") {
+                $("#<%= pnlKPIDisabled.ClientID %>").show();
+                $("#<%= pnlKPIEnabled.ClientID %>").hide();
+                RemoveArea();
+            }
+        }
+    }
+
+    function AreaTextBox_OnChange() {
+        if ($('#<%= AreaTextBox.ClientID %>').val() == "") {
+            $("#<%= AreaIdHiddenField.ClientID %>").val("0");
+            $("#<%= ProjectTextBox.ClientID %>").val("");
+            $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
+        }
+    }
+
+    function ProjectTextBox_OnChange() {
+        if ($('#<%= ProjectTextBox.ClientID %>').val() == "") {
+            $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
+        }
+    }
+
     function OrganizationCustomValidator_Validate(sender, args) {
         args.IsValid = true;
 
         var type = $("#<%= DataTypeHiddenField.ClientID %>").val();
         var value = $('#<%= OrganizationIdHiddenField.ClientID %>').val();
 
-        if ((type == "PRJ" || type == "PPL" || type == "KPI") && value == "") {
+        if ((type == "PRJ" || type == "PPL" || type == "KPI") && value == "0") {
             args.IsValid = false;
         }
     }
@@ -171,20 +201,6 @@
             }
             return item;
         }
-    }).on("change", function (event, suggestion) {
-        if (suggestion == undefined) {
-            $('#<%= OrganizationIdHiddenField.ClientID %>').val("0");
-            $("#<%= AreaTextBox.ClientID %>").val("");
-            $("#<%= AreaIdHiddenField.ClientID %>").val("0");
-            $("#<%= ProjectTextBox.ClientID %>").val("");
-            $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
-            var type = $("#<%= DataTypeHiddenField.ClientID %>").val();
-            if (type == "KPI") {
-                $("#<%= pnlKPIDisabled.ClientID %>").show();
-                $("#<%= pnlKPIEnabled.ClientID %>").hide();
-                RemoveArea();
-            }
-        }
     });
 
     $('#<%= AreaTextBox.ClientID %>').typeahead({
@@ -227,12 +243,6 @@
             $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
             return item;
         }
-    }).on("change", function (event, suggestion) {
-        if (suggestion == undefined) {
-            $("#<%= AreaIdHiddenField.ClientID %>").val("0");
-            $("#<%= ProjectTextBox.ClientID %>").val("");
-            $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
-        }
     });
 
     $('#<%= ProjectTextBox.ClientID %>').typeahead({
@@ -270,10 +280,6 @@
         updater: function (item) {
             $("#<%= ProjectIdHiddenField.ClientID %>").val(map[item].id);
             return item;
-        }
-    }).on("change", function (event, suggestion) {
-        if (suggestion == undefined) {
-            $("#<%= ProjectIdHiddenField.ClientID %>").val("0");
         }
     });
     
