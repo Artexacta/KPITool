@@ -48,7 +48,7 @@ public class ComboBoxWebServices : System.Web.Services.WebService {
             int? endOffset = itemOffset + itemsPerRequest;
 
             List<User> lista = null;
-            lista = UserBLL.GetUsersForAutoComplete(start, numItems, filter, ref totalRows);
+            //lista = UserBLL.GetUsersForAutoComplete(start, numItems, filter, ref totalRows);
 
             if (endOffset > totalRows)
             {

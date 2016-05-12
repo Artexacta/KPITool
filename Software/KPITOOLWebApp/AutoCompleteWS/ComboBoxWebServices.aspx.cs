@@ -8,6 +8,8 @@ using Artexacta.App.People;
 using Artexacta.App.People.BLL;
 using Artexacta.App.Project;
 using Artexacta.App.Project.BLL;
+using Artexacta.App.User;
+using Artexacta.App.User.BLL;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -123,6 +125,22 @@ public partial class AutoCompleteWS_ComboBoxWebServices : System.Web.UI.Page
             {
                 log.Error("Error in GetPeopleForAutocomplete to filter: " + filter + ", organizationId: " + organizationId + " and areaId: " + areaId, exc);
             }
+        }
+        return theList;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static List<User> Get_User(string filter)
+    {
+        List<User> theList = new List<User>();
+        try
+        {
+            theList = UserBLL.GetUsersForAutoComplete(filter);
+        }
+        catch (Exception exc)
+        {
+            log.Error("Error in GetUsersForAutoComplete to filter: " + filter, exc);
         }
         return theList;
     }
