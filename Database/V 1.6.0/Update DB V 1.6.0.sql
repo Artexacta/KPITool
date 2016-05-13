@@ -1,5 +1,5 @@
 /* 
-	Updates de the KPIDB database to version 1.5.0 
+	Updates de the KPIDB database to version 1.6.0 
 */
 
 Use [Master]
@@ -9,7 +9,7 @@ IF  NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'KPIDB')
 	RAISERROR('KPIDB database Doesn´t exists. Create the database first',16,127)
 GO
 
-PRINT 'Updating KPIDB database to version 1.5.0'
+PRINT 'Updating KPIDB database to version 1.6.0'
 
 Use [KPIDB]
 GO
@@ -31,9 +31,9 @@ declare @smiMinor smallint
 exec [dbo].[usp_GetVersionMajor] @smiMajor output
 exec [dbo].[usp_GetVersionMinor] @smiMinor output
 
-IF NOT (@smiMajor = 1 AND @smiMinor = 4) 
+IF NOT (@smiMajor = 1 AND @smiMinor = 5) 
 BEGIN
-	RAISERROR('KPIDB database is not in version 1.4 This program only applies to version 1.3',16,127)
+	RAISERROR('KPIDB database is not in version 1.5 This program only applies to version 1.5',16,127)
 	RETURN;
 END
 
@@ -84,7 +84,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================================
--- Author:		Get KPI List Visible for User
+-- Author:		Ivan Krsul
 -- Create date: May 12 2016
 -- Description:	Get List of KPIs that user has view rights to
 -- =============================================================
@@ -399,11 +399,11 @@ GO
 --=============================================================================================================================
 
 /*
- * We are done, mark the database as a 1.5.0 database.
+ * We are done, mark the database as a 1.6.0 database.
  */
 
 DELETE FROM [dbo].[tbl_DatabaseInfo] 
 INSERT INTO [dbo].[tbl_DatabaseInfo] 
 	([majorversion], [minorversion], [releaseversion])
-	VALUES (1,5,0)
+	VALUES (1,6,0)
 GO
