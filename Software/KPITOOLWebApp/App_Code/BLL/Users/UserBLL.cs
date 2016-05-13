@@ -190,7 +190,6 @@ namespace Artexacta.App.User.BLL
             }
         }
 
-
         public static bool UpdateUserRecord(int Userid, string Username, string Fullname,
             string Cellphone, string Address, string Phone,
             int PhoneArea, int PhoneCode, string Email)
@@ -223,7 +222,6 @@ namespace Artexacta.App.User.BLL
                 return false;
             }
         }
-
 
         public static bool DeleteUserRecord(int UserId)
         {
@@ -351,30 +349,27 @@ namespace Artexacta.App.User.BLL
             return theList;
         }
 
-        public static List<User> GetUsersForAutoComplete(int? start, int? numItems, string filter, ref int? totalRows)
+        public static List<User> GetUsersForAutoComplete(string filter)
         {
-            UserTableAdapter localAdapter = new UserTableAdapter();
-
             List<User> theList = new List<User>();
-            User theClient = null;
-
+            User theData = null;
             try
             {
-                UserDS.UserDataTable theTable =
-                    localAdapter.GetUsersForAutocomplete(numItems, start, filter, ref totalRows);
+                UserTableAdapter localAdapter = new UserTableAdapter();
+                UserDS.UserDataTable theTable = localAdapter.GetUsersForAutocomplete(filter);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (UserDS.UserRow theRow in theTable.Rows)
                     {
-                        theClient = FillUserRecord(theRow);
-                        theList.Add(theClient);
+                        theData = FillUserRecord(theRow);
+                        theList.Add(theData);
                     }
                 }
             }
-            catch (Exception q)
+            catch (Exception exc)
             {
-                log.Error("Ocurrió un error al obtener la lista de Clientes de la Base de Datos", q);
+                throw exc;
             }
             return theList;
         }
