@@ -88,7 +88,7 @@ GO
 -- Create date: May 12 2016
 -- Description:	Get List of KPIs that user has view rights to
 -- =============================================================
-CREATE PROCEDURE usp_KPI_GetKPIListForUser
+ALTER PROCEDURE [dbo].[usp_KPI_GetKPIListForUser]
 	-- Add the parameters for the stored procedure here
 	@userName varchar(50)
 AS
@@ -106,7 +106,7 @@ BEGIN
 	--If we need to determine the list of KPIs that a specific user can see 
 	--we need to follow the following steps:
 	--
-	--1. Search for all ORGs where the user has OWN permissions and all to the list 
+	--1. Search for all ORGs where the user has OWN permissions and add to the list 
 	--   of KPIs all of those KPIs associated to those ORGs.
 	--2. Search for all ORGs where the user has MAN_KPI permissions or ORG has public 
 	--   MAN_KPI and add to the list of KPIs all of these that are directly associated 
@@ -143,7 +143,7 @@ BEGIN
 
 	-- So lets start with step 1.
  
-	--1. Search for all ORGs where the user has OWN permissions and all to the list 
+	--1. Search for all ORGs where the user has OWN permissions and add to the list 
 	--   of KPIs all of those KPIs associated to those ORGs.
 
 	insert into @kpiList
@@ -348,7 +348,7 @@ BEGIN
 	)
 
 	insert into @kpiList
-	select [kpiID], 'PPL-MAN_KPI (10)', [organizationID] 
+	select [kpiID], 'PPL-MAN_KPI (10)', [personID] 
 	FROM [dbo].[tbl_KPI]
 	where [personID] in (
 		SELECT [objectID] 
