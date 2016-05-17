@@ -144,7 +144,7 @@ public partial class Project_ProjectDetails : System.Web.UI.Page
                 Kpi objKpi = kpis[0];
                 if (objKpi.KpiValues.Count > 0)
                 {
-                    img.KpiId = objKpi.ObjectId;
+                    img.OwnerId = objActivity.ObjectId;
                     img.Visible = true;
                 }
             }

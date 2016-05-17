@@ -117,55 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllLabel" xml:space="preserve">
-    <value>[Todo]</value>
+  <data name="TourStep1" xml:space="preserve">
+    <value>At any time you can create new system objects by clicking on this icon. You can create new organizations, evaluations, projects, actions or KPIs from anywhere</value>
   </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Cerrar</value>
+  <data name="TourStep2" xml:space="preserve">
+    <value>Organizations, projects and actions have properties that you can set. You can edit the name as well as the properties by clickin on this icon.   You can also add areas to organizations using this icon.</value>
   </data>
-  <data name="ComboBoxNoMatchesText" xml:space="preserve">
-    <value>No hay coincidencias</value>
+  <data name="TourStep3" xml:space="preserve">
+    <value>You can view the object page using this icon.  In the object page you can see everything about the object.</value>
   </data>
-  <data name="ErrorForAllLabel" xml:space="preserve">
-    <value>Error para todos</value>
+  <data name="TourStep4" xml:space="preserve">
+    <value>You can share this organization with other people by clicking on this button</value>
   </data>
-  <data name="ErrorLabel" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="ErrorLoadingDataFromWebServiceMessage" xml:space="preserve">
-    <value>Error al cargar datos del web service</value>
-  </data>
-  <data name="GenericSave" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="HelpTitle" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
-  <data name="ItemsLoadedFromWebServiceMessage" xml:space="preserve">
-    <value>Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; de &lt;b&gt;{1}&lt;/b&gt;</value>
-  </data>
-  <data name="MessageForAllLabel" xml:space="preserve">
-    <value>Mensaje para todos</value>
-  </data>
-  <data name="MessageLabel" xml:space="preserve">
-    <value>Mensaje</value>
-  </data>
-  <data name="PasswordRecoverySubject" xml:space="preserve">
-    <value>Nuevo Password</value>
-  </data>
-  <data name="ProjectName" xml:space="preserve">
-    <value>Sistema de Facturación</value>
-  </data>
-  <data name="SystemMessagesTitle" xml:space="preserve">
-    <value>Mensajes del Sistema</value>
-  </data>
-  <data name="TourButtonLabel" xml:space="preserve">
-    <value>Mostrar ayuda para esta página</value>
-  </data>
-  <data name="WarningForAllLabel" xml:space="preserve">
-    <value>Advertencia para todos</value>
-  </data>
-  <data name="WarningLabel" xml:space="preserve">
-    <value>Advertencia</value>
+  <data name="TourStepTitle" xml:space="preserve">
+    <value>You are in the Organization List page.</value>
   </data>
 </root>
