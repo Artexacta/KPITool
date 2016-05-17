@@ -138,6 +138,9 @@
   <data name="GenericSave" xml:space="preserve">
     <value>Guardar</value>
   </data>
+  <data name="HelpTitle" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
   <data name="ItemsLoadedFromWebServiceMessage" xml:space="preserve">
     <value>Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; de &lt;b&gt;{1}&lt;/b&gt;</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="SystemMessagesTitle" xml:space="preserve">
     <value>Mensajes del Sistema</value>
+  </data>
+  <data name="TourButtonLabel" xml:space="preserve">
+    <value>Mostrar ayuda para esta página</value>
   </data>
   <data name="WarningForAllLabel" xml:space="preserve">
     <value>Advertencia para todos</value>

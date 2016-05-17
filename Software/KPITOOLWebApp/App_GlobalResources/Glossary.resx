@@ -318,4 +318,10 @@
   <data name="PasswordRecoverySubject" xml:space="preserve">
     <value>Password Recovery</value>
   </data>
+  <data name="TourButtonLabel" xml:space="preserve">
+    <value>Show tips for this page</value>
+  </data>
+  <data name="HelpTitle" xml:space="preserve">
+    <value>Help</value>
+  </data>
 </root>

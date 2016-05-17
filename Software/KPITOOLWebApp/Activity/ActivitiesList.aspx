@@ -12,7 +12,7 @@
                         <app:AddButton ID="TheAddButton" runat="server" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
-                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" DefaultButton="SearchImageButton">
+                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" DefaultButton="SearchImageButton" ClientIDMode="Static">
                             <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
                             <div class="input-group-addon last" style="cursor: pointer">
 
@@ -119,7 +119,7 @@
                                     This activity does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i> icon above
                                 </asp:Panel>
                                 <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
-                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false"  OwnerType="ACTIVITY" />
                                 </asp:Panel>
                                 <asp:Panel runat="server" id="detailsContainer" class="col-md-111 m-t-5" visible="false">
                                     This activity has 
@@ -137,9 +137,31 @@
                     </asp:Repeater>
 
                     <br />
-                    <div style="overflow: hidden">
+                        <app:TourSettings runat="server" ID="Settings">
+                            <Items>
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep1 %>"
+                                    Element="#TheAddButton" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep2 %>"
+                                    Element="#OrganizationList .editBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep3 %>"
+                                    Element="#OrganizationList .detailsBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep4 %>"
+                                    Element="#OrganizationList .shareBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep5 %>"
+                                    Element="#SearchPanel" />
+                            </Items>
+                        </app:TourSettings>
+                        <div style="overflow: hidden">
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
+                        </div>
+                    <%--<div style="overflow: hidden">
                         <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">Show tips for this page</a>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>
@@ -160,9 +182,8 @@
                 } else {
                     $("#advanced-search-panel").slideDown(500, function () { $("#advanced-search-icon").removeClass("zmdi-chevron-down").addClass("zmdi-chevron-up"); });
                 }
-                
             });
-            
+            <%--
             $("#showTourBtn").click(function () {
                 var storageKeys = Object.keys(localStorage);
                 for (var i in storageKeys) {
@@ -175,7 +196,7 @@
                 return false;
             });
             showTour();
-            
+            --%>
         });
         $telerik.$(document).ready(function () {
             if ($find("<%= ObjectsComboBox.ClientID %>").get_value() != "")
@@ -185,7 +206,7 @@
         function onObjectSelected(sender, args) {
             $("#clearSelection").show();
         }
-
+        <%--
         function showTour() {
             
             var tour = new Tour({
@@ -228,7 +249,7 @@
             tour.start();
             $("#showTourBtn").show();
         }
-
+        --%>
     </script>
 </asp:Content>
 

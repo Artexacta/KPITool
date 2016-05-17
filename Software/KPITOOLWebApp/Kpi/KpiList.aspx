@@ -127,6 +127,30 @@
                                 </asp:Panel>
                             </FooterTemplate>
                         </asp:Repeater>
+                        
+                        <br />
+                        <app:TourSettings runat="server" ID="Settings">
+                            <Items>
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep1 %>"
+                                    Element="#TheAddButton" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep2 %>"
+                                    Element="#OrganizationList .editBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep3 %>"
+                                    Element="#OrganizationList .detailsBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep4 %>"
+                                    Element="#OrganizationList .shareBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ActivitiesList, TourStepTitle %>"
+                                    Content="<%$ Resources: ActivitiesList, TourStep5 %>"
+                                    Element="#SearchPanel" />
+                            </Items>
+                        </app:TourSettings>
+                        <div style="overflow: hidden">
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
+                        </div>
 
                     </div>
                 </div>
