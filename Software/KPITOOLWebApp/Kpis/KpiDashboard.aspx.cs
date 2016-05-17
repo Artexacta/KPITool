@@ -74,7 +74,7 @@ public partial class Kpis_KpiDashboard : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            
+            log.Error("Error getting dataitem from repeater item", ex);
         }
     }
 
