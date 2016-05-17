@@ -88,7 +88,7 @@ GO
 -- Create date: May 12 2016
 -- Description:	Get List of KPIs that user has view rights to
 -- =============================================================
-ALTER PROCEDURE [dbo].[usp_KPI_GetKPIListForUser]
+CREATE PROCEDURE [dbo].[usp_KPI_GetKPIListForUser]
 	-- Add the parameters for the stored procedure here
 	@userName varchar(50)
 AS
