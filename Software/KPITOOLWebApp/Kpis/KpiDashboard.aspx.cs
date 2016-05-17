@@ -1,4 +1,7 @@
-﻿using Artexacta.App.FRTWB;
+﻿using Artexacta.App.Dashboard;
+using Artexacta.App.Dashboard.BLL;
+using Artexacta.App.FRTWB;
+using Artexacta.App.User.BLL;
 using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
@@ -17,72 +20,123 @@ public partial class Kpis_KpiDashboard : System.Web.UI.Page
         LoadKpisData();
     }
 
-    private void LoadKpisData()
+    public void LoadKpisData()
     {
-        KpisRepeater.DataSource = FrtwbSystem.Instance.Kpis.Values;
-        KpisRepeater.DataBind();
-    }
-
-    protected void KpisRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
-        Random rnd = new Random();
-        int option = rnd.Next(0, 100);
-        Literal datas = (Literal)e.Item.FindControl("KpiExtraData");
-        Image image = (Image)e.Item.FindControl("Graphic");
-        if (option <= 33)
-        {
-            datas.Text = "<p>Lowest value: 4,000 M TK</p><p>Highest value: 16,000 M TK</p><p>Current value: 9,500 M TK</p><p>Year to date average: 12,567 M TK</p><p>Target: 22,000 M TK</p>";
-            image.ImageUrl = "~/Images/graphic04.jpg";
-        }
-        else if (option > 33 && option <= 66)
-        {
-            datas.Text = "<p>Lowest value: 2 Days</p><p>Highest value: 1.6 months</p><p>Current value: 1.0 months</p><p>Year to date average: 0.7 months</p><p>Target: 2 months</p>";
-            image.ImageUrl = "~/Images/graphic05.jpg";
-        }
-        else
-        {
-            datas.Text = "<p>Lowest value: 2 units</p><p>Highest value: 250 units</p><p>Current value: 12.0 units</p><p>Year to date average: 98 units</p><p>Target: 270 units</p>";
-            image.ImageUrl = "~/Images/graphic06.jpg";
-        }
-    }
-    protected void KpisRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
-        int kpiId = 0;
         try
         {
-            kpiId = Convert.ToInt32(e.CommandArgument);
+            int userId = UserBLL.GetUserIdByUsername(User.Identity.Name);
+            MainKpiDashboardControl.UserId = userId;
+            UserIdHiddenField.Value = userId.ToString();
+
+            List<UserDashboard> dashboards = UserDashboardBLL.GetUserDashboards(userId);
+            UserDashboard2Repeater.DataSource = dashboards;
+            UserDashboard2Repeater.DataBind();
+            UserDashboardRepeater.DataSource = dashboards;
+            UserDashboardRepeater.DataBind();
         }
         catch (Exception ex)
         {
-            log.Error("Error getting object id", ex);
+            log.Error("Error getting user id of current user", ex);
         }
-        if (kpiId <= 0)
-        {
-            SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+    }
+
+    protected void UserDashboardDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        if (e.Exception == null)
             return;
-        }
-        if (e.CommandName == "ViewKpi")
-        {
-            Session["KpiId"] = kpiId;
-            Response.Redirect("~/Kpis/KpiDetails.aspx");
+        log.Error("Error getting KPI for Dashboard", e.Exception);
+        e.ExceptionHandled = true;
+    }
+
+    protected void UserDashboard2Repeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        UserControls_Dashboard_KpiDashboard control = (UserControls_Dashboard_KpiDashboard)e.Item.FindControl("UserDashboardControl");
+        if (control == null)
             return;
-        }
-        if (e.CommandName == "DeleteKpi")
+
+        try
         {
-            //Consultamos Owner
-            if (FrtwbSystem.Instance.Kpis[kpiId].Owner is Organization)
-                FrtwbSystem.Instance.Organizations[FrtwbSystem.Instance.Kpis[kpiId].Owner.ObjectId].Kpis.Remove(kpiId);
-            if (FrtwbSystem.Instance.Kpis[kpiId].Owner is Area)
-                FrtwbSystem.Instance.Areas[FrtwbSystem.Instance.Kpis[kpiId].Owner.ObjectId].Kpis.Remove(kpiId);
-            if (FrtwbSystem.Instance.Kpis[kpiId].Owner is Project)
-                FrtwbSystem.Instance.Projects[FrtwbSystem.Instance.Kpis[kpiId].Owner.ObjectId].Kpis.Remove(kpiId);
-            if (FrtwbSystem.Instance.Kpis[kpiId].Owner is Activity)
-                FrtwbSystem.Instance.Activities[FrtwbSystem.Instance.Kpis[kpiId].Owner.ObjectId].Kpis.Remove(kpiId);
-            FrtwbSystem.Instance.Kpis.Remove(kpiId);
-            //Refrescamos el Repeater
-            KpisRepeater.DataSource = FrtwbSystem.Instance.Kpis.Values;
-            KpisRepeater.DataBind();
-            return;
+            control.UserId = Convert.ToInt32(UserIdHiddenField.Value);
+            control.LoadKpis();
         }
+        catch (Exception ex)
+        {
+            log.Error("Error setting userID to KpiDashboard", ex);
+        }
+        Literal header = (Literal)e.Item.FindControl("HeaderLiteral");
+        if (header == null)
+            return;
+        try
+        {
+            UserDashboard obj = (UserDashboard)e.Item.DataItem;
+
+            header.Text = "<div role=\"tabpanel\" class=\"tab-pane\" id=\"t-" + obj.DashboardId + "\">";
+        }
+        catch (Exception ex)
+        {
+            
+        }
+    }
+
+    protected void SaveButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            int dashboardId = Convert.ToInt32(SelectedDashboardHiddenField.Value);
+            if (dashboardId == 0)
+            {
+                int userId = Convert.ToInt32(UserIdHiddenField.Value);
+                UserDashboardBLL.InsertUserDashboard(DashboardNameTextBox.Text, userId);
+            }
+            else
+                UserDashboardBLL.UpdateUserDashboard(dashboardId, DashboardNameTextBox.Text);
+            LoadKpisData();
+            SelectedDashboardHiddenField.Value = "0";
+            DashboardNameTextBox.Text = "";
+            ModalTitle.Text = "Add Dashboard";
+        }
+        catch (Exception ex)
+        {
+            log.Error("Error saving selected dashboard", ex);
+        }
+    }
+
+    protected void UserDashboard2Repeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        if(e.CommandName == "RenameDashboard")
+        {
+            try
+            {
+                ModalTitle.Text = "Rename Dashboard";
+                int dashboardId = Convert.ToInt32(e.CommandArgument);
+                SelectedDashboardHiddenField.Value = dashboardId.ToString();
+                UserDashboard obj = UserDashboardBLL.GetUserDashboardById(dashboardId);
+                DashboardNameTextBox.Text = obj.Name;
+                OpenPopup.Value = "true";
+            }
+            catch (Exception ex)
+            {
+                log.Error("error getting data of user dashboard", ex);
+            }
+        }
+        if (e.CommandName == "DeleteDashboard")
+        {
+            try
+            {
+                int dashboardId = Convert.ToInt32(e.CommandArgument);
+                UserDashboardBLL.DeleteUserDashboard(dashboardId);
+                CurrentTabIndex.Value = "0";
+                LoadKpisData();
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error deleting selected dashboard", ex);
+            }
+        }
+    }
+
+    protected void UserDashboardControl_KpiDeleted()
+    {
+        LoadKpisData();
     }
 }

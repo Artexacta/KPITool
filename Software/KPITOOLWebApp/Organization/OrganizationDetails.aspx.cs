@@ -99,13 +99,13 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
 
     protected void AreasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
+        //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
 
-        if (img == null)
-            return;
+        //if (img == null)
+        //    return;
 
-        if (e.Row.DataItem is Area)
-        {
+        //if (e.Row.DataItem is Area)
+        //{
             //Area objArea = (Area)e.Row.DataItem;
             //if (objArea != null && objArea.Kpis.Count > 0)
             //{
@@ -117,7 +117,7 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
             //        img.Visible = true;
             //    }
             //}
-        }
+        //}
     }
 
     protected void AreasGridView_RowCommand(object sender, GridViewCommandEventArgs e)

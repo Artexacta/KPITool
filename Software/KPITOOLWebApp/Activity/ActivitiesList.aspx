@@ -119,7 +119,7 @@
                                     This activity does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i> icon above
                                 </asp:Panel>
                                 <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
-                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false"  OwnerType="ACTIVITY" />
                                 </asp:Panel>
                                 <asp:Panel runat="server" id="detailsContainer" class="col-md-111 m-t-5" visible="false">
                                     This activity has 
