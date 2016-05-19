@@ -39,8 +39,10 @@ namespace Artexacta.App.Activities.BLL
                 row.organizationID,
                 row.IsareaIDNull() ? 0 : row.areaID,
                 row.IsprojectIDNull() ? 0 : row.projectID);
+            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
+            theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
             theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
-
             return theNewRecord;
         }
 
@@ -74,13 +76,12 @@ namespace Artexacta.App.Activities.BLL
             if (organizationId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
+            string userName = HttpContext.Current.User.Identity.Name;
             List<Activity> theList = new List<Activity>();
             Activity theData = null;
-
             try
             {
-                ActivityDS.ActivitiesDataTable theTable = theAdapter.GetActivitiesByOrganization(organizationId);
-
+                ActivityDS.ActivitiesDataTable theTable = theAdapter.GetActivitiesByOrganization(organizationId, userName);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (ActivityDS.ActivitiesRow theRow in theTable)
@@ -92,8 +93,8 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía las actividades de la organización de id =" + organizationId.ToString(), exc);
-                throw exc;
+                log.Error("Error en GetActivitiesByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de actividades de la organización.");
             }
 
             return theList;
@@ -122,6 +123,35 @@ namespace Artexacta.App.Activities.BLL
             {
                 throw exc;
             }
+            return theList;
+        }
+
+        public List<Activity> GetActivitiesByProject(int projectId)
+        {
+            if (projectId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
+
+            string userName = HttpContext.Current.User.Identity.Name;
+            List<Activity> theList = new List<Activity>();
+            Activity theData = null;
+            try
+            {
+                ActivityDS.ActivitiesDataTable theTable = theAdapter.GetActivitiesByProject(projectId, userName);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (ActivityDS.ActivitiesRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetActivitiesByProject para projectId: " + projectId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de actividades del proyecto.");
+            }
+
             return theList;
         }
 

@@ -39,7 +39,9 @@ namespace Artexacta.App.People.BLL
                 row.name,
                 row.organizationID,
                 row.IsareaIDNull() ? 0 : row.areaID);
-
+            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
+            theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
             return theNewRecord;
         }
 
@@ -91,6 +93,35 @@ namespace Artexacta.App.People.BLL
             {
                 throw exc;
             }
+            return theList;
+        }
+
+        public List<People> GetPeopleByOrganization(int organizationId)
+        {
+            if (organizationId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            string userName = HttpContext.Current.User.Identity.Name;
+            List<People> theList = new List<People>();
+            People theData = null;
+            try
+            {
+                PeopleDS.PeopleDataTable theTable = theAdapter.GetPeopleByOrganization(organizationId, userName);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (PeopleDS.PeopleRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetPeopleByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de personas de la organización.");
+            }
+
             return theList;
         }
 

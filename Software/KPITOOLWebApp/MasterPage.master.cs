@@ -314,21 +314,27 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
              "~/Organization/EditOrganization.aspx",
              "~/Organization/OrganizationDetails.aspx",
-             "~/Organization/ShareOrganization.aspx"
+             "~/Organization/ShareOrganization.aspx",
 
-             ,"~/Project/ProjectForm.aspx"
-             ,"~/Project/ProjectDetails.aspx"
-             ,"~/Project/ProjectList.aspx"
+             "~/Project/ProjectForm.aspx",
+             "~/Project/ProjectDetails.aspx",
+             "~/Project/ProjectList.aspx",
+             "~/Project/ShareProject.aspx",
 
-             ,"~/Activity/AddActivity.aspx"
-             ,"~/Activity/DetailActivity.aspx"
-             ,"~/Activity/ActivitiesList.aspx"
+             "~/Activity/AddActivity.aspx",
+             "~/Activity/ActivityDetails.aspx",
+             "~/Activity/ActivitiesList.aspx",
+             "~/Activity/ShareActivity.aspx",
 
-             ,"~/Kpi/KpiForm.aspx"
-             ,"~/Kpis/KpiDetails.aspx"
-             ,"~/Kpis/KpiDashboard.aspx"
-             ,"~/Kpi/KpiList.aspx"
-             ,"~/Kpi/KpiDataEntry.aspx"
+             "~/People/SharePerson.aspx",
+             "~/People/PersonDetails.aspx",
+
+             "~/Kpi/KpiForm.aspx",
+             "~/Kpis/KpiDetails.aspx",
+             "~/Kpis/KpiDashboard.aspx",
+             "~/Kpi/KpiList.aspx",
+             "~/Kpi/KpiDataEntry.aspx",
+             "~/Kpi/ShareKpi.aspx"
         };
 
         for (int i = 0; i < openPages.Length; i++)

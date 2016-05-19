@@ -59,6 +59,10 @@ namespace Artexacta.App.ObjectAction
                     case "ENTER_DATA":
                         name = "View and enter data";
                         break;
+
+                    default:
+                        name = "[ Select a permission ]";
+                        break;
                 }
                 return name;
             }

@@ -2,11 +2,6 @@
     CodeFile="ShareOrganization.aspx.cs" Inherits="Organization_ShareOrganization" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <style type="text/css">
-        .checkboxList td {
-            padding-right: 35px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" Runat="Server">
     <div class="row">
@@ -70,7 +65,7 @@
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <p class="text-center">
-                                        There are no users for this Organization
+                                        There are no users with permissions for this Organization
                                     </p>
                                 </EmptyDataTemplate>
                             </asp:GridView>
@@ -89,7 +84,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/MainPage.aspx" Text="Back to Organization list"
+                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/MainPage.aspx" Text="Back to Organizationes list"
                     CssClass="btn btn-info">
                 </asp:HyperLink>
             </div>
@@ -140,7 +135,7 @@
             </div>
             <div class="modal-footer btn-colors">
                 <asp:LinkButton ID="SaveUserButton" runat="server" CssClass="btn btn-primary" ValidationGroup="InviteUser" 
-                    OnClick="SaveUserButton_Click" Text="Add User" />
+                    OnClientClick="return VerifiyData()" OnClick="SaveUserButton_Click" Text="Add User" />
                 <a class="btn btn-danger" href="javascript:CloseInviteUserModal();">Cancel</a>
             </div>
         </div>
@@ -168,6 +163,9 @@
                 this.checked = false;
                 this.disabled = false;
             });
+            for (i = 0; i < Page_Validators.length; i++) {
+                $(Page_Validators[i]).css('display', 'none');
+            }
         }
 
         function UserTextBox_OnChange() {
@@ -285,6 +283,38 @@
                 }
             });
         }
+
+        function VerifiyData() {
+            if (Page_ClientValidate("InviteUser") == true) {
+
+                var param = JSON.stringify({ 'organizationId': $("#<%= OrganizationIdHiddenField.ClientID %>").val(), 'userId': $("#<%= UserInvitedIdHiddenField.ClientID %>").val() });
+                var data;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "ShareOrganization.aspx/VerifiyUser",
+                    data: param,
+                    dataType: "json",
+                    async: false,
+                    success: function (msg) {
+                        data = msg.d;
+                    }
+                });
+
+                if (data) {
+                    if (confirm("El usuario ya estaba registrado por lo que los permisos se sobreescribirán por los seleccionados. ¿Está seguro de continuar?")) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+
     </script>
 
     <asp:HiddenField ID="ObjectTypeIdHiddenField" runat="server" />

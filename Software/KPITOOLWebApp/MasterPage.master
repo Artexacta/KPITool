@@ -53,7 +53,7 @@
                     </asp:HyperLink>
                 </li>
                 <li>
-                    <app:LanguageSelector ID="LanguageSelectorControl" runat="server" />
+                    <app:LanguageSelector ID="LanguageSelectorControl" runat="server"  />
                 </li>
                 <li>
                     <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutPageUrl="~/Authentication/Login.aspx" OnLoggingOut="LoginStatus1_LoggingOut" />

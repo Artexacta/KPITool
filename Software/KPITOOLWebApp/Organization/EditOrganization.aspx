@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Edit Organization" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="EditOrganization.aspx.cs" Inherits="Organization_EditOrganization" %>
 
+<%@ Register src="../UserControls/FRTWB/AddDataControl.ascx" tagname="AddDataControl" tagprefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
@@ -32,6 +34,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <p>Organization Name</p>
+                            
                         </div>
                         <div class="col-md-9">
                             <div class="form-group">
@@ -59,9 +62,13 @@
                                 <ItemTemplate>
                                     <div class="row">
                                         <div class="col-md-1">
+                                            <asp:LinkButton ID="EditAreaLB" data-id='<%# Eval("AreaId") %>' runat="server" CssClass="viewBtn editBtn" 
+                                                OnClick="EditAreaLB_Click"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></asp:LinkButton>
+                                        </div>
+                                        <div class="col-md-1">
                                             <asp:LinkButton ID="DeleteArea" data-id='<%# Eval("AreaId") %>' runat="server" CssClass="viewBtn" OnClick="DeleteArea_Click"><i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i></asp:LinkButton>
                                         </div>
-                                        <div class="col-md-11">
+                                        <div class="col-md-10">
                                             <p style="padding-top: 2px;"><%# Eval("Name") %></p>
                                         </div>
                                     </div>

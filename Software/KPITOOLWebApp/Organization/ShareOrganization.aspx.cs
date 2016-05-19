@@ -3,12 +3,15 @@ using Artexacta.App.Organization;
 using Artexacta.App.Organization.BLL;
 using Artexacta.App.PermissionObject;
 using Artexacta.App.PermissionObject.BLL;
+using Artexacta.App.User;
+using Artexacta.App.User.BLL;
 using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -33,9 +36,20 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
 
     private void ProcessSessionParameteres()
     {
-        if (Session["ORGANIZATIONID"] != null && !string.IsNullOrEmpty(Session["ORGANIZATIONID"].ToString()))
+        int organizationId = 0;
+        if (Request["ID"] != null && !string.IsNullOrEmpty(Request["ID"].ToString()))
         {
-            int organizationId = 0;
+            try
+            {
+                organizationId = Convert.ToInt32(Request["ID"].ToString());
+            }
+            catch
+            {
+                log.Error("no se pudo realizar la conversion del parametro ID");
+            }
+        }
+        else if (Session["ORGANIZATIONID"] != null && !string.IsNullOrEmpty(Session["ORGANIZATIONID"].ToString()))
+        {
             try
             {
                 organizationId = Convert.ToInt32(Session["ORGANIZATIONID"].ToString());
@@ -45,17 +59,38 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
                 log.Error("no se pudo realizar la conversion de la session organizationId:" + Session["ORGANIZATIONID"]);
             }
 
-            OrganizationIdHiddenField.Value = Session["ORGANIZATIONID"].ToString();
+            Session["ORGANIZATIONID"] = null;
         }
-        Session["ORGANIZATIONID"] = null;
+
+        if (organizationId > 0)
+            OrganizationIdHiddenField.Value = organizationId.ToString();
     }
 
     private void LoadData()
     {
-        Organization organization = null;
+        //-- verify is user is OWNER
+        PermissionObject theUser = new PermissionObject();
         try
         {
-            organization = OrganizationBLL.GetOrganizationById(Convert.ToInt32(OrganizationIdHiddenField.Value));
+            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ORGANIZATION.ToString(), Convert.ToInt32(OrganizationIdHiddenField.Value));
+        }
+        catch(Exception exc) 
+        {
+            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            Response.Redirect("~/MainPage.aspx");
+        }
+
+        if(theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        {
+            SystemMessages.DisplaySystemWarningMessage("The user is not owner, cannot share the organization with other users.");
+            Response.Redirect("~/MainPage.aspx");
+        }
+
+        //-- show Data
+        Organization theData = null;
+        try
+        {
+            theData = OrganizationBLL.GetOrganizationById(Convert.ToInt32(OrganizationIdHiddenField.Value));
         }
         catch (Exception exc)
         {
@@ -63,9 +98,9 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
             Response.Redirect("~/MainPage.aspx");
         }
 
-        if (organization != null)
+        if (theData != null)
         {
-            OrganizationNameLiteral.Text = organization.Name;
+            OrganizationNameLiteral.Text = theData.Name;
         }
     }
 
@@ -91,16 +126,6 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
                 LinkButton editButton = (LinkButton)e.Row.FindControl("EditButton");
                 editButton.Visible = false;
             }
-        }
-    }
-
-    protected void ObjectActionRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
-    {
-        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-        {
-            ObjectAction theData = (ObjectAction)(e.Item.DataItem);
-            CheckBox actionCheckBox = (CheckBox)e.Item.FindControl("ActionCheckBox");
-            actionCheckBox.Attributes.Add("onclick", "ActionCheckBox_change(" + actionCheckBox.ClientID + ",'" + theData.ObjectActionID + "')");
         }
     }
 
@@ -137,9 +162,15 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
             PermissionsGridView.DataBind();
             ObjectActionRepeater.DataBind();
         }
-        else if (e.CommandName.Equals("EditData"))
-        {
+    }
 
+    protected void ObjectActionRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            ObjectAction theData = (ObjectAction)(e.Item.DataItem);
+            CheckBox actionCheckBox = (CheckBox)e.Item.FindControl("ActionCheckBox");
+            actionCheckBox.Attributes.Add("onclick", "ActionCheckBox_change(" + actionCheckBox.ClientID + ",'" + theData.ObjectActionID + "')");
         }
     }
 
@@ -194,6 +225,17 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
         ObjectActionRepeater.DataBind();
         ShowInviteUserModal.Value = "false";
         PermissionsGridView.DataBind();
+    }
+
+    [WebMethod]
+    public static bool VerifiyUser(int organizationId, int userId)
+    {
+        User theUser = UserBLL.GetUserById(userId);
+        PermissionObject theData = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ORGANIZATION.ToString(), organizationId, theUser.Username);
+        if (theData == null)
+            return false;
+        else
+            return true;
     }
 
 }

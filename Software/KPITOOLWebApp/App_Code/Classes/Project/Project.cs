@@ -15,8 +15,10 @@ namespace Artexacta.App.Project
         public string Name { get; set; }
         public int OrganizationID { get; set; }
         public int AreaID { get; set; }
+        public string OrganizationName { get; set; }
+        public string AreaName { get; set; }
         public int NumberOfKpis { get; set; }
-        
+
         public Project()
         {
         }
@@ -33,9 +35,5 @@ namespace Artexacta.App.Project
         {
             get { return NumberOfKpis + " KPIs"; }
         }
-
-        public string OrganizationName { get; set; }
-        public string AreaName { get; set; }
-
     }
 }

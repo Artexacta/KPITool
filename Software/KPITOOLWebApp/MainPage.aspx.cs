@@ -211,14 +211,12 @@ public partial class MainPage : SqlViewStatePage
         
         if(e.CommandName == "ViewOrganization")
         {
-            Session["OrganizationId"] = organizationId;
-            Response.Redirect("~/Organization/OrganizationDetails.aspx");
+            Response.Redirect("~/Organization/OrganizationDetails.aspx?ID=" + organizationId);
         }
 
         if (e.CommandName.Equals("ShareOrganization"))
         {
-            Session["ORGANIZATIONID"] = organizationId;
-            Response.Redirect("~/Organization/ShareOrganization.aspx");
+            Response.Redirect("~/Organization/ShareOrganization.aspx?ID=" + organizationId);
         }
     }
 
