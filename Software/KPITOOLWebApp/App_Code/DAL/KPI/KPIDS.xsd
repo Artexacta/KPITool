@@ -212,6 +212,8 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="progress" msprop:Generator_ColumnVarNameInTable="columnprogress" msprop:Generator_ColumnPropNameInRow="progress" msprop:Generator_ColumnPropNameInTable="progressColumn" msprop:Generator_UserColumnName="progress" type="xs:decimal" minOccurs="0" />
+              <xs:element name="trend" msprop:Generator_ColumnVarNameInTable="columntrend" msprop:Generator_ColumnPropNameInRow="trend" msprop:Generator_ColumnPropNameInTable="trendColumn" msprop:Generator_UserColumnName="trend" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

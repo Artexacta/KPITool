@@ -163,5 +163,66 @@ namespace Artexacta.App.KPI
         public string ActivityName { get; set; }
         public string PersonName { get; set; }
 
+        public decimal Progress { get; set; }
+        public string ProgressClass
+        {
+            get
+            {
+                string className = "progress-bar";
+                if (this.Progress < 25)
+                    className = className + " progress-bar-danger";
+                else if(this.Progress < 75)
+                    className = className + " progress-bar-warning";
+                else
+                    className = className + " progress-bar-success";
+                return className;
+            }
+        }
+
+        public decimal Trend { get; set; }
+        public string TrendText
+        {
+            get
+            {
+                string trendText = "";
+                if (this.Trend > 0)
+                {
+                    trendText = string.Format("Up {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnit);
+                }
+                else if (this.Trend < 0)
+                {
+                    trendText = string.Format("Down {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnit);
+                }
+                return trendText;
+            }
+        }
+
+        public string ReportingUnit
+        {
+            get
+            {
+                string reportingUnit = "";
+                switch (this._reportingUnitID)
+                {
+                    case "DAY  ":
+                        reportingUnit = "day";
+                        break;
+                    case "MONTH":
+                        reportingUnit = "month";
+                        break;
+                    case "QUART":
+                        reportingUnit = "quart";
+                        break;
+                    case "WEEK ":
+                        reportingUnit = "week";
+                        break;
+                    case "YEAR ":
+                        reportingUnit = "year";
+                        break;
+                }
+                return reportingUnit;
+            }
+        }
+
     }
 }

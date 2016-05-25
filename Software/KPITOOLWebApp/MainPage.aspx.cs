@@ -49,12 +49,14 @@ public partial class MainPage : SqlViewStatePage
 
         if (theOrganizations.Count == 0)
         {
-            ResetTourHiddenField.Value = "true";
-            showTourBtn.Visible = false;
+            //ResetTourHiddenField.Value = "true";
+            //showTourBtn.Visible = false;
+            Tour.Hide();
         }
         if (theOrganizations.Count > 0)
         {
-            ShowTourHiddenField.Value = "true";
+            Tour.Show();
+            //ShowTourHiddenField.Value = "true";
         }
     }
     

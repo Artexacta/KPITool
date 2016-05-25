@@ -15,14 +15,29 @@
     display: block;
 }
 
+.login-form .hidden-xs {
+    display: inline !important;
+}
+
 @media (min-width: 768px) {
-    .header-inner .hidden-xs:not(.menuImage), .login-form .hidden-xs:not(.menuImage){
+    .header-inner .hidden-xs:not(.menuImage){
         display: inline !important;
-    }
+    }    
 }
 
 @media (max-width: 768px) {
     .menuImage {
         display: none !important;
     }
+}
+
+#menu-trigger {
+    background: #674EA7;
+}
+
+.kpi-heapmap-image {
+    height: 100%;
+    max-height: 50px;
+    width: 100%;
+    border: 1px solid #aaa;
 }

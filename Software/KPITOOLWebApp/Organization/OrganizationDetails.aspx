@@ -49,7 +49,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="AREA" OwnerId='<%# Eval("AreaID") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -107,7 +107,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -167,7 +167,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ACTIVITY" OwnerId='<%# Eval("ActivityID") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -225,7 +225,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server"  OwnerType="PERSON" OwnerId='<%# Eval("PersonId") %>'  />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -262,7 +262,8 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="View" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData">
+                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData"
+                                                CommandArgument='<%# Eval("KpiID") %>'>
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -283,19 +284,25 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Progress" HeaderStyle-Width="100px">
                                         <ItemTemplate>
-                                            <%--<div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("Progress") %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='<%# "width:" + Eval("Progress") + "%" %>'>
+                                            <div class="progress">
+                                                <div class='<%# Eval("ProgressClass") %>' role="progressbar" aria-valuenow='<%# Eval("Progress") %>' aria-valuemin="0" aria-valuemax="100"
+                                                    style='<%# "width:" + Eval("Progress") + "%" %>'>60%
                                                 </div>
                                             </div>
                                             <div class="text-center">
                                                 <asp:Literal ID="ProgressLiteral" runat="server" Text='<%# Eval("Progress") %>'></asp:Literal>%
-                                            </div>--%>
+                                            </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Trend" HeaderStyle-Width="100px">
                                         <ItemTemplate>
-                                            <%--<app:KpiImage ID="ImageOfKpi" runat="server" KpiId='<%# Eval("KpiID") %>' />--%>
+                                            <asp:Label ID="EqualLabel" runat="server" CssClass="glyphicon glyphicon-minus text-primary" style="font-size: 12pt; " 
+                                                Visible='<%# Convert.ToDecimal(Eval("Trend")) == 0 %>' />
+                                            <asp:Label ID="ArrowUpLabel" runat="server" CssClass="glyphicon glyphicon-arrow-up text-success" style="font-size: 12pt; " 
+                                                Visible='<%# Convert.ToDecimal(Eval("Trend")) > 0 %>' />
+                                            <asp:Label ID="ArrowDownLabel" runat="server" CssClass="glyphicon glyphicon-arrow-down text-danger" style="font-size: 12pt; " 
+                                                Visible='<%# Convert.ToDecimal(Eval("Trend")) < 0 %>' />
+                                            <asp:Literal ID="TrendLiteral" runat="server" Text='<%# Eval("TrendText") %>'></asp:Literal>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

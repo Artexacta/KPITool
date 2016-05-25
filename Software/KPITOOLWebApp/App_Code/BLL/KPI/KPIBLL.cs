@@ -60,6 +60,8 @@ namespace Artexacta.App.KPI.BLL
             theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
             theNewRecord.ActivityName = row.IsactivityNameNull() ? "" : row.activityName;
             theNewRecord.PersonName = row.IspersonNameNull() ? "" : row.personName;
+            theNewRecord.Progress = row.IsprogressNull() ? 0 : row.progress;
+            theNewRecord.Trend = row.IstrendNull() ? 0 : row.trend;
             return theNewRecord;
         }
 
@@ -440,5 +442,6 @@ namespace Artexacta.App.KPI.BLL
             }
 
         }
+
     }
 }

@@ -16,6 +16,9 @@
 
                     <div id="loginLogoContainer">
                         <asp:Image ID="LogoImage" runat="server" ImageUrl="~/Images/logo.png" Width="150" />
+                        <div class="login-form">
+                            <app:LanguageSelector ID="LanguageSelector1" runat="server" />
+                        </div>
                         <h3>
                             <asp:Literal ID="Literal1" Text="<%$ Resources: LoginGlossary, LoginTitle %>" runat="server" /></h3>
                         

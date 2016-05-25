@@ -11,7 +11,7 @@
                         <app:AddButton ID="TheAddButton" runat="server" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
-                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group">
+                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group"  ClientIDMode="Static">
 
 
                             <%--<asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
@@ -148,8 +148,30 @@
                         </asp:Repeater>
 
                         <br />
-                        <div style="overflow: hidden">
+                        <%--<div style="overflow: hidden">
                             <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">Show tips for this page</a>
+                        </div>--%>
+                        <app:TourSettings runat="server" ID="Settings">
+                            <Items>
+                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    Content="<%$ Resources: ProjectList, TourStep1 %>"
+                                    Element="#TheAddButton" />
+                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    Content="<%$ Resources: ProjectList, TourStep2 %>"
+                                    Element="#OrganizationList .editBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    Content="<%$ Resources: ProjectList, TourStep3 %>"
+                                    Element="#OrganizationList .detailsBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    Content="<%$ Resources: ProjectList, TourStep4 %>"
+                                    Element="#OrganizationList .shareBtn:first" />
+                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    Content="<%$ Resources: ProjectList, TourStep5 %>"
+                                    Element="#SearchPanel" />
+                            </Items>
+                        </app:TourSettings>
+                        <div style="overflow: hidden">
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
                     </div>
                 </div>
@@ -163,71 +185,6 @@
             <asp:Parameter DefaultValue="1=1" Name="whereClause" Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $(".rcbArrowCellRight a").html("V");
-
-            $("#showTourBtn").click(function () {
-                var storageKeys = Object.keys(localStorage);
-                for (var i in storageKeys) {
-                    var key = storageKeys[i];
-                    if (key.indexOf("ProjectListPageTour") >= 0)
-                        localStorage.removeItem(key);
-                }
-                $("#<%= ForceShowTour.ClientID %>").val("true");
-                showTour();
-                return false;
-            });
-            showTour();
-        });
-
-        function showTour() {
-
-            var tour = new Tour({
-                name: "ProjectListPageTour",
-                steps: [
-                    {
-                        element: "#<%= TheAddButton.ClientID %>",
-                        title: "You are in the Project List page.",
-                        content: "At any time you can create new system objects by clicking on this icon. You can create new organizations, evaluations, projects, actions or KPIs from anywhere"
-                    }, {
-                        element: "#ProjectList .editBtn:first",
-                        title: "You are in the Project List page.",
-                        content: "Organizations, projects and actions have properties that you can set. You can edit the name as well as the properties by clickin on this icon."
-                    }, {
-                        element: "#ProjectList .detailsBtn:first",
-                        title: "You are in the Project List page.",
-                        content: "You can view the object page using this icon.  In the object page you can see everything about the object."
-                    }, {
-                        element: "#ProjectList .shareBtn:first",
-                        title: "You are in the Project List page.",
-                        content: "You can share this project with other people by clicking on this button"
-                    }, {
-                        element: "#<%= SearchPanel.ClientID %>",
-                        title: "You are in the Project List page.",
-                        content: "You can search using this textbox. You can simply search be entering any text.",
-                        placement: "bottom"
-                    }
-                ],
-                backdrop: true
-            });
-
-            // Initialize the tour
-            if ($("#<%= ForceShowTour.ClientID %>").val() == "true") {
-                $("#<%= ForceShowTour.ClientID %>").val("false");
-                tour.init(true);
-            } else
-                tour.init();
-
-            // Start the tour
-            tour.start();
-            $("#showTourBtn").show();
-        }
-
-    </script>
 
 </asp:Content>
 
