@@ -311,6 +311,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Test/TestTooltip.aspx",
              "~/ResetSystem.aspx",
              "~/Test/TestAddData.aspx",
+             "~/Test/TestVisitKpi.aspx",
 
              "~/Organization/EditOrganization.aspx",
              "~/Organization/OrganizationDetails.aspx",

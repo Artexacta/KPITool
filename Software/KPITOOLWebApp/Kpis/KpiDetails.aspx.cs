@@ -54,9 +54,9 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         int caso = rnd.Next(1, 100);
         //Inicializo los valores conocidos
         KpiType.Text = "<div class='col-md-4 col-sm-4'>KPI Type:</div><div class='col-md-8 col-sm-8'>" + kpi.KpiTypeID + "</div>";
-        WebServiceId.Text = "<div class='col-md-4 col-sm-4'>Web Service ID:</div><div class='col-md-8 col-sm-8'>SERV-Reliavility</div>";
+        //WebServiceId.Text = "<div class='col-md-4 col-sm-4'>Web Service ID:</div><div class='col-md-8 col-sm-8'>SERV-Reliavility</div>";
         ReportingUnit.Text = "<div class='col-md-4 col-sm-4'>Reporting Unit:</div><div class='col-md-8 col-sm-8'>" + kpi.ReportingUnitID + "</div>";
-        //KpiTarget.Text = "<div class='col-md-4 col-sm-4'>KPI Target:</div><div class='col-md-8 col-sm-8'>" + (string.IsNullOrEmpty(kpi.re) ? "12 months" : kpi.KpiTarget) + "</div>";
+        KpiTarget.Text = "<div class='col-md-4 col-sm-4'>KPI Target:</div><div class='col-md-8 col-sm-8'>" + (kpi.TargetPeriod == 0 ? "No target Specified" : kpi.TargetPeriod + " " + kpi.ReportingUnitID) + "</div>";
 
         //if (caso <= 50)
         //{

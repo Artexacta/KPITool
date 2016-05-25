@@ -30,9 +30,7 @@
                             <asp:Literal ID="ReportingUnit" runat="server"></asp:Literal>
                             <asp:Literal ID="KpiTarget" runat="server"></asp:Literal>
                             <asp:Literal ID="StartingDate" runat="server"></asp:Literal>
-                            <div class="col-md-12">
-                                <asp:CheckBox ID="AddToDashboard" runat="server" Checked="true" Text="   Add to KPI Dashboard" />
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -236,6 +234,7 @@
                             <ItemTemplate>
                                 <div style="padding-left: 10px;" class="m-t-10 p-l-10">
                                     <asp:LinkButton ID="DeleteButton" runat="server" CommandArgument='<%# Eval("DashboardId") %>'
+                                        OnClientClick="return confirm('Are you sure you want to remove this KPI from selected Dashboard?')"
                                         CommandName="DeleteDashboard">
                                         <i class="fa fa-trash"></i>
                                     </asp:LinkButton>

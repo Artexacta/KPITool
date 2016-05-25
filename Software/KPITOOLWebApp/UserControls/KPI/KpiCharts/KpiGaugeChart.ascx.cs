@@ -1,4 +1,5 @@
-﻿using DotNet.Highcharts.Enums;
+﻿using Artexacta.App.KPI.BLL;
+using DotNet.Highcharts.Enums;
 using DotNet.Highcharts.Options;
 using log4net;
 using System;
@@ -33,11 +34,28 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        BuildChart();
+        try
+        {
+            BuildChart();
+        }
+        catch (Exception ex)
+        {
+            log.Error("Error getting kpi progress", ex);
+        }
     }
 
     public void BuildChart()
     {
+        bool hasTarget = false;
+        decimal currentValue = 0;
+        decimal progress = KPIBLL.GetKpiProgress(KpiId, ref hasTarget, ref currentValue);
+        if (!hasTarget)
+        {
+            CurrentValueLiteral.Text = currentValue.ToString("#.##");
+            CurrentValuePanel.Visible = true;
+            return;
+        }
+
         DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts(ClientID)
             .InitChart(new Chart()
             {
@@ -135,7 +153,7 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
             .SetSeries(new Series()
             {
                 Name = "Complete",
-                Data = new DotNet.Highcharts.Helpers.Data(new object[] { 80 })
+                Data = new DotNet.Highcharts.Helpers.Data(new object[] { progress })
             });
         ChartLiteral.Text = chart.ToHtmlString();
     }

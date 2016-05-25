@@ -94,7 +94,7 @@ public partial class UserControls_Dashboard_KpiDashboard : System.Web.UI.UserCon
         if(e.CommandName == "ViewKPI")
         {
             Session["KpiId"] = e.CommandArgument.ToString();
-            Response.Redirect("~/KPIs/KpiDetails.aspx");
+            Response.Redirect("~/Kpis/KpiDetails.aspx");
             return;
         }
 

@@ -443,5 +443,22 @@ namespace Artexacta.App.KPI.BLL
 
         }
 
+        public static decimal GetKpiProgress(int kpiId, ref bool hasTarget, ref decimal currentValue)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("KpiId cannnot be equals or less than zero");
+
+            bool? paramHasTarget = false;
+            decimal? paramCurrentValue = 0;
+            decimal? progress = 0;
+            KPIDSTableAdapters.KPITableAdapter adapter = new KPITableAdapter();
+            adapter.GetKpiProgress(kpiId, ref paramHasTarget, ref paramCurrentValue, ref progress);
+
+            hasTarget = paramHasTarget == null ? false : paramHasTarget.Value;
+            currentValue = paramCurrentValue == null ? 0 : paramCurrentValue.Value;
+
+            return progress.Value;
+        }
+        
     }
 }

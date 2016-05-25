@@ -39,7 +39,7 @@ namespace Artexacta.App.KPI.BLL
             return list;
         }
 
-        public static List<KPIMeasurement> GetKpiMeasurementsByKpiOwner(int ownerId, string ownerType, ref decimal maxValue, ref decimal minValue)
+        public static List<KPIMeasurement> GetKpiMeasurementsByKpiOwner(int ownerId, string ownerType, string userName, ref decimal maxValue, ref decimal minValue)
         {
             if (ownerId <= 0)
             {
@@ -49,6 +49,8 @@ namespace Artexacta.App.KPI.BLL
             {
                 throw new ArgumentException("ownerType cannot be null or empty");
             }
+            if (string.IsNullOrEmpty(userName))
+                throw new ArgumentException("userName cannot be null or empty");
 
             string userName = HttpContext.Current.User.Identity.Name;
             decimal? max = 0;
@@ -72,23 +74,24 @@ namespace Artexacta.App.KPI.BLL
             return list;
         }
 
-        public static List<KPIMeasurement> GetKPIMeasurementForChart(int kpiId)
+        public static List<KpiChartData> GetKPIMeasurementForChart(int kpiId, ref string strategyId, ref decimal target)
         {
             if (kpiId <= 0)
             {
                 throw new ArgumentException("kpiId cannot be equals or less than zero");
             }
 
+            decimal? paramTarget = 0;
             KpiMeasurementDSTableAdapters.KpiMeasurementsForChartTableAdapter adapter = new KpiMeasurementDSTableAdapters.KpiMeasurementsForChartTableAdapter();
-            KpiMeasurementDS.KpiMeasurementsForChartDataTable table = adapter.GetKpiMeasurementsForChart(kpiId);
+            KpiMeasurementDS.KpiMeasurementsForChartDataTable table = adapter.GetKpiMeasurementsForChart(kpiId, ref strategyId, ref paramTarget);
+            target = paramTarget == null ? 0 :  paramTarget.Value;
 
-            List<KPIMeasurement> list = new List<KPIMeasurement>();
+            List<KpiChartData> list = new List<KpiChartData>();
             foreach (var row in table)
             {
-                list.Add(new KPIMeasurement()
+                list.Add(new KpiChartData()
                 {
-                    KPIID = kpiId,
-                    Date = row.date,
+                    Period = row.period,
                     Measurement = row.measurement
                 });
             }

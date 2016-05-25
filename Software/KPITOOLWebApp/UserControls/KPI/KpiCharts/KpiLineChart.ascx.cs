@@ -50,11 +50,54 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
     public void BuildChart()
     {
         int kpiId = KpiId;
-        List<KPIMeasurement> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId);
-        Dictionary<string, object> points = new Dictionary<string, object>();
+        string strategyId = "";
+        decimal target = 0;
+        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, ref strategyId, ref target);
+        Dictionary<string, object> standardSerie = new Dictionary<string, object>();
+        Dictionary<string, object> targetStandardSerie = new Dictionary<string, object>();
+
+        Dictionary<string, object> sumSerie = new Dictionary<string, object>();
+        Dictionary<string, object> targetSumSerie = new Dictionary<string, object>();
+
+        bool hasTarget = target != 0;
+        bool isSum = strategyId == "SUM";
+
+        decimal sumMeasurement = 0;
+        decimal sumTarget = 0;
         foreach (var item in measurements)
         {
-            points.Add(item.Date.ToString("yyyy-MM-dd"), item.Measurement);
+            standardSerie.Add(item.Period, item.Measurement);
+            if (isSum)
+            {
+                sumMeasurement = sumMeasurement + item.Measurement;
+                sumSerie.Add(item.Period, sumMeasurement);
+                if (hasTarget)
+                {
+                    sumTarget = sumTarget + target;
+                    targetSumSerie.Add(item.Period, sumTarget);
+                    
+                }
+            }
+            if (hasTarget)
+            {
+                targetStandardSerie.Add(item.Period, target);                
+            }
+                
+        }
+        List<Series> series = new List<Series>();
+        series.Add(new Series
+        {
+            Name = "Values",
+            Data = new Data(standardSerie.Values.ToArray<object>())
+        });
+        if(hasTarget)
+        {
+            series.Add(new Series
+            {
+                Name = "Target",
+                Color = System.Drawing.Color.Red,
+                Data = new Data(targetStandardSerie.Values.ToArray<object>())
+            });
         }
 
         DotNet.Highcharts.Highcharts chart = new DotNet.Highcharts.Highcharts(ClientID)
@@ -67,13 +110,9 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
             })
             .SetXAxis(new XAxis
                         {
-                            Categories = points.Keys.ToArray<string>()
+                            Categories = standardSerie.Keys.ToArray<string>()
                         })
-            .SetSeries(new Series
-                        {
-                            Name = "Values",
-                            Data = new Data(points.Values.ToArray<object>())
-                        })
+            .SetSeries(series.ToArray())
             .SetLegend(new Legend()
             {
                 Layout = Layouts.Horizontal,
@@ -81,7 +120,48 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
                 VerticalAlign = VerticalAligns.Bottom,
                 BorderWidth = 0
             });
-
         ChartLiteral.Text = chart.ToHtmlString();
+
+        if (isSum)
+        {
+            series = new List<Series>();
+            series.Add(new Series
+            {
+                Name = "Values",
+                Data = new Data(sumSerie.Values.ToArray<object>())
+            });
+            if (hasTarget)
+            {
+                series.Add(new Series
+                {
+                    Name = "Target",
+                    Color = System.Drawing.Color.Red,
+                    Data = new Data(targetSumSerie.Values.ToArray<object>())
+                });
+            }
+            chart = new DotNet.Highcharts.Highcharts(ClientID + "_sum")
+            .InitChart(new Chart()
+            {
+                Type = ChartTypes.Line
+            })
+            .SetTitle(new Title()
+            {
+                Text = ""
+            })
+            .SetXAxis(new XAxis
+            {
+                Categories = standardSerie.Keys.ToArray<string>()
+            })
+            .SetSeries(series.ToArray())
+            .SetLegend(new Legend()
+            {
+                Layout = Layouts.Horizontal,
+                Align = HorizontalAligns.Center,
+                VerticalAlign = VerticalAligns.Bottom,
+                BorderWidth = 0
+            });
+            SumChartLiteral.Text = chart.ToHtmlString();
+            SumChartPanel.Visible = true;
+        }
     }
 }

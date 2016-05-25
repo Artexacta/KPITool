@@ -68,7 +68,12 @@ public partial class UserControls_FRTWB_KpiImage : System.Web.UI.UserControl
     protected override void OnPreRender(EventArgs e)
     {
         base.OnPreRender(e);
-        MyImage.ImageUrl = "~/UserControls/FRTWB/KpiImageHandler.ashx?ownerId=" + OwnerIdHiddenField.Value + "&ownerType=" + OwnerTypeHiddenField.Value;
+        string userName = "";
+        if (HttpContext.Current.User.Identity.IsAuthenticated)
+            userName = HttpContext.Current.User.Identity.Name;
+        MyImage.ImageUrl = "~/UserControls/FRTWB/KpiImageHandler.ashx?ownerId=" + OwnerIdHiddenField.Value + 
+            "&ownerType=" + OwnerTypeHiddenField.Value + 
+            "&userName=" + userName;
     }
 
     
