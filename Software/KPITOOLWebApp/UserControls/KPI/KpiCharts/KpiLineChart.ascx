@@ -4,3 +4,5 @@
 </asp:Panel>
 <asp:Literal ID="ChartLiteral" runat="server"></asp:Literal>
 <asp:HiddenField ID="KpiIdHiddenField" runat="server" Value="0" />
+<asp:HiddenField ID="CategoryIdHiddenField" runat="server" Value="0" />
+<asp:HiddenField ID="CategoryItemIdHiddenField" runat="server" Value="0" />

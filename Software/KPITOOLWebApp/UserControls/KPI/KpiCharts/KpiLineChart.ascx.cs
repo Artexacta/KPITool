@@ -29,9 +29,51 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
             }
             catch (Exception ex)
             {
-                log.Error("Error getting ", ex);
+                log.Error("Error getting kpiId", ex);
             }
             return kpiId;
+        }
+    }
+
+    public int CategoryId
+    {
+        set
+        {
+            CategoryIdHiddenField.Value = value.ToString();
+        }
+        get
+        {
+            int id = 0;
+            try
+            {
+                id = Convert.ToInt32(CategoryIdHiddenField.Value);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting CategoryId", ex);
+            }
+            return id;
+        }
+    }
+
+    public int CategoryItemId
+    {
+        set
+        {
+            CategoryItemIdHiddenField.Value = value.ToString();
+        }
+        get
+        {
+            int id = 0;
+            try
+            {
+                id = Convert.ToInt32(CategoryItemIdHiddenField.Value);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting CategoryId", ex);
+            }
+            return id;
         }
     }
 
@@ -52,14 +94,14 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         int kpiId = KpiId;
         string strategyId = "";
         decimal target = 0;
-        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, ref strategyId, ref target);
+        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, ref strategyId, ref target);
         Dictionary<string, object> standardSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetStandardSerie = new Dictionary<string, object>();
 
         Dictionary<string, object> sumSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetSumSerie = new Dictionary<string, object>();
 
-        bool hasTarget = target != 0;
+        bool hasTarget = target != -1;
         bool isSum = strategyId == "SUM";
 
         decimal sumMeasurement = 0;
