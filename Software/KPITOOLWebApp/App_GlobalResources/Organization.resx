@@ -201,4 +201,16 @@
   <data name="MessageZeroProjectId" xml:space="preserve">
     <value>The project code cannot be zero.</value>
   </data>
+  <data name="TitleActivityName" xml:space="preserve">
+    <value>Activity Name</value>
+  </data>
+  <data name="TitleKPIName" xml:space="preserve">
+    <value>KPI Name</value>
+  </data>
+  <data name="TitleOrganizationName" xml:space="preserve">
+    <value>Organization Name</value>
+  </data>
+  <data name="TitleProjectName" xml:space="preserve">
+    <value>Project Name</value>
+  </data>
 </root>

@@ -48,7 +48,7 @@ namespace Artexacta.App.Currency.BLL
 
             try
             {
-                CurrencyDS.CurrencyUnitsForCurrencyDataTable theTable = theAdapter.GetCurrencyUnitsByCurrency(language, currencyID);
+                CurrencyDS.CurrencyUnitsForCurrencyDataTable theTable = theAdapter.GetCurrencyUnitByCurrency(language, currencyID);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {

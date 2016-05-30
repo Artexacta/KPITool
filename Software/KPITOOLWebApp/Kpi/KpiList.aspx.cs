@@ -1,5 +1,4 @@
-﻿using Artexacta.App.FRTWB;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using Artexacta.App.KPI;
 
 public partial class Kpi_KpiList : System.Web.UI.Page
 {
@@ -23,11 +23,20 @@ public partial class Kpi_KpiList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        KPISearchControl.Config = new KPISearch();
+        KPISearchControl.OnSearch += KPISearchControl_OnSearch;
+
         if (!IsPostBack)
         {
             ProcessSessionParameters();
-            cargarDatos();
+            
         }
+    }
+
+    private void KPISearchControl_OnSearch()
+    {
+        log.Debug("Binding GridView on Search");
+        KpisRepeater.DataBind();
     }
 
     private void ProcessSessionParameters()
@@ -38,38 +47,6 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         }
         Session["OwnerId"] = null;
     }
-
-    private void BindAllKpis()
-    {
-        KpisRepeater.DataSource = FrtwbSystem.Instance.Kpis.Values;
-        KpisRepeater.DataBind();
-    }
-
-    private void cargarDatos()
-    {
-
-        ObjectsComboBox.DataSource = FrtwbSystem.Instance.GetObjectsForSearch("Kpi");
-        ObjectsComboBox.DataBind();
-
-        if (string.IsNullOrEmpty(ownerToSelectInSearch))
-        {
-            BindAllKpis();
-            return;
-        }
-        ObjectsComboBox.ClearSelection();
-        RadComboBoxItem item = ObjectsComboBox.Items.FindItemByValue(ownerToSelectInSearch);
-        if (item != null)
-        {
-            item.Selected = true;
-            SearchKpis();
-        }
-        else
-        {
-            BindAllKpis();
-        }
-
-    }
-
 
     protected void ViewKpi_Click(object sender, EventArgs e)
     {

@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="KPI" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="KpiForm.aspx.cs" Inherits="Kpi_KpiForm" %>
 
+<%@ Register src="../UserControls/FRTWB/AddDataControl.ascx" tagname="AddDataControl" tagprefix="uc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
@@ -22,54 +24,23 @@
                                 ValidationGroup="AddKpi"
                                 ErrorMessage="You must enter the Kpi Name">
                             </asp:RequiredFieldValidator>
+                            
                         </div>
 
-                        <label>Organization</label>
-                        <span class="label label-danger">Required</span>
-                        <asp:DropDownList ID="OrganizationComboBox" runat="server" CssClass="form-control m-b-10"
-                            DataValueField="ObjectId"
-                            DataTextField="Name"
-                            OnDataBound="OrganizationComboBox_DataBound"
-                            AutoPostBack="true"
-                            OnSelectedIndexChanged="OrganizationComboBox_SelectedIndexChanged">
-                        </asp:DropDownList>
-                        <div class="has-error m-b-10">
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="OrganizationComboBox"
-                                Display="Dynamic"
-                                ValidationGroup="AddKpi"
-                                ErrorMessage="You must select a Organization">
-                            </asp:RequiredFieldValidator>
-                        </div>
-
-                        <label>Area</label>
-                        <asp:DropDownList ID="AreaComboBox" runat="server" CssClass="form-control m-b-10"
-                            DataValueField="ObjectId"
-                            DataTextField="Name"
-                            OnDataBound="AreaComboBox_DataBound">
-                        </asp:DropDownList>
-
-                        <label>Project</label>
-                        <asp:DropDownList ID="ProjectComboBox" runat="server" CssClass="form-control m-b-10"
-                            DataValueField="ObjectId"
-                            DataTextField="Name"
-                            OnSelectedIndexChanged="ProjectComboBox_SelectedIndexChanged"
-                            AutoPostBack="true"
-                            OnDataBound="ProjectComboBox_DataBound">
-                        </asp:DropDownList>
-
-                        <label>Activity</label>
-                        <asp:DropDownList ID="ActivityComboBox" runat="server" CssClass="form-control m-b-10"
-                            DataValueField="ObjectId"
-                            DataTextField="Name"
-                            OnDataBound="ActivityComboBox_DataBound">
-                        </asp:DropDownList>
+                       <uc1:AddDataControl ID="SelectAddDataControl" runat="server" />
 
                         <label>KPI Type <span class="label label-danger">Required</span></label>
                         <asp:DropDownList ID="KPITypeCombobox" runat="server" CssClass="form-control m-b-10"
-                            DataValueField="KpiValueForCombobox"
-                            DataTextField="Name"
-                            OnDataBound="KPITypeCombobox_DataBound">
+                            DataValueField="KpiTypeID"
+                            DataTextField="TypeName" DataSourceID="KPITypeObjectDataSource"
+                            OnSelectedIndexChanged="KPITypeCombobox_SelectedIndexChanged" >
                         </asp:DropDownList>
+                        <asp:ObjectDataSource ID="KPITypeObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetKPITypes" TypeName="Artexacta.App.KPI.BLL.KPITypeBLL">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="LanguageHiddenField" DefaultValue="ES" Name="language" PropertyName="Value" Type="String" />
+                            </SelectParameters>
+                        </asp:ObjectDataSource>
+
                         <div class="has-error m-b-10">
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="KPITypeCombobox"
                                 Display="Dynamic"
@@ -383,7 +354,9 @@
         </div>
     </div>
     <asp:HiddenField ID="KpiIdHiddenField" runat="server" Value="0" />
+    <asp:HiddenField ID="LanguageHiddenField" runat="server" Value="0" />
     <asp:HiddenField ID="ParentPageHiddenField" runat="server" Value="" />
+
     <script type="text/javascript">
         var unitCombo;
         var directionCombo;
