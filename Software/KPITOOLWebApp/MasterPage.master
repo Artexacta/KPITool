@@ -17,7 +17,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server" autocomplete="off">
+    <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- MASKS AND GENERAL CHECKS ----------------------------------------------------------------->
         <div id="TOP"></div>

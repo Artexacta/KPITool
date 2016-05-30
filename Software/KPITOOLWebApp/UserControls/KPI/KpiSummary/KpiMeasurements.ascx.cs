@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using Artexacta.App.KPI;
+using Artexacta.App.KPI.BLL;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +8,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class UserControls_KPI_KpiChart : System.Web.UI.UserControl
+public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI.UserControl
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
     public int KpiId
     {
-        set {
-            LineChartControl.KpiId = value;
-            GaugeControl.KpiId = value;
+        set
+        {
             KpiIdHiddenField.Value = value.ToString();
+            
         }
         get
         {
@@ -31,13 +33,10 @@ public partial class UserControls_KPI_KpiChart : System.Web.UI.UserControl
             return kpiId;
         }
     }
-
     public string CategoryId
     {
         set
         {
-            LineChartControl.CategoryId = value;
-            GaugeControl.CategoryId = value;
             CategoryIdHiddenField.Value = value;
         }
         get
@@ -50,8 +49,6 @@ public partial class UserControls_KPI_KpiChart : System.Web.UI.UserControl
     {
         set
         {
-            LineChartControl.CategoryItemId = value;
-            GaugeControl.CategoryItemId = value;
             CategoryItemIdHiddenField.Value = value;
         }
         get
@@ -59,20 +56,27 @@ public partial class UserControls_KPI_KpiChart : System.Web.UI.UserControl
             return CategoryItemIdHiddenField.Value;
         }
     }
-
     protected void Page_Load(object sender, EventArgs e)
     {
+       // LoadMeasurements();
     }
 
-    protected override void OnPreRender(EventArgs e)
+    private void LoadMeasurements()
     {
-        base.OnPreRender(e);
-        BuildChart();
+        try
+        {
+            List<KPIMeasurement> measurements = KpiMeasurementBLL.GetKpiMeasurementsByKpiId(KpiId, CategoryId, CategoryItemId);
+            MeasurementsGridView.DataSource = measurements;
+            MeasurementsGridView.DataBind();
+        }
+        catch (Exception ex)
+        {
+            log.Error("Error getting measurements ", ex);
+        }
     }
 
-    public void BuildChart()
+    protected void MeasurementsGridView_DataBound(object sender, EventArgs e)
     {
-        LineChartControl.BuildChart();
-        GaugeControl.BuildChart();
+       // MeasurementsGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
     }
 }

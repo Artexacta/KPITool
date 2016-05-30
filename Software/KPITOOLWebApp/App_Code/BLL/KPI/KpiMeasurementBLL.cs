@@ -15,7 +15,7 @@ namespace Artexacta.App.KPI.BLL
             
         }
 
-        public static List<KPIMeasurement> GetKpiMeasurementsByKpiId(int kpiId)
+        public static List<KPIMeasurement> GetKpiMeasurementsByKpiId(int kpiId, string categoryId, string categoryItemId)
         {
             if (kpiId <= 0)
             {
@@ -23,7 +23,7 @@ namespace Artexacta.App.KPI.BLL
             }
 
             KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter adapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
-            KpiMeasurementDS.KpiMeasurementDataTable table = adapter.GetKpiMeasurements(kpiId);
+            KpiMeasurementDS.KpiMeasurementDataTable table = adapter.GetKpiMeasurements(kpiId, categoryId, categoryItemId);
 
             List<KPIMeasurement> list = new List<KPIMeasurement>();
             foreach (var row in table)
@@ -73,7 +73,7 @@ namespace Artexacta.App.KPI.BLL
             return list;
         }
 
-        public static List<KpiChartData> GetKPIMeasurementForChart(int kpiId, int categoryId, int categoryItemId, ref string strategyId, ref decimal target)
+        public static List<KpiChartData> GetKPIMeasurementForChart(int kpiId, string categoryId, string categoryItemId, ref string strategyId, ref decimal target)
         {
             if (kpiId <= 0)
             {

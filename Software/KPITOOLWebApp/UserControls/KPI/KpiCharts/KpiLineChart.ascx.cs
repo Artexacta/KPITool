@@ -35,45 +35,27 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         }
     }
 
-    public int CategoryId
+    public string CategoryId
     {
         set
         {
-            CategoryIdHiddenField.Value = value.ToString();
+            CategoryIdHiddenField.Value = value;
         }
         get
         {
-            int id = 0;
-            try
-            {
-                id = Convert.ToInt32(CategoryIdHiddenField.Value);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error getting CategoryId", ex);
-            }
-            return id;
+            return CategoryIdHiddenField.Value;
         }
     }
 
-    public int CategoryItemId
+    public string CategoryItemId
     {
         set
         {
-            CategoryItemIdHiddenField.Value = value.ToString();
+            CategoryItemIdHiddenField.Value = value;
         }
         get
         {
-            int id = 0;
-            try
-            {
-                id = Convert.ToInt32(CategoryItemIdHiddenField.Value);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error getting CategoryId", ex);
-            }
-            return id;
+            return CategoryItemIdHiddenField.Value;
         }
     }
 

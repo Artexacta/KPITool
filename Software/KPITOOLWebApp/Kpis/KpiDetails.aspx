@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="KPI" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="KpiDetails.aspx.cs" Inherits="Kpis_KpiDetails" %>
+
 <%@ Register Src="~/UserControls/KPI/KpiChart.ascx" TagName="KpiChart" TagPrefix="app" %>
+<%@ Register Src="~/UserControls/KPI/KpiSummary/KpiMeasurements.ascx" TagName="KpiMeasurements" TagPrefix="app" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
@@ -30,7 +32,7 @@
                             <asp:Literal ID="ReportingUnit" runat="server"></asp:Literal>
                             <asp:Literal ID="KpiTarget" runat="server"></asp:Literal>
                             <asp:Literal ID="StartingDate" runat="server"></asp:Literal>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -48,179 +50,67 @@
                     </asp:Panel>
                 </div>
                 <div class="row">
-                    <asp:Panel ID="MeanTimeProgress" runat="server" Visible="false" CssClass="m-t-30">
-                        <div class="col-md-5">
-                            <p>90% progress towards the goal of 2 months between failures</p>
-                            <p><span style="font-size: 18px;" class="text-danger"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i></span>Down 5% from last month</p>
-                            <p>Lowest value: 2 days</p>
-                            <p>Highest value: 1.6 months</p>
-                            <p>Current value: 1.0 months</p>
-                            <p>To date average: 0.7 months</p>
+                    <div class="col-md-5">
+                        <p>90% progress towards the goal of 2 months between failures</p>
+                        <p><span style="font-size: 18px;" class="text-danger"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i></span>Down 5% from last month</p>
+                        <p>Lowest value: 2 days</p>
+                        <p>Highest value: 1.6 months</p>
+                        <p>Current value: 1.0 months</p>
+                        <p>To date average: 0.7 months</p>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="table-responsive" style="max-height: 200px;">
+                            <app:KpiMeasurements ID="MeasurementsControl" runat="server" />
                         </div>
-                        <div class="col-md-7">
-                            <div class="table-responsive" style="max-height: 200px;">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Value</th>
-                                    </tr>
-                                    <tr>
-                                        <td>01/02/2016</td>
-                                        <td>1.5 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>02/05/2016</td>
-                                        <td>0.7 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>03/07/2016</td>
-                                        <td>1.7 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>04/01/2016</td>
-                                        <td>1.6 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>05/08/2016</td>
-                                        <td>0.2 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>06/02/2016</td>
-                                        <td>1.5 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>07/05/2016</td>
-                                        <td>0.7 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>08/07/2016</td>
-                                        <td>1.7 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>09/01/2016</td>
-                                        <td>1.6 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10/08/2016</td>
-                                        <td>0.2 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>11/07/2016</td>
-                                        <td>0.4 months</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12/08/2016</td>
-                                        <td>0.8 months</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </asp:Panel>
-                    <asp:Panel ID="RevenueCollectionProgress" runat="server" Visible="false" CssClass="m-t-30">
-                        <div class="col-md-5">
-                            <p>40% progress towards the goal of 30 days</p>
-                            <p><span style="font-size: 18px;" class="text-danger"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i></span>Down 5% from last day</p>
-                            <p>Lowest value: 3 M TK</p>
-                            <p>Highest value: 130 M TK</p>
-                            <p>Current value: 4 M TK</p>
-                            <p>To date average: 15 M TK</p>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="table-responsive" style="max-height: 200px;">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Value</th>
-                                    </tr>
-                                    <tr>
-                                        <td>01/01/2016</td>
-                                        <td>20 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/02/2016</td>
-                                        <td>10 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/03/2016</td>
-                                        <td>21 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/04/2016</td>
-                                        <td>4 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/05/2016</td>
-                                        <td>5 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/06/2016</td>
-                                        <td>15 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/07/2016</td>
-                                        <td>17 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/08/2016</td>
-                                        <td>8 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/09/2016</td>
-                                        <td>6 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/10/2016</td>
-                                        <td>11 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/11/2016</td>
-                                        <td>7 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/12/2016</td>
-                                        <td>16 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/13/2016</td>
-                                        <td>5 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/14/2016</td>
-                                        <td>15 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/15/2016</td>
-                                        <td>17 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/16/2016</td>
-                                        <td>8 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/17/2016</td>
-                                        <td>6 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/18/2016</td>
-                                        <td>11 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/19/2016</td>
-                                        <td>7 M TK</td>
-                                    </tr>
-                                    <tr>
-                                        <td>01/20/2016</td>
-                                        <td>16 M TK</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </asp:Panel>
+                    </div>
                 </div>
+                
+                <asp:Panel ID="CategoriesPanel" runat="server" CssClass="row" Visible="false">
+                    <asp:Repeater ID="CategoriesRepeater" runat="server"
+                        OnItemDataBound="CategoriesRepeater_ItemDataBound">
+                        <HeaderTemplate>
+                            <div class="row m-t-20">
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <div class="col-md-12">
+                                <button id="buttonCollapse" runat="server" class="btn btn-default btn-block m-b-20 btn-category" type="button"
+                                    data-target='<%# "#" + Eval("HtmlId") %>' aria-expanded="false" aria-controls="collapseExample">
+                                    <asp:Literal ID="CategoryForDisplay" runat="server" Text='<%# Eval("ObjectForDisplay") %>'></asp:Literal>
+                                </button>
+                                <asp:Literal ID="CollapseLiteral" runat="server">
+                                </asp:Literal>
+                                    <app:KpiChart ID="KpiChartCategory" runat="server" KpiId='<%# Eval("KpiId") %>'
+                                        CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>' />
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <p>90% progress towards the goal of 2 months between failures</p>
+                                            <p><span style="font-size: 18px;" class="text-danger"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i></span>Down 5% from last month</p>
+                                            <p>Lowest value: 2 days</p>
+                                            <p>Highest value: 1.6 months</p>
+                                            <p>Current value: 1.0 months</p>
+                                            <p>To date average: 0.7 months</p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="table-responsive" style="max-height: 200px;">
+                                                <app:KpiMeasurements ID="MeasurementsControl" runat="server" KpiId='<%# Eval("KpiId") %>'
+                                                    CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>'  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                <asp:Literal ID="CloseCollapseLiteral" runat="server" Text="</div>"></asp:Literal>
+                            </div>
+                            
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </div>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </asp:Panel>
+                
                 <div class="row">
                     <div class="col-md-5">
                         <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">
-                            <i class="fa fa-plus-square"></i> Add this KPI to a Dashboard
+                            <i class="fa fa-plus-square"></i>Add this KPI to a Dashboard
                         </a>
                         <br />
                         <asp:PlaceHolder ID="HeaderTemplate" runat="server">
@@ -230,7 +120,7 @@
                             DataSourceID="UserDashboardDataSource"
                             OnPreRender="DashboardRepeater_PreRender"
                             OnItemCommand="DashboardRepeater_ItemCommand"
-                            OnItemDataBound="DashboardRepeater_ItemDataBound"> 
+                            OnItemDataBound="DashboardRepeater_ItemDataBound">
                             <ItemTemplate>
                                 <div style="padding-left: 10px;" class="m-t-10 p-l-10">
                                     <asp:LinkButton ID="DeleteButton" runat="server" CommandArgument='<%# Eval("DashboardId") %>'
@@ -247,7 +137,7 @@
                         <asp:PlaceHolder ID="EmptyTemplate" runat="server">
                             <p class="m-t-10">This KPI is not added to any Dashboard</p>
                         </asp:PlaceHolder>
-                        
+
                         <asp:ObjectDataSource ID="UserDashboardDataSource" runat="server"
                             TypeName="Artexacta.App.Dashboard.BLL.UserDashboardBLL"
                             SelectMethod="GetUserDashboardsByKpiId"
@@ -276,7 +166,8 @@
                             DataSourceID="UserDashboardDataSource2"
                             OnDataBound="DashboardsComboBox_DataBound"
                             DataTextField="Name"
-                            DataValueField="DashboardId"></asp:DropDownList>
+                            DataValueField="DashboardId">
+                        </asp:DropDownList>
                     </div>
                     <asp:RequiredFieldValidator runat="server" Display="Dynamic"
                         ErrorMessage="You must select a Dashboard"
@@ -302,6 +193,18 @@
         </div>
     </div>
     <asp:HiddenField ID="IsAddedInMainDashboard" Value="false" runat="server" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-category").click(function () {
+                var id = $(this).data("target");
+                var fn = function () { $(window).resize(); };
+                if ($(id).is(":visible"))
+                    $(id).slideUp(500, fn);
+                else
+                    $(id).slideDown(500, fn);
+            });
+        });
+    </script>
     <%--<script type="text/javascript">
         $(function () {
             $('.gauger').attr("data-value", $("#" + '<%= Progress.ClientID %>').val())
