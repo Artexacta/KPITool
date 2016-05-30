@@ -53,7 +53,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="120px">
                                     <ItemTemplate>
-                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" OwnerType="ACTIVITY" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

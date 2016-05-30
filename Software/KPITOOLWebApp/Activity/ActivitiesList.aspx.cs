@@ -130,7 +130,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
             Kpi firstKpi = item.Kpis.Values.ToList()[0];
             if (firstKpi.KpiValues.Count > 0)
             {
-                imageOfKpi.KpiId = firstKpi.ObjectId;
+                imageOfKpi.OwnerId = item.ObjectId;
                 imageOfKpi.Visible = true;
             }
         }

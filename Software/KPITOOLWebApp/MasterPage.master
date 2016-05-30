@@ -10,14 +10,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <asp:Literal ID="JqueryAndMainMenuScript" runat="server"></asp:Literal>
     <%--<link href="App_Themes/Default/CommonStyle.css" rel="stylesheet" type="text/css" />--%>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" autocomplete="off">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- MASKS AND GENERAL CHECKS ----------------------------------------------------------------->
         <div id="TOP"></div>

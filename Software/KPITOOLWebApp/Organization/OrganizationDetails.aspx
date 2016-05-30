@@ -51,7 +51,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="AREA" OwnerId='<%# Eval("AreaID") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -102,7 +102,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -153,7 +153,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
                                         <ItemTemplate>
-                                            <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                            <app:KpiImage ID="ImageOfKpi" runat="server"  OwnerType="ACTIVITY" OwnerId='<%# Eval("ActivityId") %>'  />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -190,7 +190,8 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="View" ItemStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData">
+                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData"
+                                                CommandArgument='<%# Eval("KpiID") %>'>
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -210,7 +211,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="KPI Progress" ItemStyle-Width="100px">
                                         <ItemTemplate>
-                                            <%--<app:KpiImage ID="ImageOfKpi" runat="server" KpiId='<%# Eval("KpiID") %>' />--%>
+                                            <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="KPI" OwnerId='<%# Eval("KpiID") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

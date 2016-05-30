@@ -120,6 +120,10 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
     {
         if (!IsPostBack)
         {
+            OrganizationTextBox.Attributes.Add("onchange", "OrganizationTextBox_OnChange()");
+            AreaTextBox.Attributes.Add("onchange", "AreaTextBox_OnChange()");
+            ProjectTextBox.Attributes.Add("onchange", "ProjectTextBox_OnChange()");
+
             LoadKPI();
             LoadPerson();
             LoadActivity();
@@ -139,6 +143,7 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 pnlProject.Visible = false;
                 pnlActivity.Visible = false;
                 pnlPeople.Visible = false;
+                pnlKPI.Visible = false;
                 break;
 
             case "ACT":
@@ -147,6 +152,7 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 pnlProject.Visible = true;
                 pnlActivity.Visible = false;
                 pnlPeople.Visible = false;
+                pnlKPI.Visible = false;
                 break;
 
             case "PPL":
@@ -155,11 +161,15 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 pnlProject.Visible = false;
                 pnlActivity.Visible = false;
                 pnlPeople.Visible = false;
+                pnlKPI.Visible = false;
                 break;
 
             case "KPI":
                 OrganizationRequired.Visible = true;
                 pnlArea.Style["display"] = "none";
+                pnlProject.Visible = false;
+                pnlActivity.Visible = false;
+                pnlPeople.Visible = false;
                 pnlKPI.Visible = true;
                 break;
         }

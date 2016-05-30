@@ -13,27 +13,67 @@ public partial class UserControls_FRTWB_KpiImage : System.Web.UI.UserControl
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
-    public int KpiId
+    public enum OwnerTypeValue
     {
-        set { KpiIdHiddenField.Value = value.ToString(); }
+        KPI,
+        ACTIVITY,
+        ORGANIZATION,
+        AREA,
+        PROJECT,
+        PERSON
+    }
+
+    public OwnerTypeValue OwnerType
+    {
+        set { OwnerTypeHiddenField.Value = value.ToString(); }
         get
         {
-            int KpiId = 0;
+            OwnerTypeValue owner = OwnerTypeValue.KPI;
             try
             {
-                KpiId = Convert.ToInt32(KpiIdHiddenField.Value);
+                owner = (OwnerTypeValue)Enum.Parse(typeof(OwnerTypeValue), OwnerTypeHiddenField.Value);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error trying to convert OwnerTypeHiddenField.Value to OwnerTypeValue value", ex);
+            }
+            return owner;
+        }
+    }
+
+    public int OwnerId
+    {
+        set { OwnerIdHiddenField.Value = value.ToString(); }
+        get
+        {
+            int ownerId = 0;
+            try
+            {
+                ownerId = Convert.ToInt32(OwnerIdHiddenField.Value);
             }
             catch (Exception ex)
             {
                 log.Error("Error trying to convert KpiIdHiddenField.Value to integer value", ex);
             }
-            return KpiId;
+            return ownerId;
         }
     }
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        MyImage.ImageUrl = "~/UserControls/FRTWB/KpiImageHandler.ashx?kpiId=" + KpiId;
+        
+    }
+    // Override the OnPreRender method to set _message to
+    // a default value if it is null.
+    protected override void OnPreRender(EventArgs e)
+    {
+        base.OnPreRender(e);
+        string userName = "";
+        if (HttpContext.Current.User.Identity.IsAuthenticated)
+            userName = HttpContext.Current.User.Identity.Name;
+        MyImage.ImageUrl = "~/UserControls/FRTWB/KpiImageHandler.ashx?ownerId=" + OwnerIdHiddenField.Value + 
+            "&ownerType=" + OwnerTypeHiddenField.Value + 
+            "&userName=" + userName;
     }
 
     
