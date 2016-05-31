@@ -84,6 +84,37 @@ namespace Artexacta.App.KPI.BLL
             return theData;
         }
 
+        public List<KPI> GetKPIsBySearch(string whereClause)
+        {
+            if (string.IsNullOrEmpty(whereClause))
+                whereClause = "1=1";
+
+            List<KPI> theList = new List<KPI>();
+            KPI theData = null;
+            string username = HttpContext.Current.User.Identity.Name.ToString();
+
+            try
+            {
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIBySearch(username, whereClause);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPIDS.KPIRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía los KPIs.", exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
         public List<KPI> GetKPIsByOrganization(int organizationId)
         {
             if (organizationId <= 0)
