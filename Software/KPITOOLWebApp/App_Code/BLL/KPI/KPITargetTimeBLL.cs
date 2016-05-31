@@ -74,6 +74,31 @@ namespace Artexacta.App.KPI.BLL
             return theData;
         }
 
+        public static KPITargetTime GetKPITargetTimeByTargetId(int TargetId)
+        {
+            if (TargetId <= 0)
+                throw new ArgumentException("El ID del Target no puede ser cero.");
+
+            KPITargetTime theData = null;
+            try
+            {
+                KPITargetTimeTableAdapter localAdapter = new KPITargetTimeTableAdapter();
+                KPITargetDS.KPITargetTimeDataTable theTable = localAdapter.GetKPITargetTimeByTargetId(TargetId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    KPITargetDS.KPITargetTimeRow theRow = theTable[0];
+                    theData = FillRecord(theRow);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía el KPI Target Time de targetid: " + TargetId, exc);
+                throw exc;
+            }
+
+            return theData;
+        }
+
         public static decimal GetNumberFromTime(int year, int month, int day, int hour, int minute)
         {
             double? valor = 0;

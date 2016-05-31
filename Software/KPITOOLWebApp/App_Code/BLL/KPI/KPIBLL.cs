@@ -330,6 +330,323 @@ namespace Artexacta.App.KPI.BLL
             return kpiID;
         }
 
+
+        public static int CreateKPI(KPI theKpi, KPITarget theTarget, string currentUser)
+        {
+            int kpiID = 0;
+
+            try
+            {
+                // Create the TransactionScope to execute the commands, guaranteeing
+                // that both commands can commit or roll back as a single unit of work.
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (SqlConnection connection =
+                        new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString))
+                    {
+                        // Opening the connection automatically enlists it in the 
+                        // TransactionScope as a lightweight transaction.
+                        connection.Open();
+
+                        // Create the SqlCommand object and execute the first command.
+                        SqlCommand command1 = new SqlCommand("usp_KPI_InsertKPI", connection);
+                        command1.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        // NOTE that we pass zeros to areaID, projectID, activityID, etc., sicne the stored procedure will convert 
+                        // these to nulls!
+
+                        command1.Parameters.Add("@userName", System.Data.SqlDbType.VarChar, 50).Value = currentUser;
+                        command1.Parameters.Add("@organizationID", System.Data.SqlDbType.Int).Value = theKpi.OrganizationID;
+                        command1.Parameters.Add("@areaID", System.Data.SqlDbType.Int).Value = theKpi.AreaID;
+                        command1.Parameters.Add("@projectID", System.Data.SqlDbType.Int).Value = theKpi.ProjectID;
+                        command1.Parameters.Add("@activityID", System.Data.SqlDbType.Int).Value = theKpi.ActivityID;
+                        command1.Parameters.Add("@personID", System.Data.SqlDbType.Int).Value = theKpi.PersonID;
+                        command1.Parameters.Add("@kpiName", System.Data.SqlDbType.NVarChar, 250).Value = theKpi.Name;
+                        command1.Parameters.Add("@unit", System.Data.SqlDbType.VarChar, 10).Value = theKpi.UnitID;
+                        command1.Parameters.Add("@direction", System.Data.SqlDbType.Char, 3).Value = theKpi.DirectionID;
+                        command1.Parameters.Add("@strategy", System.Data.SqlDbType.Char, 3).Value = theKpi.StrategyID;
+
+
+                        SqlParameter dateParam = new SqlParameter("@startDate", System.Data.SqlDbType.Date);
+                        if (theKpi.StartDate == DateTime.MinValue)
+                            dateParam.Value = DBNull.Value;
+                        else
+                            dateParam.Value = theKpi.StartDate;
+                        command1.Parameters.Add(dateParam);
+
+                        command1.Parameters.Add("@reportingUnit", System.Data.SqlDbType.Char, 15).Value = theKpi.ReportingUnitID;
+
+                        SqlParameter targetPeriodParam = new SqlParameter("@targetPeriod", System.Data.SqlDbType.Int);
+                        if (theKpi.TargetPeriod == 0)
+                            targetPeriodParam.Value = DBNull.Value;
+                        else
+                            targetPeriodParam.Value = theKpi.TargetPeriod;
+                        command1.Parameters.Add(targetPeriodParam);
+
+                        // If we have categories, then set the flag.
+                        command1.Parameters.Add("@allowsCategories", System.Data.SqlDbType.Bit).Value = theKpi.AllowCategories;
+
+                        SqlParameter currencyParam = new SqlParameter("@currency", System.Data.SqlDbType.Char, 3);
+                        if (String.IsNullOrWhiteSpace(theKpi.Currency))
+                            currencyParam.Value = DBNull.Value;
+                        else
+                            currencyParam.Value = theKpi.Currency;
+                        command1.Parameters.Add(currencyParam);
+
+                        SqlParameter currencyUnitParam = new SqlParameter("@currencyUnit", System.Data.SqlDbType.Char, 3);
+                        if (String.IsNullOrWhiteSpace(theKpi.CurrencyUnitID))
+                            currencyUnitParam.Value = DBNull.Value;
+                        else
+                            currencyUnitParam.Value = theKpi.CurrencyUnitID;
+                        command1.Parameters.Add(currencyUnitParam);
+
+                        command1.Parameters.Add("@kpiTypeID", System.Data.SqlDbType.VarChar, 10).Value = theKpi.KpiTypeID;
+
+                        SqlParameter kpiIDParam = new SqlParameter("@kpiID", System.Data.SqlDbType.Int);
+                        kpiIDParam.Direction = System.Data.ParameterDirection.Output;
+                        command1.Parameters.Add(kpiIDParam);
+
+                        command1.ExecuteNonQuery();
+
+                        // The ID of the KPI just created
+                        kpiID = (int)kpiIDParam.Value;
+
+                        if (!theKpi.AllowCategories && theTarget != null && theTarget.Target > 0)
+                        {
+                            // Create the SqlCommand object and execute the first command.
+                            SqlCommand command2 = new SqlCommand("usp_KPI_UpdateKPITargetNoCategories", connection);
+                            command2.CommandType = System.Data.CommandType.StoredProcedure;
+
+                            command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                            command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theTarget.Target;
+                            command2.ExecuteNonQuery();
+                        }
+
+                        // If the KPI has categories, create them
+                        //if (categories != null && categories.Length > 0)
+                        //{
+                        //    foreach (Category cat in categories)
+                        //    {
+                        //        SqlCommand command2 = new SqlCommand("usp_KPI_AddKPICategory", connection);
+                        //        command2.CommandType = System.Data.CommandType.StoredProcedure;
+                        //        command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                        //        command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
+                        //        command2.ExecuteNonQuery();
+                        //    }
+                        //}
+
+                        // If the KPI has  and targets, create them
+                        //if (categories != null && categories.Length > 0)
+                        //{
+                        //    foreach (Category cat in categories)
+                        //    {
+                        //        foreach (CategoryItem item in cat.Items)
+                        //        {
+                        //            if (item.Target == null)
+                        //                continue;
+
+                        //            SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetInCategoryItem", connection);
+                        //            command2.CommandType = System.Data.CommandType.StoredProcedure;
+                        //            command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                        //            command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = item.Target.Value;
+                        //            command2.Parameters.Add("@categoryItemID", System.Data.SqlDbType.VarChar, 20).Value = item.ItemID;
+                        //            command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
+                        //            SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
+                        //            targetIDParam.Direction = System.Data.ParameterDirection.Output;
+                        //            command2.Parameters.Add(targetIDParam);
+                        //            command2.ExecuteNonQuery();
+                        //        }
+                        //    }
+                        //}
+                        //else if (target != null)
+                        //{
+                        //    // Single target without categories
+
+                        //    SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetNoCategories", connection);
+                        //    command2.CommandType = System.Data.CommandType.StoredProcedure;
+                        //    command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                        //    command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = target.Value;
+                        //    SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
+                        //    targetIDParam.Direction = System.Data.ParameterDirection.Output;
+                        //    command2.Parameters.Add(targetIDParam);
+                        //    command2.ExecuteNonQuery();
+                        //}
+                    }
+
+                    // The Complete method commits the transaction. If an exception has been thrown,
+                    // Complete is not  called and the transaction is rolled back.
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Failed to create a KPI", ex);
+                throw ex;
+            }
+
+            return kpiID;
+        }
+
+        public static void UpdateKPI(KPI theKpi, KPITarget theTarget)
+        {
+            try
+            {
+                // Create the TransactionScope to execute the commands, guaranteeing
+                // that both commands can commit or roll back as a single unit of work.
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    using (SqlConnection connection =
+                        new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString))
+                    {
+                        // Opening the connection automatically enlists it in the 
+                        // TransactionScope as a lightweight transaction.
+                        connection.Open();
+
+                        // Create the SqlCommand object and execute the first command.
+                        SqlCommand command1 = new SqlCommand("usp_KPI_UpdateKPI", connection);
+                        command1.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        // NOTE that we pass zeros to areaID, projectID, activityID, etc., sicne the stored procedure will convert 
+                        // these to nulls!
+
+                        command1.Parameters.Add("@kpiId", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                        command1.Parameters.Add("@organizationID", System.Data.SqlDbType.Int).Value = theKpi.OrganizationID;
+                        command1.Parameters.Add("@areaID", System.Data.SqlDbType.Int).Value = theKpi.AreaID;
+                        command1.Parameters.Add("@projectID", System.Data.SqlDbType.Int).Value = theKpi.ProjectID;
+                        command1.Parameters.Add("@activityID", System.Data.SqlDbType.Int).Value = theKpi.ActivityID;
+                        command1.Parameters.Add("@personID", System.Data.SqlDbType.Int).Value = theKpi.PersonID;
+                        command1.Parameters.Add("@kpiName", System.Data.SqlDbType.NVarChar, 250).Value = theKpi.Name;
+                        command1.Parameters.Add("@unit", System.Data.SqlDbType.VarChar, 10).Value = theKpi.UnitID;
+                        command1.Parameters.Add("@direction", System.Data.SqlDbType.Char, 3).Value = theKpi.DirectionID;
+                        command1.Parameters.Add("@strategy", System.Data.SqlDbType.Char, 3).Value = theKpi.StrategyID;
+
+                        SqlParameter dateParam = new SqlParameter("@startDate", System.Data.SqlDbType.Date);
+                        if (theKpi.StartDate == DateTime.MinValue)
+                            dateParam.Value = DBNull.Value;
+                        else
+                            dateParam.Value = theKpi.StartDate;
+                        command1.Parameters.Add(dateParam);
+
+                        command1.Parameters.Add("@reportingUnit", System.Data.SqlDbType.Char, 15).Value = theKpi.ReportingUnitID;
+
+                        SqlParameter targetPeriodParam = new SqlParameter("@targetPeriod", System.Data.SqlDbType.Int);
+                        if (theKpi.TargetPeriod == 0)
+                            targetPeriodParam.Value = DBNull.Value;
+                        else
+                            targetPeriodParam.Value = theKpi.TargetPeriod;
+                        command1.Parameters.Add(targetPeriodParam);
+
+                        // If we have categories, then set the flag.
+                        command1.Parameters.Add("@allowsCategories", System.Data.SqlDbType.Bit).Value = theKpi.AllowCategories;
+
+                        SqlParameter currencyParam = new SqlParameter("@currency", System.Data.SqlDbType.Char, 3);
+                        if (String.IsNullOrWhiteSpace(theKpi.Currency))
+                            currencyParam.Value = DBNull.Value;
+                        else
+                            currencyParam.Value = theKpi.Currency;
+                        command1.Parameters.Add(currencyParam);
+
+                        SqlParameter currencyUnitParam = new SqlParameter("@currencyUnit", System.Data.SqlDbType.Char, 3);
+                        if (String.IsNullOrWhiteSpace(theKpi.CurrencyUnitID))
+                            currencyUnitParam.Value = DBNull.Value;
+                        else
+                            currencyUnitParam.Value = theKpi.CurrencyUnitID;
+                        command1.Parameters.Add(currencyUnitParam);
+
+                        command1.Parameters.Add("@kpiTypeID", System.Data.SqlDbType.VarChar, 10).Value = theKpi.KpiTypeID;
+
+                        SqlParameter kpiIDParam = new SqlParameter("@kpiID", System.Data.SqlDbType.Int);
+                        kpiIDParam.Direction = System.Data.ParameterDirection.Output;
+                        command1.Parameters.Add(kpiIDParam);
+
+                        command1.ExecuteNonQuery();
+
+                        if (!theKpi.AllowCategories)
+                        {
+                            if (theTarget != null && theTarget.Target > 0)
+                            {
+                                //Insert or update the single target
+                                SqlCommand command2 = new SqlCommand("usp_KPI_UpdateKPITargetNoCategories", connection);
+                                command2.CommandType = System.Data.CommandType.StoredProcedure;
+
+                                command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                                command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theTarget.Target;
+                                command2.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                //Delete de target
+                                SqlCommand command3 = new SqlCommand("usp_KPI_DeleteAllKPITarget", connection);
+                                command3.CommandType = System.Data.CommandType.StoredProcedure;
+
+                                command3.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                                command3.ExecuteNonQuery();
+                            }
+                        }
+
+                        // If the KPI has categories, create them
+                        //if (categories != null && categories.Length > 0)
+                        //{
+                        //    foreach (Category cat in categories)
+                        //    {
+                        //        SqlCommand command2 = new SqlCommand("usp_KPI_AddKPICategory", connection);
+                        //        command2.CommandType = System.Data.CommandType.StoredProcedure;
+                        //        command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                        //        command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
+                        //        command2.ExecuteNonQuery();
+                        //    }
+                        //}
+
+                        // If the KPI has  and targets, create them
+                        //if (categories != null && categories.Length > 0)
+                        //{
+                        //    foreach (Category cat in categories)
+                        //    {
+                        //        foreach (CategoryItem item in cat.Items)
+                        //        {
+                        //            if (item.Target == null)
+                        //                continue;
+
+                        //            SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetInCategoryItem", connection);
+                        //            command2.CommandType = System.Data.CommandType.StoredProcedure;
+                        //            command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                        //            command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = item.Target.Value;
+                        //            command2.Parameters.Add("@categoryItemID", System.Data.SqlDbType.VarChar, 20).Value = item.ItemID;
+                        //            command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
+                        //            SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
+                        //            targetIDParam.Direction = System.Data.ParameterDirection.Output;
+                        //            command2.Parameters.Add(targetIDParam);
+                        //            command2.ExecuteNonQuery();
+                        //        }
+                        //    }
+                        //}
+                        //else if (target != null)
+                        //{
+                        //    // Single target without categories
+
+                        //    SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetNoCategories", connection);
+                        //    command2.CommandType = System.Data.CommandType.StoredProcedure;
+                        //    command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
+                        //    command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = target.Value;
+                        //    SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
+                        //    targetIDParam.Direction = System.Data.ParameterDirection.Output;
+                        //    command2.Parameters.Add(targetIDParam);
+                        //    command2.ExecuteNonQuery();
+                        //}
+                    }
+
+                    // The Complete method commits the transaction. If an exception has been thrown,
+                    // Complete is not  called and the transaction is rolled back.
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Failed to create a KPI", ex);
+                throw ex;
+            }
+        }
+
         public static void InsertKPIMeasurements(List<KPIMeasurement> measurements)
         {
             try

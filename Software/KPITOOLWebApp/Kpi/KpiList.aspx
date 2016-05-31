@@ -75,37 +75,36 @@
                         <div class="th-title">KPIs</div>
                     </div>
                     <div class="t-body tb-padding">
-                        <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIListObjectDataSource"
-                            OnItemCommand="KpisRepeater_ItemCommand">
+                        <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIListObjectDataSource" OnItemCommand="KpisRepeater_ItemCommand" >
                             <ItemTemplate>
                                 <div class="row m-b-10">
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="ViewKpi" data-id='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
-                                            OnClick="ViewKpi_Click">
+                                        <asp:LinkButton ID="ViewKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="ViewKpi" >
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="EditKpi" data-id='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
-                                            OnClick="EditKpi_Click" CommandName="EditKpi">
+                                        <asp:LinkButton ID="EditKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="EditKpi">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 disabled">
-                                        <asp:LinkButton ID="ShareKpi" data-id='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
-                                            OnClick="ShareKpi_Click">
+                                        <asp:LinkButton ID="ShareKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="ShareKpi" >
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="DeleteKpi" data-id='<%# Eval("KpiID") %>' CommandArgument='<%# Eval("KpiID") %>'
-                                            CommandName="DeleteKpi" runat="server" CssClass="viewBtn"
-                                            OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
+                                        <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server" 
+                                            CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="ListValuesKpi" data-id='<%# Eval("KpiID") %>' CssClass="viewBtn" CommandArgument='<%# Eval("KpiID") %>' OnClick="ListValuesKpi_Click" CommandName="ListValuesKpi" runat="server"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="ListValuesKpi"  CssClass="viewBtn" CommandArgument='<%# Eval("KpiID") %>' CommandName="ListValuesKpi"
+                                             runat="server"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></asp:LinkButton>
                                     </div>
                                     <div class="col-md-7">
                                         <p style="font-size: 14px; padding-top: 2px;">

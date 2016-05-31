@@ -66,6 +66,35 @@ namespace Artexacta.App.Categories.BLL
             return theList;
         }
 
+        public List<Category> GetCategoriesByKpi(int kpiId)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("The KPI ID cannot be zero.");
+
+            List<Category> theList = new List<Category>();
+            Category theData = null;
+            try
+            {
+                CategoryDS.CategoriesDataTable theTable = theAdapter.GetCategoriesByKPI(kpiId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (CategoryDS.CategoriesRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía el listado de categorías by KPI.", exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
         public static Category GetCategoryById(string categoryId)
         {
             if (string.IsNullOrEmpty(categoryId))
