@@ -41,6 +41,22 @@ public partial class UserControls_FRTWB_AddButton : System.Web.UI.UserControl
         if (!Page.IsValid)
             return;
 
+        //Verify if exists with the same name
+        OrganizationBLL theBLL = new OrganizationBLL();
+        Organization theOrg = null;
+
+        try
+        {
+            theOrg = theBLL.GetOrganizationByName(OrganizationName.Text);
+        }
+        catch {}
+
+        if (theOrg != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNameExists);
+            return;
+        }
+
         //Create the organizacion in the database
         int organizationId = 0;
 
@@ -67,24 +83,24 @@ public partial class UserControls_FRTWB_AddButton : System.Web.UI.UserControl
 
     protected void ActivityButton_Click(object sender, EventArgs e)
     {
-       
+
         string currentPage = Page.Request.AppRelativeCurrentExecutionFilePath;
         Session["ParentPage"] = currentPage;
         Response.Redirect("~/Activity/AddActivity.aspx");
     }
-    
+
     protected void ExistsOrganizationCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
     {
         args.IsValid = false;
 
         OrganizationBLL theBLL = new OrganizationBLL();
         Organization organization = null;
-        
+
         try
         {
             organization = theBLL.GetOrganizationByName(OrganizationName.Text);
         }
-        catch 
+        catch
         {
             return;
         }

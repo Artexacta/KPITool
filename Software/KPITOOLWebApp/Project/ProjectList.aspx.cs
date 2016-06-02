@@ -1,5 +1,4 @@
-﻿using Artexacta.App.FRTWB;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using Artexacta.App.Project.BLL;
+using Artexacta.App.Project;
 
 public partial class Project_ProjectList : System.Web.UI.Page
 {
@@ -24,9 +24,17 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        ProjectSearchControl.Config = new ProjectSearch();
+        ProjectSearchControl.OnSearch += ProjectSearchControl_OnSearch;
+
         if (!IsPostBack)
         {
         }
+    }
+
+    void ProjectSearchControl_OnSearch()
+    {
+        
     }
 
     protected void ViewProject_Click(object sender, EventArgs e)
@@ -51,7 +59,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
     {
 
     }
-   
+
     protected void ProjectsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         //if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
@@ -120,7 +128,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
             return;
         }
 
-        if(e.CommandName == "EditProject")
+        if (e.CommandName == "EditProject")
         {
             Session["ProjectId"] = projectId;
             Session["ParentPage"] = "~/Project/ProjectList.aspx";
@@ -128,7 +136,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
             return;
         }
 
-        if(e.CommandName == "ViewProject")
+        if (e.CommandName == "ViewProject")
         {
             Session["ProjectId"] = projectId;
             Response.Redirect("~/Project/ProjectDetails.aspx");
@@ -137,24 +145,24 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         if (e.CommandName == "ViewOwner")
         {
-            Project objProject = FrtwbSystem.Instance.Projects[projectId];
-            if (objProject == null)
-                return;
-            FrtwbObject ownerObject = objProject.Owner;
-            if (ownerObject == null)
-                return;
+            //Project objProject = FrtwbSystem.Instance.Projects[projectId];
+            //if (objProject == null)
+            //    return;
+            //FrtwbObject ownerObject = objProject.Owner;
+            //if (ownerObject == null)
+            //    return;
 
-            if (ownerObject is Organization)
-            {
-                Session["OrganizationId"] = ownerObject.ObjectId;
-                Response.Redirect("~/Organization/OrganizationDetails.aspx");
-            }
-            else if (ownerObject is Area)
-            {
-                Area area = (Area)ownerObject;
-                Session["OrganizationId"] = area.Owner.ObjectId;
-                Response.Redirect("~/Organization/OrganizationDetails.aspx#Area");
-            }
+            //if (ownerObject is Organization)
+            //{
+            //    Session["OrganizationId"] = ownerObject.ObjectId;
+            //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
+            //}
+            //else if (ownerObject is Area)
+            //{
+            //    Area area = (Area)ownerObject;
+            //    Session["OrganizationId"] = area.Owner.ObjectId;
+            //    Response.Redirect("~/Organization/OrganizationDetails.aspx#Area");
+            //}
             return;
         }
 
@@ -190,16 +198,16 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
     private void RemoveProjectFromOldOwner(Project objProject)
     {
-        if (objProject.Owner is Area)
-        {
-            Area oldArea = (Area)objProject.Owner;
-            oldArea.Projects.Remove(objProject.ObjectId);
-        }
-        else if (objProject.Owner is Organization)
-        {
-            Organization oldOrganization = (Organization)objProject.Owner;
-            oldOrganization.Projects.Remove(objProject.ObjectId);
-        }
+        //if (objProject.Owner is Area)
+        //{
+        //    Area oldArea = (Area)objProject.Owner;
+        //    oldArea.Projects.Remove(objProject.ObjectId);
+        //}
+        //else if (objProject.Owner is Organization)
+        //{
+        //    Organization oldOrganization = (Organization)objProject.Owner;
+        //    oldOrganization.Projects.Remove(objProject.ObjectId);
+        //}
     }
     protected void SearchButton_Click(object sender, EventArgs e)
     {
@@ -267,7 +275,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
     protected void ObjectsComboBox_DataBound(object sender, EventArgs e)
     {
-        
+
     }
     protected void ProjectsObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {

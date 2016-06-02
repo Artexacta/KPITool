@@ -1,5 +1,4 @@
-﻿using Artexacta.App.FRTWB;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using Artexacta.App.KPI;
 
 public partial class Kpi_KpiList : System.Web.UI.Page
 {
@@ -23,10 +23,18 @@ public partial class Kpi_KpiList : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        KPISearchControl.Config = new KPISearch();
+        KPISearchControl.OnSearch += KPISearchControl_OnSearch;
+
         if (!IsPostBack)
         {
             ProcessSessionParameters();
         }
+    }
+
+    void KPISearchControl_OnSearch()
+    {
+        
     }
 
     private void ProcessSessionParameters()
@@ -170,44 +178,44 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         switch (e.CommandName)
         {
             case "ViewOwner":
-                Kpi objKpi = FrtwbSystem.Instance.Kpis[KpiId];
-                FrtwbObject ownerObject = objKpi.Owner;
-                if (ownerObject == null)
-                    return;
+                //Kpi objKpi = FrtwbSystem.Instance.Kpis[KpiId];
+                //FrtwbObject ownerObject = objKpi.Owner;
+                //if (ownerObject == null)
+                //    return;
 
 
-                if (ownerObject is Organization)
-                {
-                    Session["OrganizationId"] = ownerObject.ObjectId;
-                    Response.Redirect("~/Organization/OrganizationDetails.aspx");
-                }
-                else if (ownerObject is Area)
-                {
-                    Area area = (Area)ownerObject;
-                    Session["OrganizationId"] = area.Owner.ObjectId;
-                    Response.Redirect("~/Organization/OrganizationDetails.aspx");
-                }
-                else if (ownerObject is Activity)
-                {
-                    Session["ActivityId"] = ownerObject.ObjectId;
-                    Response.Redirect("~/Activity/ActivityDetails.aspx");
-                }
-                else if (ownerObject is Project)
-                {
-                    Session["ProjectId"] = ownerObject.ObjectId;
-                    Response.Redirect("~/Project/ProjectDetails.aspx");
-                }
+                //if (ownerObject is Organization)
+                //{
+                //    Session["OrganizationId"] = ownerObject.ObjectId;
+                //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
+                //}
+                //else if (ownerObject is Area)
+                //{
+                //    Area area = (Area)ownerObject;
+                //    Session["OrganizationId"] = area.Owner.ObjectId;
+                //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
+                //}
+                //else if (ownerObject is Activity)
+                //{
+                //    Session["ActivityId"] = ownerObject.ObjectId;
+                //    Response.Redirect("~/Activity/ActivityDetails.aspx");
+                //}
+                //else if (ownerObject is Project)
+                //{
+                //    Session["ProjectId"] = ownerObject.ObjectId;
+                //    Response.Redirect("~/Project/ProjectDetails.aspx");
+                //}
                 return;
             case "DeleteKpi":
                 
-                objKpi = FrtwbSystem.Instance.Kpis[KpiId];
+                //objKpi = FrtwbSystem.Instance.Kpis[KpiId];
                 
 
-                RemoveKpiFromOldOwner(objKpi);
-                objKpi.Owner = null;
-                FrtwbSystem.Instance.Kpis.Remove(objKpi.ObjectId);
-                SystemMessages.DisplaySystemMessage("The Kpi was deleted");
-                SearchKpis();
+                //RemoveKpiFromOldOwner(objKpi);
+                //objKpi.Owner = null;
+                //FrtwbSystem.Instance.Kpis.Remove(objKpi.ObjectId);
+                //SystemMessages.DisplaySystemMessage("The Kpi was deleted");
+                //SearchKpis();
                 break;
             case "ViewActivities":
 
@@ -221,92 +229,20 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         }
     }
 
-    private void RemoveKpiFromOldOwner(Kpi objKpi)
+    private void RemoveKpiFromOldOwner(KPI objKpi)
     {
-        if (objKpi.Owner is Area)
-        {
-            Area oldArea = (Area)objKpi.Owner;
-            oldArea.Kpis.Remove(objKpi.ObjectId);
-        }
-        else if (objKpi.Owner is Organization)
-        {
-            Organization oldOrganization = (Organization)objKpi.Owner;
-            oldOrganization.Kpis.Remove(objKpi.ObjectId);
-        }
-    }
-    protected void SearchButton_Click(object sender, EventArgs e)
-    {
-        SearchKpis();
+        //if (objKpi.Owner is Area)
+        //{
+        //    Area oldArea = (Area)objKpi.Owner;
+        //    oldArea.Kpis.Remove(objKpi.ObjectId);
+        //}
+        //else if (objKpi.Owner is Organization)
+        //{
+        //    Organization oldOrganization = (Organization)objKpi.Owner;
+        //    oldOrganization.Kpis.Remove(objKpi.ObjectId);
+        //}
     }
 
-    private void SearchKpis()
-    {
-        string searchTerm = SearchTextBox.Text.Trim().ToLower();
-
-        Dictionary<int, Kpi> source = null;
-        if (!string.IsNullOrEmpty(ObjectsComboBox.SelectedValue))
-        {
-            string[] values = ObjectsComboBox.SelectedValue.Split(new char[] { '-' });
-            int id = Convert.ToInt32(values[0]);
-            string ownerObjectType = values[1];
-            FrtwbObject owner = null;
-            if (ownerObjectType == "Organization")
-            {
-
-                source = FrtwbSystem.Instance.Organizations[id].Kpis;
-                owner = FrtwbSystem.Instance.Organizations[id];
-            }
-            else if (ownerObjectType == "Area")
-            {
-                source = FrtwbSystem.Instance.Areas[id].Kpis;
-                owner = FrtwbSystem.Instance.Areas[id];
-            }
-            else if (ownerObjectType == "Project")
-            {
-                source = FrtwbSystem.Instance.Projects[id].Kpis;
-                owner = FrtwbSystem.Instance.Projects[id];
-            }
-            else if (ownerObjectType == "Activity")
-            {
-                source = FrtwbSystem.Instance.Activities[id].Kpis;
-                owner = FrtwbSystem.Instance.Activities[id];
-            }
-            else
-                source = new Dictionary<int, Kpi>();
-
-            OwnerObjectLabel.Text = "";
-            bool first = true;
-            while (owner != null)
-            {
-                if (first)
-                {
-                    OwnerObjectLabel.Text = owner.Type + ": " + owner.Name;
-                    first = false;
-                }
-                else
-                    OwnerObjectLabel.Text = owner.Type + ": " + owner.Name + " / " + OwnerObjectLabel.Text;
-
-                owner = owner.Owner;
-            }
-            OwnerObjectLabel.Text = "Searching activities from : " + OwnerObjectLabel.Text;
-        }
-        else
-        {
-            source = FrtwbSystem.Instance.Kpis;
-            OwnerObjectLabel.Text = "";
-        }
-
-
-        List<Kpi> results = new List<Kpi>();
-        foreach (var item in source.Values)
-        {
-            if (item.Name.ToLower().Contains(searchTerm))
-                results.Add(item);
-        }
-
-        KpisRepeater.DataSource = results;
-        KpisRepeater.DataBind();
-    }
 
     protected void ListValuesKpi_Click(object sender, EventArgs e)
     {

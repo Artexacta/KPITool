@@ -237,4 +237,7 @@
   <data name="CategoryMenu" xml:space="preserve">
     <value>Administrar Categorías</value>
   </data>
+  <data name="PersonMenu" xml:space="preserve">
+    <value>Personas</value>
+  </data>
 </root>

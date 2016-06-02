@@ -99,6 +99,38 @@ namespace Artexacta.App.Activities.BLL
             return theList;
         }
 
+        public List<Activity> GetActivitiesBySearch(string whereClause)
+        {
+            if (string.IsNullOrEmpty(whereClause))
+                whereClause = "1=1";
+
+            string username = HttpContext.Current.User.Identity.Name;
+
+            List<Activity> theList = new List<Activity>();
+            Activity theData = null;
+
+            try
+            {
+                ActivityDS.ActivitiesDataTable theTable = theAdapter.GetActivityBySearch(username, whereClause);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (ActivityDS.ActivitiesRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía las actividades de la organización.", exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
         public static List<Activity> GetActivitiesForAutocomplete(int organizationId, int areaId, int projectId, string filter)
         {
             string userName = HttpContext.Current.User.Identity.Name;

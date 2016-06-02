@@ -12,19 +12,8 @@
                         <app:AddButton ID="TheAddButton" runat="server" ClientIDMode="Static" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
-                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group" >
-                            <%--<asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>                            
-                            <span class="input-group-addon last">
-                                <asp:LinkButton ID="SearchButton" runat="server" Style="color: #000" OnClick="SearchButton_Click">
-                                    <i class="zmdi zmdi-search"></i>
-                                </asp:LinkButton>
-                                <asp:ImageButton ID="SearchImageButton" runat="server" OnClick="SearchButton_Click"
-                                    ImageUrl="~/Images/Neutral/pixel.gif" Style="display: none" /></span>--%>
-                             <%--<app:SearchControl ID="OrganizationSearchControl" runat="server" />--%>
-                        </asp:Panel>
                     </div>
                 </div>
-
                 <%--<div class="dropdown">
                     <a id="btn-behavior" href="javascript:openModal();" style="font-size: 45px; text-decoration: none; color: #000000"><i id="addIcon" runat="server" class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></a>
                     <ul class="dropdown-menu pull-left">
@@ -42,8 +31,7 @@
                 </div>--%>
             </div>
         </div>
-        <div class="col-md-6">
-        </div>
+
     </div>
     <asp:Panel ID="OrganizationsPanel" runat="server" CssClass="container">
         <div class="row">
@@ -52,31 +40,54 @@
                     <div class="t-header">
                         <div class="th-title">Organizations</div>
                     </div>
+                    <div class="t-body tb-padding">
+                        <div class="col-sm-6">
+                            <div class="m-b-10">
+                                <label class="checkbox checkbox-inline cr-alt">
+                                    <asp:CheckBox runat="server" ID="ShowPeopleCheckbox" AutoPostBack="true" OnCheckedChanged="ShowPeopleCheckbox_CheckedChanged" />
+                                    <i class="input-helper"></i>
+                                    Show People
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <app:SearchControl ID="OrgSearchControl" runat="server"
+                                Title="Búsqueda"
+                                DisplayHelp="true"
+                                DisplayContextualHelp="true"
+                                CssSearch="CSearch"
+                                CssSearchHelp="CSearchHelpPanel"
+                                CssSearchError="CSearchErrorPanel"
+                                SavedSearches="true" SavedSearchesID="OrgSavedSearch"
+                                ImageHelpUrl="Images/Neutral/Help.png"
+                                ImageErrorUrl="~/images/exclamation.png" />
+                        </div>
+                    </div>
                     <div class="t-body tb-padding" id="OrganizationList">
                         <asp:Repeater ID="OrganizationsRepeater" runat="server" OnItemDataBound="OrganizationsRepeater_ItemDataBound"
                             OnItemCommand="OrganizationsRepeater_ItemCommand">
                             <ItemTemplate>
                                 <div class="row">
                                     <div class="col-md-1 col-sm-1 col-xs-3">
-                                        <asp:LinkButton ID="ViewOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
+                                        <asp:LinkButton ID="ViewOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             CssClass="viewBtn detailsBtn" CommandName="ViewOrganization">
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-3">
-                                        <asp:LinkButton ID="EditOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
+                                        <asp:LinkButton ID="EditOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             CssClass="viewBtn editBtn" CommandName="EditOrganization">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-3">
-                                        <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
+                                        <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             CssClass="viewBtn shareBtn" CommandName="ShareOrganization">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-xs-3">
-                                        <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server" 
+                                        <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             OnClientClick="return confirm('Are you sure you want to delete selected Organization?')"
                                             CssClass="viewBtn deleteBtn" CommandName="DeleteOrganization">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
@@ -87,14 +98,14 @@
                                     </div>
                                 </div>
                                 <div class="row m-b-15">
-                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-8 col-md-offset-4 m-t-5" Visible="false">
                                         This organization does not have any objects. Create one by clicking on the 
-                                        <i class="zmdi zmdi-plus-circle-o" id=""></i> icon above
+                                        <i class="zmdi zmdi-plus-circle-o" id=""></i>icon above
                                     </asp:Panel>
-                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
+                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-4 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
                                     </asp:Panel>
-                                    <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-11 m-t-5" Visible="false">
+                                    <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-8 m-t-5" Visible="false">
                                         This organization has 
                                         <asp:Label ID="AreasLabel" runat="server" Visible="false"></asp:Label>
                                         <asp:Literal ID="AndLiteral1" runat="server" Visible="false"></asp:Literal>
@@ -108,6 +119,11 @@
                                             CommandName="ViewActivities" CommandArgument='<%# Eval("OrganizationId") %>'>
                                         </asp:LinkButton>
                                         <asp:Literal ID="AndLiteral3" runat="server" Visible="false"></asp:Literal>
+
+                                        <asp:LinkButton ID="PersonLinkButton" runat="server" Visible="false"
+                                            CommandName="ViewPersons" CommandArgument='<%# Eval("OrganizationId") %>'>
+                                        </asp:LinkButton>
+                                        <asp:Literal ID="AndLiteral4" runat="server" Visible="false"></asp:Literal>
 
                                         <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
                                             CommandName="ViewKPIs" CommandArgument='<%# Eval("OrganizationId") %>'>
@@ -130,34 +146,33 @@
                         <br />
                         <app:TourSettings runat="server" ID="Settings">
                             <Items>
-                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    Content="<%$ Resources: MainPage, TourStep1 %>"
-                                    Element="#TheAddButton" />
-                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    Content="<%$ Resources: MainPage, TourStep2 %>"
-                                    Element="#OrganizationList .editBtn:first" />
-                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    Content="<%$ Resources: MainPage, TourStep3 %>"
-                                    Element="#OrganizationList .detailsBtn:first" />
-                                <app:TourItem Title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    Content="<%$ Resources: MainPage, TourStep4 %>"
-                                    Element="#OrganizationList .shareBtn:first" />
+                                <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    content="<%$ Resources: MainPage, TourStep1 %>"
+                                    element="#TheAddButton" />
+                                <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    content="<%$ Resources: MainPage, TourStep2 %>"
+                                    element="#OrganizationList .editBtn:first" />
+                                <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    content="<%$ Resources: MainPage, TourStep3 %>"
+                                    element="#OrganizationList .detailsBtn:first" />
+                                <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
+                                    content="<%$ Resources: MainPage, TourStep4 %>"
+                                    element="#OrganizationList .shareBtn:first" />
                             </Items>
                         </app:TourSettings>
                         <div style="overflow: hidden">
                             <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
-                            <%--<a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">
+                        <%--<a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">
                                 Show tips for this page</a>--%>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </asp:Panel>
-    
 
-   <%-- <asp:HiddenField ID="ResetTourHiddenField" runat="server" Value="false" />
+
+    <%-- <asp:HiddenField ID="ResetTourHiddenField" runat="server" Value="false" />
     <asp:HiddenField ID="ShowTourHiddenField" runat="server" Value="false" />
     <asp:HiddenField ID="ForceShowTour" runat="server" Value="false" />
     <asp:PlaceHolder ID="ScriptBlock" runat="server">
@@ -234,6 +249,5 @@
             }
         </script>
     </asp:PlaceHolder>--%>
-   
 </asp:Content>
 
