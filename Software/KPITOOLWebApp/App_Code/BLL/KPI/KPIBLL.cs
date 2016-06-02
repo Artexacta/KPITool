@@ -331,7 +331,7 @@ namespace Artexacta.App.KPI.BLL
         }
 
 
-        public static int CreateKPI(KPI theKpi, KPITarget theTarget, string currentUser)
+        public static int CreateKPI(KPI theKpi, KPITarget theTarget, List<KPITarget> theTargetCategories, string currentUser)
         {
             int kpiID = 0;
 
@@ -422,55 +422,24 @@ namespace Artexacta.App.KPI.BLL
                             command2.ExecuteNonQuery();
                         }
 
-                        // If the KPI has categories, create them
-                        //if (categories != null && categories.Length > 0)
-                        //{
-                        //    foreach (Category cat in categories)
-                        //    {
-                        //        SqlCommand command2 = new SqlCommand("usp_KPI_AddKPICategory", connection);
-                        //        command2.CommandType = System.Data.CommandType.StoredProcedure;
-                        //        command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
-                        //        command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
-                        //        command2.ExecuteNonQuery();
-                        //    }
-                        //}
+                        //Save the target by categories
+                        if (theKpi.AllowCategories && theTargetCategories.Count > 0)
+                        {
+                            foreach (KPITarget theItem in theTargetCategories)
+                            {
+                                //Insert the target category
+                                SqlCommand command5 = new SqlCommand("usp_KPI_UpdateKPITargetCategory", connection);
+                                command5.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        // If the KPI has  and targets, create them
-                        //if (categories != null && categories.Length > 0)
-                        //{
-                        //    foreach (Category cat in categories)
-                        //    {
-                        //        foreach (CategoryItem item in cat.Items)
-                        //        {
-                        //            if (item.Target == null)
-                        //                continue;
+                                command5.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                                command5.Parameters.Add("@targetID", System.Data.SqlDbType.Int).Value = theItem.TargetID;
+                                command5.Parameters.Add("@items", System.Data.SqlDbType.VarChar, 1000).Value = theItem.Detalle;
+                                command5.Parameters.Add("@categories", System.Data.SqlDbType.VarChar, 1000).Value = theItem.Categories;
+                                command5.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theItem.TargetID;
 
-                        //            SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetInCategoryItem", connection);
-                        //            command2.CommandType = System.Data.CommandType.StoredProcedure;
-                        //            command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
-                        //            command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = item.Target.Value;
-                        //            command2.Parameters.Add("@categoryItemID", System.Data.SqlDbType.VarChar, 20).Value = item.ItemID;
-                        //            command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
-                        //            SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
-                        //            targetIDParam.Direction = System.Data.ParameterDirection.Output;
-                        //            command2.Parameters.Add(targetIDParam);
-                        //            command2.ExecuteNonQuery();
-                        //        }
-                        //    }
-                        //}
-                        //else if (target != null)
-                        //{
-                        //    // Single target without categories
-
-                        //    SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetNoCategories", connection);
-                        //    command2.CommandType = System.Data.CommandType.StoredProcedure;
-                        //    command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
-                        //    command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = target.Value;
-                        //    SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
-                        //    targetIDParam.Direction = System.Data.ParameterDirection.Output;
-                        //    command2.Parameters.Add(targetIDParam);
-                        //    command2.ExecuteNonQuery();
-                        //}
+                                command5.ExecuteNonQuery();
+                            }
+                        }
                     }
 
                     // The Complete method commits the transaction. If an exception has been thrown,
@@ -487,7 +456,7 @@ namespace Artexacta.App.KPI.BLL
             return kpiID;
         }
 
-        public static void UpdateKPI(KPI theKpi, KPITarget theTarget)
+        public static void UpdateKPI(KPI theKpi, KPITarget theTarget, List<KPITarget> theTargetCategories)
         {
             try
             {
@@ -508,7 +477,6 @@ namespace Artexacta.App.KPI.BLL
 
                         // NOTE that we pass zeros to areaID, projectID, activityID, etc., sicne the stored procedure will convert 
                         // these to nulls!
-
                         command1.Parameters.Add("@kpiId", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
                         command1.Parameters.Add("@organizationID", System.Data.SqlDbType.Int).Value = theKpi.OrganizationID;
                         command1.Parameters.Add("@areaID", System.Data.SqlDbType.Int).Value = theKpi.AreaID;
@@ -554,11 +522,6 @@ namespace Artexacta.App.KPI.BLL
                         command1.Parameters.Add(currencyUnitParam);
 
                         command1.Parameters.Add("@kpiTypeID", System.Data.SqlDbType.VarChar, 10).Value = theKpi.KpiTypeID;
-
-                        SqlParameter kpiIDParam = new SqlParameter("@kpiID", System.Data.SqlDbType.Int);
-                        kpiIDParam.Direction = System.Data.ParameterDirection.Output;
-                        command1.Parameters.Add(kpiIDParam);
-
                         command1.ExecuteNonQuery();
 
                         if (!theKpi.AllowCategories)
@@ -584,55 +547,39 @@ namespace Artexacta.App.KPI.BLL
                             }
                         }
 
-                        // If the KPI has categories, create them
-                        //if (categories != null && categories.Length > 0)
-                        //{
-                        //    foreach (Category cat in categories)
-                        //    {
-                        //        SqlCommand command2 = new SqlCommand("usp_KPI_AddKPICategory", connection);
-                        //        command2.CommandType = System.Data.CommandType.StoredProcedure;
-                        //        command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
-                        //        command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
-                        //        command2.ExecuteNonQuery();
-                        //    }
-                        //}
+                        
+                        // If the KPI has categories and targets, create them
+                        int firstDelete = 0;
+                        if (theKpi.AllowCategories && theTargetCategories.Count > 0)
+                        {
+                            foreach (KPITarget theItem in theTargetCategories)
+                            {
+                                //If not exists values in TARGETID clean all and recreate the categories
+                                if (firstDelete == 0 && theItem.TargetID == 0)
+                                {
+                                    //Delete de target
+                                    SqlCommand command4 = new SqlCommand("usp_KPI_DeleteAllKPITarget", connection);
+                                    command4.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        // If the KPI has  and targets, create them
-                        //if (categories != null && categories.Length > 0)
-                        //{
-                        //    foreach (Category cat in categories)
-                        //    {
-                        //        foreach (CategoryItem item in cat.Items)
-                        //        {
-                        //            if (item.Target == null)
-                        //                continue;
+                                    command4.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                                    command4.ExecuteNonQuery();
+                                }
 
-                        //            SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetInCategoryItem", connection);
-                        //            command2.CommandType = System.Data.CommandType.StoredProcedure;
-                        //            command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
-                        //            command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = item.Target.Value;
-                        //            command2.Parameters.Add("@categoryItemID", System.Data.SqlDbType.VarChar, 20).Value = item.ItemID;
-                        //            command2.Parameters.Add("@categoryID", System.Data.SqlDbType.VarChar, 20).Value = cat.ID;
-                        //            SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
-                        //            targetIDParam.Direction = System.Data.ParameterDirection.Output;
-                        //            command2.Parameters.Add(targetIDParam);
-                        //            command2.ExecuteNonQuery();
-                        //        }
-                        //    }
-                        //}
-                        //else if (target != null)
-                        //{
-                        //    // Single target without categories
+                                firstDelete++;
 
-                        //    SqlCommand command2 = new SqlCommand("usp_KPI_AddKPITargetNoCategories", connection);
-                        //    command2.CommandType = System.Data.CommandType.StoredProcedure;
-                        //    command2.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
-                        //    command2.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = target.Value;
-                        //    SqlParameter targetIDParam = new SqlParameter("@targetID", System.Data.SqlDbType.Int);
-                        //    targetIDParam.Direction = System.Data.ParameterDirection.Output;
-                        //    command2.Parameters.Add(targetIDParam);
-                        //    command2.ExecuteNonQuery();
-                        //}
+                                //Update the target category
+                                SqlCommand command5 = new SqlCommand("usp_KPI_UpdateKPITargetCategory", connection);
+                                command5.CommandType = System.Data.CommandType.StoredProcedure;
+
+                                command5.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                                command5.Parameters.Add("@targetID", System.Data.SqlDbType.Int).Value = theItem.TargetID;
+                                command5.Parameters.Add("@items", System.Data.SqlDbType.VarChar,1000).Value = theItem.Detalle;
+                                command5.Parameters.Add("@categories", System.Data.SqlDbType.VarChar,1000).Value = theItem.Categories;
+                                command5.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theItem.Target;
+
+                                command5.ExecuteNonQuery();
+                            }
+                        }
                     }
 
                     // The Complete method commits the transaction. If an exception has been thrown,

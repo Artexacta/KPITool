@@ -87,6 +87,7 @@ namespace Artexacta.App.KPI.BLL
                     {
                         theData = FillRecord(theRow);
                         theData.Detalle = theRow.IsdetalleNull() ? "" : theRow.detalle;
+                        theData.Categories = theRow.IscategoriesNull() ? "" : theRow.categories;
                         theList.Add(theData);
                     }
                 }

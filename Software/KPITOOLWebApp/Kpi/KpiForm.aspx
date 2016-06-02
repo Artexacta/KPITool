@@ -197,7 +197,7 @@
                                     runat="server" ID="TargetPeriodTextBox">
                                 </telerik:RadNumericTextBox>
                             </div>
-                            <div class="col-md-1 col-md-offset-1">
+                            <div class="col-md-2 col-md-offset-1">
                                 <input type="text" id="txtUnit" runat="server" class="form-control" />
                             </div>
                         </div>
@@ -431,7 +431,8 @@
                                 <asp:Repeater ID="CategoriesRepeater" runat="server" OnItemCommand="CategoriesRepeater_ItemCommand">
                                     <ItemTemplate>
                                         <div class="col-md-3">
-                                            <asp:LinkButton ID="RemoveButton" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ID") %>' CausesValidation="false">
+                                            <asp:LinkButton ID="RemoveButton" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ID") %>' CausesValidation="false"
+                                                 OnClientClick="return confirm('Are you sure you want to delete the category? All the data would be zero.')">
                                                      <i class="fa fa-minus-circle"></i>
                                             </asp:LinkButton>
                                             <asp:Label ID="CategoryLabel" runat="server" Text='<%# Eval("Name") %>' Style="margin: 0 5px;" />
@@ -456,6 +457,8 @@
                                                             runat="server" ID="TargetTextBox">
                                                             <EnabledStyle HorizontalAlign="Right" />
                                                         </telerik:RadNumericTextBox>
+                                                    </div>
+                                                    <div class="col-md-2 col-md-offset-1">
                                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
                                                     </div>
                                                 </div>

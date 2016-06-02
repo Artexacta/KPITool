@@ -229,6 +229,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         if (theTarget != null && theKpi.AllowCategories)
         {
             //Multiple Target
+            SingleTargetPanel.Style["display"] = "none";
             MultipleTargetPanel.Style["display"] = "block";
 
             //Get the targets categories
@@ -300,6 +301,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         theKpi.AllowCategories = categoryCheckBox.Checked;
 
         KPITarget theTarget = new KPITarget();
+        List<KPITarget> theItems = new List<KPITarget>();
 
         if (!categoryCheckBox.Checked)
         {
@@ -333,6 +335,71 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         {
             //Multiple Target
 
+            if (Session["LIST_ITEMS"] != null)
+            {
+                try
+                {
+                    theItems = (List<KPITarget>)Session["LIST_ITEMS"];
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Error to get the targets by categories.", ex);
+                    SystemMessages.DisplaySystemErrorMessage("Error to get the categories.");
+                    return;
+                }
+            }
+
+            foreach (RepeaterItem itemRepeater in targetsRepeater.Items)
+            {
+                Label ItemsLabel = (Label)itemRepeater.FindControl("ItemsLabel");
+                RadNumericTextBox targetControl = null;
+                DropDownList theYear = null;
+                DropDownList theMonth = null;
+                DropDownList theDay = null;
+                DropDownList theHour = null;
+                DropDownList theMinute = null;
+                decimal valueTarget = 0;
+
+                if (SelectedUnitHiddenField.Value == "TIME")
+                {
+                    theYear = (DropDownList)itemRepeater.FindControl("YearsCombobox");
+                    theMonth = (DropDownList)itemRepeater.FindControl("MonthsCombobox");
+                    theDay = (DropDownList)itemRepeater.FindControl("DaysCombobox");
+                    theHour = (DropDownList)itemRepeater.FindControl("HoursCombobox");
+                    theMinute = (DropDownList)itemRepeater.FindControl("MinutesCombobox");
+                    if (theYear != null && theMonth != null && theDay != null && theHour != null && theMinute != null)
+                    {
+                        try
+                        {
+                            valueTarget = KPITargetTimeBLL.GetNumberFromTime(Convert.ToInt32(theYear.SelectedValue),
+                                Convert.ToInt32(theMonth.SelectedValue),
+                                Convert.ToInt32(theDay.SelectedValue),
+                                Convert.ToInt32(theHour.SelectedValue),
+                                Convert.ToInt32(theMinute.SelectedValue));
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error("Error to get the target from the time values.", ex);
+                        }
+                    }
+                }
+                else
+                {
+                    targetControl = (RadNumericTextBox)itemRepeater.FindControl("TargetTextBox");
+                    try
+                    {
+                        if (targetControl != null && targetControl.Value > 0)
+                            valueTarget = Convert.ToDecimal(targetControl.Value);
+                    }
+                    catch { }
+                }
+
+                if (ItemsLabel != null && valueTarget > 0)
+                {
+                    KPITarget result = theItems.Find(delegate(KPITarget tg) { return tg.Detalle == ItemsLabel.Text; });
+                    result.Target = valueTarget;
+                }
+            }
         }
 
         if (KpiId > 0)
@@ -343,7 +410,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
             try
             {
-                KPIBLL.UpdateKPI(theKpi, theTarget);
+                KPIBLL.UpdateKPI(theKpi, theTarget, theItems);
             }
             catch
             {
@@ -358,7 +425,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
             try
             {
-                KpiId = KPIBLL.CreateKPI(theKpi, theTarget, username);
+                KpiId = KPIBLL.CreateKPI(theKpi, theTarget, theItems, username);
             }
             catch
             {
@@ -489,6 +556,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
     protected void AddCategory_Click(object sender, EventArgs e)
     {
+        if (string.IsNullOrEmpty(CategoryComboBox.SelectedValue))
+            return;
+
         //Get the list of Categories
         List<Category> theCategories = new List<Category>();
 
@@ -515,7 +585,33 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         Session["LIST_CATEGORIES"] = theCategories;
         CategoriesRepeater.DataSource = theCategories;
         CategoriesRepeater.DataBind();
+
+        //Obtener la nueva combinacion de items
+        List<KPICategoyCombination> theCombinations = new List<KPICategoyCombination>();
+        try
+        {
+            theCombinations = KPICategoryCombinationBLL.GetKPITargetCategoriesByKpiId(theCategories);
+        }
+        catch (Exception)
+        {
+            SystemMessages.DisplaySystemErrorMessage("Error to get the new combination of items categories.");
+            return;
+        }
+
+        //Crear la nueva lista de items para registrar target
+        List<KPITarget> theItems = new List<KPITarget>();
+        foreach (KPICategoyCombination item in theCombinations)
+        {
+            KPITarget theTarget = new KPITarget(0, KpiId, 0);
+            theTarget.Detalle = item.ItemsList;
+            theTarget.Categories = item.CategoriesList;
+            theItems.Add(theTarget);
+        }
+        Session["LIST_ITEMS"] = theItems;
+        targetsRepeater.DataSource = theItems;
+        targetsRepeater.DataBind();
     }
+
     protected void CategoriesRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         string categoryId = "";
@@ -547,21 +643,57 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 catch { }
 
                 if (theCategories == null)
-                    theCategories = new List<Category>();
+                {
+                    return;
+                }
             }
 
-            Category result = theCategories.Find(delegate(Category bk) { return bk.ID == CategoryComboBox.SelectedValue; });
+            Category result = theCategories.Find(delegate(Category bk) { return bk.ID == categoryId; });
 
             if (result != null)
             {
                 theCategories.Remove(result);
             }
+            else
+            {
+                return;
+            }
 
             Session["LIST_CATEGORIES"] = theCategories;
             CategoriesRepeater.DataSource = theCategories;
             CategoriesRepeater.DataBind();
+
+            //Obtener la nueva combinacion de items
+            List<KPICategoyCombination> theCombinations = new List<KPICategoyCombination>();
+
+            if (theCategories.Count > 0)
+            {
+                try
+                {
+                    theCombinations = KPICategoryCombinationBLL.GetKPITargetCategoriesByKpiId(theCategories);
+                }
+                catch (Exception)
+                {
+                    SystemMessages.DisplaySystemErrorMessage("Error to get the new combination of items categories.");
+                    return;
+                }
+            }
+
+            //Crear la nueva lista de items para registrar target
+            List<KPITarget> theItems = new List<KPITarget>();
+            foreach (KPICategoyCombination item in theCombinations)
+            {
+                KPITarget theTarget = new KPITarget(0, KpiId, 0);
+                theTarget.Detalle = item.ItemsList;
+                theTarget.Categories = item.CategoriesList;
+                theItems.Add(theTarget);
+            }
+            Session["LIST_ITEMS"] = theItems;
+            targetsRepeater.DataSource = theItems;
+            targetsRepeater.DataBind();
         }
     }
+
     protected void targetsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
@@ -647,6 +779,26 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 divTime.Style["display"] = "none";
             }
 
+            //Percent
+
+            RadNumericTextBox theTarget = (RadNumericTextBox)e.Item.FindControl("TargetTextBox");
+            if (theTarget != null)
+            {
+                if (SelectedUnitHiddenField.Value == "PERCENT")
+                {
+                    theTarget.MaxValue = 100;
+                    theTarget.NumberFormat.DecimalDigits = 2;
+                }
+                else if (SelectedUnitHiddenField.Value == "INT")
+                {
+                    theTarget.NumberFormat.DecimalDigits = 0;
+                }
+                else
+                {
+                    theTarget.NumberFormat.DecimalDigits = 2;
+                }
+            }
+
             //Value
             HiddenField hfTarget = (HiddenField)e.Item.FindControl("ValueHiddenField");
             if (hfTarget != null)
@@ -656,15 +808,21 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 try
                 {
                     valuetarget = Convert.ToDouble(hfTarget.Value);
-                }
-                catch {}
 
-                if (valuetarget > 0)
-                {
-                    RadNumericTextBox theTarget = (RadNumericTextBox)e.Item.FindControl("TargetTextBox");
-                    if (theTarget != null)
+                    if (valuetarget > 0 && theTarget != null)
+                    {
                         theTarget.Value = valuetarget;
+                    }
                 }
+                catch { }
+            }
+
+            //Percent label
+            if (SelectedUnitHiddenField.Value == "PERCENT")
+            {
+                Label UnitLabel = (Label)e.Item.FindControl("UnitTargetLabel");
+                if (UnitLabel != null)
+                    UnitLabel.Text = "%";
             }
         }
     }
