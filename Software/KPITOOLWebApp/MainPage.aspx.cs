@@ -82,6 +82,9 @@ public partial class MainPage : SqlViewStatePage
         
         Organization item = (Organization)e.Item.DataItem;
 
+        if (item == null)
+            return;
+
         //Areas
         AreaBLL theABLL = new AreaBLL();
         List<Area> theAreas = new List<Area>();
@@ -144,18 +147,8 @@ public partial class MainPage : SqlViewStatePage
         Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
         detailsPanel.Visible = true;
 
-        //Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
-        //kpiImagePanel.Visible = true;
-
-        //UserControls_FRTWB_KpiImage imageOfKpi = (UserControls_FRTWB_KpiImage)e.Item.FindControl("ImageOfKpi");
-        //if (item.Kpis.Count > 0)
-        //{
-        //    Kpi firstKpi = item.Kpis.Values.ToList()[0];
-        //    if(firstKpi.KpiValues.Count > 0){
-        //        imageOfKpi.KpiId = firstKpi.ObjectId;
-        //        imageOfKpi.Visible = true;
-        //    }
-        //}
+        Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
+        kpiImagePanel.Visible = true;
 
         Label areasLabel = (Label)e.Item.FindControl("AreasLabel");
         LinkButton projectButton = (LinkButton)e.Item.FindControl("ProjectsButton");

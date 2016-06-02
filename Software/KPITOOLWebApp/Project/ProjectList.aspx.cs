@@ -9,6 +9,14 @@ using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using Artexacta.App.Project.BLL;
 using Artexacta.App.Project;
+using Artexacta.App.Activities.BLL;
+using Artexacta.App.Activities;
+using Artexacta.App.KPI.BLL;
+using Artexacta.App.KPI;
+using Artexacta.App.Organization.BLL;
+using Artexacta.App.Organization;
+using Artexacta.App.Area;
+using Artexacta.App.Area.BLL;
 
 public partial class Project_ProjectList : System.Web.UI.Page
 {
@@ -59,57 +67,116 @@ public partial class Project_ProjectList : System.Web.UI.Page
     {
 
     }
+    protected string GetOrganizationInfo(Object obj)
+    {
+        int OrganizationID = 0;
+        string name = "";
+        try
+        {
+            OrganizationID = (int)obj;
+        }
+        catch {return "-";}
 
+        if (OrganizationID > 0)
+        {
+            Organization theClass = null;
+
+            try
+            {
+                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
+            }
+            catch {}
+
+            if (theClass != null)
+                name = theClass.Name;
+        }
+
+        return name;
+    }
+    protected string GetAreaInfo(Object obj)
+    {
+        int areaID = 0;
+        string name = "";
+        try
+        {
+            areaID = (int)obj;
+        }
+        catch { return "-"; }
+
+        if (areaID > 0)
+        {
+            Area theClass = null;
+
+            try
+            {
+                theClass = AreaBLL.GetAreaById(areaID);
+            }
+            catch { }
+
+            if (theClass != null)
+                name = " - " + theClass.Name;
+        }
+
+        return name;
+    }
     protected void ProjectsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        //if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
-        //    return;
-        //Project item = (Project)e.Item.DataItem;
+        if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
+            return;
 
-        //if (item.Activities.Count == 0 && item.Kpis.Count == 0)
-        //{
-        //    Panel element = (Panel)e.Item.FindControl("emptyMessage");
-        //    element.Visible = true;
-        //    return;
-        //}
-        //Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
-        //detailsPanel.Visible = true;
+        Project item = (Project)e.Item.DataItem;
 
-        //Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
-        //kpiImagePanel.Visible = true;
+        if (item == null)
+            return;
+        
+        //Activities
+        ActivityBLL theACBLL = new ActivityBLL();
+        List<Activity> theActivities = new List<Activity>();
 
-        //UserControls_FRTWB_KpiImage imageOfKpi = (UserControls_FRTWB_KpiImage)e.Item.FindControl("ImageOfKpi");
-        //if (item.Kpis.Count > 0)
-        //{
-        //    Kpi firstKpi = item.Kpis.Values.ToList()[0];
-        //    if (firstKpi.KpiValues.Count > 0)
-        //    {
-        //        imageOfKpi.KpiId = firstKpi.ObjectId;
-        //        imageOfKpi.Visible = true;
-        //    }
-        //}
+        try
+        {
+            theActivities = theACBLL.GetActivitiesByProject(item.ProjectID);
+        }
+        catch { }
 
-        //LinkButton activitiesButton = (LinkButton)e.Item.FindControl("ActivitiesButton");
-        //LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
+        //KPI
+        KPIBLL theKBLL = new KPIBLL();
+        List<KPI> theKPIs = new List<KPI>();
 
-        //Literal and = (Literal)e.Item.FindControl("AndLiteral");
+        try
+        {
+            theKPIs = theKBLL.GetKPIsByProject(item.ProjectID);
+        }
+        catch { }
+
+        if (theActivities.Count == 0 && theKPIs.Count == 0)
+        {
+            Panel element = (Panel)e.Item.FindControl("emptyMessage");
+            element.Visible = true;
+            return;
+        }
+
+        Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
+        detailsPanel.Visible = true;
+
+        Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
+        kpiImagePanel.Visible = true;
+
+        LinkButton activitiesButton = (LinkButton)e.Item.FindControl("ActivitiesButton");
+        LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
+
+        Literal and = (Literal)e.Item.FindControl("AndLiteral");
 
 
-        //activitiesButton.Visible = item.Activities.Count > 0;
-        //activitiesButton.Text = activitiesButton.Visible ? item.Activities.Count + (item.Activities.Count == 1 ? " Activity" : " Activities") : "";
+        activitiesButton.Visible = theActivities.Count > 0;
+        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " Activity" : " Activities") : "";
 
-        //kpisButton.Visible = item.Kpis.Count > 0;
-        //kpisButton.Text = kpisButton.Visible ? item.Kpis.Count + " KPI(s)" : "";
+        kpisButton.Visible = theKPIs.Count > 0;
+        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
 
-
-        //and.Visible = activitiesButton.Visible && kpisButton.Visible;
+        and.Visible = activitiesButton.Visible && kpisButton.Visible;
     }
 
-    protected void NewProjectButton_Click(object sender, EventArgs e)
-    {
-        Session["ParentPage"] = "~/Project/ProjectList.aspx";
-        Response.Redirect("~/Project/ProjectForm.aspx");
-    }
 
     protected void ProjectsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {

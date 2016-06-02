@@ -102,10 +102,10 @@
                                         This organization does not have any objects. Create one by clicking on the 
                                         <i class="zmdi zmdi-plus-circle-o" id=""></i>icon above
                                     </asp:Panel>
-                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-4 m-t-5" Visible="false">
-                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ORGANIZATION" OwnerId='<%# Eval("OrganizationId") %>' />
                                     </asp:Panel>
-                                    <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-8 m-t-5" Visible="false">
+                                    <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-6 m-t-5" Visible="false">
                                         This organization has 
                                         <asp:Label ID="AreasLabel" runat="server" Visible="false"></asp:Label>
                                         <asp:Literal ID="AndLiteral1" runat="server" Visible="false"></asp:Literal>

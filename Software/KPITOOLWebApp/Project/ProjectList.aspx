@@ -71,9 +71,12 @@
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
                                             (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# Eval("Owner") %>'
-                                                CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
+                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                                 CommandName="ViewOrganization"
+                                                 CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
+                                            <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                                CommandName="ViewArea"
+                                                CommandArgument='<%# Eval("AreaID") %>'></asp:LinkButton>
                                             )
                                         </p>
                                     </div>
@@ -82,10 +85,10 @@
                                     <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
                                         This project does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
                                     </asp:Panel>
-                                    <%-- <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
-                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                     </asp:Panel>
-                                   <asp:Panel runat="server" id="detailsContainer" class="col-md-11 m-t-5" visible="false">
+                                    <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
                                         This project has 
                                         <asp:LinkButton ID="ActivitiesButton" runat="server" Visible="false"
                                             CommandName="ViewActivities" CommandArgument='<%# Eval("ProjectID") %>'>
@@ -95,7 +98,7 @@
                                         <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
                                             CommandName="ViewKPIs" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
-                                    </asp:Panel>--%>
+                                    </asp:Panel>
                                 </div>
                             </ItemTemplate>
                             <FooterTemplate>
