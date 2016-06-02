@@ -330,12 +330,15 @@ namespace Artexacta.App.Utilities.ExcelProcessing
         {
         }
 
-        public StringExColumn(String name, bool mandatory, bool isKey)
+        public string _format { get; set; }
+
+        public StringExColumn(String name, bool mandatory, bool isKey, string format)
         {
             _name = name;
             _mandatory = mandatory;
             _type = ExColumnType.String;
             _key = isKey;
+            _format = format;
         }
 
         public override Type GetColumnSystemType()
@@ -352,6 +355,14 @@ namespace Artexacta.App.Utilities.ExcelProcessing
             if (value is String && String.IsNullOrEmpty((string)value))
                 // Valores "" se consideran vaciós en strings
                 return true;
+
+            if (!string.IsNullOrEmpty(_format))
+            {
+                Regex format1 = new Regex(_format);
+                Match matches = format1.Match(value.ToString());
+                if (!matches.Success)
+                    return false;
+            }
 
             return true;
         }

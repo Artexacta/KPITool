@@ -67,5 +67,33 @@ namespace Artexacta.App.ReportingUnit.BLL
             return theList;
         }
 
+        public ReportingUnit GetReportingUnitByID(string reportingUnitID, string language)
+        {
+            if (string.IsNullOrEmpty(reportingUnitID))
+                throw new ArgumentException("El ID no puede ser <= 0.");
+
+            if (string.IsNullOrEmpty(language))
+                language = Artexacta.App.Utilities.LanguageUtilities.GetLanguageFromContext();
+
+            ReportingUnit theData = null;
+            try
+            {
+                ReportingUnitDS.ReportingUnitsDataTable theTable = theAdapter.GetReportingUnitById(reportingUnitID, language);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    ReportingUnitDS.ReportingUnitsRow theRow = theTable[0];
+                    theData = FillRecord(theRow);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetReportingUnitByID para reportingUnitID: " + reportingUnitID + " y language: " + language, exc);
+                throw exc;
+            }
+
+            return theData;
+        }
+
     }
 }

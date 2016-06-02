@@ -24,5 +24,10 @@ namespace Artexacta.App.KPI
             this.KpiID = kpiID;
             this.Target = target;
         }
+
+        public string Detalle { get; set; }
+
+        public string Categories { get; set; }
+
     }
 }

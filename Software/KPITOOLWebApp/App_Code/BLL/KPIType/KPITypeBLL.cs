@@ -86,7 +86,7 @@ namespace Artexacta.App.KPI.BLL
 
             try
             {
-                KPITypeDS.KPITypeDetailDataTable theTable = theAdapter.GetKpiTypeById(kpiTypeID, language);
+                KPITypeDS.KPITypeDetailDataTable theTable = theAdapter.GetKPITypeById(kpiTypeID, language);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {

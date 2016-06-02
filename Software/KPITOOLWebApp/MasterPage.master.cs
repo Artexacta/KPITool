@@ -286,6 +286,18 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap3-typeahead.min.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/moment.min.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap-datetimepicker.min.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        //scriptText.Append("<script src=\"");
+        //scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap-datepicker.js"));
+        //scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
         JqueryAndMainMenuScript.Text = scriptText.ToString();
     }
 

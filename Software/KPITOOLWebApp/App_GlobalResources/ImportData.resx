@@ -117,100 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MessageActivityProjectError" xml:space="preserve">
-    <value>La actividad no pertenece al proyecto.</value>
+  <data name="DecimalDataDescription" xml:space="preserve">
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value".The values  must be only decimal with point as decimal separator.&lt;/p&gt;</value>
   </data>
-  <data name="MessageAreaOrganizationError" xml:space="preserve">
-    <value>El área no pertenece a la organización.</value>
+  <data name="IntegerDataDescription" xml:space="preserve">
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value".The values  must be only integers.&lt;/p&gt;</value>
   </data>
-  <data name="MessageCreateOk" xml:space="preserve">
-    <value>La organización se creó correctamente.</value>
-  </data>
-  <data name="MessageDeleteAreaOk" xml:space="preserve">
-    <value>El área fue eliminado de la organización.</value>
-  </data>
-  <data name="MessageDeleteOk" xml:space="preserve">
-    <value>La organización se eliminó correctamente.</value>
-  </data>
-  <data name="MessageDeleteProjectOK" xml:space="preserve">
-    <value>El proyecto se eliminó existosamente.</value>
-  </data>
-  <data name="MessageEmptyName" xml:space="preserve">
-    <value>El nombre de la organización no puede ser vacío.</value>
-  </data>
-  <data name="MessageEmptyNameArea" xml:space="preserve">
-    <value>El nombre del área no puede ser vacío.</value>
-  </data>
-  <data name="MessageEmptyNameProject" xml:space="preserve">
-    <value>El nombre del proyecto no puede ser vacío.</value>
-  </data>
-  <data name="MessageErrorCargarAreas" xml:space="preserve">
-    <value>Ocurrió un error al obtener las áreas de la organización.</value>
-  </data>
-  <data name="MessageErrorCreate" xml:space="preserve">
-    <value>Ocurrió un error al crear la organización.</value>
-  </data>
-  <data name="MessageErrorCreateArea" xml:space="preserve">
-    <value>Ocurrió un error al crear el area.</value>
-  </data>
-  <data name="MessageErrorCreateProject" xml:space="preserve">
-    <value>Ocurrió un error al crear el proyecto.</value>
-  </data>
-  <data name="MessageErrorDelete" xml:space="preserve">
-    <value>Ocurrió un error al eliminar la organización.</value>
-  </data>
-  <data name="MessageErrorDeleteArea" xml:space="preserve">
-    <value>Ocurrió un error al eliminar el área.</value>
-  </data>
-  <data name="MessageErrorDeleteProject" xml:space="preserve">
-    <value>Ocurrió un error al eliminar el proyecto.</value>
-  </data>
-  <data name="MessageErrorProjectList" xml:space="preserve">
-    <value>Error al obtener la lista de proyectos.</value>
-  </data>
-  <data name="MessageErrorUpdate" xml:space="preserve">
-    <value>Ocurrió un error al actualizar la organización.</value>
-  </data>
-  <data name="MessageErrorUpdateArea" xml:space="preserve">
-    <value>Ocurrió un error al actualizar el área.</value>
-  </data>
-  <data name="MessageErrorUpdateProject" xml:space="preserve">
-    <value>Ocurrió un error al actualizar el proyecto.</value>
-  </data>
-  <data name="MessageNameExists" xml:space="preserve">
-    <value>El nombre de la organización ya existe.</value>
-  </data>
-  <data name="MessageNameRequired" xml:space="preserve">
-    <value>El nombre de la organización es requerido.</value>
-  </data>
-  <data name="MessageProjectAreaError" xml:space="preserve">
-    <value>El proyecto no pertenece al área.</value>
-  </data>
-  <data name="MessageProjectOrganizationError" xml:space="preserve">
-    <value>El proyecto no pertenece a la organización.</value>
-  </data>
-  <data name="MessageUpdateOk" xml:space="preserve">
-    <value>La organización se actualizó correctamente.</value>
-  </data>
-  <data name="MessageZeroAreaId" xml:space="preserve">
-    <value>El código del área no puede ser cero.</value>
-  </data>
-  <data name="MessageZeroOrganizationId" xml:space="preserve">
-    <value>El código de la organización no puede ser cero.</value>
-  </data>
-  <data name="MessageZeroProjectId" xml:space="preserve">
-    <value>El código del proyecto no puede ser cero.</value>
-  </data>
-  <data name="TitleActivityName" xml:space="preserve">
-    <value>Nombre de la Actividad</value>
-  </data>
-  <data name="TitleKPIName" xml:space="preserve">
-    <value>Nombre del KPI</value>
-  </data>
-  <data name="TitleOrganizationName" xml:space="preserve">
-    <value>Nombre de la Organización</value>
-  </data>
-  <data name="TitleProjectName" xml:space="preserve">
-    <value>Nombre del Proyecto</value>
+  <data name="TimeDataDescription" xml:space="preserve">
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value". The values are time span and they must be in ISO 8601 format: durations are represented by the format P[n]Y[n]M[n]DT[n]H[n]M[n]. In these representations the [n] is replaced by the value for each date and time elements that follow the [n]. Leading zeros are not required.&lt;br /&gt;For example: P1Y2M10DT2H30M (1 year, 2 months, 10 days, 2 horas and 30 minutos).&lt;/p&gt;</value>
   </data>
 </root>

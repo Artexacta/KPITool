@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Artexacta.App.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -187,39 +188,48 @@ namespace Artexacta.App.KPI
                 string trendText = "";
                 if (this.Trend > 0)
                 {
-                    trendText = string.Format("Up {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnit);
+                    trendText = string.Format("Up {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnitName.ToLower());
                 }
                 else if (this.Trend < 0)
                 {
-                    trendText = string.Format("Down {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnit);
+                    trendText = string.Format("Down {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnitName.ToLower());
                 }
                 return trendText;
             }
         }
 
-        public string ReportingUnit
+        public string KPITypeName
+        {
+            get
+            {
+                string kpiType = "";
+                BLL.KPITypeBLL theBLL = new BLL.KPITypeBLL();
+                KPIType theData = null;
+                try
+                {
+                    theData = theBLL.GetKPITypesByID(this._kpiTypeID, LanguageUtilities.GetLanguageFromContext());
+                    if (theData != null)
+                        kpiType = theData.TypeName;
+                }
+                catch { }
+                return kpiType;
+            }
+        }
+
+        public string ReportingUnitName
         {
             get
             {
                 string reportingUnit = "";
-                switch (this._reportingUnitID)
+                ReportingUnit.BLL.ReportingUnitBLL theBLL = new ReportingUnit.BLL.ReportingUnitBLL();
+                ReportingUnit.ReportingUnit theData = null;
+                try
                 {
-                    case "DAY  ":
-                        reportingUnit = "day";
-                        break;
-                    case "MONTH":
-                        reportingUnit = "month";
-                        break;
-                    case "QUART":
-                        reportingUnit = "quart";
-                        break;
-                    case "WEEK ":
-                        reportingUnit = "week";
-                        break;
-                    case "YEAR ":
-                        reportingUnit = "year";
-                        break;
+                    theData = theBLL.GetReportingUnitByID(this._reportingUnitID, LanguageUtilities.GetLanguageFromContext());
+                    if (theData != null)
+                        reportingUnit = theData.Name;
                 }
+                catch { }
                 return reportingUnit;
             }
         }

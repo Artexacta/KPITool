@@ -70,5 +70,36 @@ namespace Artexacta.App.KPI.BLL
             return theData;
         }
 
+        public static List<KPITarget> GetKPITargetCategoriesByKpiId(int kpiId)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            List<KPITarget> theList = new List<KPITarget>();
+            KPITarget theData = null;
+            try
+            {
+                KPITargetTableAdapter localAdapter = new KPITargetTableAdapter();
+                KPITargetDS.KPITargetDataTable theTable = localAdapter.GetKPITargetCategoriesByKpiId(kpiId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPITargetDS.KPITargetRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theData.Detalle = theRow.IsdetalleNull() ? "" : theRow.detalle;
+                        theData.Categories = theRow.IscategoriesNull() ? "" : theRow.categories;
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetKPITargetCategoriesByKpiId para kpiId: " + kpiId, exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
     }
 }

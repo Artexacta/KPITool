@@ -148,5 +148,33 @@ namespace Artexacta.App.Categories.BLL
             }
         }
 
+        public static List<Category> GetCategoriesByKpiId(int kpiId)
+        {
+            List<Category> theList = new List<Category>();
+            Category theData = null;
+            try
+            {
+                CategoriesTableAdapter localAdapter = new CategoriesTableAdapter();
+                CategoryDS.CategoriesDataTable theTable = localAdapter.GetCategoriesByKpiId(kpiId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (CategoryDS.CategoriesRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theData.ItemsList = theRow.IsitemsNull() ? "" : theRow.items;
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetCategoriesByKpiId para kpiId: " + kpiId, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de categorías del KPI.");
+            }
+
+            return theList;
+        }
+
     }
 }

@@ -35,12 +35,13 @@ namespace Artexacta.App.Categories
         {
             CategoryItem theNewRecord = new CategoryItem(
                 row.categoryItemID,
-                row.name);
+                row.name,
+                row.categoryID);
 
             return theNewRecord;
         }
 
-        public List<CategoryItem> GetCategoriesItemByCategoryId(string categoryId)
+        public static List<CategoryItem> GetCategoriesItemByCategoryId(string categoryId)
         {
             if(string.IsNullOrEmpty(categoryId))
                 throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
@@ -49,7 +50,8 @@ namespace Artexacta.App.Categories
             CategoryItem theData = null;
             try
             {
-                CategoryDS.CategoryItemsDataTable theTable = theAdapter.GetCategoryItemsByCategoryId(categoryId);
+                CategoryItemsTableAdapter localAdapter = new CategoryItemsTableAdapter();
+                CategoryDS.CategoryItemsDataTable theTable = localAdapter.GetCategoryItemsByCategoryId(categoryId);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {

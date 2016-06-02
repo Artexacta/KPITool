@@ -12,6 +12,7 @@ namespace Artexacta.App.Categories
     {
         private string _categoryItemID;
         private string _categoryItemName;
+        private string _categoryID;
         private decimal? _target;
 
         public decimal? Target
@@ -20,16 +21,22 @@ namespace Artexacta.App.Categories
             set { _target = value; }
         }
 
+        public string ItemID
+        {
+            get { return _categoryItemID; }
+            set { _categoryItemID = value; }
+        }
+
         public string ItemName
         {
             get { return _categoryItemName; }
             set { _categoryItemName = value; }
         }
 
-        public string ItemID
+        public string CategoryID
         {
-            get { return _categoryItemID; }
-            set { _categoryItemID = value; }
+            get { return _categoryID; }
+            set { _categoryID = value; }
         }
 
         public CategoryItem()
@@ -43,10 +50,11 @@ namespace Artexacta.App.Categories
             _target = target;
         }
 
-        public CategoryItem(string id, string name)
+        public CategoryItem(string categoryItemID, string name, string categoryID)
         {
-            _categoryItemID = id;
+            _categoryItemID = categoryItemID;
             _categoryItemName = name;
+            _categoryID = categoryID;
         }
 
     }
