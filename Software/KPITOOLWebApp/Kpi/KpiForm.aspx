@@ -24,6 +24,7 @@
                                 ValidationGroup="AddData"
                                 ErrorMessage="You must enter the Kpi Name">
                             </asp:RequiredFieldValidator>
+
                         </div>
 
                         <uc1:AddDataControl ID="DataControl" runat="server" />
@@ -40,6 +41,7 @@
                                 <asp:ControlParameter ControlID="LanguageHiddenField" Name="language" PropertyName="Value" Type="String" />
                             </SelectParameters>
                         </asp:ObjectDataSource>
+
                         <div class="has-error m-b-10">
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="KPITypeCombobox"
                                 Display="Dynamic"
@@ -432,7 +434,7 @@
                                     <ItemTemplate>
                                         <div class="col-md-3">
                                             <asp:LinkButton ID="RemoveButton" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ID") %>' CausesValidation="false"
-                                                 OnClientClick="return confirm('Are you sure you want to delete the category? All the data would be zero.')">
+                                                OnClientClick="return confirm('Are you sure you want to delete the category? All the data would be zero.')">
                                                      <i class="fa fa-minus-circle"></i>
                                             </asp:LinkButton>
                                             <asp:Label ID="CategoryLabel" runat="server" Text='<%# Eval("Name") %>' Style="margin: 0 5px;" />
@@ -650,6 +652,7 @@
     <asp:HiddenField ID="LanguageHiddenField" runat="server" Value="" />
     <asp:ObjectDataSource ID="CategoryObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetCategories" TypeName="Artexacta.App.Categories.BLL.CategoryBLL" OnSelected="CategoryObjectDataSource_Selected"></asp:ObjectDataSource>
+
     <script type="text/javascript">
         var unitCombo;
         var directionCombo;

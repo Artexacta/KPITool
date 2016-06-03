@@ -22,6 +22,11 @@
 
     <asp:Panel ID="KpisPanel" runat="server" CssClass="container">
         <div class="row">
+            <div class="col-md-6">
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-12">
                 <div class="tile">
                     <div class="t-header">
@@ -93,7 +98,7 @@
                         </asp:Repeater>
 
                         <br />
-                        <app:TourSettings runat="server" ID="Settings">
+                        <%-- <app:TourSettings runat="server" ID="Settings">
                             <Items>
                                 <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
                                     content="<%$ Resources: ActivitiesList, TourStep1 %>"
@@ -114,8 +119,7 @@
                         </app:TourSettings>
                         <div style="overflow: hidden">
                             <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
-                        </div>
-
+                        </div>--%>
                     </div>
                 </div>
             </div>
