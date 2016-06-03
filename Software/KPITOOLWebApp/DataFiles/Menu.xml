@@ -112,6 +112,13 @@ class:         if the menu is not public, the name of the class that the user
 				public="true"
         icon="zmdi zmdi-format-list-bulleted">
   </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="PersonMenu"
+				url="~/Personas/ListaPersonas.aspx"
+				public="true"
+        icon="zmdi zmdi-picture-in-picture">
+  </Menu>
   
   <Menu resourceFile="InitMasterPage"
 				resourceItem="KpiMenu"

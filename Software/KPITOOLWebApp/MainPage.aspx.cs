@@ -9,6 +9,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.Organization.BLL;
 using Artexacta.App.Organization;
+using Artexacta.App.Area.BLL;
+using Artexacta.App.Area;
+using Artexacta.App.Project.BLL;
+using Artexacta.App.Project;
+using Artexacta.App.Activities.BLL;
+using Artexacta.App.Activities;
+using Artexacta.App.KPI.BLL;
+using Artexacta.App.KPI;
+using Artexacta.App.People.BLL;
+using Artexacta.App.People;
 
 public partial class MainPage : SqlViewStatePage
 {
@@ -22,10 +32,18 @@ public partial class MainPage : SqlViewStatePage
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        OrgSearchControl.Config = new OrganizationSearch();
+        OrgSearchControl.OnSearch += OrgSearchControl_OnSearch;
+
         if (!IsPostBack)
         {
             BindOrganizations();
         }
+    }
+
+    void OrgSearchControl_OnSearch()
+    {
+        BindOrganizations();
     }
 
     private void BindOrganizations()
@@ -49,14 +67,11 @@ public partial class MainPage : SqlViewStatePage
 
         if (theOrganizations.Count == 0)
         {
-            //ResetTourHiddenField.Value = "true";
-            //showTourBtn.Visible = false;
             Tour.Hide();
         }
         if (theOrganizations.Count > 0)
         {
             Tour.Show();
-            //ShowTourHiddenField.Value = "true";
         }
     }
     
@@ -67,89 +82,137 @@ public partial class MainPage : SqlViewStatePage
         
         Organization item = (Organization)e.Item.DataItem;
 
-        //if (item.Areas.Count == 0 && item.Projects.Count == 0 && item.Activities.Count == 0 && item.Kpis.Count == 0)
-        //{
-        //    Panel element = (Panel)e.Item.FindControl("emptyMessage");
-        //    element.Visible = true;
-        //    return;
-        //}
+        if (item == null)
+            return;
 
-        //Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
-        //detailsPanel.Visible = true;
+        //Areas
+        AreaBLL theABLL = new AreaBLL();
+        List<Area> theAreas = new List<Area>();
+        try
+        {
+            theAreas = theABLL.GetAreasByOrganization(item.OrganizationID);
+        }
+        catch {}
 
-        //Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
-        //kpiImagePanel.Visible = true;
+        //Projects
+        ProjectBLL thePBLL = new ProjectBLL();
+        List<Project> theProjects = new List<Project>();
 
-        //UserControls_FRTWB_KpiImage imageOfKpi = (UserControls_FRTWB_KpiImage)e.Item.FindControl("ImageOfKpi");
-        //if (item.Kpis.Count > 0)
-        //{
-        //    Kpi firstKpi = item.Kpis.Values.ToList()[0];
-        //    if(firstKpi.KpiValues.Count > 0){
-        //        imageOfKpi.KpiId = firstKpi.ObjectId;
-        //        imageOfKpi.Visible = true;
-        //    }
-        //}
-        //Label areasLabel = (Label)e.Item.FindControl("AreasLabel");
-        //LinkButton projectButton = (LinkButton)e.Item.FindControl("ProjectsButton");
-        //LinkButton activitiesButton = (LinkButton)e.Item.FindControl("ActivitiesButton");
-        //LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
+        try
+        {
+            theProjects = thePBLL.GetProjectByOrganization(item.OrganizationID);
+        }
+        catch {}
 
-        //Literal and1 = (Literal)e.Item.FindControl("AndLiteral1");
-        //Literal and2 = (Literal)e.Item.FindControl("AndLiteral2");
-        //Literal and3 = (Literal)e.Item.FindControl("AndLiteral3");
+        //Activities
+        ActivityBLL theACBLL = new ActivityBLL();
+        List<Activity> theActivities = new List<Activity>();
 
-        //areasLabel.Visible = item.Areas.Count > 0;
-        //areasLabel.Text = areasLabel.Visible ? item.Areas.Count + " Area" + (item.Areas.Count == 1 ? "" : "s")  : "";
+        try
+        {
+            theActivities = theACBLL.GetActivitiesByOrganization(item.OrganizationID);
+        }
+        catch {}
 
-        //projectButton.Visible = item.Projects.Count > 0;
-        //projectButton.Text = projectButton.Visible ? item.Projects.Count + " Project(s)" : "";
+        //KPI
+        KPIBLL theKBLL = new KPIBLL();
+        List<KPI> theKPIs = new List<KPI>();
 
-        //activitiesButton.Visible = item.Activities.Count > 0;
-        //activitiesButton.Text = activitiesButton.Visible ? item.Activities.Count + (item.Activities.Count == 1 ? " Activity" : " Activities") : "";
+        try
+        {
+            theKPIs = theKBLL.GetKPIsByOrganization(item.OrganizationID);
+        }
+        catch {}
 
-        //kpisButton.Visible = item.Kpis.Count > 0;
-        //kpisButton.Text = kpisButton.Visible ? item.Kpis.Count + " KPI" + (item.Kpis.Count == 1 ? "" : "s") : "";
+        //Person
+        PeopleBLL thePeBLL = new PeopleBLL();
+        List<People> thePerson = new List<People>();
 
+        if (ShowPeopleCheckbox.Checked)
+        {
+            try
+            {
+                thePerson = thePeBLL.GetPeopleByOrganization(item.OrganizationID);
+            }
+            catch { }
+        }
 
-        //and1.Visible = areasLabel.Visible && projectButton.Visible;
-        //if (and1.Visible)
-        //{
-        //    if (activitiesButton.Visible || kpisButton.Visible)
-        //        and1.Text = ",";
-        //    else
-        //        and1.Text = " and ";
-        //}
+        if (theAreas.Count == 0 && theProjects.Count == 0 && theActivities.Count == 0 && theKPIs.Count == 0 && thePerson.Count == 0)
+        {
+            Panel element = (Panel)e.Item.FindControl("emptyMessage");
+            element.Visible = true;
+            return;
+        }
 
-        //and2.Visible = projectButton.Visible && activitiesButton.Visible;
-        //if (and2.Visible)
-        //{
-        //    if (kpisButton.Visible)
-        //        and2.Text = ",";
-        //    else
-        //        and2.Text = " and ";
-        //}
+        Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
+        detailsPanel.Visible = true;
 
-        //and3.Visible =  kpisButton.Visible;
-        //if (and3.Visible && kpisButton.Visible)
-        //{
-        //    and3.Text = " and ";
-        //}
+        Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
+        kpiImagePanel.Visible = true;
+
+        Label areasLabel = (Label)e.Item.FindControl("AreasLabel");
+        LinkButton projectButton = (LinkButton)e.Item.FindControl("ProjectsButton");
+        LinkButton activitiesButton = (LinkButton)e.Item.FindControl("ActivitiesButton");
+        LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
+        LinkButton PersonButton = (LinkButton)e.Item.FindControl("PersonLinkButton");
+
+        Literal and1 = (Literal)e.Item.FindControl("AndLiteral1");
+        Literal and2 = (Literal)e.Item.FindControl("AndLiteral2");
+        Literal and3 = (Literal)e.Item.FindControl("AndLiteral3");
+        Literal and4 = (Literal)e.Item.FindControl("AndLiteral4");
+
+        areasLabel.Visible = theAreas.Count > 0;
+        areasLabel.Text = areasLabel.Visible ? theAreas.Count + " Area" + (theAreas.Count == 1 ? "" : "s") : "";
+
+        projectButton.Visible = theProjects.Count > 0;
+        projectButton.Text = projectButton.Visible ? theProjects.Count + " Project(s)" : "";
+
+        activitiesButton.Visible = theActivities.Count > 0;
+        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " Activity" : " Activities") : "";
+
+        if (ShowPeopleCheckbox.Checked)
+        {
+            PersonButton.Visible = thePerson.Count > 0;
+            PersonButton.Text = PersonButton.Visible ? thePerson.Count + (thePerson.Count == 1 ? " People" : " Person") : "";
+        }
+
+        kpisButton.Visible = theKPIs.Count > 0;
+        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI" + (theKPIs.Count == 1 ? "" : "s") : "";
+
+        and1.Visible = areasLabel.Visible && projectButton.Visible;
+        if (and1.Visible)
+        {
+            if (activitiesButton.Visible || kpisButton.Visible)
+                and1.Text = ",";
+            else
+                and1.Text = " and ";
+        }
+
+        and2.Visible = projectButton.Visible && activitiesButton.Visible;
+        if (and2.Visible)
+        {
+            if (kpisButton.Visible)
+                and2.Text = ",";
+            else
+                and2.Text = " and ";
+        }
+
+        and3.Visible = activitiesButton.Visible && PersonButton.Visible;
+        if (and3.Visible)
+        {
+            if (PersonButton.Visible)
+                and3.Text = ",";
+            else
+                and3.Text = " and ";
+        }
+
+        and4.Visible = kpisButton.Visible;
+        if (and4.Visible && kpisButton.Visible)
+        {
+            and4.Text = " and ";
+        }
     }
     
-    protected void SearchButton_Click(object sender, EventArgs e)
-    {
-        //string searchTerm = SearchTextBox.Text.Trim().ToLower();
-        //List<Organization> results = new List<Organization>();
-        //foreach (var item in FrtwbSystem.Instance.Organizations.Values)
-        //{
-        //    if (item.Name.ToLower().Contains(searchTerm))
-        //        results.Add(item);
-        //}
-
-        //OrganizationsRepeater.DataSource = results;
-        //OrganizationsRepeater.DataBind();
-    }
-
     protected void OrganizationsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         int organizationId = 0;
@@ -224,4 +287,16 @@ public partial class MainPage : SqlViewStatePage
         }
     }
 
+    protected void OrgObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage("Error to get the organization list.");
+            e.ExceptionHandled = true;
+        }
+    }
+    protected void ShowPeopleCheckbox_CheckedChanged(object sender, EventArgs e)
+    {
+        BindOrganizations();
+    }
 }

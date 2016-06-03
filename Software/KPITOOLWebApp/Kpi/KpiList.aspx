@@ -10,6 +10,9 @@
                     <div class="col-md-1">
                         <app:AddButton ID="TheAddButton" runat="server" />
                     </div>
+                    <div class="col-md-8 col-md-offset-3">
+                        <asp:Label ID="OwnerObjectLabel" runat="server" Style="font-size: 10px"></asp:Label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,18 +24,6 @@
         <div class="row">
             <div class="col-md-6">
             </div>
-            <div class="col-md-6">
-                <app:SearchControl ID="KPISearchControl" runat="server"
-                    Title="Buscar:"
-                    DisplayHelp="true"
-                    DisplayContextualHelp="true"
-                    CssSearch="CSearch"
-                    CssSearchHelp="CSearchHelpPanel"
-                    CssSearchError="CSearchErrorPanel"
-                    SavedSearches="true" SavedSearchesID="KPIList"
-                    ImageHelpUrl="Images/Neutral/Help.png"
-                    ImageErrorUrl="~/images/exclamation.png" />
-            </div>
         </div>
 
         <div class="row">
@@ -42,44 +33,56 @@
                         <div class="th-title">KPIs</div>
                     </div>
                     <div class="t-body tb-padding">
-                        <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIObjectDataSource" OnItemCommand="KpisRepeater_ItemCommand">
+                        <app:SearchControl ID="KPISearchControl" runat="server"
+                            Title="Búsqueda"
+                            DisplayHelp="true"
+                            DisplayContextualHelp="true"
+                            CssSearch="CSearch"
+                            CssSearchHelp="CSearchHelpPanel"
+                            CssSearchError="CSearchErrorPanel"
+                            SavedSearches="true" SavedSearchesID="KPISavedSearch"
+                            ImageHelpUrl="Images/Neutral/Help.png"
+                            ImageErrorUrl="~/images/exclamation.png" />
+                    </div>
+                    <div class="t-body tb-padding">
+                        <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIListObjectDataSource" OnItemCommand="KpisRepeater_ItemCommand">
                             <ItemTemplate>
                                 <div class="row m-b-10">
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="ViewKpi" data-id='<%# Eval("ObjectId") %>' runat="server" CssClass="viewBtn"
-                                            OnClick="ViewKpi_Click">
+                                        <asp:LinkButton ID="ViewKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="ViewKpi">
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="EditKpi" data-id='<%# Eval("ObjectId") %>' runat="server" CssClass="viewBtn"
-                                            OnClick="EditKpi_Click">
+                                        <asp:LinkButton ID="EditKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="EditKpi">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1 disabled">
-                                        <asp:LinkButton ID="ShareKpi" data-id='<%# Eval("ObjectId") %>' runat="server" CssClass="viewBtn"
-                                            OnClick="ShareKpi_Click">
+                                        <asp:LinkButton ID="ShareKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="ShareKpi">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="DeleteKpi" data-id='<%# Eval("ObjectId") %>' CommandArgument='<%# Eval("ObjectId") %>'
-                                            CommandName="DeleteKpi" runat="server" CssClass="viewBtn"
-                                            OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
+                                        <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server"
+                                            CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
                                     <div class="col-md-1">
-                                        <asp:LinkButton ID="ListValuesKpi" data-id='<%# Eval("ObjectId") %>' CssClass="viewBtn" CommandArgument='<%# Eval("ObjectId") %>' OnClick="ListValuesKpi_Click" CommandName="ListValuesKpi" runat="server"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="ListValuesKpi" CssClass="viewBtn" CommandArgument='<%# Eval("KpiID") %>' CommandName="ListValuesKpi"
+                                            runat="server"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></asp:LinkButton>
                                     </div>
                                     <div class="col-md-7">
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
                                             (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("Owner")) %>'
+                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("KpiID")) %>'
                                                 CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("ObjectId") %>'></asp:LinkButton>
+                                                CommandArgument='<%# Eval("KpiID") %>'></asp:LinkButton>
                                             )
                                         </p>
                                     </div>
@@ -121,12 +124,12 @@
                 </div>
             </div>
         </div>
-        <asp:ObjectDataSource ID="KPIObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetKPIBySearch" TypeName="Artexacta.App.KPI.BLL.KPIBLL">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="KPISearchControl" Name="whereSql" PropertyName="Sql" Type="String" />
-            </SelectParameters>
-        </asp:ObjectDataSource>
     </asp:Panel>
-
+    <asp:ObjectDataSource ID="KPIListObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetKPIsBySearch" TypeName="Artexacta.App.KPI.BLL.KPIBLL" OnSelected="KPIListObjectDataSource_Selected">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="KPISearchControl" PropertyName="Sql" Name="whereClause" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
 </asp:Content>
 

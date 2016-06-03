@@ -11,62 +11,10 @@
                         <app:AddButton ID="TheAddButton" runat="server" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
-                        <asp:Panel ID="SearchPanel" runat="server" CssClass="input-group"  ClientIDMode="Static">
-
-
-                            <%--<asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search..."></asp:TextBox>
-                            <div class="input-group-addon last" style="cursor: pointer">
-
-                                <a class="dropdown-toggle" id="advanced-search" style="color: #000; display: block">
-                                    <i class="zmdi zmdi-chevron-down" id="advanced-search-icon"></i>
-                                </a>
-                                <div id="advanced-search-panel" class="dropdown-menu col-md-12" style="padding: 10px">
-                                    <div style="font-size:12px;" class="m-b-5">Owner</div>
-                                    <telerik:RadComboBox ID="ObjectsComboBox" runat="server"
-                                        Width="100%"
-                                        Filter="Contains"
-                                        DataValueField="UniqueId"
-                                        DataTextField="Name"
-                                        OnClientSelectedIndexChanged="onObjectSelected"
-                                        OnDataBound="ObjectsComboBox_DataBound"
-                                        BorderColor="Transparent"
-                                        EmptyMessage="-- Select an Object --">
-                                        <HeaderTemplate>
-                                            <ul>
-                                                <li class="radcol">Name</li>
-                                                <li class="radcol">Type</li>
-                                            </ul>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <ul>
-                                                <li class="radcol">
-                                                    <%# DataBinder.Eval(Container.DataItem, "Name") %>
-                                                </li>
-                                                <li class="radcol">
-                                                    <%# DataBinder.Eval(Container.DataItem, "Type") %>
-                                                </li>
-                                            </ul>
-                                        </ItemTemplate>
-                                    </telerik:RadComboBox>
-                                    <div class="text-right">
-                                        <a href="#" id="clearSelection" style="display:none;font-size:9px">Clear selection</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="input-group-addon last">
-                                <asp:LinkButton ID="SearchButton" runat="server" Style="color: #000" OnClick="SearchButton_Click">
-                                    <i class="zmdi zmdi-search"></i>
-                                </asp:LinkButton>
-                                <asp:ImageButton ID="SearchImageButton" runat="server" OnClick="SearchButton_Click"
-                                    ImageUrl="~/Images/Neutral/pixel.gif" Style="display: none" />
-                            </span>--%>
-                        </asp:Panel>
                         <asp:Label ID="OwnerObjectLabel" runat="server" Style="font-size: 10px"></asp:Label>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
         </div>
     </div>
 
@@ -76,6 +24,18 @@
                 <div class="tile">
                     <div class="t-header">
                         <div class="th-title">Projects</div>
+                    </div>
+                    <div class="t-body tb-padding">
+                        <app:SearchControl ID="ProjectSearchControl" runat="server"
+                            Title="Búsqueda"
+                            DisplayHelp="true"
+                            DisplayContextualHelp="true"
+                            CssSearch="CSearch"
+                            CssSearchHelp="CSearchHelpPanel"
+                            CssSearchError="CSearchErrorPanel"
+                            SavedSearches="true" SavedSearchesID="ProjectSavedSearch"
+                            ImageHelpUrl="Images/Neutral/Help.png"
+                            ImageErrorUrl="~/images/exclamation.png" />
                     </div>
                     <div class="t-body tb-padding" id="ProjectList">
                         <asp:Repeater ID="ProjectsRepeater" runat="server" OnItemDataBound="ProjectsRepeater_ItemDataBound"
@@ -111,9 +71,12 @@
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
                                             (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# Eval("Owner") %>'
-                                                CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
+                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                                 CommandName="ViewOrganization"
+                                                 CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
+                                            <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                                CommandName="ViewArea"
+                                                CommandArgument='<%# Eval("AreaID") %>'></asp:LinkButton>
                                             )
                                         </p>
                                     </div>
@@ -122,10 +85,10 @@
                                     <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
                                         This project does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
                                     </asp:Panel>
-                                    <%-- <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
-                                        <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" />
+                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                        <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                     </asp:Panel>
-                                   <asp:Panel runat="server" id="detailsContainer" class="col-md-11 m-t-5" visible="false">
+                                    <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
                                         This project has 
                                         <asp:LinkButton ID="ActivitiesButton" runat="server" Visible="false"
                                             CommandName="ViewActivities" CommandArgument='<%# Eval("ProjectID") %>'>
@@ -135,7 +98,7 @@
                                         <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
                                             CommandName="ViewKPIs" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
-                                    </asp:Panel>--%>
+                                    </asp:Panel>
                                 </div>
                             </ItemTemplate>
                             <FooterTemplate>
@@ -153,21 +116,21 @@
                         </div>--%>
                         <app:TourSettings runat="server" ID="Settings">
                             <Items>
-                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
-                                    Content="<%$ Resources: ProjectList, TourStep1 %>"
-                                    Element="#TheAddButton" />
-                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
-                                    Content="<%$ Resources: ProjectList, TourStep2 %>"
-                                    Element="#OrganizationList .editBtn:first" />
-                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
-                                    Content="<%$ Resources: ProjectList, TourStep3 %>"
-                                    Element="#OrganizationList .detailsBtn:first" />
-                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
-                                    Content="<%$ Resources: ProjectList, TourStep4 %>"
-                                    Element="#OrganizationList .shareBtn:first" />
-                                <app:TourItem Title="<%$ Resources: ProjectList, TourStepTitle %>"
-                                    Content="<%$ Resources: ProjectList, TourStep5 %>"
-                                    Element="#SearchPanel" />
+                                <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    content="<%$ Resources: ProjectList, TourStep1 %>"
+                                    element="#TheAddButton" />
+                                <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    content="<%$ Resources: ProjectList, TourStep2 %>"
+                                    element="#OrganizationList .editBtn:first" />
+                                <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    content="<%$ Resources: ProjectList, TourStep3 %>"
+                                    element="#OrganizationList .detailsBtn:first" />
+                                <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    content="<%$ Resources: ProjectList, TourStep4 %>"
+                                    element="#OrganizationList .shareBtn:first" />
+                                <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
+                                    content="<%$ Resources: ProjectList, TourStep5 %>"
+                                    element="#SearchPanel" />
                             </Items>
                         </app:TourSettings>
                         <div style="overflow: hidden">
@@ -182,7 +145,7 @@
     <asp:ObjectDataSource ID="ProjectsObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetProjectBySearch" TypeName="Artexacta.App.Project.BLL.ProjectBLL" OnSelected="ProjectsObjectDataSource_Selected">
         <SelectParameters>
-            <asp:Parameter DefaultValue="1=1" Name="whereClause" Type="String" />
+            <asp:ControlParameter ControlID="ProjectSearchControl" PropertyName="Sql" Name="whereClause" Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>
 
