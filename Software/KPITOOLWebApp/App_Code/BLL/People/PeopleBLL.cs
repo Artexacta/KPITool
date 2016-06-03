@@ -96,6 +96,38 @@ namespace Artexacta.App.People.BLL
             return theList;
         }
 
+        public static List<People> GetPeopleBySearch(string whereClause)
+        {
+            if (string.IsNullOrEmpty(whereClause))
+                whereClause = "1=1";
+
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            List<People> theList = new List<People>();
+            People theData = null;
+            try
+            {
+                PeopleTableAdapter localAdapter = new PeopleTableAdapter();
+                PeopleDS.PeopleDataTable theTable = localAdapter.GetPeopleBySearch(userName, whereClause);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (PeopleDS.PeopleRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error to obtain the people by search.");
+                throw exc;
+            }
+
+            return theList;
+        }
+
         public List<People> GetPeopleByOrganization(int organizationId)
         {
             if (organizationId <= 0)

@@ -6,97 +6,111 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>
-                <asp:Label ID="TitleLabel" runat="server" Text="Lista de Personas" CssClass="title" /></h5>
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-1">
+                        <app:AddButton ID="TheAddButton" runat="server" />
+                    </div>
+                    <div class="col-md-8 col-md-offset-3">
+                        <asp:Label ID="OwnerObjectLabel" runat="server" Style="font-size: 10px"></asp:Label>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="ibox-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>
-                                <asp:LinkButton ID="NewButton" runat="server" CssClass="btn btn-primary min-letter"
-                                    OnClick="NewButton_Click"><i class="fa fa-user-plus"></i> Registrar nueva persona
-                                </asp:LinkButton>
-                            </p>
-                            <uc1:SearchControl ID="PersonaSearchControl" runat="server" Title="Buscar: " DisplayHelp="true"
-                                DisplayContextualHelp="true" CssSearch="CSearch" CssSearchError="CSearchErrorPanel"
-                                CssSearchHelp="CSearchHelpPanel" ImageErrorUrl="~/Images/neutral/exclamation.png"
-                                ImageHelpUrl="~/Images/neutral/Help.png" />
-                        </div>
-                    </div>
-                    <telerik:RadGrid ID="PersonaRadGrid" runat="server" CellSpacing="0" DataSourceID="PersonaObjectDataSource"
-                        GridLines="None" AllowPaging="true" AutoGenerateColumns="false" PageSize="10" AllowSorting="true"
-                        OnItemCommand="PersonaRadGrid_ItemCommand" Skin="aetemplate" EnableEmbeddedSkins="false" CssClass="table-responsive">
-                        <MasterTableView DataSourceID="PersonaObjectDataSource" AutoGenerateColumns="False" DataKeyNames="PersonaId"
-                            CommandItemDisplay="Top" OverrideDataSourceControlSorting="true">
-                            <CommandItemSettings ShowAddNewRecordButton="false" ShowExportToExcelButton="true"
-                                ShowRefreshButton="false" ExportToExcelText="Exportar a Excel"></CommandItemSettings>
-                            <NoRecordsTemplate>
-                                <asp:Label ID="NoRecordsLabel" runat="server" Text="No existen personas"></asp:Label>
-                            </NoRecordsTemplate>
-                            <PagerStyle Mode="NextPrevAndNumeric"></PagerStyle>
-                            <Columns>
-                                <telerik:GridButtonColumn UniqueName="EditCommandColumn" HeaderText="Editar" CommandName="Edit"
-                                    ButtonType="ImageButton" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center"
-                                    HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ImageUrl="~/Images/neutral/viewdetails.gif" />
-                                <telerik:GridButtonColumn UniqueName="DeleteCommandColumn" HeaderText="Eliminar" CommandName="Delete"
-                                    ButtonType="ImageButton" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center"
-                                    HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ImageUrl="~/Images/neutral/delete.gif"
-                                    ConfirmText="¿Está seguro que desea eliminar la información de la Persona?" />
-                                <telerik:GridBoundColumn DataField="PersonaId" HeaderText="PersonaId" SortExpression="PersonaId" UniqueName="PersonaId"
-                                    DataType="System.Int32" FilterControlAltText="Filter PersonaId column" Visible="false">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" UniqueName="Nombre"
-                                    FilterControlAltText="Filter Nombre column" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Email" HeaderText="Correo electrónico" SortExpression="Email" UniqueName="Email"
-                                    FilterControlAltText="Filter Email column" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="FechaNacimiento" HeaderText="Fecha de Nacimiento" SortExpression="FechaNacimiento"
-                                    UniqueName="FechaNacimiento" DataType="System.DateTime" FilterControlAltText="Filter FechaNacimiento column"
-                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataFormatString="{0:dd-MMM-yyyy}">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="PaisForDisplay" HeaderText="País" SortExpression="PaisId" UniqueName="PaisId"
-                                    FilterControlAltText="Filter PaisId column" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="EstadoCivil" HeaderText="Estado Civil" SortExpression="EstadoCivil" UniqueName="EstadoCivil"
-                                    FilterControlAltText="Filter EstadoCivil column" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Genero" HeaderText="Género" SortExpression="Genero" UniqueName="Genero"
-                                    FilterControlAltText="Filter Genero column" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Salario" HeaderText="Salario" SortExpression="Salario" UniqueName="Salario" DataType="System.Decimal"
-                                    FilterControlAltText="Filter Salario column" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>
-                            </Columns>
-                        </MasterTableView>
-                        <ExportSettings ExportOnlyData="true" IgnorePaging="true" HideStructureColumns="false" FileName="ListaPersonas">
-                            <Excel Format="Html" />
-                        </ExportSettings>
-                    </telerik:RadGrid>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="t-header">
+                    <div class="th-title">People</div>
+                </div>
+                <div class="t-body tb-padding">
+                    <app:SearchControl ID="PeopleSearchControl" runat="server"
+                        Title="Búsqueda"
+                        DisplayHelp="true"
+                        DisplayContextualHelp="true"
+                        CssSearch="CSearch"
+                        CssSearchHelp="CSearchHelpPanel"
+                        CssSearchError="CSearchErrorPanel"
+                        SavedSearches="true" SavedSearchesID="PeopleSavedSearch"
+                        ImageHelpUrl="Images/Neutral/Help.png"
+                        ImageErrorUrl="~/images/exclamation.png" />
+                </div>
+                <div class="t-body tb-padding" id="ActivityList">
+                    <asp:Repeater ID="PeopleRepeater" runat="server" DataSourceID="PersonaObjectDataSource" OnItemCommand="PeopleRepeater_ItemCommand"
+                        OnItemDataBound="PeopleRepeater_ItemDataBound" >
+                        <ItemTemplate>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <asp:LinkButton ID="ViewPerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn detailsBtn"
+                                        CommandName="ViewPerson">
+                                        <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="col-md-1">
+                                    <asp:LinkButton ID="EditPerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn editBtn"
+                                        CommandName="EditPerson">
+                                        <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="col-md-1 disabled">
+                                    <asp:LinkButton ID="SharePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn shareBtn">
+                                        <i class="zmdi zmdi-share zmdi-hc-fw"></i>
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="col-md-1">
+                                    <asp:LinkButton ID="DeletePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn deleteBtn"
+                                        CommandName="DeletePerson"
+                                        OnClientClick="return confirm('Are you sure you want to delete selected person?')">   
+                                        <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
+                                    </asp:LinkButton>
+                                </div>
+                                <div class="col-md-8">
+                                    <p style="font-size: 14px; padding-top: 2px;">
+                                        <%# Eval("Name") %>
+                                        (
+                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("PersonID")) %>'
+                                                CommandName="ViewOwner"
+                                                CommandArgument='<%# Eval("PersonID") %>'></asp:LinkButton>
+                                        )
+                                    </p>
+                                </div>
+                            </div>
+                            <%--<div class="row m-b-20">
+                                <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
+                                    This person does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
+                                </asp:Panel>
+                                <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
+                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" OwnerType="ACTIVITY" />
+                                </asp:Panel>
+                                <asp:Panel runat="server" ID="detailsContainer" class="col-md-111 m-t-5" Visible="false">
+                                    This person has 
+                                    <asp:LinkButton ID="KpisButton" runat="server" Visible="false"></asp:LinkButton>
+                                </asp:Panel>
+                            </div>--%>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# PeopleRepeater.Items.Count == 0 %>'>
+                                <div class="col-md-12 text-center">
+                                    -- There are no person registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above --
+                                </div>
+                            </asp:Panel>
+                        </FooterTemplate>
+                    </asp:Repeater>
 
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".rgMasterTable").addClass("table table-striped table-bordered table-hover");
-                $(".rgExpXLS").val('E');
-            });
-        </script>
     </div>
+
     <asp:ObjectDataSource ID="PersonaObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
-        TypeName="Artexacta.App.Persona.BLL.PersonaBLL" SelectMethod="GetRecordForSearch" OnSelected="PersonaObjectDataSource_Selected">
+        TypeName="Artexacta.App.People.BLL.PeopleBLL" SelectMethod="GetPeopleBySearch" OnSelected="PersonaObjectDataSource_Selected">
         <SelectParameters>
-            <asp:ControlParameter ControlID="PersonaSearchControl" Name="whereClause" PropertyName="Sql"
+            <asp:ControlParameter ControlID="PeopleSearchControl" Name="whereClause" PropertyName="Sql"
                 Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>

@@ -40,8 +40,6 @@
                     <asp:TextBox ID="OrganizationName" runat="server" CssClass="form-control" MaxLength="100" Text="" />
                     <asp:RequiredFieldValidator ID="OrganizationNameValidator" runat="server" ControlToValidate="OrganizationName"
                         ErrorMessage="<% $Resources: Organization, MessageNameRequired %>" Display="Dynamic" ValidationGroup="OrganizationValidator" />
-                    <asp:CustomValidator ID="ExistsOrganizationCustomValidator" runat="server" ErrorMessage="<% $Resources: Organization, MessageNameExists %>"
-                        Display="Dynamic" ValidationGroup="OrganizationValidator" OnServerValidate="ExistsOrganizationCustomValidator_ServerValidate" ></asp:CustomValidator>
                 </div>
             </div>
         </div>
