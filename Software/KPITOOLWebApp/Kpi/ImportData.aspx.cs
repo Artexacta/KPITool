@@ -74,7 +74,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             SubtitleLabel.Text = theData.Name;
             KPIType.Text = theData.KPITypeName;
             ReportingPeriod.Text = theData.ReportingUnitName;
-            StartingDate.Text = theData.StartDate == DateTime.MinValue ? " - " : theData.StartDate.ToString("MM/dd/yyyy");
+            StartingDate.Text = theData.StartDate == DateTime.MinValue ? " - " : theData.StartDate.ToString(CultureInfo.InvariantCulture).Substring(0, 10);
             UnitIdHiddenField.Value = theData.UnitID;
 
             switch (UnitIdHiddenField.Value)
@@ -166,7 +166,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     #region EnterData Manually
     private void LoadFormEnterData()
     {
-        DateTextBox.Text = DateTime.Now.ToString("MM/dd/yyyy");
+        DateTextBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
 
         //-- get CategoriesItems in Target
         List<KPITarget> theTargetList = new List<KPITarget>();
@@ -251,10 +251,12 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                     else
                     {
                         TextBox valueTextBox = (TextBox)item.FindControl("ValueTextBox");
-                        theData.Measurement = Convert.ToDecimal(valueTextBox.Text, CultureInfo.InvariantCulture);
+                        if (!string.IsNullOrEmpty(valueTextBox.Text))
+                            theData.Measurement = Convert.ToDecimal(valueTextBox.Text, CultureInfo.InvariantCulture);
                     }
 
-                    theList.Add(theData);
+                    if (theData.Measurement > 0 || theData.DataTime != null)
+                        theList.Add(theData);
                 }
             }
         }

@@ -142,15 +142,10 @@
                             <p><asp:Label ID="ValueDateLabel" runat="server" Text="Value Date:" Font-Bold="true" /></p>
                         </div>
                         <div class="col-md-3">
-                            <div class="input-group date" id="datetimepicker1">
-                                <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+                            <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" TextMode="Date" />
                             <div class="has-error m-b-10">
                                 <asp:RequiredFieldValidator ID="DateRequiredFieldValidator" runat="server" ControlToValidate="DateTextBox"
-                                    Display="Dynamic" ValidationGroup="EnterData" ErrorMessage="You must enter the date.">
+                                    Display="Dynamic" ValidationGroup="EnterData" ErrorMessage="You must enter the date." ForeColor="Red">
                                 </asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -173,11 +168,11 @@
                                         <div id="pnlDataDecimal" runat="server" class="col-md-10 p-l-0 p-r-0">
                                             <div class="row">
                                                 <div class="col-md-3 p-l-0 p-r-0">
-                                                    <asp:TextBox ID="ValueTextBox" runat="server" CssClass="form-control dataText" />
+                                                    <asp:TextBox ID="ValueTextBox" runat="server" CssClass="form-control dataText" TextMode="Number" />
                                                 </div>
-                                                <div class="col-md-7 p-t-5">
+                                                <%--<div class="col-md-7 p-t-5">
                                                     <span class="label label-danger">Required</span>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                             <div class="row">
                                                 <div class="has-error m-b-10">
@@ -346,9 +341,9 @@
                                                         <asp:ListItem Text="59 minutes" Value="59"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="col-md-1 p-l-0 p-r-0 p-t-5">
+                                                <%--<div class="col-md-1 p-l-0 p-r-0 p-t-5">
                                                     <span class="label label-danger">Required</span>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                             <div class="row">
                                                 <div class="has-error m-b-10">
@@ -362,6 +357,13 @@
                                     <asp:Label ID="lblEmptyData" runat="server" Visible='<%# ((Repeater)Container.NamingContainer).Items.Count == 0 %>' Text="There are no data to register" />
                                 </FooterTemplate>
                             </asp:Repeater>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="has-error m-b-10">
+                                <asp:Label ID="RequiredFieldValidatorLabel" runat="server" ForeColor="Red" />
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -424,55 +426,67 @@
     </div>
 
     <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker1').datetimepicker({
-                format: "DD/MM/YYYY"
-            });
-        });
-
         function VerifiyData() {
-            var dataOK = true;
-            if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "TIME") {
-                $(".rowData").each(function () {
-                    var year = $(this).find('select.comboYear').val();
-                    var month = $(this).find('select.comboMonth').val();
-                    var day = $(this).find('select.comboDay').val();
-                    var hour = $(this).find('select.comboHour').val();
-                    var minute = $(this).find('select.comboMinute').val();
+            if (Page_ClientValidate("EnterData")) {
+                var dataOK = true;
+                var noData = true;
+                if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "TIME") {
+                    $(".rowData").each(function () {
+                        var year = $(this).find('select.comboYear').val();
+                        var month = $(this).find('select.comboMonth').val();
+                        var day = $(this).find('select.comboDay').val();
+                        var hour = $(this).find('select.comboHour').val();
+                        var minute = $(this).find('select.comboMinute').val();
 
-                    if (year + month + day + hour + minute == 0) {
-                        $(this).find('span.timeErrorLabel').text("You must select a time.");
+                        if (year + month + day + hour + minute > 0) {
+                            noData = false;
+                        }
+                    });
+
+                    if (noData) {
+                        $("#<%= RequiredFieldValidatorLabel.ClientID %>").text("You must select a time for at least one item.");
                         dataOK = false;
                     } else {
-                        $(this).find('span.timeErrorLabel').text("");
+                        $("#<%= RequiredFieldValidatorLabel.ClientID %>").text("");
                     }
-                });
+
+                } else {
+                    var regexInt = new RegExp('^[0-9]{1,21}$');
+                    var regexDecimal = new RegExp('^[0-9]{1,17}([\.\,][0-9]{1,3})*$');
+
+                    $(".rowData").each(function () {
+                        var value = $(this).find('input.dataText').val();
+                        if (value != "") {
+                            if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "INT" && !regexInt.test(value)) {
+                                $(this).find('span.valueErrorLabel').text("The value must be integer.");
+                                dataOK = false;
+                                noData = false;
+
+                            } else if ($("#<%= UnitIdHiddenField.ClientID %>").val() != "TIME" && $("#<%= UnitIdHiddenField.ClientID %>").val() != "INT" && !regexDecimal.test(value)) {
+                                $(this).find('span.valueErrorLabel').text("The value must be decimal with point as separator.");
+                                dataOK = false;
+                                noData = false;
+
+                            } else {
+                                $(this).find('span.valueErrorLabel').text("");
+                            }
+                            noData = false;
+                        }
+                    });
+
+                    if (noData) {
+                        $("#<%= RequiredFieldValidatorLabel.ClientID %>").text("You must enter a value for at least one item.");
+                        dataOK = false;
+                    } else {
+                        $("#<%= RequiredFieldValidatorLabel.ClientID %>").text("");
+                    }
+                }
+
+                return dataOK;
 
             } else {
-                var regexInt = new RegExp('^[0-9]{1,21}$');
-                var regexDecimal = new RegExp('^[0-9]{1,21}(\.[0-9]{1,3})*$');
-
-                $(".rowData").each(function () {
-                    var value = $(this).find('input.dataText').val();
-                    if (value == "") {
-                        $(this).find('span.valueErrorLabel').text("You must enter an value.");
-                        dataOK = false;
-
-                    } else if($("#<%= UnitIdHiddenField.ClientID %>").val() == "INT" && !regexInt.test(value)){
-                        $(this).find('span.valueErrorLabel').text("The value must be integer.");
-                        dataOK = false;
-
-                    } else if ($("#<%= UnitIdHiddenField.ClientID %>").val() != "TIME" && $("#<%= UnitIdHiddenField.ClientID %>").val() != "INT" && !regexDecimal.test(value)) {
-                        $(this).find('span.valueErrorLabel').text("The value must be decimal with point as separator.");
-                        dataOK = false;
-
-                    } else {
-                        $(this).find('span.valueErrorLabel').text("");
-                    }
-                });
+                return false;
             }
-
-            return dataOK;
         }
     </script>
 
