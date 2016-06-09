@@ -260,6 +260,12 @@
                     async: false,
                     success: function (msg) {
                         data = msg.d;
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus + ": " + jQuery.parseJSON(XMLHttpRequest.responseText).Message);
+                    },
+                    failure: function () {
+                        alert('No se pudo verificar si ya existe un registro para el usuario.');
                     }
                 });
 

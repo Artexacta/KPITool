@@ -27,9 +27,5 @@ namespace Artexacta.App.KPI
             this.Target = target;
         }
 
-        public string Detalle { get; set; }
-
-        public string Categories { get; set; }
-
     }
 }

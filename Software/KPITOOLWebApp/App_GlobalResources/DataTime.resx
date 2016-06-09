@@ -117,136 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelButton" xml:space="preserve">
-    <value>Cancelar</value>
+  <data name="DaysValue" xml:space="preserve">
+    <value>days</value>
   </data>
-  <data name="CategoryColumn" xml:space="preserve">
-    <value>Categoría</value>
+  <data name="DaysValueSingle" xml:space="preserve">
+    <value>day</value>
   </data>
-  <data name="DateColumn" xml:space="preserve">
-    <value>Fecha</value>
+  <data name="HoursValue" xml:space="preserve">
+    <value>hours</value>
   </data>
-  <data name="DecimalDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;Para cargar los datos de un archivo Excel se deben tener al menos dos columnas de nombres "Fecha" y "Valor". Los valores deben ser sólo de tipo decimal de hasta tres decimales.&lt;/p&gt;</value>
+  <data name="HoursValueSingle" xml:space="preserve">
+    <value>hour</value>
   </data>
-  <data name="DeleteColumn" xml:space="preserve">
-    <value>Eliminar</value>
+  <data name="MinutesValue" xml:space="preserve">
+    <value>minutes</value>
   </data>
-  <data name="DeletedData" xml:space="preserve">
-    <value>Los datos fueron eliminados.</value>
+  <data name="MinutesValueSingle" xml:space="preserve">
+    <value>minute</value>
   </data>
-  <data name="EmptyFile" xml:space="preserve">
-    <value>El archivo está vacío.</value>
+  <data name="MonthsValue" xml:space="preserve">
+    <value>months</value>
   </data>
-  <data name="EnterDataButton" xml:space="preserve">
-    <value>Introducir los valores manualmente</value>
+  <data name="MonthsValueSingle" xml:space="preserve">
+    <value>month</value>
   </data>
-  <data name="EnterDataText" xml:space="preserve">
-    <value>Cuando existen valores para la fecha indicada:</value>
+  <data name="YearsValue" xml:space="preserve">
+    <value>years</value>
   </data>
-  <data name="ErrorDataInFile" xml:space="preserve">
-    <value>Error en la fila: {0}, la combinación de elementos '{1}' no existe para el KPI.</value>
-  </data>
-  <data name="ErrorsInFile" xml:space="preserve">
-    <value>Se han encontrado los siguientes errores al leer el archivo '{0}':</value>
-  </data>
-  <data name="ErrorToObtainData" xml:space="preserve">
-    <value>Se produjo un error al leer los datos a guardar.</value>
-  </data>
-  <data name="FileUploadRequired" xml:space="preserve">
-    <value>Debe seleccionar un archivo.</value>
-  </data>
-  <data name="IntegerDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;Para cargar los datos de un archivo Excel se deben tener al menos dos columnas de nombres "Fecha" y "Valor". Los valores deben ser sólo números enteros.&lt;/p&gt;</value>
-  </data>
-  <data name="InvalidaFile" xml:space="preserve">
-    <value>Archivo inválido. Por favor, seleccione un archivo con la extensión </value>
-  </data>
-  <data name="KPITypeLabel" xml:space="preserve">
-    <value>Tipo KPI:</value>
-  </data>
-  <data name="lblEmptyData" xml:space="preserve">
-    <value>No existen datos para registrar</value>
-  </data>
-  <data name="NoDataInFile" xml:space="preserve">
-    <value>El archivo no tiene datos para registrar.</value>
-  </data>
-  <data name="NoDataInSession" xml:space="preserve">
-    <value>No se tienen los datos en sesión.</value>
-  </data>
-  <data name="NoDataRows" xml:space="preserve">
-    <value>No hay mediciones registradas para este KPI.</value>
-  </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Ingreso de datos para KPI </value>
-  </data>
-  <data name="RegisteredData" xml:space="preserve">
-    <value>Se registraron los datos.</value>
-  </data>
-  <data name="ReportingPeriodLabel" xml:space="preserve">
-    <value>Periodo de reporte:</value>
-  </data>
-  <data name="ReportValueLabel" xml:space="preserve">
-    <value>Reportar el nuevo valor:</value>
-  </data>
-  <data name="RequiereDateValue" xml:space="preserve">
-    <value>Debe introducir la fecha.</value>
-  </data>
-  <data name="RequiereTimeSelected" xml:space="preserve">
-    <value>"Debe seleccionar un tiempo para al menos uno de los datos."</value>
-  </data>
-  <data name="RequiredLabel" xml:space="preserve">
-    <value>Requerido</value>
-  </data>
-  <data name="RequireValueEntered" xml:space="preserve">
-    <value>"Debe introducir un valor para al menos uno de los datos."</value>
-  </data>
-  <data name="ReturnLink" xml:space="preserve">
-    <value>Regresar al listado de KPIs</value>
-  </data>
-  <data name="SaveButton" xml:space="preserve">
-    <value>Insertar nuevo valor</value>
-  </data>
-  <data name="SaveUploadDataButton" xml:space="preserve">
-    <value>Guardar los datos cargados</value>
-  </data>
-  <data name="StartingDateLabel" xml:space="preserve">
-    <value>Fecha de inicio:</value>
-  </data>
-  <data name="TimeDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;Para cargar los datos de un archivo Excel se deben tener al menos dos columnas de nombres "Fecha" y "Valor". Los valores son lapsos de tiempo y deben estar en formato ISO8601: las duraciones de tiempo son representadas por el formato P[n]Y[n]M[n]DT[n]H[n]M[n]. En esta representación [n] es reemplazada por el valor de cada elemento de tiempo que sigue después de [n]. No se requieren ceros a la izquierda.&lt;br /&gt;Ejemplo: P1Y2M10DT2H30M (1 año, 2 meses, 10 días, 2 horas y 30 minutos).&lt;/p&gt;</value>
-  </data>
-  <data name="TypeUploadItemAdd" xml:space="preserve">
-    <value>Añadir un nuevo valor al antiguo</value>
-  </data>
-  <data name="TypeUploadItemReplace" xml:space="preserve">
-    <value>Reemplazar valor antiguo por uno nuevo</value>
-  </data>
-  <data name="UploadDataButton" xml:space="preserve">
-    <value>Cargar datos</value>
-  </data>
-  <data name="UploadDataLabel" xml:space="preserve">
-    <value>Los siguientes datos van a ser registrados:</value>
-  </data>
-  <data name="UploadDataText" xml:space="preserve">
-    <value>Cuando existen valores para las fechas especificadas en el archivo de Excel:</value>
-  </data>
-  <data name="UploadFileButton" xml:space="preserve">
-    <value>Cargar valores de un archivo de Excel</value>
-  </data>
-  <data name="ValueColumn" xml:space="preserve">
-    <value>Valor</value>
-  </data>
-  <data name="ValueDateLabel" xml:space="preserve">
-    <value>Fecha:</value>
-  </data>
-  <data name="ValueRequireDecimalData" xml:space="preserve">
-    <value>"El valor debe ser decimal de hasta tres decimales."</value>
-  </data>
-  <data name="ValueRequireIntegerData" xml:space="preserve">
-    <value>"El valor debe ser un entero."</value>
-  </data>
-  <data name="VerifiyDataFail" xml:space="preserve">
-    <value>"No se pudo verificar si ya existe un registro con los mismos datos."</value>
+  <data name="YearsValueSingle" xml:space="preserve">
+    <value>year</value>
   </data>
 </root>

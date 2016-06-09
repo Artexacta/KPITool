@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Artexacta.App.Utilities.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -51,6 +52,14 @@ namespace Artexacta.App.KPI
             set { _measurement = value; }
         }
 
+        public string DateForDisplay
+        {
+            get
+            {
+                return TextUtilities.GetDateTimeToString(this._date);
+            }
+        }
+
         public string Detalle { get; set; }
 
         public string Categories { get; set; }
@@ -58,6 +67,8 @@ namespace Artexacta.App.KPI
         public KPIDataTime DataTime { get; set; }
 
         public string TypeImport { get; set; }
+
+        public string MeasurementIDsToReplace { get; set; }
 
     }
 }

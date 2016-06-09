@@ -241,36 +241,6 @@ namespace Artexacta.App.KPI.BLL
             return theList;
         }
 
-        public List<KPI> GetKPIsByProject(int projectId)
-        {
-            if (projectId <= 0)
-                throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
-
-            List<KPI> theList = new List<KPI>();
-            KPI theData = null;
-
-            try
-            {
-                KPIDS.KPIDataTable theTable = theAdapter.GetKPIByProject(projectId);
-
-                if (theTable != null && theTable.Rows.Count > 0)
-                {
-                    foreach (KPIDS.KPIRow theRow in theTable)
-                    {
-                        theData = FillRecord(theRow);
-                        theList.Add(theData);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                log.Error("Ocurrió un error mientras se obtenía los KPIs del proyecto de id =" + projectId.ToString(), exc);
-                throw exc;
-            }
-
-            return theList;
-        }
-
         /// <summary>
         /// Create a KPI in the database 
         /// </summary>

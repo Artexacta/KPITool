@@ -100,36 +100,6 @@ namespace Artexacta.App.Activities.BLL
             return theList;
         }
 
-        public List<Activity> GetActivitiesByProject(int projectId)
-        {
-            if (projectId <= 0)
-                throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
-
-            List<Activity> theList = new List<Activity>();
-            Activity theData = null;
-
-            try
-            {
-                ActivityDS.ActivitiesDataTable theTable = theAdapter.GetActivitiesByProject(projectId);
-
-                if (theTable != null && theTable.Rows.Count > 0)
-                {
-                    foreach (ActivityDS.ActivitiesRow theRow in theTable)
-                    {
-                        theData = FillRecord(theRow);
-                        theList.Add(theData);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                log.Error("Ocurrió un error mientras se obtenía las actividades del proyecto de id =" + projectId.ToString(), exc);
-                throw exc;
-            }
-
-            return theList;
-        }
-
         public List<Activity> GetActivitiesBySearch(string whereClause)
         {
             if (string.IsNullOrEmpty(whereClause))

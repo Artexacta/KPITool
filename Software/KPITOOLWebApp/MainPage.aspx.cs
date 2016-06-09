@@ -97,10 +97,9 @@ public partial class MainPage : SqlViewStatePage
         //Projects
         ProjectBLL thePBLL = new ProjectBLL();
         List<Project> theProjects = new List<Project>();
-
         try
         {
-            theProjects = thePBLL.GetProjectByOrganization(item.OrganizationID);
+            theProjects = thePBLL.GetProjectsByOrganization(item.OrganizationID);
         }
         catch {}
 

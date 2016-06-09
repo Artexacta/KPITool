@@ -558,6 +558,9 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 // Valores "" se consideran vaciós en fechas
                 return true;
 
+            if (value is double)
+                return true;
+
             if (!(value is DateTime))
                 return false;
 
@@ -568,6 +571,9 @@ namespace Artexacta.App.Utilities.ExcelProcessing
         {
             if (value == null || (value is String && ((string)value) == ""))
                 return DBNull.Value;
+
+            if (value is double)
+                return DateTime.FromOADate(Convert.ToDouble(value));
 
             if (!(value is DateTime))
                 throw new ArgumentException("Invalid date object passed");

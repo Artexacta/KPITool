@@ -138,7 +138,7 @@ namespace Artexacta.App.People.BLL
             People theData = null;
             try
             {
-                PeopleDS.PeopleDataTable theTable = theAdapter.GetPeopleByOrganization(organizationId, userName);
+                PeopleDS.PeopleDataTable theTable = theAdapter.GetPersonByOrganization(organizationId, userName);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (PeopleDS.PeopleRow theRow in theTable)

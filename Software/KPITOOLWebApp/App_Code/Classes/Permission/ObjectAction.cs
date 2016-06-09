@@ -32,10 +32,6 @@ namespace Artexacta.App.ObjectAction
                         name = "Owner";
                         break;
 
-                    case "MAN_AREA":
-                        name = "Manage Area";
-                        break;
-
                     case "MAN_PROJECT":
                         name = "Manage Project";
                         break;

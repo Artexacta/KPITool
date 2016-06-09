@@ -116,6 +116,7 @@ namespace Artexacta.App.KPI.BLL
                     {
                         theData = new KPIMeasurements(theRow.measurmentID, theRow.kpiID, theRow.date, theRow.measurement);
                         theData.Detalle = theRow.IsdetalleNull() ? "" : theRow.detalle;
+                        theData.Categories = theRow.IscategoriesNull() ? "" : theRow.categories;
                         theList.Add(theData);
                     }
                 }
@@ -176,23 +177,19 @@ namespace Artexacta.App.KPI.BLL
                         if (theData.DataTime != null)
                             theData.Measurement = KPIDataTimeBLL.GetValueFromKPIDataTime(theData.DataTime);
 
-                        if (theData.MeasurementID > 0 && theData.TypeImport.Equals("U") && type.Equals("R"))
-                        {
-                            queries.UpdateKpiMeasurement(theData.MeasurementID, theData.Date, theData.Measurement);
-                        }
-                        else
-                        {
-                            int? newData = 0;
-                            queries.InsertKpiMeasurement(ref newData, kpiId, theData.Date, theData.Measurement);
+                        if (!string.IsNullOrEmpty(theData.MeasurementIDsToReplace) && type.Equals("R"))
+                            queries.DeleteKpiMeasurementByListIds(theData.MeasurementIDsToReplace);
 
-                            if (!string.IsNullOrEmpty(theData.Detalle))
+                        int? newData = 0;
+                        queries.InsertKpiMeasurement(ref newData, kpiId, theData.Date, theData.Measurement);
+
+                        if (!string.IsNullOrEmpty(theData.Detalle))
+                        {
+                            string[] itemList = theData.Detalle.Split(',');
+                            string[] categoryList = theData.Categories.Split(',');
+                            for (int i = 0; i < itemList.Length; i++)
                             {
-                                string[] itemList = theData.Detalle.Split(',');
-                                string[] categoryList = theData.Categories.Split(',');
-                                for (int i = 0; i < itemList.Length; i++)
-                                {
-                                    queries.InsertKpiMeasurementCategories(newData.Value, itemList[i].Trim(), categoryList[i].Trim());
-                                }
+                                queries.InsertKpiMeasurementCategories(newData.Value, itemList[i].Trim(), categoryList[i].Trim());
                             }
                         }
                     }
@@ -224,6 +221,33 @@ namespace Artexacta.App.KPI.BLL
                 log.Error("Error en DeleteKpiMeasuerement para kpiMeasurementId: " + measurementId, exc);
                 throw new ArgumentException("Ocurrió un error al eliminar el dato.");
             }
+        }
+
+        public static string VerifyKPIMeasurements(int kpiId, DateTime date, string detalle, string categories)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            string listIds = "";
+            try
+            {
+                KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
+                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.VerifyKpiMeasurements(kpiId, date, detalle, categories);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KpiMeasurementDS.KpiMeasurementRow theRow in theTable)
+                    {
+                        listIds = string.IsNullOrEmpty(listIds) ? theRow.measurmentID.ToString() : (listIds + ";" + theRow.measurmentID.ToString());
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en VerifyKPIMeasurements para kpiId: " + kpiId + ", date: " + date.ToString() + ", detalle: " + detalle + " y categories: " + categories, exc);
+                throw exc;
+            }
+
+            return listIds;
         }
 
     }

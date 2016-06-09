@@ -111,7 +111,7 @@
   <xs:element name="AreaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="AreaDS" msprop:Generator_UserDSName="AreaDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Area" msprop:Generator_TableClassName="AreaDataTable" msprop:Generator_TableVarName="tableArea" msprop:Generator_TablePropName="Area" msprop:Generator_RowDeletingName="AreaRowDeleting" msprop:Generator_RowChangingName="AreaRowChanging" msprop:Generator_RowEvHandlerName="AreaRowChangeEventHandler" msprop:Generator_RowDeletedName="AreaRowDeleted" msprop:Generator_UserTableName="Area" msprop:Generator_RowChangedName="AreaRowChanged" msprop:Generator_RowEvArgName="AreaRowChangeEvent" msprop:Generator_RowClassName="AreaRow">
+        <xs:element name="Area" msprop:Generator_TableClassName="AreaDataTable" msprop:Generator_TableVarName="tableArea" msprop:Generator_RowChangedName="AreaRowChanged" msprop:Generator_TablePropName="Area" msprop:Generator_RowDeletingName="AreaRowDeleting" msprop:Generator_RowChangingName="AreaRowChanging" msprop:Generator_RowEvHandlerName="AreaRowChangeEventHandler" msprop:Generator_RowDeletedName="AreaRowDeleted" msprop:Generator_RowClassName="AreaRow" msprop:Generator_UserTableName="Area" msprop:Generator_RowEvArgName="AreaRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="areaID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnareaID" msprop:Generator_ColumnPropNameInRow="areaID" msprop:Generator_ColumnPropNameInTable="areaIDColumn" msprop:Generator_UserColumnName="areaID" type="xs:int" />

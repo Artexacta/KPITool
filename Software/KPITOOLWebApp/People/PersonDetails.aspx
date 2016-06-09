@@ -21,7 +21,7 @@
     <div class="container">
         <div class="tile">
             <div class="t-header">
-                <div class="th-title">KPIs for People</div>
+                <div class="th-title">KPIs for Person</div>
             </div>
             <div class="t-body tb-padding">
                 <div class="row">

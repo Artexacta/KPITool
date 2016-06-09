@@ -2,8 +2,10 @@
 using Artexacta.App.Categories.BLL;
 using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
+using Artexacta.App.Utilities;
 using Artexacta.App.Utilities.ExcelProcessing;
 using Artexacta.App.Utilities.SystemMessages;
+using Artexacta.App.Utilities.Text;
 using log4net;
 using OfficeOpenXml;
 using System;
@@ -13,12 +15,19 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Kpi_ImportData : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
+
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -74,7 +83,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             SubtitleLabel.Text = theData.Name;
             KPIType.Text = theData.KPITypeName;
             ReportingPeriod.Text = theData.ReportingUnitName;
-            StartingDate.Text = theData.StartDate == DateTime.MinValue ? " - " : theData.StartDate.ToString(CultureInfo.InvariantCulture).Substring(0, 10);
+            StartingDate.Text = theData.StartDate == DateTime.MinValue ? " - " : TextUtilities.GetDateTimeToString(theData.StartDate);
             UnitIdHiddenField.Value = theData.UnitID;
 
             switch (UnitIdHiddenField.Value)
@@ -112,7 +121,10 @@ public partial class Kpi_ImportData : System.Web.UI.Page
 
         KpiMeasurementGridView.DataSource = theList;
         KpiMeasurementGridView.DataBind();
-        if(theList.Count > 0 && string.IsNullOrEmpty(theList[0].Detalle))
+
+        if(theList.FindAll(i => !string.IsNullOrEmpty(i.Detalle)).Count > 0)
+            KpiMeasurementGridView.Columns[2].Visible = true;
+        else
             KpiMeasurementGridView.Columns[2].Visible = false;
     }
 
@@ -131,7 +143,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                     valueLabel.Text = Convert.ToInt32(theData.Measurement).ToString();
                     break;
                 default:
-                    valueLabel.Text = string.Format("{0:#,0.000}", theData.Measurement);
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture);
                     break;
             }
         }
@@ -145,22 +157,22 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             try
             {
                 KpiMeasurementBLL.DeleteKpiMeasuerement(Convert.ToInt32(measurementId));
-                SystemMessages.DisplaySystemMessage("The data was deleted.");
+                SystemMessages.DisplaySystemMessage(Resources.ImportData.DeletedData);
             }
             catch (Exception exc)
             {
                 SystemMessages.DisplaySystemErrorMessage(exc.Message);
                 return;
             }
-        }
 
-        BindGridView();
+            BindGridView();
+        }
     }
 
     protected void KpiMeasurementGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         KpiMeasurementGridView.PageIndex = e.NewPageIndex;
-        KpiMeasurementGridView.DataBind();
+        BindGridView();
     }
 
     #region EnterData Manually
@@ -168,25 +180,25 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     {
         DateTextBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
 
-        //-- get CategoriesItems in Target
-        List<KPITarget> theTargetList = new List<KPITarget>();
+        //-- get CategoriesItems combinated
+        List<KPICategoyCombination> theCombinatedList = new List<KPICategoyCombination>();
         try
         {
-            theTargetList = KPITargetBLL.GetKPITargetCategoriesByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
+            theCombinatedList = KPICategoryCombinationBLL.GetCategoryItemsCombinatedByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
         }
         catch (Exception exc)
         {
-            log.Error("Error en GetKPITargetCategoriesByKpiId para kpiId: " + KPIIdHiddenField.Value, exc);
+            log.Error("Error en GetCategoryItemsCombinatedByKpiId para kpiId: " + KPIIdHiddenField.Value, exc);
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
             return;
         }
 
-        if (theTargetList.Count <= 0)
+        if (theCombinatedList.Count <= 0)
         {
-            theTargetList.Add(new KPITarget());
+            theCombinatedList.Add(new KPICategoyCombination());
         }
 
-        EnterDataRepeater.DataSource = theTargetList;
+        EnterDataRepeater.DataSource = theCombinatedList;
         EnterDataRepeater.DataBind();
     }
 
@@ -194,19 +206,50 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            KPITarget theData = (KPITarget)(e.Item.DataItem);
-            if (string.IsNullOrEmpty(theData.Detalle))
+            KPICategoyCombination theData = (KPICategoyCombination)(e.Item.DataItem);
+            if (string.IsNullOrEmpty(theData.ItemsList))
                 e.Item.FindControl("pnlDetalle").Visible = false;
 
             if (UnitIdHiddenField.Value.Equals("TIME"))
             {
                 e.Item.FindControl("pnlDataDecimal").Visible = false;
                 e.Item.FindControl("pnlDataTime").Visible = true;
+
+                DropDownList yearsCombobox = (DropDownList)e.Item.FindControl("YearsCombobox");
+                DropDownList monthsCombobox = (DropDownList)e.Item.FindControl("MonthsCombobox");
+                DropDownList daysCombobox = (DropDownList)e.Item.FindControl("DaysCombobox");
+                DropDownList hoursCombobox = (DropDownList)e.Item.FindControl("HoursCombobox");
+                DropDownList minutesCombobox = (DropDownList)e.Item.FindControl("MinutesCombobox");
+                HiddenField measurementIDsHiddenField = (HiddenField)e.Item.FindControl("MeasurementIDsHiddenField");
+                Label imageTimeUpdate = (Label)e.Item.FindControl("ImageTimeUpdate");
+
+                yearsCombobox.Attributes.Add("onchange", "TimeComboBox_OnChange('" + yearsCombobox.ClientID + "', '" + monthsCombobox.ClientID + "', '" + daysCombobox.ClientID
+                    + "', '" + hoursCombobox.ClientID + "', '" + minutesCombobox.ClientID + "', '" + measurementIDsHiddenField.ClientID + "', '" + imageTimeUpdate.ClientID 
+                    + "', '" + theData.ItemsList + "', '" + theData.CategoriesList + "')");
+                monthsCombobox.Attributes.Add("onchange", "TimeComboBox_OnChange('" + yearsCombobox.ClientID + "', '" + monthsCombobox.ClientID + "', '" + daysCombobox.ClientID
+                    + "', '" + hoursCombobox.ClientID + "', '" + minutesCombobox.ClientID + "', '" + measurementIDsHiddenField.ClientID + "', '" + imageTimeUpdate.ClientID
+                    + "', '" + theData.ItemsList + "', '" + theData.CategoriesList + "')");
+                daysCombobox.Attributes.Add("onchange", "TimeComboBox_OnChange('" + yearsCombobox.ClientID + "', '" + monthsCombobox.ClientID + "', '" + daysCombobox.ClientID
+                    + "', '" + hoursCombobox.ClientID + "', '" + minutesCombobox.ClientID + "', '" + measurementIDsHiddenField.ClientID + "', '" + imageTimeUpdate.ClientID
+                    + "', '" + theData.ItemsList + "', '" + theData.CategoriesList + "')");
+                hoursCombobox.Attributes.Add("onchange", "TimeComboBox_OnChange('" + yearsCombobox.ClientID + "', '" + monthsCombobox.ClientID + "', '" + daysCombobox.ClientID
+                    + "', '" + hoursCombobox.ClientID + "', '" + minutesCombobox.ClientID + "', '" + measurementIDsHiddenField.ClientID + "', '" + imageTimeUpdate.ClientID
+                    + "', '" + theData.ItemsList + "', '" + theData.CategoriesList + "')");
+                minutesCombobox.Attributes.Add("onchange", "TimeComboBox_OnChange('" + yearsCombobox.ClientID + "', '" + monthsCombobox.ClientID + "', '" + daysCombobox.ClientID
+                    + "', '" + hoursCombobox.ClientID + "', '" + minutesCombobox.ClientID + "', '" + measurementIDsHiddenField.ClientID + "', '" + imageTimeUpdate.ClientID
+                    + "', '" + theData.ItemsList + "', '" + theData.CategoriesList + "')");
             }
             else
             {
                 e.Item.FindControl("pnlDataTime").Visible = false;
                 e.Item.FindControl("pnlDataDecimal").Visible = true;
+                TextBox valueTextBox = (TextBox)e.Item.FindControl("ValueTextBox");
+                HiddenField measurementIDsHiddenField = (HiddenField)e.Item.FindControl("MeasurementIDsHiddenField");
+                Label valueRequiredFileValidator = (Label)e.Item.FindControl("ValueRequiredFileValidator");
+                Label imageUpdate = (Label)e.Item.FindControl("ImageUpdate");
+
+                valueTextBox.Attributes.Add("onchange", "ValueTextBox_OnChange('" + valueTextBox.ClientID + "', '" + measurementIDsHiddenField.ClientID + "', '" 
+                    + valueRequiredFileValidator.ClientID + "', '" + imageUpdate.ClientID + "', '" + theData.ItemsList + "', '" + theData.CategoriesList + "')");
             }
         }
     }
@@ -237,6 +280,9 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                         theData.Categories = "";
                     }
 
+                    HiddenField measurementIDsHiddenField = (HiddenField)item.FindControl("MeasurementIDsHiddenField");
+                    theData.MeasurementIDsToReplace = measurementIDsHiddenField.Value;
+
                     if (UnitIdHiddenField.Value.Equals("TIME"))
                     {
                         DropDownList yearsCombobox = (DropDownList)item.FindControl("YearsCombobox");
@@ -245,8 +291,11 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                         DropDownList hoursCombobox = (DropDownList)item.FindControl("HoursCombobox");
                         DropDownList minutesCombobox = (DropDownList)item.FindControl("MinutesCombobox");
 
-                        theData.DataTime = new KPIDataTime(Convert.ToInt32(yearsCombobox.SelectedValue), Convert.ToInt32(monthsCombobox.SelectedValue),
-                            Convert.ToInt32(daysCombobox.SelectedValue), Convert.ToInt32(hoursCombobox.SelectedValue), Convert.ToInt32(minutesCombobox.SelectedValue));
+                        if (!yearsCombobox.SelectedValue.Equals("0") || !monthsCombobox.SelectedValue.Equals("0") ||
+                            !daysCombobox.SelectedValue.Equals("0") || !hoursCombobox.SelectedValue.Equals("0") ||
+                            !minutesCombobox.SelectedValue.Equals("0"))
+                            theData.DataTime = new KPIDataTime(Convert.ToInt32(yearsCombobox.SelectedValue), Convert.ToInt32(monthsCombobox.SelectedValue),
+                                Convert.ToInt32(daysCombobox.SelectedValue), Convert.ToInt32(hoursCombobox.SelectedValue), Convert.ToInt32(minutesCombobox.SelectedValue));
                     }
                     else
                     {
@@ -263,13 +312,13 @@ public partial class Kpi_ImportData : System.Web.UI.Page
         catch (Exception exc)
         {
             log.Error("Error al obtener los datos de EnterDataRepeater", exc);
-            SystemMessages.DisplaySystemErrorMessage("There was an error to read the data to save.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.ImportData.ErrorToObtainData);
             return;
         }
 
         try
         {
-            KpiMeasurementBLL.InsertKpiMeasuerementImported(Convert.ToInt32(KPIIdHiddenField.Value), theList, "A");
+            KpiMeasurementBLL.InsertKpiMeasuerementImported(Convert.ToInt32(KPIIdHiddenField.Value), theList, TypeRadioButtonList1.SelectedValue);
         }
         catch (Exception exc)
         {
@@ -277,7 +326,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             return;
         }
 
-        SystemMessages.DisplaySystemMessage("The data were registered.");
+        SystemMessages.DisplaySystemMessage(Resources.ImportData.RegisteredData);
         BindGridView();
         LoadFormEnterData();
     }
@@ -301,7 +350,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
         if (!isValidFile)
         {
             ValidateFile.ForeColor = System.Drawing.Color.Red;
-            ValidateFile.Text = "Invalid file. Please select a fil with the extension " + string.Join(",", validFileTypes);
+            ValidateFile.Text = Resources.ImportData.InvalidaFile + string.Join(",", validFileTypes);
             return;
         }
 
@@ -317,15 +366,15 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             return;
         }
 
-        //-- get CategoriesItems in Target
-        List<KPITarget> theTargetList = new List<KPITarget>();
+        //-- get CategoriesItems combinated
+        List<KPICategoyCombination> theCombinatedList = new List<KPICategoyCombination>();
         try
         {
-            theTargetList = KPITargetBLL.GetKPITargetCategoriesByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
+            theCombinatedList = KPICategoryCombinationBLL.GetCategoryItemsCombinatedByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
         }
         catch (Exception exc)
         {
-            log.Error("Error en GetKPITargetCategoriesByKpiId para kpiId: " + KPIIdHiddenField.Value, exc);
+            log.Error("Error en GetCategoryItemsCombinatedByKpiId para kpiId: " + KPIIdHiddenField.Value, exc);
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
             return;
         }
@@ -351,17 +400,16 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
                 if (worksheet.Dimension == null)
                 {
-                    SystemMessages.DisplaySystemErrorMessage("The file is empty.");
+                    SystemMessages.DisplaySystemErrorMessage(Resources.ImportData.EmptyFile);
                     return;
                 }
             }
 
-            string[] dateFormats = { "MM/dd/yyyy", "dd/MM/yyyy" };
             string timeFormat = "^P(([0-9]|10)Y)(([0-9]|10|11)M)?(([0-9]|[1-2][0-9]|30)D)?(T(([0-9]|1[0-9]|2[0-3])H)?(([0-9]|[1-5][0-9])M)?)?$";
             Regex regexTime = new Regex(timeFormat);
             //-- leer Excel
             List<ExColumn> columns = new List<ExColumn>();
-            columns.Add(new DateExColumn("Date", true, true));
+            columns.Add(new DateExColumn(Resources.ImportData.DateColumn, true, true));
             foreach (Category theCategory in theCategoryList)
             {
                 columns.Add(new ListExColumn(theCategory.ID, true, true, theCategory.ItemsList.Split(';').ToList().FindAll(i => !string.IsNullOrEmpty(i))));
@@ -369,13 +417,13 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             switch (UnitIdHiddenField.Value)
             {
                 case "TIME":
-                    columns.Add(new StringExColumn("Value", true, true, timeFormat));
+                    columns.Add(new StringExColumn(Resources.ImportData.ValueColumn, true, true, timeFormat));
                     break;
                 case "INT":
-                    columns.Add(new IntegerExColumn("Value", true, true, true));
+                    columns.Add(new IntegerExColumn(Resources.ImportData.ValueColumn, true, true, true));
                     break;
                 default:
-                    columns.Add(new DecimalExColumn("Value", true, true, true));
+                    columns.Add(new DecimalExColumn(Resources.ImportData.ValueColumn, true, true, true));
                     break;
             }
 
@@ -386,7 +434,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 ErrorFileRepeater.DataSource = errors;
                 ErrorFileRepeater.DataBind();
                 pnlErrorData.Visible = true;
-                ErrorFileLabel.Text = string.Format("The following errors were found when reading the file '{0}':", FileUpload.FileName);
+                ErrorFileLabel.Text = string.Format(Resources.ImportData.ErrorsInFile, FileUpload.FileName);
                 return;
             }
 
@@ -413,25 +461,25 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                     theItemList = new List<string>();
                     foreach (Category theCategory in theCategoryList)
                         theItemList.Add(theRow[theCategory.ID].ToString().Trim());
-                    itemCategories = string.Join(", ", theItemList.OrderBy(item => item));
+                    itemCategories = string.Join(", ", theItemList.Select(item => item));
 
-                    if (!theTargetList.Exists(t => t.Detalle.Trim().Equals(itemCategories)))
+                    if (!theCombinatedList.Exists(t => t.ItemsList.Equals(itemCategories)))
                     {
-                        errors.Add("Error in row: " + (i + 2).ToString() + ", the combinations of items '" + itemCategories + "' does not exist for the KPI.");
+                        errors.Add(string.Format(Resources.ImportData.ErrorDataInFile, (i + 2).ToString(), itemCategories));
                         continue;
                     }
                     theData.Detalle = itemCategories;
-                    theData.Categories = theTargetList.Find(t => t.Detalle.Trim().Equals(itemCategories)).Categories;
+                    theData.Categories = theCombinatedList.Find(t => t.ItemsList.Trim().Equals(itemCategories)).CategoriesList;
 
                     //--verifiy if exists measurement in file
-                    if (theList.Exists(m => m.Date == date && m.Detalle.Equals(theData.Detalle)))
+                    if (theList.Exists(m => m.Date == date && m.Detalle.Equals(theData.Detalle) && m.Categories.Equals(theData.Categories)))
                         continue;
 
                     //-- verify if exists measurement in BD
-                    if (theMeasurementList.Exists(m => m.Date == theData.Date && m.Detalle.Equals(theData.Detalle)))
+                    if (theMeasurementList.Exists(m => m.Date == theData.Date && m.Detalle.Equals(theData.Detalle) && m.Categories.Equals(theData.Categories)))
                     {
                         theData.TypeImport = "U";
-                        theData.MeasurementID = theMeasurementList.Find(m => m.Date == theData.Date && m.Detalle.Equals(theData.Detalle)).MeasurementID;
+                        theData.MeasurementIDsToReplace = string.Join(";", theMeasurementList.FindAll(m => m.Date == theData.Date && m.Detalle.Equals(theData.Detalle) && m.Categories.Equals(theData.Categories)).Select(d => d.MeasurementID));
                     }
                     else
                         theData.TypeImport = "I";
@@ -449,7 +497,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                     if (theMeasurementList.Exists(m => m.Date == theData.Date))
                     {
                         theData.TypeImport = "U";
-                        theData.MeasurementID = theMeasurementList.Find(m => m.Date == theData.Date).MeasurementID;
+                        theData.MeasurementIDsToReplace = string.Join(";", theMeasurementList.FindAll(m => m.Date == theData.Date).Select(d => d.MeasurementID));
                     }
                     else
                         theData.TypeImport = "I";
@@ -466,13 +514,13 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 ErrorFileRepeater.DataSource = errors;
                 ErrorFileRepeater.DataBind();
                 pnlErrorData.Visible = true;
-                ErrorFileLabel.Text = string.Format("The following errors were found when reading the file '{0}':", FileUpload.FileName);
+                ErrorFileLabel.Text = string.Format(Resources.ImportData.ErrorsInFile, FileUpload.FileName);
                 return;
             }
 
             if (theList.Count == 0)
             {
-                SystemMessages.DisplaySystemWarningMessage("The file does not have data to register.");
+                SystemMessages.DisplaySystemWarningMessage(Resources.ImportData.NoDataInFile);
                 return;
             }
 
@@ -505,20 +553,15 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                     valueLabel.Text = Convert.ToInt32(theData.Measurement).ToString();
                     break;
                 default:
-                    valueLabel.Text = string.Format("{0:#,0.000}", theData.Measurement);
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture);
                     break;
             }
 
-            if (theData.TypeImport.Equals("I"))
-            {
-                e.Row.Cells[0].ForeColor = System.Drawing.Color.Green;
-                e.Row.Cells[0].Font.Bold = true;
-            }
-            else if (theData.TypeImport.Equals("U"))
-            {
-                e.Row.Cells[0].ForeColor = System.Drawing.Color.Orange;
-                e.Row.Cells[0].Font.Bold = true;
-            }
+            Label imageUpdate = (Label)e.Row.FindControl("ImageUpdate");
+            if (theData.TypeImport.Equals("U"))
+                imageUpdate.Style["display"] = "inline";
+            else
+                imageUpdate.Style["display"] = "none";
         }
     }
 
@@ -536,7 +579,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
 
         if (theList == null)
         {
-            SystemMessages.DisplaySystemErrorMessage("There are not data in session to save.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.ImportData.NoDataInSession);
             return;
         }
 
@@ -550,7 +593,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             return;
         }
 
-        SystemMessages.DisplaySystemMessage("The data were registered.");
+        SystemMessages.DisplaySystemMessage(Resources.ImportData.RegisteredData);
         pnlData.Visible = false;
         pnlMeasurement.Visible = true;
         DataGridView.DataSource = null;
@@ -566,21 +609,6 @@ public partial class Kpi_ImportData : System.Web.UI.Page
         DataGridView.DataSource = null;
         DataGridView.DataBind();
         Session["KpiMeasurementList"] = null;
-    }
-    #endregion
-
-    protected void UploadFileButton_Click(object sender, EventArgs e)
-    {
-        pnlEnterData.Visible = false;
-        pnlUploadFile.Visible = true;
-    }
-
-    protected void EnterDataButton_Click(object sender, EventArgs e)
-    {
-        pnlUploadFile.Visible = false;
-        pnlEnterData.Visible = true;
-
-        LoadFormEnterData();
     }
 
     private KPIDataTime GetMeasurementTime(string value, Regex regexTime)
@@ -604,7 +632,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 }
                 else if (matches.Groups[g].Value.Contains("M"))
                 {
-                    if(haveTime)
+                    if (haveTime)
                         theData.Minute = Convert.ToInt32(matches.Groups[g].Value.Replace("M", ""));
                     else
                         theData.Month = Convert.ToInt32(matches.Groups[g].Value.Replace("M", ""));
@@ -621,6 +649,28 @@ public partial class Kpi_ImportData : System.Web.UI.Page
         }
 
         return theData;
+    }
+    #endregion
+
+    protected void UploadFileButton_Click(object sender, EventArgs e)
+    {
+        pnlEnterData.Visible = false;
+        pnlUploadFile.Visible = true;
+    }
+
+    protected void EnterDataButton_Click(object sender, EventArgs e)
+    {
+        pnlUploadFile.Visible = false;
+        pnlEnterData.Visible = true;
+
+        LoadFormEnterData();
+    }
+
+    [WebMethod]
+    public static string VerifiyData(int kpiId, string date, string detalle, string categories)
+    {
+        string listIds = KpiMeasurementBLL.VerifyKPIMeasurements(kpiId, Convert.ToDateTime(date), detalle, categories);
+        return listIds;
     }
 
 }

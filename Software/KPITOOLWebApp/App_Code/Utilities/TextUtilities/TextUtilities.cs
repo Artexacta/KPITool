@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Web;
 
 namespace Artexacta.App.Utilities.Text
@@ -1193,5 +1194,23 @@ namespace Artexacta.App.Utilities.Text
                 throw e;
             }
         }
+
+        public static string GetDateTimeToString(DateTime date)
+        {
+            string lang = LanguageUtilities.GetLanguageFromContext();
+            string langCulture = "";
+            switch (lang)
+            {
+                case "es":
+                    langCulture = "es-ES";
+                    break;
+                case "en":
+                    langCulture = "en-US";
+                    break;
+            }
+            CultureInfo culture = new CultureInfo(langCulture);
+            return date.ToString("d", culture);
+        }
+
     }
 }

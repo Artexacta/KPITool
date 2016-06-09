@@ -117,13 +117,136 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CategoryColumn" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="DateColumn" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="DecimalDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value".The values  must be only decimal with point as decimal separator.&lt;/p&gt;</value>
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns in the Excel file named "Date" and "Value".The values  must be only decimal with at most three decimals.&lt;/p&gt;</value>
+  </data>
+  <data name="DeleteColumn" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeletedData" xml:space="preserve">
+    <value>The data was deleted.</value>
+  </data>
+  <data name="EmptyFile" xml:space="preserve">
+    <value>The file is empty.</value>
+  </data>
+  <data name="EnterDataButton" xml:space="preserve">
+    <value>Enter values manually</value>
+  </data>
+  <data name="EnterDataText" xml:space="preserve">
+    <value>When values exist for date specified:</value>
+  </data>
+  <data name="ErrorDataInFile" xml:space="preserve">
+    <value>Error in row: {0}, the combination of items '{1}' does not exist for the KPI.</value>
+  </data>
+  <data name="ErrorsInFile" xml:space="preserve">
+    <value>The following errors were found when reading the file '{0}':</value>
+  </data>
+  <data name="ErrorToObtainData" xml:space="preserve">
+    <value>There was an error to read the data to save.</value>
+  </data>
+  <data name="FileUploadRequired" xml:space="preserve">
+    <value>You must select a file.</value>
   </data>
   <data name="IntegerDataDescription" xml:space="preserve">
     <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value".The values  must be only integers.&lt;/p&gt;</value>
   </data>
+  <data name="InvalidaFile" xml:space="preserve">
+    <value>Invalid file. Please select a fil with the extension </value>
+  </data>
+  <data name="KPITypeLabel" xml:space="preserve">
+    <value>KPI Type:</value>
+  </data>
+  <data name="lblEmptyData" xml:space="preserve">
+    <value>There are no data to register</value>
+  </data>
+  <data name="NoDataInFile" xml:space="preserve">
+    <value>The file does not have data to register.</value>
+  </data>
+  <data name="NoDataInSession" xml:space="preserve">
+    <value>There are not data in session to save.</value>
+  </data>
+  <data name="NoDataRows" xml:space="preserve">
+    <value>There are no measurements registered for this KPI.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>KPI Data Entry</value>
+  </data>
+  <data name="RegisteredData" xml:space="preserve">
+    <value>The data were registered.</value>
+  </data>
+  <data name="ReportingPeriodLabel" xml:space="preserve">
+    <value>Reporting Period:</value>
+  </data>
+  <data name="ReportValueLabel" xml:space="preserve">
+    <value>Report new value:</value>
+  </data>
+  <data name="RequiereDateValue" xml:space="preserve">
+    <value>You must enter the date.</value>
+  </data>
+  <data name="RequiereTimeSelected" xml:space="preserve">
+    <value>"You must select a time for at least one data."</value>
+  </data>
+  <data name="RequiredLabel" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="RequireValueEntered" xml:space="preserve">
+    <value>"You must enter a value for at least one data."</value>
+  </data>
+  <data name="ReturnLink" xml:space="preserve">
+    <value>Back to KPI list</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Insert new value</value>
+  </data>
+  <data name="SaveUploadDataButton" xml:space="preserve">
+    <value>Save uploaded data</value>
+  </data>
+  <data name="StartingDateLabel" xml:space="preserve">
+    <value>Starting Date:</value>
+  </data>
   <data name="TimeDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value". The values are time span and they must be in ISO 8601 format: durations are represented by the format P[n]Y[n]M[n]DT[n]H[n]M[n]. In these representations the [n] is replaced by the value for each date and time elements that follow the [n]. Leading zeros are not required.&lt;br /&gt;For example: P1Y2M10DT2H30M (1 year, 2 months, 10 days, 2 horas and 30 minutos).&lt;/p&gt;</value>
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value". The values are time span and they must be in ISO 8601 format: durations are represented by the format P[n]Y[n]M[n]DT[n]H[n]M[n]. In these representations the [n] is replaced by the value for each date and time elements that follow the [n]. Leading zeros are not required.&lt;br /&gt;For example: P1Y2M10DT2H30M (1 year, 2 months, 10 days, 2 hours and 30 minutes).&lt;/p&gt;</value>
+  </data>
+  <data name="TypeUploadItemAdd" xml:space="preserve">
+    <value>Add new value to the old one</value>
+  </data>
+  <data name="TypeUploadItemReplace" xml:space="preserve">
+    <value>Replace old value with new one</value>
+  </data>
+  <data name="UploadDataButton" xml:space="preserve">
+    <value>Upload data</value>
+  </data>
+  <data name="UploadDataLabel" xml:space="preserve">
+    <value>The following data are going to be registered:</value>
+  </data>
+  <data name="UploadDataText" xml:space="preserve">
+    <value>When values exist for dates specified in the Excel file:</value>
+  </data>
+  <data name="UploadFileButton" xml:space="preserve">
+    <value>Upload values from an Excel file</value>
+  </data>
+  <data name="ValueColumn" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="ValueDateLabel" xml:space="preserve">
+    <value>Value Date:</value>
+  </data>
+  <data name="ValueRequireDecimalData" xml:space="preserve">
+    <value>"The value must be decimal with at most three decimals."</value>
+  </data>
+  <data name="ValueRequireIntegerData" xml:space="preserve">
+    <value>"The value must be integer."</value>
+  </data>
+  <data name="VerifiyDataFail" xml:space="preserve">
+    <value>"It could not be verified if a record already exists with the same data."</value>
   </data>
 </root>

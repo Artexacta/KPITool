@@ -66,23 +66,23 @@ namespace Artexacta.App.KPI
                 string dataTime = "";
                 if (this.Year > 0)
                 {
-                    dataTime = this.Year.ToString() + " years";
+                    dataTime = this.Year.ToString() + " " + (this.Year == 1 ? Resources.DataTime.YearsValueSingle : Resources.DataTime.YearsValue);
                 }
                 if (this.Month > 0)
                 {
-                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Month.ToString() + " months";
+                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Month.ToString() + " " + (this.Month == 1 ? Resources.DataTime.MonthsValueSingle : Resources.DataTime.MonthsValue);
                 }
                 if (this.Day > 0)
                 {
-                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Day.ToString() + " days";
+                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Day.ToString() + " " + (this.Day == 1 ? Resources.DataTime.DaysValueSingle : Resources.DataTime.DaysValue);
                 }
                 if (this.Hour > 0)
                 {
-                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Hour.ToString() + " hours";
+                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Hour.ToString() + " " + (this.Hour == 1 ? Resources.DataTime.HoursValueSingle : Resources.DataTime.HoursValue);
                 }
                 if (this.Minute > 0)
                 {
-                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Minute.ToString() + " minutes";
+                    dataTime = (string.IsNullOrEmpty(dataTime) ? "" : dataTime + ", ") + this.Minute.ToString() + " " + (this.Minute == 1 ? Resources.DataTime.MinutesValueSingle : Resources.DataTime.MinutesValue);
                 }
                 return dataTime;
             }

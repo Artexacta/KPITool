@@ -1,6 +1,7 @@
 ﻿using Artexacta.App.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -188,11 +189,11 @@ namespace Artexacta.App.KPI
                 string trendText = "";
                 if (this.Trend > 0)
                 {
-                    trendText = string.Format("Up {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnitName.ToLower());
+                    trendText = string.Format("Up {0}% from last {1}", Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
                 }
                 else if (this.Trend < 0)
                 {
-                    trendText = string.Format("Down {0}% from last {1}", string.Format("{0:#,0.00}", Math.Abs(this.Trend)), this.ReportingUnitName.ToLower());
+                    trendText = string.Format("Down {0}% from last {1}", Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
                 }
                 return trendText;
             }
