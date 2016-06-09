@@ -66,7 +66,9 @@
                                                 OnClick="EditAreaLB_Click"><i class="zmdi zmdi-edit zmdi-hc-fw"></i></asp:LinkButton>
                                         </div>
                                         <div class="col-md-1">
-                                            <asp:LinkButton ID="DeleteArea" data-id='<%# Eval("AreaId") %>' runat="server" CssClass="viewBtn" OnClick="DeleteArea_Click"><i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="DeleteArea" data-id='<%# Eval("AreaId") %>' runat="server" CssClass="viewBtn" 
+                                                OnClientClick="return confirm('Are you sure you want to delete selected Area?')"
+                                                OnClick="DeleteArea_Click"><i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i></asp:LinkButton>
                                         </div>
                                         <div class="col-md-10">
                                             <p style="padding-top: 2px;"><%# Eval("Name") %></p>

@@ -13,6 +13,8 @@ namespace Artexacta.App.KPI
         public int TargetID{get; set;}
         public int KpiID {get; set; }
         public decimal Target {get; set;}
+        public string Detalle { get; set; }
+        public string Categories { get; set; }
 
         public KPITarget()
         {
@@ -24,5 +26,6 @@ namespace Artexacta.App.KPI
             this.KpiID = kpiID;
             this.Target = target;
         }
+
     }
 }

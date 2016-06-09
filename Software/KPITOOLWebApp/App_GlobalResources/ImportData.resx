@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CategoryColumn" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="DateColumn" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DecimalDataDescription" xml:space="preserve">
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns in the Excel file named "Date" and "Value".The values  must be only decimal with at most three decimals.&lt;/p&gt;</value>
+  </data>
+  <data name="DeleteColumn" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeletedData" xml:space="preserve">
+    <value>The data was deleted.</value>
+  </data>
+  <data name="EmptyFile" xml:space="preserve">
+    <value>The file is empty.</value>
+  </data>
+  <data name="EnterDataButton" xml:space="preserve">
+    <value>Enter values manually</value>
+  </data>
+  <data name="EnterDataText" xml:space="preserve">
+    <value>When values exist for date specified:</value>
+  </data>
+  <data name="ErrorDataInFile" xml:space="preserve">
+    <value>Error in row: {0}, the combination of items '{1}' does not exist for the KPI.</value>
+  </data>
+  <data name="ErrorsInFile" xml:space="preserve">
+    <value>The following errors were found when reading the file '{0}':</value>
+  </data>
+  <data name="ErrorToObtainData" xml:space="preserve">
+    <value>There was an error to read the data to save.</value>
+  </data>
+  <data name="FileUploadRequired" xml:space="preserve">
+    <value>You must select a file.</value>
+  </data>
+  <data name="IntegerDataDescription" xml:space="preserve">
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value".The values  must be only integers.&lt;/p&gt;</value>
+  </data>
+  <data name="InvalidaFile" xml:space="preserve">
+    <value>Invalid file. Please select a fil with the extension </value>
+  </data>
+  <data name="KPITypeLabel" xml:space="preserve">
+    <value>KPI Type:</value>
+  </data>
+  <data name="lblEmptyData" xml:space="preserve">
+    <value>There are no data to register</value>
+  </data>
+  <data name="NoDataInFile" xml:space="preserve">
+    <value>The file does not have data to register.</value>
+  </data>
+  <data name="NoDataInSession" xml:space="preserve">
+    <value>There are not data in session to save.</value>
+  </data>
+  <data name="NoDataRows" xml:space="preserve">
+    <value>There are no measurements registered for this KPI.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>KPI Data Entry</value>
+  </data>
+  <data name="RegisteredData" xml:space="preserve">
+    <value>The data were registered.</value>
+  </data>
+  <data name="ReportingPeriodLabel" xml:space="preserve">
+    <value>Reporting Period:</value>
+  </data>
+  <data name="ReportValueLabel" xml:space="preserve">
+    <value>Report new value:</value>
+  </data>
+  <data name="RequiereDateValue" xml:space="preserve">
+    <value>You must enter the date.</value>
+  </data>
+  <data name="RequiereTimeSelected" xml:space="preserve">
+    <value>"You must select a time for at least one data."</value>
+  </data>
+  <data name="RequiredLabel" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="RequireValueEntered" xml:space="preserve">
+    <value>"You must enter a value for at least one data."</value>
+  </data>
+  <data name="ReturnLink" xml:space="preserve">
+    <value>Back to KPI list</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Insert new value</value>
+  </data>
+  <data name="SaveUploadDataButton" xml:space="preserve">
+    <value>Save uploaded data</value>
+  </data>
+  <data name="StartingDateLabel" xml:space="preserve">
+    <value>Starting Date:</value>
+  </data>
+  <data name="TimeDataDescription" xml:space="preserve">
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value". The values are time span and they must be in ISO 8601 format: durations are represented by the format P[n]Y[n]M[n]DT[n]H[n]M[n]. In these representations the [n] is replaced by the value for each date and time elements that follow the [n]. Leading zeros are not required.&lt;br /&gt;For example: P1Y2M10DT2H30M (1 year, 2 months, 10 days, 2 hours and 30 minutes).&lt;/p&gt;</value>
+  </data>
+  <data name="TypeUploadItemAdd" xml:space="preserve">
+    <value>Add new value to the old one</value>
+  </data>
+  <data name="TypeUploadItemReplace" xml:space="preserve">
+    <value>Replace old value with new one</value>
+  </data>
+  <data name="UploadDataButton" xml:space="preserve">
+    <value>Upload data</value>
+  </data>
+  <data name="UploadDataLabel" xml:space="preserve">
+    <value>The following data are going to be registered:</value>
+  </data>
+  <data name="UploadDataText" xml:space="preserve">
+    <value>When values exist for dates specified in the Excel file:</value>
+  </data>
+  <data name="UploadFileButton" xml:space="preserve">
+    <value>Upload values from an Excel file</value>
+  </data>
+  <data name="ValueColumn" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="ValueDateLabel" xml:space="preserve">
+    <value>Value Date:</value>
+  </data>
+  <data name="ValueRequireDecimalData" xml:space="preserve">
+    <value>"The value must be decimal with at most three decimals."</value>
+  </data>
+  <data name="ValueRequireIntegerData" xml:space="preserve">
+    <value>"The value must be integer."</value>
+  </data>
+  <data name="VerifiyDataFail" xml:space="preserve">
+    <value>"It could not be verified if a record already exists with the same data."</value>
+  </data>
+</root>

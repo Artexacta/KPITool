@@ -39,6 +39,7 @@ namespace Artexacta.App.Area.BLL
                 row.areaID,
                 row.organizationID,
                 row.name);
+            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
             theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
             return theNewRecord;
         }
@@ -48,13 +49,12 @@ namespace Artexacta.App.Area.BLL
             if (organizationId<=0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
+            string userName = HttpContext.Current.User.Identity.Name;
             List<Area> theList = new List<Area>();
             Area theData = null;
-
             try
             {
-                AreaDS.AreaDataTable theTable = theAdapter.GetAreasByOrganization(organizationId);
-
+                AreaDS.AreaDataTable theTable = theAdapter.GetAreasByOrganization(organizationId, userName);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (AreaDS.AreaRow theRow in theTable)
@@ -66,8 +66,8 @@ namespace Artexacta.App.Area.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía las areas de la organización de id =" + organizationId.ToString(), exc);
-                throw exc;
+                log.Error("Error en GetAreasByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de áreas de la organización.");
             }
 
             return theList;

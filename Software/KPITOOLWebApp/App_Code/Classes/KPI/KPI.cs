@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Artexacta.App.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -162,6 +164,76 @@ namespace Artexacta.App.KPI
         public string ProjectName { get; set; }
         public string ActivityName { get; set; }
         public string PersonName { get; set; }
+
+        public decimal Progress { get; set; }
+        public string ProgressClass
+        {
+            get
+            {
+                string className = "progress-bar";
+                if (this.Progress < 25)
+                    className = className + " progress-bar-danger";
+                else if(this.Progress < 75)
+                    className = className + " progress-bar-warning";
+                else
+                    className = className + " progress-bar-success";
+                return className;
+            }
+        }
+
+        public decimal Trend { get; set; }
+        public string TrendText
+        {
+            get
+            {
+                string trendText = "";
+                if (this.Trend > 0)
+                {
+                    trendText = string.Format("Up {0}% from last {1}", Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
+                }
+                else if (this.Trend < 0)
+                {
+                    trendText = string.Format("Down {0}% from last {1}", Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
+                }
+                return trendText;
+            }
+        }
+
+        public string KPITypeName
+        {
+            get
+            {
+                string kpiType = "";
+                BLL.KPITypeBLL theBLL = new BLL.KPITypeBLL();
+                KPIType theData = null;
+                try
+                {
+                    theData = theBLL.GetKPITypesByID(this._kpiTypeID, LanguageUtilities.GetLanguageFromContext());
+                    if (theData != null)
+                        kpiType = theData.TypeName;
+                }
+                catch { }
+                return kpiType;
+            }
+        }
+
+        public string ReportingUnitName
+        {
+            get
+            {
+                string reportingUnit = "";
+                ReportingUnit.BLL.ReportingUnitBLL theBLL = new ReportingUnit.BLL.ReportingUnitBLL();
+                ReportingUnit.ReportingUnit theData = null;
+                try
+                {
+                    theData = theBLL.GetReportingUnitByID(this._reportingUnitID, LanguageUtilities.GetLanguageFromContext());
+                    if (theData != null)
+                        reportingUnit = theData.Name;
+                }
+                catch { }
+                return reportingUnit;
+            }
+        }
 
     }
 }

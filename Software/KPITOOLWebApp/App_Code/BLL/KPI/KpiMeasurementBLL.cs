@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,10 @@ namespace Artexacta.App.KPI.BLL
     /// </summary>
     public class KpiMeasurementBLL
     {
+        private static readonly ILog log = LogManager.GetLogger("Standard");
+
         public KpiMeasurementBLL()
         {
-            
         }
 
         public static List<KPIMeasurement> GetKpiMeasurementsByKpiId(int kpiId, string categoryId, string categoryItemId)
@@ -96,5 +98,157 @@ namespace Artexacta.App.KPI.BLL
             }
             return list;
         }
+
+        public static List<KPIMeasurements> GetKPIMeasurementCategoriesByKpiId(int kpiId)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            List<KPIMeasurements> theList = new List<KPIMeasurements>();
+            KPIMeasurements theData = null;
+            try
+            {
+                KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
+                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.GetKpiMeasurementCategoriesByKpiId(kpiId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KpiMeasurementDS.KpiMeasurementRow theRow in theTable)
+                    {
+                        theData = new KPIMeasurements(theRow.measurmentID, theRow.kpiID, theRow.date, theRow.measurement);
+                        theData.Detalle = theRow.IsdetalleNull() ? "" : theRow.detalle;
+                        theData.Categories = theRow.IscategoriesNull() ? "" : theRow.categories;
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetKPIMeasurementCategoriesByKpiId para kpiId: " + kpiId, exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
+        public static List<KPIMeasurements> GetKPIMeasurementCategoriesTimeByKpiId(int kpiId)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            List<KPIMeasurements> theList = new List<KPIMeasurements>();
+            KPIMeasurements theData = null;
+            try
+            {
+                KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
+                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.GetKpiMeasurementCategoriesByKpiId(kpiId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KpiMeasurementDS.KpiMeasurementRow theRow in theTable)
+                    {
+                        theData = new KPIMeasurements(theRow.measurmentID, theRow.kpiID, theRow.date, theRow.measurement);
+                        theData.Detalle = theRow.IsdetalleNull() ? "" : theRow.detalle;
+                        theData.DataTime = KPIDataTimeBLL.GetKPIDataTimeFromValue(theData.Measurement);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetKPIMeasurementCategoriesByKpiId para kpiId: " + kpiId, exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
+        public static void InsertKpiMeasuerementImported(int kpiId, List<KPIMeasurements> theList, string type)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
+            {
+                try
+                {
+                    KpiMeasurementDSTableAdapters.QueriesTableAdapter queries = new KpiMeasurementDSTableAdapters.QueriesTableAdapter();
+
+                    foreach(KPIMeasurements theData in theList)
+                    {
+                        if (theData.DataTime != null)
+                            theData.Measurement = KPIDataTimeBLL.GetValueFromKPIDataTime(theData.DataTime);
+
+                        if (!string.IsNullOrEmpty(theData.MeasurementIDsToReplace) && type.Equals("R"))
+                            queries.DeleteKpiMeasurementByListIds(theData.MeasurementIDsToReplace);
+
+                        int? newData = 0;
+                        queries.InsertKpiMeasurement(ref newData, kpiId, theData.Date, theData.Measurement);
+
+                        if (!string.IsNullOrEmpty(theData.Detalle))
+                        {
+                            string[] itemList = theData.Detalle.Split(',');
+                            string[] categoryList = theData.Categories.Split(',');
+                            for (int i = 0; i < itemList.Length; i++)
+                            {
+                                queries.InsertKpiMeasurementCategories(newData.Value, itemList[i].Trim(), categoryList[i].Trim());
+                            }
+                        }
+                    }
+
+                    transaction.Complete();
+                }
+                catch (Exception exc)
+                {
+                    log.Error("Error en InsertKpiMeasuerementImported para kpiId: " + kpiId, exc);
+                    transaction.Dispose();
+                    throw new Exception("There was an error, the data were not saved.");
+                }           
+            }
+        }
+
+        public static bool DeleteKpiMeasuerement(int measurementId)
+        {
+            if (measurementId <= 0)
+                throw new ArgumentException("El ID del dato no puede ser <= 0.");
+
+            try
+            {
+                KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
+                localAdapter.DeleteKpiMeasurement(measurementId);
+                return true;
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en DeleteKpiMeasuerement para kpiMeasurementId: " + measurementId, exc);
+                throw new ArgumentException("Ocurrió un error al eliminar el dato.");
+            }
+        }
+
+        public static string VerifyKPIMeasurements(int kpiId, DateTime date, string detalle, string categories)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            string listIds = "";
+            try
+            {
+                KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
+                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.VerifyKpiMeasurements(kpiId, date, detalle, categories);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KpiMeasurementDS.KpiMeasurementRow theRow in theTable)
+                    {
+                        listIds = string.IsNullOrEmpty(listIds) ? theRow.measurmentID.ToString() : (listIds + ";" + theRow.measurmentID.ToString());
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en VerifyKPIMeasurements para kpiId: " + kpiId + ", date: " + date.ToString() + ", detalle: " + detalle + " y categories: " + categories, exc);
+                throw exc;
+            }
+
+            return listIds;
+        }
+
     }
 }

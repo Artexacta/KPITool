@@ -49,5 +49,8 @@ namespace Artexacta.App.Categories
             _categoryID = id;
             _categoryName = name;
         }
+
+        public string ItemsList { get; set; }
+
     }
 }

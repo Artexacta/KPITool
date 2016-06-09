@@ -218,14 +218,11 @@ public partial class Populate_Populate : System.Web.UI.Page
                 qta.InsertObjectPermissions("ORGANIZATION", organizationID.Value, myOwner, "OWN");
             }
 
-            bool allowAllManAreas = false;
             bool allowAllManKPIs = false;
             bool allowAllManProjects = false;
             bool allowAllManActivities = false;
             bool allowAllManPeople = false;
 
-            // X% of the time we will allow Everyone to manage areas in the organization
-            allowAllManAreas = (r.Next(0, 100) < Convert.ToInt32(AllowedEveryoneManageDropDownList.SelectedValue));
             // X% of the time we will allow Everyone to manage KPIs in the organization
             allowAllManKPIs = (r.Next(0, 100) < Convert.ToInt32(AllowedEveryoneManageDropDownList.SelectedValue));
             // X% of the time we will allow Everyone to manage Projects in the organization
@@ -235,8 +232,6 @@ public partial class Populate_Populate : System.Web.UI.Page
             // X% of the time we will allow Everyone to manage People in the organization
             allowAllManPeople = (r.Next(0, 100) < Convert.ToInt32(AllowedEveryoneManageDropDownList.SelectedValue));
 
-            if (allowAllManAreas)
-                qta.InsertObjectPublic("ORGANIZATION", organizationID.Value, "MAN_AREA");
             if (allowAllManKPIs)
                 qta.InsertObjectPublic("ORGANIZATION", organizationID.Value, "MAN_KPI");
             if (allowAllManProjects)
@@ -253,12 +248,8 @@ public partial class Populate_Populate : System.Web.UI.Page
             {
                 StringBuilder permissions = new StringBuilder();
                 // Get the permissons that we will give them.  They can be one or more
-                // of MAN_ACTIVITY, MAN_AREA, MAN_KPI, MAN_PEOPLE and MAN_PROJECT but 
+                // of MAN_ACTIVITY, MAN_KPI, MAN_PEOPLE and MAN_PROJECT but 
                 // these cannot be added if these permissons are public as above.
-
-                // 10% of the time give them MAN_AREA
-                if (r.Next(0, 100) < 10 && !allowAllManAreas)
-                    AddToStringList(permissions, "MAN_AREA", ";");
 
                 // 10% of the time give them MAN_KPI
                 if (r.Next(0, 100) < 10 && !allowAllManKPIs)

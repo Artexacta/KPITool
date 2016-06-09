@@ -1,4 +1,10 @@
-﻿using Artexacta.App.FRTWB;
+﻿using Artexacta.App.Activities;
+using Artexacta.App.KPI;
+using Artexacta.App.PermissionObject;
+using Artexacta.App.PermissionObject.BLL;
+using Artexacta.App.Project;
+using Artexacta.App.Project.BLL;
+using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -11,143 +17,180 @@ public partial class Project_ProjectDetails : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
-    private int ProjectId
+    protected void Page_Load(object sender, EventArgs e)
     {
-        set { ProjectIdHiddenField.Value = value.ToString(); }
-        get
+        if (!IsPostBack)
         {
-            int id = 0;
-            try
-            {
-                id = Convert.ToInt32(ProjectIdHiddenField.Value);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Error trying to convert ProjectIdHiddenField.Value to integer value", ex);
-            }
-            return id;
+            ProcessSessionParameteres();
+            if (!string.IsNullOrEmpty(ProjectIdHiddenField.Value))
+                LoadData();
+            else
+                Response.Redirect("~/Project/ProjectList.aspx");
         }
     }
 
-    public string ParentPage
+    private void ProcessSessionParameteres()
     {
-        set { ParentPageHiddenField.Value = value; }
-        get { return string.IsNullOrEmpty(ParentPageHiddenField.Value) ? "~/MainPage.aspx" : ParentPageHiddenField.Value; }
-    }
+        int projectId = 0;
+        if (Request["ID"] != null && !string.IsNullOrEmpty(Request["ID"].ToString()))
+        {
+            try
+            {
+                projectId = Convert.ToInt32(Request["ID"].ToString());
+            }
+            catch
+            {
+                log.Error("no se pudo realizar la conversion del parametro ID");
+            }
+        }
+        else if (Session["PROJECTID"] != null && !string.IsNullOrEmpty(Session["PROJECTID"].ToString()))
+        {
+            try
+            {
+                projectId = Convert.ToInt32(Session["PROJECTID"].ToString());
+            }
+            catch
+            {
+                log.Error("no se pudo realizar la conversion de la session projectId:" + Session["PROJECTID"]);
+            }
 
-    protected override void InitializeCulture()
-    {
-        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
-        base.InitializeCulture();
-    }
+            Session["PROJECTID"] = null;
+        }
 
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        if (IsPostBack)
-            return;
-
-        ProcessSessionParametes();
-        LoadData();
+        if (projectId > 0)
+            ProjectIdHiddenField.Value = projectId.ToString();
     }
 
     private void LoadData()
     {
-        int projectId = ProjectId;
-        if (projectId <= 0)
+        //-- verify is user is OWNER
+        PermissionObject theUser = new PermissionObject();
+        try
         {
-            Response.Redirect(ParentPage);
-            return;
+            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PROJECT.ToString(), Convert.ToInt32(ProjectIdHiddenField.Value));
         }
-        Project objProject = FrtwbSystem.Instance.Projects[projectId];
+        catch (Exception exc)
+        {
+            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            Response.Redirect("~/Project/ProjectList.aspx");
+        }
 
-        ProjectNameLiteral.Text = objProject.Name;
-        ActivitiesGridView.DataSource = objProject.Activities.Values;
-        ActivitiesGridView.DataBind();
-        KpisGridView.DataSource = objProject.Kpis.Values;
-        KpisGridView.DataBind();
+        if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        {
+            SystemMessages.DisplaySystemWarningMessage("The user is not owner, cannot view the summary information.");
+            Response.Redirect("~/Project/ProjectList.aspx");
+        }
+
+        //-- show Data
+        Project theData = null;
+        try
+        {
+            theData = ProjectBLL.GetProjectById(Convert.ToInt32(ProjectIdHiddenField.Value));
+        }
+        catch (Exception exc)
+        {
+            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            Response.Redirect("~/Project/ProjectList.aspx");
+        }
+
+        if (theData != null)
+        {
+            TitleLabel.Text = theData.Name;
+        }
     }
 
-    private void ProcessSessionParametes()
+    protected void ActivitiesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        if (Session["ParentPage"] != null && !string.IsNullOrEmpty(Session["ParentPage"].ToString()))
+        if (e.Row.DataItem is Activity)
         {
-            ParentPage = Session["ParentPage"].ToString();
-        }
-        Session["ParentPage"] = null;
-        if (Session["ProjectId"] != null && !string.IsNullOrEmpty(Session["ProjectId"].ToString()))
-        {
-            int id = 0;
-            try
+            Activity theData = (Activity)e.Row.DataItem;
+
+            HyperLink viewButton = (HyperLink)e.Row.FindControl("ViewButton");
+            viewButton.NavigateUrl = "~/Activity/ActivityDetails.aspx?ID=" + theData.ActivityID;
+
+            HyperLink organizationNameLink = (HyperLink)e.Row.FindControl("OrganizationNameLink");
+            organizationNameLink.NavigateUrl = "~/Organization/OrganizationDetails.aspx?ID=" + theData.OrganizationID;
+
+            if (theData.AreaID <= 0)
             {
-                id = Convert.ToInt32(Session["ProjectId"].ToString());
+                Label separatorArea = (Label)e.Row.FindControl("SeparatorArea");
+                separatorArea.Visible = false;
+                Label areaNameLabel = (Label)e.Row.FindControl("AreaNameLabel");
+                areaNameLabel.Visible = false;
             }
-            catch (Exception ex)
+            if (theData.ProjectID <= 0)
             {
-                log.Error("Error trying to convert Session['ProjectId'] to integer value", ex);
+                Label separatorProject = (Label)e.Row.FindControl("separatorProject");
+                separatorProject.Visible = false;
             }
-            ProjectId = id;
-        }
-        Session["ProjectId"] = null;
-    }
-    protected void ActivitiesGridView_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (ActivitiesGridView.SelectedDataKey == null)
-        {
-            return;
-        }
-
-        int activityId = (int)ActivitiesGridView.SelectedDataKey.Value;
-        if (OperationHiddenField.Value == "VIEW")
-        {
-            Session["ActivityId"] = activityId;
-            Response.Redirect("~/Activity/DetailActivity.aspx");
         }
     }
-    protected void KpisGridView_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (KpisGridView.SelectedDataKey == null)
-        {
-            return;
-        }
 
-        int idKpi = (int)KpisGridView.SelectedDataKey.Value;
-        if (OperationHiddenField.Value == "VIEW")
+    protected void KpisGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.DataItem is KPI)
         {
-            Session["KpiId"] = idKpi;
+            KPI theData = (KPI)e.Row.DataItem;
+
+            HyperLink organizationNameLink = (HyperLink)e.Row.FindControl("OrganizationNameLink");
+            organizationNameLink.NavigateUrl = "~/Organization/OrganizationDetails.aspx?ID=" + theData.OrganizationID;
+
+            if (theData.AreaID <= 0)
+            {
+                Label separatorArea = (Label)e.Row.FindControl("SeparatorArea");
+                separatorArea.Visible = false;
+                Label areaNameLabel = (Label)e.Row.FindControl("AreaNameLabel");
+                areaNameLabel.Visible = false;
+            }
+            if (theData.ProjectID <= 0)
+            {
+                Label separatorProject = (Label)e.Row.FindControl("separatorProject");
+                separatorProject.Visible = false;
+            }
+            if (theData.ActivityID <= 0)
+            {
+                Label separatorActivity = (Label)e.Row.FindControl("SeparatorActivity");
+                separatorActivity.Visible = false;
+                HyperLink activityNameLink = (HyperLink)e.Row.FindControl("ActivityNameLink");
+                activityNameLink.Visible = false;
+            }
+            else
+            {
+                HyperLink activityNameLink = (HyperLink)e.Row.FindControl("ActivityNameLink");
+                activityNameLink.NavigateUrl = "~/Activity/ActivityDetails.aspx?ID=" + theData.ActivityID;
+            }
+            if (theData.PersonID <= 0)
+            {
+                Label separatorPerson = (Label)e.Row.FindControl("SeparatorPerson");
+                separatorPerson.Visible = false;
+                HyperLink personNameLink = (HyperLink)e.Row.FindControl("PersonNameLink");
+                personNameLink.Visible = false;
+            }
+            else
+            {
+                HyperLink personNameLink = (HyperLink)e.Row.FindControl("PersonNameLink");
+                personNameLink.NavigateUrl = "~/People/PersonDetails.aspx?ID=" + theData.PersonID;
+            }
+        }
+    }
+
+    protected void KpisGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        string kpiId = e.CommandArgument.ToString();
+        if (e.CommandName.Equals("ViewData"))
+        {
+            Session["KpiId"] = kpiId;
             Response.Redirect("~/Kpis/KpiDetails.aspx");
         }
     }
-    protected void ViewActivityButton_Click(object sender, EventArgs e)
-    {
-        OperationHiddenField.Value = "VIEW";
-    }
-    protected void ViewKpiButton_Click(object sender, EventArgs e)
-    {
-        OperationHiddenField.Value = "VIEW";
-    }
-    protected void KpisGridView_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
 
-    }
-    protected void ActivitiesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void ObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
-        UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-        if (img == null)
-            return;
-
-        if (e.Row.DataItem is Activity)
+        if (e.Exception != null)
         {
-            Activity objActivity = (Activity)e.Row.DataItem;
-            if (objActivity != null && objActivity.Kpis.Count > 0)
-            {
-                List<Kpi> kpis = objActivity.Kpis.Values.ToList();
-                Kpi objKpi = kpis[0];
-                if (objKpi.KpiValues.Count > 0)
-                {
-                    img.OwnerId = objActivity.ObjectId;
-                    img.Visible = true;
-                }
-            }
+            e.ExceptionHandled = true;
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
         }
     }
+
 }
