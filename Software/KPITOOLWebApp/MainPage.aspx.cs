@@ -37,6 +37,12 @@ public partial class MainPage : SqlViewStatePage
 
         if (!IsPostBack)
         {
+            if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
+            {
+                OrgSearchControl.Query = Session["SEARCH_PARAMETER"].ToString();
+            }
+            Session["SEARCH_PARAMETER"] = null;
+
             BindOrganizations();
         }
     }
@@ -54,7 +60,7 @@ public partial class MainPage : SqlViewStatePage
 
         try
         {
-            theOrganizations = theBLL.GetOrganizationsByUser("1=1");
+            theOrganizations = theBLL.GetOrganizationsByUser(OrgSearchControl.Sql);
         }
         catch (Exception exc)
         {
@@ -125,14 +131,13 @@ public partial class MainPage : SqlViewStatePage
         catch {}
 
         //Person
-        PeopleBLL thePeBLL = new PeopleBLL();
         List<People> thePerson = new List<People>();
 
         if (ShowPeopleCheckbox.Checked)
         {
             try
             {
-                thePerson = thePeBLL.GetPeopleByOrganization(item.OrganizationID);
+                thePerson = PeopleBLL.GetPeopleByOrganization(item.OrganizationID);
             }
             catch { }
         }
@@ -232,23 +237,28 @@ public partial class MainPage : SqlViewStatePage
 
         if(e.CommandName == "ViewProjects")
         {
-            Session["OwnerId"] = organizationId + "-Organization";
+            Session["SEARCH_PARAMETER"] = "@organizationID " + organizationId.ToString();
             Response.Redirect("~/Project/ProjectList.aspx");
             return;
         }
         if (e.CommandName == "ViewActivities")
         {
-            Session["OwnerId"] = organizationId + "-Organization";
+            Session["SEARCH_PARAMETER"] = "@organizationID " + organizationId.ToString();
             Response.Redirect("~/Activity/ActivitiesList.aspx");
             return;
         }
         if (e.CommandName == "ViewKPIs")
         {
-            Session["OwnerId"] = organizationId + "-Organization";
+            Session["SEARCH_PARAMETER"] = "@organizationID " + organizationId.ToString();
             Response.Redirect("~/Kpi/KpiList.aspx");
             return;
         }
-
+        if (e.CommandName == "ViewPersons")
+        {
+            Session["SEARCH_PARAMETER"] = "@organizationID " + organizationId.ToString();
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
+            return;
+        }
         if(e.CommandName == "DeleteOrganization")
         {
             try

@@ -76,7 +76,7 @@
                                                  CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                             <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
                                                 CommandName="ViewArea"
-                                                CommandArgument='<%# Eval("AreaID") %>'></asp:LinkButton>
+                                                CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                             )
                                         </p>
                                     </div>

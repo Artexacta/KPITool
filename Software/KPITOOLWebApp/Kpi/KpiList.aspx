@@ -45,7 +45,7 @@
                             ImageErrorUrl="~/images/exclamation.png" />
                     </div>
                     <div class="t-body tb-padding">
-                        <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIListObjectDataSource" OnItemCommand="KpisRepeater_ItemCommand">
+                       <%-- <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIListObjectDataSource" OnItemCommand="KpisRepeater_ItemCommand">
                             <ItemTemplate>
                                 <div class="row m-b-10">
                                     <div class="col-md-1">
@@ -95,31 +95,71 @@
                                     </div>
                                 </asp:Panel>
                             </FooterTemplate>
-                        </asp:Repeater>
+                        </asp:Repeater>--%>
 
                         <br />
-                        <%-- <app:TourSettings runat="server" ID="Settings">
-                            <Items>
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep1 %>"
-                                    element="#TheAddButton" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep2 %>"
-                                    element="#OrganizationList .editBtn:first" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep3 %>"
-                                    element="#OrganizationList .detailsBtn:first" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep4 %>"
-                                    element="#OrganizationList .shareBtn:first" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep5 %>"
-                                    element="#SearchPanel" />
-                            </Items>
-                        </app:TourSettings>
-                        <div style="overflow: hidden">
-                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
-                        </div>--%>
+                        <asp:GridView ID="KpisGridView" runat="server" DataSourceID="KPIListObjectDataSource" AutoGenerateColumns="false"
+                            OnRowCommand="KpisGridView_RowCommand" CssClass="table table-striped m-b-15 i-table tbl-summary" >
+                            <Columns>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="ViewKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="ViewKpi"><i class="zmdi zmdi-eye zmdi-hc-fw"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="EditKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="EditKpi">
+                                            <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="ShareKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                            CommandName="ShareKpi">
+                                            <i class="zmdi zmdi-share zmdi-hc-fw"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server"
+                                            CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
+                                            <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="ListValuesKpi" CssClass="viewBtn" CommandArgument='<%# Eval("KpiID") %>' CommandName="ListValuesKpi"
+                                            runat="server"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="<% $Resources: Kpi, LabelName %>">
+                                    <ItemTemplate>
+                                        <p style="font-size: 14px; padding-top: 2px;">
+                                            <%# Eval("Name") %>
+                                            <br />
+                                            <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                                CommandName="ViewOrganization"
+                                                CommandArgument='<%# Eval("OrganizationID") %>'>
+                                            </asp:LinkButton>
+                                            <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                                CommandName="ViewArea"
+                                                CommandArgument='<%# Eval("AreaID") %>'>
+                                            </asp:LinkButton>
+                                            <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
+                                                CommandName="ViewProject"
+                                                CommandArgument='<%# Eval("ProjectID") %>'>
+                                            </asp:LinkButton>
+                                        </p>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>

@@ -326,6 +326,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
              ,"~/Activity/ActivitiesList.aspx"
 
              ,"~/Personas/ListaPersonas.aspx"
+             ,"~/Personas/PeopleForm.aspx"
 
              ,"~/Kpi/KpiForm.aspx"
              ,"~/Kpis/KpiDetails.aspx"

@@ -20,6 +20,7 @@
 
                 <div class="row">
                     <div class="col-sm-6">
+
                         <label>Project name <span class="label label-danger">Required</span></label>
                         <asp:TextBox ID="ProjectNameTextBox" runat="server" CssClass="form-control" placeholder="Enter the project name"></asp:TextBox>
                         <div class="has-error m-b-10">

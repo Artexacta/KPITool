@@ -8,6 +8,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using Artexacta.App.KPI;
+using Artexacta.App.Organization;
+using Artexacta.App.Organization.BLL;
+using Artexacta.App.Area;
+using Artexacta.App.Area.BLL;
+using Artexacta.App.Project;
+using Artexacta.App.Project.BLL;
 
 public partial class Kpi_KpiList : System.Web.UI.Page
 {
@@ -18,8 +24,6 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
         base.InitializeCulture();
     }
-
-    private string ownerToSelectInSearch;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -34,125 +38,97 @@ public partial class Kpi_KpiList : System.Web.UI.Page
 
     void KPISearchControl_OnSearch()
     {
-        
+
     }
 
     private void ProcessSessionParameters()
     {
-        if (Session["OwnerId"] != null && !string.IsNullOrEmpty(Session["OwnerId"].ToString()))
+        if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
         {
-            ownerToSelectInSearch = Session["OwnerId"].ToString();
+            KPISearchControl.Query = Session["SEARCH_PARAMETER"].ToString();
         }
+        Session["SEARCH_PARAMETER"] = null;
     }
 
-    protected void ViewKpi_Click(object sender, EventArgs e)
+    protected string GetOrganizationInfo(Object obj)
     {
-        LinkButton btnClick = (LinkButton)sender;
-        Session["KpiId"] = btnClick.Attributes["data-id"];
-        Response.Redirect("~/Kpis/KpiDetails.aspx");
+        int OrganizationID = 0;
+        string name = "";
+        try
+        {
+            OrganizationID = (int)obj;
+        }
+        catch { return "-"; }
+
+        if (OrganizationID > 0)
+        {
+            Organization theClass = null;
+
+            try
+            {
+                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
+            }
+            catch { }
+
+            if (theClass != null)
+                name = theClass.Name;
+        }
+
+        return name;
     }
 
-    protected void EditKpi_Click(object sender, EventArgs e)
+    protected string GetAreaInfo(Object obj)
     {
-        LinkButton btnClick = (LinkButton)sender;
-        Session["KpiId"] = btnClick.Attributes["data-id"];
-        Session["ParentPage"] = "~/Kpi/KpiList.aspx";
-        Response.Redirect("~/Kpi/KpiForm.aspx");
-    }
-    protected void ShareKpi_Click(object sender, EventArgs e)
-    {
+        int areaID = 0;
+        string name = "";
+        try
+        {
+            areaID = (int)obj;
+        }
+        catch { return "-"; }
 
-    }
-    protected void DeleteKpi_Click(object sender, EventArgs e)
-    {
+        if (areaID > 0)
+        {
+            Area theClass = null;
 
-    }
-    protected string GetOwnerInfo(Object obj)
-    {
-        return "N/A";
-        //FrtwbObject ownerObject = (FrtwbObject)obj;
-        //if (ownerObject == null)
-        //    return "N/A";
+            try
+            {
+                theClass = AreaBLL.GetAreaById(areaID);
+            }
+            catch { }
 
-        //string type = "";
-        //if (ownerObject is Organization)
-        //    return "Organization: " + ownerObject.Name;
-        //else if (ownerObject is Area)
-        //{
-        //    string owner = "Area: " + ownerObject.Name;
-        //    Area area = (Area)ownerObject;
-        //    if (area.Owner != null)
-        //        owner += " of Organization " + area.Owner.Name;
-        //    return owner;
-        //}
-        //else if (ownerObject is Project)
-        //{
-        //    string owner = "Project: " + ownerObject.Name;
-        //    Project project = (Project)ownerObject;
-        //    if (project.Owner != null)
-        //    {
-        //        if (project.Owner is Area)
-        //        {
-        //            owner += " of Area " + project.Owner.Name;
-        //            Area area = (Area)project.Owner;
-        //            if (area.Owner != null)
-        //                owner += " of Organization " + area.Owner.Name;
-        //        }
-        //        else if (project.Owner is Organization)
-        //        {
-        //            owner += " of Organization " + project.Owner.Name;
-        //        }
-        //    }
-        //    return owner;
-        //}
-        //else if (ownerObject is Activity)
-        //{
-        //    string owner = "Activity: " + ownerObject.Name;
-        //    Activity activity = (Activity)ownerObject;
-        //    if (activity.Owner != null)
-        //    {
-        //        if (activity.Owner is Area)
-        //        {
-        //            owner += " of Area " + activity.Owner.Name;
-        //            Area area = (Area)activity.Owner;
-        //            if (area.Owner != null)
-        //                owner += " of Organization " + area.Owner.Name;
-        //        }
-        //        else if (activity.Owner is Organization)
-        //        {
-        //            owner += " of Organization " + activity.Owner.Name;
-        //        }
-        //        else if (activity.Owner is Project)
-        //        {
-        //            owner += " of Project " + activity.Owner.Name;
-        //            Project project = (Project)activity.Owner;
-        //            if (project.Owner != null)
-        //            {
-        //                if (project.Owner is Area)
-        //                {
-        //                    owner += " of Area " + project.Owner.Name;
-        //                    Area area = (Area)project.Owner;
-        //                    if (area.Owner != null)
-        //                        owner += " of Organization " + area.Owner.Name;
-        //                }
-        //                else if (activity.Owner is Organization)
-        //                {
-        //                    owner += " of Organization " + activity.Owner.Name;
-        //                }
-        //            }
+            if (theClass != null)
+                name = " - " + theClass.Name;
+        }
 
-        //        }
-        //    }
-        //    return owner;
-        //}
-        //return type;
+        return name;
     }
 
-
-    protected void NewKpiButton_Click(object sender, EventArgs e)
+    protected string GetProjectInfo(Object obj)
     {
-        Session["ParentPage"] = "~/Kpi/KpiList.aspx";
-        Response.Redirect("~/Kpi/KpiForm.aspx");
+        int projectID = 0;
+        string name = "";
+        try
+        {
+            projectID = (int)obj;
+        }
+        catch { return "-"; }
+
+        if (projectID > 0)
+        {
+            Project theClass = null;
+
+            try
+            {
+                theClass = ProjectBLL.GetProjectById(projectID);
+            }
+            catch { }
+
+            if (theClass != null)
+                name = " - " + theClass.Name;
+        }
+
+        return name;
     }
 
     protected void KpisRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -171,7 +147,6 @@ public partial class Kpi_KpiList : System.Web.UI.Page
             SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
             return;
         }
-
 
         switch (e.CommandName)
         {
@@ -205,9 +180,9 @@ public partial class Kpi_KpiList : System.Web.UI.Page
                 //}
                 return;
             case "DeleteKpi":
-                
+
                 //objKpi = FrtwbSystem.Instance.Kpis[KpiId];
-                
+
 
                 //RemoveKpiFromOldOwner(objKpi);
                 //objKpi.Owner = null;
@@ -227,33 +202,41 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         }
     }
 
-    private void RemoveKpiFromOldOwner(KPI objKpi)
-    {
-        //if (objKpi.Owner is Area)
-        //{
-        //    Area oldArea = (Area)objKpi.Owner;
-        //    oldArea.Kpis.Remove(objKpi.ObjectId);
-        //}
-        //else if (objKpi.Owner is Organization)
-        //{
-        //    Organization oldOrganization = (Organization)objKpi.Owner;
-        //    oldOrganization.Kpis.Remove(objKpi.ObjectId);
-        //}
-    }
-
-
-    protected void ListValuesKpi_Click(object sender, EventArgs e)
-    {
-        LinkButton btnClick = (LinkButton)sender;
-        Session["KpiId"] = btnClick.Attributes["data-id"];
-        Response.Redirect("~/Kpi/KpiDataEntry.aspx");
-    }
     protected void KPIListObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
         if (e.Exception != null)
         {
             SystemMessages.DisplaySystemErrorMessage("Error to get KPI List.");
             e.ExceptionHandled = true;
+        }
+    }
+    protected void KpisGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        int kpiId = 0;
+        try
+        {
+            kpiId = Convert.ToInt32(e.CommandArgument);
+        }
+        catch (Exception ex)
+        {
+            log.Error("Error getting object id", ex);
+        }
+
+        if (kpiId <= 0)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageNotAction);
+            return;
+        }
+
+        if (e.CommandName == "ViewKpi")
+        {
+            Session["KpiId"] = kpiId.ToString();
+            Response.Redirect("~/Kpis/KpiDetails.aspx");
+        }
+        if (e.CommandName == "EditKpi")
+        {
+            Session["KPI_ID"] = kpiId.ToString();
+            Response.Redirect("~/Kpi/KpiForm.aspx");
         }
     }
 }

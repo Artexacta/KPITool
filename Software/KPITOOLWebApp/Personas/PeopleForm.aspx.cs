@@ -1,33 +1,33 @@
-﻿using Artexacta.App.Utilities.SystemMessages;
-using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Artexacta.App.Project;
-using Artexacta.App.Project.BLL;
+using Artexacta.App.People;
+using Artexacta.App.People.BLL;
+using Artexacta.App.Utilities.SystemMessages;
+using log4net;
 
-public partial class Project_ProjectForm : System.Web.UI.Page
+public partial class Personas_PeopleForm : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
-    public int ProjectId
+    public int PersonId
     {
-        set { ProjectIdHiddenField.Value = value.ToString(); }
+        set { PersonIdHiddenField.Value = value.ToString(); }
         get
         {
-            int projectId = 0;
+            int personId = 0;
             try
             {
-                projectId = Convert.ToInt32(ProjectIdHiddenField.Value);
+                personId = Convert.ToInt32(PersonIdHiddenField.Value);
             }
             catch (Exception ex)
             {
-                log.Error("Error trying to convert ProjectIdHiddenField.Value to integer value", ex);
+                log.Error("Error trying to convert PersonIdHiddenField.Value to integer value", ex);
             }
-            return projectId;
+            return personId;
         }
     }
 
@@ -48,6 +48,7 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         if (IsPostBack)
             return;
 
+        DataControl.DataType = UserControls_FRTWB_AddDataControl.AddType.PPL.ToString();
         ProcessSessionParametes();
         LoadProjectData();
     }
@@ -60,38 +61,37 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         }
         Session["ParentPage"] = null;
 
-        if (Session["ProjectId"] != null && !string.IsNullOrEmpty(Session["ProjectId"].ToString()))
+        if (Session["PersonId"] != null && !string.IsNullOrEmpty(Session["PersonId"].ToString()))
         {
-            int projectId = 0;
+            int personId = 0;
             try
             {
-                projectId = Convert.ToInt32(Session["ProjectId"].ToString());
+                personId = Convert.ToInt32(Session["PersonId"].ToString());
             }
             catch (Exception ex)
             {
-                log.Error("Error trying to convert Session['ProjectId'] to integer value", ex);
+                log.Error("Error trying to convert Session['PersonId'] to integer value", ex);
             }
-            ProjectId = projectId;
+            PersonId = personId;
         }
-        Session["ProjectId"] = null;
+        Session["PersonId"] = null;
     }
 
     protected void LoadProjectData()
     {
-        OrganizationControl.DataType = UserControls_FRTWB_AddDataControl.AddType.PRJ.ToString();
-
-        if (string.IsNullOrEmpty(ProjectIdHiddenField.Value) || ProjectIdHiddenField.Value == "0")
+        if (string.IsNullOrEmpty(PersonIdHiddenField.Value) || PersonIdHiddenField.Value == "0")
         {
             //Insert
-            OrganizationControl.OrganizationId = 0;
+            DataControl.OrganizationId = 0;
         }
         else
         {
             //Update
-            Project theData = null;
+            People theData = null;
+
             try
             {
-                theData = ProjectBLL.GetProjectById(Convert.ToInt32(ProjectIdHiddenField.Value));
+                theData = PeopleBLL.GetPeopleById(Convert.ToInt32(PersonIdHiddenField.Value));
             }
             catch (Exception exc)
             {
@@ -100,53 +100,62 @@ public partial class Project_ProjectForm : System.Web.UI.Page
 
             if (theData != null)
             {
-                ProjectNameTextBox.Text = theData.Name;
-                OrganizationControl.OrganizationId = theData.OrganizationID;
-                OrganizationControl.AreaId = theData.AreaID;
+                CodeTextBox.Text = theData.Id;
+                NameTextBox.Text = theData.Name;
+                DataControl.OrganizationId = theData.OrganizationId;
+                DataControl.AreaId = theData.AreaId;
             }
         }
     }
 
+
     protected void SaveButton_Click(object sender, EventArgs e)
     {
-        Project theProj = new Project();
-        theProj.Name = ProjectNameTextBox.Text;
-        theProj.OrganizationID = OrganizationControl.OrganizationId;
-        theProj.AreaID = OrganizationControl.AreaId;
+        if (!Page.IsValid)
+            return;
 
-        if (string.IsNullOrEmpty(ProjectIdHiddenField.Value) || ProjectIdHiddenField.Value == "0")
+        People thePerson = new People();
+
+        thePerson.Id = CodeTextBox.Text;
+        thePerson.Name = NameTextBox.Text;
+        thePerson.OrganizationId = DataControl.OrganizationId;
+        thePerson.AreaId = DataControl.AreaId;
+
+        if (PersonId == 0)
         {
             //Insert
             try
             {
-                ProjectBLL.InsertProject(theProj);
+                PeopleBLL.InsertPeople(thePerson);
             }
             catch (Exception ex)
             {
                 SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
+
+            SystemMessages.DisplaySystemMessage(Resources.People.MessageCreatePersonOk);
         }
         else
         {
             //Update
-            theProj.ProjectID = Convert.ToInt32(ProjectIdHiddenField.Value);
+            thePerson.PersonId = PersonId;
             try
             {
-                ProjectBLL.UpdateProject(theProj);
+                PeopleBLL.UpdatePeople(thePerson);
             }
             catch (Exception ex)
             {
                 SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
+
+            SystemMessages.DisplaySystemMessage(Resources.People.MessageUpdatePersonOk);
         }
-
-        Response.Redirect("~/Project/ProjectList.aspx");
+        Response.Redirect("~/Personas/ListaPersonas.aspx");
     }
-
     protected void CancelButton_Click(object sender, EventArgs e)
     {
-        Response.Redirect(ParentPage);
+        Response.Redirect("~/Personas/ListaPersonas.aspx");
     }
 }

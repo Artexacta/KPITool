@@ -169,7 +169,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         //Get the single target Value
         KPITarget theTarget = null;
-        
+
         try
         {
             theTarget = KPITargetBLL.GetKPITargetByKpiId(theKpi.KpiID);
@@ -223,6 +223,11 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 NumericSingleTargetPanel.Style["display"] = "block";
                 TimeSingleTargetPanel.Style["display"] = "none";
                 SingleTargetTextBox.Value = Convert.ToDouble(theTarget.Target);
+
+                if (theKpi.UnitID == "PERCENT")
+                    UnitTargetLabel.Text = "%";
+                else
+                    UnitTargetLabel.Text = "";
             }
         }
 

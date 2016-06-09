@@ -21,6 +21,12 @@
             </asp:LinkButton>
         </li>
         <li role="presentation">
+            <asp:LinkButton ID="PersonButton" runat="server" role="menuitem" TabIndex="-1" OnClick="PersonButton_Click"  AccessKey="A">
+                Add Person
+                <kbd style="margin-left: 50px"><kbd>ALT</kbd> <span class="shift-cmd">+ <kbd>SHIFT</kbd></span> + <kbd>L</kbd></kbd>
+            </asp:LinkButton>
+        </li>
+        <li role="presentation">
             <asp:HyperLink runat="server" role="menuitem" TabIndex="-1" NavigateUrl="~/Kpi/KpiForm.aspx" AccessKey="K">
                 Add KPI  
                 <kbd style="margin-left: 74px"><kbd>ALT</kbd> <span class="shift-cmd">+ <kbd>SHIFT</kbd></span> + <kbd>K</kbd></kbd>

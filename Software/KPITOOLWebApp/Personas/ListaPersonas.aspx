@@ -26,11 +26,13 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="t-header">
-                    <div class="th-title">People</div>
+                    <div class="th-title">
+                        <asp:Label ID="PersonTitleLabel" runat="server" Text="<% $Resources: People, LabelPeople %>"></asp:Label>
+                    </div>
                 </div>
                 <div class="t-body tb-padding">
                     <app:SearchControl ID="PeopleSearchControl" runat="server"
-                        Title="Búsqueda"
+                        Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                         DisplayHelp="true"
                         DisplayContextualHelp="true"
                         CssSearch="CSearch"
@@ -42,7 +44,7 @@
                 </div>
                 <div class="t-body tb-padding" id="ActivityList">
                     <asp:Repeater ID="PeopleRepeater" runat="server" DataSourceID="PersonaObjectDataSource" OnItemCommand="PeopleRepeater_ItemCommand"
-                        OnItemDataBound="PeopleRepeater_ItemDataBound" >
+                        OnItemDataBound="PeopleRepeater_ItemDataBound">
                         <ItemTemplate>
                             <div class="row">
                                 <div class="col-md-1">
@@ -73,30 +75,39 @@
                                     <p style="font-size: 14px; padding-top: 2px;">
                                         <%# Eval("Name") %>
                                         (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("PersonID")) %>'
-                                                CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("PersonID") %>'></asp:LinkButton>
+                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                                 CommandName="ViewOrganization"
+                                                 CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                            CommandName="ViewArea"
+                                            CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                         )
                                     </p>
                                 </div>
                             </div>
-                            <%--<div class="row m-b-20">
+                            <div class="row m-b-20">
                                 <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
-                                    This person does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
+                                    <asp:Label ID="Label1" runat="server" Text="<% $Resources: People, LabelPersonNoObjects %>"></asp:Label>
+                                    <i class="zmdi zmdi-plus-circle-o"></i>
+                                    <asp:Label ID="Label2" runat="server" Text="<% $Resources: People, LabelPersonIcon %>"></asp:Label>
                                 </asp:Panel>
-                                <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
-                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" OwnerType="ACTIVITY" />
+                                <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                    <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PERSON" OwnerId='<%# Eval("PersonID") %>' />
                                 </asp:Panel>
-                                <asp:Panel runat="server" ID="detailsContainer" class="col-md-111 m-t-5" Visible="false">
-                                    This person has 
-                                    <asp:LinkButton ID="KpisButton" runat="server" Visible="false"></asp:LinkButton>
+                                <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
+                                    <asp:Label ID="PersonHasLabel" runat="server" Text="<% $Resources: People, LabelPersonHas %>"></asp:Label>
+                                    <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
+                                        CommandName="ViewKPIs" CommandArgument='<%# Eval("PersonID") %>'>
+                                    </asp:LinkButton>
                                 </asp:Panel>
-                            </div>--%>
+                            </div>
                         </ItemTemplate>
                         <FooterTemplate>
                             <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# PeopleRepeater.Items.Count == 0 %>'>
                                 <div class="col-md-12 text-center">
-                                    -- There are no person registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above --
+                                    <asp:Label ID="Label3" runat="server" Text="<% $Resources: People, LabelPersonNoCreated %>"></asp:Label>
+                                     <i class="zmdi zmdi-plus-circle-o"></i>
+                                    <asp:Label ID="Label4" runat="server" Text="<% $Resources: People, LabelPersonIconNoCreated %>"></asp:Label>
                                 </div>
                             </asp:Panel>
                         </FooterTemplate>

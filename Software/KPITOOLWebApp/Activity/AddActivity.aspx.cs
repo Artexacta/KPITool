@@ -1,5 +1,4 @@
-﻿using Artexacta.App.FRTWB;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Artexacta.App.Activities.BLL;
+using Artexacta.App.Activities;
 
 public partial class Activity_AddActivity : System.Web.UI.Page
 {
@@ -43,11 +44,9 @@ public partial class Activity_AddActivity : System.Web.UI.Page
         if (IsPostBack)
             return;
 
+        AddDataControl.DataType = UserControls_FRTWB_AddDataControl.AddType.ACT.ToString();
         ProcessSessionParametes();
         LoadActivityData();
-
-        OrganizationComboBox.DataSource = FrtwbSystem.Instance.Organizations.Values;
-        OrganizationComboBox.DataBind();
     }
 
     private void ProcessSessionParametes()
@@ -57,6 +56,7 @@ public partial class Activity_AddActivity : System.Web.UI.Page
             ParentPage = Session["ParentPage"].ToString();
         }
         Session["ParentPage"] = null;
+
         if (Session["ActivityId"] != null && !string.IsNullOrEmpty(Session["ActivityId"].ToString()))
         {
             int activityId = 0;
@@ -79,254 +79,67 @@ public partial class Activity_AddActivity : System.Web.UI.Page
         if (activityId <= 0)
             return;
 
-        try
-        {
-            currentObject = FrtwbSystem.Instance.Activities[activityId];
-            ActivityNameTextBox.Text = currentObject.Name;
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error loading activity data", ex);
-        }
-    }
-
-    protected void OrganizationComboBox_DataBound(object sender, EventArgs e)
-    {
-        OrganizationComboBox.Items.Insert(0, new ListItem("-- Select a Organization --", ""));
-        if (currentObject == null)
-            return;
-
-        string organizationId = currentObject.Owner is Organization ? currentObject.Owner.ObjectId.ToString() :
-            currentObject.Owner.Owner.ObjectId.ToString();
-        ListItem item = OrganizationComboBox.Items.FindByValue(organizationId);
-        if (item != null)
-            item.Selected = true;
-
-        LoadAreaComboBox(organizationId);
-
-    }
-
-    protected void OrganizationComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        LoadAreaComboBox(OrganizationComboBox.SelectedValue);
-        LoadProjectComboBoxByOrganization(OrganizationComboBox.SelectedValue);
-    }
-
-    protected void AreaComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        LoadProjectComboBoxByArea(AreaComboBox.SelectedValue);
-    }
-
-    private void LoadAreaComboBox(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            AreaComboBox.DataSource = new List<Area>();
-            AreaComboBox.DataBind();
-            return;
-        }
+        Activity theClass = null;
 
         try
         {
-            Organization org = FrtwbSystem.Instance.Organizations[Convert.ToInt32(value)];
-            AreaComboBox.DataSource = org.Areas.Values;
-            AreaComboBox.DataBind();
+            theClass = ActivityBLL.GetActivityById(activityId);
         }
-        catch (Exception ex)
+        catch
         {
-            log.Error("Error loading areas from selected organization", ex);
-        }
-    }
-
-    private void LoadProjectComboBoxByOrganization(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            ProjectComboBox.DataSource = new List<Project>();
-            ProjectComboBox.DataBind();
+            SystemMessages.DisplaySystemErrorMessage("Error to get the activity information.");
             return;
         }
 
-        try
+        if (theClass != null)
         {
-            Organization org = FrtwbSystem.Instance.Organizations[Convert.ToInt32(value)];
-            ProjectComboBox.DataSource = org.Projects.Values;
-            ProjectComboBox.DataBind();
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error loading activitys from selected organization", ex);
+            ActivityNameTextBox.Text = theClass.Name;
+            AddDataControl.OrganizationId = theClass.OrganizationID;
+            AddDataControl.AreaId = theClass.AreaID;
+            AddDataControl.ProjectId = theClass.ProjectID;
         }
     }
 
-    private void LoadProjectComboBoxByArea(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            ProjectComboBox.DataSource = new List<Project>();
-            ProjectComboBox.DataBind();
-            return;
-        }
-
-        try
-        {
-            Area org = FrtwbSystem.Instance.Areas[Convert.ToInt32(value)];
-            ProjectComboBox.DataSource = org.Projects.Values;
-            ProjectComboBox.DataBind();
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error loading activitys from selected area", ex);
-        }
-    }
-
-
-    protected void AreaComboBox_DataBound(object sender, EventArgs e)
-    {
-        AreaComboBox.Items.Insert(0, new ListItem("-- Select an Area --", ""));
-
-        if (currentObject == null)
-            return;
-
-        string areaId = currentObject.Owner is Area ? currentObject.Owner.ObjectId.ToString() :
-            currentObject.Owner.Owner.ObjectId.ToString();
-        ListItem item = AreaComboBox.Items.FindByValue(areaId);
-        if (item != null)
-            item.Selected = true;
-
-        LoadProjectComboBoxByArea(areaId);
-    }
-
-    protected void ProjectComboBox_DataBound(object sender, EventArgs e)
-    {
-        ProjectComboBox.Items.Insert(0, new ListItem("-- Select a Project --", ""));
-
-        if (currentObject == null)
-            return;
-
-        if (currentObject.Owner is Project)
-        {
-            string activityId = currentObject.Owner.ObjectId.ToString();
-            ListItem item = ProjectComboBox.Items.FindByValue(activityId);
-            if (item != null)
-                item.Selected = true;
-        }
-    }
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
-        try
+        Activity theClass = new Activity();
+
+        theClass.Name = ActivityNameTextBox.Text;
+        theClass.OrganizationID = AddDataControl.OrganizationId;
+        theClass.AreaID = AddDataControl.AreaId;
+        theClass.ProjectID = AddDataControl.ProjectId;
+
+        if (ActivityId == 0)
         {
-            int activityId = this.ActivityId;
-            string activityName = ActivityNameTextBox.Text;
-            int organizationId = Convert.ToInt32(OrganizationComboBox.SelectedValue);
-            string area = AreaComboBox.SelectedValue;
-            string project = ProjectComboBox.SelectedValue;
-
-
-            Activity objActivity = null;
-            bool isNew = activityId == 0;
-
-            if (isNew)
+            //Insert
+            try
             {
-                objActivity = new Activity()
-                {
-                    Name = activityName
-                };
-                FrtwbSystem.Instance.Activities.Add(objActivity.ObjectId, objActivity);
+                ActivityBLL.InsertActivity(theClass);
             }
-            else
+            catch (Exception ex)
             {
-                objActivity = FrtwbSystem.Instance.Activities[activityId];
-                objActivity.Name = activityName;
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
             }
-
-
-            Organization objOrg = FrtwbSystem.Instance.Organizations[organizationId];
-            if (!string.IsNullOrEmpty(area))
+            SystemMessages.DisplaySystemMessage("The activity was created successfully.");
+        }
+        else
+        {
+            // Update
+            theClass.ActivityID = ActivityId;
+            try
             {
-                int areaId = Convert.ToInt32(area);
-                Area objArea = objOrg.Areas[areaId];
-                if (!string.IsNullOrEmpty(project))
-                {
-                    int projectId = Convert.ToInt32(project);
-                    Project objProject = objArea.Projects[projectId];
-                    if (objActivity.Owner != null && objActivity.Owner != objProject)
-                    {
-                        RemoveActivityFromOldOwner(objActivity);
-                    }
-                    if (!objProject.Activities.ContainsKey(objActivity.ObjectId))
-                        objProject.Activities.Add(objActivity.ObjectId, objActivity);
-                    objActivity.Owner = objProject;
-                }
-                else
-                {
-                    if (objActivity.Owner != null && objActivity.Owner != objArea)
-                    {
-                        RemoveActivityFromOldOwner(objActivity);
-                    }
-                    if (!objArea.Activities.ContainsKey(objActivity.ObjectId))
-                        objArea.Activities.Add(objActivity.ObjectId, objActivity);
-                    objActivity.Owner = objArea;
-                }
-
+                ActivityBLL.UpdateActivity(theClass);
             }
-            else
+            catch (Exception ex)
             {
-                if (!string.IsNullOrEmpty(project))
-                {
-                    int projectId = Convert.ToInt32(project);
-                    Project objProject = objOrg.Projects[projectId];
-                    if (objActivity.Owner != null && objActivity.Owner != objProject)
-                    {
-                        RemoveActivityFromOldOwner(objActivity);
-                    }
-                    if (!objProject.Activities.ContainsKey(objActivity.ObjectId))
-                        objProject.Activities.Add(objActivity.ObjectId, objActivity);
-                    objActivity.Owner = objProject;
-                }
-                else
-                {
-                    if (objActivity.Owner != null && objActivity.Owner != objOrg)
-                    {
-                        RemoveActivityFromOldOwner(objActivity);
-                    }
-                    if (!objOrg.Activities.ContainsKey(objActivity.ObjectId))
-                        objOrg.Activities.Add(objActivity.ObjectId, objActivity);
-                    objActivity.Owner = objOrg;
-                }
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
             }
-            if (isNew)
-                SystemMessages.DisplaySystemMessage("Activity was created");
-            else
-                SystemMessages.DisplaySystemMessage("Activity was modified");
-            Response.Redirect("~/Activity/ActivitiesList.aspx");
-
+            SystemMessages.DisplaySystemMessage("The activity was updated successfully.");
         }
-        catch (Exception ex)
-        {
-            log.Error("Error saving activity", ex);
-        }
-
-    }
-
-    private void RemoveActivityFromOldOwner(Activity objActivity)
-    {
-        if (objActivity.Owner is Area)
-        {
-            Area oldArea = (Area)objActivity.Owner;
-            oldArea.Activities.Remove(objActivity.ObjectId);
-        }
-        else if (objActivity.Owner is Project)
-        {
-            Project oldProject = (Project)objActivity.Owner;
-            oldProject.Activities.Remove(objActivity.ObjectId);
-        }
-        else if (objActivity.Owner is Organization)
-        {
-            Organization oldOrganization = (Organization)objActivity.Owner;
-            oldOrganization.Activities.Remove(objActivity.ObjectId);
-        }
+        Response.Redirect(ParentPage);
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)

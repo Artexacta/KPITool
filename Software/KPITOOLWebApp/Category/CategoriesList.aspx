@@ -33,15 +33,19 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Editar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="EditImageButton" runat="server" CommandName="EditData" CssClass="text-success img-buttons" 
+                                        <asp:LinkButton ID="EditImageButton" runat="server" CommandName="Edit" CssClass="text-success img-buttons" 
                                             Text="<i class='fa fa-pencil'></i>" CommandArgument='<%#Eval("ID")%>' />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                    <ItemStyle VerticalAlign="Middle"></ItemStyle>
+                                    <EditItemTemplate>
+                                        <asp:LinkButton ID="SaveLinkButton" runat="server"  CommandName="Update" 
+                                            CssClass="text-success img-buttons" Text="<i class='fa fa-pencil'></i>"></asp:LinkButton>
+                                        <asp:LinkButton ID="CancelLinkButton" runat="server"  CommandName="Cancel" 
+                                            CssClass="text-success img-buttons" Text="<i class='fa fa-trash-o'></i>"></asp:LinkButton>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Eliminar" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="50px">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="DeleteImageButton" runat="server" CommandName="DeleteData" CssClass="text-danger img-buttons" 
+                                        <asp:LinkButton ID="DeleteImageButton" runat="server" CommandName="Delete" CssClass="text-danger img-buttons" 
                                             Text="<i class='fa fa-trash-o'></i>" CommandArgument='<%#Eval("ID")%>' 
                                             OnClientClick="return confirm('¿Está seguro de eliminar la categoría?')" />
                                     </ItemTemplate>

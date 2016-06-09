@@ -70,9 +70,12 @@
                                     <p style="font-size: 14px; padding-top: 2px;">
                                         <%# Eval("Name") %>
                                         (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("ActivityId")) %>'
-                                                CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("ActivityId") %>'></asp:LinkButton>
+                                            <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationId")) %>'
+                                                CommandName="ViewOrganization"
+                                                CommandArgument='<%# Eval("OrganizationId") %>'></asp:LinkButton>
+                                            <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
+                                                CommandName="ViewProject"
+                                                CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
                                         )
                                     </p>
                                 </div>
@@ -81,12 +84,13 @@
                                 <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
                                     This activity does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
                                 </asp:Panel>
-                                <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
-                                    <app:KpiImage ID="ImageOfKpi" runat="server" Visible="false" OwnerType="ACTIVITY" />
+                                <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                    <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ACTIVITY" OwnerId='<%# Eval("ActivityId") %>' />
                                 </asp:Panel>
-                                <asp:Panel runat="server" ID="detailsContainer" class="col-md-111 m-t-5" Visible="false">
+                                <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
                                     This activity has 
-                                    <asp:LinkButton ID="KpisButton" runat="server" Visible="false"></asp:LinkButton>
+                                    <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
+                                         CommandName="ViewKPIs" CommandArgument='<%# Eval("ActivityId") %>'></asp:LinkButton>
                                 </asp:Panel>
                             </div>
                         </ItemTemplate>

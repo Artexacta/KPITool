@@ -126,7 +126,7 @@ namespace Artexacta.App.People.BLL
             return theList;
         }
 
-        public List<People> GetPeopleByOrganization(int organizationId)
+        public static List<People> GetPeopleByOrganization(int organizationId)
         {
             string userName = HttpContext.Current.User.Identity.Name;
 
@@ -154,5 +154,97 @@ namespace Artexacta.App.People.BLL
             return theList;
         }
 
+        public static List<People> GetPeopleByArea(int areaId)
+        {
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            List<People> theList = new List<People>();
+            People theData = null;
+            try
+            {
+                PeopleTableAdapter localAdapter = new PeopleTableAdapter();
+                PeopleDS.PeopleDataTable theTable = localAdapter.GetPersonByArea(areaId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (PeopleDS.PeopleRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error to obtain the people by area.");
+                throw exc;
+            }
+
+            return theList;
+        }
+
+        public static int InsertPeople(People theClass)
+        {
+            if (theClass.OrganizationId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            PeopleTableAdapter localAdapter = new PeopleTableAdapter();
+
+            int? personId = 0;
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                localAdapter.InsertPerson(userName, theClass.OrganizationId, theClass.AreaId, theClass.Name, theClass.Id, ref personId);
+            }
+            catch (Exception exc)
+            {
+                log.Error(Resources.People.MessageErrorCreatePerson, exc);
+                throw new Exception(Resources.People.MessageErrorCreatePerson);
+            }
+
+            if ((int)personId <= 0)
+            {
+                log.Error(Resources.People.MessageErrorCreatePerson);
+                throw new ArgumentException(Resources.People.MessageErrorCreatePerson);
+            }
+
+            return (int)personId;
+        }
+
+        public static void UpdatePeople(People theClass)
+        {
+            if (theClass.OrganizationId <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            PeopleTableAdapter localAdapter = new PeopleTableAdapter();
+
+            try
+            {
+                localAdapter.UpdatePerson(theClass.PersonId, theClass.Id, theClass.Name, theClass.OrganizationId, theClass.AreaId);
+            }
+            catch (Exception exc)
+            {
+                log.Error(Resources.People.MessageErrorUpdatePerson, exc);
+                throw new Exception(Resources.People.MessageErrorUpdatePerson);
+            }
+        }
+
+        public static void DeletePeople(int personId)
+        {
+            if (personId <= 0)
+                throw new ArgumentException(Resources.People.MessageIdPersonZero);
+
+            PeopleTableAdapter localAdapter = new PeopleTableAdapter();
+
+            try
+            {
+                localAdapter.DeletePerson(personId);
+            }
+            catch (Exception exc)
+            {
+                log.Error(Resources.People.MessageErrorDeletePerson, exc);
+                throw new Exception(Resources.People.MessageErrorDeletePerson);
+            }
+        }
     }
 }

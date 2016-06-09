@@ -195,7 +195,7 @@
                         <label>Target Period<span class="label label-danger">Required</span></label>
                         <div class="row">
                             <div class="col-md-2">
-                                <telerik:RadNumericTextBox CssClass="form-control m-b-10" MinValue="0" NumberFormat-DecimalDigits="0"
+                                <telerik:RadNumericTextBox MinValue="0" NumberFormat-DecimalDigits="0"
                                     runat="server" ID="TargetPeriodTextBox">
                                 </telerik:RadNumericTextBox>
                             </div>

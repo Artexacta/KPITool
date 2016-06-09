@@ -111,4 +111,10 @@ public partial class UserControls_FRTWB_AddButton : System.Web.UI.UserControl
 
 
 
+    protected void PersonButton_Click(object sender, EventArgs e)
+    {
+        string currentPage = Page.Request.AppRelativeCurrentExecutionFilePath;
+        Session["ParentPage"] = currentPage;
+        Response.Redirect("~/Personas/PeopleForm.aspx");
+    }
 }

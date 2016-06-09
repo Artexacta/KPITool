@@ -117,130 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LabelAddArea" xml:space="preserve">
-    <value>Add Area</value>
+  <data name="LabelBackPeople" xml:space="preserve">
+    <value>Retornar a la lista de personas</value>
   </data>
-  <data name="LabelAddAreas" xml:space="preserve">
-    <value>Adicionar nuevas áreas para esta organización</value>
+  <data name="LabelDocIdentification" xml:space="preserve">
+    <value>Código de Identificación</value>
   </data>
-  <data name="LabelAddOrganization" xml:space="preserve">
-    <value>Adicionar Organización</value>
+  <data name="LabelEnterCode" xml:space="preserve">
+    <value>[Ingrese el código]</value>
   </data>
-  <data name="LabelAreaName" xml:space="preserve">
-    <value>Nombre del Área:</value>
+  <data name="LabelEnterName" xml:space="preserve">
+    <value>[Ingrese el nombre]</value>
   </data>
-  <data name="LabelAreas" xml:space="preserve">
-    <value>Áreas</value>
+  <data name="LabelName" xml:space="preserve">
+    <value>Nombre</value>
   </data>
-  <data name="LabelBackListOrganization" xml:space="preserve">
-    <value>Retornar a la lista de organizaciones</value>
+  <data name="LabelPeople" xml:space="preserve">
+    <value>Persona</value>
   </data>
-  <data name="LabelCreateArea" xml:space="preserve">
-    <value>Crear Área</value>
+  <data name="LabelPersonHas" xml:space="preserve">
+    <value>Esta persona tiene </value>
   </data>
-  <data name="LabelEditOrganization" xml:space="preserve">
-    <value>Editar Organización</value>
+  <data name="LabelPersonIcon" xml:space="preserve">
+    <value>icono de arriba</value>
   </data>
-  <data name="MessageActivityProjectError" xml:space="preserve">
-    <value>La actividad no pertenece al proyecto.</value>
+  <data name="LabelPersonIconNoCreated" xml:space="preserve">
+    <value>icono de arriba --</value>
   </data>
-  <data name="MessageAreaOrganizationError" xml:space="preserve">
-    <value>El área no pertenece a la organización.</value>
+  <data name="LabelPersonNoCreated" xml:space="preserve">
+    <value>-- No existen personas registradas. Cree una haciendo click en</value>
   </data>
-  <data name="MessageAreaRequired" xml:space="preserve">
-    <value>El nombre de área es requerido.</value>
+  <data name="LabelPersonNoObjects" xml:space="preserve">
+    <value>Esta persona no tiene ningún objeto. Cree alguno haciendo click en</value>
   </data>
-  <data name="MessageCreateOk" xml:space="preserve">
-    <value>La organización se creó correctamente.</value>
+  <data name="MessageCodeFormat" xml:space="preserve">
+    <value>El código tiene caracteres inválidos.</value>
   </data>
-  <data name="MessageDeleteArea" xml:space="preserve">
-    <value>¿Está seguro de eliminar el área seleccionada?</value>
+  <data name="MessageCodeRequired" xml:space="preserve">
+    <value>Debe ingresar el código de identificación.</value>
   </data>
-  <data name="MessageDeleteAreaOk" xml:space="preserve">
-    <value>El área fue eliminado de la organización.</value>
+  <data name="MessageConfirmDeletePerson" xml:space="preserve">
+    <value>¿Está seguro de eliminar la persona seleccionada?</value>
   </data>
-  <data name="MessageDeleteOk" xml:space="preserve">
-    <value>La organización se eliminó correctamente.</value>
+  <data name="MessageCreatePersonOk" xml:space="preserve">
+    <value>La persona se creó correctamente.</value>
   </data>
-  <data name="MessageDeleteProjectOK" xml:space="preserve">
-    <value>El proyecto se eliminó existosamente.</value>
+  <data name="MessageDeletePersonOk" xml:space="preserve">
+    <value>La persona se eliminó correctamente.</value>
   </data>
-  <data name="MessageEmptyName" xml:space="preserve">
-    <value>El nombre de la organización no puede ser vacío.</value>
+  <data name="MessageErrorCreatePerson" xml:space="preserve">
+    <value>Error al crear la persona.</value>
   </data>
-  <data name="MessageEmptyNameArea" xml:space="preserve">
-    <value>El nombre del área no puede ser vacío.</value>
+  <data name="MessageErrorDeletePerson" xml:space="preserve">
+    <value>Error al eliminar la persona.</value>
   </data>
-  <data name="MessageEmptyNameProject" xml:space="preserve">
-    <value>El nombre del proyecto no puede ser vacío.</value>
+  <data name="MessageErrorUpdatePerson" xml:space="preserve">
+    <value>Error al actualizar la persona.</value>
   </data>
-  <data name="MessageErrorCargarAreas" xml:space="preserve">
-    <value>Ocurrió un error al obtener las áreas de la organización.</value>
+  <data name="MessageIdPersonZero" xml:space="preserve">
+    <value>El ID de la persona no puede ser cero.</value>
   </data>
-  <data name="MessageErrorCreate" xml:space="preserve">
-    <value>Ocurrió un error al crear la organización.</value>
-  </data>
-  <data name="MessageErrorCreateArea" xml:space="preserve">
-    <value>Ocurrió un error al crear el area.</value>
-  </data>
-  <data name="MessageErrorCreateProject" xml:space="preserve">
-    <value>Ocurrió un error al crear el proyecto.</value>
-  </data>
-  <data name="MessageErrorDelete" xml:space="preserve">
-    <value>Ocurrió un error al eliminar la organización.</value>
-  </data>
-  <data name="MessageErrorDeleteArea" xml:space="preserve">
-    <value>Ocurrió un error al eliminar el área.</value>
-  </data>
-  <data name="MessageErrorDeleteProject" xml:space="preserve">
-    <value>Ocurrió un error al eliminar el proyecto.</value>
-  </data>
-  <data name="MessageErrorProjectList" xml:space="preserve">
-    <value>Error al obtener la lista de proyectos.</value>
-  </data>
-  <data name="MessageErrorUpdate" xml:space="preserve">
-    <value>Ocurrió un error al actualizar la organización.</value>
-  </data>
-  <data name="MessageErrorUpdateArea" xml:space="preserve">
-    <value>Ocurrió un error al actualizar el área.</value>
-  </data>
-  <data name="MessageErrorUpdateProject" xml:space="preserve">
-    <value>Ocurrió un error al actualizar el proyecto.</value>
-  </data>
-  <data name="MessageNameExists" xml:space="preserve">
-    <value>El nombre de la organización ya existe.</value>
+  <data name="MessageNameFormat" xml:space="preserve">
+    <value>El nombre tiene caracteres inválidos.</value>
   </data>
   <data name="MessageNameRequired" xml:space="preserve">
-    <value>El nombre de la organización es requerida.</value>
+    <value>Debe ingresar el nombre.</value>
   </data>
-  <data name="MessageProjectAreaError" xml:space="preserve">
-    <value>El proyecto no pertenece al área.</value>
+  <data name="MessageNotAction" xml:space="preserve">
+    <value>No se puede completar con la solicitud realizada.</value>
   </data>
-  <data name="MessageProjectOrganizationError" xml:space="preserve">
-    <value>El proyecto no pertenece a la organización.</value>
-  </data>
-  <data name="MessageUpdateOk" xml:space="preserve">
-    <value>La organización se actualizó correctamente.</value>
-  </data>
-  <data name="MessageZeroAreaId" xml:space="preserve">
-    <value>El código del área no puede ser cero.</value>
-  </data>
-  <data name="MessageZeroOrganizationId" xml:space="preserve">
-    <value>El código de la organización no puede ser cero.</value>
-  </data>
-  <data name="MessageZeroProjectId" xml:space="preserve">
-    <value>El código del proyecto no puede ser cero.</value>
-  </data>
-  <data name="TitleActivityName" xml:space="preserve">
-    <value>Nombre de la Actividad</value>
-  </data>
-  <data name="TitleKPIName" xml:space="preserve">
-    <value>Nombre del KPI</value>
-  </data>
-  <data name="TitleOrganizationName" xml:space="preserve">
-    <value>Nombre de la Organización</value>
-  </data>
-  <data name="TitleProjectName" xml:space="preserve">
-    <value>Nombre del Proyecto</value>
+  <data name="MessageUpdatePersonOk" xml:space="preserve">
+    <value>La información se actualizó correctamente.</value>
   </data>
 </root>

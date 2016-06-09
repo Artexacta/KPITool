@@ -176,6 +176,66 @@ namespace Artexacta.App.KPI.BLL
             return theList;
         }
 
+        public List<KPI> GetKPIsByActivity(int activityId)
+        {
+            if (activityId <= 0)
+                throw new ArgumentException("El ID de la activity no puede ser cero.");
+
+            List<KPI> theList = new List<KPI>();
+            KPI theData = null;
+
+            try
+            {
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIByActivity(activityId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPIDS.KPIRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía los KPIs de la actividad de id =" + activityId.ToString(), exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
+        public List<KPI> GetKPIsByPerson(int personId)
+        {
+            if (personId <= 0)
+                throw new ArgumentException("El ID de la persona no puede ser cero.");
+
+            List<KPI> theList = new List<KPI>();
+            KPI theData = null;
+
+            try
+            {
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIByPerson(personId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPIDS.KPIRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error mientras se obtenía los KPIs de la persona de id =" + personId.ToString(), exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
         /// <summary>
         /// Create a KPI in the database 
         /// </summary>
