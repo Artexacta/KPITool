@@ -72,7 +72,7 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
     {
         bool hasTarget = true;
         decimal currentValue = 0;
-        decimal progress = 50;//KPIBLL.GetKpiProgress(KpiId, ref hasTarget, ref currentValue);
+        decimal progress = KPIBLL.GetKpiProgress(KpiId, ref hasTarget, ref currentValue);
         if (!hasTarget)
         {
             CurrentValueLiteral.Text = currentValue.ToString("#.##");
