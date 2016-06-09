@@ -120,7 +120,34 @@
   <data name="LabelName" xml:space="preserve">
     <value>KPI Name</value>
   </data>
+  <data name="LabelOf" xml:space="preserve">
+    <value> of </value>
+  </data>
+  <data name="MessageErrorCategoryList" xml:space="preserve">
+    <value>Error to get the categories list.</value>
+  </data>
+  <data name="MessageErrorCurrencyList" xml:space="preserve">
+    <value>Error to get the currencies list.</value>
+  </data>
+  <data name="MessageErrorDirectionList" xml:space="preserve">
+    <value>Error to get the directions list.</value>
+  </data>
+  <data name="MessageErrorStrategyList" xml:space="preserve">
+    <value>Error to get the acummulation strategies list.</value>
+  </data>
+  <data name="MessageErrorTypesList" xml:space="preserve">
+    <value>Error to get the KPI Types List.</value>
+  </data>
+  <data name="MessageErrorUnitList" xml:space="preserve">
+    <value>Error to get the units list.</value>
+  </data>
   <data name="MessageNotAction" xml:space="preserve">
     <value>Could not complete the requested action.</value>
+  </data>
+  <data name="MessageStartingDateRequired" xml:space="preserve">
+    <value>You must enter a starting date.</value>
+  </data>
+  <data name="MessageTargetRequired" xml:space="preserve">
+    <value>You must enter a target value.</value>
   </data>
 </root>

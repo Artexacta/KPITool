@@ -139,6 +139,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             CurrencyCombobox.SelectedValue = theKpi.Currency;
             SelectedCurrencyHiddenField.Value = theKpi.Currency;
             MeasuredInCombobox.SelectedValue = theKpi.CurrencyUnitID;
+            UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text + " of " + CurrencyCombobox.SelectedItem.Text;
         }
 
         DirectionCombobox.SelectedValue = theKpi.DirectionID;
@@ -153,7 +154,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         ReportingPeriodCombobox.SelectedValue = theKpi.ReportingUnitID;
         ReportingPeriodHiddenfield.Value = theKpi.ReportingUnitID;
-        txtUnit.Value = theKpi.ReportingUnitID;
+        UnitLabel.Text = theKpi.ReportingUnitID;
         TargetPeriodTextBox.Value = theKpi.TargetPeriod;
 
         if (theKpi.StartDate > DateTime.MinValue)
@@ -448,32 +449,46 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
     {
         Response.Redirect(ParentPage);
     }
-
     protected void KPITypeObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
         if (e.Exception != null)
         {
             e.ExceptionHandled = true;
-            SystemMessages.DisplaySystemErrorMessage("Error to get the KPI Types List.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorTypesList);
         }
     }
     protected void UnitObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
-
+        if (e.Exception != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorUnitList);
+            e.ExceptionHandled = true;
+        }
     }
     protected void CurrencyObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
-
+        if (e.Exception != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorCurrencyList);
+            e.ExceptionHandled = true;
+        }
     }
     protected void DirectionObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
-
+        if (e.Exception != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorDirectionList);
+            e.ExceptionHandled = true;
+        }
     }
     protected void StrategyObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
-
+        if (e.Exception != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorStrategyList);
+            e.ExceptionHandled = true;
+        }
     }
-
     protected void KPITypeCombobox_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(KPITypeCombobox.SelectedValue))
@@ -498,6 +513,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         {
             UnitCombobox.SelectedValue = theType.UnitID.Trim();
             UnitCombobox.Enabled = false;
+            SelectedUnitHiddenField.Value = theType.UnitID.Trim();
             UnitTargetLabel.Text = "";
             switch (theType.UnitID.Trim().ToUpper())
             {
@@ -553,13 +569,21 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
     protected void CurrencyCombobox_SelectedIndexChanged(object sender, EventArgs e)
     {
         SelectedCurrencyHiddenField.Value = CurrencyCombobox.SelectedValue;
+        MeasuredInCombobox.Items.Clear();
         MeasuredInCombobox.DataBind();
+
+        UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
+
+        //MeasuredInCombobox.SelectedValue = "";
     }
     protected void CategoryObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
-
+        if (e.Exception != null)
+        {
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorCategoryList);
+            e.ExceptionHandled = true;
+        }
     }
-
     protected void AddCategory_Click(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(CategoryComboBox.SelectedValue))
@@ -617,7 +641,6 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         targetsRepeater.DataSource = theItems;
         targetsRepeater.DataBind();
     }
-
     protected void CategoriesRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         string categoryId = "";
@@ -699,7 +722,6 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             targetsRepeater.DataBind();
         }
     }
-
     protected void targetsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
@@ -770,7 +792,8 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 }
             }
         }
-        else
+
+        if (SelectedUnitHiddenField.Value != "TIME")
         {
             HtmlGenericControl divNumeric = (HtmlGenericControl)e.Item.FindControl("numericTarget");
             if (divNumeric != null)
@@ -830,6 +853,232 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 if (UnitLabel != null)
                     UnitLabel.Text = "%";
             }
+
+            //Currency Label
+            if (SelectedUnitHiddenField.Value == "MONEY" && !string.IsNullOrEmpty(CurrencyCombobox.SelectedValue) && !string.IsNullOrEmpty(MeasuredInCombobox.SelectedValue))
+            {
+                Label UnitLabel = (Label)e.Item.FindControl("UnitTargetLabel");
+                if (UnitLabel != null)
+                    UnitLabel.Text = MeasuredInCombobox.SelectedItem.Text + " of " + CurrencyCombobox.SelectedItem.Text;
+            }
         }
+    }
+    protected void TargetCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        if (StartingDatePicker.SelectedDate == null)
+        {
+            args.IsValid = true;
+            return;
+        }
+
+        if (!categoryCheckBox.Checked)
+        {
+            if (SelectedUnitHiddenField.Value == "TIME")
+            {
+                if (Convert.ToInt32(YearsSingleCombobox.SelectedValue) == 0 &&
+                    Convert.ToInt32(MonthsSingleCombobox.SelectedValue) == 0 &&
+                    Convert.ToInt32(DaysSingleCombobox.SelectedValue) == 0 &&
+                    Convert.ToInt32(HoursSingleCombobox.SelectedValue) == 0 &&
+                    Convert.ToInt32(MinutesSingleCombobox.SelectedValue) == 0)
+                {
+                    args.IsValid = false;
+                    return;
+                }
+            }
+            else
+            {
+                if (SingleTargetTextBox.Value == null || SingleTargetTextBox.Value <= 0)
+                {
+                    args.IsValid = false;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            //Verify if select a categories
+            if (CategoriesRepeater.Items.Count <= 0)
+            {
+                args.IsValid = false;
+                return;
+            }
+
+            bool exitsValue = false;
+
+            foreach (RepeaterItem itemRepeater in targetsRepeater.Items)
+            {
+                RadNumericTextBox targetControl = null;
+                DropDownList theYear = null;
+                DropDownList theMonth = null;
+                DropDownList theDay = null;
+                DropDownList theHour = null;
+                DropDownList theMinute = null;
+                decimal valueTarget = 0;
+
+                if (SelectedUnitHiddenField.Value == "TIME")
+                {
+                    theYear = (DropDownList)itemRepeater.FindControl("YearsCombobox");
+                    theMonth = (DropDownList)itemRepeater.FindControl("MonthsCombobox");
+                    theDay = (DropDownList)itemRepeater.FindControl("DaysCombobox");
+                    theHour = (DropDownList)itemRepeater.FindControl("HoursCombobox");
+                    theMinute = (DropDownList)itemRepeater.FindControl("MinutesCombobox");
+
+                    if (theYear != null && theMonth != null && theDay != null && theHour != null && theMinute != null)
+                    {
+                        if (Convert.ToInt32(theYear.SelectedValue) == 0 &&
+                            Convert.ToInt32(theMonth.SelectedValue) == 0 &&
+                            Convert.ToInt32(theDay.SelectedValue) == 0 &&
+                            Convert.ToInt32(theHour.SelectedValue) == 0 &&
+                            Convert.ToInt32(theMinute.SelectedValue) == 0)
+                        {
+                            valueTarget = 0;
+                        }
+                        else
+                        {
+                            valueTarget = 1;
+                        }
+                    }
+                }
+                else
+                {
+                    targetControl = (RadNumericTextBox)itemRepeater.FindControl("TargetTextBox");
+                    try
+                    {
+                        if (targetControl != null && targetControl.Value > 0)
+                            valueTarget = Convert.ToDecimal(targetControl.Value);
+                    }
+                    catch { }
+                }
+
+                if (valueTarget > 0)
+                {
+                    exitsValue = true;
+                    break;
+                }
+            }
+
+            if (!exitsValue)
+            {
+                args.IsValid = false;
+                return;
+            }
+        }
+
+        args.IsValid = true;
+    }
+    protected void StartingDateCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        if (StartingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate > DateTime.MinValue)
+        {
+            args.IsValid = true;
+            return;
+        }
+
+        //Verify if exists target
+        bool existsTarget = false;
+
+        if (!categoryCheckBox.Checked)
+        {
+            if (SelectedUnitHiddenField.Value == "TIME")
+            {
+                if (Convert.ToInt32(YearsSingleCombobox.SelectedValue) > 0 ||
+                    Convert.ToInt32(MonthsSingleCombobox.SelectedValue) > 0 ||
+                    Convert.ToInt32(DaysSingleCombobox.SelectedValue) > 0 ||
+                    Convert.ToInt32(HoursSingleCombobox.SelectedValue) > 0 ||
+                    Convert.ToInt32(MinutesSingleCombobox.SelectedValue) > 0)
+                    existsTarget = true;
+            }
+            else
+            {
+                if (SingleTargetTextBox.Value > 0)
+                    existsTarget = true;
+            }
+        }
+        else
+        {
+            //Verify if select a categories
+            if (CategoriesRepeater.Items.Count > 0)
+            {
+                foreach (RepeaterItem itemRepeater in targetsRepeater.Items)
+                {
+                    RadNumericTextBox targetControl = null;
+                    DropDownList theYear = null;
+                    DropDownList theMonth = null;
+                    DropDownList theDay = null;
+                    DropDownList theHour = null;
+                    DropDownList theMinute = null;
+                    decimal valueTarget = 0;
+
+                    if (SelectedUnitHiddenField.Value == "TIME")
+                    {
+                        theYear = (DropDownList)itemRepeater.FindControl("YearsCombobox");
+                        theMonth = (DropDownList)itemRepeater.FindControl("MonthsCombobox");
+                        theDay = (DropDownList)itemRepeater.FindControl("DaysCombobox");
+                        theHour = (DropDownList)itemRepeater.FindControl("HoursCombobox");
+                        theMinute = (DropDownList)itemRepeater.FindControl("MinutesCombobox");
+
+                        if (theYear != null && theMonth != null && theDay != null && theHour != null && theMinute != null)
+                        {
+                            if (Convert.ToInt32(theYear.SelectedValue) > 0 ||
+                                Convert.ToInt32(theMonth.SelectedValue) > 0 ||
+                                Convert.ToInt32(theDay.SelectedValue) > 0 ||
+                                Convert.ToInt32(theHour.SelectedValue) > 0 |
+                                Convert.ToInt32(theMinute.SelectedValue) > 0)
+                            {
+                                existsTarget = true;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        targetControl = (RadNumericTextBox)itemRepeater.FindControl("TargetTextBox");
+                        try
+                        {
+                            if (targetControl != null && targetControl.Value > 0)
+                                valueTarget = Convert.ToDecimal(targetControl.Value);
+                        }
+                        catch { }
+                    }
+
+                    if (valueTarget > 0)
+                    {
+                        existsTarget = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (existsTarget)
+            args.IsValid = true;
+        else
+            args.IsValid = false;
+
+    }
+    protected void MeasuredInCombobox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text + Resources.Kpi.LabelOf + CurrencyCombobox.SelectedItem.Text;
+
+        List<KPITarget> theItems = new List<KPITarget>();
+
+        if (Session["LIST_ITEMS"] != null)
+        {
+            try
+            {
+                theItems = (List<KPITarget>)Session["LIST_ITEMS"];
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error to get the targets by categories.", ex);
+                SystemMessages.DisplaySystemErrorMessage("Error to get the categories.");
+                return;
+            }
+
+            targetsRepeater.DataSource = theItems;
+            targetsRepeater.DataBind();
+        }
+
+        UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
     }
 }
