@@ -97,6 +97,7 @@ namespace Artexacta.App.KPI.BLL
 
             List<KPI> theList = new List<KPI>();
             KPI theData = null;
+
             string username = HttpContext.Current.User.Identity.Name.ToString();
 
             try

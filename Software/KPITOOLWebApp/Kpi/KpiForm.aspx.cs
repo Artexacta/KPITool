@@ -169,7 +169,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         //Get the single target Value
         KPITarget theTarget = null;
-
+        
         try
         {
             theTarget = KPITargetBLL.GetKPITargetByKpiId(theKpi.KpiID);
@@ -263,6 +263,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             targetsRepeater.DataBind();
         }
     }
+
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {

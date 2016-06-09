@@ -43,9 +43,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         {
             ownerToSelectInSearch = Session["OwnerId"].ToString();
         }
-        Session["OwnerId"] = null;
     }
-
 
     protected void ViewKpi_Click(object sender, EventArgs e)
     {
