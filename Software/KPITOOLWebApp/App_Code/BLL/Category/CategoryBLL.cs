@@ -66,35 +66,6 @@ namespace Artexacta.App.Categories.BLL
             return theList;
         }
 
-        public List<Category> GetCategoriesByKpi(int kpiId)
-        {
-            if (kpiId <= 0)
-                throw new ArgumentException("The KPI ID cannot be zero.");
-
-            List<Category> theList = new List<Category>();
-            Category theData = null;
-            try
-            {
-                CategoryDS.CategoriesDataTable theTable = theAdapter.GetCategoriesByKPI(kpiId);
-
-                if (theTable != null && theTable.Rows.Count > 0)
-                {
-                    foreach (CategoryDS.CategoriesRow theRow in theTable)
-                    {
-                        theData = FillRecord(theRow);
-                        theList.Add(theData);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                log.Error("Ocurrió un error mientras se obtenía el listado de categorías by KPI.", exc);
-                throw exc;
-            }
-
-            return theList;
-        }
-
         public static Category GetCategoryById(string categoryId)
         {
             if (string.IsNullOrEmpty(categoryId))
@@ -175,6 +146,34 @@ namespace Artexacta.App.Categories.BLL
                 log.Error(Resources.Organization.MessageErrorDeleteProject, exc);
                 throw new Exception(Resources.Organization.MessageErrorDeleteProject);
             }
+        }
+
+        public static List<Category> GetCategoriesByKpiId(int kpiId)
+        {
+            List<Category> theList = new List<Category>();
+            Category theData = null;
+            try
+            {
+                CategoriesTableAdapter localAdapter = new CategoriesTableAdapter();
+                CategoryDS.CategoriesDataTable theTable = localAdapter.GetCategoriesByKpiId(kpiId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (CategoryDS.CategoriesRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theData.ItemsList = theRow.IsitemsNull() ? "" : theRow.items;
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetCategoriesByKpiId para kpiId: " + kpiId, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de categorías del KPI.");
+            }
+
+            return theList;
         }
 
     }

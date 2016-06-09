@@ -32,10 +32,6 @@ namespace Artexacta.App.ObjectAction
                         name = "Owner";
                         break;
 
-                    case "MAN_AREA":
-                        name = "Manage Area";
-                        break;
-
                     case "MAN_PROJECT":
                         name = "Manage Project";
                         break;
@@ -58,6 +54,10 @@ namespace Artexacta.App.ObjectAction
 
                     case "ENTER_DATA":
                         name = "View and enter data";
+                        break;
+
+                    default:
+                        name = "[ Select a permission ]";
                         break;
                 }
                 return name;

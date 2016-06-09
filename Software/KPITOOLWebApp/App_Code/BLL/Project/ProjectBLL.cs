@@ -39,25 +39,24 @@ namespace Artexacta.App.Project.BLL
                 row.projectID,
                 row.name,
                 row.organizationID,
-                row.IsareaIDNull() ? 0 : row.areaID,
-                row.IsownerNull() ? "" : row.owner);
-             
+                row.IsareaIDNull() ? 0 : row.areaID);
+            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
             theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
-
             return theNewRecord;
         }
 
-        public List<Project> GetProjectByOrganization(int organizationId)
+        public List<Project> GetProjectsByOrganization(int organizationId)
         {
             if (organizationId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
+            string userName = HttpContext.Current.User.Identity.Name;
             List<Project> theList = new List<Project>();
             Project theData = null;
-
             try
             {
-                ProjectDS.ProjectsDataTable theTable = theAdapter.GetProjectsByOrganization(organizationId);
+                ProjectDS.ProjectsDataTable theTable = theAdapter.GetProjectsByOrganization(organizationId, userName);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
@@ -70,8 +69,8 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía los proyectos de la organización de id =" + organizationId.ToString(), exc);
-                throw exc;
+                log.Error("Error en GetProjectByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de proyectos de la organización.");
             }
 
             return theList;

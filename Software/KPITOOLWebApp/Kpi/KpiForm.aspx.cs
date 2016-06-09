@@ -233,12 +233,10 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             MultipleTargetPanel.Style["display"] = "block";
 
             //Get the targets categories
-            CategoryBLL theCBLL = new CategoryBLL();
             List<Category> theCList = new List<Category>();
-
             try
             {
-                theCList = theCBLL.GetCategoriesByKpi(kpiId);
+                theCList = CategoryBLL.GetCategoriesByKpiId(kpiId);
             }
             catch
             {

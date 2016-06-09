@@ -97,10 +97,9 @@ public partial class MainPage : SqlViewStatePage
         //Projects
         ProjectBLL thePBLL = new ProjectBLL();
         List<Project> theProjects = new List<Project>();
-
         try
         {
-            theProjects = thePBLL.GetProjectByOrganization(item.OrganizationID);
+            theProjects = thePBLL.GetProjectsByOrganization(item.OrganizationID);
         }
         catch {}
 
@@ -276,14 +275,12 @@ public partial class MainPage : SqlViewStatePage
         
         if(e.CommandName == "ViewOrganization")
         {
-            Session["OrganizationId"] = organizationId;
-            Response.Redirect("~/Organization/OrganizationDetails.aspx");
+            Response.Redirect("~/Organization/OrganizationDetails.aspx?ID=" + organizationId);
         }
 
         if (e.CommandName.Equals("ShareOrganization"))
         {
-            Session["ORGANIZATIONID"] = organizationId;
-            Response.Redirect("~/Organization/ShareOrganization.aspx");
+            Response.Redirect("~/Organization/ShareOrganization.aspx?ID=" + organizationId);
         }
     }
 

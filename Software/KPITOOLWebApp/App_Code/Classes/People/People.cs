@@ -58,6 +58,15 @@ namespace Artexacta.App.People
             get { return _areaId; }
             set { _areaId = value; }
         }
+
+        public string OrganizationName { get; set; }
+        public string AreaName { get; set; }
+        public int NumberOfKpis { get; set; }
+
+        public string NumberOfKpisForDisplay
+        {
+            get { return NumberOfKpis + " KPIs"; }
+        }
         
     }
 }

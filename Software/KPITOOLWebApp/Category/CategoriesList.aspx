@@ -72,6 +72,9 @@
                         <div class="has-error m-b-10">
                             <asp:RequiredFieldValidator ID="CategoryIdRequiredFieldValidator" runat="server" Display="Dynamic" 
                                 ControlToValidate="IDTextBox" ValidationGroup="RegisterCategory" ErrorMessage="Enter an ID." />
+                            <asp:RegularExpressionValidator ID="CategoryRegularExpressionValidator" runat="server" Display="Dynamic" 
+                                ControlToValidate="IDTextBox" ValidationGroup="RegisterCategory" ErrorMessage="Invalid characters." 
+                                ValidationExpression="<%$ Resources:Validations, CodeFormat %>" />
                             <asp:CustomValidator ID="ExistsIDCustomValidator" runat="server" ControlToValidate="IDTextBox" 
                                 ValidationGroup="RegisterCategory" ErrorMessage="El ID se encuentra registrado." 
                                 OnServerValidate="ExistsIDCustomValidator_ServerValidate" Display="Dynamic" />

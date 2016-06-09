@@ -47,10 +47,10 @@ namespace Artexacta.App.PermissionObject.BLL
         public static List<PermissionObject> GetPermissionsByObject(string objectTypeId, int objectId)
         {
             if (string.IsNullOrEmpty(objectTypeId))
-                throw new ArgumentException("El tipo de dato no puede ser nulo o vacío.");
+                throw new ArgumentException(Resources.ShareData.MessageNullObjectTypeId);
 
             if (objectId <= 0)
-                throw new ArgumentException("El ID del dato no puede ser <= 0");
+                throw new ArgumentException(Resources.ShareData.MessageZeroObjectId);
 
             List<PermissionObject> theList = new List<PermissionObject>();
             PermissionObject theData = null;
@@ -80,7 +80,7 @@ namespace Artexacta.App.PermissionObject.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetPermissionsByObject para objectTypeId: " + objectTypeId + " y objectId: " + objectId, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de usuarios con permisos registrados.");
+                throw new ArgumentException(Resources.ShareData.MessageErrorPermissionsByObject);
             }
 
             return theList;
@@ -89,13 +89,13 @@ namespace Artexacta.App.PermissionObject.BLL
         public static bool InsertObjectPermissions(string objectTypeId, int objectId, int userId, string objectActionList)
         {
             if (string.IsNullOrEmpty(objectTypeId))
-                throw new ArgumentException("El tipo de dato no puede ser nulo o vacío.");
+                throw new ArgumentException(Resources.ShareData.MessageNullObjectTypeId);
 
             if (objectId <= 0)
-                throw new ArgumentException("El ID del dato no puede ser <= 0.");
+                throw new ArgumentException(Resources.ShareData.MessageZeroObjectId);
 
             if (userId <= 0)
-                throw new ArgumentException("El ID del usuario no puede ser <= 0");
+                throw new ArgumentException(Resources.ShareData.MessageZeroUserId);
 
             User.User theUser = null;
             try
@@ -104,14 +104,14 @@ namespace Artexacta.App.PermissionObject.BLL
             }
             catch
             {
-                throw new ArgumentException("Error al obtener la información del usuario.");
+                throw new ArgumentException(Resources.ShareData.MessageErrorUser);
             }
 
             if (theUser == null)
-                throw new ArgumentException("Error al obtener la información del usuario.");
+                throw new ArgumentException(Resources.ShareData.MessageErrorUser);
 
             if (string.IsNullOrEmpty(objectActionList))
-                throw new ArgumentException("El listado de permisos para el usuario no puede ser vacío.");
+                throw new ArgumentException(Resources.ShareData.MessageEmptyPermissionsList);
 
             try
             {
@@ -123,7 +123,7 @@ namespace Artexacta.App.PermissionObject.BLL
             {
                 log.Error("Error en InsertObjectPermissions para los datos objectTypeId: " + objectTypeId + ", objectId: " + objectId
                     + ", userId: " + userId + " y objectActionList: " + objectActionList, exc);
-                throw new ArgumentException("Ocurrió un error al registrar los permisos para el usuario.");
+                throw new ArgumentException(Resources.ShareData.MessageErrorInsertObjectPermissions);
             }
         }
 
@@ -234,6 +234,46 @@ namespace Artexacta.App.PermissionObject.BLL
             {
                 log.Error("Error en GetPermissionsByUser para objectTypeId: " + objectTypeId + ", objectId: " + objectId + " y userName: " + userName, exc);
                 throw new ArgumentException("Ocurrió un error al obtener los permisos registrados para el usuario.");
+            }
+
+            return theData;
+        }
+
+        public static PermissionObject GetPermissionsByUser(string objectTypeId, int objectId)
+        {
+            if (string.IsNullOrEmpty(objectTypeId))
+                throw new ArgumentException("El tipo de dato no puede ser nulo o vacío.");
+
+            if (objectId <= 0)
+                throw new ArgumentException("El ID del dato no puede ser <= 0");
+
+            string userName = HttpContext.Current.User.Identity.Name;
+            PermissionObject theData = null;
+            try
+            {
+                ObjectPermissionsTableAdapter localAdapter = new ObjectPermissionsTableAdapter();
+                PermissionObjectDS.ObjectPermissionsDataTable theTable = localAdapter.GetObjectPermissionsByUser(objectTypeId, objectId, userName);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (PermissionObjectDS.ObjectPermissionsRow theRow in theTable)
+                    {
+                        if (theData == null)
+                        {
+                            theData = FillRecord(theRow);
+                            theData.TheActionList.Add(new ObjectAction.ObjectAction(theRow.objectActionID));
+                        }
+                        else
+                        {
+                            theData.TheActionList.Add(new ObjectAction.ObjectAction(theRow.objectActionID));
+                        }
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetPermissionsByUser para objectTypeId: " + objectTypeId + ", objectId: " + objectId + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al verificar si el usuario tiene permisos para acceder al formulario.");
             }
 
             return theData;

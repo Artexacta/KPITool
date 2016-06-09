@@ -32,5 +32,35 @@ namespace Artexacta.App.KPI
             this.Hour = hour;
             this.Minute = minute;
         }
+
+        public string KPITargetTimeText
+        {
+            get
+            {
+                string targetTime = "";
+                if (this.Year > 0)
+                {
+                    targetTime = this.Year.ToString() + " years";
+                }
+                if (this.Month > 0)
+                {
+                    targetTime = (string.IsNullOrEmpty(targetTime) ? "" : targetTime + ", ") + this.Month.ToString() + " months";
+                }
+                if (this.Day > 0)
+                {
+                    targetTime = (string.IsNullOrEmpty(targetTime) ? "" : targetTime + ", ") + this.Day.ToString() + " days";
+                }
+                if (this.Hour > 0)
+                {
+                    targetTime = (string.IsNullOrEmpty(targetTime) ? "" : targetTime + ", ") + this.Hour.ToString() + " hours";
+                }
+                if (this.Minute > 0)
+                {
+                    targetTime = (string.IsNullOrEmpty(targetTime) ? "" : targetTime + ", ") + this.Minute.ToString() + " minutes";
+                }
+                return targetTime;
+            }
+        }
+
     }
 }

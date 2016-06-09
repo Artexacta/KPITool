@@ -81,5 +81,34 @@ namespace Artexacta.App.KPI.BLL
             return theList;
         }
 
+        public static List<KPICategoyCombination> GetCategoryItemsCombinatedByKpiId(int kpiId)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("El ID del KPI no puede ser cero.");
+
+            List<KPICategoyCombination> theList = new List<KPICategoyCombination>();
+            KPICategoyCombination theData = null;
+            try
+            {
+                KPICombinationCategoryTableAdapter localAdapter = new KPICombinationCategoryTableAdapter();
+                KPICategoryCombinationDS.KPICombinationCategoryDataTable theTable = localAdapter.GetCategoryItemsCombinatedByKpiId(kpiId);
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPICategoryCombinationDS.KPICombinationCategoryRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetCategoryItemsCombinatedByKpiId para kpiId: " + kpiId, exc);
+                throw exc;
+            }
+
+            return theList;
+        }
+
     }
 }

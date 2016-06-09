@@ -55,7 +55,13 @@ namespace Artexacta.App.KPI.BLL
                 row.IscurrencyNull() ? "" : row.currency,
                 row.IscurrencyUnitIDNull() ? "" : row.currencyUnitID,
                 row.kpiTypeID);
-
+            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
+            theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
+            theNewRecord.ActivityName = row.IsactivityNameNull() ? "" : row.activityName;
+            theNewRecord.PersonName = row.IspersonNameNull() ? "" : row.personName;
+            theNewRecord.Progress = row.IsprogressNull() ? 0 : row.progress;
+            theNewRecord.Trend = row.IstrendNull() ? 0 : row.trend;
             return theNewRecord;
         }
 
@@ -121,12 +127,12 @@ namespace Artexacta.App.KPI.BLL
             if (organizationId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
+            string userName = HttpContext.Current.User.Identity.Name;
             List<KPI> theList = new List<KPI>();
             KPI theData = null;
-
             try
             {
-                KPIDS.KPIDataTable theTable = theAdapter.GetKPIsByOrganization(organizationId);
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIsByOrganization(organizationId, userName);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
@@ -139,8 +145,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía los KPIs de la organización de id =" + organizationId.ToString(), exc);
-                throw exc;
+                log.Error("Error en GetKPIsByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs de la organización.");
             }
 
             return theList;
@@ -151,12 +157,12 @@ namespace Artexacta.App.KPI.BLL
             if (projectId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
 
+            string userName = HttpContext.Current.User.Identity.Name;
             List<KPI> theList = new List<KPI>();
             KPI theData = null;
-
             try
             {
-                KPIDS.KPIDataTable theTable = theAdapter.GetKPIByProject(projectId);
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIsByProject(projectId, userName);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
@@ -169,8 +175,68 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía los KPIs del proyecto de id =" + projectId.ToString(), exc);
-                throw exc;
+                log.Error("Error en GetKPIsByProject para projectId: " + projectId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs del proyecto.");
+            }
+
+            return theList;
+        }
+
+        public List<KPI> GetKPIsByActivity(int activityId)
+        {
+            if (activityId <= 0)
+                throw new ArgumentException("The code of activity cannot be zero.");
+
+            string userName = HttpContext.Current.User.Identity.Name;
+            List<KPI> theList = new List<KPI>();
+            KPI theData = null;
+            try
+            {
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIsByActivity(activityId, userName);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPIDS.KPIRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetKPIsByActivity para activityId: " + activityId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs de la actividad.");
+            }
+
+            return theList;
+        }
+
+        public List<KPI> GetKPIsByPerson(int personId)
+        {
+            if (personId <= 0)
+                throw new ArgumentException("The code of person cannot be zero.");
+
+            string userName = HttpContext.Current.User.Identity.Name;
+            List<KPI> theList = new List<KPI>();
+            KPI theData = null;
+            try
+            {
+                KPIDS.KPIDataTable theTable = theAdapter.GetKPIsByPerson(personId, userName);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    foreach (KPIDS.KPIRow theRow in theTable)
+                    {
+                        theData = FillRecord(theRow);
+                        theList.Add(theData);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error en GetKPIsByPerson para personId: " + personId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs de la persona.");
             }
 
             return theList;
@@ -689,5 +755,6 @@ namespace Artexacta.App.KPI.BLL
 
             return progress.Value;
         }
+        
     }
 }
