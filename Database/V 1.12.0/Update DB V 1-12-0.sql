@@ -31,9 +31,9 @@ declare @smiMinor smallint
 exec [dbo].[usp_GetVersionMajor] @smiMajor output
 exec [dbo].[usp_GetVersionMinor] @smiMinor output
 
-IF NOT (@smiMajor = 1 AND @smiMinor = 10) 
+IF NOT (@smiMajor = 1 AND @smiMinor = 11) 
 BEGIN
-	RAISERROR('KPIDB database is not in version 1.10 This program only applies to version 1.10',16,127)
+	RAISERROR('KPIDB database is not in version 1.11 This program only applies to version 1.11',16,127)
 	RETURN;
 END
 
