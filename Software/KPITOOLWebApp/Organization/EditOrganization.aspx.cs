@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Artexacta.App.Organization.BLL;
 using Artexacta.App.Organization;
 using Artexacta.App.Area.BLL;
+using Artexacta.App.Area;
 
 public partial class Organization_EditOrganization : System.Web.UI.Page
 {
@@ -66,7 +67,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             {
                 OrganizationNameLit.Text = organization.Name;
                 OrganizationNameTextBox.Text = organization.Name;
-                AreasRepeater.DataBind();
+                AreasGridView.DataBind();
             }
         }
     }
@@ -105,7 +106,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             return;
         }
 
-        AreasRepeater.DataBind();
+        AreasGridView.DataBind();
 
         SystemMessages.DisplaySystemMessage(Resources.Organization.MessageDeleteAreaOk);
     }
@@ -113,26 +114,17 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
     {
         try
         {
-            AreaBLL.InsertArea(OrganizationId,AreaName.Text);
+            AreaBLL.InsertArea(OrganizationId, AreaName.Text);
         }
         catch (Exception ex)
         {
             SystemMessages.DisplaySystemErrorMessage(ex.Message);
             return;
         }
-        
-        AreasRepeater.DataBind();
+
+        AreasGridView.DataBind();
 
         SystemMessages.DisplaySystemMessage("New Area was added to current Organization");
-    }
-    protected void AddOrganization_Click(object sender, EventArgs e)
-    {
-        Organization organization = new Organization();
-        organization.Name = OrganizationName.Text;
-
-        SystemMessages.DisplaySystemMessage("Organization was modified");
-
-        Response.Redirect("~/MainPage.aspx");
     }
 
     protected void SaveOrganizationButton_Click(object sender, EventArgs e)
@@ -142,7 +134,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
         {
             try
             {
-                OrganizationBLL.InsertOrganization(OrganizationName.Text);
+                OrganizationBLL.InsertOrganization(OrganizationNameTextBox.Text);
             }
             catch (Exception exc)
             {
@@ -175,8 +167,98 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
         }
     }
-    protected void EditAreaLB_Click(object sender, EventArgs e)
-    {
 
+    protected void AreasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Actualizar")
+        {
+            int areaId = 0;
+            try
+            {
+                areaId = Convert.ToInt32(e.CommandArgument);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting object id", ex);
+            }
+
+            if (areaId <= 0)
+            {
+                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                return;
+            }
+
+            GridViewRow oItem = (GridViewRow)((LinkButton)e.CommandSource).NamingContainer;
+
+            if (oItem == null)
+            {
+                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                return;
+            }
+
+            TextBox nameTextBox = (TextBox)oItem.Cells[2].FindControl("NameTextBox");
+
+            if (nameTextBox == null)
+            {
+                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                return;
+            }
+
+            try
+            {
+                AreaBLL.UpdateArea(areaId, nameTextBox.Text);
+            }
+            catch
+            {
+                SystemMessages.DisplaySystemErrorMessage("Error al actualizar el area.");
+                return;
+            }
+
+            Session["OrganizationId"] = OrganizationIdHiddenField.Value;
+            Response.Redirect("~/Organization/EditOrganization.aspx");
+        }
+        else if (e.CommandName == "Eliminar")
+        {
+            int areaId = 0;
+
+            try
+            {
+                areaId = Convert.ToInt32(e.CommandArgument);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting object id", ex);
+            }
+
+            if (areaId <= 0)
+            {
+                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                return;
+            }
+
+            try
+            {
+                AreaBLL.DeleteArea(areaId);
+            }
+            catch (Exception ex)
+            {
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
+            }
+
+            Session["OrganizationId"] = OrganizationIdHiddenField.Value;
+            Response.Redirect("~/Organization/EditOrganization.aspx");
+        }
+
+    }
+
+    protected void AreasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            LinkButton buttonDelete = (LinkButton)e.Row.Cells[1].FindControl("DeleteArea");
+            if (buttonDelete != null)
+                buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Organization.MessageDeleteArea);
+        }
     }
 }

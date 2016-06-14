@@ -166,10 +166,12 @@
                                 <div class="col-md-5">
                                     <label>Measured in</label>
                                     <asp:DropDownList runat="server" ID="MeasuredInCombobox" CssClass="form-control m-b-10" DataSourceID="MeasuredObjectDataSource"
-                                        DataTextField="Name" DataValueField="CurrencyID" AppendDataBoundItems="true">
+                                        DataTextField="Name" DataValueField="CurrencyUnitID" AppendDataBoundItems="true"
+                                        OnSelectedIndexChanged="MeasuredInCombobox_SelectedIndexChanged" AutoPostBack="true">
                                         <asp:ListItem Text="[Select a Measured]" Value="" />
                                     </asp:DropDownList>
-                                    <asp:ObjectDataSource ID="MeasuredObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetCurrencyUnitsByCurrency" TypeName="Artexacta.App.Currency.BLL.CurrencyUnitBLL">
+                                    <asp:ObjectDataSource ID="MeasuredObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
+                                        SelectMethod="GetCurrencyUnitsByCurrency" TypeName="Artexacta.App.Currency.BLL.CurrencyUnitBLL">
                                         <SelectParameters>
                                             <asp:ControlParameter ControlID="LanguageHiddenField" Name="language" PropertyName="Value" Type="String" />
                                             <asp:ControlParameter ControlID="SelectedCurrencyHiddenField" Name="currencyID" PropertyName="Value" Type="String" />
@@ -178,15 +180,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="has-error m-b-10">
-                                    <asp:RequiredFieldValidator ID="CurrencyRequiredFieldValidator" runat="server" ControlToValidate="CurrencyCombobox"
-                                        Display="Dynamic"
-                                        ErrorMessage="You must select a Currency">
-                                    </asp:RequiredFieldValidator>
-                                    <asp:RequiredFieldValidator ID="MeasuredRequiredFieldValidator" runat="server" ControlToValidate="MeasuredInCombobox"
-                                        Display="Dynamic"
-                                        ErrorMessage="You must select a Measured">
-                                    </asp:RequiredFieldValidator>
+                                <div class="col-md-5">
+                                    <div class="has-error m-b-10">
+                                        <asp:RequiredFieldValidator ID="CurrencyRequiredFieldValidator" runat="server" ControlToValidate="CurrencyCombobox"
+                                            Display="Dynamic"
+                                            ErrorMessage="You must select a Currency">
+                                        </asp:RequiredFieldValidator>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="has-error m-b-10">
+                                        <asp:RequiredFieldValidator ID="MeasuredRequiredFieldValidator" runat="server" ControlToValidate="MeasuredInCombobox"
+                                            Display="Dynamic"
+                                            ErrorMessage="You must select a Measured">
+                                        </asp:RequiredFieldValidator>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -195,12 +204,12 @@
                         <label>Target Period<span class="label label-danger">Required</span></label>
                         <div class="row">
                             <div class="col-md-2">
-                                <telerik:RadNumericTextBox CssClass="form-control m-b-10" MinValue="0" NumberFormat-DecimalDigits="0"
+                                <telerik:RadNumericTextBox MinValue="0" NumberFormat-DecimalDigits="0"
                                     runat="server" ID="TargetPeriodTextBox">
                                 </telerik:RadNumericTextBox>
                             </div>
                             <div class="col-md-2 col-md-offset-1">
-                                <input type="text" id="txtUnit" runat="server" class="form-control" />
+                                <asp:Label ID="UnitLabel" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
                         <div class="row">
@@ -220,6 +229,18 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <telerik:RadDatePicker ID="StartingDatePicker" runat="server"></telerik:RadDatePicker>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="has-error m-b-10">
+                                    <asp:CustomValidator ID="StartingDateCustomValidator" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, MessageStartingDateRequired %>"
+                                        Display="Dynamic"
+                                        ValidationGroup="AddData"
+                                        OnServerValidate="StartingDateCustomValidator_ServerValidate">
+                                    </asp:CustomValidator>
+                                </div>
                             </div>
                         </div>
 
@@ -243,7 +264,7 @@
                                             <EnabledStyle HorizontalAlign="Right" />
                                         </telerik:RadNumericTextBox>
                                     </div>
-                                    <div class="col-md-2 col-md-offset-1">
+                                    <div class="col-md-3 col-md-offset-1">
                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
                                     </div>
                                 </div>
@@ -417,17 +438,19 @@
                         <%--Multiple Targets--%>
                         <div id="MultipleTargetPanel" runat="server" style="border: thin; display: none">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <label>Select the Categories</label>
-                                    <asp:DropDownList ID="CategoryComboBox" runat="server" CssClass="form-control m-b-10" AppendDataBoundItems="True"
-                                        DataSourceID="CategoryObjectDataSource" DataTextField="Name" DataValueField="ID">
-                                        <asp:ListItem Text="[Select a Category]" Value="" />
-                                    </asp:DropDownList>
-                                </div>
-                                <div class="col-sm-4">
-                                    <asp:LinkButton ID="AddCategory" runat="server" CssClass="viewBtn" OnClick="AddCategory_Click"
-                                        CausesValidation="false"><i class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></asp:LinkButton>
-                                </div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label>Select the Categories</label>
+                                            <asp:DropDownList ID="CategoryComboBox" runat="server" CssClass="form-control m-b-10" AppendDataBoundItems="True"
+                                                DataSourceID="CategoryObjectDataSource" DataTextField="Name" DataValueField="ID">
+                                                <asp:ListItem Text="[Select a Category]" Value="" />
+                                            </asp:DropDownList></td>
+                                        <td>
+                                            <asp:LinkButton ID="AddCategory" runat="server" CssClass="viewBtn" OnClick="AddCategory_Click"
+                                                CausesValidation="false"><i class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></asp:LinkButton></td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="row">
                                 <asp:Repeater ID="CategoriesRepeater" runat="server" OnItemCommand="CategoriesRepeater_ItemCommand">
@@ -460,7 +483,7 @@
                                                             <EnabledStyle HorizontalAlign="Right" />
                                                         </telerik:RadNumericTextBox>
                                                     </div>
-                                                    <div class="col-md-2 col-md-offset-1">
+                                                    <div class="col-md-3 col-md-offset-1">
                                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
                                                     </div>
                                                 </div>
@@ -632,6 +655,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="has-error m-b-10">
+                                <asp:CustomValidator ID="TargetCustomValidator" runat="server"
+                                    ErrorMessage="<% $Resources: Kpi, MessageTargetRequired %>"
+                                    Display="Dynamic"
+                                    ValidationGroup="AddData"
+                                    OnServerValidate="TargetCustomValidator_ServerValidate">
+                                </asp:CustomValidator>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -719,8 +752,18 @@
         }
         function LoadReportingPeriod() {
             var ddlPeriod = document.getElementById("<%=ReportingPeriodCombobox.ClientID %>");
-            var txt = document.getElementById("<%= txtUnit.ClientID %>");
-            txt.value = ddlPeriod.options[ddlPeriod.selectedIndex].innerHTML;
+            var txt = document.getElementById("<%= UnitLabel.ClientID %>");
+            txt.innerText = ddlPeriod.options[ddlPeriod.selectedIndex].innerHTML;
+        }
+        function LoadCurrency() {
+            var ddlCurrency = document.getElementById("<%=CurrencyCombobox.ClientID %>");
+            var ddlMeasured = document.getElementById("<%=MeasuredInCombobox.ClientID %>");
+            var labTarget = document.getElementById("<%=UnitTargetLabel.ClientID %>");
+
+            var txtCurrency = ddlCurrency.options[ddlCurrency.selectedIndex].innerHTML;
+            var txtMeasured = ddlMeasured.options[ddlMeasured.selectedIndex].innerHTML;
+
+            document.getElementById("<%=UnitTargetLabel.ClientID %>").innerText = txtMeasured.concat(" of ", txtCurrency);
         }
         function updateReportingUnitCombo() {
             var optionsInReportingCombo = reportingPeriodCombo.children('option');

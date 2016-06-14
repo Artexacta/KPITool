@@ -146,7 +146,7 @@
   <xs:element name="KPIDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="KPIDS" msprop:Generator_UserDSName="KPIDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="KPI" msprop:Generator_TableClassName="KPIDataTable" msprop:Generator_TableVarName="tableKPI" msprop:Generator_TablePropName="KPI" msprop:Generator_RowDeletingName="KPIRowDeleting" msprop:Generator_RowChangingName="KPIRowChanging" msprop:Generator_RowEvHandlerName="KPIRowChangeEventHandler" msprop:Generator_RowDeletedName="KPIRowDeleted" msprop:Generator_UserTableName="KPI" msprop:Generator_RowChangedName="KPIRowChanged" msprop:Generator_RowEvArgName="KPIRowChangeEvent" msprop:Generator_RowClassName="KPIRow">
+        <xs:element name="KPI" msprop:Generator_TableClassName="KPIDataTable" msprop:Generator_TableVarName="tableKPI" msprop:Generator_RowChangedName="KPIRowChanged" msprop:Generator_TablePropName="KPI" msprop:Generator_RowDeletingName="KPIRowDeleting" msprop:Generator_RowChangingName="KPIRowChanging" msprop:Generator_RowEvHandlerName="KPIRowChangeEventHandler" msprop:Generator_RowDeletedName="KPIRowDeleted" msprop:Generator_RowClassName="KPIRow" msprop:Generator_UserTableName="KPI" msprop:Generator_RowEvArgName="KPIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="kpiID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnkpiID" msprop:Generator_ColumnPropNameInRow="kpiID" msprop:Generator_ColumnPropNameInTable="kpiIDColumn" msprop:Generator_UserColumnName="kpiID" type="xs:int" />

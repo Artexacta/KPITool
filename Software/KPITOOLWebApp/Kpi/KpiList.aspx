@@ -45,81 +45,92 @@
                             ImageErrorUrl="~/images/exclamation.png" />
                     </div>
                     <div class="t-body tb-padding">
-                        <asp:Repeater ID="KpisRepeater" runat="server" DataSourceID="KPIListObjectDataSource" OnItemCommand="KpisRepeater_ItemCommand">
-                            <ItemTemplate>
-                                <div class="row m-b-10">
-                                    <div class="col-md-1">
+                        <br />
+                        <asp:GridView ID="KpisGridView" runat="server" DataSourceID="KPIListObjectDataSource" AutoGenerateColumns="false"
+                            OnRowCommand="KpisGridView_RowCommand" CssClass="table table-striped m-b-15 i-table tbl-summary" >
+                            <Columns>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
                                         <asp:LinkButton ID="ViewKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
-                                            CommandName="ViewKpi">
-                                            <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
+                                            CommandName="ViewKpi"><i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1">
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
                                         <asp:LinkButton ID="EditKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
                                             CommandName="EditKpi">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1 disabled">
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
                                         <asp:LinkButton ID="ShareKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
                                             CommandName="ShareKpi">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1">
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
                                         <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server"
                                             CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1">
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
                                         <asp:LinkButton ID="ListValuesKpi" CssClass="viewBtn" CommandArgument='<%# Eval("KpiID") %>' CommandName="ListValuesKpi"
                                             runat="server"><i class="zmdi zmdi-format-list-bulleted zmdi-hc-fw"></i></asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-7">
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="<% $Resources: Kpi, LabelName %>">
+                                    <ItemTemplate>
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
-                                            (
-                                            <asp:LinkButton ID="OwnerLinkButton" runat="server" Text='<%# GetOwnerInfo(Eval("KpiID")) %>'
-                                                CommandName="ViewOwner"
-                                                CommandArgument='<%# Eval("KpiID") %>'></asp:LinkButton>
-                                            )
+                                            <br />
+                                            <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                                CommandName="ViewOrganization"
+                                                CommandArgument='<%# Eval("OrganizationID") %>'>
+                                            </asp:LinkButton>
+                                            <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                                CommandName="ViewArea"
+                                                CommandArgument='<%# Eval("AreaID") %>'>
+                                            </asp:LinkButton>
+                                            <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
+                                                CommandName="ViewProject"
+                                                CommandArgument='<%# Eval("ProjectID") %>'>
+                                            </asp:LinkButton>
                                         </p>
-                                    </div>
-                                </div>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# KpisRepeater.Items.Count == 0 %>'>
-                                    <div class="col-md-12 text-center">
-                                        -- There are no Kpis registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above --
-                                    </div>
-                                </asp:Panel>
-                            </FooterTemplate>
-                        </asp:Repeater>
-
-                        <br />
-                        <%-- <app:TourSettings runat="server" ID="Settings">
-                            <Items>
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep1 %>"
-                                    element="#TheAddButton" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep2 %>"
-                                    element="#OrganizationList .editBtn:first" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep3 %>"
-                                    element="#OrganizationList .detailsBtn:first" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep4 %>"
-                                    element="#OrganizationList .shareBtn:first" />
-                                <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
-                                    content="<%$ Resources: ActivitiesList, TourStep5 %>"
-                                    element="#SearchPanel" />
-                            </Items>
-                        </app:TourSettings>
-                        <div style="overflow: hidden">
-                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
-                        </div>--%>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Progress" HeaderStyle-Width="150px">
+                                        <ItemTemplate>
+                                            <div class="progress">
+                                                <div class='<%# Eval("ProgressClass") %>' role="progressbar" aria-valuenow='<%# Eval("Progress") %>' aria-valuemin="0" aria-valuemax="100"
+                                                    style='<%# "width:" + Eval("Progress") + "%" %>'>60%
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <asp:Literal ID="ProgressLiteral" runat="server" Text='<%# Eval("Progress") %>'></asp:Literal>%
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Trend" HeaderStyle-Width="150px">
+                                        <ItemTemplate>
+                                            <asp:Label ID="EqualLabel" runat="server" CssClass="glyphicon glyphicon-minus text-primary" style="font-size: 12pt; " 
+                                                Visible='<%# Convert.ToDecimal(Eval("Trend")) == 0 %>' />
+                                            <asp:Label ID="ArrowUpLabel" runat="server" CssClass="glyphicon glyphicon-arrow-up text-success" style="font-size: 12pt; " 
+                                                Visible='<%# Convert.ToDecimal(Eval("Trend")) > 0 %>' />
+                                            <asp:Label ID="ArrowDownLabel" runat="server" CssClass="glyphicon glyphicon-arrow-down text-danger" style="font-size: 12pt; " 
+                                                Visible='<%# Convert.ToDecimal(Eval("Trend")) < 0 %>' />
+                                            <asp:Literal ID="TrendLiteral" runat="server" Text='<%# Eval("TrendText") %>'></asp:Literal>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
                     </div>
                 </div>
             </div>
