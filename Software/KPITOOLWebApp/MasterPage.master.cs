@@ -320,6 +320,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/ResetSystem.aspx",
              "~/Test/TestAddData.aspx",
              "~/Test/TestVisitKpi.aspx",
+             "~/HelpManager/Default.aspx",
 
              "~/Organization/EditOrganization.aspx",
              "~/Organization/OrganizationDetails.aspx",

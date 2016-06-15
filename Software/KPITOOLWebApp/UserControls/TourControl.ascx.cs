@@ -36,6 +36,14 @@ public partial class UserControls_TourControl : UserControl
             {
                 TourSettings settings = (TourSettings)Parent.FindControl(TourSettingsId);
                 items = settings.Items;
+
+                foreach (var item in items)
+                {
+                    if(item.SourceType == TourItem.SourceTypeOption.HelpFile)
+                    {
+                        setContentFromFile(item);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -44,6 +52,34 @@ public partial class UserControls_TourControl : UserControl
         }
 
         ItemsHiddenField.Value = js.Serialize(items);
+    }
+
+    private void setContentFromFile(TourItem item)
+    {
+        System.IO.StreamReader streamReader = null;
+        try
+        {
+            if (System.IO.File.Exists(Server.MapPath("" + "/" + file)))
+            {
+                streamReader = new System.IO.StreamReader(Server.MapPath(lblHelpFilesRoute.Text + "/" + file));
+                this.ViewState["state"] = "update";
+                item.content =  streamReader.ReadToEnd();
+            }
+            else
+            {
+                this.ViewState["state"] = "new";
+                return string.Empty;
+            }
+        }
+        catch (Exception x)
+        {
+            throw x;
+        }
+        finally
+        {
+            if (streamReader != null)
+                streamReader.Close();
+        }
     }
 
     protected void Page_Load(object sender, EventArgs e)
