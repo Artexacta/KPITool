@@ -1,6 +1,9 @@
-﻿using Artexacta.App.Utilities.Controls;
+﻿using Artexacta.App.Utilities;
+using Artexacta.App.Utilities.Controls;
+using log4net;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -10,6 +13,7 @@ using System.Web.UI.WebControls;
 
 public partial class UserControls_TourControl : UserControl
 {
+    private static readonly ILog log = LogManager.GetLogger("Standard");
 
     public string CssClass
     {
@@ -47,6 +51,7 @@ public partial class UserControls_TourControl : UserControl
             }
             catch (Exception ex)
             {
+                log.Error("Error getting tour settings", ex);
                 items = new List<TourItem>();
             }
         }
@@ -59,21 +64,32 @@ public partial class UserControls_TourControl : UserControl
         System.IO.StreamReader streamReader = null;
         try
         {
-            if (System.IO.File.Exists(Server.MapPath("" + "/" + file)))
+            string directory = ConfigurationManager.AppSettings["HelpFilesRoute"];
+            string extension = ConfigurationManager.AppSettings["HelpFilesExtension"];
+            if (!string.IsNullOrEmpty(directory) && !directory.EndsWith("/"))
+                directory += "/";
+            if (!string.IsNullOrEmpty(extension) && !extension.StartsWith("."))
+                extension = "." + extension;
+
+            string language = LanguageUtilities.GetLanguageFromContext();
+
+            string title = item.content;
+            string file = Server.MapPath(directory + item.content + "_" + language + extension);
+            if (System.IO.File.Exists(file))
             {
-                streamReader = new System.IO.StreamReader(Server.MapPath(lblHelpFilesRoute.Text + "/" + file));
-                this.ViewState["state"] = "update";
+                streamReader = new System.IO.StreamReader(file);
                 item.content =  streamReader.ReadToEnd();
             }
             else
             {
-                this.ViewState["state"] = "new";
-                return string.Empty;
+                item.content = "";
             }
+
+            item.title += " <small><span class='label label-default'>" + title + "</span></small>";
         }
         catch (Exception x)
         {
-            throw x;
+            log.Error("Error loading content from help file", x);
         }
         finally
         {

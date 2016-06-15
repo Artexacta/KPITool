@@ -147,7 +147,8 @@
                         <app:TourSettings runat="server" ID="Settings">
                             <Items>
                                 <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    content="<%$ Resources: MainPage, TourStep1 %>"
+                                    content="ORG-WIZ-1"
+                                    SourceType="HelpFile"
                                     element="#TheAddButton" />
                                 <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
                                     content="<%$ Resources: MainPage, TourStep2 %>"
