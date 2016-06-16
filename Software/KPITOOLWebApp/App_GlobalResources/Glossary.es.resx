@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdvancedSearchLabel" xml:space="preserve">
+    <value>Búsqueda</value>
+  </data>
   <data name="AllLabel" xml:space="preserve">
     <value>[Todo]</value>
+  </data>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="CloseLabel" xml:space="preserve">
     <value>Cerrar</value>
   </data>
   <data name="ComboBoxNoMatchesText" xml:space="preserve">
     <value>No hay coincidencias</value>
+  </data>
+  <data name="DeleteLabel" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="EditLabel" xml:space="preserve">
+    <value>Editar</value>
   </data>
   <data name="ErrorForAllLabel" xml:space="preserve">
     <value>Error para todos</value>
@@ -135,7 +147,13 @@
   <data name="ErrorLoadingDataFromWebServiceMessage" xml:space="preserve">
     <value>Error al cargar datos del web service</value>
   </data>
+  <data name="GenericCancelLabel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
   <data name="GenericSave" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="GenericSaveLabel" xml:space="preserve">
     <value>Guardar</value>
   </data>
   <data name="HelpTitle" xml:space="preserve">
@@ -155,6 +173,9 @@
   </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Sistema de Facturación</value>
+  </data>
+  <data name="RequiredLabel" xml:space="preserve">
+    <value>Requerido</value>
   </data>
   <data name="SystemMessagesTitle" xml:space="preserve">
     <value>Mensajes del Sistema</value>

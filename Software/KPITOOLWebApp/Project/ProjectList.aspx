@@ -76,13 +76,13 @@
                                                  CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                             <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
                                                 CommandName="ViewArea"
-                                                CommandArgument='<%# Eval("AreaID") %>'></asp:LinkButton>
+                                                CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                             )
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row m-b-20">
-                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-1 m-t-5" Visible="false">
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-4 m-t-5" Visible="false">
                                         This project does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
                                     </asp:Panel>
                                     <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">

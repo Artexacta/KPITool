@@ -28,8 +28,6 @@ public partial class Project_ProjectList : System.Web.UI.Page
         base.InitializeCulture();
     }
 
-    private string ownerToSelectInSearch;
-
     protected void Page_Load(object sender, EventArgs e)
     {
         ProjectSearchControl.Config = new ProjectSearch();
@@ -38,36 +36,19 @@ public partial class Project_ProjectList : System.Web.UI.Page
         if (!IsPostBack)
         {
             Tour.Show();
+            if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
+            {
+                ProjectSearchControl.Query = Session["SEARCH_PARAMETER"].ToString();
+            }
+            Session["SEARCH_PARAMETER"] = null;
         }
     }
 
     void ProjectSearchControl_OnSearch()
     {
-        
+        log.Debug(ProjectSearchControl.Query.ToString());
     }
 
-    protected void ViewProject_Click(object sender, EventArgs e)
-    {
-        LinkButton btnClick = (LinkButton)sender;
-        Session["ProjectId"] = btnClick.Attributes["data-id"];
-        Response.Redirect("~/Project/ProjectDetails.aspx");
-    }
-
-    protected void EditProject_Click(object sender, EventArgs e)
-    {
-        LinkButton btnClick = (LinkButton)sender;
-        Session["ProjectId"] = btnClick.Attributes["data-id"];
-        Session["ParentPage"] = "~/Project/ProjectList.aspx";
-        Response.Redirect("~/Project/ProjectForm.aspx");
-    }
-    protected void ShareProject_Click(object sender, EventArgs e)
-    {
-
-    }
-    protected void DeleteProject_Click(object sender, EventArgs e)
-    {
-
-    }
     protected string GetOrganizationInfo(Object obj)
     {
         int OrganizationID = 0;
@@ -76,7 +57,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
         {
             OrganizationID = (int)obj;
         }
-        catch {return "-";}
+        catch { return "-"; }
 
         if (OrganizationID > 0)
         {
@@ -86,7 +67,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
             {
                 theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
             }
-            catch {}
+            catch { }
 
             if (theClass != null)
                 name = theClass.Name;
@@ -120,6 +101,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         return name;
     }
+
     protected void ProjectsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
@@ -129,7 +111,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         if (item == null)
             return;
-        
+
         //Activities
         ActivityBLL theACBLL = new ActivityBLL();
         List<Activity> theActivities = new List<Activity>();
@@ -177,8 +159,6 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         and.Visible = activitiesButton.Visible && kpisButton.Visible;
     }
-
-
     protected void ProjectsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         int projectId = 0;
@@ -211,29 +191,6 @@ public partial class Project_ProjectList : System.Web.UI.Page
             return;
         }
 
-        if (e.CommandName == "ViewOwner")
-        {
-            //Project objProject = FrtwbSystem.Instance.Projects[projectId];
-            //if (objProject == null)
-            //    return;
-            //FrtwbObject ownerObject = objProject.Owner;
-            //if (ownerObject == null)
-            //    return;
-
-            //if (ownerObject is Organization)
-            //{
-            //    Session["OrganizationId"] = ownerObject.ObjectId;
-            //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
-            //}
-            //else if (ownerObject is Area)
-            //{
-            //    Area area = (Area)ownerObject;
-            //    Session["OrganizationId"] = area.Owner.ObjectId;
-            //    Response.Redirect("~/Organization/OrganizationDetails.aspx#Area");
-            //}
-            return;
-        }
-
         if (e.CommandName == "DeleteProject")
         {
             try
@@ -252,14 +209,26 @@ public partial class Project_ProjectList : System.Web.UI.Page
         }
         if (e.CommandName == "ViewActivities")
         {
-            Session["OwnerId"] = projectId + "-Project";
+            Session["SEARCH_PARAMETER"] = "@projectID " + projectId.ToString();
             Response.Redirect("~/Activity/ActivitiesList.aspx");
             return;
         }
         if (e.CommandName == "ViewKPIs")
         {
-            Session["OwnerId"] = projectId + "-Project";
+            Session["SEARCH_PARAMETER"] = "@projectID " + projectId.ToString();
             Response.Redirect("~/Kpi/KpiList.aspx");
+            return;
+        }
+        if (e.CommandName == "ViewOrganization")
+        {
+            Session["SEARCH_PARAMETER"] = "@organizationID " + projectId.ToString();
+            Response.Redirect("~/MainPage.aspx");
+            return;
+        }
+        if (e.CommandName == "ViewArea")
+        {
+            Session["OrganizationId"] = projectId.ToString();
+            Response.Redirect("~/Organization/EditOrganization.aspx");
             return;
         }
     }

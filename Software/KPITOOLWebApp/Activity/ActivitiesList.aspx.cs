@@ -8,6 +8,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using Artexacta.App.Activities;
+using Artexacta.App.Organization;
+using Artexacta.App.Organization.BLL;
+using Artexacta.App.Project;
+using Artexacta.App.Project.BLL;
+using Artexacta.App.KPI.BLL;
+using Artexacta.App.KPI;
+using Artexacta.App.Activities.BLL;
 
 public partial class Activity_ActivitiesList : System.Web.UI.Page
 {
@@ -30,62 +37,105 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         ActivityRepeater.DataBind();
     }
 
-    private string ownerToSelectInSearch;
-
     private void ProcessSessionParameters()
     {
-        if (Session["OwnerId"] != null && !string.IsNullOrEmpty(Session["OwnerId"].ToString()))
+        if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
         {
-            ownerToSelectInSearch = Session["OwnerId"].ToString();
+            ActivitySearchControl.Query = Session["SEARCH_PARAMETER"].ToString();
         }
-        Session["OwnerId"] = null;
+        Session["SEARCH_PARAMETER"] = null;
     }
- 
 
-    protected string GetOwnerInfo(Object obj)
+    protected string GetOrganizationInfo(Object obj)
     {
-     
-            return "N/A";
+        int OrganizationID = 0;
+        string name = "";
+        try
+        {
+            OrganizationID = (int)obj;
+        }
+        catch { return "-"; }
 
-     
+        if (OrganizationID > 0)
+        {
+            Organization theClass = null;
+
+            try
+            {
+                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
+            }
+            catch { }
+
+            if (theClass != null)
+                name = theClass.Name;
+        }
+
+        return name;
+    }
+
+    protected string GetProjectInfo(Object obj)
+    {
+        int projectID = 0;
+        string name = "";
+        try
+        {
+            projectID = (int)obj;
+        }
+        catch { return "-"; }
+
+        if (projectID > 0)
+        {
+            Project theClass = null;
+
+            try
+            {
+                theClass = ProjectBLL.GetProjectById(projectID);
+            }
+            catch { }
+
+            if (theClass != null)
+                name = " - " + theClass.Name;
+        }
+
+        return name;
     }
 
     protected void ActivityRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
             return;
-        //Activity item = (Activity)e.Item.DataItem;
-        //if (item == null)
-        //    return;
-        //if (item.Kpis.Count == 0)
-        //{
-        //    Panel element = (Panel)e.Item.FindControl("emptyMessage");
-        //    element.Visible = true;
-        //    return;
-        //}
-        //Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
-        //detailsPanel.Visible = true;
 
-        //Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
-        //kpiImagePanel.Visible = true;
+        Activity item = (Activity)e.Item.DataItem;
 
-        //UserControls_FRTWB_KpiImage imageOfKpi = (UserControls_FRTWB_KpiImage)e.Item.FindControl("ImageOfKpi");
-        //if (item.Kpis.Count > 0)
-        //{
-        //    Kpi firstKpi = item.Kpis.Values.ToList()[0];
-        //    if (firstKpi.KpiValues.Count > 0)
-        //    {
-        //        imageOfKpi.OwnerId = item.ObjectId;
-        //        imageOfKpi.Visible = true;
-        //    }
-        //}
+        //KPI
+        KPIBLL theKBLL = new KPIBLL();
+        List<KPI> theKPIs = new List<KPI>();
 
-        //LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
+        try
+        {
+            theKPIs = theKBLL.GetKPIsByActivity(item.ActivityID);
+        }
+        catch { }
 
-        //Literal and = (Literal)e.Item.FindControl("AndLiteral");
+        if (theKPIs.Count == 0)
+        {
+            Panel element = (Panel)e.Item.FindControl("emptyMessage");
+            element.Visible = true;
+            return;
+        }
 
-        //kpisButton.Visible = item.Kpis.Count > 0;
-        //kpisButton.Text = kpisButton.Visible ? item.Kpis.Count + " KPI(s)" : "";
+        Panel detailsPanel = (Panel)e.Item.FindControl("detailsContainer");
+        detailsPanel.Visible = true;
+
+        Panel kpiImagePanel = (Panel)e.Item.FindControl("KpiImageContainer");
+        kpiImagePanel.Visible = true;
+
+        LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
+
+        Literal and = (Literal)e.Item.FindControl("AndLiteral");
+
+        kpisButton.Visible = theKPIs.Count > 0;
+        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
 
     }
 
@@ -108,76 +158,50 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         if (e.CommandName == "EditActivity")
         {
             Session["ActivityId"] = activityId;
+            Session["ParentPage"] = "~/Activity/ActivitiesList.aspx";
             Response.Redirect("~/Activity/AddActivity.aspx");
             return;
         }
         if (e.CommandName == "ViewActivity")
         {
             Session["ActivityId"] = activityId;
+            Session["ParentPage"] = "~/Activity/ActivitiesList.aspx";
             Response.Redirect("~/Activity/DetailActivity.aspx");
             return;
         }
         if (e.CommandName == "DeleteActivity")
         {
-            //Activity objActivity = FrtwbSystem.Instance.Activities[activityId];
-            //if (objActivity.Kpis.Count > 0)
-            //{
-            //    SystemMessages.DisplaySystemErrorMessage("This project cannot be delete because has KPIs related to it");
-            //    return;
-            //}
-            //RemoveActivityFromOldOwner(objActivity);
-            //objActivity.Owner = null;
-            //FrtwbSystem.Instance.Activities.Remove(objActivity.ObjectId);
-            //SystemMessages.DisplaySystemMessage("The Activity was deleted");
-            //SearchActivities();
-            return;
+            try
+            {
+                ActivityBLL.DeleteActivity(activityId);
+            }
+            catch (Exception ex)
+            {
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
+            }
+            SystemMessages.DisplaySystemMessage("The activity was deleted successfully.");
+            ActivityRepeater.DataBind();
         }
-        if (e.CommandName == "ViewOwner")
+        if (e.CommandName == "ViewKPIs")
         {
-
-            //Activity objActivity = FrtwbSystem.Instance.Activities[activityId];
-            //FrtwbObject ownerObject = objActivity.Owner;
-            //if (ownerObject == null)
-            //    return;
-
-            //if (ownerObject is Organization)
-            //{
-            //    Session["OrganizationId"] = ownerObject.ObjectId;
-            //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
-            //}
-            //else if (ownerObject is Area && ownerObject.Owner != null)
-            //{
-            //    Area area = (Area)ownerObject;
-            //    Session["OrganizationId"] = area.Owner.ObjectId;
-            //    Response.Redirect("~/Organization/OrganizationDetails.aspx#Area");
-            //}
-            //else if (ownerObject is Project)
-            //{
-            //    Session["ProjectId"] = ownerObject.ObjectId;
-            //    Response.Redirect("~/Project/ProjectDetails.aspx");
-            //}
+            Session["SEARCH_PARAMETER"] = "@activityID " + activityId.ToString();
+            Response.Redirect("~/Kpi/KpiList.aspx");
+            return;
+        }
+        if (e.CommandName == "ViewOrganization")
+        {
+            Session["SEARCH_PARAMETER"] = "@organizationID " + activityId.ToString();
+            Response.Redirect("~/MainPage.aspx");
+            return;
+        }
+        if (e.CommandName == "ViewProject")
+        {
+            Session["SEARCH_PARAMETER"] = "@projectID " + activityId.ToString();
+            Response.Redirect("~/Project/ProjectList.aspx");
             return;
         }
     }
 
-   
-
-    private void RemoveActivityFromOldOwner(Activity objActivity)
-    {
-        //if (objActivity.Owner is Area)
-        //{
-        //    Area oldArea = (Area)objActivity.Owner;
-        //    oldArea.Activities.Remove(objActivity.ObjectId);
-        //}
-        //else if (objActivity.Owner is Project)
-        //{
-        //    Project oldProject = (Project)objActivity.Owner;
-        //    oldProject.Activities.Remove(objActivity.ObjectId);
-        //}
-        //else if (objActivity.Owner is Organization)
-        //{
-        //    Organization oldOrganization = (Organization)objActivity.Owner;
-        //    oldOrganization.Activities.Remove(objActivity.ObjectId);
-        //}
-    }
+  
 }

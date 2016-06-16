@@ -117,14 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LabelAddArea" xml:space="preserve">
+    <value>Add Area</value>
+  </data>
+  <data name="LabelAddAreas" xml:space="preserve">
+    <value>Add new area for this organization</value>
+  </data>
+  <data name="LabelAddOrganization" xml:space="preserve">
+    <value>Add Organization</value>
+  </data>
+  <data name="LabelAreaName" xml:space="preserve">
+    <value>Area Name:</value>
+  </data>
+  <data name="LabelAreas" xml:space="preserve">
+    <value>Areas</value>
+  </data>
+  <data name="LabelBackListOrganization" xml:space="preserve">
+    <value>Back to Organization List</value>
+  </data>
+  <data name="LabelCreateArea" xml:space="preserve">
+    <value>Create Area</value>
+  </data>
+  <data name="LabelEditOrganization" xml:space="preserve">
+    <value>Edit Organization</value>
+  </data>
   <data name="MessageActivityProjectError" xml:space="preserve">
     <value>The activity is not in the project.</value>
   </data>
   <data name="MessageAreaOrganizationError" xml:space="preserve">
     <value>The area is not in the organization.</value>
   </data>
+  <data name="MessageAreaRequired" xml:space="preserve">
+    <value>The area is required.</value>
+  </data>
   <data name="MessageCreateOk" xml:space="preserve">
     <value>The organization was created successfuly.</value>
+  </data>
+  <data name="MessageDeleteArea" xml:space="preserve">
+    <value>Are you sure you want to delete selected Area?</value>
   </data>
   <data name="MessageDeleteAreaOk" xml:space="preserve">
     <value>The area was deleted from current organization.</value>
@@ -192,6 +222,9 @@
   <data name="MessageUpdateOk" xml:space="preserve">
     <value>The organization was updated successfuly.</value>
   </data>
+  <data name="MessageZeroActivityId" xml:space="preserve">
+    <value>The code of activity cannot be zero.</value>
+  </data>
   <data name="MessageZeroAreaId" xml:space="preserve">
     <value>The code of area cannot be zero.</value>
   </data>
@@ -209,6 +242,9 @@
   </data>
   <data name="TitleOrganizationName" xml:space="preserve">
     <value>Organization Name</value>
+  </data>
+  <data name="TitlePersonName" xml:space="preserve">
+    <value>Persona Name</value>
   </data>
   <data name="TitleProjectName" xml:space="preserve">
     <value>Project Name</value>

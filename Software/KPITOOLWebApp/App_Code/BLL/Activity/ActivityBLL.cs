@@ -187,5 +187,77 @@ namespace Artexacta.App.Activities.BLL
             return theList;
         }
 
+        public static int InsertActivity(Activity theClass)
+        {
+            if (theClass.OrganizationID <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            if (string.IsNullOrEmpty(theClass.Name))
+                throw new ArgumentException("The name of activity cannot be empty.");
+
+            ActivitiesTableAdapter localAdapter = new ActivitiesTableAdapter();
+
+            int? activityId = 0;
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                localAdapter.InsertActivity(userName, theClass.OrganizationID, theClass.AreaID, theClass.ProjectID, theClass.Name, ref activityId);
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error to create the activity", exc);
+                throw new Exception("Error to create the activity");
+            }
+
+            if ((int)activityId <= 0)
+            {
+                log.Error("Error to create the activity");
+                throw new ArgumentException("Error to create the activity");
+            }
+
+            return (int)activityId;
+        }
+
+        public static void UpdateActivity(Activity theClass)
+        {
+            if (theClass.OrganizationID <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
+
+            if (string.IsNullOrEmpty(theClass.Name))
+                throw new ArgumentException("The name of activity cannot be empty.");
+
+            ActivitiesTableAdapter localAdapter = new ActivitiesTableAdapter();
+
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                localAdapter.UpdateActivity(theClass.ActivityID, theClass.Name, theClass.OrganizationID, theClass.AreaID, theClass.ProjectID);
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error to update the activity", exc);
+                throw new Exception("Error to update the activity");
+            }
+        }
+
+        public static void DeleteActivity(int activityID)
+        {
+            if (activityID <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroActivityId);
+
+            ActivitiesTableAdapter localAdapter = new ActivitiesTableAdapter();
+
+            try
+            {
+                localAdapter.DeleteActivity(activityID);
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error to update the activity", exc);
+                throw new Exception("Error to update the activity");
+            }
+        }
     }
 }
