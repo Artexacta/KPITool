@@ -19,7 +19,7 @@
                 }
                 $("#<%= ResetTourHiddenField.ClientID %>").val("false");
             }
-            showTour();
+            <%= ClientID %>_showTour();
 
             $("#<%= showTourBtn.ClientID %>").click(function () {
                 var storageKeys = Object.keys(localStorage);
@@ -30,12 +30,12 @@
                 }
                 $("#<%= ForceShowTour.ClientID %>").val("true");
                 $("#<%= ShowTourHiddenField.ClientID %>").val("true");
-                showTour();
+                <%= ClientID %>_showTour();
                 return false;
             });
         });
 
-        function showTour() {
+        function <%= ClientID %>_showTour() {
             if ($("#<%= ShowTourHiddenField.ClientID %>").val() == "true") {
                 var tour = new Tour({
                     name: "<%= ClientID %>",
@@ -49,7 +49,7 @@
                     tour.init(true);
                 } else
                     tour.init();
-
+                debugger;
                 // Start the tour
                 tour.start();
                 $("#<%= showTourBtn.ClientID %>").show();

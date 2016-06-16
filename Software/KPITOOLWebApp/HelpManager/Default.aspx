@@ -13,11 +13,13 @@
                     <div class="th-title">Help Manager</div>
                 </div>
                 <div class="t-body tb-padding">
-                    <div class="row">
-                        <asp:Panel runat="server" ID="pnlInfo" CssClass="col-md-12">
+                    <div class="row">                        
+                        <asp:Panel runat="server" ID="pnlInfo" CssClass="col-md-12 alert alert-info">
                             <asp:Literal runat="server" ID="lblInfo"></asp:Literal>
                         </asp:Panel>
-                        <asp:LinkButton ID="btnNuevo" runat="server" OnClick="btnNuevo_Click">Add</asp:LinkButton>
+                        <div class="col-md-12 m-b-20">
+                            <asp:LinkButton ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" CssClass="btn btn-default">Add</asp:LinkButton>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">

@@ -37,6 +37,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            Tour.Show();
         }
     }
 
