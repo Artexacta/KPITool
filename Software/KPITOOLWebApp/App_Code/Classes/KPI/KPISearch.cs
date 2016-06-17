@@ -36,6 +36,12 @@ namespace Artexacta.App.KPI
             col.DisplayHelp = false;
             col.Description = Resources.Organization.TitleActivityName;
             this.Cols.Add(col);
+
+            col = new Column("[k].[personID]", "personID", Column.ColumnType.Numeric);
+            col.AppearInStandardSearch = false;
+            col.DisplayHelp = false;
+            col.Description = Resources.Organization.TitlePersonName;
+            this.Cols.Add(col);
         }
     }
 }

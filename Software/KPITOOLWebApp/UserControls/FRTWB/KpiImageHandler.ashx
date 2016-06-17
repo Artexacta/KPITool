@@ -9,8 +9,8 @@ using Artexacta.App.KPI.BLL;
 public class KpiImageHandler : IHttpHandler {
 
     public void ProcessRequest (HttpContext context) {
-        int imageHeight = 35;
-        int imageWidth = 100;
+        int imageHeight = 400;
+        int imageWidth = 800;
 
         int ownerId = Convert.ToInt32(context.Request["ownerId"]);
         string ownerType = context.Request["ownerType"];
@@ -42,7 +42,7 @@ public class KpiImageHandler : IHttpHandler {
             int y = itemNumber / divisions;
             int x = itemNumber - (y * divisions);
 
-            System.Drawing.Rectangle r = new System.Drawing.Rectangle(x * width, y * height, width, height);
+            System.Drawing.Rectangle r = new System.Drawing.Rectangle(x * width, y * height, imageWidth, imageHeight);
             decimal value = Convert.ToDecimal(data.Measurement);
             objGraphics.FillRectangle(new System.Drawing.SolidBrush(GetRedYellowGreen(min, max, value)), r);
 

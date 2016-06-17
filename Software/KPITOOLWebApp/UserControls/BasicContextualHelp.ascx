@@ -13,6 +13,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">
                     <asp:Literal ID="HelpTitleLiteral" runat="server" Text="<%$ Resources: Glossary, HelpTitle %>"></asp:Literal>
+                    <asp:Literal ID="HelpFileIdLiteral" runat="server"></asp:Literal>
                 </h4>
             </div>
             <div class="modal-body">
@@ -26,3 +27,5 @@
         </div>
     </div>
 </div>
+<asp:HiddenField ID="SourceTypeHiddenField" runat="server" Value="Resource" />
+<asp:HiddenField ID="HelpFileHiddenField" runat="server" Value="" />

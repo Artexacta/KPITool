@@ -31,6 +31,30 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
             return kpiId;
         }
     }
+    
+    public string CategoryId
+    {
+        set
+        {
+            CategoryIdHiddenField.Value = value;
+        }
+        get
+        {
+            return CategoryIdHiddenField.Value;
+        }
+    }
+
+    public string CategoryItemId
+    {
+        set
+        {
+            CategoryItemIdHiddenField.Value = value;
+        }
+        get
+        {
+            return CategoryItemIdHiddenField.Value;
+        }
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -46,9 +70,9 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
 
     public void BuildChart()
     {
-        bool hasTarget = false;
+        bool hasTarget = true;
         decimal currentValue = 0;
-        decimal progress = KPIBLL.GetKpiProgress(KpiId, ref hasTarget, ref currentValue);
+        decimal progress = KPIBLL.GetKpiProgress(KpiId, CategoryId, CategoryItemId, ref hasTarget, ref currentValue);
         if (!hasTarget)
         {
             CurrentValueLiteral.Text = currentValue.ToString("#.##");

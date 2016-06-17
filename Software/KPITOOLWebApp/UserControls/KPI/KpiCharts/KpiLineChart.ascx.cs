@@ -29,9 +29,33 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
             }
             catch (Exception ex)
             {
-                log.Error("Error getting ", ex);
+                log.Error("Error getting kpiId", ex);
             }
             return kpiId;
+        }
+    }
+
+    public string CategoryId
+    {
+        set
+        {
+            CategoryIdHiddenField.Value = value;
+        }
+        get
+        {
+            return CategoryIdHiddenField.Value;
+        }
+    }
+
+    public string CategoryItemId
+    {
+        set
+        {
+            CategoryItemIdHiddenField.Value = value;
+        }
+        get
+        {
+            return CategoryItemIdHiddenField.Value;
         }
     }
 
@@ -52,14 +76,14 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         int kpiId = KpiId;
         string strategyId = "";
         decimal target = 0;
-        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, ref strategyId, ref target);
+        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, ref strategyId, ref target);
         Dictionary<string, object> standardSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetStandardSerie = new Dictionary<string, object>();
 
         Dictionary<string, object> sumSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetSumSerie = new Dictionary<string, object>();
 
-        bool hasTarget = target != 0;
+        bool hasTarget = target != -1;
         bool isSum = strategyId == "SUM";
 
         decimal sumMeasurement = 0;

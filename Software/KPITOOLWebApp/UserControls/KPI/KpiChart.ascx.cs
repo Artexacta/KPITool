@@ -16,7 +16,6 @@ public partial class UserControls_KPI_KpiChart : System.Web.UI.UserControl
             LineChartControl.KpiId = value;
             GaugeControl.KpiId = value;
             KpiIdHiddenField.Value = value.ToString();
-            BuildChart();
         }
         get
         {
@@ -30,6 +29,34 @@ public partial class UserControls_KPI_KpiChart : System.Web.UI.UserControl
                 log.Error("Error getting ", ex);
             }
             return kpiId;
+        }
+    }
+
+    public string CategoryId
+    {
+        set
+        {
+            LineChartControl.CategoryId = value;
+            GaugeControl.CategoryId = value;
+            CategoryIdHiddenField.Value = value;
+        }
+        get
+        {
+            return CategoryIdHiddenField.Value;
+        }
+    }
+
+    public string CategoryItemId
+    {
+        set
+        {
+            LineChartControl.CategoryItemId = value;
+            GaugeControl.CategoryItemId = value;
+            CategoryItemIdHiddenField.Value = value;
+        }
+        get
+        {
+            return CategoryItemIdHiddenField.Value;
         }
     }
 

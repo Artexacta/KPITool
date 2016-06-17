@@ -50,12 +50,6 @@ public partial class Project_ProjectForm : System.Web.UI.Page
 
         ProcessSessionParametes();
         LoadProjectData();
-
-        //OrganizationComboBox.DataSource = FrtwbSystem.Instance.Organizations.Values;
-        //OrganizationComboBox.DataBind();
-
-        //AreaComboBox.DataSource = new List<Area>();
-        //AreaComboBox.DataBind();
     }
 
     private void ProcessSessionParametes()
@@ -106,6 +100,7 @@ public partial class Project_ProjectForm : System.Web.UI.Page
 
             if (theData != null)
             {
+                TitleLiteral.Text = theData.Name;
                 ProjectNameTextBox.Text = theData.Name;
                 OrganizationControl.OrganizationId = theData.OrganizationID;
                 OrganizationControl.AreaId = theData.AreaID;
@@ -149,20 +144,6 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         }
 
         Response.Redirect("~/Project/ProjectList.aspx");
-    }
-
-    private void RemoveProjectFromOldOwner(Project objProject)
-    {
-        //if (objProject.Owner is Area)
-        //{
-        //    Area oldArea = (Area)objProject.Owner;
-        //    oldArea.Projects.Remove(objProject.ObjectId);
-        //}
-        //else if (objProject.Owner is Organization)
-        //{
-        //    Organization oldOrganization = (Organization)objProject.Owner;
-        //    oldOrganization.Projects.Remove(objProject.ObjectId);
-        //}
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
