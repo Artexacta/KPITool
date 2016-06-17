@@ -15,6 +15,12 @@ public partial class Security_CreateUser : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -22,11 +28,6 @@ public partial class Security_CreateUser : System.Web.UI.Page
             // El usuario no debería estar logged in al crearlo
             CreateUserWizard1.LoginCreatedUser = false;
         }
-
-        //Obtener el control de mensajes
-        Label theMessageLabel = (Label)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("MessageLabel");
-        if (theMessageLabel != null)
-            theMessageLabel.Text = "";
     }
 
     protected void CreateUserWizard1_CreatingUser(object sender, LoginCancelEventArgs e)
@@ -34,46 +35,22 @@ public partial class Security_CreateUser : System.Web.UI.Page
         if (!Page.IsValid)
             return;
 
-        //Obtener el control de mensajes
-        Label theMessageLabel = (Label)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("MessageLabel");
-
-        if (theMessageLabel == null)
-        {
-            log.Error("Error al obtener el control para mostrar mensajes.");
-            return;
-        }
-        theMessageLabel.Text = "";
-
         //Si el nombre de usuario existe y aun tiene el codigo de verificacion intentamos eliminar
         //el registro de usuario
-
         MembershipUser theUser = Membership.GetUser(CreateUserWizard1.UserName);
         if (theUser != null)
         {
-            //Si esta aprobado no se continua
-            if (theUser.IsApproved)
+            try
             {
-                theMessageLabel.Text = "Nombre de usuario existente.";
-                e.Cancel = true;
-                return;
+                User theClassUser = UserBLL.GetUserByUsername(CreateUserWizard1.UserName);
+                UserBLL.DeleteUserRecord(theClassUser.UserId);
+                Membership.DeleteUser(CreateUserWizard1.UserName);
             }
-            else
+            catch (Exception q)
             {
-                try
-                {
-                    Membership.DeleteUser(CreateUserWizard1.UserName);
-
-                    User theClassUser = UserBLL.GetUserByUsername(CreateUserWizard1.UserName);
-
-                    if (theClassUser != null)
-                        UserBLL.DeleteUserRecord(theClassUser.UserId);
-                }
-                catch (Exception q)
-                {
-                    theMessageLabel.Text = "Error al eliminar un usuario no verificado.";
-                    log.Error("Error al eliminar un usuario no verificado." + q.Message);
-                    e.Cancel = true;
-                }
+                SystemMessages.DisplaySystemErrorMessage(Resources.UserData.MessageErrorDeleteNoUser);
+                log.Error("Error al eliminar un usuario no verificado: " + CreateUserWizard1.UserName + "." + q.Message);
+                e.Cancel = true;
             }
         }
     }
@@ -104,10 +81,8 @@ public partial class Security_CreateUser : System.Web.UI.Page
             TextBox theEmail = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Email");
             TextBox theFullName = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("FullNameTextBox");
             
-            if (theCellPhone != null && theAddress != null
-                && thePhoneNumber != null && theEmail != null
-                && thePhoneArea != null && thePhoneCode != null
-                && theFullName != null)
+            if (theCellPhone != null && theAddress != null && thePhoneNumber != null && theEmail != null
+                && thePhoneArea != null && thePhoneCode != null && theFullName != null)
             {
                 fullName = theFullName.Text;
                 PhoneNumber = thePhoneNumber.Text;
@@ -125,18 +100,18 @@ public partial class Security_CreateUser : System.Web.UI.Page
             UserBLL.InsertUserRecord(CreateUserWizard1.UserName, fullName, CellPhone,
                 Address, PhoneNumber, PhoneArea, PhoneCode, Email);
 
-            SystemMessages.DisplaySystemMessage("Se registró correctamente el usuario.");
+            SystemMessages.DisplaySystemMessage(Resources.UserData.MessageUserCreated);
         }
-        catch (Exception q)
+        catch (Exception exc)
         {
-            Session["ErrorMessage"] = "Error al crear el usuario. Por favor contactese con el administrador del sistema o intente nuevamente. " + q.Message;
+            Session["ErrorMessage"] = Resources.UserData.MessageErrorCreateUser + exc.Message;
             Response.Redirect("~/FatalError.aspx");
         }
     }
 
     protected void CreateUserWizard1_CreateUserError(object sender, CreateUserErrorEventArgs e)
     {
-        SystemMessages.DisplaySystemErrorMessage("Ocurrió un error al crear nuevo usuario.");
+        SystemMessages.DisplaySystemErrorMessage(Resources.UserData.MessageErrorCreateMembership);
     }
 
     protected void CreateUserWizard1_SendingMail(object sender, MailMessageEventArgs e)
@@ -144,28 +119,26 @@ public partial class Security_CreateUser : System.Web.UI.Page
         try
         {
             string confirmURL = HttpContext.Current.Request.Url.Scheme + "://" +
-                HttpContext.Current.Request.Url.Authority +
-                HttpContext.Current.Request.ApplicationPath + "/MainPage.aspx";
+                HttpContext.Current.Request.Url.Authority + HttpContext.Current.Request.ApplicationPath + "/MainPage.aspx";
 
-            e.Message.From = new System.Net.Mail.MailAddress(
-                Configuration.GetReturnEmailAddress(), Configuration.GetReturnEmailName());
+            e.Message.From = new System.Net.Mail.MailAddress(Configuration.GetReturnEmailAddress(), Configuration.GetReturnEmailName());
             e.Message.Body = e.Message.Body.Replace("<%UserName%>", CreateUserWizard1.UserName);
-            e.Message.Body = e.Message.Body.Replace("<%Contraseña%>", CreateUserWizard1.Password);
+            e.Message.Body = e.Message.Body.Replace("<%Password%>", CreateUserWizard1.Password);
             e.Message.Body = e.Message.Body.Replace("<%Link%>", "<a href=\"" + confirmURL + "\">" + confirmURL + "</a>");
-            e.Message.Subject = Configuration.GetCreationEmailSubject();
+            e.Message.Subject = Resources.UserData.UserCreatedSubject;
             e.Message.IsBodyHtml = true;
         }
-        catch (Exception q)
+        catch (Exception exc)
         {
-            log.Error("Failed to construct a confirmation email for the creation of an account for user " + CreateUserWizard1.UserName, q);
+            log.Error("Failed to construct a confirmation email for the creation of an account for user " + CreateUserWizard1.UserName, exc);
             e.Cancel = true;
-            SystemMessages.DisplaySystemErrorMessage("Ocurrió un error al enviar el email de confirmación al usuario.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.UserData.MessageErrorSentMailNew);
         }
     }
 
     protected void CreateUserWizard1_SendMailError(object sender, SendMailErrorEventArgs e)
     {
-        SystemMessages.DisplaySystemWarningMessage("No se pudo enviar la notificación de creación de cuenta al nuevo usuario.");
+        SystemMessages.DisplaySystemWarningMessage(Resources.UserData.MessageErrorSendMail);
         e.Handled = true;
     }
 
@@ -174,17 +147,31 @@ public partial class Security_CreateUser : System.Web.UI.Page
         Response.Redirect("~/Security/UserList.aspx");
     }
 
+    protected void ExistsUserNameCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = false;
+
+        TextBox userNameTB = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("UserName");
+        MembershipUser theUser = Membership.GetUser(userNameTB.Text.Trim());
+        if (theUser == null)
+        {
+            args.IsValid = true;
+        }
+        else if(!theUser.IsApproved)
+        {
+            args.IsValid = true;
+        }
+    }
+
     protected void ExistsEmailCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
     {
         args.IsValid = false;
 
         TextBox emailTB = (TextBox)CreateUserWizard1.CreateUserStep.ContentTemplateContainer.FindControl("Email");
-
         string userName = Membership.GetUserNameByEmail(emailTB.Text.Trim());
 
-        if (!String.IsNullOrEmpty(userName))
+        if (!string.IsNullOrEmpty(userName))
         {
-            // Verify that the user is not valid
             MembershipUser muser = Membership.GetUser(userName);
             if (muser == null)
             {

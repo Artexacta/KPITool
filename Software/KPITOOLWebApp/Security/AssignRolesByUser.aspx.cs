@@ -16,6 +16,12 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         //Make the Search button the default button for the page
@@ -90,8 +96,8 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
                         {
                             Roles.RemoveUserFromRole(UserLabel.Text, RoleToDelete);
                             UserBLL.DeleteUserInRoles(UserLabel.Text, RoleToDelete);
-                            SystemMessages.DisplaySystemMessage("El Usuario " + UserLabel.Text + " ha sido eliminado del Rol " + RoleToDelete + ".");
                             log.Debug("Removed User " + UserLabel.Text + " from Role " + RoleToDelete + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                            SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageDeletedRoleUser, UserLabel.Text, RoleToDelete));
                         }
                     }
                 }
@@ -104,14 +110,10 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
                     {
                         Roles.AddUserToRole(UserLabel.Text, RoleToInsert);
                         UserBLL.InsertUserInRoles(UserLabel.Text, RoleToInsert);
-                        SystemMessages.DisplaySystemMessage("El Usuario " + UserLabel.Text + " ha sido adicionado al Rol " + RoleToInsert + ".");
                         log.Debug("Added User " + UserLabel.Text + " to Role " + RoleToInsert + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageUserRegisteredInRole, UserLabel.Text, RoleToInsert));
                     }
                 }
-            }
-            else
-            {
-                SystemMessages.DisplaySystemErrorMessage("No se pudo eliminar el Usuario " + UserLabel.Text + " del Rol");
             }
         }
         else
@@ -124,9 +126,8 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
                     {
                         Roles.RemoveUserFromRole(UserLabel.Text, RoleToDelete);
                         UserBLL.DeleteUserInRoles(UserLabel.Text, RoleToDelete);
-                        SystemMessages.DisplaySystemMessage("El Usuario " + UserLabel.Text +
-                            " ha sido eliminado del Rol " + RoleToDelete + ".");
                         log.Debug("Removed User " + UserLabel.Text + " from Role " + RoleToDelete + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageDeletedRoleUser, UserLabel.Text, RoleToDelete));
                     }
                 }
             }
@@ -138,7 +139,8 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
                     {
                         Roles.AddUserToRole(UserLabel.Text, RoleToInsert);
                         UserBLL.InsertUserInRoles(UserLabel.Text, RoleToInsert);
-                        SystemMessages.DisplaySystemMessage("El Usuario " + UserLabel.Text + " ha sido adicionado al Rol " + RoleToInsert + ".");
+                        log.Debug("Added User " + UserLabel.Text + " to Role " + RoleToInsert + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageUserRegisteredInRole, UserLabel.Text, RoleToInsert));
                     }
                 }
             }
@@ -235,10 +237,10 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
                 ResetRolesButton.Visible = (!LoginSecurity.IsUserAuthorizedPermission("RESET_USER_ACCOUNT"));
             }
         }
-        catch (Exception q)
+        catch (Exception exc)
         {
-            SystemMessages.DisplaySystemMessage("no se pudo obtener información de Roles desde la base de datos.");
-            log.Error("Function InRoleListBox_SelectedIndexChanged from AssingRolesByUser page", q);
+            log.Error("Function InRoleListBox_SelectedIndexChanged from AssingRolesByUser page", exc);
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetRoles);
         }
     }
 
@@ -247,7 +249,7 @@ public partial class Security_AssignRolesByUser : System.Web.UI.Page
         if (e.Exception != null)
         {
             log.Error("Cannot load Users on AssignRolesByUser.aspx page", e.Exception);
-            SystemMessages.DisplaySystemErrorMessage("No se pudo obtener información de Roles desde la base de datos.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.UserData.MessageErrorGetUsersList);
             UserGridView.Visible = false;
             e.ExceptionHandled = true;
         }

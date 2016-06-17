@@ -14,6 +14,12 @@ public partial class Security_EditUser : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -49,83 +55,72 @@ public partial class Security_EditUser : System.Web.UI.Page
         Session["USERID"] = null;
     }
 
-    protected void GetUserDetails(string UserName)
+    protected void GetUserDetails(string userName)
     {
-        if (String.IsNullOrEmpty(UserName))
-        {
-            log.Error("Se recibió un usuario vació o nulo.");
-            SystemMessages.DisplaySystemMessage("Se recibió un usuario vació o nulo.");
-        }
-
-        UsernameLabel.Text = "[ " + UserName + " ]";
+        UsernameLabel.Text = "[ " + userName + " ]";
         UsernameLabel.Enabled = false;
-        MembershipUser MemUser = null;
-
+        MembershipUser memUser = null;
         try
         {
-            MemUser = Membership.GetUser(UserName);
+            memUser = Membership.GetUser(userName);
         }
         catch (Exception q)
         {
-            log.Error("Error al intentar obtener detalles del usuario " + UserName, q);
-            SystemMessages.DisplaySystemMessage("Error al intentar obtener detalles del usuario: " + UserName + ".");
+            log.Error("Error en Membership.GetUser para userName: " + userName, q);
+            SystemMessages.DisplaySystemErrorMessage(string.Format(Resources.UserData.MessageErrorGetMembership, userName));
+            Response.Redirect("~/Security/UserList.aspx");
         }
 
-        if (MemUser == null)
+        if (memUser == null)
         {
-            log.Error("No se pudo encontrar al usuario " + UserName + " en la lista de cuentas ASP.NET.");
-
-            Session["ErrorMessage"] = "No se encontró el usuario indicado.";
-            Response.Redirect("~/FatalError.aspx");
+            SystemMessages.DisplaySystemErrorMessage(string.Format(Resources.UserData.MessageErrorNoMembership, userName));
+            Response.Redirect("~/Security/UserList.aspx");
         }
 
         try
         {
-            EmailTextBox.Text = MemUser.Email.ToString();
+            EmailTextBox.Text = memUser.Email.ToString();
             EmailHiddenField.Value = EmailTextBox.Text;
 
-            User theUser = UserBLL.GetUserByUsername(UserName);
+            User theUser = UserBLL.GetUserByUsername(userName);
             if (theUser != null)
             {
-                NameTextBox.Text = theUser.FullName;
+                FullNameTextBox.Text = theUser.FullName;
                 AddressTextBox.Text = theUser.Address;
                 CellPhoneTextBox.Text = theUser.CellPhone;
-                CiudadAreaTextBox.Text = theUser.PhoneArea.ToString();
+                PaisAreaTextBox.Text = theUser.PhoneCode > 0 ? theUser.PhoneCode.ToString() : "";
+                CiudadAreaTextBox.Text = theUser.PhoneArea > 0 ? theUser.PhoneArea.ToString() : "";
                 NumeroTextBox.Text = theUser.PhoneNumber;
-                PaisAreaTextBox.Text = theUser.PhoneCode.ToString();
                 UserIdHiddenField.Value = theUser.UserId.ToString();
             }
         }
         catch (Exception q)
         {
-            log.Error("Cannot get user data", q);
-            SystemMessages.DisplaySystemMessage("Error al obtener los datos del usuario.");
+            log.Error("Error en GetUserByUsername para userName: " + userName, q);
+            SystemMessages.DisplaySystemMessage(Resources.UserData.MessageErrorGetUser);
         }
     }
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
-        bool sucess = false;
-        string userName = UsernameHiddenField.Value;
-
         if (!Page.IsValid)
             return;
 
+        bool sucess = false;
+        string userName = UsernameHiddenField.Value;
         try
         {
             if (EmailTextBox.Text != EmailHiddenField.Value)
             {
                 string user = Membership.GetUserNameByEmail(EmailTextBox.Text);
-
                 if (!String.IsNullOrEmpty(user) && !user.Equals(userName))
                 {
-                    SystemMessages.DisplaySystemErrorMessage("El correo electrónico ya está registrado para otro usuario.");
+                    SystemMessages.DisplaySystemErrorMessage(Resources.UserData.ExistsEmailCustomValidator);
                     return;
                 }
 
                 MembershipUser theUser = null;
                 theUser = Membership.GetUser(userName);
-
                 if (theUser != null)
                 {
                     theUser.Email = EmailTextBox.Text;
@@ -133,7 +128,7 @@ public partial class Security_EditUser : System.Web.UI.Page
                 }
                 else
                 {
-                    SystemMessages.DisplaySystemMessage("No se pudo obtener información [ASPDB] del usuario:" + userName + ".");
+                    SystemMessages.DisplaySystemMessage(string.Format(Resources.UserData.MessageErrorGetMembership, userName));
                     return;
                 }
             }
@@ -142,40 +137,32 @@ public partial class Security_EditUser : System.Web.UI.Page
         }
         catch (Exception q)
         {
-            log.Error("Cannot update user email in database", q);
-            SystemMessages.DisplaySystemMessage("No se pudo modificar el correo electrónico del Usuario.");
+            log.Error("Error en UpdateUser para userId: " + UserIdHiddenField.Value, q);
+            SystemMessages.DisplaySystemMessage(Resources.UserData.MessageErrorChangeEmail);
         }
 
         if (sucess)
         {
-            try
+            if (!UserBLL.UpdateUserRecord(Convert.ToInt32(UserIdHiddenField.Value), 
+                userName, 
+                FullNameTextBox.Text,
+                CellPhoneTextBox.Text,
+                AddressTextBox.Text,
+                NumeroTextBox.Text,
+                !string.IsNullOrEmpty(CiudadAreaTextBox.Text) ? Convert.ToInt32(CiudadAreaTextBox.Text) : 0,
+                !string.IsNullOrEmpty(PaisAreaTextBox.Text) ? Convert.ToInt32(PaisAreaTextBox.Text) : 0,
+                EmailTextBox.Text))
             {
-                if (!UserBLL.UpdateUserRecord(Convert.ToInt32(UserIdHiddenField.Value),
-                        userName,
-                        NameTextBox.Text,
-                        CellPhoneTextBox.Text,
-                        AddressTextBox.Text,
-                        NumeroTextBox.Text,
-                        Convert.ToInt32(CiudadAreaTextBox.Text),
-                        Convert.ToInt32(PaisAreaTextBox.Text),
-                        EmailTextBox.Text))
-                {
-                    SystemMessages.DisplaySystemMessage("No se pudo modificar el Usuario " + userName + ".");
-                }
-                else
-                {
-                    SystemMessages.DisplaySystemMessage("Se modificó los datos del usuario satisfactoriamente.");
-                }
+                SystemMessages.DisplaySystemErrorMessage(Resources.UserData.MessageErrorUpdateUser);
             }
-            catch (Exception q)
+            else
             {
-                log.Error("Cannot update user information to database", q);
-                SystemMessages.DisplaySystemMessage("No se pudo modificar el Usuario.");
+                SystemMessages.DisplaySystemMessage(Resources.UserData.MessageUserUpdated);
             }
         }
         else
         {
-            SystemMessages.DisplaySystemMessage("No se pudo modificar el Usuario " + userName + ".");
+            SystemMessages.DisplaySystemErrorMessage(Resources.UserData.MessageErrorUpdateUser);
         }
 
         if (MyAccountHiddenField.Value.Equals("false"))
