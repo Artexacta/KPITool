@@ -1,0 +1,20 @@
+﻿<p>
+	Su cuenta fue creada en nuestro sitio Web con la siguiente informaci&oacute;n:
+</p>
+<blockquote>
+	<p>
+		Nombre de Usuario: <%UserName%>
+	</p>
+	<p>
+        Contraseña: <%Password%>
+	</p>
+</blockquote>
+<p>
+	Para ingresar al sistema presione el siguiente enlace: <%Link%>
+</p>
+<p>
+	Gracias por crear una cuenta con nuestro sitio.
+</p>
+<p>
+	Si usted no se registró en nuestro sitio por favor ignore este email.
+</p>
