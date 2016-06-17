@@ -74,13 +74,13 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
         {
             theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ORGANIZATION.ToString(), Convert.ToInt32(OrganizationIdHiddenField.Value));
         }
-        catch(Exception exc) 
+        catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
             Response.Redirect("~/MainPage.aspx");
         }
 
-        if(theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
             SystemMessages.DisplaySystemWarningMessage("The user is not owner, cannot share the organization with other users.");
             Response.Redirect("~/MainPage.aspx");

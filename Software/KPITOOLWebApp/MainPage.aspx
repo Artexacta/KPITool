@@ -14,21 +14,6 @@
                     <div class="col-md-8 col-md-offset-3">
                     </div>
                 </div>
-                <%--<div class="dropdown">
-                    <a id="btn-behavior" href="javascript:openModal();" style="font-size: 45px; text-decoration: none; color: #000000"><i id="addIcon" runat="server" class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></a>
-                    <ul class="dropdown-menu pull-left">
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1"  href="#" onclick="return newOrganization()">Add Organization CTRL+T</a>
-                        </li>
-                        <li role="presentation">
-                            <asp:HyperLink runat="server" role="menuitem" TabIndex="-1" NavigateUrl="~/Project/ProjectForm.aspx">Add Project CTRL+T</asp:HyperLink>
-                        </li>
-                        <li role="presentation">
-                            <asp:HyperLink ID="HyperLink2" runat="server" role="menuitem" TabIndex="-1" NavigateUrl="~/Activity/AddActivity.aspx">Add Activity CTRL+A</asp:HyperLink>
-                        </li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="Kpi/KpiForm.aspx">Add KPI CTRL+K</a></li>
-                    </ul>
-                </div>--%>
             </div>
         </div>
 
@@ -38,7 +23,8 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="t-header">
-                        <div class="th-title">Organizations</div>
+                        <div class="th-title">
+                            <asp:Literal ID="Literal1" runat="server" Text="<% $Resources: Organization, TitleOrganizations %>"></asp:Literal></div>
                     </div>
                     <div class="t-body tb-padding">
                         <div class="col-sm-6">
@@ -46,13 +32,13 @@
                                 <label class="checkbox checkbox-inline cr-alt">
                                     <asp:CheckBox runat="server" ID="ShowPeopleCheckbox" AutoPostBack="true" OnCheckedChanged="ShowPeopleCheckbox_CheckedChanged" />
                                     <i class="input-helper"></i>
-                                    Show People
+                                    <asp:Label ID="ShowPeopleLabel" runat="server" Text="<% $Resources: Organization, TitleShowPeople %>"></asp:Label>
                                 </label>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <app:SearchControl ID="OrgSearchControl" runat="server"
-                                Title="Búsqueda"
+                                Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                                 DisplayHelp="true"
                                 DisplayContextualHelp="true"
                                 CssSearch="CSearch"
@@ -99,14 +85,15 @@
                                 </div>
                                 <div class="row m-b-15">
                                     <asp:Panel runat="server" ID="emptyMessage" class="col-md-8 col-md-offset-4 m-t-5" Visible="false">
-                                        This organization does not have any objects. Create one by clicking on the 
-                                        <i class="zmdi zmdi-plus-circle-o" id=""></i>icon above
+                                        <asp:Label ID="Label1" runat="server" Text="<% $Resources: Organization, MessageNoObjects %>"></asp:Label> 
+                                        <i class="zmdi zmdi-plus-circle-o" id=""></i>
+                                        <asp:Label ID="Label2" runat="server" Text="<% $resources: Organization, MessageNoObtects2 %>"></asp:Label>
                                     </asp:Panel>
                                     <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ORGANIZATION" OwnerId='<%# Eval("OrganizationId") %>' />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-6 m-t-5" Visible="false">
-                                        This organization has 
+                                        <asp:Label ID="Label3" runat="server" Text="<% $Resources: Organization, LabelOrganizationHas %>"></asp:Label> 
                                         <asp:Label ID="AreasLabel" runat="server" Visible="false"></asp:Label>
                                         <asp:Literal ID="AndLiteral1" runat="server" Visible="false"></asp:Literal>
 
@@ -133,12 +120,10 @@
                             </ItemTemplate>
                             <FooterTemplate>
                                 <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# OrganizationsRepeater.Items.Count == 0 %>'>
-                                    <h3 class="col-md-12 text-center">No organizations have been defined for you.
-                                        At least one organization is needed and you won't be able to create evaluations, projects, actions or KPI's
-                                        until at least one organization is available.
-                                        You can create an organization by clicking 
-                                        <i class="zmdi zmdi-plus-circle-o"></i>
-                                        icon above.
+                                    <h3 class="col-md-12 text-center">
+                                        <asp:Literal ID="NoOrganizationLiteral" runat="server" Text="<% $Resources: Organization, MessageNoOrganizations %>"></asp:Literal>
+                                        <asp:Literal ID="NoObjectLiteral" runat="server" Text="<% $Resources: Organization, MessageCanCreate %>" ></asp:Literal><i class="zmdi zmdi-plus-circle-o"></i>
+                                        <asp:Literal ID="NoObject1Literal" runat="server" Text="<% $Resources: Organization, MessageNoObtects2 %>" ></asp:Literal>
                                     </h3>
                                 </asp:Panel>
                             </FooterTemplate>
@@ -163,91 +148,10 @@
                         <div style="overflow: hidden">
                             <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
-                        <%--<a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">
-                                Show tips for this page</a>--%>
                     </div>
                 </div>
             </div>
         </div>
     </asp:Panel>
-
-
-    <%-- <asp:HiddenField ID="ResetTourHiddenField" runat="server" Value="false" />
-    <asp:HiddenField ID="ShowTourHiddenField" runat="server" Value="false" />
-    <asp:HiddenField ID="ForceShowTour" runat="server" Value="false" />
-    <asp:PlaceHolder ID="ScriptBlock" runat="server">
-        <script type="text/javascript">
-            $(document).ready(function () {
-                if ($("#<%= ResetTourHiddenField.ClientID %>").val() == "true") {
-                    var storageKeys = Object.keys(localStorage);
-                    for (var i in storageKeys) {
-                        var key = storageKeys[i];
-                        if (key.indexOf("MainPageTour") >= 0)
-                            localStorage.removeItem(key);
-                    }
-                    $("#<%= ResetTourHiddenField.ClientID %>").val("false");
-                }
-                showTour();
-
-                $("#showTourBtn").click(function () {
-                    var storageKeys = Object.keys(localStorage);
-                    for (var i in storageKeys) {
-                        var key = storageKeys[i];
-                        if (key.indexOf("MainPageTour") >= 0)
-                            localStorage.removeItem(key);
-                    }
-                    $("#<%= ForceShowTour.ClientID %>").val("true");
-                    $("#<%= ShowTourHiddenField.ClientID %>").val("true");
-                    showTour();
-                    return false;
-                });
-            });
-
-            function showTour() {
-                if ($("#<%= ShowTourHiddenField.ClientID %>").val() == "true") {
-                    var tour = new Tour({
-                        name: "MainPageTour",
-                        steps: [
-                            {
-                                element: "#<%= TheAddButton.ClientID %>",
-                                title: "You are in the Organization List page.",
-                                content: "At any time you can create new system objects by clicking on this icon. You can create new organizations, evaluations, projects, actions or KPIs from anywhere"
-                            }, {
-                                element: "#OrganizationList .editBtn:first",
-                                title: "You are in the Organization List page.",
-                                content: "Organizations, projects and actions have properties that you can set. You can edit the name as well as the properties by clickin on this icon.   You can also add areas to organizations using this icon."
-                            }, {
-                                element: "#OrganizationList .detailsBtn:first",
-                                title: "You are in the Organization List page.",
-                                content: "You can view the object page using this icon.  In the object page you can see everything about the object."
-                            }, {
-                                element: "#OrganizationList .shareBtn:first",
-                                title: "You are in the Organization List page.",
-                                content: "You can share this organization with other people by clicking on this button"
-                            }, {
-                                element: "#<%= SearchPanel.ClientID %>",
-                                title: "You are in the Organization List page.",
-                                content: "You can search using this textbox. You can simply search be entering any text.",
-                                placement: "bottom"
-                            }
-                        ],
-                        backdrop: true
-                    });
-
-                    // Initialize the tour
-                    if ($("#<%= ForceShowTour.ClientID %>").val() == "true") {
-                        $("#<%= ForceShowTour.ClientID %>").val("false");
-                        tour.init(true);
-                    } else
-                        tour.init();
-
-                    // Start the tour
-                    tour.start();
-                    $("#showTourBtn").show();
-                    $("#<%= ShowTourHiddenField.ClientID %>").val("false");
-                }
-            }
-        </script>
-    </asp:PlaceHolder>--%>
 </asp:Content>
 

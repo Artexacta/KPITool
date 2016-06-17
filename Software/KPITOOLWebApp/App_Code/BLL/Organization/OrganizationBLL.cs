@@ -44,9 +44,9 @@ namespace Artexacta.App.Organization.BLL
 
         public static Organization GetOrganizationById(int organizationId)
         {
-            if (organizationId<=0)
+            if (organizationId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
-            
+
             Organization theData = null;
             try
             {
@@ -62,7 +62,7 @@ namespace Artexacta.App.Organization.BLL
             catch (Exception exc)
             {
                 log.Error("Ocurrió un error mientras se obtenía la organización de id =" + organizationId.ToString(), exc);
-                throw exc;
+                throw new Exception(Resources.Organization.MessageErrorObtainOrganization);
             }
 
             return theData;
@@ -90,8 +90,8 @@ namespace Artexacta.App.Organization.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía la lista organizaciones. " + whereClause, exc);
-                throw exc;
+                log.Error(Resources.Organization.MessageOrganizationList + whereClause, exc);
+                throw new Exception(Resources.Organization.MessageOrganizationList);
             }
 
             return theList;
@@ -118,7 +118,7 @@ namespace Artexacta.App.Organization.BLL
             catch (Exception exc)
             {
                 log.Error("Ocurrió un error mientras se obtenía la organización de nombre: " + name, exc);
-                throw exc;
+                throw new Exception(Resources.Organization.MessageErrorObtainOrganization);
             }
 
             return theData;
@@ -131,7 +131,7 @@ namespace Artexacta.App.Organization.BLL
 
             OrganizationTableAdapter localAdapter = new OrganizationTableAdapter();
 
-            int? organizacionId =0;
+            int? organizacionId = 0;
             string userName = HttpContext.Current.User.Identity.Name;
 
             try
@@ -157,7 +157,7 @@ namespace Artexacta.App.Organization.BLL
         {
             if (organizationId <= 0)
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
-            
+
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException(Resources.Organization.MessageEmptyName);
 
@@ -213,7 +213,8 @@ namespace Artexacta.App.Organization.BLL
             }
             catch (Exception exc)
             {
-                throw exc;
+                log.Error("Error al obtener una organizacion for autocomplete.", exc);
+                throw new Exception(Resources.Organization.MessageErrorObtainOrganization);
             }
             return theList;
         }
