@@ -147,20 +147,24 @@
                         <app:TourSettings runat="server" ID="Settings">
                             <Items>
                                 <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    content="<%$ Resources: MainPage, TourStep1 %>"
+                                    content="ORG-WIZ-1"
+                                    SourceType="HelpFile"
                                     element="#TheAddButton" />
                                 <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    content="<%$ Resources: MainPage, TourStep2 %>"
+                                    content="ORG-WIZ-2"
+                                    SourceType="HelpFile"
                                     element="#OrganizationList .editBtn:first" />
                                 <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    content="<%$ Resources: MainPage, TourStep3 %>"
+                                    content="ORG-WIZ-3"
+                                    SourceType="HelpFile"
                                     element="#OrganizationList .detailsBtn:first" />
                                 <app:TourItem title="<%$ Resources: MainPage, TourStepTitle %>"
-                                    content="<%$ Resources: MainPage, TourStep4 %>"
+                                    content="ORG-WIZ-4"
+                                    SourceType="HelpFile"
                                     element="#OrganizationList .shareBtn:first" />
                             </Items>
                         </app:TourSettings>
-                        <div style="overflow: hidden">
+                        <div class="col-md-12" style="overflow: hidden">
                             <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
                         <%--<a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">

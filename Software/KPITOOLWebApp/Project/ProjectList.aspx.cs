@@ -35,6 +35,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            Tour.Show();
             if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
             {
                 ProjectSearchControl.Query = Session["SEARCH_PARAMETER"].ToString();

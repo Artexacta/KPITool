@@ -10,3 +10,5 @@
     </div>
 </div>
 <asp:HiddenField ID="KpiIdHiddenField" runat="server" Value="0" />
+<asp:HiddenField ID="CategoryIdHiddenField" runat="server" Value="" />
+<asp:HiddenField ID="CategoryItemIdHiddenField" runat="server" Value="" />

@@ -16,6 +16,11 @@ namespace Artexacta.App.KPI
         public string CategoryID { get; set; }
         public string CategoryItemID { get; set; }
 
+        public string DateForDisplay
+        {
+            get { return Date.ToString("yyyy-MM-dd"); }
+        }
+
         public KPIMeasurement()
         {
         }

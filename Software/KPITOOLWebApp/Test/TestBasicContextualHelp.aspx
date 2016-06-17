@@ -10,11 +10,11 @@
 </head>
 <body>
     <form id="form1" runat="server" style="margin-left: 50px">
-        <app:BasicContextualHelp runat="server" HelpText="This is a Help text. This text can be loaded from Resource" Mode="Popover" />
+        <app:BasicContextualHelp runat="server" SourceType="HelpFile" HelpSourceFile="ORG-WIZ-1" Mode="Popover" />
         <br />
-        <app:BasicContextualHelp runat="server" HelpText="This is a Help text. This is shown in a tooltip" Mode="Tooltip" />
+        <app:BasicContextualHelp runat="server" SourceType="HelpFile" HelpSourceFile="ORG-WIZ-1" Mode="Tooltip" />
         <br />
-        <app:BasicContextualHelp runat="server" HelpText="The help text also can be shown in modal dialog" Mode="Dialog"  />
+        <app:BasicContextualHelp runat="server" SourceType="HelpFile" HelpSourceFile="ORG-WIZ-1" Mode="Dialog"  />
     </form>
 </body>
 </html>

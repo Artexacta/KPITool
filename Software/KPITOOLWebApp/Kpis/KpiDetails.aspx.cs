@@ -16,7 +16,26 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
-
+    public int KpiId
+    {
+        set
+        {
+            KpiIdHiddenField.Value = value.ToString();
+        }
+        get
+        {
+            int kpiId = 0;
+            try
+            {
+                kpiId = Convert.ToInt32(KpiIdHiddenField.Value);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting ", ex);
+            }
+            return kpiId;
+        }
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,7 +47,16 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             Response.Redirect("~/Kpi/KpiList.aspx");
             return;
         }
-        LoadKpiData();
+
+        try
+        {
+            LoadKpiData();
+        }
+        catch (Exception ex)
+        {
+            
+        }
+        
     }
 
     private void ProcessSessionParameters()
@@ -48,6 +76,14 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
 
         KPI kpi = KPIBLL.GetKPIById(kpiId);
         KpiNameLiteral.Text = kpi.Name;
+
+        List<KPICategory> categories = KPICategoryBLL.GetKpiCategoriesByKpiId(kpiId);
+        if(categories.Count > 0)
+        {
+            CategoriesRepeater.DataSource = categories;
+            CategoriesRepeater.DataBind();
+            CategoriesPanel.Visible = true;
+        }
         
         //Obtengo aleatoriamente el dato a mostrar
         Random rnd = new Random();
@@ -68,8 +104,9 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         //{
             StartingDate.Text = "<div class='col-md-4 col-sm-4'>Starting Date:</div><div class='col-md-8 col-sm-8'>05/17/15</div>";
             RevenueCollectionGraphic.Visible = true;
-            RevenueCollectionProgress.Visible = true;
+            //RevenueCollectionProgress.Visible = true;
             ChartControl.KpiId = kpiId;
+            MeasurementsControl.KpiId = kpiId;
         //}
     }
 
@@ -149,5 +186,16 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
     {
         HeaderTemplate.Visible = DashboardRepeater.Items.Count > 0;
         EmptyTemplate.Visible = !HeaderTemplate.Visible;
+    }
+
+    protected void CategoriesRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        Literal lt = (Literal)e.Item.FindControl("CollapseLiteral");
+        if (lt == null)
+            return;
+        KPICategory obj = (KPICategory) e.Item.DataItem;
+        if (obj == null)
+            return;
+        lt.Text = "<div class='collapse m-b-20' id='" + obj.HtmlId + "'>";
     }
 }

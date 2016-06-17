@@ -27,6 +27,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            Tour.Show();
             ProcessSessionParameters();
         }
     }
