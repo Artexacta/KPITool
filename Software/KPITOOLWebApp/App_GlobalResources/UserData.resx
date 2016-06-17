@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddressLabel" xml:space="preserve">
+    <value>Address:</value>
+  </data>
+  <data name="ApprovedColumn" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="AreaFormatRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the area code.</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-times'&gt;&lt;/i&gt; Cancel</value>
+  </data>
+  <data name="CellPhoneLabel" xml:space="preserve">
+    <value>Cellphone:</value>
+  </data>
+  <data name="ChangePasswordButton" xml:space="preserve">
+    <value>&lt;i class="fa fa-floppy-o"&gt;&lt;/i&gt; Change Password</value>
+  </data>
+  <data name="CiudadAreaTextBox" xml:space="preserve">
+    <value>Area code</value>
+  </data>
+  <data name="ConfirmDeleteUser" xml:space="preserve">
+    <value>return confirm('Are you sure to delete the user?')</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm Password:</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>The password confirmation is required.</value>
+  </data>
+  <data name="ConfirmResetPassword" xml:space="preserve">
+    <value>return confirm('The password will be changed and sent to the user via email. Are you sure to continue?')</value>
+  </data>
+  <data name="ConfirmUnlockUser" xml:space="preserve">
+    <value>return confirm('Are you sure to unlock the user?')</value>
+  </data>
+  <data name="ConnectedColumn" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="ContinuePushButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="CreatedUserLabel" xml:space="preserve">
+    <value>The user was succesfully created. To return to the user list click the following link:</value>
+  </data>
+  <data name="DeleteColumn" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DireccionFormatRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the address.</value>
+  </data>
+  <data name="EditColumn" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EmailColumn" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailLabel" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>The email is required.</value>
+  </data>
+  <data name="EmptyRowUser" xml:space="preserve">
+    <value>There are no user registered</value>
+  </data>
+  <data name="ExistsEmailCustomValidator" xml:space="preserve">
+    <value>The email is already registered.</value>
+  </data>
+  <data name="ExistsUserNameCustomValidator" xml:space="preserve">
+    <value>The username already exists.</value>
+  </data>
+  <data name="FormatEmailRegularExpressionValidator" xml:space="preserve">
+    <value>Malformed email.</value>
+  </data>
+  <data name="FormatNombreRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the full name.</value>
+  </data>
+  <data name="FullNameColumn" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="FullNameLabel" xml:space="preserve">
+    <value>Full name:</value>
+  </data>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>The full name is required.</value>
+  </data>
+  <data name="LockedColumn" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="MessageDeletedUser" xml:space="preserve">
+    <value>The user was successfully deleted.</value>
+  </data>
+  <data name="MessageErrorChangeEmail" xml:space="preserve">
+    <value>Unable to change the email.</value>
+  </data>
+  <data name="MessageErrorCreateMembership" xml:space="preserve">
+    <value>Error to create new user.</value>
+  </data>
+  <data name="MessageErrorCreateUser" xml:space="preserve">
+    <value>Error to register the user. Please contact your system administrator or try again. </value>
+  </data>
+  <data name="MessageErrorDeleteNoUser" xml:space="preserve">
+    <value>Failed to delete a user not verified.</value>
+  </data>
+  <data name="MessageErrorDeleteUser" xml:space="preserve">
+    <value>Error to delete the user.</value>
+  </data>
+  <data name="MessageErrorGetMembership" xml:space="preserve">
+    <value>Error to obtain the user {0} from ASPNETDB.</value>
+  </data>
+  <data name="MessageErrorGetUser" xml:space="preserve">
+    <value>Error to obtain the user details.</value>
+  </data>
+  <data name="MessageErrorGetUsersList" xml:space="preserve">
+    <value>Error to obtain the users list.</value>
+  </data>
+  <data name="MessageErrorNoMembership" xml:space="preserve">
+    <value>The user {0} does no exists in ASPNETDB.</value>
+  </data>
+  <data name="MessageErrorResetPassword" xml:space="preserve">
+    <value>Error to reset the password for the user {0}.</value>
+  </data>
+  <data name="MessageErrorSendMail" xml:space="preserve">
+    <value>The notification of new user created can not be sent.</value>
+  </data>
+  <data name="MessageErrorSentMailNew" xml:space="preserve">
+    <value>Error to send email confirmation to the new user.</value>
+  </data>
+  <data name="MessageErrorUnlockUser" xml:space="preserve">
+    <value>Error to unlock the user {0}.</value>
+  </data>
+  <data name="MessageErrorUpdateUser" xml:space="preserve">
+    <value>Error to update the user.</value>
+  </data>
+  <data name="MessagePasswordReset" xml:space="preserve">
+    <value>The password for the user {0} was reset and succesfully sent.</value>
+  </data>
+  <data name="MessageUnlockedUser" xml:space="preserve">
+    <value>The user {0} has been unlocked.</value>
+  </data>
+  <data name="MessageUserCreated" xml:space="preserve">
+    <value>The user was successfully created.</value>
+  </data>
+  <data name="MessageUserUpdated" xml:space="preserve">
+    <value>The user information was succesfully updated.</value>
+  </data>
+  <data name="MessageWarningDeleteAdmin" xml:space="preserve">
+    <value>The user admin can not be deleted.</value>
+  </data>
+  <data name="MessageWarningResetPassword" xml:space="preserve">
+    <value>Unable to reset the password for the user {0}.</value>
+  </data>
+  <data name="MessageWarningUserUnlocked" xml:space="preserve">
+    <value>The user {0} is unlocked.</value>
+  </data>
+  <data name="MessageZeroUserId" xml:space="preserve">
+    <value>The user id can not be zero.</value>
+  </data>
+  <data name="NewButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-user-plus'&gt;&lt;/i&gt; New User</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>New Password:</value>
+  </data>
+  <data name="NewPasswordRequiredFieldValidator" xml:space="preserve">
+    <value>The new password is required.</value>
+  </data>
+  <data name="NumeroFormatRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the phone number.</value>
+  </data>
+  <data name="NumeroTextBox" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="PageTitleCreate" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="PageTitleEdit" xml:space="preserve">
+    <value>Edit User</value>
+  </data>
+  <data name="PageTitleList" xml:space="preserve">
+    <value>Users list</value>
+  </data>
+  <data name="PageTitlePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="PaisAreaTextBox" xml:space="preserve">
+    <value>Country code</value>
+  </data>
+  <data name="PaisFormatRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the country code.</value>
+  </data>
+  <data name="PasswordChangedLabel" xml:space="preserve">
+    <value>Your password was changed successfully.</value>
+  </data>
+  <data name="PasswordCompareValidator" xml:space="preserve">
+    <value>The password and password confirmation must be equal.</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="PasswordRegularExpressionValidator" xml:space="preserve">
+    <value>Error in password. It must contain at least 7 characters, including numbers, alphanumeric and non-alphanumeric characters.</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>The password is required.</value>
+  </data>
+  <data name="PhoneFormatRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the cellphone.</value>
+  </data>
+  <data name="PhoneLabel" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="RestorePasswordColumn" xml:space="preserve">
+    <value>Restore password</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>&lt;i class="fa fa-plus"&gt;&lt;/i&gt; Save</value>
+  </data>
+  <data name="SearchLabel" xml:space="preserve">
+    <value>Search: </value>
+  </data>
+  <data name="StepNextButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-plus'&gt;&lt;/i&gt; Create User</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SubjectResetPassword" xml:space="preserve">
+    <value>Password reset</value>
+  </data>
+  <data name="UnlockColumn" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="UserCreatedSubject" xml:space="preserve">
+    <value>New user account</value>
+  </data>
+  <data name="UserNameColumn" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="UserNameLabel" xml:space="preserve">
+    <value>User name:</value>
+  </data>
+  <data name="UserNameRegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters in the user name.</value>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>The user name is required.</value>
+  </data>
+</root>

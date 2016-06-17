@@ -117,127 +117,157 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivityMenu" xml:space="preserve">
-    <value>Actividades</value>
+  <data name="ActivitiesOrganizationLabel" xml:space="preserve">
+    <value>Activities for Organization</value>
   </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Cerrar</value>
+  <data name="ActivitiesProjectLabel" xml:space="preserve">
+    <value>Activities for Project</value>
   </data>
-  <data name="EnterFeedbackTitle" xml:space="preserve">
-    <value>Ingresar Comentario</value>
+  <data name="ActivityNameColumn" xml:space="preserve">
+    <value>Activity Name</value>
   </data>
-  <data name="KpiDashboardMenu" xml:space="preserve">
-    <value>Panel de Control de KPI</value>
+  <data name="AreaNameColumn" xml:space="preserve">
+    <value>Area Name</value>
   </data>
-  <data name="KPIMenu" xml:space="preserve">
-    <value>KPIs</value>
+  <data name="AreasOrganizationLabel" xml:space="preserve">
+    <value>Areas for Organization</value>
   </data>
-  <data name="MensajeArchivoVacio" xml:space="preserve">
-    <value>Empty resourceFile in menu item</value>
+  <data name="DownFromLastLabel" xml:space="preserve">
+    <value>Down {0}% from last {1}</value>
   </data>
-  <data name="MensajeItemPublicoVacio" xml:space="preserve">
-    <value>Menu no tiene un item publico</value>
+  <data name="KPINameColumn" xml:space="preserve">
+    <value>KPI Name</value>
   </data>
-  <data name="MensajeMenuNoPublico" xml:space="preserve">
-    <value>Item del menu no es público y no tiene una clase definida en el item</value>
+  <data name="KpiProgressColumn" xml:space="preserve">
+    <value>KPIs Progress</value>
   </data>
-  <data name="MensajeValorInvalidoItem" xml:space="preserve">
-    <value>Valor inválido para un item público</value>
+  <data name="KpisActivityLabel" xml:space="preserve">
+    <value>KPIs for Activity</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Acerca de</value>
+  <data name="KpisOrganizationLabel" xml:space="preserve">
+    <value>KPIs for Organization</value>
   </data>
-  <data name="MenuAccount" xml:space="preserve">
-    <value>Mi Cuenta</value>
+  <data name="KpisPersonLabel" xml:space="preserve">
+    <value>KPIs for Person</value>
   </data>
-  <data name="MenuAssignRoles" xml:space="preserve">
-    <value>Asignar Roles</value>
+  <data name="KpisProjectLabel" xml:space="preserve">
+    <value>KPIs for Project</value>
   </data>
-  <data name="MenuAssignRolesByUser" xml:space="preserve">
-    <value>Asignar Roles por Usuario</value>
+  <data name="MessageErrorActivitiesByOrganization" xml:space="preserve">
+    <value>Error to obtain the Activities list for the organization.</value>
   </data>
-  <data name="MenuChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="MessageErrorActivitiesByProject" xml:space="preserve">
+    <value>Error to obtain the Activities list for the project.</value>
   </data>
-  <data name="MenuChanges" xml:space="preserve">
-    <value>Cambios en la Aplicación</value>
+  <data name="MessageErrorAreasByOrganization" xml:space="preserve">
+    <value>Error to obtain the Areas list for the organization.</value>
   </data>
-  <data name="MenuClasificadores" xml:space="preserve">
-    <value>Clasificadores</value>
+  <data name="MessageErrorGetActivity" xml:space="preserve">
+    <value>Error to obtain the Activity details.</value>
   </data>
-  <data name="MenuConcepto" xml:space="preserve">
-    <value>Conceptos</value>
+  <data name="MessageErrorGetOrganization" xml:space="preserve">
+    <value>Error to obtain the Organization details.</value>
   </data>
-  <data name="MenuCredits" xml:space="preserve">
-    <value>Créditos</value>
+  <data name="MessageErrorGetPersona" xml:space="preserve">
+    <value>Error to obtain the Person details.</value>
   </data>
-  <data name="MenuDefinePermissionRole" xml:space="preserve">
-    <value>Definir Permisos a Roles</value>
+  <data name="MessageErrorGetProject" xml:space="preserve">
+    <value>Error to obtain the Project details.</value>
   </data>
-  <data name="MenuDefinePermissionUser" xml:space="preserve">
-    <value>Definir Permisos a Usuarios</value>
+  <data name="MessageErrorKpisByActivity" xml:space="preserve">
+    <value>Error to obtain the KPIs list for the activity.</value>
   </data>
-  <data name="MenuDepartamentos" xml:space="preserve">
-    <value>Departamentos</value>
+  <data name="MessageErrorKpisByOrganization" xml:space="preserve">
+    <value>Error to obtain the KPIs list for the organization.</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
-    <value>Inicio</value>
+  <data name="MessageErrorKpisByPerson" xml:space="preserve">
+    <value>Error to obtain the KPIs list for the person.</value>
   </data>
-  <data name="MenuListaEventosBitacora" xml:space="preserve">
-    <value>Ver Bitácora</value>
+  <data name="MessageErrorKpisByProject" xml:space="preserve">
+    <value>Error to obtain the KPIs list for the project.</value>
   </data>
-  <data name="MenuOficinas" xml:space="preserve">
-    <value>Oficinas</value>
+  <data name="MessageErrorPeopleByOrganization" xml:space="preserve">
+    <value>Error to obtain the People list for the organization.</value>
   </data>
-  <data name="MenuPersonas" xml:space="preserve">
-    <value>Personas</value>
+  <data name="MessageErrorProjectsByOrganization" xml:space="preserve">
+    <value>Error to obtain the Projects list for the organization.</value>
   </data>
-  <data name="MenuPersonasListado" xml:space="preserve">
-    <value>Administrador de Personas</value>
+  <data name="NoActivitiesOrganizationLabel" xml:space="preserve">
+    <value>There are no Activities registered for this Organization</value>
   </data>
-  <data name="MenuPreferences" xml:space="preserve">
-    <value>Preferencias de Usuario</value>
+  <data name="NoActivitiesProjectLabel" xml:space="preserve">
+    <value>There are no Activities registered for this Project</value>
   </data>
-  <data name="MenuSecurity" xml:space="preserve">
-    <value>Seguridad</value>
+  <data name="NoAreasOrganizationLabel" xml:space="preserve">
+    <value>There are no Areas registered for this Organization</value>
   </data>
-  <data name="MenuSeguimiento" xml:space="preserve">
-    <value>Seguimiento a Comerciales</value>
+  <data name="NoKpisActivityLabel" xml:space="preserve">
+    <value>There are no KPIs registered for this Activity</value>
   </data>
-  <data name="MenuTipoCambio" xml:space="preserve">
-    <value>Tipos de Cambio</value>
+  <data name="NoKpisOrganizationLabel" xml:space="preserve">
+    <value>There are no KPIs registered for this Organzation</value>
   </data>
-  <data name="MenuUserList" xml:space="preserve">
-    <value>Lista de Usuarios</value>
+  <data name="NoKpisPersonLabel" xml:space="preserve">
+    <value>There are no KPIs registered for this Person</value>
   </data>
-  <data name="NoFeedback" xml:space="preserve">
-    <value>No existe seguimiento para esta aplicación</value>
+  <data name="NoKpisProjectLabel" xml:space="preserve">
+    <value>There are no KPIs registered for this Project</value>
   </data>
-  <data name="NoJScriptLabel" xml:space="preserve">
-    <value>Para esta aplicación es imprescindible tener javascript habilitado.</value>
+  <data name="NoPeopleOrganizationLabel" xml:space="preserve">
+    <value>There are no People registered for this Organzation</value>
   </data>
-  <data name="ProjectMenu" xml:space="preserve">
-    <value>Proyectos</value>
+  <data name="NoProjectsOrganizationLabel" xml:space="preserve">
+    <value>There are no Projects registered for this Organization</value>
   </data>
-  <data name="SubmitfeedbackLabel" xml:space="preserve">
-    <value>Reportar problema</value>
+  <data name="PageTitleActivity" xml:space="preserve">
+    <value>Activity Details</value>
   </data>
-  <data name="MenuEditUser" xml:space="preserve">
-    <value>Editar mi cuenta</value>
+  <data name="PageTitleOrganization" xml:space="preserve">
+    <value>Organization Details</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="PageTitlePerson" xml:space="preserve">
+    <value>Person Details</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Cerrar Sesión</value>
+  <data name="PageTitleProject" xml:space="preserve">
+    <value>Project Details</value>
   </data>
-  <data name="SelectLanguageLabel" xml:space="preserve">
-    <value>Seleccione el idioma:</value>
+  <data name="PeopleOrganizationLabel" xml:space="preserve">
+    <value>People for Organization</value>
   </data>
-  <data name="CategoryMenu" xml:space="preserve">
-    <value>Administrar Categorías</value>
+  <data name="PersonNameColumn" xml:space="preserve">
+    <value>Person Name</value>
   </data>
-  <data name="PersonMenu" xml:space="preserve">
-    <value>Personas</value>
+  <data name="ProgressColumn" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="ProjectNameColumn" xml:space="preserve">
+    <value>Project Name</value>
+  </data>
+  <data name="ProjectsOrganizationLabel" xml:space="preserve">
+    <value>Projects for Organization</value>
+  </data>
+  <data name="ReturnActivityLink" xml:space="preserve">
+    <value>Back to Activities list</value>
+  </data>
+  <data name="ReturnOrganizationLink" xml:space="preserve">
+    <value>Back to Organizationes list</value>
+  </data>
+  <data name="ReturnPersonLink" xml:space="preserve">
+    <value>Back to People list</value>
+  </data>
+  <data name="ReturnProjectLink" xml:space="preserve">
+    <value>Back to Projects list</value>
+  </data>
+  <data name="TrendColumn" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="UpFromLastLabel" xml:space="preserve">
+    <value>Up {0}% from last {1}</value>
+  </data>
+  <data name="UserNotOwner" xml:space="preserve">
+    <value>The user is not owner, cannot view the summary information.</value>
+  </data>
+  <data name="ViewColumn" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>

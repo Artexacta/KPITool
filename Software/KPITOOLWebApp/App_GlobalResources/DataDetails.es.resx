@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivitiesOrganizationLabel" xml:space="preserve">
+    <value>Actividades para la Organización</value>
+  </data>
+  <data name="ActivitiesProjectLabel" xml:space="preserve">
+    <value>Actividades para el Proyecto</value>
+  </data>
+  <data name="ActivityNameColumn" xml:space="preserve">
+    <value>Nombre de la Actividad</value>
+  </data>
+  <data name="AreaNameColumn" xml:space="preserve">
+    <value>Nombre del Area</value>
+  </data>
+  <data name="AreasOrganizationLabel" xml:space="preserve">
+    <value>Areas para la Organización</value>
+  </data>
+  <data name="DownFromLastLabel" xml:space="preserve">
+    <value>Baja {0}% respecto al anterior {1}</value>
+  </data>
+  <data name="KPINameColumn" xml:space="preserve">
+    <value>Nombre del KPI</value>
+  </data>
+  <data name="KpiProgressColumn" xml:space="preserve">
+    <value>Progreso de KPIs</value>
+  </data>
+  <data name="KpisActivityLabel" xml:space="preserve">
+    <value>KPIs para la Actividad</value>
+  </data>
+  <data name="KpisOrganizationLabel" xml:space="preserve">
+    <value>KPIs para la Organización</value>
+  </data>
+  <data name="KpisPersonLabel" xml:space="preserve">
+    <value>KPIs para la persona</value>
+  </data>
+  <data name="KpisProjectLabel" xml:space="preserve">
+    <value>KPIs para el Proyecto</value>
+  </data>
+  <data name="MessageErrorActivitiesByOrganization" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de actividades para la organización.</value>
+  </data>
+  <data name="MessageErrorActivitiesByProject" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de actividades para el proyecto.</value>
+  </data>
+  <data name="MessageErrorAreasByOrganization" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de áreas para la organización.</value>
+  </data>
+  <data name="MessageErrorGetActivity" xml:space="preserve">
+    <value>Ocurrió un error al obtener la información de la actividad.</value>
+  </data>
+  <data name="MessageErrorGetOrganization" xml:space="preserve">
+    <value>Ocurrió un error al obtener la información de la organización.</value>
+  </data>
+  <data name="MessageErrorGetPersona" xml:space="preserve">
+    <value>Ocurrió un error al obtener la información de la persona.</value>
+  </data>
+  <data name="MessageErrorGetProject" xml:space="preserve">
+    <value>Ocurrió un error al obtener la información del proyecto.</value>
+  </data>
+  <data name="MessageErrorKpisByActivity" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de KPIs para la actividad.</value>
+  </data>
+  <data name="MessageErrorKpisByOrganization" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de KPIs para la organización.</value>
+  </data>
+  <data name="MessageErrorKpisByPerson" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de KPIs para la persona.</value>
+  </data>
+  <data name="MessageErrorKpisByProject" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de KPIs para el proyecto.</value>
+  </data>
+  <data name="MessageErrorPeopleByOrganization" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de personas para la organización.</value>
+  </data>
+  <data name="MessageErrorProjectsByOrganization" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de proyectos para la organización.</value>
+  </data>
+  <data name="NoActivitiesOrganizationLabel" xml:space="preserve">
+    <value>No hay actividades registradas para esta organización</value>
+  </data>
+  <data name="NoActivitiesProjectLabel" xml:space="preserve">
+    <value>No hay actividades registradas para este proyecto</value>
+  </data>
+  <data name="NoAreasOrganizationLabel" xml:space="preserve">
+    <value>No hay áreas registrados para esta organización</value>
+  </data>
+  <data name="NoKpisActivityLabel" xml:space="preserve">
+    <value>No hay KPIs registrados para esta actividad</value>
+  </data>
+  <data name="NoKpisOrganizationLabel" xml:space="preserve">
+    <value>No hay KPIs registrados para esta organización</value>
+  </data>
+  <data name="NoKpisPersonLabel" xml:space="preserve">
+    <value>No hay KPIs registrados para esta person</value>
+  </data>
+  <data name="NoKpisProjectLabel" xml:space="preserve">
+    <value>No hay KPIs registrados para este proyecto</value>
+  </data>
+  <data name="NoPeopleOrganizationLabel" xml:space="preserve">
+    <value>No hay personas registradas para esta organización</value>
+  </data>
+  <data name="NoProjectsOrganizationLabel" xml:space="preserve">
+    <value>No hay proyectos registrados para esta organización</value>
+  </data>
+  <data name="PageTitleActivity" xml:space="preserve">
+    <value>Detalles de la Actividad</value>
+  </data>
+  <data name="PageTitleOrganization" xml:space="preserve">
+    <value>Detalles de la Organización</value>
+  </data>
+  <data name="PageTitlePerson" xml:space="preserve">
+    <value>Detalles de la Persona</value>
+  </data>
+  <data name="PageTitleProject" xml:space="preserve">
+    <value>Detalles del Proyecto</value>
+  </data>
+  <data name="PeopleOrganizationLabel" xml:space="preserve">
+    <value>Personas para la Organización</value>
+  </data>
+  <data name="PersonNameColumn" xml:space="preserve">
+    <value>Nombre de la Persona</value>
+  </data>
+  <data name="ProgressColumn" xml:space="preserve">
+    <value>Progreso</value>
+  </data>
+  <data name="ProjectNameColumn" xml:space="preserve">
+    <value>Nombre del Proyecto</value>
+  </data>
+  <data name="ProjectsOrganizationLabel" xml:space="preserve">
+    <value>Proyectos para la Organización</value>
+  </data>
+  <data name="ReturnActivityLink" xml:space="preserve">
+    <value>Regresar al listado de Actividades</value>
+  </data>
+  <data name="ReturnOrganizationLink" xml:space="preserve">
+    <value>Regresar al listado de Organizaciones</value>
+  </data>
+  <data name="ReturnPersonLink" xml:space="preserve">
+    <value>Regresar al listado de Personas</value>
+  </data>
+  <data name="ReturnProjectLink" xml:space="preserve">
+    <value>Regresar al listado de Proyectos</value>
+  </data>
+  <data name="TrendColumn" xml:space="preserve">
+    <value>Tendencia</value>
+  </data>
+  <data name="UpFromLastLabel" xml:space="preserve">
+    <value>Sube {0}% respecto al anterior {1}</value>
+  </data>
+  <data name="UserNotOwner" xml:space="preserve">
+    <value>El usuario no es propietario, no puede ver el resumen de la información.</value>
+  </data>
+  <data name="ViewColumn" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+</root>

@@ -117,127 +117,142 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivityMenu" xml:space="preserve">
-    <value>Actividades</value>
+  <data name="AddInButton" xml:space="preserve">
+    <value>Move User to Role</value>
   </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Cerrar</value>
+  <data name="AddNewRoleButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-plus'&gt;&lt;/i&gt; Add New Role</value>
   </data>
-  <data name="EnterFeedbackTitle" xml:space="preserve">
-    <value>Ingresar Comentario</value>
+  <data name="AddNewUserButton" xml:space="preserve">
+    <value>&lt;i class="fa fa-plus"&gt;&lt;/i&gt; Add New User</value>
   </data>
-  <data name="KpiDashboardMenu" xml:space="preserve">
-    <value>Panel de Control de KPI</value>
+  <data name="AddOutButton" xml:space="preserve">
+    <value>Move User outside the role</value>
   </data>
-  <data name="KPIMenu" xml:space="preserve">
-    <value>KPIs</value>
+  <data name="AllRolesItem" xml:space="preserve">
+    <value>All</value>
   </data>
-  <data name="MensajeArchivoVacio" xml:space="preserve">
-    <value>Empty resourceFile in menu item</value>
+  <data name="ChangePermissionLabel" xml:space="preserve">
+    <value>Change permissions for the Role:</value>
   </data>
-  <data name="MensajeItemPublicoVacio" xml:space="preserve">
-    <value>Menu no tiene un item publico</value>
+  <data name="ChangePermissionUserLabel" xml:space="preserve">
+    <value>Change permissions for the User:</value>
   </data>
-  <data name="MensajeMenuNoPublico" xml:space="preserve">
-    <value>Item del menu no es público y no tiene una clase definida en el item</value>
+  <data name="ConfirmDeleteRol" xml:space="preserve">
+    <value>return confirm('Are you sure to delete the role?')</value>
   </data>
-  <data name="MensajeValorInvalidoItem" xml:space="preserve">
-    <value>Valor inválido para un item público</value>
+  <data name="DeleteRolButton" xml:space="preserve">
+    <value>Delete Rol</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Acerca de</value>
+  <data name="DescriptionColumn" xml:space="preserve">
+    <value>Permission description</value>
   </data>
-  <data name="MenuAccount" xml:space="preserve">
-    <value>Mi Cuenta</value>
+  <data name="MessageDeletedRole" xml:space="preserve">
+    <value>The Role {0} has been deleted.</value>
   </data>
-  <data name="MenuAssignRoles" xml:space="preserve">
-    <value>Asignar Roles</value>
+  <data name="MessageDeletedRoleUser" xml:space="preserve">
+    <value>The user {0} has been deleted from the role  {1}.</value>
   </data>
-  <data name="MenuAssignRolesByUser" xml:space="preserve">
-    <value>Asignar Roles por Usuario</value>
+  <data name="MessageErrorDeletedRole" xml:space="preserve">
+    <value>You can not remove the Role {0} because it has assigned users.</value>
   </data>
-  <data name="MenuChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="MessageErrorDeleteRoleUser" xml:space="preserve">
+    <value>Error to delete the user {0}  from the role  {1}.</value>
   </data>
-  <data name="MenuChanges" xml:space="preserve">
-    <value>Cambios en la Aplicación</value>
+  <data name="MessageErrorGetPermissions" xml:space="preserve">
+    <value>Error to obtain the Permissions list.</value>
   </data>
-  <data name="MenuClasificadores" xml:space="preserve">
-    <value>Clasificadores</value>
+  <data name="MessageErrorGetPermissionsUser" xml:space="preserve">
+    <value>Error to obtain the permissions list by the user.</value>
   </data>
-  <data name="MenuConcepto" xml:space="preserve">
-    <value>Conceptos</value>
+  <data name="MessageErrorGetRoles" xml:space="preserve">
+    <value>Error to obtain the Roles list.</value>
   </data>
-  <data name="MenuCredits" xml:space="preserve">
-    <value>Créditos</value>
+  <data name="MessageErrorGetUsersByRole" xml:space="preserve">
+    <value>Error to obtain the user list by role </value>
   </data>
-  <data name="MenuDefinePermissionRole" xml:space="preserve">
-    <value>Definir Permisos a Roles</value>
+  <data name="MessageErrorRegisterPermissionsToRol" xml:space="preserve">
+    <value>Error to register permissions to the role.</value>
   </data>
-  <data name="MenuDefinePermissionUser" xml:space="preserve">
-    <value>Definir Permisos a Usuarios</value>
+  <data name="MessageErrorRegisterPermissionsToUser" xml:space="preserve">
+    <value>Error to register permissions to the user {0}.</value>
   </data>
-  <data name="MenuDepartamentos" xml:space="preserve">
-    <value>Departamentos</value>
+  <data name="MessageNoUsersInList" xml:space="preserve">
+    <value>There are no users in the list.</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
-    <value>Inicio</value>
+  <data name="MessageRegisterPermissionsToRol" xml:space="preserve">
+    <value>The permissions for the rol were successfully registered.</value>
   </data>
-  <data name="MenuListaEventosBitacora" xml:space="preserve">
-    <value>Ver Bitácora</value>
+  <data name="MessageRegisterPermissionsToUser" xml:space="preserve">
+    <value>The permissions for the user {0} were successfully registered.</value>
   </data>
-  <data name="MenuOficinas" xml:space="preserve">
-    <value>Oficinas</value>
+  <data name="MessageUserRegisteredInRole" xml:space="preserve">
+    <value>The user {0} has been added to role {1}.</value>
   </data>
-  <data name="MenuPersonas" xml:space="preserve">
-    <value>Personas</value>
+  <data name="MessageUsersNoSelected" xml:space="preserve">
+    <value>There are no selected users in the list.</value>
   </data>
-  <data name="MenuPersonasListado" xml:space="preserve">
-    <value>Administrador de Personas</value>
+  <data name="MessageWarningDeleteAdministrativeUser" xml:space="preserve">
+    <value>The user {0} can not be deleted from the role {1} because it is the last with administrative privileges.</value>
   </data>
-  <data name="MenuPreferences" xml:space="preserve">
-    <value>Preferencias de Usuario</value>
+  <data name="MessageWarningDeleteAdminUser" xml:space="preserve">
+    <value>The user {0} can not be deleted from the role {1} because it is the last with administrative privileges and it is the system administrator.</value>
   </data>
-  <data name="MenuSecurity" xml:space="preserve">
-    <value>Seguridad</value>
+  <data name="NoneRoleItem" xml:space="preserve">
+    <value>None</value>
   </data>
-  <data name="MenuSeguimiento" xml:space="preserve">
-    <value>Seguimiento a Comerciales</value>
+  <data name="PageTitlePermissionRole" xml:space="preserve">
+    <value>Permissions for Roles</value>
   </data>
-  <data name="MenuTipoCambio" xml:space="preserve">
-    <value>Tipos de Cambio</value>
+  <data name="PageTitlePermissionUser" xml:space="preserve">
+    <value>Permissions for Users</value>
   </data>
-  <data name="MenuUserList" xml:space="preserve">
-    <value>Lista de Usuarios</value>
+  <data name="PageTitleRoles" xml:space="preserve">
+    <value>Assign Roles</value>
   </data>
-  <data name="NoFeedback" xml:space="preserve">
-    <value>No existe seguimiento para esta aplicación</value>
+  <data name="PageTitleUserRoles" xml:space="preserve">
+    <value>Assign Roles by User</value>
   </data>
-  <data name="NoJScriptLabel" xml:space="preserve">
-    <value>Para esta aplicación es imprescindible tener javascript habilitado.</value>
+  <data name="ResetPermissionsButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-refresh'&gt;&lt;/i&gt; Reset permissions</value>
   </data>
-  <data name="ProjectMenu" xml:space="preserve">
-    <value>Proyectos</value>
+  <data name="ResetRolesButton" xml:space="preserve">
+    <value>&lt;i class="fa fa-refresh"&gt;&lt;/i&gt; Reset User Roles</value>
   </data>
-  <data name="SubmitfeedbackLabel" xml:space="preserve">
-    <value>Reportar problema</value>
+  <data name="RoleColumn" xml:space="preserve">
+    <value>Role</value>
   </data>
-  <data name="MenuEditUser" xml:space="preserve">
-    <value>Editar mi cuenta</value>
+  <data name="RoleLabel" xml:space="preserve">
+    <value>Role:</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="RolesLabel" xml:space="preserve">
+    <value>Roles for the User</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Cerrar Sesión</value>
+  <data name="SavePermissionsButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-floppy-o'&gt;&lt;/i&gt; Save permissions</value>
   </data>
-  <data name="SelectLanguageLabel" xml:space="preserve">
-    <value>Seleccione el idioma:</value>
+  <data name="SaveRolesButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-floppy-o'&gt;&lt;/i&gt; Record User Roles</value>
   </data>
-  <data name="CategoryMenu" xml:space="preserve">
-    <value>Administrar Categorías</value>
+  <data name="SearchUserButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-search'&gt;&lt;/i&gt; Search Users</value>
   </data>
-  <data name="PersonMenu" xml:space="preserve">
-    <value>Personas</value>
+  <data name="SelectAllButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-caret-down'&gt;&lt;/i&gt; Select All</value>
+  </data>
+  <data name="SelectColumn" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectUserLabel" xml:space="preserve">
+    <value>You must select an user.</value>
+  </data>
+  <data name="TitleUserLabel" xml:space="preserve">
+    <value>Information of the user selected</value>
+  </data>
+  <data name="UsersInLabel" xml:space="preserve">
+    <value>Users in Role</value>
+  </data>
+  <data name="UsersNotInLabel" xml:space="preserve">
+    <value>Users not in the Role</value>
   </data>
 </root>

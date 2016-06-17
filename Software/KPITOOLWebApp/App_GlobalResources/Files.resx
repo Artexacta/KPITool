@@ -121,7 +121,7 @@
     <value>~/Images/neutral/iconfiles</value>
   </data>
   <data name="FileTypesFileLocation" xml:space="preserve">
-    <value>~/DataFiles/FileTypesEN.xml</value>
+    <value>~/DataFiles/FileTypesES.xml</value>
   </data>
   <data name="MIMETypesFile" xml:space="preserve">
     <value>~/DataFiles/MIMETypes.txt</value>
@@ -129,85 +129,19 @@
   <data name="UnknownFileIcon" xml:space="preserve">
     <value>unkown-icon.gif</value>
   </data>
-  <data name="ChangeUserEmail" xml:space="preserve">
-    <value>/DataFiles/Emails/ChangeUserEmail.en.txt</value>
-  </data>
-  <data name="ConfirmResetPassword" xml:space="preserve">
-    <value>/DataFiles/Emails/ConfirmResetPassword.en.txt</value>
-  </data>
   <data name="CreateUserEmail" xml:space="preserve">
     <value>~/DataFiles/Emails/CreateUserEmail.en.txt</value>
   </data>
-  <data name="DeletedUsersNotConfirmedError" xml:space="preserve">
-    <value>/DataFiles/Emails/DeletedUsersNotConfirmedError.en.txt</value>
-  </data>
-  <data name="DeletedUsersNotConfirmedOK" xml:space="preserve">
-    <value>/DataFiles/Emails/DeletedUsersNotConfirmedOK.en.txt</value>
-  </data>
-  <data name="ApproveRequest" xml:space="preserve">
-    <value>/DataFiles/Emails/ApproveRequest.en.txt</value>
-  </data>
-  <data name="DenyRequest" xml:space="preserve">
-    <value>/DataFiles/Emails/DenyRequest.en.txt</value>
-  </data>
-  <data name="NoteReportBobyLocation" xml:space="preserve">
-    <value>~/DataFiles/ReportTemplates/NoteReportBodyEN.txt</value>
-  </data>
-  <data name="NoteReportHeaderLocation" xml:space="preserve">
-    <value>~/DataFiles/ReportTemplates/NoteReportHeaderEN.txt</value>
-  </data>
-  <data name="ResendCode" xml:space="preserve">
-    <value>/DataFiles/Emails/ResendCode.en.txt</value>
-  </data>
   <data name="ResetPassword" xml:space="preserve">
     <value>/DataFiles/Emails/ResetPassword.en.txt</value>
-  </data>
-  <data name="AccountConfirmationOK" xml:space="preserve">
-    <value>/DataFiles/Emails/AccountConfirmationOK.en.txt</value>
-  </data>
-  <data name="AdmEmailResetPassword" xml:space="preserve">
-    <value>/DataFiles/Emails/AdmResetPassword.en.txt</value>
-  </data>
-  <data name="CompanyRegisteredOK" xml:space="preserve">
-    <value>/DataFiles/Emails/CompanyCreatedOK.en.txt</value>
-  </data>
-  <data name="UserInvitationSentOK" xml:space="preserve">
-    <value>/DataFiles/Emails/UserInvitationSentOK.en.txt</value>
-  </data>
-  <data name="EmailIpaMessageSent" xml:space="preserve">
-    <value>/DataFiles/Emails/Reply/IpaMessageSent.en.txt</value>
-  </data>
-  <data name="EmailInvestorMessageSent" xml:space="preserve">
-    <value>/DataFiles/Emails/Reply/InvestorMessageSent.en.txt</value>
-  </data>
-  <data name="EmailReplyReSent" xml:space="preserve">
-    <value>/DataFiles/Emails/Reply/InvestorReplyReSent.en.txt</value>
-  </data>
-  <data name="EmailReplySent" xml:space="preserve">
-    <value>/DataFiles/Emails/Reply/InvestorReplySent.en.txt</value>
-  </data>
-  <data name="EmailRequestDeleted" xml:space="preserve">
-    <value>/DataFiles/Emails/Request/InvestorRequestDeleted.en.txt</value>
-  </data>
-  <data name="EmailRequestSent" xml:space="preserve">
-    <value>/DataFiles/Emails/Request/IpaRequestSent.en.txt</value>
-  </data>
-  <data name="EmailInvitation" xml:space="preserve">
-    <value>/DataFiles/Emails/EmailInvitation.en.txt</value>
-  </data>
-  <data name="AssignmentSTL" xml:space="preserve">
-    <value>/DataFiles/Emails/AssignmentSTL.en.txt</value>
-  </data>
-  <data name="AssignmentUser" xml:space="preserve">
-    <value>/DataFiles/Emails/AssignmentUser.en.txt</value>
-  </data>
-  <data name="AssignCompaniesUser" xml:space="preserve">
-    <value>/DataFiles/Emails/AssignCompaniesUser.en.txt</value>
   </data>
   <data name="UnknownFileType" xml:space="preserve">
     <value>Unkown File Type</value>
   </data>
   <data name="NewPasswordFileLocation" xml:space="preserve">
     <value>~/DataFiles/Emails/NewPasswordEmail.txt</value>
+  </data>
+  <data name="UnkownFileSize" xml:space="preserve">
+    <value>Unkown File Size</value>
   </data>
 </root>

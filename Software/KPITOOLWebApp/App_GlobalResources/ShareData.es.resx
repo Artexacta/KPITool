@@ -117,6 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmDeleteUserPermission" xml:space="preserve">
+    <value>return confirm('¿Está seguro de borrar el usuario y sus permisos?')</value>
+  </data>
+  <data name="ConfirmOverwritePermissions" xml:space="preserve">
+    <value>"El usuario ya estaba registrado por lo que los permisos se sobreescribirán por los seleccionados. ¿Está seguro de continuar?"</value>
+  </data>
+  <data name="DeleteColumn" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="DeleteObjectPermissionsOk" xml:space="preserve">
+    <value>Los permisos para del usuarios fueron eliminados.</value>
+  </data>
+  <data name="DeleteObjectPublicOk" xml:space="preserve">
+    <value>Los permisos para todos los usuarios fueron eliminados.</value>
+  </data>
+  <data name="EditColumn" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="EveryoneCheckBox" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="InsertObjectPermissionsOk" xml:space="preserve">
+    <value>Se registró correctamente los permisiones seleccionados para el usuario </value>
+  </data>
+  <data name="InsertObjectPublicOk" xml:space="preserve">
+    <value>Se registró correctamente los permisiones seleccionados para todos los usuarios.</value>
+  </data>
+  <data name="InviteUserButton" xml:space="preserve">
+    <value>Invitar a más usuarios</value>
+  </data>
+  <data name="InviteUserModalTitle" xml:space="preserve">
+    <value>Invitar a usuario</value>
+  </data>
+  <data name="lblEmptyData" xml:space="preserve">
+    <value>No se tienen permisos disponibles para registrar</value>
+  </data>
   <data name="MessageEmptyPermissionsList" xml:space="preserve">
     <value>El listado de permisos para el usuario no puede ser vacío.</value>
   </data>
@@ -167,5 +203,170 @@
   </data>
   <data name="MessageZeroUserId" xml:space="preserve">
     <value>El ID del usuario no puede ser cero.</value>
+  </data>
+  <data name="NoDataRowsOrganization" xml:space="preserve">
+    <value>No existen usuarios con permisos para esta Organización.</value>
+  </data>
+  <data name="ObjectActionActivity" xml:space="preserve">
+    <value>Administrar Actividad</value>
+  </data>
+  <data name="ObjectActionCustomValidator" xml:space="preserve">
+    <value>Debe seleccionar un permiso.</value>
+  </data>
+  <data name="ObjectActionDefault" xml:space="preserve">
+    <value>[ Seleccione un permiso ]</value>
+  </data>
+  <data name="ObjectActionEnterData" xml:space="preserve">
+    <value>Ver e introducir datos</value>
+  </data>
+  <data name="ObjectActionKpi" xml:space="preserve">
+    <value>Administrar KPI</value>
+  </data>
+  <data name="ObjectActionOwn" xml:space="preserve">
+    <value>Propietario</value>
+  </data>
+  <data name="ObjectActionPeople" xml:space="preserve">
+    <value>Administrar Persona</value>
+  </data>
+  <data name="ObjectActionProject" xml:space="preserve">
+    <value>Administrar Proyecto</value>
+  </data>
+  <data name="ObjectActionViewKpi" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="PageTitleOrganization" xml:space="preserve">
+    <value>Compartir Organización</value>
+  </data>
+  <data name="PermissionsColumn" xml:space="preserve">
+    <value>Permisos</value>
+  </data>
+  <data name="PermissionsListLabel" xml:space="preserve">
+    <value>Permisos:</value>
+  </data>
+  <data name="ReturnOrganizationLink" xml:space="preserve">
+    <value>Regresar al listado de Organizaciones</value>
+  </data>
+  <data name="SaveUserButton" xml:space="preserve">
+    <value>Agregar usuario</value>
+  </data>
+  <data name="SubtitleLabelOrganization" xml:space="preserve">
+    <value>Está compartiendo una organización: </value>
+  </data>
+  <data name="UserColumn" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="UserCustomValidator" xml:space="preserve">
+    <value>Debe seleccionar un usuario.</value>
+  </data>
+  <data name="UserLabel" xml:space="preserve">
+    <value>Usuario:</value>
+  </data>
+  <data name="UserNotOwnOrganization" xml:space="preserve">
+    <value>El usuario no es propietario, no puede compartir la organización con otros usuarios.</value>
+  </data>
+  <data name="UserPermissionsOrganizationLabel" xml:space="preserve">
+    <value>Usuarios que tienen permisos para esta organización:</value>
+  </data>
+  <data name="UserTextBoxPlaceHolder" xml:space="preserve">
+    <value>[ Seleccione un usuario ]</value>
+  </data>
+  <data name="VerifiyDataFail" xml:space="preserve">
+    <value>"No se pudo verificar si ya existe un registro para el usuario."</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="EveryoneCheckBoxKpi" xml:space="preserve">
+    <value>Todos los usuarios pueden ver este KPI</value>
+  </data>
+  <data name="MessageErrorDeleteObjectPermissions" xml:space="preserve">
+    <value>Ocurrió un error al eliminar los permisos para el usuario.</value>
+  </data>
+  <data name="MessageErrorDeleteObjectPublic" xml:space="preserve">
+    <value>Ocurrió un error al eliminar los permisos para todos los usuarios.</value>
+  </data>
+  <data name="MessageErrorInsertObjectPublic" xml:space="preserve">
+    <value>Ocurrió un error al registrar los permisos para todos los usuarios.</value>
+  </data>
+  <data name="MessageErrorPermissionsByUser" xml:space="preserve">
+    <value>Ocurrió un error al obtener los permisos registrados para el usuario.</value>
+  </data>
+  <data name="MessageErrorUserName" xml:space="preserve">
+    <value>El nombre del usuario no puede ser nulo o vacío.</value>
+  </data>
+  <data name="MessageErrorVerifyPermissionsByUser" xml:space="preserve">
+    <value>Ocurrió un error al verificar si el usuario tiene permisos para acceder al formulario.</value>
+  </data>
+  <data name="NoDataRowsActivity" xml:space="preserve">
+    <value>No existen usuarios con permisos para esta Actividad.</value>
+  </data>
+  <data name="NoDataRowsKpi" xml:space="preserve">
+    <value>No existen usuarios con permisos para este KPI.</value>
+  </data>
+  <data name="NoDataRowsPerson" xml:space="preserve">
+    <value>No existen usuarios con permisos para esta Persona.</value>
+  </data>
+  <data name="NoDataRowsProject" xml:space="preserve">
+    <value>No existen usuarios con permisos para este Proyecto.</value>
+  </data>
+  <data name="PageTitleActivity" xml:space="preserve">
+    <value>Compartir Actividad</value>
+  </data>
+  <data name="PageTitleKpi" xml:space="preserve">
+    <value>Compartir KPI</value>
+  </data>
+  <data name="PageTitlePerson" xml:space="preserve">
+    <value>Compartir Persona</value>
+  </data>
+  <data name="PageTitleProject" xml:space="preserve">
+    <value>Compartir Proyecto</value>
+  </data>
+  <data name="ReturnActivityLink" xml:space="preserve">
+    <value>Regresar al listado de Actividades</value>
+  </data>
+  <data name="ReturnKpiLink" xml:space="preserve">
+    <value>Regresar al listado de KPIs</value>
+  </data>
+  <data name="ReturnPersonLink" xml:space="preserve">
+    <value>Regresar al listado de Personas</value>
+  </data>
+  <data name="ReturnProjectLink" xml:space="preserve">
+    <value>Regresar al listado de Proyectos</value>
+  </data>
+  <data name="SubtitleLabelActivity" xml:space="preserve">
+    <value>Está compartiendo una actividad: </value>
+  </data>
+  <data name="SubtitleLabelKpi" xml:space="preserve">
+    <value>Está compartiendo un KPI: </value>
+  </data>
+  <data name="SubtitleLabelPerson" xml:space="preserve">
+    <value>Está compartiendo una persona: </value>
+  </data>
+  <data name="SubtitleLabelProject" xml:space="preserve">
+    <value>Está compartiendo un proyecto: </value>
+  </data>
+  <data name="UserNotOwnActivity" xml:space="preserve">
+    <value>El usuario no es propietario, no puede compartir la actividad con otros usuarios.</value>
+  </data>
+  <data name="UserNotOwnKpi" xml:space="preserve">
+    <value>El usuario no es propietario, no puede compartir el KPI con otros usuarios.</value>
+  </data>
+  <data name="UserNotOwnPerson" xml:space="preserve">
+    <value>El usuario no es propietario, no puede compartir la persona con otros usuarios.</value>
+  </data>
+  <data name="UserNotOwnProject" xml:space="preserve">
+    <value>El usuario no es propietario, no puede compartir el proyecto con otros usuarios.</value>
+  </data>
+  <data name="UserPermissionsActivityLabel" xml:space="preserve">
+    <value>Usuarios que tienen permisos para esta actividad:</value>
+  </data>
+  <data name="UserPermissionsKpiLabel" xml:space="preserve">
+    <value>Usuarios que tienen permisos para este KPI:</value>
+  </data>
+  <data name="UserPermissionsPersonLabel" xml:space="preserve">
+    <value>Usuarios que tienen permisos para esta persona:</value>
+  </data>
+  <data name="UserPermissionsProjectLabel" xml:space="preserve">
+    <value>Usuarios que tienen permisos para este proyecto:</value>
   </data>
 </root>

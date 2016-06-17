@@ -249,4 +249,28 @@
   <data name="VerifiyDataFail" xml:space="preserve">
     <value>"It could not be verified if a record already exists with the same data."</value>
   </data>
+  <data name="ValueRequirePercentData" xml:space="preserve">
+    <value>"The value must be a number between 1 and 100"</value>
+  </data>
+  <data name="DeleteMeasurementError" xml:space="preserve">
+    <value>There was an error while deleting the measurement.</value>
+  </data>
+  <data name="GetKPIMeasurements" xml:space="preserve">
+    <value>There was an error getting the list of recorded measurements.</value>
+  </data>
+  <data name="ImageAlert" xml:space="preserve">
+    <value>The data already exists</value>
+  </data>
+  <data name="InsertMeasurementError" xml:space="preserve">
+    <value>There was an error, the data were not saved.</value>
+  </data>
+  <data name="ZeroKpiId" xml:space="preserve">
+    <value>The ID of KPI cannot be zero.</value>
+  </data>
+  <data name="ZeroMeasurementId" xml:space="preserve">
+    <value>The ID of measurement cannot be zero.</value>
+  </data>
+  <data name="ConfirmDeleteMeasurement" xml:space="preserve">
+    <value>return confirm('Are you sure to delete the measurement?')</value>
+  </data>
 </root>
