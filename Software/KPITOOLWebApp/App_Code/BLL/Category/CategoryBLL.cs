@@ -59,8 +59,8 @@ namespace Artexacta.App.Categories.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el listado de categorías.", exc);
-                throw exc;
+                log.Error("Error en GetCategories", exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorGetCategories);
             }
 
             return theList;
@@ -69,7 +69,7 @@ namespace Artexacta.App.Categories.BLL
         public static Category GetCategoryById(string categoryId)
         {
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             Category theData = null;
             try
@@ -84,8 +84,8 @@ namespace Artexacta.App.Categories.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía la categoría de id: " + categoryId, exc);
-                throw exc;
+                log.Error("Error en GetCategoryById para categoryId: " + categoryId, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorGetCategory);
             }
 
             return theData;
@@ -94,10 +94,10 @@ namespace Artexacta.App.Categories.BLL
         public static void InsertCategory(string categoryId, string name)
         {
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(Resources.Organization.MessageEmptyNameProject);
+                throw new ArgumentException(Resources.Categories.MessageEmptyNameCategory);
 
             try
             {
@@ -106,18 +106,18 @@ namespace Artexacta.App.Categories.BLL
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorCreateProject, exc);
-                throw exc;
+                log.Error("Error en InsertCategory para los datos categoryId: " + categoryId + " y name: " + name, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorCreateCategory);
             }
         }
 
         public static void UpdateCategory(string categoryId, string name)
         {
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(Resources.Organization.MessageEmptyNameProject);
+                throw new ArgumentException(Resources.Categories.MessageEmptyNameCategory);
 
             try
             {
@@ -126,15 +126,15 @@ namespace Artexacta.App.Categories.BLL
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorUpdateProject, exc);
-                throw exc;
+                log.Error("Error en UpdateCategory para los datos categoryId: " + categoryId + " y name: " + name, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorUpdateCategory);
             }
         }
 
         public static void DeleteCategory(string categoryId)
         {
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             try
             {
@@ -143,8 +143,8 @@ namespace Artexacta.App.Categories.BLL
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorDeleteProject, exc);
-                throw new Exception(Resources.Organization.MessageErrorDeleteProject);
+                log.Error("Error en DeleteCategory para categoryId: " + categoryId, exc);
+                throw new Exception(Resources.Categories.MessageErrorDeleteCategory);
             }
         }
 
@@ -170,7 +170,7 @@ namespace Artexacta.App.Categories.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetCategoriesByKpiId para kpiId: " + kpiId, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de categorías del KPI.");
+                throw new ArgumentException(Resources.Categories.MessageErrorGetCategoriesByKpi);
             }
 
             return theList;

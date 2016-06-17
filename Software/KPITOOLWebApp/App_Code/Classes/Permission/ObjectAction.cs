@@ -29,35 +29,35 @@ namespace Artexacta.App.ObjectAction
                 switch (this.ObjectActionID)
                 {
                     case "OWN":
-                        name = "Owner";
+                        name = Resources.ShareData.ObjectActionOwn;
                         break;
 
                     case "MAN_PROJECT":
-                        name = "Manage Project";
+                        name = Resources.ShareData.ObjectActionProject;
                         break;
 
                     case "MAN_ACTIVITY":
-                        name = "Manage Activity";
+                        name = Resources.ShareData.ObjectActionActivity;
                         break;
 
                     case "MAN_PEOPLE":
-                        name = "Manage People";
+                        name = Resources.ShareData.ObjectActionPeople;
                         break;
 
                     case "MAN_KPI":
-                        name = "Manage KPI";
+                        name = Resources.ShareData.ObjectActionKpi;
                         break;
 
                     case "VIEW_KPI":
-                        name = "View";
+                        name = Resources.ShareData.ObjectActionViewKpi;
                         break;
 
                     case "ENTER_DATA":
-                        name = "View and enter data";
+                        name = Resources.ShareData.ObjectActionEnterData;
                         break;
 
                     default:
-                        name = "[ Select a permission ]";
+                        name = Resources.ShareData.ObjectActionDefault;
                         break;
                 }
                 return name;

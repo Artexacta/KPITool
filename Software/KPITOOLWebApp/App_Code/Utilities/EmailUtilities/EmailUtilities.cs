@@ -30,7 +30,7 @@ namespace Artexacta.App.Utilities.Email
             if (e.Cancelled)
             {
                 string cancelled = string.Format("[{0}] Send canceled.", subject);
-                log.Warn("The email ssend was cancelled: " + cancelled);
+                log.Warn("The email send was cancelled: " + cancelled);
             }
             if (e.Error != null)
             {
@@ -53,26 +53,20 @@ namespace Artexacta.App.Utilities.Email
         /// <param name="message">The email text (in HTML format)</param>
         static public void SendEmail(string to, string from, string subject, string message)
         {
-            //Obtener el mail para enviar la copia oculta
-            string emailBCC = "";
+            if (String.IsNullOrEmpty(to) || String.IsNullOrEmpty(from) ||
+                String.IsNullOrEmpty(subject) || String.IsNullOrEmpty(message))
+            {
+                log.Error("Invalid parameters.  One or more parameters was null or empty");
+                throw new ArgumentException("Invalid parameters.  One or more parameters was null or empty");
+            }
 
-            try
-            {
-                emailBCC = ConfigurationManager.AppSettings.Get("emailCopyClient");
-            }
-            catch (Exception q)
-            {
-                log.Error("Error al obtener el email de copia oculta.", q);
-            }
+            log.Debug("Begin sending email");
 
             System.Net.Mail.MailMessage emailMessage = new System.Net.Mail.MailMessage();
             emailMessage.From = new System.Net.Mail.MailAddress(from, Artexacta.App.Configuration.Configuration.GetReturnEmailName());
             emailMessage.IsBodyHtml = true;
             emailMessage.Subject = subject;
             emailMessage.To.Add(to);
-
-            if (!string.IsNullOrEmpty(emailBCC))
-                emailMessage.Bcc.Add(emailBCC);
 
             string logoMessage = "";
             try
@@ -83,8 +77,8 @@ namespace Artexacta.App.Utilities.Email
                 string file = appPath + "Images\\logo.png";
                 LinkedResource logo = new LinkedResource(file);
                 logo.ContentId = "companylogo";
-                int imageHeight = 62;
-                int imageWidth = 72;
+                int imageHeight = 44;
+                int imageWidth = 120;
 
                 logoMessage = logoMessage + "<table>";
                 logoMessage = logoMessage + "<tr>";
@@ -122,10 +116,13 @@ namespace Artexacta.App.Utilities.Email
                 System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
                 smtp.SendCompleted += new SendCompletedEventHandler(SmtpClient_OnCompleted);
                 smtp.Send(emailMessage);
+
+                log.Debug("Finished sending email");
             }
             catch (Exception q)
             {
                 log.Error("No se pudo enviar el email", q);
+                throw q;
             }
         }
 
@@ -175,27 +172,22 @@ namespace Artexacta.App.Utilities.Email
             if (string.IsNullOrEmpty(filePath))
             {
                 log.Error("Empty file path in call to SendEmailPath");
-                return;
+                throw new ArgumentException("Empty file path in call to SendEmailPath");
             }
             if (string.IsNullOrEmpty(subject))
             {
                 log.Error("Empty subject in call to SendEmailPath");
-                return;
+                throw new ArgumentException("Empty subject in call to SendEmailPath");
             }
             if (string.IsNullOrEmpty(toName))
             {
-                log.Error("Empty To Name in call to SendEmailPath for filePath: " + filePath + " and subject: " + subject);
-                return;
+                log.Error("Empty To Name in call to SendEmailPath");
+                throw new ArgumentException("Empty To Name in call to SendEmailPath");
             }
             if (string.IsNullOrEmpty(toEmail))
             {
                 log.Error("Empty To Email in call to SendEmailPath");
-                return;
-            }
-            if (parameters == null)
-            {
-                log.Error("Null parameters in call to SendEmailPath");
-                return;
+                throw new ArgumentException("Empty To Email in call to SendEmailPath");
             }
 
             if (log.IsDebugEnabled)
@@ -213,11 +205,10 @@ namespace Artexacta.App.Utilities.Email
             }
 
             string textToSend = "";
-            string baseDirectory = "";
             // Read the file to send
             try
             {
-                baseDirectory = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory.ToString();
                 if (!string.IsNullOrEmpty(baseDirectory))
                 {
                     baseDirectory = baseDirectory + filePath;
@@ -234,14 +225,15 @@ namespace Artexacta.App.Utilities.Email
             }
             catch (Exception q)
             {
-                log.Error("Failed to read file to mail form path " + baseDirectory, q);
+                log.Error("Failed to read file to mail form path " + filePath, q);
+                throw q;
             }
 
             textToSend = textToSend.Trim();
             if (textToSend.Length <= 0)
             {
                 log.Warn("Empty text file to send or file does not exist: " + filePath);
-                return;
+                throw new ArgumentException("Empty text file to send or file does not exist: " + filePath);
             }
 
             // Now for every substitution parameter, perform the substitution
@@ -265,6 +257,7 @@ namespace Artexacta.App.Utilities.Email
             catch (Exception q)
             {
                 log.Warn("Failed to send email message", q);
+                throw q;
             }
         }
 

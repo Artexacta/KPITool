@@ -110,11 +110,9 @@ namespace Artexacta.App.User.BLL
 
             List<User> theList = new List<User>();
             User theUser = null;
-
             try
             {
                 UserDS.UserDataTable table = theAdapter.GetUsersForSearch(whereSql);
-
                 if (table != null && table.Rows.Count > 0)
                 {
                     foreach (UserDS.UserRow row in table.Rows)
@@ -124,10 +122,10 @@ namespace Artexacta.App.User.BLL
                     }
                 }
             }
-            catch (Exception q)
+            catch (Exception exc)
             {
-                log.Error("An error was ocurred while getting list of Users from data base", q);
-                return null;
+                log.Error("Error en GetUsersListForSearch para whereSql: " + whereSql, exc);
+                throw new ArgumentException(Resources.UserData.MessageErrorGetUsersList);
             }
             return theList;
         }
@@ -226,20 +224,17 @@ namespace Artexacta.App.User.BLL
         public static bool DeleteUserRecord(int UserId)
         {
             if (UserId <= 0)
-                throw new ArgumentException("Error en el código de usuario a eliminar.");
-
-            UserTableAdapter localAdapter = new UserTableAdapter();
+                throw new ArgumentException(Resources.UserData.MessageZeroUserId);
 
             try
             {
-                User theUser = UserBLL.GetUserById(UserId);
-
+                UserTableAdapter localAdapter = new UserTableAdapter();
                 localAdapter.DeleteUserRecord(UserId);
             }
-            catch (Exception q)
+            catch (Exception exc)
             {
-                log.Error("An error was ocurred while deleting user", q);
-                throw q;
+                log.Error("Error en DeleteUserRecord para userId: " + UserId, exc);
+                throw new ArgumentException(Resources.UserData.MessageErrorDeleteUser);
             }
 
             return true;

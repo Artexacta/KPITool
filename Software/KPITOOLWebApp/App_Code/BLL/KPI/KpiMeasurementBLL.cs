@@ -102,7 +102,7 @@ namespace Artexacta.App.KPI.BLL
         public static List<KPIMeasurements> GetKPIMeasurementCategoriesByKpiId(int kpiId)
         {
             if (kpiId <= 0)
-                throw new ArgumentException("El ID del KPI no puede ser cero.");
+                throw new ArgumentException(Resources.ImportData.ZeroKpiId);
 
             List<KPIMeasurements> theList = new List<KPIMeasurements>();
             KPIMeasurements theData = null;
@@ -124,7 +124,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetKPIMeasurementCategoriesByKpiId para kpiId: " + kpiId, exc);
-                throw exc;
+                throw new ArgumentException(Resources.ImportData.GetKPIMeasurements);
             }
 
             return theList;
@@ -133,7 +133,7 @@ namespace Artexacta.App.KPI.BLL
         public static List<KPIMeasurements> GetKPIMeasurementCategoriesTimeByKpiId(int kpiId)
         {
             if (kpiId <= 0)
-                throw new ArgumentException("El ID del KPI no puede ser cero.");
+                throw new ArgumentException(Resources.ImportData.ZeroKpiId);
 
             List<KPIMeasurements> theList = new List<KPIMeasurements>();
             KPIMeasurements theData = null;
@@ -155,7 +155,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetKPIMeasurementCategoriesByKpiId para kpiId: " + kpiId, exc);
-                throw exc;
+                throw new ArgumentException(Resources.ImportData.GetKPIMeasurements);
             }
 
             return theList;
@@ -164,7 +164,7 @@ namespace Artexacta.App.KPI.BLL
         public static void InsertKpiMeasuerementImported(int kpiId, List<KPIMeasurements> theList, string type)
         {
             if (kpiId <= 0)
-                throw new ArgumentException("El ID del KPI no puede ser cero.");
+                throw new ArgumentException(Resources.ImportData.ZeroKpiId);
 
             using (System.Transactions.TransactionScope transaction = new System.Transactions.TransactionScope())
             {
@@ -200,7 +200,7 @@ namespace Artexacta.App.KPI.BLL
                 {
                     log.Error("Error en InsertKpiMeasuerementImported para kpiId: " + kpiId, exc);
                     transaction.Dispose();
-                    throw new Exception("There was an error, the data were not saved.");
+                    throw new Exception(Resources.ImportData.InsertMeasurementError);
                 }           
             }
         }
@@ -208,7 +208,7 @@ namespace Artexacta.App.KPI.BLL
         public static bool DeleteKpiMeasuerement(int measurementId)
         {
             if (measurementId <= 0)
-                throw new ArgumentException("El ID del dato no puede ser <= 0.");
+                throw new ArgumentException(Resources.ImportData.ZeroMeasurementId);
 
             try
             {
@@ -219,7 +219,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en DeleteKpiMeasuerement para kpiMeasurementId: " + measurementId, exc);
-                throw new ArgumentException("Ocurrió un error al eliminar el dato.");
+                throw new ArgumentException(Resources.ImportData.DeleteMeasurementError);
             }
         }
 
