@@ -20,6 +20,12 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -80,7 +86,7 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
 
         if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
-            SystemMessages.DisplaySystemWarningMessage("The user is not owner, cannot view the summary information.");
+            SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
             Response.Redirect("~/MainPage.aspx");
         }
 
@@ -92,32 +98,14 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
         }
         catch (Exception exc)
         {
-            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            log.Error(exc.Message);
+            SystemMessages.DisplaySystemErrorMessage(Resources.DataDetails.MessageErrorGetOrganization);
             Response.Redirect("~/MainPage.aspx");
         }
 
         if (theData != null)
         {
             TitleLabel.Text = theData.Name;
-        }
-    }
-
-    protected void AreasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.DataItem is Area)
-        {
-            Area objArea = (Area)e.Row.DataItem;
-
-            //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-            //if (img == null)
-            //    return;
-            //List<Kpi> kpis = objArea.Kpis.Values.ToList();
-            //    Kpi objKpi = kpis[0];
-            //    if (objKpi.KpiValues.Count > 0)
-            //    {
-            //        img.KpiId = objKpi.ObjectId;
-            //        img.Visible = true;
-            //    }
         }
     }
 
@@ -136,17 +124,6 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
 
             HyperLink viewButton = (HyperLink)e.Row.FindControl("ViewButton");
             viewButton.NavigateUrl = "~/Project/ProjectDetails.aspx?ID=" + theData.ProjectID;
-
-            //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-            //if (img == null)
-            //    return;
-            //    List<Kpi> kpis = objProject.Kpis.Values.ToList();
-            //    Kpi objKpi = kpis[0];
-            //    if (objKpi.KpiValues.Count > 0)
-            //    {
-            //        img.KpiId = objKpi.ObjectId;
-            //        img.Visible = true;
-            //    }
         }
     }
 
@@ -177,17 +154,6 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
 
             HyperLink viewButton = (HyperLink)e.Row.FindControl("ViewButton");
             viewButton.NavigateUrl = "~/Activity/ActivityDetails.aspx?ID=" + theData.ActivityID;
-
-            //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-            //if (img == null)
-            //    return;
-            //List<Kpi> kpis = objActivity.Kpis.Values.ToList();
-            //        Kpi objKpi = kpis[0];
-            //        if (objKpi.KpiValues.Count > 0)
-            //        {
-            //            img.KpiId = objKpi.ObjectId;
-            //            img.Visible = true;
-            //        }
         }
     }
 
@@ -206,17 +172,6 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
 
             HyperLink viewButton = (HyperLink)e.Row.FindControl("ViewButton");
             viewButton.NavigateUrl = "~/People/PersonDetails.aspx?ID=" + theData.PersonId;
-
-            //UserControls_FRTWB_KpiImage img = (UserControls_FRTWB_KpiImage)e.Row.FindControl("ImageOfKpi");
-            //if (img == null)
-            //    return;
-            //    List<Kpi> kpis = objProject.Kpis.Values.ToList();
-            //    Kpi objKpi = kpis[0];
-            //    if (objKpi.KpiValues.Count > 0)
-            //    {
-            //        img.KpiId = objKpi.ObjectId;
-            //        img.Visible = true;
-            //    }
         }
     }
 
@@ -286,7 +241,7 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
         if (e.Exception != null)
         {
             e.ExceptionHandled = true;
-            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
+            SystemMessages.DisplaySystemErrorMessage(e.Exception.Message);
         }
     }
 

@@ -19,6 +19,12 @@ public partial class People_SharePerson : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -82,7 +88,7 @@ public partial class People_SharePerson : System.Web.UI.Page
 
         if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
-            SystemMessages.DisplaySystemWarningMessage("The user is not owner, cannot share the person with other users.");
+            SystemMessages.DisplaySystemWarningMessage(Resources.ShareData.UserNotOwnPerson);
             Response.Redirect("~/People/PeopleList.aspx");
         }
 
@@ -139,6 +145,7 @@ public partial class People_SharePerson : System.Web.UI.Page
                 try
                 {
                     PermissionObjectBLL.DeleteObjectPublic(PermissionObject.ObjectType.PERSON.ToString(), Convert.ToInt32(PersonIdHiddenField.Value));
+                    SystemMessages.DisplaySystemMessage(Resources.ShareData.DeleteObjectPublicOk);
                 }
                 catch (Exception exc)
                 {
@@ -151,6 +158,7 @@ public partial class People_SharePerson : System.Web.UI.Page
                 try
                 {
                     PermissionObjectBLL.DeleteObjectPermissions(PermissionObject.ObjectType.PERSON.ToString(), Convert.ToInt32(PersonIdHiddenField.Value), userName);
+                    SystemMessages.DisplaySystemMessage(Resources.ShareData.DeleteObjectPermissionsOk);
                 }
                 catch (Exception exc)
                 {
@@ -196,7 +204,7 @@ public partial class People_SharePerson : System.Web.UI.Page
             try
             {
                 PermissionObjectBLL.InsertObjectPublic(PermissionObject.ObjectType.PERSON.ToString(), Convert.ToInt32(PersonIdHiddenField.Value), objectActionList);
-                SystemMessages.DisplaySystemMessage("Se registró correctamente los permisiones seleccionados para todos los usuarios.");
+                SystemMessages.DisplaySystemMessage(Resources.ShareData.InsertObjectPublicOk);
             }
             catch (Exception exc)
             {
@@ -210,7 +218,7 @@ public partial class People_SharePerson : System.Web.UI.Page
             {
                 PermissionObjectBLL.InsertObjectPermissions(PermissionObject.ObjectType.PERSON.ToString(),
                     Convert.ToInt32(PersonIdHiddenField.Value), Convert.ToInt32(UserInvitedIdHiddenField.Value), objectActionList);
-                SystemMessages.DisplaySystemMessage("Se registró correctamente los permisiones seleccionados para el usuario " + UserTextBox.Text);
+                SystemMessages.DisplaySystemMessage(Resources.ShareData.InsertObjectPermissionsOk + UserTextBox.Text);
             }
             catch (Exception exc)
             {

@@ -119,7 +119,7 @@
                                                 <ItemTemplate>
                                                     <asp:Label ID="DateLabel" runat="server" Text='<%# Eval("DateForDisplay") %>' />
                                                     <span class="p-t-5 p-l-5 text-warning">
-                                                        <asp:Label ID="ImageUpdate" runat="server" Text="<i class='fa fa-warning'></i>" />
+                                                        <asp:Label ID="ImageUpdate" runat="server" Text="<i class='fa fa-warning'></i>" ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
                                                     </span>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
@@ -180,7 +180,7 @@
                                                     <asp:TextBox ID="ValueTextBox" runat="server" CssClass="form-control dataText" TextMode="Number" />
                                                 </div>
                                                 <div class="p-t-5 text-warning">
-                                                    <asp:Label ID="ImageUpdate" runat="server" Text="<i class='fa fa-warning'></i>" style="display: none; " />
+                                                    <asp:Label ID="ImageUpdate" runat="server" Text="<i class='fa fa-warning'></i>" style="display: none; " ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -217,7 +217,7 @@
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="p-t-5 text-warning">
-                                                    <asp:Label ID="ImageTimeUpdate" runat="server" Text="<i class='fa fa-warning'></i>" style="display: none; " />
+                                                    <asp:Label ID="ImageTimeUpdate" runat="server" Text="<i class='fa fa-warning'></i>" style="display: none; " ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -298,7 +298,7 @@
                                     <asp:TemplateField HeaderText="<%$ Resources:ImportData, DeleteColumn %>" ItemStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="DeleteButton" runat="server" Text="<i class='fa fa-minus-circle'></i>" CommandName="DeleteData" ToolTip="Delete" 
-                                                CssClass="text-danger" CommandArgument='<%# Eval("MeasurementID") %>' OnClientClick="return confirm('¿Are you sure to delete the measurement?')" />
+                                                CssClass="text-danger" CommandArgument='<%# Eval("MeasurementID") %>' OnClientClick="<%$ Resources:ImportData, ConfirmDeleteMeasurement %>" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField HeaderText="<%$ Resources:ImportData, DateColumn %>" DataField="DateForDisplay" ItemStyle-Width="200px" />
@@ -336,13 +336,16 @@
             if (value != "") {
                 var regexInt = new RegExp('^[0-9]{1,21}$');
                 var regexDecimal = new RegExp('^[0-9]{1,17}([\.\,][0-9]{1,3})*$');
+                var regexPercent = new RegExp('^([1-9]{1,2}([\.\,][0-9]{1,3})*|100)$');
 
                 if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "INT" && !regexInt.test(value)) {
                     $("#" + valueRequiredFileValidator).text(<%= Resources.ImportData.ValueRequireIntegerData %>);
 
-                } else if ($("#<%= UnitIdHiddenField.ClientID %>").val() != "TIME" && $("#<%= UnitIdHiddenField.ClientID %>").val() != "INT" && !regexDecimal.test(value)) {
+                } else if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "PERCENT" && !regexPercent.test(value)) {
+                    $("#" + valueRequiredFileValidator).text(<%= Resources.ImportData.ValueRequirePercentData %>);
+
+                } else if (($("#<%= UnitIdHiddenField.ClientID %>").val() == "DECIMAL" || $("#<%= UnitIdHiddenField.ClientID %>").val() == "MONEY") && !regexDecimal.test(value)) {
                     $("#" + valueRequiredFileValidator).text(<%= Resources.ImportData.ValueRequireDecimalData %>);
-                    
 
                 } else {
                     $("#" + valueRequiredFileValidator).text("");
