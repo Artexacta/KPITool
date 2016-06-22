@@ -178,7 +178,7 @@
     <value>You can create an organization by clicking</value>
   </data>
   <data name="MessageConfirmDelete" xml:space="preserve">
-    <value>Are you sure you want to delete selected Organization?</value>
+    <value>Please confirm that you wish to delete the selected organization. Note that organization that are deleted are moved to the Trash and you can recover the deleted organization for up to 30 days.</value>
   </data>
   <data name="MessageCreateOk" xml:space="preserve">
     <value>The organization was created successfuly.</value>
@@ -213,17 +213,11 @@
   <data name="MessageErrorCreateArea" xml:space="preserve">
     <value>Error to create the area.</value>
   </data>
-  <data name="MessageErrorCreateProject" xml:space="preserve">
-    <value>Error to create the project.</value>
-  </data>
   <data name="MessageErrorDelete" xml:space="preserve">
     <value>Error to delete the organization.</value>
   </data>
   <data name="MessageErrorDeleteArea" xml:space="preserve">
     <value>Error to delete the area.</value>
-  </data>
-  <data name="MessageErrorDeleteProject" xml:space="preserve">
-    <value>Error to delete the project.</value>
   </data>
   <data name="MessageErrorObtainOrganization" xml:space="preserve">
     <value>Error to obtain the organization data.</value>
@@ -236,9 +230,6 @@
   </data>
   <data name="MessageErrorUpdateArea" xml:space="preserve">
     <value>Error to update the area.</value>
-  </data>
-  <data name="MessageErrorUpdateProject" xml:space="preserve">
-    <value>Error to update the project.</value>
   </data>
   <data name="MessageNameExists" xml:space="preserve">
     <value>The name is already exists.</value>
@@ -288,6 +279,9 @@ At least one organization is needed and you won't be able to create evaluations,
   </data>
   <data name="TitleKPIName" xml:space="preserve">
     <value>KPI Name</value>
+  </data>
+  <data name="TitleOrganization" xml:space="preserve">
+    <value>Organization</value>
   </data>
   <data name="TitleOrganizationName" xml:space="preserve">
     <value>Organization Name</value>

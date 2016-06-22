@@ -180,10 +180,11 @@ namespace Artexacta.App.Organization.BLL
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
             OrganizationTableAdapter localAdapter = new OrganizationTableAdapter();
+            string userName = HttpContext.Current.User.Identity.Name;
 
             try
             {
-                localAdapter.DeleteOrganization(organizationId);
+                localAdapter.DeleteOrganization(organizationId,userName);
             }
             catch (Exception exc)
             {

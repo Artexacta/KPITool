@@ -102,11 +102,12 @@ public partial class Project_ProjectForm : System.Web.UI.Page
 
             bool readOnly = false;
 
-            if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+            if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN") || i.ObjectActionID.Equals("MANAGE_PROJECT")))
             {
                 readOnly = true;
             }
-            
+
+            OrganizationControl.ReadOnly = readOnly;
 
             //Update
             Project theData = null;
@@ -125,12 +126,11 @@ public partial class Project_ProjectForm : System.Web.UI.Page
                 ProjectNameTextBox.Text = theData.Name;
                 OrganizationControl.OrganizationId = theData.OrganizationID;
                 OrganizationControl.AreaId = theData.AreaID;
-
-                if (readOnly)
-                {
-                    ProjectNameTextBox.Enabled = false;
-                }
+                ProjectNameTextBox.Enabled = !readOnly;    
             }
+
+            SaveButton.Visible = !readOnly;
+            RequiredLabel.Visible = !readOnly;
         }
     }
 

@@ -644,7 +644,6 @@ namespace Artexacta.App.KPI.BLL
                             }
                         }
 
-                        
                         // If the KPI has categories and targets, create them
                         int firstDelete = 0;
                         if (theKpi.AllowCategories && theTargetCategories.Count > 0)
@@ -670,8 +669,8 @@ namespace Artexacta.App.KPI.BLL
 
                                 command5.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
                                 command5.Parameters.Add("@targetID", System.Data.SqlDbType.Int).Value = theItem.TargetID;
-                                command5.Parameters.Add("@items", System.Data.SqlDbType.VarChar,1000).Value = theItem.Detalle;
-                                command5.Parameters.Add("@categories", System.Data.SqlDbType.VarChar,1000).Value = theItem.Categories;
+                                command5.Parameters.Add("@items", System.Data.SqlDbType.VarChar, 1000).Value = theItem.Detalle;
+                                command5.Parameters.Add("@categories", System.Data.SqlDbType.VarChar, 1000).Value = theItem.Categories;
                                 command5.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theItem.Target;
 
                                 command5.ExecuteNonQuery();
@@ -688,6 +687,22 @@ namespace Artexacta.App.KPI.BLL
             {
                 log.Error("Failed to create a KPI", ex);
                 throw ex;
+            }
+        }
+
+        public static void DeleteKPI(int kpiId)
+        {
+            KPIDSTableAdapters.KPITableAdapter adapter = new KPITableAdapter();
+
+            string username = HttpContext.Current.User.Identity.Name;
+            try
+            {
+                adapter.DeleteKPI(kpiId, username);
+            }
+            catch (Exception ex)
+            {
+                log.Error(Resources.Kpi.MessageErrorDelete, ex);
+                throw new Exception(Resources.Kpi.MessageErrorDelete);
             }
         }
 
@@ -755,6 +770,6 @@ namespace Artexacta.App.KPI.BLL
 
             return progress.Value;
         }
-        
+
     }
 }

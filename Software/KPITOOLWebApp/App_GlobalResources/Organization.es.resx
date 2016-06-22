@@ -178,7 +178,7 @@
     <value>Usted puede crear una organización haciendo click en </value>
   </data>
   <data name="MessageConfirmDelete" xml:space="preserve">
-    <value>¿Está seguro de eliminar la Organización seleccionada?</value>
+    <value>Por favor confirme que desea eliminar la organización seleccionada. Notar que la organización eliminada será movida al basurero y podrá recuperar hasta por 30 días.</value>
   </data>
   <data name="MessageCreateOk" xml:space="preserve">
     <value>La organización se creó correctamente.</value>
@@ -213,17 +213,11 @@
   <data name="MessageErrorCreateArea" xml:space="preserve">
     <value>Ocurrió un error al crear el area.</value>
   </data>
-  <data name="MessageErrorCreateProject" xml:space="preserve">
-    <value>Ocurrió un error al crear el proyecto.</value>
-  </data>
   <data name="MessageErrorDelete" xml:space="preserve">
     <value>Ocurrió un error al eliminar la organización.</value>
   </data>
   <data name="MessageErrorDeleteArea" xml:space="preserve">
     <value>Ocurrió un error al eliminar el área.</value>
-  </data>
-  <data name="MessageErrorDeleteProject" xml:space="preserve">
-    <value>Ocurrió un error al eliminar el proyecto.</value>
   </data>
   <data name="MessageErrorObtainOrganization" xml:space="preserve">
     <value>Ocurrió un error al obtener los datos de la organización.</value>
@@ -236,9 +230,6 @@
   </data>
   <data name="MessageErrorUpdateArea" xml:space="preserve">
     <value>Ocurrió un error al actualizar el área.</value>
-  </data>
-  <data name="MessageErrorUpdateProject" xml:space="preserve">
-    <value>Ocurrió un error al actualizar el proyecto.</value>
   </data>
   <data name="MessageNameExists" xml:space="preserve">
     <value>El nombre de la organización ya existe.</value>
@@ -288,6 +279,9 @@ Se necesita al menos una organización para que pueda crear evaluaciones, proyec
   </data>
   <data name="TitleKPIName" xml:space="preserve">
     <value>Nombre del KPI</value>
+  </data>
+  <data name="TitleOrganization" xml:space="preserve">
+    <value>Organización</value>
   </data>
   <data name="TitleOrganizationName" xml:space="preserve">
     <value>Nombre de la Organización</value>

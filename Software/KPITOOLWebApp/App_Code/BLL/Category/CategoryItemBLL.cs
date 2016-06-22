@@ -117,7 +117,7 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorCreateProject, exc);
+                log.Error("Error to insert the category.", exc);
                 throw exc;
             }
         }
@@ -140,7 +140,7 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorUpdateProject, exc);
+                log.Error("Error to update the category item.", exc);
                 throw exc;
             }
         }
@@ -160,8 +160,8 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorDeleteProject, exc);
-                throw new Exception(Resources.Organization.MessageErrorDeleteProject);
+                log.Error("Error to delete the category", exc);
+                throw new Exception("Error to delete the category");
             }
         }
 

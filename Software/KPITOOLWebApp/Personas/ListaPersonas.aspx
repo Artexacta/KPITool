@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Lista de Personas" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
+﻿<%@ Page Title="<% $Resources: People, LabelPeople %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="ListaPersonas.aspx.cs" Inherits="Personas_ListaPersonas" %>
 
 <%@ Register Src="../UserControls/SearchUserControl/SearchControl.ascx" TagName="SearchControl" TagPrefix="uc1" %>

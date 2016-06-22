@@ -116,6 +116,27 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
         set { KPIIdHiddenField.Value = value.ToString(); }
     }
 
+    public bool ReadOnly
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(ReadOnlyHiddenField.Value))
+                return false;
+            else
+                try
+                {
+                    return Convert.ToBoolean(ReadOnlyHiddenField.Value);
+                }
+                catch 
+                {
+                    return false;
+                }
+        }
+        set
+        {
+            ReadOnlyHiddenField.Value = value.ToString();
+        }
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -206,6 +227,9 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
 
                 OrganizationId = theData.OrganizationID;
                 AreaId = theData.AreaID;
+
+                KPIProjectText.Enabled = !ReadOnly;
+                ProjectTextBox.Enabled = !ReadOnly;
             }
         }
     }
@@ -242,6 +266,7 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 OrganizationId = theData.OrganizationID;
                 AreaId = theData.AreaID;
                 ProjectId = theData.ProjectID;
+                KPIActivityText.Enabled = !ReadOnly;
             }
         }
     }
@@ -278,6 +303,7 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
 
                 OrganizationId = theData.OrganizationId;
                 AreaId = theData.AreaId;
+                KPIPeopleText.Enabled = !ReadOnly;
             }
         }
     }
@@ -298,6 +324,8 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
             if (theData != null)
             {
                 OrganizationTextBox.Text = theData.Name;
+                OrganizationTextBox.Enabled = !ReadOnly;
+                OrganizationRequired.Visible = !ReadOnly;
             }
         }
     }
@@ -327,6 +355,9 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                     AreaTextBox.Text = theData.Name;
             }
         }
+
+        KPIActivityText.Enabled = !ReadOnly;
+        AreaTextBox.Enabled = !ReadOnly;
     }
 
     private void LoadKPI()

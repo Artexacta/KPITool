@@ -49,7 +49,7 @@ namespace Artexacta.App.Activities.BLL
         public static Activity GetActivityById(int activityId)
         {
             if (activityId <= 0)
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Activity.MessageErrorActivityID);
 
             Activity theData = null;
             try
@@ -64,8 +64,8 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía la actividad de id: " + activityId, exc);
-                throw exc;
+                log.Error(Resources.Activity.MessageErrorGetActivity + " id: " + activityId, exc);
+                throw new Exception(Resources.Activity.MessageErrorGetActivity);
             }
 
             return theData;
@@ -93,8 +93,8 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Error en GetActivitiesByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de actividades de la organización.");
+                log.Error(Resources.Activity.MessageErrorGetForOrganization + " para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException(Resources.Activity.MessageErrorGetForOrganization);
             }
 
             return theList;
@@ -125,8 +125,8 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía las actividades de la organización.", exc);
-                throw exc;
+                log.Error(Resources.Activity.MessageErrorActivityList, exc);
+                throw new Exception(Resources.Activity.MessageErrorActivityList);
             }
 
             return theList;
@@ -153,8 +153,10 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                throw exc;
+                log.Error(Resources.Activity.MessageErrorActivityList + " for autocomplete.", exc);
+                throw new Exception(Resources.Activity.MessageErrorActivityList);
             }
+
             return theList;
         }
 
@@ -180,8 +182,8 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Error en GetActivitiesByProject para projectId: " + projectId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de actividades del proyecto.");
+                log.Error(Resources.Activity.MessageErrorGetForProject + " para projectId: " + projectId.ToString() + " y userName: " + userName, exc);
+                throw new ArgumentException(Resources.Activity.MessageErrorGetForProject);
             }
 
             return theList;
@@ -193,7 +195,7 @@ namespace Artexacta.App.Activities.BLL
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
             if (string.IsNullOrEmpty(theClass.Name))
-                throw new ArgumentException("The name of activity cannot be empty.");
+                throw new ArgumentException(Resources.Activity.MessageNameEmpty);
 
             ActivitiesTableAdapter localAdapter = new ActivitiesTableAdapter();
 
@@ -206,14 +208,14 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Error to create the activity", exc);
-                throw new Exception("Error to create the activity");
+                log.Error(Resources.Activity.MessageErrorCreate, exc);
+                throw new Exception(Resources.Activity.MessageErrorCreate);
             }
 
             if ((int)activityId <= 0)
             {
-                log.Error("Error to create the activity");
-                throw new ArgumentException("Error to create the activity");
+                log.Error(Resources.Activity.MessageErrorCreate);
+                throw new ArgumentException(Resources.Activity.MessageErrorCreate);
             }
 
             return (int)activityId;
@@ -225,7 +227,7 @@ namespace Artexacta.App.Activities.BLL
                 throw new ArgumentException(Resources.Organization.MessageZeroOrganizationId);
 
             if (string.IsNullOrEmpty(theClass.Name))
-                throw new ArgumentException("The name of activity cannot be empty.");
+                throw new ArgumentException(Resources.Activity.MessageNameEmpty);
 
             ActivitiesTableAdapter localAdapter = new ActivitiesTableAdapter();
 
@@ -237,8 +239,8 @@ namespace Artexacta.App.Activities.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Error to update the activity", exc);
-                throw new Exception("Error to update the activity");
+                log.Error(Resources.Activity.MessageErrorUpdate, exc);
+                throw new Exception(Resources.Activity.MessageErrorUpdate);
             }
         }
 
@@ -248,15 +250,16 @@ namespace Artexacta.App.Activities.BLL
                 throw new ArgumentException(Resources.Organization.MessageZeroActivityId);
 
             ActivitiesTableAdapter localAdapter = new ActivitiesTableAdapter();
+            string username = HttpContext.Current.User.Identity.Name;
 
             try
             {
-                localAdapter.DeleteActivity(activityID);
+                localAdapter.DeleteActivity(activityID, username);
             }
             catch (Exception exc)
             {
-                log.Error("Error to update the activity", exc);
-                throw new Exception("Error to update the activity");
+                log.Error(Resources.Activity.MessageErrorDelete, exc);
+                throw new Exception(Resources.Activity.MessageErrorDelete);
             }
         }
     }

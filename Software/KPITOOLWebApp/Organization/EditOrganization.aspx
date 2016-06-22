@@ -1,4 +1,4 @@
-﻿<%@ Page Title="<% $Resources: Organization, LabelEditOrganization%>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="EditOrganization.aspx.cs" Inherits="Organization_EditOrganization" %>
+﻿<%@ Page Title="<% $Resources: Organization, TitleOrganizations %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="EditOrganization.aspx.cs" Inherits="Organization_EditOrganization" %>
 
 <%@ Register Src="../UserControls/FRTWB/AddDataControl.ascx" TagName="AddDataControl" TagPrefix="uc1" %>
 

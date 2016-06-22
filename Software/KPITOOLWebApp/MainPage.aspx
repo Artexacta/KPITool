@@ -24,7 +24,8 @@
                 <div class="tile">
                     <div class="t-header">
                         <div class="th-title">
-                            <asp:Literal ID="Literal1" runat="server" Text="<% $Resources: Organization, TitleOrganizations %>"></asp:Literal></div>
+                            <asp:Literal ID="Literal1" runat="server" Text="<% $Resources: Organization, TitleOrganizations %>"></asp:Literal>
+                        </div>
                     </div>
                     <div class="t-body tb-padding">
                         <div class="col-sm-6">
@@ -41,10 +42,13 @@
                                 Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                                 DisplayHelp="true"
                                 DisplayContextualHelp="true"
+                                AdvancedSearchForm="~/UserControls/AdvancedSearch/OrganizationAdvancedSearch.ascx"
                                 CssSearch="CSearch"
                                 CssSearchHelp="CSearchHelpPanel"
                                 CssSearchError="CSearchErrorPanel"
-                                SavedSearches="true" SavedSearchesID="OrgSavedSearch"
+                                CssSearchAdvanced="CSearch_Advanced_Panel"
+                                SavedSearches="true"
+                                SavedSearchesID="OrgSavedSearch"
                                 ImageHelpUrl="Images/Neutral/Help.png"
                                 ImageErrorUrl="~/images/exclamation.png" />
                         </div>
@@ -85,7 +89,7 @@
                                 </div>
                                 <div class="row m-b-15">
                                     <asp:Panel runat="server" ID="emptyMessage" class="col-md-8 col-md-offset-4 m-t-5" Visible="false">
-                                        <asp:Label ID="Label1" runat="server" Text="<% $Resources: Organization, MessageNoObjects %>"></asp:Label> 
+                                        <asp:Label ID="Label1" runat="server" Text="<% $Resources: Organization, MessageNoObjects %>"></asp:Label>
                                         <i class="zmdi zmdi-plus-circle-o" id=""></i>
                                         <asp:Label ID="Label2" runat="server" Text="<% $resources: Organization, MessageNoObtects2 %>"></asp:Label>
                                     </asp:Panel>
@@ -93,7 +97,7 @@
                                         <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ORGANIZATION" OwnerId='<%# Eval("OrganizationId") %>' />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-6 m-t-5" Visible="false">
-                                        <asp:Label ID="Label3" runat="server" Text="<% $Resources: Organization, LabelOrganizationHas %>"></asp:Label> 
+                                        <asp:Label ID="Label3" runat="server" Text="<% $Resources: Organization, LabelOrganizationHas %>"></asp:Label>
                                         <asp:Label ID="AreasLabel" runat="server" Visible="false"></asp:Label>
                                         <asp:Literal ID="AndLiteral1" runat="server" Visible="false"></asp:Literal>
 
@@ -122,8 +126,8 @@
                                 <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# OrganizationsRepeater.Items.Count == 0 %>'>
                                     <h3 class="col-md-12 text-center">
                                         <asp:Literal ID="NoOrganizationLiteral" runat="server" Text="<% $Resources: Organization, MessageNoOrganizations %>"></asp:Literal>
-                                        <asp:Literal ID="NoObjectLiteral" runat="server" Text="<% $Resources: Organization, MessageCanCreate %>" ></asp:Literal><i class="zmdi zmdi-plus-circle-o"></i>
-                                        <asp:Literal ID="NoObject1Literal" runat="server" Text="<% $Resources: Organization, MessageNoObtects2 %>" ></asp:Literal>
+                                        <asp:Literal ID="NoObjectLiteral" runat="server" Text="<% $Resources: Organization, MessageCanCreate %>"></asp:Literal><i class="zmdi zmdi-plus-circle-o"></i>
+                                        <asp:Literal ID="NoObject1Literal" runat="server" Text="<% $Resources: Organization, MessageNoObtects2 %>"></asp:Literal>
                                     </h3>
                                 </asp:Panel>
                             </FooterTemplate>
