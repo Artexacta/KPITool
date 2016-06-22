@@ -147,7 +147,7 @@ namespace Artexacta.App.Security.BLL
                 Result = Roles.GetAllRoles();
                 string[] FinalResul = new string[Result.Length + 1];
 
-                FinalResul[0] = "Ninguno";
+                FinalResul[0] = Resources.SecurityData.NoneRoleItem;
 
                 for (int i = 1; i < Result.Length + 1; i++)
                 {
@@ -172,7 +172,7 @@ namespace Artexacta.App.Security.BLL
             Result = Roles.GetAllRoles();
             string[] FinalResul = new string[Result.Length + 1];
 
-            FinalResul[0] = "Todos";
+            FinalResul[0] = Resources.SecurityData.AllRolesItem;
 
             for (int i = 1; i < Result.Length + 1; i++)
             {
@@ -698,7 +698,6 @@ namespace Artexacta.App.Security.BLL
                 // See if we need to create the ADMIN account
 
                 log.Debug("We are using Forms authentication.  Checking to see if we need to create an ADMIN account");
-                //log.Debug(Configuration.Configuration.GetDBConnectionString().ToString());
 
                 if (Membership.FindUsersByName(adminUserName).Count == 0)
                 {
@@ -724,8 +723,7 @@ namespace Artexacta.App.Security.BLL
                     }
                     else
                     {
-                        if (UserBLL.InsertUserRecord(adminUserName, adminFullname,
-                            "", "", "", 0, 0, adminEmailAddress) < 0)
+                        if (UserBLL.InsertUserRecord(adminUserName, adminFullname, "", "", "", 0, 0, adminEmailAddress) < 0)
                         {
                             throw new Exception("Error al crear el usuario admin en la base de Producción.");
                         }
@@ -767,7 +765,6 @@ namespace Artexacta.App.Security.BLL
         public static void AddDefaultAdministratorAccess(string Role)
         {
             UserTableAdapter theAdapter = new UserTableAdapter();
-
             try
             {
                 theAdapter.AddDefaultAdministratorAccess(Role);

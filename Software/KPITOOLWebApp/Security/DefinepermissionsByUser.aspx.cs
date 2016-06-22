@@ -13,6 +13,12 @@ public partial class Security_DefinepermissionsByUser : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         //Make the Search button the default button for the page
@@ -40,13 +46,9 @@ public partial class Security_DefinepermissionsByUser : System.Web.UI.Page
             SelectedUserIdHiddenField.Value = employeeID;
             UserLabel.Text = DataKeyData.Values["FullName"].ToString();
             PermissionPanel.Visible = true;
-            SelectLabel.Visible = false;
-            ChangingLabel.Visible = true;
+            SelectUserLabel.Visible = false;
+            ChangeLabel.Visible = true;
         }
-    }
-
-    protected void EmployeeGridView_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
     }
 
     protected void UserObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
@@ -54,7 +56,7 @@ public partial class Security_DefinepermissionsByUser : System.Web.UI.Page
         if (e.Exception != null)
         {
             log.Error("Function UserObjectDataSource_Selected on page DefinePermissionsByUser.aspx", e.Exception);
-            SystemMessages.DisplaySystemMessage("No se pudo obtener información de usuarios desde la base de datos.");
+            SystemMessages.DisplaySystemMessage(Resources.UserData.MessageErrorGetUsersList);
             EmployeeGridView.Visible = false;
             e.ExceptionHandled = true;
         }
@@ -65,7 +67,7 @@ public partial class Security_DefinepermissionsByUser : System.Web.UI.Page
         if (e.Exception != null)
         {
             log.Error("Function UserPermissionsObjectDataSource_Selected on page DefinePermissionsByUser.aspx", e.Exception);
-            SystemMessages.DisplaySystemMessage("No se pudo obtener información de permisos de usuarios desde la base de datos.");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetPermissionsUser);
             e.ExceptionHandled = true;
         }
     }
@@ -83,7 +85,7 @@ public partial class Security_DefinepermissionsByUser : System.Web.UI.Page
     {
         if (EmployeeGridView.Rows.Count > 0)
         {
-            SelectLabel.Visible = true;
+            SelectUserLabel.Visible = true;
             EmployeeGridView.Visible = true;
         }
     }
@@ -124,12 +126,12 @@ public partial class Security_DefinepermissionsByUser : System.Web.UI.Page
                     theBLL.UpdatePermissionForUser(permissionID, false, userId);
                 }
             }
-            SystemMessages.DisplaySystemMessage("Se grabaron los permisos para el Usuario: " + UserLabel.Text + ".");
+            SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageRegisterPermissionsToUser, UserLabel.Text));
         }
         catch (Exception q)
         {
             log.Error("No se pudieron grabar los permisos para el Usuario " + EmployeeGridView.SelectedValue.ToString() + ".", q);
-            SystemMessages.DisplaySystemMessage("No se pudieron grabar los permisos para el Usuario " + EmployeeGridView.SelectedValue.ToString() + ".");
+            SystemMessages.DisplaySystemErrorMessage(string.Format(Resources.SecurityData.MessageErrorRegisterPermissionsToUser, EmployeeGridView.SelectedValue.ToString()));
         }
     }
 

@@ -94,7 +94,7 @@ namespace Artexacta.App.Activities.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetActivitiesByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de actividades de la organización.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorActivitiesByOrganization);
             }
 
             return theList;
@@ -181,7 +181,7 @@ namespace Artexacta.App.Activities.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetActivitiesByProject para projectId: " + projectId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de actividades del proyecto.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorActivitiesByProject);
             }
 
             return theList;

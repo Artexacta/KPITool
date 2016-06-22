@@ -166,6 +166,13 @@ namespace Artexacta.App.KPI
         public string PersonName { get; set; }
 
         public decimal Progress { get; set; }
+        public string ProgressText
+        {
+            get
+            {
+                return this.Progress.ToString(CultureInfo.InvariantCulture);
+            }
+        }
         public string ProgressClass
         {
             get
@@ -189,11 +196,11 @@ namespace Artexacta.App.KPI
                 string trendText = "";
                 if (this.Trend > 0)
                 {
-                    trendText = string.Format("Up {0}% from last {1}", Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
+                    trendText = string.Format(Resources.DataDetails.UpFromLastLabel, Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
                 }
                 else if (this.Trend < 0)
                 {
-                    trendText = string.Format("Down {0}% from last {1}", Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
+                    trendText = string.Format(Resources.DataDetails.DownFromLastLabel, Math.Abs(this.Trend).ToString(CultureInfo.InvariantCulture), this.ReportingUnitName.ToLower());
                 }
                 return trendText;
             }

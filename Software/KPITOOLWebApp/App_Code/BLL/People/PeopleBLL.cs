@@ -151,7 +151,7 @@ namespace Artexacta.App.People.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetPeopleByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de personas de la organización.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorPeopleByOrganization);
             }
 
             return theList;

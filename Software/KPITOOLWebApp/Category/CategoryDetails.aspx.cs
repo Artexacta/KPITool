@@ -13,6 +13,12 @@ public partial class Category_CategoryDetails : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -47,7 +53,7 @@ public partial class Category_CategoryDetails : System.Web.UI.Page
         }
 
         if (theData != null)
-            TitleLabel.Text = "Lista de Items para la categoría " + theData.Name + " - " + theData.ID;
+            TitleLabel.Text = string.Format(Resources.Categories.TitleDetailsLabel, theData.Name, theData.ID);
         else
             Response.Redirect("~/Category/CategoriesList.aspx");
     }
@@ -67,8 +73,8 @@ public partial class Category_CategoryDetails : System.Web.UI.Page
         {
             try
             {
-                CategoryItemBLL.DeleteCategory(categoryItemId, CategoryIdHiddenField.Value);
-                SystemMessages.DisplaySystemMessage("Se eliminó correctamente el item.");
+                CategoryItemBLL.DeleteCategoryItem(categoryItemId, CategoryIdHiddenField.Value);
+                SystemMessages.DisplaySystemMessage(Resources.Categories.MessageDeletedItem);
                 CategoryItemGridView.DataBind();
             }
             catch (Exception exc)
@@ -109,7 +115,7 @@ public partial class Category_CategoryDetails : System.Web.UI.Page
             try
             {
                 CategoryItemBLL.InsertCategoryItem(IDTextBox.Text.Trim(), CategoryIdHiddenField.Value, NameTextBox.Text.Trim());
-                SystemMessages.DisplaySystemMessage("Se registró correctamente el item.");
+                SystemMessages.DisplaySystemMessage(Resources.Categories.MessageCreatedItem);
             }
             catch (Exception exc)
             {
@@ -122,7 +128,7 @@ public partial class Category_CategoryDetails : System.Web.UI.Page
             try
             {
                 CategoryItemBLL.UpdateCategoryItem(IDTextBox.Text.Trim(), CategoryIdHiddenField.Value, NameTextBox.Text.Trim());
-                SystemMessages.DisplaySystemMessage("Se actualizó correctamente el item.");
+                SystemMessages.DisplaySystemMessage(Resources.Categories.MessageUpdatedItem);
             }
             catch (Exception exc)
             {

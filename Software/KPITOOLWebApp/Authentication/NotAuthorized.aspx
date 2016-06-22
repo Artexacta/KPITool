@@ -5,7 +5,8 @@
     <div class="middle-box text-center animated fadeInDown">
         <h1><i class="fa fa-user-secret"></i></h1>
         <h3 class="font-bold">
-            <asp:Label ID="NotAuthorizedTitleLabel" runat="server" CssClass="title" Text="<% $ Resources : LoginGlossary, NotAuthorizedTitle %>" /></h3>
+            <asp:Label ID="NotAuthorizedTitleLabel" runat="server" CssClass="title" Text="<% $ Resources : LoginGlossary, NotAuthorizedTitle %>" />
+        </h3>
 
         <div class="error-desc">
             <p>

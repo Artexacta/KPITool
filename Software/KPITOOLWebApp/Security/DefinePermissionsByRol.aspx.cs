@@ -13,6 +13,12 @@ public partial class Security_DefinePermissionsByRol : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         HtmlForm mainform = this.Form;
@@ -40,8 +46,8 @@ public partial class Security_DefinePermissionsByRol : System.Web.UI.Page
     {
         if (e.Exception != null)
         {
-            SystemMessages.DisplaySystemMessage("Error al obtener la informacion de los roles.");
             log.Error("Function RoleObjectDataSource_Selected on page DefineGenericPermissionsByRole.aspx", e.Exception);
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetRoles);
             e.ExceptionHandled = true;
         }
     }
@@ -50,8 +56,8 @@ public partial class Security_DefinePermissionsByRol : System.Web.UI.Page
     {
         if (e.Exception != null)
         {
-            SystemMessages.DisplaySystemMessage("Error al obtener la información de los permisos.");
             log.Error("Function PermissionObjectDataSource_Selected on page DefineGenericPermissionsByRole.aspx", e.Exception);
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetPermissions);
             e.ExceptionHandled = true;
         }
     }
@@ -91,12 +97,12 @@ public partial class Security_DefinePermissionsByRol : System.Web.UI.Page
                 }
             }
 
-            SystemMessages.DisplaySystemMessage("Se guardó los permisos satisfactoriamente.");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageRegisterPermissionsToRol);
         }
         catch (Exception q)
         {
             log.Error("No se pudieron grabar los permisos para el Rol " + RoleDropDownList.Text + ".", q);
-            SystemMessages.DisplaySystemMessage("No se pudieron grabar los permisos para el Rol " + RoleDropDownList.Text + ".");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorRegisterPermissionsToRol);
         }
     }
 

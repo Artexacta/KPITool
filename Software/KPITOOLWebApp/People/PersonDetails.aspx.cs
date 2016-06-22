@@ -16,6 +16,12 @@ public partial class People_PersonDetails : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -76,7 +82,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
 
         if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
-            SystemMessages.DisplaySystemWarningMessage("The user is not owner, cannot view the summary information.");
+            SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
             Response.Redirect("~/People/PeopleList.aspx");
         }
 
@@ -88,7 +94,8 @@ public partial class People_PersonDetails : System.Web.UI.Page
         }
         catch (Exception exc)
         {
-            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            log.Error(exc.Message);
+            SystemMessages.DisplaySystemErrorMessage(Resources.DataDetails.MessageErrorGetPersona);
             Response.Redirect("~/People/PeopleList.aspx");
         }
 
@@ -161,7 +168,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
         if (e.Exception != null)
         {
             e.ExceptionHandled = true;
-            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageErrorCargarAreas);
+            SystemMessages.DisplaySystemErrorMessage(e.Exception.Message);
         }
     }
 

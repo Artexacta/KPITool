@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 
 public partial class Security_ChangePassword : System.Web.UI.Page
 {
-
     protected override void InitializeCulture()
     {
         Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();

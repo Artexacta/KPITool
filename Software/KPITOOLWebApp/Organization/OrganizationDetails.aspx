@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Organization Details" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" 
+﻿<%@ Page Title="<%$ Resources:DataDetails, PageTitleOrganization %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" 
     CodeFile="OrganizationDetails.aspx.cs" Inherits="Organization_OrganizationDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -21,21 +21,20 @@
     <div class="container">
         <div class="tile">
             <div class="t-header">
-                <div class="th-title">Areas for Organization</div>
+                <div class="th-title"><asp:Literal ID="AreasOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, AreasOrganizationLabel %>" /></div>
             </div>
             <div class="t-body tb-padding">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="AreasGridView" runat="server" AutoGenerateColumns="False" Width="100%" GridLines="None" 
-                                CssClass="table table-striped table-bordered table-hover" DataSourceID="AreasObjectDataSource" DataKeyNames="AreaID" 
-                                OnRowDataBound="AreasGridView_RowDataBound">
+                                CssClass="table table-striped table-bordered table-hover" DataSourceID="AreasObjectDataSource" DataKeyNames="AreaID">
                                 <HeaderStyle CssClass="rgHeader head" />
                                 <FooterStyle CssClass="foot" />
                                 <AlternatingRowStyle CssClass="altRow" />
                                 <EmptyDataRowStyle CssClass="gridNoData" />
                                 <Columns>
-                                    <asp:TemplateField HeaderText="Area Name" HeaderStyle-Width="420px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, AreaNameColumn %>" HeaderStyle-Width="420px">
                                         <ItemTemplate>
                                             <asp:Label ID="AreaNameLabel" runat="server" Text='<%# Eval("Name") %>' /> 
                                             (<asp:Label ID="OrganizationNameLabel" runat="server" Text='<%# Eval("OrganizationName") %>' CssClass="text-primary" />)
@@ -47,7 +46,7 @@
                                             <asp:LinkButton ID="KpiButton" runat="server" Text='<%# Eval("NumberOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumberOfKpis")) > 0 %>'></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, KpiProgressColumn %>" HeaderStyle-Width="140px">
                                         <ItemTemplate>
                                             <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="AREA" OwnerId='<%# Eval("AreaID") %>' />
                                         </ItemTemplate>
@@ -55,7 +54,7 @@
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <p class="text-center">
-                                        There are no Areas registered for this Organization
+                                        <asp:Literal ID="NoAreasOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, NoAreasOrganizationLabel %>" />
                                     </p>
                                 </EmptyDataTemplate>
                             </asp:GridView>
@@ -70,7 +69,7 @@
     <div class="container">
         <div class="tile">
             <div class="t-header">
-                <div class="th-title">Projects for Organization</div>
+                <div class="th-title"><asp:Literal ID="ProjectsOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, ProjectsOrganizationLabel %>" /></div>
             </div>
             <div class="t-body tb-padding">
                 <div class="row">
@@ -84,14 +83,14 @@
                                 <AlternatingRowStyle CssClass="altRow" />
                                 <EmptyDataRowStyle CssClass="gridNoData" />
                                 <Columns>
-                                    <asp:TemplateField HeaderText="View" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ViewColumn %>" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:HyperLink ID="ViewButton" runat="server" CommandName="ViewData">
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:HyperLink>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Project Name" HeaderStyle-Width="350px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ProjectNameColumn %>" HeaderStyle-Width="350px">
                                         <ItemTemplate>
                                             <asp:Label ID="ProjectNameLabel" runat="server" Text='<%# Eval("Name") %>' /> 
                                             (<asp:Label ID="OrganizationNameLabel" runat="server" Text='<%# Eval("OrganizationName") %>' CssClass="text-primary" />
@@ -105,7 +104,7 @@
                                             <asp:LinkButton ID="KpiButton" runat="server" Text='<%# Eval("NumberOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumberOfKpis")) > 0 %>'></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, KpiProgressColumn %>" HeaderStyle-Width="140px">
                                         <ItemTemplate>
                                             <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                         </ItemTemplate>
@@ -113,7 +112,7 @@
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <p class="text-center">
-                                        There are no Projects registered for this Organization
+                                        <asp:Literal ID="NoProjectsOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, NoProjectsOrganizationLabel %>" />
                                     </p>
                                 </EmptyDataTemplate>
                             </asp:GridView>
@@ -128,7 +127,7 @@
     <div class="container">
         <div class="tile">
             <div class="t-header">
-                <div class="th-title">Activities for Organization</div>
+                <div class="th-title"><asp:Literal ID="ActivitiesOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, ActivitiesOrganizationLabel %>" /></div>
             </div>
             <div class="t-body tb-padding">
                 <div class="row">
@@ -142,14 +141,14 @@
                                 <AlternatingRowStyle CssClass="altRow" />
                                 <EmptyDataRowStyle CssClass="gridNoData" />
                                 <Columns>
-                                    <asp:TemplateField HeaderText="View" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ViewColumn %>" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:HyperLink ID="ViewButton" runat="server" CommandName="ViewData">
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:HyperLink>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Activity Name" HeaderStyle-Width="350px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ActivityNameColumn %>" HeaderStyle-Width="350px">
                                         <ItemTemplate>
                                             <asp:Label ID="ActivityNameLabel" runat="server" Text='<%# Eval("Name") %>' /> 
                                             (<asp:Label ID="OrganizationNameLabel" runat="server" Text='<%# Eval("OrganizationName") %>' CssClass="text-primary" />
@@ -165,7 +164,7 @@
                                             <asp:LinkButton ID="KpiButton" runat="server" Text='<%# Eval("NumberOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumberOfKpis")) > 0 %>'></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, KpiProgressColumn %>" HeaderStyle-Width="140px">
                                         <ItemTemplate>
                                             <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ACTIVITY" OwnerId='<%# Eval("ActivityID") %>' />
                                         </ItemTemplate>
@@ -173,7 +172,7 @@
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <p class="text-center">
-                                        There are no Activities registered for this Organization
+                                        <asp:Literal ID="NoActivitiesOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, NoActivitiesOrganizationLabel %>" />
                                     </p>
                                 </EmptyDataTemplate>
                             </asp:GridView>
@@ -188,7 +187,7 @@
     <div class="container">
         <div class="tile">
             <div class="t-header">
-                <div class="th-title">People for Organization</div>
+                <div class="th-title"><asp:Literal ID="PeopleOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, PeopleOrganizationLabel %>" /></div>
             </div>
             <div class="t-body tb-padding">
                 <div class="row">
@@ -202,14 +201,14 @@
                                 <AlternatingRowStyle CssClass="altRow" />
                                 <EmptyDataRowStyle CssClass="gridNoData" />
                                 <Columns>
-                                    <asp:TemplateField HeaderText="View" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ViewColumn %>" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:HyperLink ID="ViewButton" runat="server" CommandName="ViewData">
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:HyperLink>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Project Name" HeaderStyle-Width="350px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, PersonNameColumn %>" HeaderStyle-Width="350px">
                                         <ItemTemplate>
                                             <asp:Label ID="ProjectNameLabel" runat="server" Text='<%# Eval("Name") %>' /> 
                                             (<asp:Label ID="OrganizationNameLabel" runat="server" Text='<%# Eval("OrganizationName") %>' CssClass="text-primary" />
@@ -223,7 +222,7 @@
                                             <asp:LinkButton ID="KpiButton" runat="server" Text='<%# Eval("NumberOfKpisForDisplay") %>' Visible='<%# Convert.ToInt32(Eval("NumberOfKpis")) > 0 %>'></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="KPI Progress" HeaderStyle-Width="140px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, KpiProgressColumn %>" HeaderStyle-Width="140px">
                                         <ItemTemplate>
                                             <app:KpiImage ID="ImageOfKpi" runat="server"  OwnerType="PERSON" OwnerId='<%# Eval("PersonId") %>'  />
                                         </ItemTemplate>
@@ -231,7 +230,7 @@
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <p class="text-center">
-                                        There are no People registered for this Organzation
+                                        <asp:Literal ID="NoPeopleOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, NoPeopleOrganizationLabel %>" />
                                     </p>
                                 </EmptyDataTemplate>
                             </asp:GridView>
@@ -246,7 +245,7 @@
     <div class="container">
         <div class="tile">
             <div class="t-header">
-                <div class="th-title">KPIs for Organization</div>
+                <div class="th-title"><asp:Literal ID="KpisOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, KpisOrganizationLabel %>" /></div>
             </div>
             <div class="t-body tb-padding">
                 <div class="row">
@@ -260,7 +259,7 @@
                                 <AlternatingRowStyle CssClass="altRow" />
                                 <EmptyDataRowStyle CssClass="gridNoData" />
                                 <Columns>
-                                    <asp:TemplateField HeaderText="View" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ViewColumn %>" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData"
                                                 CommandArgument='<%# Eval("KpiID") %>'>
@@ -268,7 +267,7 @@
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="KPI Name" HeaderStyle-Width="350px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, KPINameColumn %>" HeaderStyle-Width="350px">
                                         <ItemTemplate>
                                             <asp:Label ID="KPINameLabel" runat="server" Text='<%# Eval("Name") %>' /><br />
                                             (<asp:Label ID="OrganizationNameLabel" runat="server" Text='<%# Eval("OrganizationName") %>' CssClass="text-primary" />
@@ -282,19 +281,19 @@
                                             <asp:HyperLink ID="PersonNameLink" runat="server" Text='<%# Eval("PersonName") %>'  />)
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Progress" HeaderStyle-Width="100px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ProgressColumn %>" HeaderStyle-Width="100px">
                                         <ItemTemplate>
                                             <div class="progress">
-                                                <div class='<%# Eval("ProgressClass") %>' role="progressbar" aria-valuenow='<%# Eval("Progress") %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='<%# "width:" + Eval("Progress") + "%" %>'>60%
+                                                <div class='<%# Eval("ProgressClass") %>' role="progressbar" aria-valuenow='<%# Eval("ProgressText") %>' aria-valuemin="0" aria-valuemax="100"
+                                                    style='<%# "width:" + Eval("ProgressText") + "%" %>'>60%
                                                 </div>
                                             </div>
                                             <div class="text-center">
-                                                <asp:Literal ID="ProgressLiteral" runat="server" Text='<%# Eval("Progress") %>'></asp:Literal>%
+                                                <asp:Literal ID="ProgressLiteral" runat="server" Text='<%# Eval("ProgressText") %>'></asp:Literal>%
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Trend" HeaderStyle-Width="100px">
+                                    <asp:TemplateField HeaderText="<%$ Resources:DataDetails, TrendColumn %>" HeaderStyle-Width="100px">
                                         <ItemTemplate>
                                             <asp:Label ID="EqualLabel" runat="server" CssClass="glyphicon glyphicon-minus text-primary" style="font-size: 12pt; " 
                                                 Visible='<%# Convert.ToDecimal(Eval("Trend")) == 0 %>' />
@@ -308,7 +307,7 @@
                                 </Columns>
                                 <EmptyDataTemplate>
                                     <p class="text-center">
-                                        There are no KPIs registered for this Organzation
+                                        <asp:Literal ID="NoKpisOrganizationLabel" runat="server" Text="<%$ Resources:DataDetails, NoKpisOrganizationLabel %>" />
                                     </p>
                                 </EmptyDataTemplate>
                             </asp:GridView>
@@ -322,7 +321,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/MainPage.aspx" Text="Back to Organizationes list"
+                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/MainPage.aspx" Text="<%$ Resources:DataDetails, ReturnOrganizationLink %>" 
                     CssClass="btn btn-info">
                 </asp:HyperLink>
             </div>

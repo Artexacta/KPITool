@@ -123,17 +123,11 @@
   <data name="FileTypesFileLocation" xml:space="preserve">
     <value>~/DataFiles/FileTypesES.xml</value>
   </data>
-  <data name="MailCrearUsuario" xml:space="preserve">
-    <value>~/DataFiles/Emails/CreateUserEmail.htm</value>
-  </data>
   <data name="MIMETypesFile" xml:space="preserve">
     <value>~/DataFiles/MIMETypes.txt</value>
   </data>
-  <data name="NewPasswordFileLocation" xml:space="preserve">
-    <value>~/DataFiles/Emails/NewPasswordEmail.txt</value>
-  </data>
   <data name="ResetPassword" xml:space="preserve">
-    <value>/DataFiles/Emails/SendNewResetPassword.htm</value>
+    <value>/DataFiles/Emails/ResetPassword.es.txt</value>
   </data>
   <data name="UnknownFileType" xml:space="preserve">
     <value>Unkown File Type</value>
@@ -143,5 +137,11 @@
   </data>
   <data name="UnkownFileSize" xml:space="preserve">
     <value>Unkown File Size</value>
+  </data>
+  <data name="CreateUserEmail" xml:space="preserve">
+    <value>~/DataFiles/Emails/CreateUserEmail.es.txt</value>
+  </data>
+  <data name="NewPasswordFileLocation" xml:space="preserve">
+    <value>~/DataFiles/Emails/NewPasswordEmail.txt</value>
   </data>
 </root>
