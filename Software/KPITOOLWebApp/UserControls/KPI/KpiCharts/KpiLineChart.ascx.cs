@@ -111,14 +111,14 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         List<Series> series = new List<Series>();
         series.Add(new Series
         {
-            Name = "Values",
+            Name = Resources.KpiDetails.ValuesLabel,
             Data = new Data(standardSerie.Values.ToArray<object>())
         });
         if(hasTarget)
         {
             series.Add(new Series
             {
-                Name = "Target",
+                Name = Resources.KpiDetails.KpiTargetLabel,
                 Color = System.Drawing.Color.Red,
                 Data = new Data(targetStandardSerie.Values.ToArray<object>())
             });
@@ -151,14 +151,14 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
             series = new List<Series>();
             series.Add(new Series
             {
-                Name = "Values",
+                Name = Resources.KpiDetails.ValuesLabel,
                 Data = new Data(sumSerie.Values.ToArray<object>())
             });
             if (hasTarget)
             {
                 series.Add(new Series
                 {
-                    Name = "Target",
+                    Name = Resources.KpiDetails.KpiTargetLabel,
                     Color = System.Drawing.Color.Red,
                     Data = new Data(targetSumSerie.Values.ToArray<object>())
                 });

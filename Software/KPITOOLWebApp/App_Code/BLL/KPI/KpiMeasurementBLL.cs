@@ -17,7 +17,7 @@ namespace Artexacta.App.KPI.BLL
         {
         }
 
-        public static List<KPIMeasurement> GetKpiMeasurementsByKpiId(int kpiId, string categoryId, string categoryItemId)
+        public static List<KPIMeasurement> GetKpiMeasurementsByKpiId(int kpiId, string categoryId, string categoryItemId, string unit)
         {
             if (kpiId <= 0)
             {

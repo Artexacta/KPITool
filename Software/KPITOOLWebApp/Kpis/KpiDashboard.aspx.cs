@@ -15,6 +15,12 @@ public partial class Kpis_KpiDashboard : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadKpisData();

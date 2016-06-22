@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/UserControls/KPI/KpiChart.ascx" TagName="KpiChart" TagPrefix="app" %>
 <%@ Register Src="~/UserControls/KPI/KpiSummary/KpiMeasurements.ascx" TagName="KpiMeasurements" TagPrefix="app" %>
+<%@ Register Src="~/UserControls/KPI/KpiSummary/KpiStats.ascx" TagName="KpiStats" TagPrefix="app" %>
+<%@ Register Src="~/UserControls/KPI/KpiCharts/ExcelExportKpiChart.ascx" TagName="ExcelExportKpiChart" TagPrefix="app" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
@@ -46,17 +48,15 @@
                         </div>
                     </asp:Panel>--%>
                     <asp:Panel ID="RevenueCollectionGraphic" runat="server" Visible="false">
+                        <div class="text-right">
+                            <app:ExcelExportKpiChart ID="ExportControl" runat="server" />
+                        </div>
                         <app:KpiChart ID="ChartControl" runat="server" />
                     </asp:Panel>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        <p>90% progress towards the goal of 2 months between failures</p>
-                        <p><span style="font-size: 18px;" class="text-danger"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i></span>Down 5% from last month</p>
-                        <p>Lowest value: 2 days</p>
-                        <p>Highest value: 1.6 months</p>
-                        <p>Current value: 1.0 months</p>
-                        <p>To date average: 0.7 months</p>
+                        <app:KpiStats ID="StatsControl" runat="server" />
                     </div>
                     <div class="col-md-7">
                         <div class="table-responsive" style="max-height: 200px;">
@@ -79,16 +79,16 @@
                                 </button>
                                 <asp:Literal ID="CollapseLiteral" runat="server">
                                 </asp:Literal>
+                                    <div class="text-right">
+                                        <app:ExcelExportKpiChart ID="ExportControl" runat="server" KpiId='<%# Eval("KpiId") %>'
+                                            CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>' />
+                                    </div>
                                     <app:KpiChart ID="KpiChartCategory" runat="server" KpiId='<%# Eval("KpiId") %>'
                                         CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>' />
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <p>90% progress towards the goal of 2 months between failures</p>
-                                            <p><span style="font-size: 18px;" class="text-danger"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i></span>Down 5% from last month</p>
-                                            <p>Lowest value: 2 days</p>
-                                            <p>Highest value: 1.6 months</p>
-                                            <p>Current value: 1.0 months</p>
-                                            <p>To date average: 0.7 months</p>
+                                            <app:KpiMeasurements ID="MeasurementsCategoryControl" runat="server" KpiId='<%# Eval("KpiId") %>'
+                                                    CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>'/>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="table-responsive" style="max-height: 200px;">
@@ -110,11 +110,15 @@
                 <div class="row">
                     <div class="col-md-5">
                         <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-default">
-                            <i class="fa fa-plus-square"></i>Add this KPI to a Dashboard
+                            <i class="fa fa-plus-square"></i>
+                            <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, AddToDashboard %>"></asp:Literal>
                         </a>
                         <br />
                         <asp:PlaceHolder ID="HeaderTemplate" runat="server">
-                            <p class="m-t-10">This KPI is in the following Dashboards:</p>
+                            <p class="m-t-10">
+                                <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, DashboardForKpi %>"></asp:Literal>
+                                :
+                            </p>
                         </asp:PlaceHolder>
                         <asp:Repeater ID="DashboardRepeater" runat="server"
                             DataSourceID="UserDashboardDataSource"
@@ -124,7 +128,7 @@
                             <ItemTemplate>
                                 <div style="padding-left: 10px;" class="m-t-10 p-l-10">
                                     <asp:LinkButton ID="DeleteButton" runat="server" CommandArgument='<%# Eval("DashboardId") %>'
-                                        OnClientClick="return confirm('Are you sure you want to remove this KPI from selected Dashboard?')"
+                                        OnClientClick="return confirm(getConfirmMessage())"
                                         CommandName="DeleteDashboard">
                                         <i class="fa fa-trash"></i>
                                     </asp:LinkButton>
@@ -135,7 +139,9 @@
                             </ItemTemplate>
                         </asp:Repeater>
                         <asp:PlaceHolder ID="EmptyTemplate" runat="server">
-                            <p class="m-t-10">This KPI is not added to any Dashboard</p>
+                            <p class="m-t-10">
+                                <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, KpiInDashboardEmptyMessage %>"></asp:Literal>
+                            </p>
                         </asp:PlaceHolder>
 
                         <asp:ObjectDataSource ID="UserDashboardDataSource" runat="server"
@@ -204,107 +210,10 @@
                     $(id).slideDown(500, fn);
             });
         });
+        function getConfirmMessage() {
+            return "<%= Resources.KpiDetails.DeleteForDashboardMessage %>";
+        }
     </script>
-    <%--<script type="text/javascript">
-        $(function () {
-            $('.gauger').attr("data-value", $("#" + '<%= Progress.ClientID %>').val())
-            $('.gauger').each(function () {
-                var progress = $(this).data("value");
-                $(this).highcharts({
-
-                    chart: {
-                        type: 'gauge',
-                        plotBackgroundColor: null,
-                        plotBackgroundImage: null,
-                        plotBorderWidth: 0,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: ''
-                    },
-                    pane: {
-                        startAngle: -150,
-                        endAngle: 150,
-                        background: [{
-                            backgroundColor: {
-                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                                stops: [
-                                    [0, '#FFF'],
-                                    [1, '#333']
-                                ]
-                            },
-                            borderWidth: 0,
-                            outerRadius: '109%'
-                        }, {
-                            backgroundColor: {
-                                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                                stops: [
-                                    [0, '#333'],
-                                    [1, '#FFF']
-                                ]
-                            },
-                            borderWidth: 1,
-                            outerRadius: '107%'
-                        }, {
-                            // default background
-                        }, {
-                            backgroundColor: '#DDD',
-                            borderWidth: 0,
-                            outerRadius: '105%',
-                            innerRadius: '103%'
-                        }]
-                    },
-
-                    // the value axis
-                    yAxis: {
-                        min: 0,
-                        max: 100,
-
-                        minorTickInterval: 'auto',
-                        minorTickWidth: 1,
-                        minorTickLength: 10,
-                        minorTickPosition: 'inside',
-                        minorTickColor: '#666',
-
-                        tickPixelInterval: 30,
-                        tickWidth: 2,
-                        tickPosition: 'inside',
-                        tickLength: 10,
-                        tickColor: '#666',
-                        labels: {
-                            step: 2,
-                            rotation: 'auto'
-                        },
-                        title: {
-                            text: '%'
-                        },
-                        plotBands: [{
-                            from: 0,
-                            to: 33,
-                            color: '#DF5353' // red
-                        }, {
-                            from: 33,
-                            to: 66,
-                            color: '#DDDF0D' // yellow
-                        }, {
-                            from: 66,
-                            to: 100,
-                            color: '#55BF3B' // green
-                        }]
-                    },
-
-                    series: [{
-                        name: 'Complete',
-                        data: [progress],
-                        tooltip: {
-                            valueSuffix: ' %'
-                        }
-                    }]
-
-                });
-            });
-        });
-    </script>--%>
     <asp:HiddenField ID="Progress" runat="server" />
     <asp:HiddenField ID="KpiIdHiddenField" runat="server" Value="0" />
     <asp:HiddenField ID="UserIdHiddenField" runat="server" Value="0" />

@@ -16,6 +16,12 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     public int KpiId
     {
         set
@@ -54,7 +60,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            
+            log.Error("Error loading KPI", ex);
         }
         
     }
@@ -84,15 +90,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             CategoriesRepeater.DataBind();
             CategoriesPanel.Visible = true;
         }
-        
-        //Obtengo aleatoriamente el dato a mostrar
-        Random rnd = new Random();
-        int caso = rnd.Next(1, 100);
         //Inicializo los valores conocidos
-        KpiType.Text = "<div class='col-md-4 col-sm-4'>KPI Type:</div><div class='col-md-8 col-sm-8'>" + kpi.KpiTypeID + "</div>";
+        KpiType.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiTypeLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + kpi.KpiTypeID + "</div>";
         //WebServiceId.Text = "<div class='col-md-4 col-sm-4'>Web Service ID:</div><div class='col-md-8 col-sm-8'>SERV-Reliavility</div>";
-        ReportingUnit.Text = "<div class='col-md-4 col-sm-4'>Reporting Unit:</div><div class='col-md-8 col-sm-8'>" + kpi.ReportingUnitID + "</div>";
-        KpiTarget.Text = "<div class='col-md-4 col-sm-4'>KPI Target:</div><div class='col-md-8 col-sm-8'>" + (kpi.TargetPeriod == 0 ? "No target Specified" : kpi.TargetPeriod + " " + kpi.ReportingUnitID) + "</div>";
+        ReportingUnit.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiReportingUnitLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + kpi.ReportingUnitID + "</div>";
+        KpiTarget.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiTargetLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + (kpi.TargetPeriod == 0 ? Resources.KpiDetails.NoTargetLabel : kpi.TargetPeriod + " " + kpi.ReportingUnitID) + "</div>";
 
         //if (caso <= 50)
         //{
@@ -102,11 +104,14 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         //}
         //else
         //{
-            StartingDate.Text = "<div class='col-md-4 col-sm-4'>Starting Date:</div><div class='col-md-8 col-sm-8'>05/17/15</div>";
-            RevenueCollectionGraphic.Visible = true;
+        StartingDate.Text = "<div class='col-md-4 col-sm-4'>Starting Date:</div><div class='col-md-8 col-sm-8'>05/17/15</div>";
+        RevenueCollectionGraphic.Visible = true;
             //RevenueCollectionProgress.Visible = true;
-            ChartControl.KpiId = kpiId;
-            MeasurementsControl.KpiId = kpiId;
+        ChartControl.KpiId = kpiId;
+        ExportControl.KpiId = kpiId;
+        StatsControl.KpiId = kpiId;
+        MeasurementsControl.KpiId = kpiId;
+        MeasurementsControl.Unit = kpi.UnitID.ToLower();
         //}
     }
 
@@ -120,12 +125,12 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
 
     protected void DashboardsComboBox_DataBound(object sender, EventArgs e)
     {
-        DashboardsComboBox.Items.Insert(0, new ListItem("-- Select a Dashboard --", ""));
+        DashboardsComboBox.Items.Insert(0, new ListItem(Resources.KpiDetails.SelectDashboardLabel, ""));
         if (IsAddedInMainDashboard.Value == "true")
             return;
         ListItem item = DashboardsComboBox.Items.FindByValue("0");
         if(item == null)
-            DashboardsComboBox.Items.Insert(1, new ListItem("Main Dashboard", "0"));
+            DashboardsComboBox.Items.Insert(1, new ListItem(Resources.KpiDashboard.MainDashboardTitle, "0"));
     }
 
     protected void SaveButton_Click(object sender, EventArgs e)
