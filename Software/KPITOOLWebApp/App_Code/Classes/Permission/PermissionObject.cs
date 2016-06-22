@@ -81,7 +81,7 @@ namespace Artexacta.App.PermissionObject
         {
             get
             {
-                return string.IsNullOrEmpty(this._userName) ? "Everyone" : (this._fullName + " (" + this._email + ")");
+                return string.IsNullOrEmpty(this._userName) ? Resources.ShareData.EveryoneCheckBox : (this._fullName + " (" + this._email + ")");
             }
         }
 

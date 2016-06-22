@@ -17,7 +17,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" autocomplete="off">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- MASKS AND GENERAL CHECKS ----------------------------------------------------------------->
         <div id="TOP"></div>
@@ -70,37 +70,32 @@
             </div>
         </section>
         <footer id="footer">
-
-                            <div class="col-md-12">
-                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/About/Credits.aspx"
-                                    CssClass="FooterText"
-                                    Text="Credits">
-                                </asp:HyperLink>
-                                &nbsp;|&nbsp;
-                                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/About/Credits.aspx"
-                                    CssClass="FooterText"
-                                    Text="News and Changes">
-                                </asp:HyperLink>
-                                &nbsp;|&nbsp;
-                                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/ResetSystem.aspx"
-                                    CssClass="FooterText"
-                                    Text="Manage System">
-                                </asp:HyperLink>
-                            </div>
-                            <div class="col-md-12">
-                                <a href="#" id="feedbackHyperLink" class="FooterText">
-                                    <asp:Literal ID="SubmitfeedbackLabel" runat="server" Text="<%$ Resources: InitMasterPage, SubmitFeedbackLabel %>"></asp:Literal>
-                                </a>
-                    </div>
-                            <div class="col-md-12 footerImage">
-                                Powered by 
-                            <a class="FooterText font-bold" href="http://www.artexacta.com" target="_blank">Artexacta S.R.L.</a>
-                                <a href="http://www.artexacta.com" target="_blank">
-                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/ArtexactaLogo30px.png" Width="20px" />
-                                </a>
-
-                                <div style="clear: both"></div>
-                            </div>
+            <div class="col-md-12">
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/About/Credits.aspx"
+                    CssClass="FooterText" Text="Credits">
+                </asp:HyperLink>
+                &nbsp;|&nbsp;
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/About/Credits.aspx"
+                    CssClass="FooterText" Text="News and Changes">
+                </asp:HyperLink>
+                &nbsp;|&nbsp;
+                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/ResetSystem.aspx"
+                    CssClass="FooterText" Text="Manage System">
+                </asp:HyperLink>
+            </div>
+            <div class="col-md-12">
+                <a href="#" id="feedbackHyperLink" class="FooterText">
+                    <asp:Literal ID="SubmitfeedbackLabel" runat="server" Text="<%$ Resources: InitMasterPage, SubmitFeedbackLabel %>"></asp:Literal>
+                </a>
+            </div>
+            <div class="col-md-12 footerImage">
+                Powered by 
+                <a class="FooterText font-bold" href="http://www.artexacta.com" target="_blank">Artexacta S.R.L.</a>
+                <a href="http://www.artexacta.com" target="_blank">
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/ArtexactaLogo30px.png" Width="20px" />
+                </a>
+                <div style="clear: both"></div>
+            </div>
         </footer>
 
         <asp:HiddenField ID="CurrentUserIDHiddenField" runat="server" />
@@ -127,19 +122,12 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                
-
                 updateOnResize();
-
                 $("#feedbackPanel").hide();
-
                 // Handler to show the columns selector
                 $("#feedbackHyperLink").click(function (e) {
-
                     $.scrollTo($('#TOP'), 800);
-
                     e.preventDefault();
-
                     var maskWinH = $(document).height();
                     var maskWinW = $(window).width();
                     $("#feedback_Mask").css({ 'width': maskWinW, 'height': maskWinH });

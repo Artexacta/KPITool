@@ -18,6 +18,12 @@ public partial class Security_AssignRoles : System.Web.UI.Page
     string[] gRolesForUser;
     SecurityBLL theUsersAndRolesBLL = new SecurityBLL();
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -34,10 +40,10 @@ public partial class Security_AssignRoles : System.Web.UI.Page
             RoleDropDownList.DataBind();
             BindData();
         }
-        catch (Exception q)
+        catch (Exception exc)
         {
-            SystemMessages.DisplaySystemMessage("Hubo un problema al cargar Roles al Grid");
-            log.Error("InitializeControls Error. Function InitializeControls from AssignRoles page", q);
+            log.Error("InitializeControls Error. Function InitializeControls from AssignRoles page", exc);
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetRoles);
         }
     }
 
@@ -46,7 +52,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         try
         {
             //Initialize the values for the IN ROLE list box
-            if (RoleDropDownList.Text == "Ninguno" || string.IsNullOrEmpty(RoleDropDownList.Text))
+            if (RoleDropDownList.Text == Resources.SecurityData.NoneRoleItem || string.IsNullOrEmpty(RoleDropDownList.Text))
             {
                 InRoleListBox.DataSource = theUsersAndRolesBLL.UsersInNoneRole();
             }
@@ -60,7 +66,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
             InRoleListBox.DataBind();
 
             //Initialize the values for the NOT IN ROLE list box
-            if (RoleDropDownList.Text == "Ninguno" || string.IsNullOrEmpty(RoleDropDownList.Text))
+            if (RoleDropDownList.Text == Resources.SecurityData.NoneRoleItem || string.IsNullOrEmpty(RoleDropDownList.Text))
             {
                 OutRoleListBox.DataSource = theUsersAndRolesBLL.UsersNotInRoleNone();
                 AddOutImageButton.Enabled = false;
@@ -81,7 +87,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         catch (Exception q)
         {
             log.Error("Error en BindData de la pagina AssignRoles.aspx.", q);
-            SystemMessages.DisplaySystemErrorMessage("Error al obtener los listados de usuarios para el rol: " + RoleDropDownList.Text);
+            SystemMessages.DisplaySystemErrorMessage(Resources.SecurityData.MessageErrorGetUsersByRole + RoleDropDownList.Text);
         }
         EmployeeRolePanel.Visible = false;
     }
@@ -98,15 +104,15 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         {
             log.Debug("Deleting a Role");
             string rol = RoleDropDownList.Text;
-            Roles.DeleteRole(RoleDropDownList.Text);
+            Roles.DeleteRole(rol);
             RoleDropDownList.DataSource = theUsersAndRolesBLL.GetAllRolesAndNone();
             RoleDropDownList.DataBind();
-            SystemMessages.DisplaySystemMessage("El Rol " + rol + " ha sido eliminado.");
+            SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageDeletedRole, rol));
         }
-        catch (Exception q)
+        catch (Exception exc)
         {
-            SystemMessages.DisplaySystemMessage("No es posible eliminar el Rol: " + RoleDropDownList.Text + " porque existen usuarios en el.");
-            log.Error("Cannot delete the Role : " + RoleDropDownList.Text + " because users exist in it. Function DeleteRolImageButton_Click from AssignRoles page", q);
+            log.Error("Cannot delete the Role : " + RoleDropDownList.Text + " because users exist in it. Function DeleteRolImageButton_Click from AssignRoles page", exc);
+            SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageErrorDeletedRole, RoleDropDownList.Text));
         }
     }
 
@@ -194,7 +200,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                     SaveRolesButton.Visible = true;
                     ResetRolesButton.Visible = (!LoginSecurity.IsUserAuthorizedPermission("RESET_USER_ACCOUNT"));
                     AddInImageButton.Enabled = true;
-                    AddOutImageButton.Enabled = (RoleDropDownList.Text != "Ninguno" && !string.IsNullOrEmpty(RoleDropDownList.Text));
+                    AddOutImageButton.Enabled = (RoleDropDownList.Text != Resources.SecurityData.NoneRoleItem && !string.IsNullOrEmpty(RoleDropDownList.Text));
                 }
             }
             else
@@ -205,7 +211,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         catch (Exception q)
         {
             log.Error("Function InRoleListBox_SelectedIndexChanged from AssignRoles page", q);
-            SystemMessages.DisplaySystemMessage("No se pudo obtener información de Roles desde la base de datos.");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetRoles);
         }
     }
 
@@ -251,7 +257,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         catch (Exception q)
         {
             log.Error("Function OutRoleListBox_SelectedIndexChanged from AssigRole page", q);
-            SystemMessages.DisplaySystemMessage("No se pudo obtener información de Roles desde la base de datos.");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageErrorGetRoles);
         }
     }
 
@@ -293,7 +299,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         ListOfUsersToDeleteFromRol = GetUserIDs(InRoleListBox);
         if (ListOfUsersToDeleteFromRol == null)
         {
-            SystemMessages.DisplaySystemMessage("No existen usuarios seleccionados en la lista.");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageUsersNoSelected);
             return;
         }
         string userType = "Normal";
@@ -311,34 +317,30 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                     {
                         UserBLL.DeleteUserInRoles(UserDeleted, RoleDropDownList.Text);
                         log.Debug("El Usuario " + UserDeleted + " ha sido eliminado del Rol " + RoleDropDownList.Text + ".");
-                        SystemMessages.DisplaySystemMessage("El Usuario " + UserDeleted + " ha sido eliminado del Rol " + RoleDropDownList.Text + ".");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageDeletedRoleUser, UserDeleted, RoleDropDownList.Text));
                     }
                     catch
                     {
-                        SystemMessages.DisplaySystemErrorMessage("Error al eliminar el usuario " + UserDeleted + " del Rol " + RoleDropDownList.Text + ".");
+                        SystemMessages.DisplaySystemErrorMessage(string.Format(Resources.SecurityData.MessageErrorDeleteRoleUser, UserDeleted, RoleDropDownList.Text));
                     }
                 }
             }
             else
             {
-                SystemMessages.DisplaySystemMessage("No existen usuarios en la lista.");
+                SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageNoUsersInList);
             }
         }
         else
         {
             if (userType == "Normal")
             {
-                log.Error("No se puede eliminar el Usuario " + HttpContext.Current.User.Identity.Name +
-                    " del rol " + RoleDropDownList.SelectedValue + " porque es el útimo con privilegios administrativos");
-                SystemMessages.DisplaySystemMessage("No se puede eliminar el Usuario " + HttpContext.Current.User.Identity.Name +
-                    " del rol " + RoleDropDownList.SelectedValue + " porque es el último con privilegios administrativos.");
+                log.Error("No se puede eliminar el Usuario " + HttpContext.Current.User.Identity.Name + " del rol " + RoleDropDownList.SelectedValue + " porque es el útimo con privilegios administrativos");
+                SystemMessages.DisplaySystemWarningMessage(string.Format(Resources.SecurityData.MessageWarningDeleteAdministrativeUser, HttpContext.Current.User.Identity.Name, RoleDropDownList.SelectedValue));
             }
             else if (userType == "Admin")
             {
-                log.Error("No se puede eliminar el Usuario " + ConfigurationManager.AppSettings.Get("AdminUser") +
-                    " del Rol " + RoleDropDownList.SelectedValue + " porque es el útimo grupo con privilegios de administración y es el Administrador del Sistema");
-                SystemMessages.DisplaySystemMessage("No se puede eliminar el Usuario " + ConfigurationManager.AppSettings.Get("AdminUser") +
-                    " del Rol " + RoleDropDownList.SelectedValue + " porque es el útimo grupo con privilegios de administración y es el Administrador del Sistema");
+                log.Error("No se puede eliminar el Usuario " + ConfigurationManager.AppSettings.Get("AdminUser") + " del Rol " + RoleDropDownList.SelectedValue + " porque es el útimo grupo con privilegios de administración y es el Administrador del Sistema");
+                SystemMessages.DisplaySystemWarningMessage(string.Format(Resources.SecurityData.MessageWarningDeleteAdminUser, ConfigurationManager.AppSettings.Get("AdminUser"), RoleDropDownList.SelectedValue));
             }
         }
         BindData();
@@ -350,7 +352,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
         ListOfUsersToAddToRol = GetUserIDs(OutRoleListBox);
         if (ListOfUsersToAddToRol != null && ListOfUsersToAddToRol.Length > 0)
         {
-            if (RoleDropDownList.Text == "Ninguno")
+            if (RoleDropDownList.Text == Resources.SecurityData.NoneRoleItem)
             {
                 foreach (String UserAdded in ListOfUsersToAddToRol)
                 {
@@ -369,10 +371,8 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                             }
                             else
                             {
-                                log.Error("No se puede eliminar el Usuario " + HttpContext.Current.User.Identity.Name +
-                                    " del rol " + RoleDropDownList.SelectedValue + " porque es el útimo con privilegios administrativos");
-                                SystemMessages.DisplaySystemMessage("No se puede eliminar el Usuario " + HttpContext.Current.User.Identity.Name +
-                                    " del rol " + RoleDropDownList.SelectedValue + " porque es el útimo con privilegios administrativos");
+                                log.Error("No se puede eliminar el Usuario " + HttpContext.Current.User.Identity.Name + " del rol " + RoleDropDownList.SelectedValue + " porque es el útimo con privilegios administrativos");
+                                SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageWarningDeleteAdministrativeUser, HttpContext.Current.User.Identity.Name, RoleDropDownList.SelectedValue));
                             }
                         }
                     }
@@ -384,14 +384,14 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                 foreach (String UserAdded in ListOfUsersToAddToRol)
                 {
                     UserBLL.InsertUserInRoles(UserAdded, RoleDropDownList.Text);
-                    SystemMessages.DisplaySystemMessage("El Usuario " + UserAdded + " ha sido adicionado al Rol " + RoleDropDownList.Text + ".");
                     log.Debug("El Usuario " + UserAdded + " ha sido adicionado al Rol " + RoleDropDownList.Text + ".");
+                    SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageUserRegisteredInRole, UserAdded, RoleDropDownList.Text));
                 }
             }
         }
         else
         {
-            SystemMessages.DisplaySystemMessage("No existen usuarios seleccionados en la lista.");
+            SystemMessages.DisplaySystemMessage(Resources.SecurityData.MessageUsersNoSelected);
         }
         BindData();
     }
@@ -465,8 +465,8 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                         {
                             Roles.RemoveUserFromRole(UserLabel.Text, RoleToDelete);
                             UserBLL.DeleteUserInRoles(UserLabel.Text, RoleToDelete);
-                            SystemMessages.DisplaySystemMessage("Se elimino el usuario " + UserLabel.Text + " del Rol " + RoleToDelete + ".");
                             log.Debug("Removed User " + UserLabel.Text + " from Role " + RoleToDelete + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                            SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageDeletedRoleUser, UserLabel.Text, RoleToDelete));
                         }
                     }
                 }
@@ -479,15 +479,10 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                     {
                         Roles.AddUserToRole(UserLabel.Text, RoleToInsert);
                         UserBLL.InsertUserInRoles(UserLabel.Text, RoleToInsert);
-
-                        SystemMessages.DisplaySystemMessage("Adiciono usuario " + UserLabel.Text + " al Rol " + RoleToInsert + ".");
                         log.Debug("Added User " + UserLabel.Text + " to Role " + RoleToInsert + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageUserRegisteredInRole, UserLabel.Text, RoleToInsert));
                     }
                 }
-            }
-            else
-            {
-                SystemMessages.DisplaySystemMessage("No se puede eliminar el Usuario " + UserLabel.Text + ".");
             }
         }
         else
@@ -500,8 +495,8 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                     {
                         Roles.RemoveUserFromRole(UserLabel.Text, RoleToDelete);
                         UserBLL.DeleteUserInRoles(UserLabel.Text, RoleToDelete);
-                        SystemMessages.DisplaySystemMessage("Usuario eliminado " + UserLabel.Text + " del Rol " + RoleToDelete + ".");
                         log.Debug("Removed User " + UserLabel.Text + " from Role " + RoleToDelete + ". Function SaveRolesImageButton_Click from AssignRoles page");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageDeletedRoleUser, UserLabel.Text, RoleToDelete));
                     }
                 }
             }
@@ -513,7 +508,7 @@ public partial class Security_AssignRoles : System.Web.UI.Page
                     {
                         Roles.AddUserToRole(UserLabel.Text, RoleToInsert);
                         UserBLL.InsertUserInRoles(UserLabel.Text, RoleToInsert);
-                        SystemMessages.DisplaySystemMessage("Adiciono usuario " + UserLabel.Text + " al Rol " + RoleToInsert + ".");
+                        SystemMessages.DisplaySystemMessage(string.Format(Resources.SecurityData.MessageUserRegisteredInRole, UserLabel.Text, RoleToInsert));
                     }
                 }
             }
@@ -523,7 +518,6 @@ public partial class Security_AssignRoles : System.Web.UI.Page
 
     protected void ResetRolesButton_Click(object sender, EventArgs e)
     {
-
         string selectedName = "";
         if (VerifyIfIsOnlyOneUserSelected(OutRoleListBox))
             selectedName = OutRoleListBox.SelectedValue;

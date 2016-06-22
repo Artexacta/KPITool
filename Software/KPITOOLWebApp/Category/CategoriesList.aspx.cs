@@ -13,6 +13,12 @@ public partial class Category_CategoriesList : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -34,7 +40,7 @@ public partial class Category_CategoriesList : System.Web.UI.Page
             try
             {
                 CategoryBLL.DeleteCategory(categoryId);
-                SystemMessages.DisplaySystemMessage("Se eliminó correctamente la categoría.");
+                SystemMessages.DisplaySystemMessage(Resources.Categories.MessageDeletedCategory);
                 CategoryGridView.DataBind();
             }
             catch (Exception exc)
@@ -80,7 +86,7 @@ public partial class Category_CategoriesList : System.Web.UI.Page
             try
             {
                 CategoryBLL.InsertCategory(IDTextBox.Text.Trim(), NameTextBox.Text.Trim());
-                SystemMessages.DisplaySystemMessage("Se registró correctamente la categoría.");
+                SystemMessages.DisplaySystemMessage(Resources.Categories.MessageCreatedCategory);
             }
             catch (Exception exc)
             {
@@ -93,7 +99,7 @@ public partial class Category_CategoriesList : System.Web.UI.Page
             try
             {
                 CategoryBLL.UpdateCategory(IDTextBox.Text.Trim(), NameTextBox.Text.Trim());
-                SystemMessages.DisplaySystemMessage("Se actualizó correctamente la categoría.");
+                SystemMessages.DisplaySystemMessage(Resources.Categories.MessageUpdatedCategory);
             }
             catch (Exception exc)
             {

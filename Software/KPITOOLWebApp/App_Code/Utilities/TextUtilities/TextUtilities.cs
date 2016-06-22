@@ -1209,7 +1209,7 @@ namespace Artexacta.App.Utilities.Text
                     break;
             }
             CultureInfo culture = new CultureInfo(langCulture);
-            return date.ToString("d", culture);
+            return date.ToString("dd-MMM-yyyy", culture);
         }
 
     }

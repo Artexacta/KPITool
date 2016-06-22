@@ -117,127 +117,142 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivityMenu" xml:space="preserve">
-    <value>Actividades</value>
+  <data name="AddInButton" xml:space="preserve">
+    <value>Mover Usuario a Rol</value>
   </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Cerrar</value>
+  <data name="AddNewRoleButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-plus'&gt;&lt;/i&gt; Adicionar Nuevo Rol</value>
   </data>
-  <data name="EnterFeedbackTitle" xml:space="preserve">
-    <value>Ingresar Comentario</value>
+  <data name="AddNewUserButton" xml:space="preserve">
+    <value>&lt;i class="fa fa-plus"&gt;&lt;/i&gt; Adicionar Nuevo Usuario</value>
   </data>
-  <data name="KpiDashboardMenu" xml:space="preserve">
-    <value>Panel de Control de KPI</value>
+  <data name="AddOutButton" xml:space="preserve">
+    <value>Mover Usuario fuera del Rol</value>
   </data>
-  <data name="KPIMenu" xml:space="preserve">
-    <value>KPIs</value>
+  <data name="AllRolesItem" xml:space="preserve">
+    <value>Todos</value>
   </data>
-  <data name="MensajeArchivoVacio" xml:space="preserve">
-    <value>Empty resourceFile in menu item</value>
+  <data name="ChangePermissionLabel" xml:space="preserve">
+    <value>Cambiar permisos para el Rol:</value>
   </data>
-  <data name="MensajeItemPublicoVacio" xml:space="preserve">
-    <value>Menu no tiene un item publico</value>
+  <data name="ChangePermissionUserLabel" xml:space="preserve">
+    <value>Cambiar permisos para el Usuario:</value>
   </data>
-  <data name="MensajeMenuNoPublico" xml:space="preserve">
-    <value>Item del menu no es público y no tiene una clase definida en el item</value>
+  <data name="ConfirmDeleteRol" xml:space="preserve">
+    <value>return confirm('¿Esta seguro de eliminar el rol?')</value>
   </data>
-  <data name="MensajeValorInvalidoItem" xml:space="preserve">
-    <value>Valor inválido para un item público</value>
+  <data name="DeleteRolButton" xml:space="preserve">
+    <value>Eliminar Rol</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Acerca de</value>
+  <data name="DescriptionColumn" xml:space="preserve">
+    <value>Descripción del permiso</value>
   </data>
-  <data name="MenuAccount" xml:space="preserve">
-    <value>Mi Cuenta</value>
+  <data name="MessageDeletedRole" xml:space="preserve">
+    <value>El Rol {0} ha sido eliminado.</value>
   </data>
-  <data name="MenuAssignRoles" xml:space="preserve">
+  <data name="MessageDeletedRoleUser" xml:space="preserve">
+    <value>El Usuario {0} ha sido eliminado del Rol {1}.</value>
+  </data>
+  <data name="MessageErrorDeletedRole" xml:space="preserve">
+    <value>No es posible eliminar el Rol {0} porque tiene usuarios asignados.</value>
+  </data>
+  <data name="MessageErrorDeleteRoleUser" xml:space="preserve">
+    <value>Ocurrió un error al eliminar el usuario {0}  del rol  {1}.</value>
+  </data>
+  <data name="MessageErrorGetPermissions" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de permisos.</value>
+  </data>
+  <data name="MessageErrorGetPermissionsUser" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de permisos del usuario.</value>
+  </data>
+  <data name="MessageErrorGetRoles" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de Roles.</value>
+  </data>
+  <data name="MessageErrorGetUsersByRole" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de usuarios del rol </value>
+  </data>
+  <data name="MessageErrorRegisterPermissionsToRol" xml:space="preserve">
+    <value>Ocurrió un error al registrar los permisos para el rol.</value>
+  </data>
+  <data name="MessageErrorRegisterPermissionsToUser" xml:space="preserve">
+    <value>Ocurrió un error al registrar los permisos para el usuario {0}.</value>
+  </data>
+  <data name="MessageNoUsersInList" xml:space="preserve">
+    <value>No se tienen usuarios en el listado.</value>
+  </data>
+  <data name="MessageRegisterPermissionsToRol" xml:space="preserve">
+    <value>Se registró correctamente los permisos para el rol.</value>
+  </data>
+  <data name="MessageRegisterPermissionsToUser" xml:space="preserve">
+    <value>Los permisos para el usuario {0} fueron registrados correctamente.</value>
+  </data>
+  <data name="MessageUserRegisteredInRole" xml:space="preserve">
+    <value>El Usuario {0} ha sido adicionado al Rol {1}.</value>
+  </data>
+  <data name="MessageUsersNoSelected" xml:space="preserve">
+    <value>No se tiene usuarios seleccionados en la lista.</value>
+  </data>
+  <data name="MessageWarningDeleteAdministrativeUser" xml:space="preserve">
+    <value>No se puede eliminar el Usuario {0} del rol {1} porque es el último con privilegios administrativos.</value>
+  </data>
+  <data name="MessageWarningDeleteAdminUser" xml:space="preserve">
+    <value>No se puede eliminar el Usuario {0} del Rol {1} porque es el útimo grupo con privilegios de administración y es el Administrador del Sistema.</value>
+  </data>
+  <data name="NoneRoleItem" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="PageTitlePermissionRole" xml:space="preserve">
+    <value>Definir permisos a Roles</value>
+  </data>
+  <data name="PageTitlePermissionUser" xml:space="preserve">
+    <value>Definir permisos a Usuarios</value>
+  </data>
+  <data name="PageTitleRoles" xml:space="preserve">
     <value>Asignar Roles</value>
   </data>
-  <data name="MenuAssignRolesByUser" xml:space="preserve">
+  <data name="PageTitleUserRoles" xml:space="preserve">
     <value>Asignar Roles por Usuario</value>
   </data>
-  <data name="MenuChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="ResetPermissionsButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-refresh'&gt;&lt;/i&gt; Resetear permisos</value>
   </data>
-  <data name="MenuChanges" xml:space="preserve">
-    <value>Cambios en la Aplicación</value>
+  <data name="ResetRolesButton" xml:space="preserve">
+    <value>&lt;i class="fa fa-refresh"&gt;&lt;/i&gt; Resetar los Roles del usuario</value>
   </data>
-  <data name="MenuClasificadores" xml:space="preserve">
-    <value>Clasificadores</value>
+  <data name="RoleColumn" xml:space="preserve">
+    <value>Rol</value>
   </data>
-  <data name="MenuConcepto" xml:space="preserve">
-    <value>Conceptos</value>
+  <data name="RoleLabel" xml:space="preserve">
+    <value>Rol:</value>
   </data>
-  <data name="MenuCredits" xml:space="preserve">
-    <value>Créditos</value>
+  <data name="RolesLabel" xml:space="preserve">
+    <value>Roles para el Usuario</value>
   </data>
-  <data name="MenuDefinePermissionRole" xml:space="preserve">
-    <value>Definir Permisos a Roles</value>
+  <data name="SavePermissionsButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-floppy-o'&gt;&lt;/i&gt; Grabar permisos</value>
   </data>
-  <data name="MenuDefinePermissionUser" xml:space="preserve">
-    <value>Definir Permisos a Usuarios</value>
+  <data name="SaveRolesButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-floppy-o'&gt;&lt;/i&gt; Grabar los Roles del Usuario</value>
   </data>
-  <data name="MenuDepartamentos" xml:space="preserve">
-    <value>Departamentos</value>
+  <data name="SearchUserButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-search'&gt;&lt;/i&gt; Buscar Usuarios</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
-    <value>Inicio</value>
+  <data name="SelectAllButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-caret-down'&gt;&lt;/i&gt; Seleccionar Todo</value>
   </data>
-  <data name="MenuListaEventosBitacora" xml:space="preserve">
-    <value>Ver Bitácora</value>
+  <data name="SelectColumn" xml:space="preserve">
+    <value>Seleccionar</value>
   </data>
-  <data name="MenuOficinas" xml:space="preserve">
-    <value>Oficinas</value>
+  <data name="SelectUserLabel" xml:space="preserve">
+    <value>Debe seleccionar un usuario.</value>
   </data>
-  <data name="MenuPersonas" xml:space="preserve">
-    <value>Personas</value>
+  <data name="TitleUserLabel" xml:space="preserve">
+    <value>Información del Usuario seleccionado</value>
   </data>
-  <data name="MenuPersonasListado" xml:space="preserve">
-    <value>Administrador de Personas</value>
+  <data name="UsersInLabel" xml:space="preserve">
+    <value>Usuarios en el Rol</value>
   </data>
-  <data name="MenuPreferences" xml:space="preserve">
-    <value>Preferencias de Usuario</value>
-  </data>
-  <data name="MenuSecurity" xml:space="preserve">
-    <value>Seguridad</value>
-  </data>
-  <data name="MenuSeguimiento" xml:space="preserve">
-    <value>Seguimiento a Comerciales</value>
-  </data>
-  <data name="MenuTipoCambio" xml:space="preserve">
-    <value>Tipos de Cambio</value>
-  </data>
-  <data name="MenuUserList" xml:space="preserve">
-    <value>Lista de Usuarios</value>
-  </data>
-  <data name="NoFeedback" xml:space="preserve">
-    <value>No existe seguimiento para esta aplicación</value>
-  </data>
-  <data name="NoJScriptLabel" xml:space="preserve">
-    <value>Para esta aplicación es imprescindible tener javascript habilitado.</value>
-  </data>
-  <data name="ProjectMenu" xml:space="preserve">
-    <value>Proyectos</value>
-  </data>
-  <data name="SubmitfeedbackLabel" xml:space="preserve">
-    <value>Reportar problema</value>
-  </data>
-  <data name="MenuEditUser" xml:space="preserve">
-    <value>Editar mi cuenta</value>
-  </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Cerrar Sesión</value>
-  </data>
-  <data name="SelectLanguageLabel" xml:space="preserve">
-    <value>Seleccione el idioma:</value>
-  </data>
-  <data name="CategoryMenu" xml:space="preserve">
-    <value>Administrar Categorías</value>
-  </data>
-  <data name="PersonMenu" xml:space="preserve">
-    <value>Personas</value>
+  <data name="UsersNotInLabel" xml:space="preserve">
+    <value>Usuarios no en el Rol</value>
   </data>
 </root>

@@ -11,7 +11,6 @@ namespace Artexacta.App.Project.BLL
     /// Summary description for ProjectBLL
     /// </summary>
     /// 
-
     [System.ComponentModel.DataObject]
     public class ProjectBLL
     {
@@ -70,7 +69,7 @@ namespace Artexacta.App.Project.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetProjectByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de proyectos de la organización.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorProjectsByOrganization);
             }
 
             return theList;

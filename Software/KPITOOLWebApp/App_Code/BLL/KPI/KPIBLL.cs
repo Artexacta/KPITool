@@ -146,7 +146,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetKPIsByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs de la organización.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorKpisByOrganization);
             }
 
             return theList;
@@ -176,7 +176,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetKPIsByProject para projectId: " + projectId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs del proyecto.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorKpisByProject);
             }
 
             return theList;
@@ -206,7 +206,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetKPIsByActivity para activityId: " + activityId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs de la actividad.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorKpisByActivity);
             }
 
             return theList;
@@ -236,7 +236,7 @@ namespace Artexacta.App.KPI.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetKPIsByPerson para personId: " + personId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException("Ocurrió un error al obtener el listado de KPIs de la persona.");
+                throw new ArgumentException(Resources.DataDetails.MessageErrorKpisByPerson);
             }
 
             return theList;

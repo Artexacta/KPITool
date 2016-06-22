@@ -249,4 +249,28 @@
   <data name="VerifiyDataFail" xml:space="preserve">
     <value>"No se pudo verificar si ya existe un registro con los mismos datos."</value>
   </data>
+  <data name="ValueRequirePercentData" xml:space="preserve">
+    <value>"El valor debe ser un número entre 1 y 100"</value>
+  </data>
+  <data name="DeleteMeasurementError" xml:space="preserve">
+    <value>Ocurrió un error al eliminar la medición.</value>
+  </data>
+  <data name="GetKPIMeasurements" xml:space="preserve">
+    <value>Ocurrió un error al obtener el listado de mediciones registradas.</value>
+  </data>
+  <data name="ImageAlert" xml:space="preserve">
+    <value>Los datos ya existen</value>
+  </data>
+  <data name="InsertMeasurementError" xml:space="preserve">
+    <value>Ocurrió un error, la información no se registró.</value>
+  </data>
+  <data name="ZeroKpiId" xml:space="preserve">
+    <value>El ID del KPI no puede ser cero.</value>
+  </data>
+  <data name="ZeroMeasurementId" xml:space="preserve">
+    <value>El ID de la medición no puede ser cero.</value>
+  </data>
+  <data name="ConfirmDeleteMeasurement" xml:space="preserve">
+    <value>return confirm('¿Está seguro de eliminar la medición?')</value>
+  </data>
 </root>

@@ -117,127 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivityMenu" xml:space="preserve">
-    <value>Actividades</value>
+  <data name="CancelButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-times'&gt;&lt;/i&gt; Cancel</value>
   </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Cerrar</value>
+  <data name="ConfirmDeleteCategory" xml:space="preserve">
+    <value>return confirm('Are you sure to delete the category?')</value>
   </data>
-  <data name="EnterFeedbackTitle" xml:space="preserve">
-    <value>Ingresar Comentario</value>
+  <data name="ConfirmDeleteItem" xml:space="preserve">
+    <value>return confirm('Are you sure to delete the item?')</value>
   </data>
-  <data name="KpiDashboardMenu" xml:space="preserve">
-    <value>Panel de Control de KPI</value>
+  <data name="DeleteColumn" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="KPIMenu" xml:space="preserve">
-    <value>KPIs</value>
+  <data name="EditColumn" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="MensajeArchivoVacio" xml:space="preserve">
-    <value>Empty resourceFile in menu item</value>
+  <data name="ExistsIDCustomValidator" xml:space="preserve">
+    <value>The ID already exists.</value>
   </data>
-  <data name="MensajeItemPublicoVacio" xml:space="preserve">
-    <value>Menu no tiene un item publico</value>
+  <data name="IdRequiredFieldValidator" xml:space="preserve">
+    <value>Enter an ID.</value>
   </data>
-  <data name="MensajeMenuNoPublico" xml:space="preserve">
-    <value>Item del menu no es público y no tiene una clase definida en el item</value>
+  <data name="ItemsColumn" xml:space="preserve">
+    <value>Items</value>
   </data>
-  <data name="MensajeValorInvalidoItem" xml:space="preserve">
-    <value>Valor inválido para un item público</value>
+  <data name="MessageCreatedCategory" xml:space="preserve">
+    <value>The category was successfully registered.</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Acerca de</value>
+  <data name="MessageCreatedItem" xml:space="preserve">
+    <value>The item was successfully registered.</value>
   </data>
-  <data name="MenuAccount" xml:space="preserve">
-    <value>Mi Cuenta</value>
+  <data name="MessageDeletedCategory" xml:space="preserve">
+    <value>The category was successfully deleted.</value>
   </data>
-  <data name="MenuAssignRoles" xml:space="preserve">
-    <value>Asignar Roles</value>
+  <data name="MessageDeletedItem" xml:space="preserve">
+    <value>The item was successfully deleted.</value>
   </data>
-  <data name="MenuAssignRolesByUser" xml:space="preserve">
-    <value>Asignar Roles por Usuario</value>
+  <data name="MessageEmptyCategoryId" xml:space="preserve">
+    <value>The ID of the category can not be empty.</value>
   </data>
-  <data name="MenuChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="MessageEmptyItemId" xml:space="preserve">
+    <value>The ID of the item can not be empty.</value>
   </data>
-  <data name="MenuChanges" xml:space="preserve">
-    <value>Cambios en la Aplicación</value>
+  <data name="MessageEmptyNameCategory" xml:space="preserve">
+    <value>The name of the category can not be empty.</value>
   </data>
-  <data name="MenuClasificadores" xml:space="preserve">
-    <value>Clasificadores</value>
+  <data name="MessageEmptyNameItem" xml:space="preserve">
+    <value>The name of the item can not be empty.</value>
   </data>
-  <data name="MenuConcepto" xml:space="preserve">
-    <value>Conceptos</value>
+  <data name="MessageErrorCreateCategory" xml:space="preserve">
+    <value>Error to create the category.</value>
   </data>
-  <data name="MenuCredits" xml:space="preserve">
-    <value>Créditos</value>
+  <data name="MessageErrorCreateItem" xml:space="preserve">
+    <value>Error to create the item.</value>
   </data>
-  <data name="MenuDefinePermissionRole" xml:space="preserve">
-    <value>Definir Permisos a Roles</value>
+  <data name="MessageErrorDeleteCategory" xml:space="preserve">
+    <value>Error to delete the category.</value>
   </data>
-  <data name="MenuDefinePermissionUser" xml:space="preserve">
-    <value>Definir Permisos a Usuarios</value>
+  <data name="MessageErrorDeleteItem" xml:space="preserve">
+    <value>Error to delete the item.</value>
   </data>
-  <data name="MenuDepartamentos" xml:space="preserve">
-    <value>Departamentos</value>
+  <data name="MessageErrorGetCategories" xml:space="preserve">
+    <value>Error to obtain the categories list registered.</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
-    <value>Inicio</value>
+  <data name="MessageErrorGetCategoriesByKpi" xml:space="preserve">
+    <value>There was an error getting the list of categories by KPI.</value>
   </data>
-  <data name="MenuListaEventosBitacora" xml:space="preserve">
-    <value>Ver Bitácora</value>
+  <data name="MessageErrorGetCategory" xml:space="preserve">
+    <value>Error to obtain the Category details.</value>
   </data>
-  <data name="MenuOficinas" xml:space="preserve">
-    <value>Oficinas</value>
+  <data name="MessageErrorGetItem" xml:space="preserve">
+    <value>Error to obtain the Item details.</value>
   </data>
-  <data name="MenuPersonas" xml:space="preserve">
-    <value>Personas</value>
+  <data name="MessageErrorGetItemsByCategory" xml:space="preserve">
+    <value>Error to obtain the Items list by category.</value>
   </data>
-  <data name="MenuPersonasListado" xml:space="preserve">
-    <value>Administrador de Personas</value>
+  <data name="MessageErrorUpdateCategory" xml:space="preserve">
+    <value>Error to update the category.</value>
   </data>
-  <data name="MenuPreferences" xml:space="preserve">
-    <value>Preferencias de Usuario</value>
+  <data name="MessageErrorUpdateItem" xml:space="preserve">
+    <value>Error to update the item.</value>
   </data>
-  <data name="MenuSecurity" xml:space="preserve">
-    <value>Seguridad</value>
+  <data name="MessageUpdatedCategory" xml:space="preserve">
+    <value>The category was successfully updated.</value>
   </data>
-  <data name="MenuSeguimiento" xml:space="preserve">
-    <value>Seguimiento a Comerciales</value>
+  <data name="MessageUpdatedItem" xml:space="preserve">
+    <value>The item was successfully updated.</value>
   </data>
-  <data name="MenuTipoCambio" xml:space="preserve">
-    <value>Tipos de Cambio</value>
+  <data name="NameColumn" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="MenuUserList" xml:space="preserve">
-    <value>Lista de Usuarios</value>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name:</value>
   </data>
-  <data name="NoFeedback" xml:space="preserve">
-    <value>No existe seguimiento para esta aplicación</value>
+  <data name="NameRequiredFieldValidator" xml:space="preserve">
+    <value>Enter a name.</value>
   </data>
-  <data name="NoJScriptLabel" xml:space="preserve">
-    <value>Para esta aplicación es imprescindible tener javascript habilitado.</value>
+  <data name="NewButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-plus'&gt;&lt;/i&gt; New Category</value>
   </data>
-  <data name="ProjectMenu" xml:space="preserve">
-    <value>Proyectos</value>
+  <data name="NewItemButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-plus'&gt;&lt;/i&gt; New Item</value>
   </data>
-  <data name="SubmitfeedbackLabel" xml:space="preserve">
-    <value>Reportar problema</value>
+  <data name="NoDataItemRows" xml:space="preserve">
+    <value>There are not registered items</value>
   </data>
-  <data name="MenuEditUser" xml:space="preserve">
-    <value>Editar mi cuenta</value>
+  <data name="NoDataRows" xml:space="preserve">
+    <value>There are not registered categories</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+  <data name="PageDetailsTitle" xml:space="preserve">
+    <value>Category Details</value>
   </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Cerrar Sesión</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Categories</value>
   </data>
-  <data name="SelectLanguageLabel" xml:space="preserve">
-    <value>Seleccione el idioma:</value>
+  <data name="RegularExpressionValidator" xml:space="preserve">
+    <value>Invalid characters.</value>
   </data>
-  <data name="CategoryMenu" xml:space="preserve">
-    <value>Administrar Categorías</value>
+  <data name="ReturnButton" xml:space="preserve">
+    <value>Back to Categories list</value>
   </data>
-  <data name="PersonMenu" xml:space="preserve">
-    <value>Personas</value>
+  <data name="SaveButton" xml:space="preserve">
+    <value>&lt;i class='fa fa-plus'&gt;&lt;/i&gt; Save</value>
+  </data>
+  <data name="TitleDetailsLabel" xml:space="preserve">
+    <value>Items list for the category {0} - {1}</value>
+  </data>
+  <data name="TitleLabel" xml:space="preserve">
+    <value>Categories list</value>
   </data>
 </root>

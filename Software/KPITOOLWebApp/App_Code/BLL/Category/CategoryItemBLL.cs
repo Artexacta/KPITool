@@ -44,7 +44,7 @@ namespace Artexacta.App.Categories
         public static List<CategoryItem> GetCategoriesItemByCategoryId(string categoryId)
         {
             if(string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             List<CategoryItem> theList = new List<CategoryItem>();
             CategoryItem theData = null;
@@ -64,8 +64,8 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el listado de items de la categoria: " + categoryId, exc);
-                throw exc;
+                log.Error("Error en GetCategoriesItemByCategoryId para categoryId: " + categoryId, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorGetItemsByCategory);
             }
 
             return theList;
@@ -74,10 +74,10 @@ namespace Artexacta.App.Categories
         public static CategoryItem GetCategoryItemById(string categoryItemId, string categoryId)
         {
             if (string.IsNullOrEmpty(categoryItemId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyItemId);
 
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             CategoryItem theData = null;
             try
@@ -92,8 +92,8 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el item de categoryItemId: " + categoryItemId + " y categoryId: " + categoryId, exc);
-                throw exc;
+                log.Error("Error en GetCategoryItemById para categoryItemId: " + categoryItemId + " y categoryId: " + categoryId, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorGetItem);
             }
 
             return theData;
@@ -102,13 +102,13 @@ namespace Artexacta.App.Categories
         public static void InsertCategoryItem(string categoryItemId, string categoryId, string name)
         {
             if (string.IsNullOrEmpty(categoryItemId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyItemId);
 
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(Resources.Organization.MessageEmptyNameProject);
+                throw new ArgumentException(Resources.Categories.MessageEmptyNameItem);
 
             try
             {
@@ -117,21 +117,21 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorCreateProject, exc);
-                throw exc;
+                log.Error("Error en InsertCategoryItem para categoryItemId: " + categoryItemId + ", categoryId: " + categoryId + " y name: " + name, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorCreateItem);
             }
         }
 
         public static void UpdateCategoryItem(string categoryItemId, string categoryId, string name)
         {
             if (string.IsNullOrEmpty(categoryItemId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyItemId);
 
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException(Resources.Organization.MessageEmptyNameProject);
+                throw new ArgumentException(Resources.Categories.MessageEmptyNameItem);
 
             try
             {
@@ -140,18 +140,18 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorUpdateProject, exc);
-                throw exc;
+                log.Error("Error en UpdateCategoryItem para categoryItemId: " + categoryItemId + ", categoryId: " + categoryId + " y name: " + name, exc);
+                throw new ArgumentException(Resources.Categories.MessageErrorUpdateItem);
             }
         }
 
-        public static void DeleteCategory(string categoryItemId, string categoryId)
+        public static void DeleteCategoryItem(string categoryItemId, string categoryId)
         {
             if (string.IsNullOrEmpty(categoryItemId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyItemId);
 
             if (string.IsNullOrEmpty(categoryId))
-                throw new ArgumentException(Resources.Organization.MessageZeroAreaId);
+                throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             try
             {
@@ -160,8 +160,8 @@ namespace Artexacta.App.Categories
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorDeleteProject, exc);
-                throw new Exception(Resources.Organization.MessageErrorDeleteProject);
+                log.Error("Error en DeleteCategoryItem para categoryItemId: " + categoryItemId + " y categoryId: " + categoryId, exc);
+                throw new Exception(Resources.Categories.MessageErrorDeleteItem);
             }
         }
 

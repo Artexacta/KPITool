@@ -14,16 +14,14 @@ public partial class Authentication_ResetearContrasena : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
-    protected void Page_Load(object sender, EventArgs e)
-    {
-
-    }
-
-
     protected override void InitializeCulture()
     {
-        base.InitializeCulture();
         Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
 
     }
 
@@ -45,11 +43,9 @@ public partial class Authentication_ResetearContrasena : System.Web.UI.Page
         }
 
         string newPass = "";
-
         try
         {
             MembershipUser user = Membership.GetUser(userName, false);
-
             if (user == null)
             {
                 ErrorLabel.Text = Resources.LoginGlossary.MensajeUsuarioNoEncontrado;
