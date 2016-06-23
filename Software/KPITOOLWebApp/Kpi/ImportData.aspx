@@ -151,7 +151,7 @@
                             <p><asp:Label ID="ValueDateLabel" runat="server" Text="<%$ Resources:ImportData, ValueDateLabel %>" Font-Bold="true" /></p>
                         </div>
                         <div class="col-md-3">
-                            <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" TextMode="Date" />
+                            <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" TextMode="Date" data-polyfill="desktop" />
                             <div class="has-error m-b-10">
                                 <asp:RequiredFieldValidator ID="DateRequiredFieldValidator" runat="server" ControlToValidate="DateTextBox"
                                     Display="Dynamic" ValidationGroup="EnterData" ErrorMessage="<%$ Resources:ImportData, RequiereDateValue %>" ForeColor="Red">
