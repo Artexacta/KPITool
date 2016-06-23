@@ -69,7 +69,7 @@ namespace Artexacta.App.Project.BLL
             catch (Exception exc)
             {
                 log.Error("Error en GetProjectByOrganization para organizationId: " + organizationId.ToString() + " y userName: " + userName, exc);
-                throw new ArgumentException(Resources.DataDetails.MessageErrorProjectsByOrganization);
+                throw new ArgumentException(Resources.Project.MessageErrorLoadProjectByOrganization);
             }
 
             return theList;
@@ -101,7 +101,7 @@ namespace Artexacta.App.Project.BLL
             catch (Exception exc)
             {
                 log.Error("Ocurrió un error mientras se obtenía los proyectos by search =" + whereClause, exc);
-                throw exc;
+                throw new Exception(Resources.Project.MessageErrorLoadProject);
             }
 
             return theList;
@@ -126,14 +126,14 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorCreateProject, exc);
-                throw new Exception(Resources.Organization.MessageErrorCreateProject);
+                log.Error(Resources.Project.MessageErrorCreateProject, exc);
+                throw new Exception(Resources.Project.MessageErrorCreateProject);
             }
 
             if ((int)projectId <= 0)
             {
-                log.Error(Resources.Organization.MessageErrorCreateProject);
-                throw new ArgumentException(Resources.Organization.MessageErrorCreateProject);
+                log.Error(Resources.Project.MessageErrorCreateProject);
+                throw new ArgumentException(Resources.Project.MessageErrorCreateProject);
             }
 
             return (int)projectId;
@@ -161,8 +161,8 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorUpdateProject, exc);
-                throw new Exception(Resources.Organization.MessageErrorUpdateProject);
+                log.Error(Resources.Project.MessageErrorUpdateProject, exc);
+                throw new Exception(Resources.Project.MessageErrorUpdateProject);
             }
         }
 
@@ -172,15 +172,16 @@ namespace Artexacta.App.Project.BLL
                 throw new ArgumentException(Resources.Organization.MessageZeroProjectId);
 
             ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
+            string userName = HttpContext.Current.User.Identity.Name;
 
             try
             {
-                localAdapter.DeleteProject(projectId);
+                localAdapter.DeleteProject(projectId, userName);
             }
             catch (Exception exc)
             {
-                log.Error(Resources.Organization.MessageErrorDeleteProject, exc);
-                throw new Exception(Resources.Organization.MessageErrorDeleteProject);
+                log.Error(Resources.Project.MessageErrorDeleteProject, exc);
+                throw new Exception(Resources.Project.MessageErrorDeleteProject);
             }
         }
 
@@ -202,8 +203,8 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el proyecto de id: " + projectId, exc);
-                throw exc;
+                log.Error(Resources.Project.MessageErrorLoadAProject + " ID:" + projectId, exc);
+                throw new Exception(Resources.Project.MessageErrorLoadAProject);
             }
 
             return theData;
@@ -230,7 +231,8 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                throw exc;
+                log.Error(Resources.Project.MessageErrorLoadProject + " for autocomplete.", exc);
+                throw new Exception(Resources.Project.MessageErrorLoadProject);
             }
             return theList;
         }

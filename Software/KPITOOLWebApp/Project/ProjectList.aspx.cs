@@ -75,6 +75,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         return name;
     }
+    
     protected string GetAreaInfo(Object obj)
     {
         int areaID = 0;
@@ -106,6 +107,10 @@ public partial class Project_ProjectList : System.Web.UI.Page
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
             return;
+
+        LinkButton buttonDelete = (LinkButton)e.Item.FindControl("DeleteProject");
+        if (buttonDelete != null)
+            buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Project.MessageConfirmDelete);
 
         Project item = (Project)e.Item.DataItem;
 
@@ -152,13 +157,14 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
 
         activitiesButton.Visible = theActivities.Count > 0;
-        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " Activity" : " Activities") : "";
+        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " " + Resources.Organization.LabelActivity : " " + Resources.Organization.LabelActivities) : "";
 
         kpisButton.Visible = theKPIs.Count > 0;
         kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
 
         and.Visible = activitiesButton.Visible && kpisButton.Visible;
     }
+
     protected void ProjectsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         int projectId = 0;
@@ -172,7 +178,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
         }
         if (projectId <= 0)
         {
-            SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
             return;
         }
 
@@ -233,87 +239,6 @@ public partial class Project_ProjectList : System.Web.UI.Page
         }
     }
 
-    private void RemoveProjectFromOldOwner(Project objProject)
-    {
-        //if (objProject.Owner is Area)
-        //{
-        //    Area oldArea = (Area)objProject.Owner;
-        //    oldArea.Projects.Remove(objProject.ObjectId);
-        //}
-        //else if (objProject.Owner is Organization)
-        //{
-        //    Organization oldOrganization = (Organization)objProject.Owner;
-        //    oldOrganization.Projects.Remove(objProject.ObjectId);
-        //}
-    }
-    protected void SearchButton_Click(object sender, EventArgs e)
-    {
-        //SearchProjects();
-    }
-
-    //private void SearchProjects()
-    //{
-    //    string searchTerm = SearchTextBox.Text.Trim().ToLower();
-
-    //    Dictionary<int, Project> source = null;
-    //    if (!string.IsNullOrEmpty(ObjectsComboBox.SelectedValue))
-    //    {
-    //        string[] values = ObjectsComboBox.SelectedValue.Split(new char[] { '-' });
-    //        int id = Convert.ToInt32(values[0]);
-    //        string ownerObjectType = values[1];
-    //        FrtwbObject owner = null;
-    //        if (ownerObjectType == "Organization")
-    //        {
-
-    //            source = FrtwbSystem.Instance.Organizations[id].Projects;
-    //            owner = FrtwbSystem.Instance.Organizations[id];
-    //        }
-    //        else if (ownerObjectType == "Area")
-    //        {
-    //            source = FrtwbSystem.Instance.Areas[id].Projects;
-    //            owner = FrtwbSystem.Instance.Areas[id];
-    //        }
-    //        else
-    //            source = new Dictionary<int, Project>();
-
-    //        OwnerObjectLabel.Text = "";
-    //        bool first = true;
-    //        while (owner != null)
-    //        {
-    //            if (first)
-    //            {
-    //                OwnerObjectLabel.Text = owner.Type + ": " + owner.Name;
-    //                first = false;
-    //            }
-    //            else
-    //                OwnerObjectLabel.Text = owner.Type + ": " + owner.Name + " / " + OwnerObjectLabel.Text;
-
-    //            owner = owner.Owner;
-    //        }
-    //        OwnerObjectLabel.Text = "Searching activities from : " + OwnerObjectLabel.Text;
-    //    }
-    //    else
-    //    {
-    //        source = FrtwbSystem.Instance.Projects;
-    //        OwnerObjectLabel.Text = "";
-    //    }
-
-
-    //    List<Project> results = new List<Project>();
-    //    foreach (var item in source.Values)
-    //    {
-    //        if (item.Name.ToLower().Contains(searchTerm))
-    //            results.Add(item);
-    //    }
-
-    //    ProjectsRepeater.DataSource = results;
-    //    ProjectsRepeater.DataBind();
-    //}
-
-    protected void ObjectsComboBox_DataBound(object sender, EventArgs e)
-    {
-
-    }
     protected void ProjectsObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
         if (e.Exception != null)

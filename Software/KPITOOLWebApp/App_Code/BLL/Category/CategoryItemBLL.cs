@@ -43,7 +43,7 @@ namespace Artexacta.App.Categories
 
         public static List<CategoryItem> GetCategoriesItemByCategoryId(string categoryId)
         {
-            if(string.IsNullOrEmpty(categoryId))
+            if (string.IsNullOrEmpty(categoryId))
                 throw new ArgumentException(Resources.Categories.MessageEmptyCategoryId);
 
             List<CategoryItem> theList = new List<CategoryItem>();

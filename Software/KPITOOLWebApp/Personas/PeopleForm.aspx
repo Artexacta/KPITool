@@ -31,13 +31,15 @@
                                 Display="Dynamic"
                                 ValidationGroup="AddData"
                                 ErrorMessage="<% $Resources: People, MessageCodeFormat %>"
-                                ValidationExpression="<% $Resources: Validations, CodeFormat %>" ></asp:RegularExpressionValidator>
+                                ValidationExpression="<% $Resources: Validations, CodeFormat %>"></asp:RegularExpressionValidator>
                         </div>
 
                         <label>
                             <asp:Label ID="NameLabel" runat="server" Text="<% $Resources: People, LabelName %>"></asp:Label>
                             <span class="label label-danger">
-                                <asp:Label ID="Req1Label" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label></span></label>
+                                <asp:Label ID="Req1Label" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label>
+                            </span>
+                        </label>
                         <asp:TextBox ID="NameTextBox" runat="server" CssClass="form-control" placeholder="<% $Resources: People, LabelEnterName %>" MaxLength="200"></asp:TextBox>
                         <div class="has-error m-b-10">
                             <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ControlToValidate="NameTextBox"
@@ -49,7 +51,7 @@
                                 Display="Dynamic"
                                 ValidationGroup="AddData"
                                 ErrorMessage="<% $Resources: People, MessageNameFormat %>"
-                                ValidationExpression="<% $Resources: Validations, NameFormat %>" ></asp:RegularExpressionValidator>
+                                ValidationExpression="<% $Resources: Validations, NameFormat %>"></asp:RegularExpressionValidator>
                         </div>
 
                         <uc1:AddDataControl ID="DataControl" runat="server" />

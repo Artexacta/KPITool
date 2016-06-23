@@ -14,6 +14,7 @@ using Artexacta.App.Area;
 using Artexacta.App.Area.BLL;
 using Artexacta.App.Project;
 using Artexacta.App.Project.BLL;
+using Artexacta.App.KPI.BLL;
 
 public partial class Kpi_KpiList : System.Web.UI.Page
 {
@@ -237,6 +238,24 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         {
             Session["KPI_ID"] = kpiId.ToString();
             Response.Redirect("~/Kpi/KpiForm.aspx");
+        }
+        if (e.CommandName == "ShareKpi")
+        {
+            Session["KPIID"] = kpiId.ToString();
+            Response.Redirect("~/Kpi/ShareKpi.aspx");
+        }
+        if (e.CommandName == "DeleteKpi")
+        {
+            try
+            {
+                KPIBLL.DeleteKPI(kpiId);
+            }
+            catch (Exception ex)
+            {
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
+                return;
+            }
+            KpisGridView.DataBind();
         }
     }
 }

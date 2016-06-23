@@ -122,6 +122,11 @@
   </data>
   <data name="FromLastLabel" xml:space="preserve">
     <value>desde el</value>
+  <data name="ErrorFormatTarget" xml:space="preserve">
+    <value>El Objetivo es un valor númerico inválido.</value>
+  </data>
+  <data name="ErrorFormatTargetPeriod" xml:space="preserve">
+    <value>El Periodo del Objetivo es un valor númerico inválido.</value>
   </data>
   <data name="LabelName" xml:space="preserve">
     <value>Nombre del KPI</value>
@@ -134,6 +139,9 @@
   </data>
   <data name="MessageErrorCurrencyList" xml:space="preserve">
     <value>Error al obtener la lista de monedas.</value>
+  </data>
+  <data name="MessageErrorDelete" xml:space="preserve">
+    <value>Error al eliminar el KPI.</value>
   </data>
   <data name="MessageErrorDirectionList" xml:space="preserve">
     <value>Error al obtener la lista de direcciones.</value>
@@ -150,8 +158,14 @@
   <data name="MessageNotAction" xml:space="preserve">
     <value>No se puede completar con la solicitud realizada.</value>
   </data>
+  <data name="MessageStartingDateFormat" xml:space="preserve">
+    <value>La fecha de inicio tiene formato inválido.</value>
+  </data>
   <data name="MessageStartingDateRequired" xml:space="preserve">
     <value>Debe ingresar la fecha de inicio.</value>
+  </data>
+  <data name="MessageTargetPeriodRequired" xml:space="preserve">
+    <value>Debe ingresar el Periodo Objetivo del Kpii</value>
   </data>
   <data name="MessageTargetRequired" xml:space="preserve">
     <value>Debe ingresar algún valor al objetivo del Kpi.</value>

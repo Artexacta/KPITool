@@ -85,7 +85,11 @@ public partial class MainPage : SqlViewStatePage
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
             return;
-        
+
+        LinkButton buttonDelete = (LinkButton)e.Item.FindControl("DeleteOrganization");
+        if (buttonDelete != null)
+            buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Organization.MessageConfirmDelete);
+
         Organization item = (Organization)e.Item.DataItem;
 
         if (item == null)
@@ -171,15 +175,15 @@ public partial class MainPage : SqlViewStatePage
         areasLabel.Text = areasLabel.Visible ? theAreas.Count + " Area" + (theAreas.Count == 1 ? "" : "s") : "";
 
         projectButton.Visible = theProjects.Count > 0;
-        projectButton.Text = projectButton.Visible ? theProjects.Count + " Project(s)" : "";
+        projectButton.Text = projectButton.Visible ? theProjects.Count + " " + Resources.Organization.LabelProjects : "";
 
         activitiesButton.Visible = theActivities.Count > 0;
-        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " Activity" : " Activities") : "";
+        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " " + Resources.Organization.LabelActivity : " " + Resources.Organization.LabelActivities) : "";
 
         if (ShowPeopleCheckbox.Checked)
         {
             PersonButton.Visible = thePerson.Count > 0;
-            PersonButton.Text = PersonButton.Visible ? thePerson.Count + (thePerson.Count == 1 ? " People" : " Person") : "";
+            PersonButton.Text = PersonButton.Visible ? thePerson.Count + (thePerson.Count == 1 ? " " + Resources.Organization.LabelPeople : " " + Resources.Organization.LabelPerson) : "";
         }
 
         kpisButton.Visible = theKPIs.Count > 0;
@@ -191,7 +195,7 @@ public partial class MainPage : SqlViewStatePage
             if (activitiesButton.Visible || kpisButton.Visible)
                 and1.Text = ",";
             else
-                and1.Text = " and ";
+                and1.Text = " " + Resources.Organization.LabelAnd + " ";
         }
 
         and2.Visible = projectButton.Visible && activitiesButton.Visible;
@@ -200,7 +204,7 @@ public partial class MainPage : SqlViewStatePage
             if (kpisButton.Visible)
                 and2.Text = ",";
             else
-                and2.Text = " and ";
+                and2.Text = " " + Resources.Organization.LabelAnd + " ";
         }
 
         and3.Visible = activitiesButton.Visible && PersonButton.Visible;
@@ -209,13 +213,13 @@ public partial class MainPage : SqlViewStatePage
             if (PersonButton.Visible)
                 and3.Text = ",";
             else
-                and3.Text = " and ";
+                and3.Text = " " + Resources.Organization.LabelAnd + " ";
         }
 
         and4.Visible = kpisButton.Visible;
         if (and4.Visible && kpisButton.Visible)
         {
-            and4.Text = " and ";
+            and4.Text = " " + Resources.Organization.LabelAnd + " ";
         }
     }
     
@@ -232,7 +236,7 @@ public partial class MainPage : SqlViewStatePage
         }
         if(organizationId <= 0)
         {
-            SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
             return;
         }
 
@@ -269,7 +273,6 @@ public partial class MainPage : SqlViewStatePage
             }
             catch (Exception ex)
             {
-                log.Error("Error deleting an Organization", ex);
                 SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
@@ -302,7 +305,7 @@ public partial class MainPage : SqlViewStatePage
     {
         if (e.Exception != null)
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to get the organization list.");
+            SystemMessages.DisplaySystemErrorMessage(e.Exception.Message);
             e.ExceptionHandled = true;
         }
     }

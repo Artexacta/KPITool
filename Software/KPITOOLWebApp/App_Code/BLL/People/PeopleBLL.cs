@@ -210,10 +210,11 @@ namespace Artexacta.App.People.BLL
                 throw new ArgumentException(Resources.People.MessageIdPersonZero);
 
             PeopleTableAdapter localAdapter = new PeopleTableAdapter();
+            string userName = HttpContext.Current.User.Identity.Name;
 
             try
             {
-                localAdapter.DeletePerson(personId);
+                localAdapter.DeletePerson(personId,userName);
             }
             catch (Exception exc)
             {

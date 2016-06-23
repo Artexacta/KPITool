@@ -54,6 +54,8 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         LanguageHiddenField.Value = Artexacta.App.Utilities.LanguageUtilities.GetLanguageFromContext();
         DataControl.DataType = UserControls_FRTWB_AddDataControl.AddType.KPI.ToString();
+        DateRangeValidator.MinimumValue = DateTime.MinValue.ToString("d");
+        DateRangeValidator.MaximumValue = DateTime.Today.AddYears(50).ToString("d");
         Session["LIST_CATEGORIES"] = null;
         ProcessSessionParametes();
         LoadKpiData();
@@ -141,6 +143,12 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             MeasuredInCombobox.SelectedValue = theKpi.CurrencyUnitID;
             UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text + " of " + CurrencyCombobox.SelectedItem.Text;
         }
+        if (theKpi.UnitID == "PERCENT")
+        {
+            UnitTargetLabel.Text = "%";
+            SingleTargetRangeValidator.MaximumValue = "100";
+            SingleTargetRangeValidator.Type = ValidationDataType.Double;
+        }
 
         DirectionCombobox.SelectedValue = theKpi.DirectionID;
         SelectedDirectionHiddenField.Value = theKpi.DirectionID;
@@ -155,15 +163,15 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         ReportingPeriodCombobox.SelectedValue = theKpi.ReportingUnitID;
         ReportingPeriodHiddenfield.Value = theKpi.ReportingUnitID;
         UnitLabel.Text = theKpi.ReportingUnitID;
-        TargetPeriodTextBox.Value = theKpi.TargetPeriod;
+        TargetPeriodTextBox.Text = theKpi.TargetPeriod.ToString();
 
         if (theKpi.StartDate > DateTime.MinValue)
         {
-            StartingDatePicker.SelectedDate = theKpi.StartDate;
+            StartingDateTextBox.Text = theKpi.StartDate.ToString("d");
         }
         else
         {
-            StartingDatePicker.SelectedDate = null;
+            StartingDateTextBox.Text = null;
         }
 
         categoryCheckBox.Checked = theKpi.AllowCategories;
@@ -177,19 +185,16 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
         catch { }
 
-        if (theTarget == null)
+        if (theKpi.UnitID.Trim() == "TIME")
         {
-            if (theKpi.UnitID.Trim() == "TIME")
-            {
-                NumericSingleTargetPanel.Style["display"] = "none";
-                TimeSingleTargetPanel.Style["display"] = "block";
-            }
-            else
-            {
-                NumericSingleTargetPanel.Style["display"] = "block";
-                TimeSingleTargetPanel.Style["display"] = "none";
-                SingleTargetTextBox.Value = 0;
-            }
+            NumericSingleTargetPanel.Style["display"] = "none";
+            TimeSingleTargetPanel.Style["display"] = "block";
+        }
+        else
+        {
+            NumericSingleTargetPanel.Style["display"] = "block";
+            TimeSingleTargetPanel.Style["display"] = "none";
+            SingleTargetTextBox.Text = "0";
         }
 
         if (theTarget != null && !theKpi.AllowCategories)
@@ -223,12 +228,15 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             {
                 NumericSingleTargetPanel.Style["display"] = "block";
                 TimeSingleTargetPanel.Style["display"] = "none";
-                SingleTargetTextBox.Value = Convert.ToDouble(theTarget.Target);
 
-                if (theKpi.UnitID == "PERCENT")
-                    UnitTargetLabel.Text = "%";
-                else
-                    UnitTargetLabel.Text = "";
+                try
+                {
+                    SingleTargetTextBox.Text = theTarget.Target.ToString();
+                }
+                catch
+                {
+                    SystemMessages.DisplaySystemErrorMessage("No se pudo obtener el valor del target, es inválido.");
+                }
             }
         }
 
@@ -297,10 +305,18 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             theKpi.CurrencyUnitID = MeasuredInCombobox.SelectedValue;
         }
 
-        theKpi.TargetPeriod = Convert.ToInt32(TargetPeriodTextBox.Value);
+        try
+        {
+            theKpi.TargetPeriod = Convert.ToInt32(TargetPeriodTextBox.Text);
+        }
+        catch
+        {
+            SystemMessages.DisplaySystemErrorMessage("El Target Period no es un valor númerico válido.");
+            return;
+        }
 
-        if (StartingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate > DateTime.MinValue)
-            theKpi.StartDate = Convert.ToDateTime(StartingDatePicker.SelectedDate);
+        if (!string.IsNullOrEmpty(StartingDateTextBox.Text) && Convert.ToDateTime(StartingDateTextBox.Text) > DateTime.MinValue)
+            theKpi.StartDate = Convert.ToDateTime(StartingDateTextBox.Text);
         else
             theKpi.StartDate = DateTime.MinValue;
 
@@ -334,7 +350,15 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             }
             else
             {
-                theTarget.Target = Convert.ToDecimal(SingleTargetTextBox.Value);
+                try
+                {
+                    theTarget.Target = Convert.ToDecimal(SingleTargetTextBox.Text);
+                }
+                catch
+                {
+                    theTarget.Target = 0;
+                }
+
             }
         }
         else
@@ -358,7 +382,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             foreach (RepeaterItem itemRepeater in targetsRepeater.Items)
             {
                 Label ItemsLabel = (Label)itemRepeater.FindControl("ItemsLabel");
-                RadNumericTextBox targetControl = null;
+                TextBox targetControl = null;
                 DropDownList theYear = null;
                 DropDownList theMonth = null;
                 DropDownList theDay = null;
@@ -391,11 +415,11 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 }
                 else
                 {
-                    targetControl = (RadNumericTextBox)itemRepeater.FindControl("TargetTextBox");
+                    targetControl = (TextBox)itemRepeater.FindControl("TargetTextBox");
                     try
                     {
-                        if (targetControl != null && targetControl.Value > 0)
-                            valueTarget = Convert.ToDecimal(targetControl.Value);
+                        if (targetControl != null && Convert.ToDecimal(targetControl.Text) > 0)
+                            valueTarget = Convert.ToDecimal(targetControl.Text);
                     }
                     catch { }
                 }
@@ -520,9 +544,8 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
                     UnitTargetLabel.Text = "%";
-                    SingleTargetTextBox.MinValue = 0;
-                    SingleTargetTextBox.MaxValue = 100;
-                    SingleTargetTextBox.NumberFormat.DecimalDigits = 2;
+                    SingleTargetRangeValidator.MaximumValue = "100";
+                    SingleTargetRangeValidator.Type = ValidationDataType.Double;
                     CurrencyPanel.Style["display"] = "none";
                     break;
                 case "TIME":
@@ -533,19 +556,19 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 case "INT":
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
-                    SingleTargetTextBox.NumberFormat.DecimalDigits = 0;
+                    SingleTargetRangeValidator.Type = ValidationDataType.Integer;
                     CurrencyPanel.Style["display"] = "none";
                     break;
                 case "DECIMAL":
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
-                    SingleTargetTextBox.NumberFormat.DecimalDigits = 2;
+                    SingleTargetRangeValidator.Type = ValidationDataType.Double;
                     CurrencyPanel.Style["display"] = "none";
                     break;
                 case "MONEY":
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
-                    SingleTargetTextBox.NumberFormat.DecimalDigits = 2;
+                    SingleTargetRangeValidator.Type = ValidationDataType.Double;
                     CurrencyPanel.Style["display"] = "block";
                     CurrencyRequiredFieldValidator.ValidationGroup = "AddData";
                     MeasuredRequiredFieldValidator.ValidationGroup = "AddData";
@@ -809,21 +832,23 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
             //Percent
 
-            RadNumericTextBox theTarget = (RadNumericTextBox)e.Item.FindControl("TargetTextBox");
-            if (theTarget != null)
+            TextBox theTarget = (TextBox)e.Item.FindControl("TargetTextBox");
+            RangeValidator theValidation = (RangeValidator)e.Item.FindControl("TargetRangeValidator");
+
+            if (theTarget != null && theValidation != null)
             {
                 if (SelectedUnitHiddenField.Value == "PERCENT")
                 {
-                    theTarget.MaxValue = 100;
-                    theTarget.NumberFormat.DecimalDigits = 2;
+                    theValidation.MaximumValue = "100";
+                    theValidation.Type = ValidationDataType.Double;
                 }
                 else if (SelectedUnitHiddenField.Value == "INT")
                 {
-                    theTarget.NumberFormat.DecimalDigits = 0;
+                    theValidation.Type = ValidationDataType.Integer;
                 }
                 else
                 {
-                    theTarget.NumberFormat.DecimalDigits = 2;
+                    theValidation.Type = ValidationDataType.Double;
                 }
             }
 
@@ -839,7 +864,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
                     if (valuetarget > 0 && theTarget != null)
                     {
-                        theTarget.Value = valuetarget;
+                        theTarget.Text = valuetarget.ToString();
                     }
                 }
                 catch { }
@@ -864,7 +889,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
     }
     protected void TargetCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
     {
-        if (StartingDatePicker.SelectedDate == null)
+        if (string.IsNullOrEmpty(StartingDateTextBox.Text))
         {
             args.IsValid = true;
             return;
@@ -886,7 +911,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             }
             else
             {
-                if (SingleTargetTextBox.Value == null || SingleTargetTextBox.Value <= 0)
+                if (string.IsNullOrEmpty(SingleTargetTextBox.Text) || Convert.ToDecimal(SingleTargetTextBox.Text) <= 0)
                 {
                     args.IsValid = false;
                     return;
@@ -906,7 +931,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
             foreach (RepeaterItem itemRepeater in targetsRepeater.Items)
             {
-                RadNumericTextBox targetControl = null;
+                TextBox targetControl = null;
                 DropDownList theYear = null;
                 DropDownList theMonth = null;
                 DropDownList theDay = null;
@@ -940,11 +965,11 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 }
                 else
                 {
-                    targetControl = (RadNumericTextBox)itemRepeater.FindControl("TargetTextBox");
+                    targetControl = (TextBox)itemRepeater.FindControl("TargetTextBox");
                     try
                     {
-                        if (targetControl != null && targetControl.Value > 0)
-                            valueTarget = Convert.ToDecimal(targetControl.Value);
+                        if (targetControl != null && Convert.ToDecimal(targetControl.Text) > 0)
+                            valueTarget = Convert.ToDecimal(targetControl.Text);
                     }
                     catch { }
                 }
@@ -967,10 +992,13 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
     }
     protected void StartingDateCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
     {
-        if (StartingDatePicker.SelectedDate != null && StartingDatePicker.SelectedDate > DateTime.MinValue)
+        if (!string.IsNullOrEmpty(StartingDateTextBox.Text))
         {
-            args.IsValid = true;
-            return;
+            if (Convert.ToDateTime(StartingDateTextBox.Text) > DateTime.MinValue)
+            {
+                args.IsValid = true;
+                return;
+            }
         }
 
         //Verify if exists target
@@ -989,7 +1017,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             }
             else
             {
-                if (SingleTargetTextBox.Value > 0)
+                if (!string.IsNullOrEmpty(StartingDateTextBox.Text) && Convert.ToDecimal(SingleTargetTextBox.Text) > 0)
                     existsTarget = true;
             }
         }
@@ -1000,7 +1028,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             {
                 foreach (RepeaterItem itemRepeater in targetsRepeater.Items)
                 {
-                    RadNumericTextBox targetControl = null;
+                    TextBox targetControl = null;
                     DropDownList theYear = null;
                     DropDownList theMonth = null;
                     DropDownList theDay = null;
@@ -1031,11 +1059,11 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                     }
                     else
                     {
-                        targetControl = (RadNumericTextBox)itemRepeater.FindControl("TargetTextBox");
+                        targetControl = (TextBox)itemRepeater.FindControl("TargetTextBox");
                         try
                         {
-                            if (targetControl != null && targetControl.Value > 0)
-                                valueTarget = Convert.ToDecimal(targetControl.Value);
+                            if (targetControl != null && Convert.ToDecimal(targetControl.Text) > 0)
+                                valueTarget = Convert.ToDecimal(targetControl.Text);
                         }
                         catch { }
                     }
@@ -1050,9 +1078,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
 
         if (existsTarget)
-            args.IsValid = true;
-        else
             args.IsValid = false;
+        else
+            args.IsValid = true;
 
     }
     protected void MeasuredInCombobox_SelectedIndexChanged(object sender, EventArgs e)

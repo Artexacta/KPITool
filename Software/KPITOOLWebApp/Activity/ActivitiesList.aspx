@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Activities" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ActivitiesList.aspx.cs" Inherits="Activity_ActivitiesList" %>
+﻿<%@ Page Title="<% $Resources: Activity, TitleActivities %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ActivitiesList.aspx.cs" Inherits="Activity_ActivitiesList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -23,11 +23,13 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="t-header">
-                    <div class="th-title">Activities</div>
+                    <div class="th-title">
+                        <asp:Label ID="TitleActivyLabel" runat="server" Text="<% $Resources: Activity, TitleActivities %>"></asp:Label>
+                    </div>
                 </div>
                 <div class="t-body tb-padding">
                     <app:SearchControl ID="ActivitySearchControl" runat="server"
-                        Title="Búsqueda"
+                        Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                         DisplayHelp="true"
                         DisplayContextualHelp="true"
                         CssSearch="CSearch"
@@ -73,31 +75,35 @@
                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationId")) %>'
                                                 CommandName="ViewOrganization"
                                                 CommandArgument='<%# Eval("OrganizationId") %>'></asp:LinkButton>
-                                            <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
-                                                CommandName="ViewProject"
-                                                CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
+                                            CommandName="ViewProject"
+                                            CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
                                         )
                                     </p>
                                 </div>
                             </div>
                             <div class="row m-b-20">
                                 <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-4 m-t-5" Visible="false">
-                                    This activity does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
+                                    <asp:Label ID="NoObjectLabel" runat="server" Text="<% $Resources: Activity, MessageActivityNoObject %>"></asp:Label>
+                                    <i class="zmdi zmdi-plus-circle-o"></i>
+                                    <asp:Label ID="IconLabel" runat="server" Text="<% $Resources: Activity, MessageActivityIconAbove %>"></asp:Label>
                                 </asp:Panel>
                                 <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
                                     <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ACTIVITY" OwnerId='<%# Eval("ActivityId") %>' />
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
-                                    This activity has 
+                                    <asp:Label ID="HasLabel" runat="server" Text="<% $Resources: Activity, MessageActivityHas %>"></asp:Label> 
                                     <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
-                                         CommandName="ViewKPIs" CommandArgument='<%# Eval("ActivityId") %>'></asp:LinkButton>
+                                        CommandName="ViewKPIs" CommandArgument='<%# Eval("ActivityId") %>'></asp:LinkButton>
                                 </asp:Panel>
                             </div>
                         </ItemTemplate>
                         <FooterTemplate>
                             <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# ActivityRepeater.Items.Count == 0 %>'>
                                 <div class="col-md-12 text-center">
-                                    -- There are no Activities registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above --
+                                    <asp:Label ID="NoActivitiesLabel" runat="server" Text="<% $Resources: Activity, MessageNoActivity %>"></asp:Label>
+                                    <i class="zmdi zmdi-plus-circle-o"></i>
+                                    <asp:Label ID="Icon2Label" runat="server" Text="<% $Resources: Activity, MessageActivityIconAbove1 %>"></asp:Label>
                                 </div>
                             </asp:Panel>
                         </FooterTemplate>
@@ -130,7 +136,8 @@
             </div>
         </div>
     </div>
-    <asp:ObjectDataSource ID="ActivityObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetActivitiesBySearch" TypeName="Artexacta.App.Activities.BLL.ActivityBLL">
+    <asp:ObjectDataSource ID="ActivityObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" 
+        SelectMethod="GetActivitiesBySearch" TypeName="Artexacta.App.Activities.BLL.ActivityBLL" OnSelected="ActivityObjectDataSource_Selected">
         <SelectParameters>
             <asp:ControlParameter ControlID="ActivitySearchControl" PropertyName="Sql" Name="whereClause" Type="String" />
         </SelectParameters>

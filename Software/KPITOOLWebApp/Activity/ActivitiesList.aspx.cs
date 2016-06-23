@@ -19,6 +19,12 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         ActivitySearchControl.Config = new ActivitiesSearch();
@@ -104,6 +110,10 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
             return;
 
+        LinkButton buttonDelete = (LinkButton)e.Item.FindControl("DeleteActivity");
+        if (buttonDelete != null)
+            buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Activity.MessageConfirmDelete);
+
         Activity item = (Activity)e.Item.DataItem;
 
         //KPI
@@ -131,8 +141,6 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 
         LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
 
-        Literal and = (Literal)e.Item.FindControl("AndLiteral");
-
         kpisButton.Visible = theKPIs.Count > 0;
         kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
 
@@ -151,7 +159,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         }
         if (activityId <= 0)
         {
-            SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
             return;
         }
         if (e.CommandName == "EditActivity")
@@ -179,7 +187,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
                 SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
-            SystemMessages.DisplaySystemMessage("The activity was deleted successfully.");
+            SystemMessages.DisplaySystemMessage(Resources.Activity.MessageDeleted);
             ActivityRepeater.DataBind();
         }
         if (e.CommandName == "ViewKPIs")
@@ -202,5 +210,12 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         }
     }
 
-  
+    protected void ActivityObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            e.ExceptionHandled = true;
+            SystemMessages.DisplaySystemErrorMessage(Resources.Activity.MessageErrorGetActivities);
+        }
+    }
 }

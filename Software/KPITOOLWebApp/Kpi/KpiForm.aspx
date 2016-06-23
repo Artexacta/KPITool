@@ -204,9 +204,7 @@
                         <label>Target Period<span class="label label-danger">Required</span></label>
                         <div class="row">
                             <div class="col-md-2">
-                                <telerik:RadNumericTextBox MinValue="0" NumberFormat-DecimalDigits="0"
-                                    runat="server" ID="TargetPeriodTextBox">
-                                </telerik:RadNumericTextBox>
+                                <asp:TextBox ID="TargetPeriodTextBox" runat="server" TextMode="Number"></asp:TextBox>
                             </div>
                             <div class="col-md-2 col-md-offset-1">
                                 <asp:Label ID="UnitLabel" runat="server" Text=""></asp:Label>
@@ -215,11 +213,19 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="has-error m-b-10">
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TargetPeriodTextBox"
+                                    <asp:RequiredFieldValidator ID="TargetRequiredFieldValidator" runat="server" ControlToValidate="TargetPeriodTextBox"
                                         Display="Dynamic"
                                         ValidationGroup="AddData"
-                                        ErrorMessage="You must choose the Target Period for the Kpi">
+                                        ErrorMessage="<% $Resources: Kpi, MessageTargetPeriodRequired %>">
                                     </asp:RequiredFieldValidator>
+                                    <asp:RangeValidator ID="TargetRangeValidator" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, ErrorFormatTargetPeriod %>"
+                                        ControlToValidate="TargetPeriodTextBox"
+                                        Display="Dynamic"
+                                        MinimumValue="0"
+                                        MaximumValue="999999999"
+                                        ValidationGroup="AddData"
+                                        Type="Integer"></asp:RangeValidator>
                                 </div>
                             </div>
                         </div>
@@ -228,7 +234,7 @@
                         <label>Starting Date</label>
                         <div class="row">
                             <div class="col-md-4">
-                                <telerik:RadDatePicker ID="StartingDatePicker" runat="server"></telerik:RadDatePicker>
+                                <asp:TextBox ID="StartingDateTextBox" runat="server" TextMode="Date"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">
@@ -240,6 +246,12 @@
                                         ValidationGroup="AddData"
                                         OnServerValidate="StartingDateCustomValidator_ServerValidate">
                                     </asp:CustomValidator>
+                                    <asp:RangeValidator ID="DateRangeValidator" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, MessageStartingDateFormat %>"
+                                        Display="Dynamic"
+                                        ValidationGroup="AddData"
+                                        Type="Date"
+                                        ControlToValidate="StartingDateTextBox"></asp:RangeValidator>
                                 </div>
                             </div>
                         </div>
@@ -259,14 +271,20 @@
                             <div id="NumericSingleTargetPanel" runat="server">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <telerik:RadNumericTextBox MinValue="0" NumberFormat-DecimalDigits="0"
-                                            runat="server" ID="SingleTargetTextBox">
-                                            <EnabledStyle HorizontalAlign="Right" />
-                                        </telerik:RadNumericTextBox>
+                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" TextMode="Number"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3 col-md-offset-1">
                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
                                     </div>
+                                </div>
+                                <div class="has-error m-b-10">
+                                    <asp:RangeValidator ID="SingleTargetRangeValidator" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, ErrorFormatTarget %>"
+                                        Display="Dynamic"
+                                        ControlToValidate="SingleTargetTextBox"
+                                        MinimumValue="0"
+                                        MaximumValue="999999999"
+                                        ValidationGroup="AddData"></asp:RangeValidator>
                                 </div>
                             </div>
                             <div id="TimeSingleTargetPanel" runat="server" style="display: none">
@@ -478,13 +496,19 @@
                                                 </div>
                                                 <div id="numericTarget" runat="server" style="display: none">
                                                     <div class="col-md-2">
-                                                        <telerik:RadNumericTextBox MinValue="0" NumberFormat-DecimalDigits="0"
-                                                            runat="server" ID="TargetTextBox">
-                                                            <EnabledStyle HorizontalAlign="Right" />
-                                                        </telerik:RadNumericTextBox>
+                                                        <asp:TextBox ID="TargetTextBox" runat="server"></asp:TextBox>
                                                     </div>
-                                                    <div class="col-md-3 col-md-offset-1">
+                                                    <div class="col-md-2 col-md-offset-1">
                                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
+                                                    </div>
+                                                    <div class="col-md-4 col-md-offset-1">
+                                                        <asp:RangeValidator ID="TargetRangeValidator" runat="server"
+                                                            ErrorMessage="<% $Resources: Kpi, ErrorFormatTarget %>"
+                                                            Display="Dynamic"
+                                                            ControlToValidate="TargetTextBox"
+                                                            MinimumValue="0"
+                                                            MaximumValue="999999999"
+                                                            Type="Double"></asp:RangeValidator>
                                                     </div>
                                                 </div>
                                                 <div id="timeTarget" runat="server" style="display: none">

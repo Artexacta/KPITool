@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.Project;
 using Artexacta.App.Project.BLL;
+using Artexacta.App.PermissionObject;
+using Artexacta.App.PermissionObject.BLL;
 
 public partial class Project_ProjectForm : System.Web.UI.Page
 {
@@ -87,6 +89,26 @@ public partial class Project_ProjectForm : System.Web.UI.Page
         }
         else
         {
+            PermissionObject theUser = new PermissionObject();
+            try
+            {
+                theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PROJECT.ToString(), Convert.ToInt32(ProjectIdHiddenField.Value));
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                Response.Redirect("~/MainPage.aspx");
+            }
+
+            bool readOnly = false;
+
+            if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN") || i.ObjectActionID.Equals("MANAGE_PROJECT")))
+            {
+                readOnly = true;
+            }
+
+            OrganizationControl.ReadOnly = readOnly;
+
             //Update
             Project theData = null;
             try
@@ -104,7 +126,11 @@ public partial class Project_ProjectForm : System.Web.UI.Page
                 ProjectNameTextBox.Text = theData.Name;
                 OrganizationControl.OrganizationId = theData.OrganizationID;
                 OrganizationControl.AreaId = theData.AreaID;
+                ProjectNameTextBox.Enabled = !readOnly;    
             }
+
+            SaveButton.Visible = !readOnly;
+            RequiredLabel.Visible = !readOnly;
         }
     }
 
