@@ -13,9 +13,9 @@
     <div id="CSearch_Item_Panel">
         <asp:Label ID="lblTitle" runat="server" CssClass="CSearch_Item_Label"></asp:Label>
         <div id="CSearch_Item_Control">
-            <telerik:RadComboBox ID="OrganizationComboBox" runat="server" CssClass="CSearch_Item_Control_Operator" ZIndex="8101" Width="50"
+            <asp:DropDownList ID="OrganizationComboBox" runat="server" CssClass="CSearch_Item_Control_Operator" ZIndex="8101" Width="50"
                 DataSourceID="OrganizationObjectDataSource" DataValueField="OrganizationID" DataTextField="Name" >
-            </telerik:RadComboBox>
+            </asp:DropDownList>
             <asp:ObjectDataSource ID="OrganizationObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" 
                 SelectMethod="GetOrganizationsByUser" TypeName="Artexacta.App.Organization.BLL.OrganizationBLL">
                 <SelectParameters>

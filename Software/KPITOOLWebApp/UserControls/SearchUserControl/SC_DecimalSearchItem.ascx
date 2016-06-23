@@ -16,18 +16,17 @@
 			<table>
 				<tr>
 					<td>
-						<telerik:RadComboBox ID="ddlOperator" runat="server" CssClass="CSearch_Item_Control_Operator" ZIndex="8101" Width="50">
+						<asp:DropDownList ID="ddlOperator" runat="server" CssClass="CSearch_Item_Control_Operator" ZIndex="8101" Width="50">
 							<Items>
-								<telerik:RadComboBoxItem Text="=" Value=" " Selected="True"></telerik:RadComboBoxItem>
-								<telerik:RadComboBoxItem Text="&gt;" Value=">"></telerik:RadComboBoxItem>
-								<telerik:RadComboBoxItem Text="&lt;" Value="<"></telerik:RadComboBoxItem>
+								<asp:ListItem Text="=" Value=" " Selected="True"></asp:ListItem>
+								<asp:ListItem Text="&gt;" Value=">"></asp:ListItem>
+								<asp:ListItem Text="&lt;" Value="<"></asp:ListItem>
 							</Items>
-						</telerik:RadComboBox>
+						</asp:DropDownList>
 					</td>
 					<td>
-						<telerik:RadNumericTextBox ID="CSearch_Item_AspnetControl" runat="server" DataType="System.Double">
-							<NumberFormat DecimalDigits="2" DecimalSeparator="."/>
-						</telerik:RadNumericTextBox>
+						<asp:TextBox ID="CSearch_Item_AspnetControl" runat="server" TextMode="Number">
+						</asp:TextBox>
 					</td>
 				</tr>
 			</table>

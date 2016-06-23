@@ -122,6 +122,7 @@
   </data>
   <data name="FromLastLabel" xml:space="preserve">
     <value>desde el</value>
+  </data>
   <data name="ErrorFormatTarget" xml:space="preserve">
     <value>El Objetivo es un valor númerico inválido.</value>
   </data>

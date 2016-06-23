@@ -122,6 +122,7 @@
   </data>
   <data name="FromLastLabel" xml:space="preserve">
     <value>from last</value>
+  </data>
   <data name="ErrorFormatTarget" xml:space="preserve">
     <value>The Target is an invalid number.</value>
   </data>
