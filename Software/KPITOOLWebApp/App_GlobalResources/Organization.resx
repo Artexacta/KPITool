@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LabelActivities" xml:space="preserve">
+    <value>Activities</value>
+  </data>
+  <data name="LabelActivity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
   <data name="LabelAddArea" xml:space="preserve">
     <value>Add Area</value>
   </data>
@@ -125,6 +131,9 @@
   </data>
   <data name="LabelAddOrganization" xml:space="preserve">
     <value>Add Organization</value>
+  </data>
+  <data name="LabelAnd" xml:space="preserve">
+    <value>and</value>
   </data>
   <data name="LabelAreaName" xml:space="preserve">
     <value>Area Name:</value>
@@ -141,14 +150,35 @@
   <data name="LabelEditOrganization" xml:space="preserve">
     <value>Edit Organization</value>
   </data>
+  <data name="LabelOrganizationHas" xml:space="preserve">
+    <value>This organization has</value>
+  </data>
+  <data name="LabelPeople" xml:space="preserve">
+    <value>People</value>
+  </data>
+  <data name="LabelPerson" xml:space="preserve">
+    <value>Person</value>
+  </data>
+  <data name="LabelProjects" xml:space="preserve">
+    <value>Project(s)</value>
+  </data>
   <data name="MessageActivityProjectError" xml:space="preserve">
     <value>The activity is not in the project.</value>
+  </data>
+  <data name="MessageAddArea" xml:space="preserve">
+    <value>New Area was added to current Organization.</value>
   </data>
   <data name="MessageAreaOrganizationError" xml:space="preserve">
     <value>The area is not in the organization.</value>
   </data>
   <data name="MessageAreaRequired" xml:space="preserve">
     <value>The area is required.</value>
+  </data>
+  <data name="MessageCanCreate" xml:space="preserve">
+    <value>You can create an organization by clicking</value>
+  </data>
+  <data name="MessageConfirmDelete" xml:space="preserve">
+    <value>Please confirm that you wish to delete the selected organization. Note that organization that are deleted are moved to the Trash and you can recover the deleted organization for up to 30 days.</value>
   </data>
   <data name="MessageCreateOk" xml:space="preserve">
     <value>The organization was created successfuly.</value>
@@ -183,17 +213,14 @@
   <data name="MessageErrorCreateArea" xml:space="preserve">
     <value>Error to create the area.</value>
   </data>
-  <data name="MessageErrorCreateProject" xml:space="preserve">
-    <value>Error to create the project.</value>
-  </data>
   <data name="MessageErrorDelete" xml:space="preserve">
     <value>Error to delete the organization.</value>
   </data>
   <data name="MessageErrorDeleteArea" xml:space="preserve">
     <value>Error to delete the area.</value>
   </data>
-  <data name="MessageErrorDeleteProject" xml:space="preserve">
-    <value>Error to delete the project.</value>
+  <data name="MessageErrorObtainOrganization" xml:space="preserve">
+    <value>Error to obtain the organization data.</value>
   </data>
   <data name="MessageErrorProjectList" xml:space="preserve">
     <value>Error to obtain the project list.</value>
@@ -204,14 +231,27 @@
   <data name="MessageErrorUpdateArea" xml:space="preserve">
     <value>Error to update the area.</value>
   </data>
-  <data name="MessageErrorUpdateProject" xml:space="preserve">
-    <value>Error to update the project.</value>
-  </data>
   <data name="MessageNameExists" xml:space="preserve">
     <value>The name is already exists.</value>
   </data>
   <data name="MessageNameRequired" xml:space="preserve">
     <value>The name is required.</value>
+  </data>
+  <data name="MessageNoComplete" xml:space="preserve">
+    <value>Could not complete the requested action.</value>
+  </data>
+  <data name="MessageNoObjects" xml:space="preserve">
+    <value>This organization does not have any objects. Create one by clicking on the</value>
+  </data>
+  <data name="MessageNoObtects2" xml:space="preserve">
+    <value>icon above</value>
+  </data>
+  <data name="MessageNoOrganizations" xml:space="preserve">
+    <value>No organizations have been defined for you.
+At least one organization is needed and you won't be able to create evaluations, projects, actions or KPI's until at least one organization is available.</value>
+  </data>
+  <data name="MessageOrganizationList" xml:space="preserve">
+    <value>Error to obtain the organization list.</value>
   </data>
   <data name="MessageProjectAreaError" xml:space="preserve">
     <value>The project is not in the area.</value>
@@ -240,13 +280,22 @@
   <data name="TitleKPIName" xml:space="preserve">
     <value>KPI Name</value>
   </data>
+  <data name="TitleOrganization" xml:space="preserve">
+    <value>Organization</value>
+  </data>
   <data name="TitleOrganizationName" xml:space="preserve">
     <value>Organization Name</value>
+  </data>
+  <data name="TitleOrganizations" xml:space="preserve">
+    <value>Organizations</value>
   </data>
   <data name="TitlePersonName" xml:space="preserve">
     <value>Persona Name</value>
   </data>
   <data name="TitleProjectName" xml:space="preserve">
     <value>Project Name</value>
+  </data>
+  <data name="TitleShowPeople" xml:space="preserve">
+    <value>Show People</value>
   </data>
 </root>

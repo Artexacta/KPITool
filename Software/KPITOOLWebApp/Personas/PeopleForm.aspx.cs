@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.People;
 using Artexacta.App.People.BLL;
+using Artexacta.App.PermissionObject;
+using Artexacta.App.PermissionObject.BLL;
 using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 
@@ -86,6 +88,26 @@ public partial class Personas_PeopleForm : System.Web.UI.Page
         }
         else
         {
+            PermissionObject theUser = new PermissionObject();
+            try
+            {
+                theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PERSON.ToString(), Convert.ToInt32(PersonIdHiddenField.Value));
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                Response.Redirect("~/MainPage.aspx");
+            }
+
+            bool readOnly = false;
+
+            if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN") || i.ObjectActionID.Equals("MAN_PEOPLE")))
+            {
+                readOnly = true;
+            }
+
+            DataControl.ReadOnly = readOnly;
+
             //Update
             People theData = null;
 
@@ -105,6 +127,11 @@ public partial class Personas_PeopleForm : System.Web.UI.Page
                 NameTextBox.Text = theData.Name;
                 DataControl.OrganizationId = theData.OrganizationId;
                 DataControl.AreaId = theData.AreaId;
+                CodeTextBox.Enabled = !readOnly;
+                NameTextBox.Enabled = !readOnly;
+                SaveButton.Visible = !readOnly;
+                ReqLabel.Visible = !readOnly;
+                Req1Label.Visible = !readOnly;
             }
         }
     }

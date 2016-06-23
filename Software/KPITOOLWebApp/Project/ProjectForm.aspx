@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Project" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProjectForm.aspx.cs" Inherits="Project_ProjectForm" %>
+﻿<%@ Page Title="<% $Resources: Project, TitleProject %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProjectForm.aspx.cs" Inherits="Project_ProjectForm" %>
 
 <%@ Register Src="../UserControls/FRTWB/AddDataControl.ascx" TagName="AddDataControl" TagPrefix="uc1" %>
 
@@ -12,7 +12,7 @@
         <div class="tile">
             <div class="t-header">
                 <div class="th-title">
-                    <asp:Literal ID="TitleLiteral" runat="server" Text="Create Project"></asp:Literal>
+                    <asp:Literal ID="TitleLiteral" runat="server" Text="<% $Resources: Project, TitleCreateProject %>"></asp:Literal>
                 </div>
             </div>
 
@@ -21,13 +21,15 @@
                 <div class="row">
                     <div class="col-sm-6">
 
-                        <label>Project name <span class="label label-danger">Required</span></label>
-                        <asp:TextBox ID="ProjectNameTextBox" runat="server" CssClass="form-control" placeholder="Enter the project name"></asp:TextBox>
+                        <label>
+                            <asp:Label ID="nameLabel" runat="server" Text="<% $Resources: Project, labelProjectName %>"></asp:Label>
+                            <span class="label label-danger"><asp:Label ID="RequiredLabel" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label></span></label>
+                        <asp:TextBox ID="ProjectNameTextBox" runat="server" CssClass="form-control" placeholder="<% $Resources: Project, LabelEnterProjectName %>"></asp:TextBox>
                         <div class="has-error m-b-10">
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="ProjectNameTextBox"
                                 Display="Dynamic"
                                 ValidationGroup="AddData"
-                                ErrorMessage="You must enter the Project Name">
+                                ErrorMessage="<% $Resources: Project, MessageNameRequired %>">
                             </asp:RequiredFieldValidator>
                         </div>
 
@@ -40,10 +42,10 @@
                     <div class="col-sm-12">
 
                         <hr />
-                        <asp:LinkButton ID="SaveButton" runat="server" CssClass="btn btn-primary" Text="Save Project"
+                        <asp:LinkButton ID="SaveButton" runat="server" CssClass="btn btn-primary" Text="<% $Resources: Glossary, GenericSaveLabel %>"
                             ValidationGroup="AddData" OnClick="SaveButton_Click">
                         </asp:LinkButton>
-                        <asp:LinkButton ID="CancelButton" runat="server" CssClass="btn btn-danger" Text="Cancel" OnClick="CancelButton_Click"></asp:LinkButton>
+                        &nbsp;<asp:LinkButton ID="CancelButton" runat="server" CssClass="btn btn-danger" Text="<% $Resources: Project, LabelBackList %>" OnClick="CancelButton_Click"></asp:LinkButton>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,4 @@
-﻿using Artexacta.App.Persona.BLL;
-using Artexacta.App.Utilities.SystemMessages;
+﻿using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -172,6 +171,10 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
             return;
 
+        LinkButton buttonDelete = (LinkButton)e.Item.FindControl("DeletePerson");
+        if (buttonDelete != null)
+            buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.People.MessageConfirmDeletePerson);
+
         People item = (People)e.Item.DataItem;
 
         //KPI
@@ -203,10 +206,6 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
 
         kpisButton.Visible = theKPIs.Count > 0;
         kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
-
-        LinkButton buttonDelete = (LinkButton)e.Item.FindControl("DeletePerson");
-        if (buttonDelete != null)
-            buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.People.MessageConfirmDeletePerson);
 
     }
 }

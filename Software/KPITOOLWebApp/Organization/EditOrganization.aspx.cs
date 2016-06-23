@@ -10,6 +10,8 @@ using Artexacta.App.Organization.BLL;
 using Artexacta.App.Organization;
 using Artexacta.App.Area.BLL;
 using Artexacta.App.Area;
+using Artexacta.App.PermissionObject.BLL;
+using Artexacta.App.PermissionObject;
 
 public partial class Organization_EditOrganization : System.Web.UI.Page
 {
@@ -52,6 +54,23 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
                 return;
             }
 
+            PermissionObject theUser = new PermissionObject();
+            try
+            {
+                theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ORGANIZATION.ToString(), organizationId);
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                Response.Redirect("~/MainPage.aspx");
+            }
+
+            bool readOnly = false;
+            if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+            {
+                readOnly = true;
+            }
+
             Organization organization = null;
             try
             {
@@ -67,8 +86,20 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             {
                 OrganizationNameLit.Text = organization.Name;
                 OrganizationNameTextBox.Text = organization.Name;
+                NameLabel.Text = organization.Name;
                 AreasGridView.DataBind();
+
+                if (readOnly)
+                {
+                    NameLabel.Visible = true;
+                    AddAreaLabel.Visible = false;
+                    OrganizationNameTextBox.Visible = false;
+                    SaveOrganizationButton.Visible = false;
+                    AreasGridView.Columns[0].Visible = false;
+                    AreasGridView.Columns[1].Visible = false;
+                }
             }
+
         }
     }
 
@@ -110,6 +141,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
         SystemMessages.DisplaySystemMessage(Resources.Organization.MessageDeleteAreaOk);
     }
+
     protected void AddArea_Click(object sender, EventArgs e)
     {
         try
@@ -124,7 +156,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
         AreasGridView.DataBind();
 
-        SystemMessages.DisplaySystemMessage("New Area was added to current Organization");
+        SystemMessages.DisplaySystemMessage(Resources.Organization.MessageAddArea);
     }
 
     protected void SaveOrganizationButton_Click(object sender, EventArgs e)
@@ -184,7 +216,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
             if (areaId <= 0)
             {
-                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
                 return;
             }
 
@@ -192,7 +224,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
             if (oItem == null)
             {
-                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
                 return;
             }
 
@@ -200,7 +232,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
             if (nameTextBox == null)
             {
-                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
                 return;
             }
 
@@ -208,9 +240,9 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             {
                 AreaBLL.UpdateArea(areaId, nameTextBox.Text);
             }
-            catch
+            catch (Exception ex)
             {
-                SystemMessages.DisplaySystemErrorMessage("Error al actualizar el area.");
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
 
@@ -232,7 +264,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
             if (areaId <= 0)
             {
-                SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
                 return;
             }
 

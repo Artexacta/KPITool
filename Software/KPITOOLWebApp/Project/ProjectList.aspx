@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Projects" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProjectList.aspx.cs" Inherits="Project_ProjectList" %>
+﻿<%@ Page Title="<% $Resources: Project, TitleProjects %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ProjectList.aspx.cs" Inherits="Project_ProjectList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -23,11 +23,13 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="t-header">
-                        <div class="th-title">Projects</div>
+                        <div class="th-title">
+                            <asp:Label ID="Label1" runat="server" Text="<% $Resources: Project, TitleProjects %>"></asp:Label>
+                        </div>
                     </div>
                     <div class="t-body tb-padding">
                         <app:SearchControl ID="ProjectSearchControl" runat="server"
-                            Title="Búsqueda"
+                            Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                             DisplayHelp="true"
                             DisplayContextualHelp="true"
                             CssSearch="CSearch"
@@ -83,18 +85,19 @@
                                 </div>
                                 <div class="row m-b-20">
                                     <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-4 m-t-5" Visible="false">
-                                        This project does not have any objects. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above
+                                        <asp:Label ID="NoObjectLabel" runat="server" Text="<% $Resources: Project, MessageProjectNoObject %>"></asp:Label>
+                                        <i class="zmdi zmdi-plus-circle-o"></i>
+                                        <asp:Label ID="IconLabel" runat="server" Text="<% $Resources: Project, MessageProjectIconAbove %>"></asp:Label>
                                     </asp:Panel>
                                     <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
-                                        This project has 
+                                        <asp:Label ID="ProjectHasLabel" runat="server" Text="<% $Resources: Project, MessageProjectHas %>"></asp:Label>
                                         <asp:LinkButton ID="ActivitiesButton" runat="server" Visible="false"
                                             CommandName="ViewActivities" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
-                                        <asp:Literal ID="AndLiteral" runat="server" Visible="false" Text="and"></asp:Literal>
-
+                                        <asp:Literal ID="AndLiteral" runat="server" Visible="false" Text="<% $Resources: Organization, LabelAnd %>"></asp:Literal>
                                         <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
                                             CommandName="ViewKPIs" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
@@ -104,16 +107,14 @@
                             <FooterTemplate>
                                 <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# ProjectsRepeater.Items.Count == 0 %>'>
                                     <div class="col-md-12 text-center">
-                                        -- There are no Projects registered. Create one by clicking on the <i class="zmdi zmdi-plus-circle-o"></i>icon above --
+                                        <asp:Label ID="Label2" runat="server" Text="<% $Resources: Project, MessageNoProject %>"></asp:Label>
+                                        <i class="zmdi zmdi-plus-circle-o"></i>
+                                        <asp:Label ID="IconLabel" runat="server" Text="<% $Resources: Project, MessageProjectIconAbove %>"></asp:Label>
                                     </div>
                                 </asp:Panel>
                             </FooterTemplate>
                         </asp:Repeater>
-
                         <br />
-                        <%--<div style="overflow: hidden">
-                            <a id="showTourBtn" runat="server" href="#" class="btn btn-default pull-right" clientidmode="Static" style="display: none">Show tips for this page</a>
-                        </div>--%>
                         <app:TourSettings runat="server" ID="Settings">
                             <Items>
                                 <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"

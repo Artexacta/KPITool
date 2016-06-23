@@ -1,4 +1,4 @@
-﻿<%@ Page Title="<% $Resources: Organization, LabelEditOrganization%>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="EditOrganization.aspx.cs" Inherits="Organization_EditOrganization" %>
+﻿<%@ Page Title="<% $Resources: Organization, TitleOrganizations %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="EditOrganization.aspx.cs" Inherits="Organization_EditOrganization" %>
 
 <%@ Register Src="../UserControls/FRTWB/AddDataControl.ascx" TagName="AddDataControl" TagPrefix="uc1" %>
 
@@ -29,6 +29,7 @@
                             </p>
                             <div class="form-group">
                                 <asp:TextBox ID="OrganizationNameTextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:Label ID="NameLabel" runat="server" Text="" Visible="false" CssClass="form-control"></asp:Label>
                                 <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" ControlToValidate="OrganizationNameTextBox"
                                     ErrorMessage="<% $Resources: Organization, MessageNameRequired %>" Display="Dynamic" ValidationGroup="EditOrganizationValidator" />
                             </div>
@@ -37,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <p>
-                                <asp:Label ID="AreasLabel" runat="server" Text="<% $Resources: Organization, LabelAreas %>"></asp:Label>
+                                <asp:Label ID="AreasLabel" runat="server" Text="<% $Resources: Organization, LabelAreas %>" Font-Bold="true"></asp:Label>
                             </p>
                             <div class="form-group">
                                 <a href="javascript:openModal();">

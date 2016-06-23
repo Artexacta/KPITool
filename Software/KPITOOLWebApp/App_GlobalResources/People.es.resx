@@ -157,7 +157,7 @@
     <value>Debe ingresar el código de identificación.</value>
   </data>
   <data name="MessageConfirmDeletePerson" xml:space="preserve">
-    <value>¿Está seguro de eliminar la persona seleccionada?</value>
+    <value>Por favor confirme que desea eliminar la persona seleccionada. Notar que la persona eliminada será movido al basurero y podrá recuperar hasta por 30 días.</value>
   </data>
   <data name="MessageCreatePersonOk" xml:space="preserve">
     <value>La persona se creó correctamente.</value>
