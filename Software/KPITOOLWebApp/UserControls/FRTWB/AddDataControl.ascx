@@ -554,6 +554,7 @@
 <asp:HiddenField ID="ActivityIdHiddenField" runat="server" Value="0" />
 <asp:HiddenField ID="PersonaIdHiddenField" runat="server" Value="0" />
 <asp:HiddenField ID="KPIIdHiddenField" runat="server" />
+<asp:HiddenField ID="ReadOnlyHiddenField" runat="server" />
 
 <asp:ObjectDataSource ID="OrganizationObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" 
     TypeName="Artexacta.App.Organization.BLL.OrganizationBLL" SelectMethod="GetAllOrganizations" 

@@ -157,7 +157,7 @@
     <value>You must enter the Identification Code.</value>
   </data>
   <data name="MessageConfirmDeletePerson" xml:space="preserve">
-    <value>Are you sure you want to delete selected person?</value>
+    <value>Please confirm that you wish to delete the selected person. Note that person that are deleted are moved to the Trash and you can recover the deleted person for up to 30 days.</value>
   </data>
   <data name="MessageCreatePersonOk" xml:space="preserve">
     <value>The person was created successfully.</value>

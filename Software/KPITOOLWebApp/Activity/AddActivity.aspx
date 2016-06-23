@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Activity" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddActivity.aspx.cs" Inherits="Activity_AddActivity" %>
+﻿<%@ Page Title="<% $Resources: Activity, TitleActivity %>" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddActivity.aspx.cs" Inherits="Activity_AddActivity" %>
 
 <%@ Register Src="../UserControls/FRTWB/AddDataControl.ascx" TagName="AddDataControl" TagPrefix="uc1" %>
 
@@ -10,20 +10,23 @@
 
         <div class="tile">
             <div class="t-header">
-                <div class="th-title"><asp:Literal ID="TitleLiteral" runat="server" Text="Create Activity"></asp:Literal></div>
+                <div class="th-title"><asp:Literal ID="TitleLiteral" runat="server" Text="<% $Resources: Activity, TitleCreateActivity %>"></asp:Literal></div>
             </div>
 
             <div class="t-body tb-padding">
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>Activity Name <span class="label label-danger">Required</span></label>
-                        <asp:TextBox ID="ActivityNameTextBox" runat="server" CssClass="form-control" placeholder="Enter the activity name"></asp:TextBox>
+                        <label>
+                            <asp:Label ID="NameLabel" runat="server" Text="<% $Resources: Activity, LabelName %>"></asp:Label>
+                            <span class="label label-danger"><asp:Label ID="RequiredLabel" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label></span></label>
+                        <asp:TextBox ID="ActivityNameTextBox" runat="server" CssClass="form-control" placeholder="<% $Resources: Activity, LabelEnterName %>"></asp:TextBox>
                         <div class="has-error m-b-10">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ActivityNameTextBox"
+                            <asp:RequiredFieldValidator ID="NameRequiredFieldValidator" runat="server" 
+                                ControlToValidate="ActivityNameTextBox"
                                 Display="Dynamic"
-                                ValidationGroup="AddActivity"
-                                ErrorMessage="You must enter the Activity Name">
+                                ValidationGroup="AddData"
+                                ErrorMessage="<% $Resources: Activity, MessageNameRequired %>">
                             </asp:RequiredFieldValidator>
                         </div>
 
@@ -35,10 +38,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <hr />
-                        <asp:LinkButton ID="SaveButton" runat="server" CssClass="btn btn-primary" Text="Save Activity"
+                        <asp:LinkButton ID="SaveButton" runat="server" CssClass="btn btn-primary" Text="<% $Resources: Glossary, GenericSaveLabel %>"
                             ValidationGroup="AddData" OnClick="SaveButton_Click">
                         </asp:LinkButton>
-                        <asp:LinkButton ID="CancelButton" runat="server" CssClass="btn btn-danger" Text="Cancel" OnClick="CancelButton_Click"></asp:LinkButton>
+                        <asp:LinkButton ID="CancelButton" runat="server" CssClass="btn btn-danger" Text="<% $Resources: Activity, ButtonBackList %>" OnClick="CancelButton_Click"></asp:LinkButton>
 
                     </div>
                 </div>

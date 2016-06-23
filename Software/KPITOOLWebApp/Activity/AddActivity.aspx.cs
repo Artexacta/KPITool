@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.Activities.BLL;
 using Artexacta.App.Activities;
+using Artexacta.App.PermissionObject;
+using Artexacta.App.PermissionObject.BLL;
 
 public partial class Activity_AddActivity : System.Web.UI.Page
 {
@@ -38,7 +40,11 @@ public partial class Activity_AddActivity : System.Web.UI.Page
         set { ParentPageHiddenField.Value = value; }
         get { return string.IsNullOrEmpty(ParentPageHiddenField.Value) ? "~/MainPage.aspx" : ParentPageHiddenField.Value; }
     }
-
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack)
@@ -87,20 +93,44 @@ public partial class Activity_AddActivity : System.Web.UI.Page
         }
         catch
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to get the activity information.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Activity.MessageGetActivity);
             return;
         }
 
         if (theClass != null)
         {
+            PermissionObject theUser = new PermissionObject();
+            try
+            {
+                theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ACTIVITY.ToString(), activityId);
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+                Response.Redirect("~/MainPage.aspx");
+            }
+
+            bool readOnly = false;
+
+            if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN") ||
+                                                                      i.ObjectActionID.Equals("MANAGE_PROJECT") ||
+                                                                      i.ObjectActionID.Equals("MAN_ACTIVITY")))
+            {
+                readOnly = true;
+            }
+
+            AddDataControl.ReadOnly = readOnly;
+
             TitleLiteral.Text = theClass.Name;
             ActivityNameTextBox.Text = theClass.Name;
             AddDataControl.OrganizationId = theClass.OrganizationID;
             AddDataControl.AreaId = theClass.AreaID;
             AddDataControl.ProjectId = theClass.ProjectID;
+
+            ActivityNameTextBox.Enabled = !readOnly;
+            RequiredLabel.Visible = !readOnly;
         }
     }
-
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
@@ -123,7 +153,7 @@ public partial class Activity_AddActivity : System.Web.UI.Page
                 SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
-            SystemMessages.DisplaySystemMessage("The activity was created successfully.");
+            SystemMessages.DisplaySystemMessage(Resources.Activity.MessageCreateOk);
         }
         else
         {
@@ -138,7 +168,7 @@ public partial class Activity_AddActivity : System.Web.UI.Page
                 SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
-            SystemMessages.DisplaySystemMessage("The activity was updated successfully.");
+            SystemMessages.DisplaySystemMessage(Resources.Activity.MessageUpdateOk);
         }
         Response.Redirect(ParentPage);
     }
