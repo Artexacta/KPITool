@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Register Src="UserControls/Messages.ascx" TagName="Messages" TagPrefix="msg" %>
 <%@ Register Src="~/UserControls/ToolTipManager/ToolTipManager.ascx" TagName="ToolTipManager" TagPrefix="artexacta" %>
 <%@ Register Src="~/UserControls/LanguageSelector.ascx" TagPrefix="lang" TagName="LanguageSelector" %>
