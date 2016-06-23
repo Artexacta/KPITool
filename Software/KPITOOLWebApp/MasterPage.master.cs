@@ -287,11 +287,23 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
         scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/moment.min.js"));
+        scriptText.Append(ResolveClientUrl("~/Scripts/better-dom.min.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
         scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap-datetimepicker.min.js"));
+        scriptText.Append(ResolveClientUrl("~/Scripts/better-i18n-plugin.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/better-time-element.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/better-emmet-plugin.js"));
+        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+
+        scriptText.Append("<script src=\"");
+        scriptText.Append(ResolveClientUrl("~/Scripts/better-dateinput-polyfill.min.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
         JqueryAndMainMenuScript.Text = scriptText.ToString();

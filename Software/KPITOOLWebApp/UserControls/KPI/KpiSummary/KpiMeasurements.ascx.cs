@@ -56,27 +56,35 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
             return CategoryItemIdHiddenField.Value;
         }
     }
+
+    public string Unit
+    {
+        set
+        {
+            UnitHiddenField.Value = value;
+        }
+        get
+        {
+            return UnitHiddenField.Value;
+        }
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
        // LoadMeasurements();
     }
 
-    private void LoadMeasurements()
-    {
-        try
-        {
-            List<KPIMeasurement> measurements = KpiMeasurementBLL.GetKpiMeasurementsByKpiId(KpiId, CategoryId, CategoryItemId);
-            MeasurementsGridView.DataSource = measurements;
-            MeasurementsGridView.DataBind();
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error getting measurements ", ex);
-        }
-    }
-
     protected void MeasurementsGridView_DataBound(object sender, EventArgs e)
     {
        // MeasurementsGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
+    }
+
+    protected void MeasurementsDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+    {
+        if (e.Exception == null)
+            return;
+
+        log.Error("Error loading measurements", e.Exception);
+        e.ExceptionHandled = true;
     }
 }

@@ -27,11 +27,7 @@ public partial class Bitacora_ListaEventosBitacora : System.Web.UI.Page
 
     }
 
-
-    protected void BitacoraGridView_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
-    {
-
-    }
+    
 
     protected void Pager_PageChanged(int row)
     {

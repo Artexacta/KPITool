@@ -13,7 +13,8 @@
             </div>
         </div>
         <div class="col-md-11">
-            <h1 class="text-center">KPI Dashboard
+            <h1 class="text-center">
+                <asp:Literal runat="server" Text="<%$ Resources: KpiDashboard, KpiDashboardTitle %>"></asp:Literal>
             </h1>
         </div>
     </div>
@@ -26,7 +27,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation"><a href="#main-dashboard" aria-controls="main-dashboard" role="tab" data-toggle="tab">Main Dashboard</a></li>
+                            <li role="presentation">
+                                <a href="#main-dashboard" aria-controls="main-dashboard" role="tab" data-toggle="tab">
+                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDashboard, MainDashboardTitle %>"></asp:Literal>
+                                </a>
+                            </li>
                             <asp:Repeater ID="UserDashboardRepeater" runat="server">
                                 <ItemTemplate>
                                     <li role="presentation">
@@ -38,7 +43,7 @@
                                 </ItemTemplate>
                             </asp:Repeater>
                             <li role="presentation">
-                                <a href="#" data-toggle="modal" data-target="#myModal">
+                                <a runat="server" href="#" data-toggle="modal" data-target="#myModal" title="<%$ Resources: KpiDashboard, AddDashboard %>">
                                     <i class="fa fa-plus-square"></i>
                                 </a>
                             </li>
@@ -96,19 +101,25 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Dashboard Name</label>
+                        <label>
+                            <asp:Literal runat="server" Text="<%$ Resources: KpiDashboard, DashboardNameLabel %>"></asp:Literal>
+                        </label>
                         <asp:TextBox ID="DashboardNameTextBox" runat="server" CssClass="form-control"></asp:TextBox>
                     </div>
                     <asp:RequiredFieldValidator runat="server" Display="Dynamic"
-                        ErrorMessage="Dashboard Name is requiered"
+                        ErrorMessage="<%$ Resources: KpiDashboard, DashboardNameRequiredMessage %>"
                         ControlToValidate="DashboardNameTextBox"
                         ValidationGroup="Dashboard">
                     </asp:RequiredFieldValidator>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <asp:Literal runat="server" Text="<%$ Resources: KpiDashboard, CancelLabel %>"></asp:Literal>
+                    </button>
                     <asp:LinkButton ID="SaveButton" runat="server" CssClass="btn btn-primary" OnClick="SaveButton_Click"
-                        ValidationGroup="Dashboard">Save changes</asp:LinkButton>
+                        ValidationGroup="Dashboard">
+                        <asp:Literal runat="server" Text="<%$ Resources: KpiDashboard, SaveLabel %>"></asp:Literal>
+                    </asp:LinkButton>
                 </div>
             </div>
         </div>

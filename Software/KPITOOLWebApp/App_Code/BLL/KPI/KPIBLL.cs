@@ -771,5 +771,27 @@ namespace Artexacta.App.KPI.BLL
             return progress.Value;
         }
 
+        public static void GetKpiStats(int kpiId, string categoryId, string categoryItemId, ref decimal currentValue, ref decimal lowestValue,
+                                        ref decimal maxValue, ref decimal avgValue, ref decimal progress, ref decimal trend)
+        {
+            if (kpiId <= 0)
+                throw new ArgumentException("KpiId cannnot be equals or less than zero");
+
+            decimal? paramCurrentValue = 0;
+            decimal? paramLowestValue = 0;            
+            decimal? paramMaxValue = 0;
+            decimal? paramAvgValue = 0; 
+            decimal? paramProgress = 0;
+            decimal? paramTrend = 0;
+            KPIDSTableAdapters.KPITableAdapter adapter = new KPITableAdapter();
+            adapter.GetKpiStats(kpiId, categoryId, categoryItemId, ref paramCurrentValue, ref paramLowestValue, ref paramMaxValue, ref paramAvgValue, ref paramProgress, ref paramTrend);
+
+            currentValue = paramCurrentValue == null ? decimal.MinValue : paramCurrentValue.Value;
+            lowestValue = paramLowestValue == null ? decimal.MinValue : paramLowestValue.Value;
+            maxValue = paramMaxValue == null ? decimal.MinValue : paramMaxValue.Value;
+            avgValue = paramAvgValue == null ? decimal.MinValue : paramAvgValue.Value;
+            progress = paramProgress == null ? decimal.MinValue : paramProgress.Value;
+            trend = paramTrend == null ? decimal.MinValue : paramTrend.Value;
+        }
     }
 }

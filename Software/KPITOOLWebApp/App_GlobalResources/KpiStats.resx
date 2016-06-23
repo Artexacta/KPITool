@@ -117,61 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownLabel" xml:space="preserve">
-    <value>Bajó</value>
+  <data name="AverageLabel" xml:space="preserve">
+    <value>Average value</value>
   </data>
-  <data name="FromLastLabel" xml:space="preserve">
-    <value>desde el</value>
+  <data name="CurrentValue" xml:space="preserve">
+    <value>Current value</value>
   </data>
-  <data name="ErrorFormatTarget" xml:space="preserve">
-    <value>El Objetivo es un valor númerico inválido.</value>
+  <data name="HighestValue" xml:space="preserve">
+    <value>Highest value</value>
   </data>
-  <data name="ErrorFormatTargetPeriod" xml:space="preserve">
-    <value>El Periodo del Objetivo es un valor númerico inválido.</value>
+  <data name="LowestValue" xml:space="preserve">
+    <value>Lowest value</value>
   </data>
-  <data name="LabelName" xml:space="preserve">
-    <value>Nombre del KPI</value>
-  </data>
-  <data name="LabelOf" xml:space="preserve">
-    <value> de </value>
-  </data>
-  <data name="MessageErrorCategoryList" xml:space="preserve">
-    <value>Error al obtener la lista de categorías.</value>
-  </data>
-  <data name="MessageErrorCurrencyList" xml:space="preserve">
-    <value>Error al obtener la lista de monedas.</value>
-  </data>
-  <data name="MessageErrorDelete" xml:space="preserve">
-    <value>Error al eliminar el KPI.</value>
-  </data>
-  <data name="MessageErrorDirectionList" xml:space="preserve">
-    <value>Error al obtener la lista de direcciones.</value>
-  </data>
-  <data name="MessageErrorStrategyList" xml:space="preserve">
-    <value>Error al obtener la lista de estrategias de acumulación.</value>
-  </data>
-  <data name="MessageErrorTypesList" xml:space="preserve">
-    <value>Error al obtener la lista de tipos de KPI.</value>
-  </data>
-  <data name="MessageErrorUnitList" xml:space="preserve">
-    <value>Error al obtener la lista de unidades.</value>
-  </data>
-  <data name="MessageNotAction" xml:space="preserve">
-    <value>No se puede completar con la solicitud realizada.</value>
-  </data>
-  <data name="MessageStartingDateFormat" xml:space="preserve">
-    <value>La fecha de inicio tiene formato inválido.</value>
-  </data>
-  <data name="MessageStartingDateRequired" xml:space="preserve">
-    <value>Debe ingresar la fecha de inicio.</value>
-  </data>
-  <data name="MessageTargetPeriodRequired" xml:space="preserve">
-    <value>Debe ingresar el Periodo Objetivo del Kpii</value>
-  </data>
-  <data name="MessageTargetRequired" xml:space="preserve">
-    <value>Debe ingresar algún valor al objetivo del Kpi.</value>
-  </data>
-  <data name="UpLabel" xml:space="preserve">
-    <value>Subió</value>
+  <data name="ProgressLabel" xml:space="preserve">
+    <value>of progress</value>
   </data>
 </root>

@@ -117,61 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DownLabel" xml:space="preserve">
-    <value>Bajó</value>
+  <data name="AddDashboard" xml:space="preserve">
+    <value>AddDashboard</value>
   </data>
-  <data name="FromLastLabel" xml:space="preserve">
-    <value>desde el</value>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="ErrorFormatTarget" xml:space="preserve">
-    <value>El Objetivo es un valor númerico inválido.</value>
+  <data name="DashboardNameLabel" xml:space="preserve">
+    <value>Dashboard Name</value>
   </data>
-  <data name="ErrorFormatTargetPeriod" xml:space="preserve">
-    <value>El Periodo del Objetivo es un valor númerico inválido.</value>
+  <data name="DashboardNameRequiredMessage" xml:space="preserve">
+    <value>Dashboard name is required</value>
   </data>
-  <data name="LabelName" xml:space="preserve">
-    <value>Nombre del KPI</value>
+  <data name="ExportKpi" xml:space="preserve">
+    <value>Export KPI Chart</value>
   </data>
-  <data name="LabelOf" xml:space="preserve">
-    <value> de </value>
+  <data name="KpiDashboardTitle" xml:space="preserve">
+    <value>KPI Dashboard</value>
   </data>
-  <data name="MessageErrorCategoryList" xml:space="preserve">
-    <value>Error al obtener la lista de categorías.</value>
+  <data name="MainDashboardTitle" xml:space="preserve">
+    <value>Main Dashboard</value>
   </data>
-  <data name="MessageErrorCurrencyList" xml:space="preserve">
-    <value>Error al obtener la lista de monedas.</value>
+  <data name="MessageDeleteKpiFromDashboard" xml:space="preserve">
+    <value>Are you sure you want remove this KPI from Dashboard?</value>
   </data>
-  <data name="MessageErrorDelete" xml:space="preserve">
-    <value>Error al eliminar el KPI.</value>
+  <data name="RemoveKpiFromDashboard" xml:space="preserve">
+    <value>Remove KPI from Dashboard</value>
   </data>
-  <data name="MessageErrorDirectionList" xml:space="preserve">
-    <value>Error al obtener la lista de direcciones.</value>
+  <data name="SaveLabel" xml:space="preserve">
+    <value>Save</value>
   </data>
-  <data name="MessageErrorStrategyList" xml:space="preserve">
-    <value>Error al obtener la lista de estrategias de acumulación.</value>
-  </data>
-  <data name="MessageErrorTypesList" xml:space="preserve">
-    <value>Error al obtener la lista de tipos de KPI.</value>
-  </data>
-  <data name="MessageErrorUnitList" xml:space="preserve">
-    <value>Error al obtener la lista de unidades.</value>
-  </data>
-  <data name="MessageNotAction" xml:space="preserve">
-    <value>No se puede completar con la solicitud realizada.</value>
-  </data>
-  <data name="MessageStartingDateFormat" xml:space="preserve">
-    <value>La fecha de inicio tiene formato inválido.</value>
-  </data>
-  <data name="MessageStartingDateRequired" xml:space="preserve">
-    <value>Debe ingresar la fecha de inicio.</value>
-  </data>
-  <data name="MessageTargetPeriodRequired" xml:space="preserve">
-    <value>Debe ingresar el Periodo Objetivo del Kpii</value>
-  </data>
-  <data name="MessageTargetRequired" xml:space="preserve">
-    <value>Debe ingresar algún valor al objetivo del Kpi.</value>
-  </data>
-  <data name="UpLabel" xml:space="preserve">
-    <value>Subió</value>
+  <data name="ViewKpi" xml:space="preserve">
+    <value>View KPI</value>
   </data>
 </root>

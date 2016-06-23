@@ -11,7 +11,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
 
 public partial class UserControls_GridColumnSelect : System.Web.UI.UserControl
 {
@@ -76,7 +75,7 @@ public partial class UserControls_GridColumnSelect : System.Web.UI.UserControl
         //Get the columns count number and add the columns to the checklist.  
 
         GridView theGridView = null;
-        RadGrid theRadGrid = null;
+        //RadGrid theRadGrid = null;
 
         if (gridType == "System.Web.UI.WebControls.GridView")
         {
@@ -90,19 +89,19 @@ public partial class UserControls_GridColumnSelect : System.Web.UI.UserControl
                     ColumnCheckBoxList.Items.Add(theItem);
                 }
         }
-        else if (gridType == "Telerik.Web.UI.RadGrid")
-        {
-            // In the Telerik grids we use the unique column name as the name of the column
-            theRadGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
-            for (int i = 0; i < theRadGrid.Columns.Count; i++)
-                if (!String.IsNullOrEmpty(theRadGrid.Columns[i].UniqueName) &&
-                    !ignoreColumns.Contains(theRadGrid.Columns[i].UniqueName))
-                {
-                    ListItem theItem = new ListItem(theRadGrid.Columns[i].HeaderText,
-                        theRadGrid.Columns[i].UniqueName);
-                    ColumnCheckBoxList.Items.Add(theItem);
-                }
-        }
+        //else if (gridType == "Telerik.Web.UI.RadGrid")
+        //{
+        //    // In the Telerik grids we use the unique column name as the name of the column
+        //    theRadGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
+        //    for (int i = 0; i < theRadGrid.Columns.Count; i++)
+        //        if (!String.IsNullOrEmpty(theRadGrid.Columns[i].UniqueName) &&
+        //            !ignoreColumns.Contains(theRadGrid.Columns[i].UniqueName))
+        //        {
+        //            ListItem theItem = new ListItem(theRadGrid.Columns[i].HeaderText,
+        //                theRadGrid.Columns[i].UniqueName);
+        //            ColumnCheckBoxList.Items.Add(theItem);
+        //        }
+        //}
         else
         {
             throw new Exception("Unknown Grid of type " + gridType);
@@ -153,15 +152,15 @@ public partial class UserControls_GridColumnSelect : System.Web.UI.UserControl
                 {
                     visibility = theGridView.Columns[Convert.ToInt32(theItem.Value)].Visible;
                 }
-                else if (gridType == "Telerik.Web.UI.RadGrid")
-                {
-                    for (int i = 0; i < theRadGrid.Columns.Count; i++)
-                        if (theRadGrid.Columns[i].UniqueName == theItem.Value)
-                        {
-                            visibility = theRadGrid.Columns[i].Visible;
-                            break;
-                        }
-                }
+                //else if (gridType == "Telerik.Web.UI.RadGrid")
+                //{
+                //    for (int i = 0; i < theRadGrid.Columns.Count; i++)
+                //        if (theRadGrid.Columns[i].UniqueName == theItem.Value)
+                //        {
+                //            visibility = theRadGrid.Columns[i].Visible;
+                //            break;
+                //        }
+                //}
 
                 theItem.Selected = visibility;
             }
@@ -199,17 +198,17 @@ public partial class UserControls_GridColumnSelect : System.Web.UI.UserControl
                     theGridView.Columns[i].Visible = theCol.Visible;
                 }
         }
-        else if (gridType == "Telerik.Web.UI.RadGrid")
-        {
-            // In the Telerik grids we use the unique column name as the name of the column
-            for (int i = 0; i < theRadGrid.Columns.Count; i++)
-                if (!ignoreColumns.Contains(theRadGrid.Columns[i].UniqueName) &&
-                    columnsHash.ContainsKey(theRadGrid.Columns[i].UniqueName))
-                {
-                    SelectionGridColumn theCol = (SelectionGridColumn)columnsHash[theRadGrid.Columns[i].UniqueName];
-                    theRadGrid.Columns[i].Visible = theCol.Visible;
-                }
-        }
+        //else if (gridType == "Telerik.Web.UI.RadGrid")
+        //{
+        //    // In the Telerik grids we use the unique column name as the name of the column
+        //    for (int i = 0; i < theRadGrid.Columns.Count; i++)
+        //        if (!ignoreColumns.Contains(theRadGrid.Columns[i].UniqueName) &&
+        //            columnsHash.ContainsKey(theRadGrid.Columns[i].UniqueName))
+        //        {
+        //            SelectionGridColumn theCol = (SelectionGridColumn)columnsHash[theRadGrid.Columns[i].UniqueName];
+        //            theRadGrid.Columns[i].Visible = theCol.Visible;
+        //        }
+        //}
         else
         {
             throw new Exception("Unknown Grid of type " + gridType);
@@ -272,18 +271,18 @@ public partial class UserControls_GridColumnSelect : System.Web.UI.UserControl
                     theGridView.Columns[i].Visible = theCol.Visible;
                 }
         }
-        else if (gridType == "Telerik.Web.UI.RadGrid")
-        {
-            // In the Telerik grids we use the unique column name as the name of the column
-            RadGrid theRadGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
-            for (int i = 0; i < theRadGrid.Columns.Count; i++)
-                if (!ignoreColumns.Contains(theRadGrid.Columns[i].UniqueName) &&
-                    columnsHash.ContainsKey(theRadGrid.Columns[i].UniqueName))
-                {
-                    SelectionGridColumn theCol = (SelectionGridColumn)columnsHash[theRadGrid.Columns[i].UniqueName];
-                    theRadGrid.Columns[i].Visible = theCol.Visible;
-                }
-        }
+        //else if (gridType == "Telerik.Web.UI.RadGrid")
+        //{
+        //    // In the Telerik grids we use the unique column name as the name of the column
+        //    RadGrid theRadGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
+        //    for (int i = 0; i < theRadGrid.Columns.Count; i++)
+        //        if (!ignoreColumns.Contains(theRadGrid.Columns[i].UniqueName) &&
+        //            columnsHash.ContainsKey(theRadGrid.Columns[i].UniqueName))
+        //        {
+        //            SelectionGridColumn theCol = (SelectionGridColumn)columnsHash[theRadGrid.Columns[i].UniqueName];
+        //            theRadGrid.Columns[i].Visible = theCol.Visible;
+        //        }
+        //}
         else
         {
             throw new Exception("Unknown Grid of type " + gridType);

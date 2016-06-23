@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
 
 public partial class UserControls_GridRows : System.Web.UI.UserControl
 {
@@ -106,30 +105,30 @@ public partial class UserControls_GridRows : System.Web.UI.UserControl
 
         switch (gridType)
         {
-            case "Telerik.Web.UI.RadGrid":
-                RadGrid theRadGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
-                if (theRadGrid != null)
-                {
-                    Rows3ImageButton.Visible = Rows3;
-                    Rows5ImageButton.Visible = Rows5;
-                    Rows10ImageButton.Visible = Rows10;
-                    Rows20ImageButton.Visible = Rows20;
-                    Rows30ImageButton.Visible = Rows30;
-                    Rows50ImageButton.Visible = Rows50;
+            //case "Telerik.Web.UI.RadGrid":
+            //    RadGrid theRadGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
+            //    if (theRadGrid != null)
+            //    {
+            //        Rows3ImageButton.Visible = Rows3;
+            //        Rows5ImageButton.Visible = Rows5;
+            //        Rows10ImageButton.Visible = Rows10;
+            //        Rows20ImageButton.Visible = Rows20;
+            //        Rows30ImageButton.Visible = Rows30;
+            //        Rows50ImageButton.Visible = Rows50;
 
-                    GridPageSizeBLL theBLL = new GridPageSizeBLL();
-                    GridPageSize theGridPageSize = theBLL.GetGridPageSizeState(AssociatedGridView.ToString(),
-                        HttpContext.Current.User.Identity.Name);
-                    if (theGridPageSize != null)
-                    {
-                        theRadGrid.PageSize = theGridPageSize.PageSize;
-                    }
-                }
-                else
-                {
-                    this.Visible = false;
-                }
-                break;
+            //        GridPageSizeBLL theBLL = new GridPageSizeBLL();
+            //        GridPageSize theGridPageSize = theBLL.GetGridPageSizeState(AssociatedGridView.ToString(),
+            //            HttpContext.Current.User.Identity.Name);
+            //        if (theGridPageSize != null)
+            //        {
+            //            theRadGrid.PageSize = theGridPageSize.PageSize;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        this.Visible = false;
+            //    }
+            //    break;
             case "System.Web.UI.WebControls.GridView":
                 GridView theGridView = (GridView)this.Parent.FindControl(AssociatedGridView);
                 if (theGridView != null)
@@ -206,16 +205,16 @@ public partial class UserControls_GridRows : System.Web.UI.UserControl
                     HttpContext.Current.User.Identity.Name, size);
             }
         }
-        else if (gridType == "Telerik.Web.UI.RadGrid")
-        {
-            RadGrid theTelerikGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
-            if (theTelerikGrid != null)
-            {
-                theTelerikGrid.PageSize = size;
-                TheBll.SaveGridPageSizeState(AssociatedGridView.ToString(),
-                    HttpContext.Current.User.Identity.Name, size);
-            }
-        }
+        //else if (gridType == "Telerik.Web.UI.RadGrid")
+        //{
+        //    RadGrid theTelerikGrid = (RadGrid)this.Parent.FindControl(AssociatedGridView);
+        //    if (theTelerikGrid != null)
+        //    {
+        //        theTelerikGrid.PageSize = size;
+        //        TheBll.SaveGridPageSizeState(AssociatedGridView.ToString(),
+        //            HttpContext.Current.User.Identity.Name, size);
+        //    }
+        //}
 
         // now fire the event that tells the page that we changed the grid rows, so they can choose to 
         // rebind if necessary
