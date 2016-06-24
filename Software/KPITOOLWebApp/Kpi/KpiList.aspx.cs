@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
 using Artexacta.App.KPI;
 using Artexacta.App.Organization;
 using Artexacta.App.Organization.BLL;

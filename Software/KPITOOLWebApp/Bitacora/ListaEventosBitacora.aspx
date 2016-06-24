@@ -45,42 +45,28 @@
                             </div>
                         </div>
                     </div>
-                    <telerik:RadGrid ID="BitacoraGridView" runat="server"
+                    <asp:GridView ID="BitacoraGridView" runat="server"
                         AutoGenerateColumns="false"
                         DataSourceID="BitacoraDataSource"
                         AllowPaging="false"
-                        OnItemDataBound="BitacoraGridView_ItemDataBound"
                         AllowMultiRowSelection="False" Skin="aetemplate" EnableEmbeddedSkins="false" CssClass="table-responsive">
-                        <MasterTableView DataKeyNames="Id" ExpandCollapseColumn-Display="false"
-                            CommandItemDisplay="None"
-                            AllowSorting="false"
-                            OverrideDataSourceControlSorting="true">
-                            <NoRecordsTemplate>
+                            <EmptyDataTemplate>
                                 <div style="text-align: center;">No hay eventos en la bitácora, ver si el web.config está bien configurado</div>
-                            </NoRecordsTemplate>
+                            </EmptyDataTemplate>
 
 
                             <Columns>
 
-                                <telerik:GridBoundColumn UniqueName="Id" DataField="Id"
-                                    HeaderText="Id" />
-                                <telerik:GridBoundColumn UniqueName="Fecha" DataField="Fecha"
-                                    HeaderText="Fecha/Hora" />
-                                <telerik:GridBoundColumn UniqueName="TipoEvento" DataField="TipoEvento"
-                                    HeaderText="Tipo de Evento" />
-                                <telerik:GridBoundColumn UniqueName="Empleado" DataField="Empleado"
-                                    HeaderText="Usuario" />
-                                <telerik:GridBoundColumn UniqueName="TipoObjeto" DataField="TipoObjeto"
-                                    HeaderText="Módulo" />
-                                <telerik:GridBoundColumn UniqueName="IdObjeto" DataField="IdObjeto"
-                                    HeaderText="Id Obj." />
-                                <telerik:GridBoundColumn UniqueName="Mensaje" DataField="Mensaje"
-                                    HeaderText="Mensaje" />
+                                <asp:BoundField DataField="Id" HeaderText="Id" />
+                                <asp:BoundField DataField="Fecha" HeaderText="Fecha/Hora" />
+                                <asp:BoundField DataField="TipoEvento" HeaderText="Tipo de Evento" />
+                                <asp:BoundField DataField="Empleado" HeaderText="Usuario" />
+                                <asp:BoundField DataField="TipoObjeto" HeaderText="Módulo" />
+                                <asp:BoundField DataField="IdObjeto" HeaderText="Id Obj." />
+                                <asp:BoundField HeaderText="Mensaje" />
                             </Columns>
 
-                        </MasterTableView>
-
-                    </telerik:RadGrid>
+                    </asp:GridView>
                     <asp:ObjectDataSource ID="BitacoraDataSource" runat="server"
                         TypeName="Artexacta.MSCRRHH.Bitacora.BLL.EventoBitacoraBLL"
                         SelectMethod="getEventoBitacoraList"

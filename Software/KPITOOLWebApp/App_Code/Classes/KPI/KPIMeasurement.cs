@@ -15,6 +15,15 @@ namespace Artexacta.App.KPI
         public decimal Measurement { get; set; }
         public string CategoryID { get; set; }
         public string CategoryItemID { get; set; }
+        public string Unit { get; set; }
+
+        public string MeasurementForDisplay
+        {
+            get
+            {
+                return Measurement.ToString("#.##") + (string.IsNullOrEmpty(Unit) ? "" : " " + Unit);
+            }
+        }
 
         public string DateForDisplay
         {

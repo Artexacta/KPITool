@@ -11,7 +11,6 @@ using Artexacta.App.KPI.BLL;
 using Artexacta.App.Categories.BLL;
 using Artexacta.App.Categories;
 using System.Web.UI.HtmlControls;
-using Telerik.Web.UI;
 
 public partial class Kpi_KpiForm : System.Web.UI.Page
 {
