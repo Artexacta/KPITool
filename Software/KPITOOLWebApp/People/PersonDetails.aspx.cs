@@ -156,7 +156,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
     protected void KpisGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string kpiId = e.CommandArgument.ToString();
-        if (e.CommandName.Equals("ViewData"))
+        if (e.CommandName.Equals("ViewData") && !string.IsNullOrEmpty(kpiId))
         {
             Session["KpiId"] = kpiId;
             Response.Redirect("~/Kpis/KpiDetails.aspx");

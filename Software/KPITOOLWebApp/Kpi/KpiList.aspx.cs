@@ -132,77 +132,6 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         return name;
     }
 
-    protected void KpisRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
-        int KpiId = 0;
-        try
-        {
-            KpiId = Convert.ToInt32(e.CommandArgument);
-        }
-        catch (Exception ex)
-        {
-            log.Error("Error getting object id", ex);
-        }
-        if (KpiId <= 0)
-        {
-            SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
-            return;
-        }
-
-        switch (e.CommandName)
-        {
-            case "ViewOwner":
-                //Kpi objKpi = FrtwbSystem.Instance.Kpis[KpiId];
-                //FrtwbObject ownerObject = objKpi.Owner;
-                //if (ownerObject == null)
-                //    return;
-
-
-                //if (ownerObject is Organization)
-                //{
-                //    Session["OrganizationId"] = ownerObject.ObjectId;
-                //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
-                //}
-                //else if (ownerObject is Area)
-                //{
-                //    Area area = (Area)ownerObject;
-                //    Session["OrganizationId"] = area.Owner.ObjectId;
-                //    Response.Redirect("~/Organization/OrganizationDetails.aspx");
-                //}
-                //else if (ownerObject is Activity)
-                //{
-                //    Session["ActivityId"] = ownerObject.ObjectId;
-                //    Response.Redirect("~/Activity/ActivityDetails.aspx");
-                //}
-                //else if (ownerObject is Project)
-                //{
-                //    Session["ProjectId"] = ownerObject.ObjectId;
-                //    Response.Redirect("~/Project/ProjectDetails.aspx");
-                //}
-                return;
-            case "DeleteKpi":
-
-                //objKpi = FrtwbSystem.Instance.Kpis[KpiId];
-
-
-                //RemoveKpiFromOldOwner(objKpi);
-                //objKpi.Owner = null;
-                //FrtwbSystem.Instance.Kpis.Remove(objKpi.ObjectId);
-                //SystemMessages.DisplaySystemMessage("The Kpi was deleted");
-                //SearchKpis();
-                break;
-            case "ViewActivities":
-
-                Session["OwnerId"] = KpiId + "-Kpi";
-                Response.Redirect("~/Activity/ActivitiesList.aspx");
-                break;
-            case "EditKpi":
-                Session["KPI_ID"] = KpiId.ToString();
-                Response.Redirect("~/Kpi/KpiForm.aspx");
-                break;
-        }
-    }
-
     protected void KPIListObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
         if (e.Exception != null)
@@ -211,6 +140,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
             e.ExceptionHandled = true;
         }
     }
+
     protected void KpisGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         int kpiId = 0;
@@ -244,6 +174,11 @@ public partial class Kpi_KpiList : System.Web.UI.Page
             Session["KPIID"] = kpiId.ToString();
             Response.Redirect("~/Kpi/ShareKpi.aspx");
         }
+        if (e.CommandName == "ListValuesKpi")
+        {
+            Session["KPIID"] = kpiId.ToString();
+            Response.Redirect("~/Kpi/ImportData.aspx");
+        }
         if (e.CommandName == "DeleteKpi")
         {
             try
@@ -258,4 +193,5 @@ public partial class Kpi_KpiList : System.Web.UI.Page
             KpisGridView.DataBind();
         }
     }
+
 }

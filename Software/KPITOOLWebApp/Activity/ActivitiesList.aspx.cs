@@ -174,7 +174,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         {
             Session["ActivityId"] = activityId;
             Session["ParentPage"] = "~/Activity/ActivitiesList.aspx";
-            Response.Redirect("~/Activity/DetailActivity.aspx");
+            Response.Redirect("~/Activity/ActivityDetails.aspx");
             return;
         }
         if (e.CommandName == "DeleteActivity")
