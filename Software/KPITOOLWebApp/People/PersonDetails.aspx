@@ -96,7 +96,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/People/PeopleList.aspx" Text="<%$ Resources:DataDetails, ReturnPersonLink %>" 
+                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/Personas/ListaPersonas.aspx" Text="<%$ Resources:DataDetails, ReturnPersonLink %>" 
                     CssClass="btn btn-info">
                 </asp:HyperLink>
             </div>

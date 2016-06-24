@@ -208,6 +208,11 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
             Response.Redirect("~/Project/ProjectList.aspx");
             return;
         }
+        if (e.CommandName.Equals("ShareActivity"))
+        {
+            Session["ACTIVITYID"] = activityId.ToString();
+            Response.Redirect("~/Activity/ShareActivity.aspx");
+        }
     }
 
     protected void ActivityObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)

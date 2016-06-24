@@ -50,7 +50,7 @@
                                                 CssClass="text-success" CommandArgument='<%# Eval("UserName") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="<%$ Resources:ShareData, DeleteColumn %>" ItemStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="<%$ Resources:ShareData, DeleteColumn %>">
+                                    <asp:TemplateField HeaderText="<%$ Resources:ShareData, DeleteColumn %>" ItemStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="DeleteButton" runat="server" Text="<i class='fa fa-minus-circle'></i>" CommandName="DeleteData" ToolTip="Delete" 
                                                 CssClass="text-danger" CommandArgument='<%# Eval("UserName") %>' OnClientClick="<%$ Resources:ShareData, ConfirmDeleteUserPermission %>" />
@@ -84,7 +84,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/People/PeopleList.aspx" Text="<%$ Resources:ShareData, ReturnPersonLink %>" CssClass="btn btn-info">
+                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/Personas/ListaPersonas.aspx" Text="<%$ Resources:ShareData, ReturnPersonLink %>" CssClass="btn btn-info">
                 </asp:HyperLink>
             </div>
         </div>
