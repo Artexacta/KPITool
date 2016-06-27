@@ -33,7 +33,7 @@ public partial class People_SharePerson : System.Web.UI.Page
             if (!string.IsNullOrEmpty(PersonIdHiddenField.Value))
                 LoadData();
             else
-                Response.Redirect("~/People/PeopleList.aspx");
+                Response.Redirect("~/Personas/ListaPersonas.aspx");
 
             UserTextBox.Attributes.Add("onchange", "UserTextBox_OnChange()");
             ObjectTypeIdHiddenField.Value = PermissionObject.ObjectType.PERSON.ToString();
@@ -69,7 +69,7 @@ public partial class People_SharePerson : System.Web.UI.Page
         }
 
         if (personId > 0)
-            PersonIdHiddenField.Value = Request["ID"].ToString();
+            PersonIdHiddenField.Value = personId.ToString();
     }
 
     private void LoadData()
@@ -83,13 +83,13 @@ public partial class People_SharePerson : System.Web.UI.Page
         catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/People/PeopleList.aspx");
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
 
         if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
             SystemMessages.DisplaySystemWarningMessage(Resources.ShareData.UserNotOwnPerson);
-            Response.Redirect("~/People/PeopleList.aspx");
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
 
         //-- show Data
@@ -101,7 +101,7 @@ public partial class People_SharePerson : System.Web.UI.Page
         catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/People/PeopleList.aspx");
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
 
         if (theData != null)

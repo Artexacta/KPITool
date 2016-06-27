@@ -59,8 +59,9 @@
                                         <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </asp:LinkButton>
                                 </div>
-                                <div class="col-md-1 disabled">
-                                    <asp:LinkButton ID="SharePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn shareBtn">
+                                <div class="col-md-1">
+                                    <asp:LinkButton ID="SharePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn shareBtn" 
+                                        CommandName="SharePerson">
                                         <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                     </asp:LinkButton>
                                 </div>
