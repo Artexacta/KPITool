@@ -1,4 +1,4 @@
-﻿<%@ Page Title="FRTWB" Language="C#" MasterPageFile="~/MasterPage.master"
+﻿<%@ Page Title="KPI Tool" Language="C#" MasterPageFile="~/MasterPage.master"
     AutoEventWireup="true" CodeFile="MainPage.aspx.cs" Inherits="MainPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
