@@ -173,7 +173,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         {
             Session["ActivityId"] = activityId;
             Session["ParentPage"] = "~/Activity/ActivitiesList.aspx";
-            Response.Redirect("~/Activity/DetailActivity.aspx");
+            Response.Redirect("~/Activity/ActivityDetails.aspx");
             return;
         }
         if (e.CommandName == "DeleteActivity")
@@ -207,6 +207,11 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
             Session["SEARCH_PARAMETER"] = "@projectID " + activityId.ToString();
             Response.Redirect("~/Project/ProjectList.aspx");
             return;
+        }
+        if (e.CommandName.Equals("ShareActivity"))
+        {
+            Session["ACTIVITYID"] = activityId.ToString();
+            Response.Redirect("~/Activity/ShareActivity.aspx");
         }
     }
 

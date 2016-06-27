@@ -236,6 +236,11 @@ public partial class Project_ProjectList : System.Web.UI.Page
             Response.Redirect("~/Organization/EditOrganization.aspx");
             return;
         }
+        if (e.CommandName.Equals("ShareProject"))
+        {
+            Session["PROJECTID"] = projectId.ToString();
+            Response.Redirect("~/Project/ShareProject.aspx");
+        }
     }
 
     protected void ProjectsObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)

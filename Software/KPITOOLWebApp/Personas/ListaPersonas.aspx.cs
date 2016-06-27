@@ -126,6 +126,11 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
             return;
         }
 
+        if (e.CommandName.Equals("ViewPerson"))
+        {
+            Session["PERSONID"] = personId.ToString();
+            Response.Redirect("~/People/PersonDetails.aspx");
+        }
         if (e.CommandName == "EditPerson")
         {
             Session["PersonId"] = personId.ToString();
@@ -162,6 +167,11 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
             Session["SEARCH_PARAMETER"] = "@personID " + personId.ToString();
             Response.Redirect("~/Kpi/KpiList.aspx");
             return;
+        }
+        if (e.CommandName.Equals("SharePerson"))
+        {
+            Session["PERSONID"] = personId.ToString();
+            Response.Redirect("~/People/SharePerson.aspx");
         }
     }
     
