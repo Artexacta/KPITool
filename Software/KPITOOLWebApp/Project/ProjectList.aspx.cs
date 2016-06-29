@@ -49,65 +49,12 @@ public partial class Project_ProjectList : System.Web.UI.Page
         log.Debug(ProjectSearchControl.Query.ToString());
     }
 
-    protected string GetOrganizationInfo(Object obj)
-    {
-        int OrganizationID = 0;
-        string name = "";
-        try
-        {
-            OrganizationID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (OrganizationID > 0)
-        {
-            Organization theClass = null;
-
-            try
-            {
-                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = theClass.Name;
-        }
-
-        return name;
-    }
-    
-    protected string GetAreaInfo(Object obj)
-    {
-        int areaID = 0;
-        string name = "";
-        try
-        {
-            areaID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (areaID > 0)
-        {
-            Area theClass = null;
-
-            try
-            {
-                theClass = AreaBLL.GetAreaById(areaID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = " - " + theClass.Name;
-        }
-
-        return name;
-    }
-
     protected void ProjectsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
             return;
 
+        //Change the text of confirmation message of delete button
         LinkButton buttonDelete = (LinkButton)e.Item.FindControl("DeleteProject");
         if (buttonDelete != null)
             buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Project.MessageConfirmDelete);
@@ -116,6 +63,34 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         if (item == null)
             return;
+
+        //If exists AreaName Show the GuionLabel
+        if (!string.IsNullOrEmpty(item.AreaName))
+        {
+            Label theGuion = (Label)e.Item.FindControl("GuionLabel");
+            if (theGuion != null)
+                theGuion.Visible = true;
+        }
+
+        //Show the delete button if is Owner
+        HiddenField theHFOwner = (HiddenField)e.Item.FindControl("IsOwnerHiddenField");
+        if (theHFOwner != null)
+        {
+            if (!Convert.ToBoolean(theHFOwner.Value))
+            {
+                Panel panelDelete = (Panel)e.Item.FindControl("pnlDelete");
+                if (panelDelete != null)
+                {
+                    panelDelete.CssClass = "col-md-1 disabled";
+                }
+
+                Panel panelShare = (Panel)e.Item.FindControl("pnlShare");
+                if (panelShare != null)
+                {
+                    panelShare.CssClass = "col-md-1 disabled";
+                }
+            }
+        }
 
         //Activities
         ActivityBLL theACBLL = new ActivityBLL();
@@ -127,17 +102,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
         }
         catch { }
 
-        //KPI
-        KPIBLL theKBLL = new KPIBLL();
-        List<KPI> theKPIs = new List<KPI>();
-
-        try
-        {
-            theKPIs = theKBLL.GetKPIsByProject(item.ProjectID);
-        }
-        catch { }
-
-        if (theActivities.Count == 0 && theKPIs.Count == 0)
+        if (theActivities.Count == 0 && item.NumberOfKpis == 0)
         {
             Panel element = (Panel)e.Item.FindControl("emptyMessage");
             element.Visible = true;
@@ -159,8 +124,8 @@ public partial class Project_ProjectList : System.Web.UI.Page
         activitiesButton.Visible = theActivities.Count > 0;
         activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " " + Resources.Organization.LabelActivity : " " + Resources.Organization.LabelActivities) : "";
 
-        kpisButton.Visible = theKPIs.Count > 0;
-        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
+        kpisButton.Visible = item.NumberOfKpis > 0;
+        kpisButton.Text = kpisButton.Visible ? item.NumberOfKpis + " KPI(s)" : "";
 
         and.Visible = activitiesButton.Visible && kpisButton.Visible;
     }

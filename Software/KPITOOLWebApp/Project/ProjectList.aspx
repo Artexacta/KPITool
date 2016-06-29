@@ -56,27 +56,30 @@
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1 disabled">
+                                    <asp:Panel ID="pnlShare" runat="server" CssClass="col-md-1">
                                         <asp:LinkButton ID="ShareProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
                                             CssClass="viewBtn shareBtn">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1">
+                                    </asp:Panel>
+                                    <asp:Panel ID="pnlDelete" runat="server" CssClass="col-md-1">
+                                        <asp:HiddenField ID="IsOwnerHiddenField" runat="server" Value='<%# Eval("IsOwner") %>' />
                                         <asp:LinkButton ID="DeleteProject" data-id='<%# Eval("ProjectID") %>' CommandArgument='<%# Eval("ProjectID") %>'
                                             CommandName="DeleteProject" runat="server" CssClass="viewBtn deleteBtn"
                                             OnClientClick="return confirm('Are you sure you want to delete selected Project?')">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
+                                    </asp:Panel>
+
                                     <div class="col-md-8">
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
                                             (
-                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# Eval("OrganizationName") %>'
                                                  CommandName="ViewOrganization"
                                                  CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
-                                            <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                            <asp:Label ID="GuionLabel" runat="server" Text=" - " Visible="false"></asp:Label>
+                                            <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# Eval("AreaName") %>'
                                                 CommandName="ViewArea"
                                                 CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                             )
@@ -98,7 +101,7 @@
                                             CommandName="ViewActivities" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
                                         <asp:Literal ID="AndLiteral" runat="server" Visible="false" Text="<% $Resources: Organization, LabelAnd %>"></asp:Literal>
-                                        <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
+                                        <asp:LinkButton ID="KpisButton" runat="server" Visible="false" Text='<%# Eval("NumberOfKpis") %>'
                                             CommandName="ViewKPIs" CommandArgument='<%# Eval("ProjectID") %>'>
                                         </asp:LinkButton>
                                     </asp:Panel>

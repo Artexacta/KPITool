@@ -70,19 +70,21 @@
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-3">
+                                    <asp:Panel class="col-md-1 col-sm-1 col-xs-3" ID="pnlShare" runat="server">
                                         <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             CssClass="viewBtn shareBtn" CommandName="ShareOrganization">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-3">
+                                    </asp:Panel>
+
+                                    <asp:Panel class="col-md-1 col-sm-1 col-xs-3" ID="pnlDelete" runat="server">
+                                        <asp:HiddenField ID="IsOwnerHiddenField" runat="server" Value='<%# Eval("IsOwner") %>' />
                                         <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             OnClientClick="return confirm('Are you sure you want to delete selected Organization?')"
                                             CssClass="viewBtn deleteBtn" CommandName="DeleteOrganization">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
+                                    </asp:Panel>
                                     <div class="col-md-8 col-sm-8 col-xs-12">
                                         <p style="font-size: 14px; padding-top: 2px;"><%# Eval("Name") %></p>
                                     </div>

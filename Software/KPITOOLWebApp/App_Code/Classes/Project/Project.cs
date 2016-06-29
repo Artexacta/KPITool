@@ -18,6 +18,8 @@ namespace Artexacta.App.Project
         public string OrganizationName { get; set; }
         public string AreaName { get; set; }
         public int NumberOfKpis { get; set; }
+        public bool IsOwner { get; set; }
+        public string Owner { get; set; }
 
         public Project()
         {

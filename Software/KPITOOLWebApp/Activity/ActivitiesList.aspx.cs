@@ -40,7 +40,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 
     void ActivitySearchControl_OnSearch()
     {
-        ActivityRepeater.DataBind();
+        //ActivityRepeater.DataBind();
     }
 
     private void ProcessSessionParameters()
@@ -50,60 +50,6 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
             ActivitySearchControl.Query = Session["SEARCH_PARAMETER"].ToString();
         }
         Session["SEARCH_PARAMETER"] = null;
-    }
-
-    protected string GetOrganizationInfo(Object obj)
-    {
-        int OrganizationID = 0;
-        string name = "";
-        try
-        {
-            OrganizationID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (OrganizationID > 0)
-        {
-            Organization theClass = null;
-
-            try
-            {
-                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = theClass.Name;
-        }
-
-        return name;
-    }
-
-    protected string GetProjectInfo(Object obj)
-    {
-        int projectID = 0;
-        string name = "";
-        try
-        {
-            projectID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (projectID > 0)
-        {
-            Project theClass = null;
-
-            try
-            {
-                theClass = ProjectBLL.GetProjectById(projectID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = " - " + theClass.Name;
-        }
-
-        return name;
     }
 
     protected void ActivityRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -117,17 +63,42 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 
         Activity item = (Activity)e.Item.DataItem;
 
-        //KPI
-        KPIBLL theKBLL = new KPIBLL();
-        List<KPI> theKPIs = new List<KPI>();
-
-        try
+        //If exists AreaName Show the GuionLabel
+        if (!string.IsNullOrEmpty(item.AreaName))
         {
-            theKPIs = theKBLL.GetKPIsByActivity(item.ActivityID);
+            Label theGuionA = (Label)e.Item.FindControl("GuionAreaLabel");
+            if (theGuionA != null)
+                theGuionA.Visible = true;
         }
-        catch { }
+        //If exists ProjectName Show the GuionLabel
+        if (!string.IsNullOrEmpty(item.ProjectName))
+        {
+            Label theGuionP = (Label)e.Item.FindControl("GuionProjectLabel");
+            if (theGuionP != null)
+                theGuionP.Visible = true;
+        }
 
-        if (theKPIs.Count == 0)
+        //Show the delete button if is Owner
+        HiddenField theHFOwner = (HiddenField)e.Item.FindControl("IsOwnerHiddenField");
+        if (theHFOwner != null)
+        {
+            if (!Convert.ToBoolean(theHFOwner.Value))
+            {
+                Panel panelDelete = (Panel)e.Item.FindControl("pnlDelete");
+                if (panelDelete != null)
+                {
+                    panelDelete.CssClass = "col-md-1 disabled";
+                }
+
+                Panel panelShare = (Panel)e.Item.FindControl("pnlShare");
+                if (panelShare != null)
+                {
+                    panelShare.CssClass = "col-md-1 disabled";
+                }
+            }
+        }
+
+        if (item.NumberOfKpis == 0)
         {
             Panel element = (Panel)e.Item.FindControl("emptyMessage");
             element.Visible = true;
@@ -142,8 +113,8 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 
         LinkButton kpisButton = (LinkButton)e.Item.FindControl("KpisButton");
 
-        kpisButton.Visible = theKPIs.Count > 0;
-        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
+        kpisButton.Visible = item.NumberOfKpis > 0;
+        kpisButton.Text = kpisButton.Visible ? item.NumberOfKpis + " KPI(s)" : "";
 
     }
 
@@ -207,6 +178,12 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         {
             Session["SEARCH_PARAMETER"] = "@projectID " + activityId.ToString();
             Response.Redirect("~/Project/ProjectList.aspx");
+            return;
+        }
+        if (e.CommandName == "ViewArea")
+        {
+            Session["OrganizationId"] = activityId.ToString();
+            Response.Redirect("~/Organization/EditOrganization.aspx");
             return;
         }
     }

@@ -51,87 +51,6 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         Session["SEARCH_PARAMETER"] = null;
     }
 
-    protected string GetOrganizationInfo(Object obj)
-    {
-        int OrganizationID = 0;
-        string name = "";
-        try
-        {
-            OrganizationID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (OrganizationID > 0)
-        {
-            Organization theClass = null;
-
-            try
-            {
-                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = theClass.Name;
-        }
-
-        return name;
-    }
-
-    protected string GetAreaInfo(Object obj)
-    {
-        int areaID = 0;
-        string name = "";
-        try
-        {
-            areaID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (areaID > 0)
-        {
-            Area theClass = null;
-
-            try
-            {
-                theClass = AreaBLL.GetAreaById(areaID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = " - " + theClass.Name;
-        }
-
-        return name;
-    }
-
-    protected string GetProjectInfo(Object obj)
-    {
-        int projectID = 0;
-        string name = "";
-        try
-        {
-            projectID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (projectID > 0)
-        {
-            Project theClass = null;
-
-            try
-            {
-                theClass = ProjectBLL.GetProjectById(projectID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = " - " + theClass.Name;
-        }
-
-        return name;
-    }
-
     protected void KpisRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         int KpiId = 0;
@@ -256,6 +175,45 @@ public partial class Kpi_KpiList : System.Web.UI.Page
                 return;
             }
             KpisGridView.DataBind();
+        }
+    }
+
+    protected void KpisGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.DataItem is KPI)
+        {
+            KPI theData = (KPI)e.Row.DataItem;
+
+            if (theData == null)
+                return;
+
+            Panel theDelete = (Panel)e.Row.FindControl("pnlDelete");
+            if (theDelete != null && !theData.IsOwner)
+            {
+                theDelete.CssClass = "disabled";
+            }
+
+            Panel theShare = (Panel)e.Row.FindControl("pnlShare");
+            if (theShare != null && !theData.IsOwner)
+            {
+                theShare.CssClass = "disabled";
+            }
+
+            //If exists AreaName Show the GuionLabel
+            if (!string.IsNullOrEmpty(theData.AreaName))
+            {
+                Label theGuionA = (Label)e.Row.FindControl("GuionALabel");
+                if (theGuionA != null)
+                    theGuionA.Visible = true;
+            }
+            //If exists ProjectName Show the GuionLabel
+            if (!string.IsNullOrEmpty(theData.ProjectName))
+            {
+                Label theGuionP = (Label)e.Row.FindControl("GuionPLabel");
+                if (theGuionP != null)
+                    theGuionP.Visible = true;
+            }
+
         }
     }
 }

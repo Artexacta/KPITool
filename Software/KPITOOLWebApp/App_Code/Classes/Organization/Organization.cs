@@ -13,6 +13,7 @@ namespace Artexacta.App.Organization
     {
         public int OrganizationID { get; set; }
         public string Name { get; set; }
+        public bool IsOwner { get; set; }
 
         public Organization()
         {

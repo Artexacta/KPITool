@@ -56,26 +56,32 @@
                                         <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </asp:LinkButton>
                                 </div>
-                                <div class="col-md-1 disabled">
+                                <asp:Panel class="col-md-1" ID="pnlShare" runat="server">
                                     <asp:LinkButton ID="ShareActivity" CommandArgument='<%# Eval("ActivityId") %>' runat="server" CssClass="viewBtn shareBtn">
                                         <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                     </asp:LinkButton>
-                                </div>
-                                <div class="col-md-1">
+                                </asp:Panel>
+                                <asp:Panel class="col-md-1" ID="pnlDelete" runat="server">
+                                    <asp:HiddenField ID="IsOwnerHiddenField" runat="server" Value='<%# Eval("IsOwner") %>' />
                                     <asp:LinkButton ID="DeleteActivity" CommandArgument='<%# Eval("ActivityId") %>' runat="server" CssClass="viewBtn deleteBtn"
                                         CommandName="DeleteActivity"
                                         OnClientClick="return confirm('Are you sure you want to delete selected Activity?')">   
                                         <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                     </asp:LinkButton>
-                                </div>
+                                </asp:Panel>
                                 <div class="col-md-8">
                                     <p style="font-size: 14px; padding-top: 2px;">
                                         <%# Eval("Name") %>
                                         (
-                                            <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationId")) %>'
+                                            <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# Eval("OrganizationName") %>'
                                                 CommandName="ViewOrganization"
                                                 CommandArgument='<%# Eval("OrganizationId") %>'></asp:LinkButton>
-                                        <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
+                                        <asp:Label ID="GuionAreaLabel" runat="server" Text=" - " Visible="false"></asp:Label>
+                                        <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# Eval("AreaName") %>'
+                                            CommandName="ViewArea"
+                                            CommandArgument='<%# Eval("OrganizationId") %>'></asp:LinkButton>
+                                        <asp:Label ID="GuionProjectLabel" runat="server" Text=" - " Visible="false"></asp:Label>
+                                        <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# Eval("ProjectName") %>'
                                             CommandName="ViewProject"
                                             CommandArgument='<%# Eval("ProjectID") %>'></asp:LinkButton>
                                         )
@@ -92,9 +98,8 @@
                                     <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ACTIVITY" OwnerId='<%# Eval("ActivityId") %>' />
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">
-                                    <asp:Label ID="HasLabel" runat="server" Text="<% $Resources: Activity, MessageActivityHas %>"></asp:Label> 
-                                    <asp:LinkButton ID="KpisButton" runat="server" Visible="false"
-                                        CommandName="ViewKPIs" CommandArgument='<%# Eval("ActivityId") %>'></asp:LinkButton>
+                                    <asp:Label ID="HasLabel" runat="server" Text="<% $Resources: Activity, MessageActivityHas %>"></asp:Label>
+                                    <asp:LinkButton ID="KpisButton" runat="server" CommandName="ViewKPIs" CommandArgument='<%# Eval("ActivityId") %>'></asp:LinkButton>
                                 </asp:Panel>
                             </div>
                         </ItemTemplate>
@@ -136,7 +141,7 @@
             </div>
         </div>
     </div>
-    <asp:ObjectDataSource ID="ActivityObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}" 
+    <asp:ObjectDataSource ID="ActivityObjectDataSource" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetActivitiesBySearch" TypeName="Artexacta.App.Activities.BLL.ActivityBLL" OnSelected="ActivityObjectDataSource_Selected">
         <SelectParameters>
             <asp:ControlParameter ControlID="ActivitySearchControl" PropertyName="Sql" Name="whereClause" Type="String" />
