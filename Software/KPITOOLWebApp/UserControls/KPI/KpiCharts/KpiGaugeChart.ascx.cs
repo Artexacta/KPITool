@@ -176,7 +176,7 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
             })
             .SetSeries(new Series()
             {
-                Name = "Complete",
+                Name = Resources.KpiDetails.CompleteLabel,
                 Data = new DotNet.Highcharts.Helpers.Data(new object[] { progress })
             });
         ChartLiteral.Text = chart.ToHtmlString();

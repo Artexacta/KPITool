@@ -13,6 +13,12 @@ public partial class Test_TestBasicContextualHelp : System.Web.UI.Page
         LoadMainMenuScript();
     }
 
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
+
     private void LoadMainMenuScript()
     {
         StringBuilder scriptText = new StringBuilder("<script src=\"");

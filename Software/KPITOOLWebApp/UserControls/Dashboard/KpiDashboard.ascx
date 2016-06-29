@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="KpiDashboard.ascx.cs" Inherits="UserControls_Dashboard_KpiDashboard" %>
 <%@ Register Src="~/UserControls/KPI/KpiChart.ascx" TagName="KpiChart" TagPrefix="app" %>
+<%@ Register Src="~/UserControls/KPI/KpiCharts/ExcelExportKpiChart.ascx" TagName="ExcelExportKpiChart" TagPrefix="app" %>
 
 <asp:Repeater ID="KpisRepeater" runat="server"
     OnItemCommand="KpisRepeater_ItemCommand"
@@ -14,21 +15,23 @@
             <div class="col-md-6">
 
             </div>
-            <div class="col-md-6 text-right">
-                <asp:LinkButton ID="ViewButton" runat="server" CommandArgument='<%# Eval("KpiId") %>' CommandName="ViewKPI">
+            <div    class="col-md-6 text-right">
+                <asp:LinkButton ID="ViewButton" runat="server" CommandArgument='<%# Eval("KpiId") %>' CommandName="ViewKPI"
+                    ToolTip="<%$ Resources: KpiDashboard, ViewKpi %>">
                     <i class="fa fa-eye fa-2x"></i>
                 </asp:LinkButton>
                 &nbsp;
-                <asp:LinkButton ID="ExportButton" runat="server" CommandArgument='<%# Eval("KpiId") %>' CommandName="ExportKPI">
-                    <i class="fa fa-file-excel-o fa-2x"></i>
-                </asp:LinkButton>
+                <app:ExcelExportKpiChart ID="ExcelExportControl" runat="server" KpiId='<%# Eval("KpiId") %>' />
                 &nbsp;
-                <asp:LinkButton ID="DeleteButton" runat="server" CommandArgument='<%# Eval("KpiId") %>' CommandName="DeleteKPI">
-                    <i class="fa fa-trash fa-2x"></i>
+                <asp:LinkButton ID="DeleteButton" runat="server" CommandArgument='<%# Eval("KpiId") %>' CommandName="DeleteKPI"
+                    ToolTip="<%$ Resources: KpiDashboard, RemoveKpiFromDashboard %>">
+                    <i class="fa fa-trash fa-2x text-danger"></i>
                 </asp:LinkButton>
             </div>
+            <div class="col-md-12">
+                <app:KpiChart ID="KpiChartControl" runat="server" KpiId='<%# Eval("KpiId") %>' />
+            </div>
         </div>
-        <app:KpiChart ID="KpiChartControl" runat="server" KpiId='<%# Eval("KpiId") %>' />
     </ItemTemplate>
     <FooterTemplate>
         <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# KpisRepeater.Items.Count == 0 %>'>

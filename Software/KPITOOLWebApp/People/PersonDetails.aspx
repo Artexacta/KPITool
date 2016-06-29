@@ -37,7 +37,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ViewColumn %>" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData">
+                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData" CommandArgument='<%# Eval("KpiID") %>'>
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
@@ -96,7 +96,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/People/PeopleList.aspx" Text="<%$ Resources:DataDetails, ReturnPersonLink %>" 
+                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/Personas/ListaPersonas.aspx" Text="<%$ Resources:DataDetails, ReturnPersonLink %>" 
                     CssClass="btn btn-info">
                 </asp:HyperLink>
             </div>

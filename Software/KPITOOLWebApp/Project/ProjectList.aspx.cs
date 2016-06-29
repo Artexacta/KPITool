@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
 using Artexacta.App.Project.BLL;
 using Artexacta.App.Project;
 using Artexacta.App.Activities.BLL;
@@ -201,6 +200,11 @@ public partial class Project_ProjectList : System.Web.UI.Page
             Session["OrganizationId"] = projectId.ToString();
             Response.Redirect("~/Organization/EditOrganization.aspx");
             return;
+        }
+        if (e.CommandName.Equals("ShareProject"))
+        {
+            Session["PROJECTID"] = projectId.ToString();
+            Response.Redirect("~/Project/ShareProject.aspx");
         }
     }
 

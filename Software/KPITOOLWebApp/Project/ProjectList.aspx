@@ -58,7 +58,7 @@
                                     </div>
                                     <asp:Panel ID="pnlShare" runat="server" CssClass="col-md-1">
                                         <asp:LinkButton ID="ShareProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
-                                            CssClass="viewBtn shareBtn">
+                                            CssClass="viewBtn shareBtn" CommandName="ShareProject">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </asp:Panel>

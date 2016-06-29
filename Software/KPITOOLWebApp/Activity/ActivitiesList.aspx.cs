@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Web.UI;
 using Artexacta.App.Activities;
 using Artexacta.App.Organization;
 using Artexacta.App.Organization.BLL;
@@ -145,7 +144,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         {
             Session["ActivityId"] = activityId;
             Session["ParentPage"] = "~/Activity/ActivitiesList.aspx";
-            Response.Redirect("~/Activity/DetailActivity.aspx");
+            Response.Redirect("~/Activity/ActivityDetails.aspx");
             return;
         }
         if (e.CommandName == "DeleteActivity")
@@ -166,25 +165,26 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         {
             Session["SEARCH_PARAMETER"] = "@activityID " + activityId.ToString();
             Response.Redirect("~/Kpi/KpiList.aspx");
-            return;
         }
         if (e.CommandName == "ViewOrganization")
         {
             Session["SEARCH_PARAMETER"] = "@organizationID " + activityId.ToString();
             Response.Redirect("~/MainPage.aspx");
-            return;
         }
         if (e.CommandName == "ViewProject")
         {
             Session["SEARCH_PARAMETER"] = "@projectID " + activityId.ToString();
             Response.Redirect("~/Project/ProjectList.aspx");
-            return;
         }
         if (e.CommandName == "ViewArea")
         {
             Session["OrganizationId"] = activityId.ToString();
             Response.Redirect("~/Organization/EditOrganization.aspx");
-            return;
+        }
+        if (e.CommandName.Equals("ShareActivity"))
+        {
+            Session["ACTIVITYID"] = activityId.ToString();
+            Response.Redirect("~/Activity/ShareActivity.aspx");
         }
     }
 

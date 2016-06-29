@@ -125,10 +125,8 @@ public partial class UserControls_Dashboard_KpiDashboard : System.Web.UI.UserCon
 
     protected void KpisRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
-        //if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
-        //    return;
-        //UserControls_KPI_KpiChart control = (UserControls_KPI_KpiChart)e.Item.FindControl("KpiChartControl");
-        //if(control != null)
-        //    control.BuildChart();
+        LinkButton button = (LinkButton)e.Item.FindControl("DeleteButton");
+        if (button != null)
+            button.OnClientClick = "return confirm('" + Resources.KpiDashboard.MessageDeleteKpiFromDashboard + "');";
     }
 }

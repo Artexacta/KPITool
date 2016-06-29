@@ -30,7 +30,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
             if (!string.IsNullOrEmpty(PersonIdHiddenField.Value))
                 LoadData();
             else
-                Response.Redirect("~/People/PeopleList.aspx");
+                Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
     }
 
@@ -63,7 +63,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
         }
 
         if (personId > 0)
-            PersonIdHiddenField.Value = Request["ID"].ToString();
+            PersonIdHiddenField.Value = personId.ToString();
     }
 
     private void LoadData()
@@ -77,13 +77,13 @@ public partial class People_PersonDetails : System.Web.UI.Page
         catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/People/PeopleList.aspx");
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
 
         if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
             SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
-            Response.Redirect("~/People/PeopleList.aspx");
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
 
         //-- show Data
@@ -96,7 +96,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
         {
             log.Error(exc.Message);
             SystemMessages.DisplaySystemErrorMessage(Resources.DataDetails.MessageErrorGetPersona);
-            Response.Redirect("~/People/PeopleList.aspx");
+            Response.Redirect("~/Personas/ListaPersonas.aspx");
         }
 
         if (theData != null)
@@ -156,7 +156,7 @@ public partial class People_PersonDetails : System.Web.UI.Page
     protected void KpisGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         string kpiId = e.CommandArgument.ToString();
-        if (e.CommandName.Equals("ViewData"))
+        if (e.CommandName.Equals("ViewData") && !string.IsNullOrEmpty(kpiId))
         {
             Session["KpiId"] = kpiId;
             Response.Redirect("~/Kpis/KpiDetails.aspx");

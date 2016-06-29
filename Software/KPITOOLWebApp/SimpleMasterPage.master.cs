@@ -20,8 +20,8 @@ public partial class SimpleMasterPage : System.Web.UI.MasterPage
     private void LoadIcon()
     {
         StringBuilder scriptText = new StringBuilder("<link rel=\"icon\" href=\"");
-        scriptText.Append(ResolveUrl("~/favicon.ico"));
-        scriptText.Append("\" type=\"image/vnd.microsoft.icon\"></script>\n");
+        scriptText.Append(ResolveUrl("~/Images/favicon.png"));
+        scriptText.Append("\" type=\"image/png\" >\n"); ;
 
         JqueryAndMainMenuScript.Text = scriptText.ToString();
     }

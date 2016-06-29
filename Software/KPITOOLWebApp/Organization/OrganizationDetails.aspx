@@ -261,8 +261,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="<%$ Resources:DataDetails, ViewColumn %>" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData"
-                                                CommandArgument='<%# Eval("KpiID") %>'>
+                                            <asp:LinkButton ID="ViewButton" runat="server" CommandName="ViewData" CommandArgument='<%# Eval("KpiID") %>'>
                                                 <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
