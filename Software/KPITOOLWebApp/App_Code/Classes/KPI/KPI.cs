@@ -164,6 +164,7 @@ namespace Artexacta.App.KPI
         public string ProjectName { get; set; }
         public string ActivityName { get; set; }
         public string PersonName { get; set; }
+        public bool IsOwner { get; set; }
 
         public decimal Progress { get; set; }
         public string ProgressText

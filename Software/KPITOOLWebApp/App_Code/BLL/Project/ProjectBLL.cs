@@ -39,9 +39,13 @@ namespace Artexacta.App.Project.BLL
                 row.name,
                 row.organizationID,
                 row.IsareaIDNull() ? 0 : row.areaID);
-            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            
+            theNewRecord.OrganizationName = row.organizationName;
             theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
             theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
+            theNewRecord.IsOwner = row.IsisOwnerNull() ? false : Convert.ToBoolean(row.isOwner);
+            theNewRecord.Owner = row.IsownerNull() ? "" : row.owner;
+            
             return theNewRecord;
         }
 
@@ -55,7 +59,7 @@ namespace Artexacta.App.Project.BLL
             Project theData = null;
             try
             {
-                ProjectDS.ProjectsDataTable theTable = theAdapter.GetProjectsByOrganization(organizationId, userName);
+                ProjectDS.ProjectsDataTable theTable = theAdapter.GetProjectByOrganization(organizationId, userName);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
@@ -219,7 +223,7 @@ namespace Artexacta.App.Project.BLL
             try
             {
                 ProjectsTableAdapter localAdapter = new ProjectsTableAdapter();
-                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectsForAutocomplete(userName, organizationId, areaId, filter);
+                ProjectDS.ProjectsDataTable theTable = localAdapter.GetProjectForAutocomplete(userName, organizationId, areaId, filter);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (ProjectDS.ProjectsRow theRow in theTable)

@@ -55,13 +55,15 @@ namespace Artexacta.App.KPI.BLL
                 row.IscurrencyNull() ? "" : row.currency,
                 row.IscurrencyUnitIDNull() ? "" : row.currencyUnitID,
                 row.kpiTypeID);
-            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            theNewRecord.OrganizationName = row.organizationName;
             theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
             theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
             theNewRecord.ActivityName = row.IsactivityNameNull() ? "" : row.activityName;
             theNewRecord.PersonName = row.IspersonNameNull() ? "" : row.personName;
             theNewRecord.Progress = row.IsprogressNull() ? 0 : row.progress;
             theNewRecord.Trend = row.IstrendNull() ? 0 : row.trend;
+            theNewRecord.IsOwner = row.IsisOwnerNull() ? false : Convert.ToBoolean(row.isOwner);
+
             return theNewRecord;
         }
 

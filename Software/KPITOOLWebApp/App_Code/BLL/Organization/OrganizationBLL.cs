@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Artexacta.App.Utilities.Quantity;
 using log4net;
 using OrganizationDSTableAdapters;
 
@@ -84,6 +85,7 @@ namespace Artexacta.App.Organization.BLL
                     foreach (OrganizationDS.OrganizationRow theRow in theTable)
                     {
                         theData = FillRecord(theRow);
+                        theData.IsOwner = theRow.isOwner;
                         theList.Add(theData);
                     }
                 }
@@ -184,7 +186,7 @@ namespace Artexacta.App.Organization.BLL
 
             try
             {
-                localAdapter.DeleteOrganization(organizationId,userName);
+                localAdapter.DeleteOrganization(organizationId, userName);
             }
             catch (Exception exc)
             {
@@ -220,5 +222,29 @@ namespace Artexacta.App.Organization.BLL
             return theList;
         }
 
+        public static Quantity GetQuantityByOrganization(int organizationId)
+        {
+            Quantity theClass = null;
+            string userName = HttpContext.Current.User.Identity.Name;
+
+            try
+            {
+                QuantityTableAdapter localAdapter = new QuantityTableAdapter();
+                OrganizationDS.QuantityDataTable theTable = localAdapter.GetQuantityByOrganization(organizationId, userName);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    OrganizationDS.QuantityRow row = theTable[0];
+                    theClass = new Quantity(row.Areas, row.Projects, row.People, row.Activities, row.Kpis);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Error al obtener la cantidades de la organizacion " + organizationId.ToString() + " para usuario " + userName, exc);
+                throw new Exception(Resources.Organization.MessageErrorObtainOrganization);
+            }
+
+            return theClass;
+        }
     }
 }

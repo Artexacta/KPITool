@@ -16,6 +16,7 @@ namespace Artexacta.App.Activities
         private int _areaID;
         private int _projectID;
 
+
         public Activity()
         {
         }
@@ -63,6 +64,7 @@ namespace Artexacta.App.Activities
         public string AreaName { get; set; }
         public string ProjectName { get; set; }
         public int NumberOfKpis { get; set; }
+        public bool IsOwner { get; set; }
 
         public string NumberOfKpisForDisplay
         {

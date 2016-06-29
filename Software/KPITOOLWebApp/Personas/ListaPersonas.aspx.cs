@@ -186,17 +186,38 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
 
         People item = (People)e.Item.DataItem;
 
-        //KPI
-        KPIBLL theKBLL = new KPIBLL();
-        List<KPI> theKPIs = new List<KPI>();
+        if (item == null)
+            return;
 
-        try
+        //If exists AreaName Show the GuionLabel
+        if (!string.IsNullOrEmpty(item.AreaName))
         {
-            theKPIs = theKBLL.GetKPIsByPerson(item.PersonId);
+            Label theGuionA = (Label)e.Item.FindControl("GuionLabel");
+            if (theGuionA != null)
+                theGuionA.Visible = true;
         }
-        catch { }
 
-        if (theKPIs.Count == 0)
+        //Show the delete button if is Owner
+        HiddenField theHFOwner = (HiddenField)e.Item.FindControl("IsOwnerHiddenField");
+        if (theHFOwner != null)
+        {
+            if (!Convert.ToBoolean(theHFOwner.Value))
+            {
+                Panel panelDelete = (Panel)e.Item.FindControl("pnlDelete");
+                if (panelDelete != null)
+                {
+                    panelDelete.CssClass = "col-md-1 disabled";
+                }
+
+                Panel panelShare = (Panel)e.Item.FindControl("pnlShare");
+                if (panelShare != null)
+                {
+                    panelShare.CssClass = "col-md-1 disabled";
+                }
+            }
+        }
+
+        if (item.NumberOfKpis == 0)
         {
             Panel element = (Panel)e.Item.FindControl("emptyMessage");
             element.Visible = true;
@@ -213,8 +234,8 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
 
         Literal and = (Literal)e.Item.FindControl("AndLiteral");
 
-        kpisButton.Visible = theKPIs.Count > 0;
-        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI(s)" : "";
+        kpisButton.Visible = item.NumberOfKpis > 0;
+        kpisButton.Text = kpisButton.Visible ? item.NumberOfKpis + " KPI(s)" : "";
 
     }
 }
