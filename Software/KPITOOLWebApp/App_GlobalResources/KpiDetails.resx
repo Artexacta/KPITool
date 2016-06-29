@@ -153,6 +153,9 @@
   <data name="SelectDashboardLabel" xml:space="preserve">
     <value>-- Select a Dashboard --</value>
   </data>
+  <data name="StartingDateLabel" xml:space="preserve">
+    <value>Starting Date</value>
+  </data>
   <data name="ValueLabel" xml:space="preserve">
     <value>Value</value>
   </data>

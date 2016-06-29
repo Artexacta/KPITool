@@ -91,10 +91,10 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             CategoriesPanel.Visible = true;
         }
         //Inicializo los valores conocidos
-        KpiType.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiTypeLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + kpi.KpiTypeID + "</div>";
+        KpiType.Text = kpi.KpiTypeID ;
         //WebServiceId.Text = "<div class='col-md-4 col-sm-4'>Web Service ID:</div><div class='col-md-8 col-sm-8'>SERV-Reliavility</div>";
-        ReportingUnit.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiReportingUnitLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + kpi.ReportingUnitID + "</div>";
-        KpiTarget.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiTargetLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + (kpi.TargetPeriod == 0 ? Resources.KpiDetails.NoTargetLabel : kpi.TargetPeriod + " " + kpi.ReportingUnitID) + "</div>";
+        ReportingUnit.Text =  kpi.ReportingUnitID;
+        KpiTarget.Text = (kpi.TargetPeriod == 0 ? Resources.KpiDetails.NoTargetLabel : kpi.TargetPeriod + " " + kpi.ReportingUnitID);
 
         //if (caso <= 50)
         //{
@@ -104,7 +104,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         //}
         //else
         //{
-        StartingDate.Text = "<div class='col-md-4 col-sm-4'>Starting Date:</div><div class='col-md-8 col-sm-8'>05/17/15</div>";
+        StartingDate.Text = kpi.StartDate != DateTime.MinValue ? kpi.StartDate.ToShortDateString() : "-";
         RevenueCollectionGraphic.Visible = true;
             //RevenueCollectionProgress.Visible = true;
         ChartControl.KpiId = kpiId;

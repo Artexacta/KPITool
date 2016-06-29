@@ -75,16 +75,20 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
     {
         int kpiId = KpiId;
         string strategyId = "";
+        string startingPeriod = "";
         decimal target = 0;
-        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, ref strategyId, ref target);
+        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, ref strategyId, ref target, ref startingPeriod);
         Dictionary<string, object> standardSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetStandardSerie = new Dictionary<string, object>();
 
         Dictionary<string, object> sumSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetSumSerie = new Dictionary<string, object>();
 
+        KPI objKpi = KPIBLL.GetKPIById(kpiId);
+
         bool hasTarget = target != -1;
         bool isSum = strategyId == "SUM";
+        bool isTargetUsable = false;
 
         decimal sumMeasurement = 0;
         decimal sumTarget = 0;
@@ -97,14 +101,28 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
                 sumSerie.Add(item.Period, sumMeasurement);
                 if (hasTarget)
                 {
-                    sumTarget = sumTarget + target;
-                    targetSumSerie.Add(item.Period, sumTarget);
-                    
+                    if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
+                        isTargetUsable = true;
+
+                    if (isTargetUsable)
+                    {
+                        sumTarget = sumTarget + target;
+                        targetSumSerie.Add(item.Period, sumTarget);
+                    }
+                    else
+                        targetSumSerie.Add(item.Period, null);
+
                 }
             }
             if (hasTarget)
             {
-                targetStandardSerie.Add(item.Period, target);                
+                if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
+                    isTargetUsable = true;
+
+                if (isTargetUsable)
+                    targetStandardSerie.Add(item.Period, target);
+                else
+                    targetStandardSerie.Add(item.Period, null);
             }
                 
         }
@@ -144,6 +162,33 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
                 VerticalAlign = VerticalAligns.Bottom,
                 BorderWidth = 0
             });
+        if(objKpi.UnitID != "TIME")
+        {
+            chart.SetTooltip(new Tooltip()
+            {
+                ValueSuffix = " " + objKpi.ReportingUnitID.ToLower() + "s"
+
+            });
+        }
+        else
+        {
+            chart.SetTooltip(new Tooltip()
+            {
+                Formatter = "function (){" +
+                    "return decimalToYYMMDDhhmm(this.y).toString('" + Resources.DataTime.YearsValueSingle + "','" + Resources.DataTime.YearsValue + "'," +
+                    "'" + Resources.DataTime.MonthsValueSingle + "'," +
+                    "'" + Resources.DataTime.MonthsValue + "'," +
+                    "'" + Resources.DataTime.DaysValueSingle + "'," +
+                    "'" + Resources.DataTime.DaysValue + "'," +
+                    "'" + Resources.DataTime.HoursValueSingle + "'," +
+                    "'" + Resources.DataTime.HoursValue + "'," +
+                    "'" + Resources.DataTime.MinutesValueSingle + "'," +
+                    "'" + Resources.DataTime.MinutesValue + "');" +
+                "}"
+
+            });
+        }
+        
         ChartLiteral.Text = chart.ToHtmlString();
 
         if (isSum)

@@ -153,6 +153,9 @@
   <data name="SelectDashboardLabel" xml:space="preserve">
     <value>-- Seleccione un Panel de Control --</value>
   </data>
+  <data name="StartingDateLabel" xml:space="preserve">
+    <value>Fecha de Inicio</value>
+  </data>
   <data name="ValueLabel" xml:space="preserve">
     <value>Valor</value>
   </data>

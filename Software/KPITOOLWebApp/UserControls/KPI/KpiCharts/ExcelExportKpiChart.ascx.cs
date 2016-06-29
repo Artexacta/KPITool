@@ -70,7 +70,8 @@ public partial class UserControls_KPI_KpiCharts_ExcelExportKpiChart : System.Web
         {
             decimal target = 0;
             string strategy = "";
-            List<KpiChartData> kpiSeries = KpiMeasurementBLL.GetKPIMeasurementForChart(KpiId, CategoryId, CategoryItemId, ref strategy, ref target);
+            string startingPeriod = "";
+            List<KpiChartData> kpiSeries = KpiMeasurementBLL.GetKPIMeasurementForChart(KpiId, CategoryId, CategoryItemId, ref strategy, ref target, ref startingPeriod);
             bool hasTarget = target > -1;
             excelByteArray = GetChartAsExcelByteArray(kpiSeries, target, hasTarget);
         }
