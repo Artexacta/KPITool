@@ -448,12 +448,12 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             {
                 DataRow theRow = newDataSet.Tables[0].Rows[i];
                 theData = new KPIMeasurements();
-                theData.Date = DateTime.Parse(theRow["Date"].ToString().Trim());
+                theData.Date = DateTime.Parse(theRow[Resources.ImportData.DateColumn].ToString().Trim());
 
                 if (UnitIdHiddenField.Value.Equals("TIME"))
-                    theData.DataTime = GetMeasurementTime(theRow["Value"].ToString().Trim(), regexTime);
+                    theData.DataTime = GetMeasurementTime(theRow[Resources.ImportData.ValueColumn].ToString().Trim(), regexTime);
                 else
-                    theData.Measurement = Convert.ToDecimal(theRow["Value"].ToString().Trim());
+                    theData.Measurement = Convert.ToDecimal(theRow[Resources.ImportData.ValueColumn].ToString().Trim());
 
                 //--verifiy item categories
                 if (theCategoryList.Count > 0)

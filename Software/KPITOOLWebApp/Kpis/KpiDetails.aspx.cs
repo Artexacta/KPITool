@@ -57,12 +57,13 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         try
         {
             LoadKpiData();
+            return;
         }
         catch (Exception ex)
         {
             log.Error("Error loading KPI", ex);
         }
-        
+        Response.Redirect("~/Kpi/KpiList.aspx");
     }
 
     private void ProcessSessionParameters()
@@ -147,7 +148,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         catch (Exception ex)
         {
             log.Error("Error saving KPI in dashboard", ex);
+            return;
         }
+
+        Session["KpiId"] = KpiIdHiddenField.Value;
+        Response.Redirect("~/Kpis/KpiDetails.aspx");
     }
 
     protected void DashboardRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)

@@ -164,11 +164,11 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
             });
         if(objKpi.UnitID != "TIME")
         {
-            chart.SetTooltip(new Tooltip()
-            {
-                ValueSuffix = " " + objKpi.ReportingUnitID.ToLower() + "s"
+            //chart.SetTooltip(new Tooltip()
+            //{
+            //    ValueSuffix = " " + objKpi.uni.ToLower() + "s"
 
-            });
+            //});
         }
         else
         {
@@ -229,6 +229,32 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
                 VerticalAlign = VerticalAligns.Bottom,
                 BorderWidth = 0
             });
+            if (objKpi.UnitID != "TIME")
+            {
+                //chart.SetTooltip(new Tooltip()
+                //{
+                //    ValueSuffix = " " + objKpi.uni.ToLower() + "s"
+
+                //});
+            }
+            else
+            {
+                chart.SetTooltip(new Tooltip()
+                {
+                    Formatter = "function (){" +
+                        "return decimalToYYMMDDhhmm(this.y).toString('" + Resources.DataTime.YearsValueSingle + "','" + Resources.DataTime.YearsValue + "'," +
+                        "'" + Resources.DataTime.MonthsValueSingle + "'," +
+                        "'" + Resources.DataTime.MonthsValue + "'," +
+                        "'" + Resources.DataTime.DaysValueSingle + "'," +
+                        "'" + Resources.DataTime.DaysValue + "'," +
+                        "'" + Resources.DataTime.HoursValueSingle + "'," +
+                        "'" + Resources.DataTime.HoursValue + "'," +
+                        "'" + Resources.DataTime.MinutesValueSingle + "'," +
+                        "'" + Resources.DataTime.MinutesValue + "');" +
+                    "}"
+
+                });
+            }
             SumChartLiteral.Text = chart.ToHtmlString();
             SumChartPanel.Visible = true;
         }

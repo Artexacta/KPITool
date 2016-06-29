@@ -41,21 +41,21 @@
             }
             if (this.months > 0)
             {
-                dataTime = (dataTime || dataTime == "" ? "" : dataTime + ", ") + this.months + " " + (this.months == 1 ? monthSigleLabel : monthLabel);
+                dataTime = (!dataTime || dataTime == "" ? "" : dataTime + ", ") + this.months + " " + (this.months == 1 ? monthSigleLabel : monthLabel);
             }
             if (this.days > 0)
             {
-                dataTime = (dataTime || dataTime == "" ? "" : dataTime + ", ") + this.days + " " + (this.days == 1 ? daySingleLabel : dayLabel);
+                dataTime = (!dataTime || dataTime == "" ? "" : dataTime + ", ") + this.days + " " + (this.days == 1 ? daySingleLabel : dayLabel);
             }
             if (this.hours > 0)
             {
-                dataTime = (dataTime || dataTime == "" ? "" : dataTime + ", ") + this.hours + " " + (this.hours == 1 ? hourSingleLabel : hourLabel);
+                dataTime = (!dataTime || dataTime == "" ? "" : dataTime + ", ") + this.hours + " " + (this.hours == 1 ? hourSingleLabel : hourLabel);
             }
             if (this.minutes > 0)
             {
-                dataTime = (dataTime || dataTime == "" ? "" : dataTime + ", ") + this.minutes + " " + (this.minutes == 1 ? minuteSingleLabel : minuteLabel);
+                dataTime = (!dataTime || dataTime == "" ? "" : dataTime + ", ") + this.minutes + " " + (this.minutes == 1 ? minuteSingleLabel : minuteLabel);
             }
-            return dataTime;
+            return dataTime == "" ? "N/A" : dataTime;
         }
     };
 }
