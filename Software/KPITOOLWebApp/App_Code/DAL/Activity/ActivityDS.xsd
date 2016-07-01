@@ -62,6 +62,11 @@
               <Mapping SourceColumn="organizationID" DataSetColumn="organizationID" />
               <Mapping SourceColumn="areaID" DataSetColumn="areaID" />
               <Mapping SourceColumn="projectID" DataSetColumn="projectID" />
+              <Mapping SourceColumn="organizationName" DataSetColumn="organizationName" />
+              <Mapping SourceColumn="areaName" DataSetColumn="areaName" />
+              <Mapping SourceColumn="projectName" DataSetColumn="projectName" />
+              <Mapping SourceColumn="isOwner" DataSetColumn="isOwner" />
+              <Mapping SourceColumn="numberKPIs" DataSetColumn="numberKPIs" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="DBConnectionString (Web.config)" DbObjectName="KPIDB.dbo.usp_ACT_DeleteActivity" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="DeleteActivity" Modifier="Public" Name="DeleteActivity" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteActivity">
@@ -179,7 +184,7 @@
   <xs:element name="ActivityDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ActivityDS" msprop:Generator_UserDSName="ActivityDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PopulateActivities" msprop:Generator_TableClassName="PopulateActivitiesDataTable" msprop:Generator_TableVarName="tablePopulateActivities" msprop:Generator_TablePropName="PopulateActivities" msprop:Generator_RowDeletingName="PopulateActivitiesRowDeleting" msprop:Generator_RowChangingName="PopulateActivitiesRowChanging" msprop:Generator_RowEvHandlerName="PopulateActivitiesRowChangeEventHandler" msprop:Generator_RowDeletedName="PopulateActivitiesRowDeleted" msprop:Generator_UserTableName="PopulateActivities" msprop:Generator_RowChangedName="PopulateActivitiesRowChanged" msprop:Generator_RowEvArgName="PopulateActivitiesRowChangeEvent" msprop:Generator_RowClassName="PopulateActivitiesRow">
+        <xs:element name="PopulateActivities" msprop:Generator_TableClassName="PopulateActivitiesDataTable" msprop:Generator_TableVarName="tablePopulateActivities" msprop:Generator_RowChangedName="PopulateActivitiesRowChanged" msprop:Generator_TablePropName="PopulateActivities" msprop:Generator_RowDeletingName="PopulateActivitiesRowDeleting" msprop:Generator_RowChangingName="PopulateActivitiesRowChanging" msprop:Generator_RowEvHandlerName="PopulateActivitiesRowChangeEventHandler" msprop:Generator_RowDeletedName="PopulateActivitiesRowDeleted" msprop:Generator_RowClassName="PopulateActivitiesRow" msprop:Generator_UserTableName="PopulateActivities" msprop:Generator_RowEvArgName="PopulateActivitiesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="activityID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnactivityID" msprop:Generator_ColumnPropNameInRow="activityID" msprop:Generator_ColumnPropNameInTable="activityIDColumn" msprop:Generator_UserColumnName="activityID" type="xs:int" />
@@ -196,7 +201,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Activities" msprop:Generator_TableClassName="ActivitiesDataTable" msprop:Generator_TableVarName="tableActivities" msprop:Generator_RowChangedName="ActivitiesRowChanged" msprop:Generator_TablePropName="Activities" msprop:Generator_RowDeletingName="ActivitiesRowDeleting" msprop:Generator_RowChangingName="ActivitiesRowChanging" msprop:Generator_RowEvHandlerName="ActivitiesRowChangeEventHandler" msprop:Generator_RowDeletedName="ActivitiesRowDeleted" msprop:Generator_RowClassName="ActivitiesRow" msprop:Generator_UserTableName="Activities" msprop:Generator_RowEvArgName="ActivitiesRowChangeEvent">
+        <xs:element name="Activities" msprop:Generator_TableClassName="ActivitiesDataTable" msprop:Generator_TableVarName="tableActivities" msprop:Generator_TablePropName="Activities" msprop:Generator_RowDeletingName="ActivitiesRowDeleting" msprop:Generator_RowChangingName="ActivitiesRowChanging" msprop:Generator_RowEvHandlerName="ActivitiesRowChangeEventHandler" msprop:Generator_RowDeletedName="ActivitiesRowDeleted" msprop:Generator_UserTableName="Activities" msprop:Generator_RowChangedName="ActivitiesRowChanged" msprop:Generator_RowEvArgName="ActivitiesRowChangeEvent" msprop:Generator_RowClassName="ActivitiesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="activityID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnactivityID" msprop:Generator_ColumnPropNameInRow="activityID" msprop:Generator_ColumnPropNameInTable="activityIDColumn" msprop:Generator_UserColumnName="activityID" type="xs:int" />
@@ -210,7 +215,7 @@
               <xs:element name="organizationID" msprop:Generator_ColumnVarNameInTable="columnorganizationID" msprop:Generator_ColumnPropNameInRow="organizationID" msprop:Generator_ColumnPropNameInTable="organizationIDColumn" msprop:Generator_UserColumnName="organizationID" type="xs:int" />
               <xs:element name="areaID" msprop:Generator_ColumnVarNameInTable="columnareaID" msprop:Generator_ColumnPropNameInRow="areaID" msprop:Generator_ColumnPropNameInTable="areaIDColumn" msprop:Generator_UserColumnName="areaID" type="xs:int" minOccurs="0" />
               <xs:element name="projectID" msprop:Generator_ColumnVarNameInTable="columnprojectID" msprop:Generator_ColumnPropNameInRow="projectID" msprop:Generator_ColumnPropNameInTable="projectIDColumn" msprop:Generator_UserColumnName="projectID" type="xs:int" minOccurs="0" />
-              <xs:element name="organizationName" msprop:Generator_ColumnVarNameInTable="columnorganizationName" msprop:Generator_ColumnPropNameInRow="organizationName" msprop:Generator_ColumnPropNameInTable="organizationNameColumn" msprop:Generator_UserColumnName="organizationName" minOccurs="0">
+              <xs:element name="organizationName" msprop:Generator_ColumnVarNameInTable="columnorganizationName" msprop:Generator_ColumnPropNameInRow="organizationName" msprop:Generator_ColumnPropNameInTable="organizationNameColumn" msprop:Generator_UserColumnName="organizationName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />
@@ -232,6 +237,7 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="numberKPIs" msprop:Generator_ColumnVarNameInTable="columnnumberKPIs" msprop:Generator_ColumnPropNameInRow="numberKPIs" msprop:Generator_ColumnPropNameInTable="numberKPIsColumn" msprop:Generator_UserColumnName="numberKPIs" type="xs:int" minOccurs="0" />
+              <xs:element name="isOwner" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnisOwner" msprop:Generator_ColumnPropNameInRow="isOwner" msprop:Generator_ColumnPropNameInTable="isOwnerColumn" msprop:Generator_UserColumnName="isOwner" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

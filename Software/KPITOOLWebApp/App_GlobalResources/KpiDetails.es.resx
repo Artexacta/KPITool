@@ -120,6 +120,9 @@
   <data name="AddToDashboard" xml:space="preserve">
     <value>Agregar este KPI a un Panel de Control</value>
   </data>
+  <data name="BackToListButton" xml:space="preserve">
+    <value>Ir a la Lista de KPIs</value>
+  </data>
   <data name="CompleteLabel" xml:space="preserve">
     <value>Completado</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="DeleteForDashboardMessage" xml:space="preserve">
     <value>¿Esta seguro que desea eliminar este KPI del Panel de Control seleccionado?</value>
+  </data>
+  <data name="ErrorLoadingKpi" xml:space="preserve">
+    <value>Ocurrió un error al cargar el KPI seleccionado</value>
   </data>
   <data name="KpiInDashboardEmptyMessage" xml:space="preserve">
     <value>Este KPI no esta agregado a ningun Panel de Control</value>
@@ -152,6 +158,9 @@
   </data>
   <data name="SelectDashboardLabel" xml:space="preserve">
     <value>-- Seleccione un Panel de Control --</value>
+  </data>
+  <data name="StartingDateLabel" xml:space="preserve">
+    <value>Fecha de Inicio</value>
   </data>
   <data name="ValueLabel" xml:space="preserve">
     <value>Valor</value>

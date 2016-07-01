@@ -59,27 +59,29 @@
                                         <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                     </asp:LinkButton>
                                 </div>
-                                <div class="col-md-1">
-                                    <asp:LinkButton ID="SharePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn shareBtn" 
+                                <asp:Panel ID="pnlShare" runat="server" class="col-md-1">
+                                    <asp:LinkButton ID="SharePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn shareBtn"
                                         CommandName="SharePerson">
                                         <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                     </asp:LinkButton>
-                                </div>
-                                <div class="col-md-1">
+                                </asp:Panel>
+                                <asp:Panel ID="pnlDelete" runat="server" class="col-md-1">
+                                    <asp:HiddenField ID="IsOwnerHiddenField" runat="server" Value='<%# Eval("IsOwner") %>' />
                                     <asp:LinkButton ID="DeletePerson" CommandArgument='<%# Eval("PersonID") %>' runat="server" CssClass="viewBtn deleteBtn"
                                         CommandName="DeletePerson"
                                         OnClientClick="return confirm('Are you sure you want to delete selected person?')">   
                                         <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                     </asp:LinkButton>
-                                </div>
+                                </asp:Panel>
                                 <div class="col-md-8">
                                     <p style="font-size: 14px; padding-top: 2px;">
                                         <%# Eval("Name") %>
                                         (
-                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                             <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# Eval("OrganizationName") %>'
                                                  CommandName="ViewOrganization"
                                                  CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
-                                        <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                        <asp:Label ID="GuionLabel" runat="server" Text=" - " Visible="false"></asp:Label>
+                                        <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# Eval("AreaName") %>'
                                             CommandName="ViewArea"
                                             CommandArgument='<%# Eval("OrganizationID") %>'></asp:LinkButton>
                                         )
@@ -107,7 +109,7 @@
                             <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# PeopleRepeater.Items.Count == 0 %>'>
                                 <div class="col-md-12 text-center">
                                     <asp:Label ID="Label3" runat="server" Text="<% $Resources: People, LabelPersonNoCreated %>"></asp:Label>
-                                     <i class="zmdi zmdi-plus-circle-o"></i>
+                                    <i class="zmdi zmdi-plus-circle-o"></i>
                                     <asp:Label ID="Label4" runat="server" Text="<% $Resources: People, LabelPersonIconNoCreated %>"></asp:Label>
                                 </div>
                             </asp:Panel>

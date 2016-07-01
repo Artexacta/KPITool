@@ -38,7 +38,7 @@
             <ul class="header-inner">
                 <!-- Logo -->
                 <li class="logo">
-                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/logo.png" AlternateText="logo" CssClass="menuImage hidden-xs"/>
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/logo2.png" AlternateText="logo" CssClass="menuImage hidden-xs"/>
                     <div id="menu-trigger"><i class="zmdi zmdi-menu" style="margin-top: -10px;margin-left: 4px;"></i></div>
                 </li>
                 <li>
@@ -76,16 +76,16 @@
                 <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/About/Credits.aspx"
                     CssClass="FooterText" Text="News and Changes">
                 </asp:HyperLink>
-                &nbsp;|&nbsp;
+                <%--&nbsp;|&nbsp;
                 <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/ResetSystem.aspx"
                     CssClass="FooterText" Text="Manage System">
-                </asp:HyperLink>
+                </asp:HyperLink>--%>
             </div>
-            <div class="col-md-12">
+            <%--<div class="col-md-12">
                 <a href="#" id="feedbackHyperLink" class="FooterText">
                     <asp:Literal ID="SubmitfeedbackLabel" runat="server" Text="<%$ Resources: InitMasterPage, SubmitFeedbackLabel %>"></asp:Literal>
                 </a>
-            </div>
+            </div>--%>
             <div class="col-md-12 footerImage">
                 Powered by 
                 <a class="FooterText font-bold" href="http://www.artexacta.com" target="_blank">Artexacta S.R.L.</a>

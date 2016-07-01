@@ -2,13 +2,17 @@
 <div class="table-responsive" style="max-height: 200px;">
     <asp:GridView ID="MeasurementsGridView" runat="server"
         DataSourceID="MeasurementsDataSource"
-        OnDataBound="MeasurementsGridView_DataBound"
+        OnRowDataBound="MeasurementsGridView_RowDataBound"
         CssClass="table table-striped"
         GridLines="None"
         AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField DataField="DateForDisplay" HeaderText="<%$ Resources: KpiDetails,DateLabel %>" />
-            <asp:BoundField DataField="MeasurementForDisplay" HeaderText="<%$ Resources: KpiDetails,ValueLabel %>" />
+            <asp:TemplateField HeaderText="<%$ Resources: KpiDetails,ValueLabel %>">
+                <ItemTemplate>
+                    <asp:Literal ID="ValueLiteral" runat="server"></asp:Literal>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>
             <p class="text-center">
@@ -20,6 +24,8 @@
     <asp:HiddenField ID="CategoryIdHiddenField" runat="server" Value="" />
     <asp:HiddenField ID="CategoryItemIdHiddenField" runat="server" Value="" />
     <asp:HiddenField ID="UnitHiddenField" runat="server" Value="" />
+    <asp:HiddenField ID="CurrencyHiddenField" runat="server" />
+    <asp:HiddenField ID="CurrencyUnitHiddenField" runat="server" />
     <asp:ObjectDataSource ID="MeasurementsDataSource" runat="server"
         TypeName="Artexacta.App.KPI.BLL.KpiMeasurementBLL"
         SelectMethod="GetKpiMeasurementsByKpiId"

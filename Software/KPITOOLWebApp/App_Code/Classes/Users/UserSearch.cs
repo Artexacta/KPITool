@@ -11,37 +11,37 @@ public class UserSearch : ConfigColumns
 {
 	public UserSearch() : base()
 	{
-        Column col = new Column("U.[fullname]", "NombreCompleto", Column.ColumnType.String);
+        Column col = new Column("U.[fullname]", Resources.UserData.FullNameKeySearch, Column.ColumnType.String);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);
 
-        col = new Column("U.[cellphone]", "TelefonoMovil", Column.ColumnType.String);
+        col = new Column("U.[cellphone]", Resources.UserData.MobilePhoneKeySearch, Column.ColumnType.String);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);
 
-        col = new Column("U.[address]", "Direccion", Column.ColumnType.String);
+        col = new Column("U.[address]", Resources.UserData.AddressKeySearch, Column.ColumnType.String);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);
 
-        col = new Column("U.[phonenumber]", "Telefono", Column.ColumnType.String);
+        col = new Column("U.[phonenumber]", Resources.UserData.PhoneNumberKeySearch, Column.ColumnType.String);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);
 
-        col = new Column("U.[username]", "NombreUsuario", Column.ColumnType.String);
+        col = new Column("U.[username]", Resources.UserData.UserNameKeySearch, Column.ColumnType.String);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);
 
-        col = new Column("U.[email]", "Email", Column.ColumnType.String);
+        col = new Column("U.[email]", Resources.UserData.EmailKeySearch, Column.ColumnType.String);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);
 
-        col = new Column("U.[allowExternalAccess]", "AccesoExterno", Column.ColumnType.Boolean);
+        col = new Column("U.[allowExternalAccess]", Resources.UserData.ExternalAccesKeyName, Column.ColumnType.Boolean);
         col.AppearInStandardSearch = true;
         col.DisplayHelp = true;
         this.Cols.Add(col);

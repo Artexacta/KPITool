@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddressKeySearch" xml:space="preserve">
+    <value>direccion</value>
+  </data>
   <data name="AddressLabel" xml:space="preserve">
     <value>Dirección:</value>
   </data>
@@ -174,6 +177,9 @@
   <data name="EmailColumn" xml:space="preserve">
     <value>Correo Electrónico</value>
   </data>
+  <data name="EmailKeySearch" xml:space="preserve">
+    <value>correoElectronico</value>
+  </data>
   <data name="EmailLabel" xml:space="preserve">
     <value>Correo Electrónico:</value>
   </data>
@@ -189,6 +195,9 @@
   <data name="ExistsUserNameCustomValidator" xml:space="preserve">
     <value>El nombre del usuario ya está registrado.</value>
   </data>
+  <data name="ExternalAccesKeyName" xml:space="preserve">
+    <value>accesoExterno</value>
+  </data>
   <data name="FormatEmailRegularExpressionValidator" xml:space="preserve">
     <value>Formato incorrecto del correo electrónico.</value>
   </data>
@@ -197,6 +206,9 @@
   </data>
   <data name="FullNameColumn" xml:space="preserve">
     <value>Nombre Completo</value>
+  </data>
+  <data name="FullNameKeySearch" xml:space="preserve">
+    <value>nombreCompleto</value>
   </data>
   <data name="FullNameLabel" xml:space="preserve">
     <value>Nombre Completo:</value>
@@ -276,6 +288,9 @@
   <data name="MessageZeroUserId" xml:space="preserve">
     <value>El ID del usuario ni puede ser cero.</value>
   </data>
+  <data name="MobilePhoneKeySearch" xml:space="preserve">
+    <value>telefonoMovil</value>
+  </data>
   <data name="NewButton" xml:space="preserve">
     <value>&lt;i class='fa fa-user-plus'&gt;&lt;/i&gt; Nuevo Usuario</value>
   </data>
@@ -330,6 +345,9 @@
   <data name="PhoneLabel" xml:space="preserve">
     <value>Teléfono:</value>
   </data>
+  <data name="PhoneNumberKeySearch" xml:space="preserve">
+    <value>telefono</value>
+  </data>
   <data name="RestorePasswordColumn" xml:space="preserve">
     <value>Restablecer contraseña</value>
   </data>
@@ -350,6 +368,9 @@
   </data>
   <data name="UserNameColumn" xml:space="preserve">
     <value>Nombre de Usuario</value>
+  </data>
+  <data name="UserNameKeySearch" xml:space="preserve">
+    <value>nombreUsuario</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
     <value>Nombre de Usuario:</value>

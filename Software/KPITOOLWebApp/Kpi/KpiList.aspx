@@ -48,7 +48,7 @@
                         <div class="table-responsive">
                             <br />
                             <asp:GridView ID="KpisGridView" runat="server" DataSourceID="KPIListObjectDataSource" AutoGenerateColumns="false"
-                                OnRowCommand="KpisGridView_RowCommand" CssClass="table table-striped table-bordered table-hover">
+                                OnRowCommand="KpisGridView_RowCommand" CssClass="table table-striped table-bordered table-hover" DataKeyNames="IsOwner" OnRowDataBound="KpisGridView_RowDataBound">
                                 <Columns>
                                     <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
@@ -67,18 +67,21 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="ShareKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
-                                                CommandName="ShareKpi">
-                                            <i class="zmdi zmdi-share zmdi-hc-fw"></i>
-                                            </asp:LinkButton>
+                                            <asp:Panel ID="pnlShare" runat="server" >
+                                                <asp:LinkButton ID="ShareKpi" CommandArgument='<%# Eval("KpiID") %>' runat="server" CssClass="viewBtn"
+                                                    CommandName="ShareKpi"><i class="zmdi zmdi-share zmdi-hc-fw"></i>
+                                                </asp:LinkButton>
+                                            </asp:Panel>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server"
-                                                CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
+                                            <asp:Panel ID="pnlDelete" runat="server">
+                                                <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server"
+                                                    CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
-                                            </asp:LinkButton>
+                                                </asp:LinkButton>
+                                            </asp:Panel>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
@@ -92,15 +95,17 @@
                                             <p style="font-size: 14px; padding-top: 2px;">
                                                 <%# Eval("Name") %>
                                                 <br />
-                                                <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# GetOrganizationInfo(Eval("OrganizationID")) %>'
+                                                <asp:LinkButton ID="OrganizationLinkButton" runat="server" Text='<%# Eval("OrganizationName") %>'
                                                     CommandName="ViewOrganization"
                                                     CommandArgument='<%# Eval("OrganizationID") %>'>
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# GetAreaInfo(Eval("AreaID")) %>'
+                                                <asp:Label ID="GuionALabel" runat="server" Text=" - " Visible="false"></asp:Label>
+                                                <asp:LinkButton ID="AreaLinkButton" runat="server" Text='<%# Eval("AreaName") %>'
                                                     CommandName="ViewArea"
-                                                    CommandArgument='<%# Eval("AreaID") %>'>
+                                                    CommandArgument='<%# Eval("OrganizationID") %>'>
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# GetProjectInfo(Eval("ProjectID")) %>'
+                                                <asp:Label ID="GuionPLabel" runat="server" Text=" - " Visible="false"></asp:Label>
+                                                <asp:LinkButton ID="ProjectLinkButton" runat="server" Text='<%# Eval("ProjectName") %>'
                                                     CommandName="ViewProject"
                                                     CommandArgument='<%# Eval("ProjectID") %>'>
                                                 </asp:LinkButton>

@@ -69,15 +69,42 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
         }
     }
 
+    public string Currency
+    {
+        set
+        {
+            CurrencyHiddenField.Value = value;
+        }
+        get
+        {
+            return CurrencyHiddenField.Value;
+        }
+    }
+
+    public string CurrencyUnit
+    {
+        set
+        {
+            CurrencyUnitHiddenField.Value = value;
+        }
+        get
+        {
+            return CurrencyUnitHiddenField.Value;
+        }
+    }
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
        // LoadMeasurements();
     }
 
-    protected void MeasurementsGridView_DataBound(object sender, EventArgs e)
+    protected override void OnPreRender(EventArgs e)
     {
-       // MeasurementsGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
+        base.OnPreRender(e);
+        
     }
+
 
     protected void MeasurementsDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
@@ -86,5 +113,46 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
 
         log.Error("Error loading measurements", e.Exception);
         e.ExceptionHandled = true;
+    }
+
+    protected void MeasurementsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (!(e.Row.DataItem is KPIMeasurement))
+            return;
+
+        KPIMeasurement measurement = (KPIMeasurement) e.Row.DataItem;
+        if (measurement == null)
+            return;
+        Literal valueLiteral = (Literal)e.Row.FindControl("ValueLiteral");
+        string unit = this.Unit;
+        if(unit == "TIME")
+        {
+            try
+            {
+                KPIDataTime datatime = KPIDataTimeBLL.GetKPIDataTimeFromValue(measurement.Measurement);
+                valueLiteral.Text = datatime.TimeDescription;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting datatime for measurement value", ex);
+            }
+        }
+        else if(unit == "PERCENT")
+        {
+            valueLiteral.Text = measurement.Measurement.ToString("#.##") + " %";
+        }
+        else if(unit == "MONEY")
+        {
+            valueLiteral.Text = measurement.Measurement.ToString("#.##") + " " + Currency + " " + CurrencyUnit;
+        }
+        else if (unit == "INT")
+        {
+            valueLiteral.Text = Convert.ToInt32(measurement.Measurement).ToString();
+        }
+        else
+        {
+            valueLiteral.Text = measurement.Measurement.ToString("#.##");
+        }
+
     }
 }

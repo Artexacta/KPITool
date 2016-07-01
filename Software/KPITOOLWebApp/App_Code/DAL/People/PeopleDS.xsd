@@ -62,6 +62,10 @@
               <Mapping SourceColumn="name" DataSetColumn="name" />
               <Mapping SourceColumn="organizationID" DataSetColumn="organizationID" />
               <Mapping SourceColumn="areaID" DataSetColumn="areaID" />
+              <Mapping SourceColumn="organizationName" DataSetColumn="organizationName" />
+              <Mapping SourceColumn="areaName" DataSetColumn="areaName" />
+              <Mapping SourceColumn="isOwner" DataSetColumn="isOwner" />
+              <Mapping SourceColumn="numberKPIs" DataSetColumn="numberKPIs" />
             </Mappings>
             <Sources>
               <DbSource ConnectionRef="DBConnectionString (Web.config)" DbObjectName="KPIDB.dbo.usp_PEOPLE_DeletePerson" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="DeletePerson" Modifier="Public" Name="DeletePerson" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeletePerson">
@@ -166,7 +170,7 @@
   <xs:element name="PeopleDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="PeopleDS" msprop:Generator_UserDSName="PeopleDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PopulatePeople" msprop:Generator_TableClassName="PopulatePeopleDataTable" msprop:Generator_TableVarName="tablePopulatePeople" msprop:Generator_TablePropName="PopulatePeople" msprop:Generator_RowDeletingName="PopulatePeopleRowDeleting" msprop:Generator_RowChangingName="PopulatePeopleRowChanging" msprop:Generator_RowEvHandlerName="PopulatePeopleRowChangeEventHandler" msprop:Generator_RowDeletedName="PopulatePeopleRowDeleted" msprop:Generator_UserTableName="PopulatePeople" msprop:Generator_RowChangedName="PopulatePeopleRowChanged" msprop:Generator_RowEvArgName="PopulatePeopleRowChangeEvent" msprop:Generator_RowClassName="PopulatePeopleRow">
+        <xs:element name="PopulatePeople" msprop:Generator_TableClassName="PopulatePeopleDataTable" msprop:Generator_TableVarName="tablePopulatePeople" msprop:Generator_RowChangedName="PopulatePeopleRowChanged" msprop:Generator_TablePropName="PopulatePeople" msprop:Generator_RowDeletingName="PopulatePeopleRowDeleting" msprop:Generator_RowChangingName="PopulatePeopleRowChanging" msprop:Generator_RowEvHandlerName="PopulatePeopleRowChangeEventHandler" msprop:Generator_RowDeletedName="PopulatePeopleRowDeleted" msprop:Generator_RowClassName="PopulatePeopleRow" msprop:Generator_UserTableName="PopulatePeople" msprop:Generator_RowEvArgName="PopulatePeopleRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="personID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnpersonID" msprop:Generator_ColumnPropNameInRow="personID" msprop:Generator_ColumnPropNameInTable="personIDColumn" msprop:Generator_UserColumnName="personID" type="xs:int" />
@@ -189,7 +193,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="People" msprop:Generator_TableClassName="PeopleDataTable" msprop:Generator_TableVarName="tablePeople" msprop:Generator_RowChangedName="PeopleRowChanged" msprop:Generator_TablePropName="People" msprop:Generator_RowDeletingName="PeopleRowDeleting" msprop:Generator_RowChangingName="PeopleRowChanging" msprop:Generator_RowEvHandlerName="PeopleRowChangeEventHandler" msprop:Generator_RowDeletedName="PeopleRowDeleted" msprop:Generator_RowClassName="PeopleRow" msprop:Generator_UserTableName="People" msprop:Generator_RowEvArgName="PeopleRowChangeEvent">
+        <xs:element name="People" msprop:Generator_TableClassName="PeopleDataTable" msprop:Generator_TableVarName="tablePeople" msprop:Generator_TablePropName="People" msprop:Generator_RowDeletingName="PeopleRowDeleting" msprop:Generator_RowChangingName="PeopleRowChanging" msprop:Generator_RowEvHandlerName="PeopleRowChangeEventHandler" msprop:Generator_RowDeletedName="PeopleRowDeleted" msprop:Generator_UserTableName="People" msprop:Generator_RowChangedName="PeopleRowChanged" msprop:Generator_RowEvArgName="PeopleRowChangeEvent" msprop:Generator_RowClassName="PeopleRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="personID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnpersonID" msprop:Generator_ColumnPropNameInRow="personID" msprop:Generator_ColumnPropNameInTable="personIDColumn" msprop:Generator_UserColumnName="personID" type="xs:int" />
@@ -209,7 +213,7 @@
               </xs:element>
               <xs:element name="organizationID" msprop:Generator_ColumnVarNameInTable="columnorganizationID" msprop:Generator_ColumnPropNameInRow="organizationID" msprop:Generator_ColumnPropNameInTable="organizationIDColumn" msprop:Generator_UserColumnName="organizationID" type="xs:int" />
               <xs:element name="areaID" msprop:Generator_ColumnVarNameInTable="columnareaID" msprop:Generator_ColumnPropNameInRow="areaID" msprop:Generator_ColumnPropNameInTable="areaIDColumn" msprop:Generator_UserColumnName="areaID" type="xs:int" minOccurs="0" />
-              <xs:element name="organizationName" msprop:Generator_ColumnVarNameInTable="columnorganizationName" msprop:Generator_ColumnPropNameInRow="organizationName" msprop:Generator_ColumnPropNameInTable="organizationNameColumn" msprop:Generator_UserColumnName="organizationName" minOccurs="0">
+              <xs:element name="organizationName" msprop:Generator_ColumnVarNameInTable="columnorganizationName" msprop:Generator_ColumnPropNameInRow="organizationName" msprop:Generator_ColumnPropNameInTable="organizationNameColumn" msprop:Generator_UserColumnName="organizationName">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />
@@ -224,6 +228,7 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="numberKPIs" msprop:Generator_ColumnVarNameInTable="columnnumberKPIs" msprop:Generator_ColumnPropNameInRow="numberKPIs" msprop:Generator_ColumnPropNameInTable="numberKPIsColumn" msprop:Generator_UserColumnName="numberKPIs" type="xs:int" minOccurs="0" />
+              <xs:element name="isOwner" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnisOwner" msprop:Generator_ColumnPropNameInRow="isOwner" msprop:Generator_ColumnPropNameInTable="isOwnerColumn" msprop:Generator_UserColumnName="isOwner" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

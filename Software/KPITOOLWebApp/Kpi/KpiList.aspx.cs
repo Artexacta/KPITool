@@ -50,87 +50,6 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         Session["SEARCH_PARAMETER"] = null;
     }
 
-    protected string GetOrganizationInfo(Object obj)
-    {
-        int OrganizationID = 0;
-        string name = "";
-        try
-        {
-            OrganizationID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (OrganizationID > 0)
-        {
-            Organization theClass = null;
-
-            try
-            {
-                theClass = OrganizationBLL.GetOrganizationById(OrganizationID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = theClass.Name;
-        }
-
-        return name;
-    }
-
-    protected string GetAreaInfo(Object obj)
-    {
-        int areaID = 0;
-        string name = "";
-        try
-        {
-            areaID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (areaID > 0)
-        {
-            Area theClass = null;
-
-            try
-            {
-                theClass = AreaBLL.GetAreaById(areaID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = " - " + theClass.Name;
-        }
-
-        return name;
-    }
-
-    protected string GetProjectInfo(Object obj)
-    {
-        int projectID = 0;
-        string name = "";
-        try
-        {
-            projectID = (int)obj;
-        }
-        catch { return "-"; }
-
-        if (projectID > 0)
-        {
-            Project theClass = null;
-
-            try
-            {
-                theClass = ProjectBLL.GetProjectById(projectID);
-            }
-            catch { }
-
-            if (theClass != null)
-                name = " - " + theClass.Name;
-        }
-
-        return name;
-    }
-
     protected void KPIListObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
         if (e.Exception != null)
@@ -161,6 +80,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         if (e.CommandName == "ViewKpi")
         {
             Session["KpiId"] = kpiId.ToString();
+            Session["SEARCH_PARAMETER"] = KPISearchControl.Query;
             Response.Redirect("~/Kpis/KpiDetails.aspx");
         }
         if (e.CommandName == "EditKpi")
@@ -178,6 +98,21 @@ public partial class Kpi_KpiList : System.Web.UI.Page
             Session["KPIID"] = kpiId.ToString();
             Response.Redirect("~/Kpi/ImportData.aspx");
         }
+        if (e.CommandName == "ViewOrganization")
+        {
+            Session["SEARCH_PARAMETER"] = "@organizationID " + kpiId.ToString();
+            Response.Redirect("~/MainPage.aspx");
+        }
+        if (e.CommandName == "ViewProject")
+        {
+            Session["SEARCH_PARAMETER"] = "@projectID " + kpiId.ToString();
+            Response.Redirect("~/Project/ProjectList.aspx");
+        }
+        if (e.CommandName == "ViewArea")
+        {
+            Session["OrganizationId"] = kpiId.ToString();
+            Response.Redirect("~/Organization/EditOrganization.aspx");
+        }
         if (e.CommandName == "DeleteKpi")
         {
             try
@@ -193,4 +128,42 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         }
     }
 
+    protected void KpisGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.DataItem is KPI)
+        {
+            KPI theData = (KPI)e.Row.DataItem;
+
+            if (theData == null)
+                return;
+
+            Panel theDelete = (Panel)e.Row.FindControl("pnlDelete");
+            if (theDelete != null && !theData.IsOwner)
+            {
+                theDelete.CssClass = "disabled";
+            }
+
+            Panel theShare = (Panel)e.Row.FindControl("pnlShare");
+            if (theShare != null && !theData.IsOwner)
+            {
+                theShare.CssClass = "disabled";
+            }
+
+            //If exists AreaName Show the GuionLabel
+            if (!string.IsNullOrEmpty(theData.AreaName))
+            {
+                Label theGuionA = (Label)e.Row.FindControl("GuionALabel");
+                if (theGuionA != null)
+                    theGuionA.Visible = true;
+            }
+            //If exists ProjectName Show the GuionLabel
+            if (!string.IsNullOrEmpty(theData.ProjectName))
+            {
+                Label theGuionP = (Label)e.Row.FindControl("GuionPLabel");
+                if (theGuionP != null)
+                    theGuionP.Visible = true;
+            }
+
+        }
+    }
 }

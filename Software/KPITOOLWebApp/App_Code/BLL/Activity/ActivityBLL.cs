@@ -39,10 +39,11 @@ namespace Artexacta.App.Activities.BLL
                 row.organizationID,
                 row.IsareaIDNull() ? 0 : row.areaID,
                 row.IsprojectIDNull() ? 0 : row.projectID);
-            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
+            theNewRecord.OrganizationName = row.organizationName;
             theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
             theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
             theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
+            theNewRecord.IsOwner = row.IsisOwnerNull() ? false : Convert.ToBoolean(row.isOwner);
             return theNewRecord;
         }
 

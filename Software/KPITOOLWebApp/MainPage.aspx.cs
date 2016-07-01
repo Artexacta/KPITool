@@ -19,16 +19,17 @@ using Artexacta.App.KPI.BLL;
 using Artexacta.App.KPI;
 using Artexacta.App.People.BLL;
 using Artexacta.App.People;
+using Artexacta.App.Utilities.Quantity;
 
 public partial class MainPage : SqlViewStatePage
 {
     private static readonly ILog log = LogManager.GetLogger("Standard");
 
-        protected override void InitializeCulture()
-        {
-            Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
-            base.InitializeCulture();
-        }
+    protected override void InitializeCulture()
+    {
+        Artexacta.App.Utilities.LanguageUtilities.SetLanguageFromContext();
+        base.InitializeCulture();
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -49,7 +50,7 @@ public partial class MainPage : SqlViewStatePage
 
     void OrgSearchControl_OnSearch()
     {
-        BindOrganizations();
+        log.Debug(OrgSearchControl.Sql);
     }
 
     private void BindOrganizations()
@@ -80,7 +81,7 @@ public partial class MainPage : SqlViewStatePage
             Tour.Show();
         }
     }
-    
+
     protected void OrganizationsRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
@@ -95,59 +96,39 @@ public partial class MainPage : SqlViewStatePage
         if (item == null)
             return;
 
-        //Areas
-        AreaBLL theABLL = new AreaBLL();
-        List<Area> theAreas = new List<Area>();
-        try
+        //Show the delete button if is Owner
+        HiddenField theHFOwner = (HiddenField)e.Item.FindControl("IsOwnerHiddenField");
+        if (theHFOwner != null)
         {
-            theAreas = theABLL.GetAreasByOrganization(item.OrganizationID);
-        }
-        catch {}
-
-        //Projects
-        ProjectBLL thePBLL = new ProjectBLL();
-        List<Project> theProjects = new List<Project>();
-
-        try
-        {
-            theProjects = thePBLL.GetProjectsByOrganization(item.OrganizationID);
-        }
-        catch {}
-
-        //Activities
-        ActivityBLL theACBLL = new ActivityBLL();
-        List<Activity> theActivities = new List<Activity>();
-
-        try
-        {
-            theActivities = theACBLL.GetActivitiesByOrganization(item.OrganizationID);
-        }
-        catch {}
-
-        //KPI
-        KPIBLL theKBLL = new KPIBLL();
-        List<KPI> theKPIs = new List<KPI>();
-
-        try
-        {
-            theKPIs = theKBLL.GetKPIsByOrganization(item.OrganizationID);
-        }
-        catch {}
-
-        //Person
-        PeopleBLL thePLLBLL = new PeopleBLL();
-        List<People> thePerson = new List<People>();
-
-        if (ShowPeopleCheckbox.Checked)
-        {
-            try
+            if (!Convert.ToBoolean(theHFOwner.Value))
             {
-                thePerson = thePLLBLL.GetPeopleByOrganization(item.OrganizationID);
+                Panel panelDelete = (Panel)e.Item.FindControl("pnlDelete");
+                if (panelDelete != null)
+                {
+                    panelDelete.CssClass = "col-md-1 col-sm-1 col-xs-3 disabled";
+                }
+
+                Panel panelShare = (Panel)e.Item.FindControl("pnlShare");
+                if (panelShare != null)
+                {
+                    panelShare.CssClass = "col-md-1 col-sm-1 col-xs-3 disabled";
+                }
+
             }
-            catch { }
         }
 
-        if (theAreas.Count == 0 && theProjects.Count == 0 && theActivities.Count == 0 && theKPIs.Count == 0 && thePerson.Count == 0)
+        Quantity theQuantity = null;
+
+        try
+        {
+            theQuantity = OrganizationBLL.GetQuantityByOrganization(item.OrganizationID);
+        }
+        catch {}
+
+        if (theQuantity == null)
+            return;
+
+        if (theQuantity.Areas == 0 && theQuantity.Projects == 0 && theQuantity.Activities == 0 && theQuantity.Kpis == 0 && theQuantity.People == 0)
         {
             Panel element = (Panel)e.Item.FindControl("emptyMessage");
             element.Visible = true;
@@ -171,23 +152,23 @@ public partial class MainPage : SqlViewStatePage
         Literal and3 = (Literal)e.Item.FindControl("AndLiteral3");
         Literal and4 = (Literal)e.Item.FindControl("AndLiteral4");
 
-        areasLabel.Visible = theAreas.Count > 0;
-        areasLabel.Text = areasLabel.Visible ? theAreas.Count + " Area" + (theAreas.Count == 1 ? "" : "s") : "";
+        areasLabel.Visible = theQuantity.Areas > 0;
+        areasLabel.Text = areasLabel.Visible ? theQuantity.Areas + " Area" + (theQuantity.Areas == 1 ? "" : "s") : "";
 
-        projectButton.Visible = theProjects.Count > 0;
-        projectButton.Text = projectButton.Visible ? theProjects.Count + " " + Resources.Organization.LabelProjects : "";
+        projectButton.Visible = theQuantity.Projects > 0;
+        projectButton.Text = projectButton.Visible ? theQuantity.Projects + " " + Resources.Organization.LabelProjects : "";
 
-        activitiesButton.Visible = theActivities.Count > 0;
-        activitiesButton.Text = activitiesButton.Visible ? theActivities.Count + (theActivities.Count == 1 ? " " + Resources.Organization.LabelActivity : " " + Resources.Organization.LabelActivities) : "";
+        activitiesButton.Visible = theQuantity.Activities > 0;
+        activitiesButton.Text = activitiesButton.Visible ? theQuantity.Activities + (theQuantity.Activities == 1 ? " " + Resources.Organization.LabelActivity : " " + Resources.Organization.LabelActivities) : "";
 
         if (ShowPeopleCheckbox.Checked)
         {
-            PersonButton.Visible = thePerson.Count > 0;
-            PersonButton.Text = PersonButton.Visible ? thePerson.Count + (thePerson.Count == 1 ? " " + Resources.Organization.LabelPeople : " " + Resources.Organization.LabelPerson) : "";
+            PersonButton.Visible = theQuantity.People > 0;
+            PersonButton.Text = PersonButton.Visible ? theQuantity.People + (theQuantity.People == 1 ? " " + Resources.Organization.LabelPeople : " " + Resources.Organization.LabelPerson) : "";
         }
 
-        kpisButton.Visible = theKPIs.Count > 0;
-        kpisButton.Text = kpisButton.Visible ? theKPIs.Count + " KPI" + (theKPIs.Count == 1 ? "" : "s") : "";
+        kpisButton.Visible = theQuantity.Kpis > 0;
+        kpisButton.Text = kpisButton.Visible ? theQuantity.Kpis + " KPI" + (theQuantity.Kpis == 1 ? "" : "s") : "";
 
         and1.Visible = areasLabel.Visible && projectButton.Visible;
         if (and1.Visible)
@@ -221,8 +202,9 @@ public partial class MainPage : SqlViewStatePage
         {
             and4.Text = " " + Resources.Organization.LabelAnd + " ";
         }
+        
     }
-    
+
     protected void OrganizationsRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         int organizationId = 0;
@@ -234,13 +216,13 @@ public partial class MainPage : SqlViewStatePage
         {
             log.Error("Cannot convert e.CommandArgument to integer value", ex);
         }
-        if(organizationId <= 0)
+        if (organizationId <= 0)
         {
             SystemMessages.DisplaySystemErrorMessage(Resources.Organization.MessageNoComplete);
             return;
         }
 
-        if(e.CommandName == "ViewProjects")
+        if (e.CommandName == "ViewProjects")
         {
             Session["SEARCH_PARAMETER"] = "@organizationID " + organizationId.ToString();
             Response.Redirect("~/Project/ProjectList.aspx");
@@ -264,7 +246,7 @@ public partial class MainPage : SqlViewStatePage
             Response.Redirect("~/Personas/ListaPersonas.aspx");
             return;
         }
-        if(e.CommandName == "DeleteOrganization")
+        if (e.CommandName == "DeleteOrganization")
         {
             try
             {
@@ -281,14 +263,14 @@ public partial class MainPage : SqlViewStatePage
             return;
         }
 
-        if(e.CommandName == "EditOrganization")
+        if (e.CommandName == "EditOrganization")
         {
             Session["OrganizationId"] = organizationId;
             Response.Redirect("~/Organization/EditOrganization.aspx");
             return;
         }
-        
-        if(e.CommandName == "ViewOrganization")
+
+        if (e.CommandName == "ViewOrganization")
         {
             Session["OrganizationId"] = organizationId;
             Response.Redirect("~/Organization/OrganizationDetails.aspx");

@@ -49,7 +49,6 @@
                     tour.init(true);
                 } else
                     tour.init();
-                debugger;
                 // Start the tour
                 tour.start();
                 $("#<%= showTourBtn.ClientID %>").show();

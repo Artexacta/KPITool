@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddressKeySearch" xml:space="preserve">
+    <value>address</value>
+  </data>
   <data name="AddressLabel" xml:space="preserve">
     <value>Address:</value>
   </data>
@@ -174,6 +177,9 @@
   <data name="EmailColumn" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmailKeySearch" xml:space="preserve">
+    <value>email</value>
+  </data>
   <data name="EmailLabel" xml:space="preserve">
     <value>Email:</value>
   </data>
@@ -189,6 +195,9 @@
   <data name="ExistsUserNameCustomValidator" xml:space="preserve">
     <value>The username already exists.</value>
   </data>
+  <data name="ExternalAccesKeyName" xml:space="preserve">
+    <value>externalAccess</value>
+  </data>
   <data name="FormatEmailRegularExpressionValidator" xml:space="preserve">
     <value>Malformed email.</value>
   </data>
@@ -196,10 +205,13 @@
     <value>Invalid characters in the full name.</value>
   </data>
   <data name="FullNameColumn" xml:space="preserve">
-    <value>Full name</value>
+    <value>Full Name</value>
+  </data>
+  <data name="FullNameKeySearch" xml:space="preserve">
+    <value>fullName</value>
   </data>
   <data name="FullNameLabel" xml:space="preserve">
-    <value>Full name:</value>
+    <value>Full Name:</value>
   </data>
   <data name="FullNameRequired" xml:space="preserve">
     <value>The full name is required.</value>
@@ -276,6 +288,9 @@
   <data name="MessageZeroUserId" xml:space="preserve">
     <value>The user id can not be zero.</value>
   </data>
+  <data name="MobilePhoneKeySearch" xml:space="preserve">
+    <value>cellphoneNumber</value>
+  </data>
   <data name="NewButton" xml:space="preserve">
     <value>&lt;i class='fa fa-user-plus'&gt;&lt;/i&gt; New User</value>
   </data>
@@ -330,8 +345,11 @@
   <data name="PhoneLabel" xml:space="preserve">
     <value>Phone:</value>
   </data>
+  <data name="PhoneNumberKeySearch" xml:space="preserve">
+    <value>phoneNumber</value>
+  </data>
   <data name="RestorePasswordColumn" xml:space="preserve">
-    <value>Restore password</value>
+    <value>Reset password</value>
   </data>
   <data name="SaveButton" xml:space="preserve">
     <value>&lt;i class="fa fa-plus"&gt;&lt;/i&gt; Save</value>
@@ -355,10 +373,13 @@
     <value>New user account</value>
   </data>
   <data name="UserNameColumn" xml:space="preserve">
-    <value>User name</value>
+    <value>Username</value>
+  </data>
+  <data name="UserNameKeySearch" xml:space="preserve">
+    <value>userName</value>
   </data>
   <data name="UserNameLabel" xml:space="preserve">
-    <value>User name:</value>
+    <value>Username:</value>
   </data>
   <data name="UserNameRegularExpressionValidator" xml:space="preserve">
     <value>Invalid characters in the user name.</value>

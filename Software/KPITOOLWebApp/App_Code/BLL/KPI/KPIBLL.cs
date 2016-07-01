@@ -62,6 +62,8 @@ namespace Artexacta.App.KPI.BLL
             theNewRecord.PersonName = row.IspersonNameNull() ? "" : row.personName;
             theNewRecord.Progress = row.IsprogressNull() ? 0 : row.progress;
             theNewRecord.Trend = row.IstrendNull() ? 0 : row.trend;
+            theNewRecord.IsOwner = row.IsisOwnerNull() ? false : Convert.ToBoolean(row.isOwner);
+
             return theNewRecord;
         }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="FRTWB" Language="C#" MasterPageFile="~/MasterPage.master"
+﻿<%@ Page Title="KPI Tool" Language="C#" MasterPageFile="~/MasterPage.master"
     AutoEventWireup="true" CodeFile="MainPage.aspx.cs" Inherits="MainPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -70,19 +70,21 @@
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-3">
+                                    <asp:Panel class="col-md-1 col-sm-1 col-xs-3" ID="pnlShare" runat="server">
                                         <asp:LinkButton ID="ShareOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             CssClass="viewBtn shareBtn" CommandName="ShareOrganization">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
-                                    <div class="col-md-1 col-sm-1 col-xs-3">
+                                    </asp:Panel>
+
+                                    <asp:Panel class="col-md-1 col-sm-1 col-xs-3" ID="pnlDelete" runat="server">
+                                        <asp:HiddenField ID="IsOwnerHiddenField" runat="server" Value='<%# Eval("IsOwner") %>' />
                                         <asp:LinkButton ID="DeleteOrganization" CommandArgument='<%# Eval("OrganizationId") %>' runat="server"
                                             OnClientClick="return confirm('Are you sure you want to delete selected Organization?')"
                                             CssClass="viewBtn deleteBtn" CommandName="DeleteOrganization">
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
-                                    </div>
+                                    </asp:Panel>
                                     <div class="col-md-8 col-sm-8 col-xs-12">
                                         <p style="font-size: 14px; padding-top: 2px;"><%# Eval("Name") %></p>
                                     </div>
@@ -156,6 +158,7 @@
                         <div class="col-md-12" style="overflow: hidden">
                             <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
+                        <br />
                     </div>
                 </div>
             </div>
