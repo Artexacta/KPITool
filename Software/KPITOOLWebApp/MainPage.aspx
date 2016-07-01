@@ -1,4 +1,4 @@
-﻿<%@ Page Title="FRTWB" Language="C#" MasterPageFile="~/MasterPage.master"
+﻿<%@ Page Title="KPI Tool" Language="C#" MasterPageFile="~/MasterPage.master"
     AutoEventWireup="true" CodeFile="MainPage.aspx.cs" Inherits="MainPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -158,6 +158,7 @@
                         <div class="col-md-12" style="overflow: hidden">
                             <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
                         </div>
+                        <br />
                     </div>
                 </div>
             </div>

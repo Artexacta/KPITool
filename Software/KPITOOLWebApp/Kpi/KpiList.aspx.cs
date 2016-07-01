@@ -80,6 +80,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         if (e.CommandName == "ViewKpi")
         {
             Session["KpiId"] = kpiId.ToString();
+            Session["SEARCH_PARAMETER"] = KPISearchControl.Query;
             Response.Redirect("~/Kpis/KpiDetails.aspx");
         }
         if (e.CommandName == "EditKpi")

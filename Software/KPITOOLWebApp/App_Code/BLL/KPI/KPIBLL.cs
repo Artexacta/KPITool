@@ -55,7 +55,7 @@ namespace Artexacta.App.KPI.BLL
                 row.IscurrencyNull() ? "" : row.currency,
                 row.IscurrencyUnitIDNull() ? "" : row.currencyUnitID,
                 row.kpiTypeID);
-            theNewRecord.OrganizationName = row.organizationName;
+            theNewRecord.OrganizationName = row.IsorganizationNameNull() ? "" : row.organizationName;
             theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
             theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
             theNewRecord.ActivityName = row.IsactivityNameNull() ? "" : row.activityName;

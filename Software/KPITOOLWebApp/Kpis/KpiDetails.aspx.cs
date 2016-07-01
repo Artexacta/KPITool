@@ -4,6 +4,7 @@ using Artexacta.App.FRTWB;
 using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
 using Artexacta.App.User.BLL;
+using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         ProcessSessionParameters();
         if (KpiIdHiddenField.Value == "0")
         {
+            SystemMessages.DisplaySystemErrorMessage(Resources.KpiDetails.ErrorLoadingKpi);
             Response.Redirect("~/Kpi/KpiList.aspx");
             return;
         }
@@ -57,12 +59,14 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         try
         {
             LoadKpiData();
+            return;
         }
         catch (Exception ex)
         {
+            SystemMessages.DisplaySystemErrorMessage(Resources.KpiDetails.ErrorLoadingKpi);
             log.Error("Error loading KPI", ex);
         }
-        
+        Response.Redirect("~/Kpi/KpiList.aspx");
     }
 
     private void ProcessSessionParameters()
@@ -72,6 +76,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             KpiIdHiddenField.Value = Session["KpiId"].ToString();
         }
         Session["KpiId"] = null;
+        if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
+        {
+            SearchQuery.Value = Session["SEARCH_PARAMETER"].ToString();
+        }
+        Session["SEARCH_PARAMETER"] = null;
     }
 
     private void LoadKpiData()
@@ -91,10 +100,10 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             CategoriesPanel.Visible = true;
         }
         //Inicializo los valores conocidos
-        KpiType.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiTypeLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + kpi.KpiTypeID + "</div>";
+        KpiType.Text = kpi.KpiTypeID ;
         //WebServiceId.Text = "<div class='col-md-4 col-sm-4'>Web Service ID:</div><div class='col-md-8 col-sm-8'>SERV-Reliavility</div>";
-        ReportingUnit.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiReportingUnitLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + kpi.ReportingUnitID + "</div>";
-        KpiTarget.Text = "<div class='col-md-4 col-sm-4'><label>" + Resources.KpiDetails.KpiTargetLabel + ":</label></div><div class='col-md-8 col-sm-8'>" + (kpi.TargetPeriod == 0 ? Resources.KpiDetails.NoTargetLabel : kpi.TargetPeriod + " " + kpi.ReportingUnitID) + "</div>";
+        ReportingUnit.Text =  kpi.ReportingUnitID;
+        KpiTarget.Text = (kpi.TargetPeriod == 0 ? Resources.KpiDetails.NoTargetLabel : kpi.TargetPeriod + " " + kpi.ReportingUnitID);
 
         //if (caso <= 50)
         //{
@@ -104,14 +113,18 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         //}
         //else
         //{
-        StartingDate.Text = "<div class='col-md-4 col-sm-4'>Starting Date:</div><div class='col-md-8 col-sm-8'>05/17/15</div>";
+        StartingDate.Text = kpi.StartDate != DateTime.MinValue ? kpi.StartDate.ToShortDateString() : "-";
         RevenueCollectionGraphic.Visible = true;
             //RevenueCollectionProgress.Visible = true;
         ChartControl.KpiId = kpiId;
         ExportControl.KpiId = kpiId;
         StatsControl.KpiId = kpiId;
         MeasurementsControl.KpiId = kpiId;
-        MeasurementsControl.Unit = kpi.UnitID.ToLower();
+        
+        MeasurementsControl.Unit = kpi.UnitID;
+
+        //MeasurementsControl.Currency = kpi.Currency;
+
         //}
     }
 
@@ -147,7 +160,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         catch (Exception ex)
         {
             log.Error("Error saving KPI in dashboard", ex);
+            return;
         }
+
+        Session["KpiId"] = KpiIdHiddenField.Value;
+        Response.Redirect("~/Kpis/KpiDetails.aspx");
     }
 
     protected void DashboardRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -202,5 +219,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         if (obj == null)
             return;
         lt.Text = "<div class='collapse m-b-20' id='" + obj.HtmlId + "'>";
+    }
+
+    protected void BackToListButton_Click(object sender, EventArgs e)
+    {
+        Session["SEARCH_PARAMETER"] = SearchQuery.Value;
+        Response.Redirect("~/Kpi/KpiList.aspx");
     }
 }

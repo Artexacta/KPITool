@@ -4,17 +4,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <h5>
-                <asp:Label ID="EditLabel" runat="server" Text="<%$ Resources:UserData, PageTitleEdit %>" CssClass="title"></asp:Label></h5>
-            <div class="ibox-tools">
-                <a class="collapse-link">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
+    <div class="tile icons-demo">
+        <div class="t-header">
+            <div class="th-title">
+                <asp:Label ID="EditLabel" runat="server" Text="<%$ Resources:UserData, PageTitleEdit %>" CssClass="title"></asp:Label>
             </div>
         </div>
-        <div class="ibox-content">
+        <div class="t-body tb-padding">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

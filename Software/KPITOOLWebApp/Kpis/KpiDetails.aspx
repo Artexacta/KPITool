@@ -5,6 +5,13 @@
 <%@ Register Src="~/UserControls/KPI/KpiSummary/KpiStats.ascx" TagName="KpiStats" TagPrefix="app" %>
 <%@ Register Src="~/UserControls/KPI/KpiCharts/ExcelExportKpiChart.ascx" TagName="ExcelExportKpiChart" TagPrefix="app" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style type="text/css">
+        label{
+            margin-top: 10px !important;
+            display: block !important;
+        }
+    </style>
+    <script src="../Scripts/kpiUtils.js?a=<%= DateTime.Now.Ticks %>"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
     <div class="row">
@@ -29,11 +36,35 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
-                            <asp:Literal ID="KpiType" runat="server"></asp:Literal>
-                            <asp:Literal ID="WebServiceId" runat="server"></asp:Literal>
-                            <asp:Literal ID="ReportingUnit" runat="server"></asp:Literal>
-                            <asp:Literal ID="KpiTarget" runat="server"></asp:Literal>
-                            <asp:Literal ID="StartingDate" runat="server"></asp:Literal>
+                            <div class="col-md-6">
+                                <label>
+                                    <asp:Literal runat="server" Text="<%$ Resources:KpiDetails, KpiTypeLabel %>"></asp:Literal>
+                                </label>
+                                <asp:Literal ID="KpiType" runat="server"></asp:Literal>
+                            </div>
+                            <div class="col-md-6">                                
+                                <label>
+                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, KpiReportingUnitLabel %>"></asp:Literal>
+                                </label>
+                                <asp:Literal ID="ReportingUnit" runat="server"></asp:Literal>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, KpiTargetLabel %>"></asp:Literal>
+                                </label>
+                                <asp:Literal ID="KpiTarget" runat="server"></asp:Literal>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, StartingDateLabel %>"></asp:Literal>
+                                </label>
+                                <asp:Literal ID="StartingDate" runat="server"></asp:Literal>
+                            </div>
+                            
+                            <%--<asp:Literal ID="WebServiceId" runat="server"></asp:Literal>--%>
+                            
+                            
+                            
 
                         </div>
                     </div>
@@ -157,7 +188,10 @@
                 </div>
             </div>
         </div>
+        <asp:LinkButton ID="BackToListButton" runat="server" OnClick="BackToListButton_Click" CssClass="btn btn-primary" Text="<%$ Resources: KpiDetails, BackToListButton %>"></asp:LinkButton>
     </div>
+
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -169,6 +203,7 @@
                     <div class="form-group">
                         <label>Dashboard Name</label>
                         <asp:DropDownList ID="DashboardsComboBox" runat="server"
+                            CssClass="form-control"
                             DataSourceID="UserDashboardDataSource2"
                             OnDataBound="DashboardsComboBox_DataBound"
                             DataTextField="Name"
@@ -199,6 +234,7 @@
         </div>
     </div>
     <asp:HiddenField ID="IsAddedInMainDashboard" Value="false" runat="server" />
+    <asp:HiddenField ID="SearchQuery" runat="server" />
     <script type="text/javascript">
         $(document).ready(function () {
             $(".btn-category").click(function () {
