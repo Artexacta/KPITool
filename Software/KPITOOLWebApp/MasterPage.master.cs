@@ -327,7 +327,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Authentication/UserIsLocked.aspx",
              "~/Authentication/UserIsUnlocked.aspx",
              "~/Authentication/UserNotApproved.aspx",
-             "~/Test/TestUpload.aspx",
              "~/Test/TestTooltip.aspx",
              "~/ResetSystem.aspx",
              "~/Test/TestAddData.aspx",
@@ -399,18 +398,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             if (currentPage.Equals(categoriesPages[i]) &&
                 LoginSecurity.IsUserAuthorizedPermission("MANAGE_CATEGORIES"))
-                return true;
-        }
-
-        //CLASIFICADORES pages
-        string[] clasificadoresPages = new string[]{
-            "~/Clasificadores/ListaDepartamentos.aspx"
-        };
-
-        for (int i = 0; i < clasificadoresPages.Length; i++)
-        {
-            if (currentPage.Equals(clasificadoresPages[i]) &&
-                LoginSecurity.IsUserAuthorizedPermission("ADMIN_CLASIFICADORES"))
                 return true;
         }
 
