@@ -129,6 +129,9 @@
   <data name="LowestValue" xml:space="preserve">
     <value>Lowest value</value>
   </data>
+  <data name="NoChangesLabel" xml:space="preserve">
+    <value>No changes</value>
+  </data>
   <data name="ProgressLabel" xml:space="preserve">
     <value>of progress</value>
   </data>

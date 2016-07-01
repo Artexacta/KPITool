@@ -188,7 +188,10 @@
                 </div>
             </div>
         </div>
+        <asp:LinkButton ID="BackToListButton" runat="server" OnClick="BackToListButton_Click" CssClass="btn btn-primary" Text="<%$ Resources: KpiDetails, BackToListButton %>"></asp:LinkButton>
     </div>
+
+
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -200,6 +203,7 @@
                     <div class="form-group">
                         <label>Dashboard Name</label>
                         <asp:DropDownList ID="DashboardsComboBox" runat="server"
+                            CssClass="form-control"
                             DataSourceID="UserDashboardDataSource2"
                             OnDataBound="DashboardsComboBox_DataBound"
                             DataTextField="Name"
@@ -230,6 +234,7 @@
         </div>
     </div>
     <asp:HiddenField ID="IsAddedInMainDashboard" Value="false" runat="server" />
+    <asp:HiddenField ID="SearchQuery" runat="server" />
     <script type="text/javascript">
         $(document).ready(function () {
             $(".btn-category").click(function () {

@@ -75,11 +75,13 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
             decimal trend = 0;
             bool isTime = objKpi.UnitID == "TIME";
             KPIBLL.GetKpiStats(KpiId, CategoryId, CategoryItemId, ref currentValue, ref lowestValue, ref highestValue, ref averageValue, ref progress, ref trend);
-            CurrentValueLiteral.Text = currentValue == decimal.MinValue ? "-" : currentValue != 0 ? currentValue.ToString("#.##") : "0";
-            LowestValueLiteral.Text = lowestValue == decimal.MinValue ? "-" : lowestValue != 0 ? lowestValue.ToString("#.##") : "0";
-            HighestValueLiteral.Text = highestValue == decimal.MinValue ? "-" : highestValue != 0 ? highestValue.ToString("#.##") : "0";
-            AverageLiteral.Text = averageValue == decimal.MinValue ? "-" : averageValue != 0 ? averageValue.ToString("#.##") : "0";
-            ProgressLiteral.Text = progress == decimal.MinValue ? "-" : progress != 0 ? progress.ToString("#.##") : "0";
+
+            CurrentValueLiteral.Text = GetValue(currentValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
+            LowestValueLiteral.Text = GetValue(lowestValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
+            HighestValueLiteral.Text = GetValue(highestValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
+            AverageLiteral.Text = GetValue(averageValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
+            
+            ProgressLiteral.Text = progress == decimal.MinValue ? "-" : progress != 0 ? progress.ToString("#.##") + "%": "0%";
 
             if(trend < 0)
             {
@@ -96,7 +98,7 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
             else
             {
                 IconLabel.Text = "-";
-                TrendLiteral.Text = "No changes";
+                TrendLiteral.Text = Resources.KpiStats.NoChangesLabel;
                 PeriodLiteral.Text = objKpi.ReportingUnitID.ToLower();
                 return;
             }
@@ -110,5 +112,43 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
             log.Error("Error getting stats for KPI", ex);
         }
 
+        
+
+    }
+
+    private string GetValue(decimal value, string unit, string currency, string currencyUnit)
+    {
+        if (value == decimal.MinValue)
+            return "-";
+        if (unit == "TIME")
+        {
+            try
+            {
+                KPIDataTime datatime = KPIDataTimeBLL.GetKPIDataTimeFromValue(value);
+                return datatime.TimeDescription;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting datatime for measurement value", ex);
+            }
+            return "-";
+        }
+        else if (unit == "PERCENT")
+        {
+            return value.ToString("#.##") + " %";
+        }
+        else if (unit == "MONEY")
+        {
+            return value.ToString("#.##") + " " + currency + " " + currencyUnit;
+        }
+        else if (unit == "INT")
+        {
+            return Convert.ToInt32(value).ToString();
+        }
+        else
+        {
+            return value.ToString("#.##");
+        }
+        
     }
 }

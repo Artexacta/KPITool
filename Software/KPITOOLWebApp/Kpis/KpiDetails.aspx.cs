@@ -4,6 +4,7 @@ using Artexacta.App.FRTWB;
 using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
 using Artexacta.App.User.BLL;
+using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         ProcessSessionParameters();
         if (KpiIdHiddenField.Value == "0")
         {
+            SystemMessages.DisplaySystemErrorMessage(Resources.KpiDetails.ErrorLoadingKpi);
             Response.Redirect("~/Kpi/KpiList.aspx");
             return;
         }
@@ -61,6 +63,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            SystemMessages.DisplaySystemErrorMessage(Resources.KpiDetails.ErrorLoadingKpi);
             log.Error("Error loading KPI", ex);
         }
         Response.Redirect("~/Kpi/KpiList.aspx");
@@ -73,6 +76,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             KpiIdHiddenField.Value = Session["KpiId"].ToString();
         }
         Session["KpiId"] = null;
+        if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
+        {
+            SearchQuery.Value = Session["SEARCH_PARAMETER"].ToString();
+        }
+        Session["SEARCH_PARAMETER"] = null;
     }
 
     private void LoadKpiData()
@@ -112,7 +120,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         ExportControl.KpiId = kpiId;
         StatsControl.KpiId = kpiId;
         MeasurementsControl.KpiId = kpiId;
-        MeasurementsControl.Unit = kpi.UnitID.ToLower();
+        
+        MeasurementsControl.Unit = kpi.UnitID;
+
+        //MeasurementsControl.Currency = kpi.Currency;
+
         //}
     }
 
@@ -207,5 +219,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         if (obj == null)
             return;
         lt.Text = "<div class='collapse m-b-20' id='" + obj.HtmlId + "'>";
+    }
+
+    protected void BackToListButton_Click(object sender, EventArgs e)
+    {
+        Session["SEARCH_PARAMETER"] = SearchQuery.Value;
+        Response.Redirect("~/Kpi/KpiList.aspx");
     }
 }
