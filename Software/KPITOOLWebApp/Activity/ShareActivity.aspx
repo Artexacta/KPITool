@@ -105,7 +105,7 @@
                         <asp:HiddenField ID="UserInvitedIdHiddenField" runat="server" />
                         <div class="has-error m-b-10">
                             <asp:CustomValidator ID="UserCustomValidator" runat="server" Display="Dynamic" ValidationGroup="InviteUser" 
-                                ErrorMessage="<%$ Resources:ShareData, UserCustomValidator %>" ClientValidationFunction="UserCustomValidator_Validate" />
+                                ClientValidationFunction="UserCustomValidator_Validate" />
                         </div>
                     </div>
 
@@ -262,12 +262,40 @@
         }
 
         function UserCustomValidator_Validate(sender, args) {
-            args.IsValid = true;
+            args.IsValid = false;
 
             if (!$("#<%= EveryoneCheckBox.ClientID%>").is(':checked')) {
                 var value = $('#<%= UserInvitedIdHiddenField.ClientID %>').val();
                 if (value == null || value == "") {
                     args.IsValid = false;
+                    $(sender).text(<%= Resources.ShareData.UserCustomValidator %>);
+                } else {
+                    var param = JSON.stringify({ 'userId': $("#<%= UserInvitedIdHiddenField.ClientID %>").val() });
+                    var data;
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "ShareActivity.aspx/VerifiyActualUser",
+                        data: param,
+                        dataType: "json",
+                        async: false,
+                        success: function (msg) {
+                            data = msg.d;
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert(textStatus + ": " + jQuery.parseJSON(XMLHttpRequest.responseText).Message);
+                        },
+                        failure: function () {
+                            alert(<%= Resources.ShareData.VerifyActualUserFail %>);
+                        }
+                    });
+
+                    if (data) {
+                        args.IsValid = false;
+                        $(sender).text(<%= Resources.ShareData.UserActualCustomValidator %>);
+                    } else {
+                        args.IsValid = true;
+                    }
                 }
             }
         }

@@ -16,16 +16,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-        </div>
     </div>
 
     <asp:Panel ID="KpisPanel" runat="server" CssClass="container">
-        <div class="row">
-            <div class="col-md-6">
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
@@ -79,7 +72,7 @@
                                             <asp:Panel ID="pnlDelete" runat="server">
                                                 <asp:LinkButton ID="DeleteKpi" CommandArgument='<%# Eval("KpiID") %>' CommandName="DeleteKpi" runat="server"
                                                     CssClass="viewBtn" OnClientClick="return confirm('Are you sure you want to delete the selected KPI?')">
-                                            <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
+                                                    <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                                 </asp:LinkButton>
                                             </asp:Panel>
                                         </ItemTemplate>
