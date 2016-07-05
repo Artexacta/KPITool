@@ -9,6 +9,7 @@
         label{
             margin-top: 10px !important;
             display: block !important;
+            font-weight:bold;
         }
     </style>
     <script src="../Scripts/kpiUtils.js?a=<%= DateTime.Now.Ticks %>"></script>
@@ -188,7 +189,7 @@
                 </div>
             </div>
         </div>
-        <asp:LinkButton ID="BackToListButton" runat="server" OnClick="BackToListButton_Click" CssClass="btn btn-primary" Text="<%$ Resources: KpiDetails, BackToListButton %>"></asp:LinkButton>
+        <asp:LinkButton ID="BackToListButton" runat="server" OnClick="BackToListButton_Click" CssClass="btn btn-info" Text="<%$ Resources: KpiDetails, BackToListButton %>"></asp:LinkButton>
     </div>
 
 
@@ -226,9 +227,13 @@
                     </asp:ObjectDataSource>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, CancelLabel %>"></asp:Literal>
+                    </button>
                     <asp:LinkButton ID="SaveButton" runat="server" CssClass="btn btn-primary" OnClick="SaveButton_Click"
-                        ValidationGroup="Dashboard">Save</asp:LinkButton>
+                        ValidationGroup="Dashboard">
+                        <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, SaveLabel %>"></asp:Literal>
+                    </asp:LinkButton>
                 </div>
             </div>
         </div>

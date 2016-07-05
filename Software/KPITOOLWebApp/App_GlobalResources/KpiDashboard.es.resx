@@ -123,6 +123,10 @@
   <data name="CancelLabel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="DashboardEmptyMessage" xml:space="preserve">
+    <value>Usted no ha agregado ningun KPI a este Panel de Control.&lt;br /&gt;
+Por favor, vaya al detalle de un KPI y agreguelo a este Panel de Control.</value>
+  </data>
   <data name="DashboardNameLabel" xml:space="preserve">
     <value>Nombre del Panel de Control</value>
   </data>

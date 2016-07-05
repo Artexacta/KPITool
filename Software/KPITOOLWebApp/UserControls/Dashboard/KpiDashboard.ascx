@@ -37,8 +37,7 @@
         <asp:Panel ID="EmptyMessageContaienr" runat="server" CssClass="row" Visible='<%# KpisRepeater.Items.Count == 0 %>'>
             <br />
             <h3 class="col-md-12 text-center">
-                You have not added any KPIs to this Dashboard.<br />
-                Please go to the view page of any KPI and add it to this dashboard.
+                <asp:Literal runat="server" Text="<%$ Resources: KpiDashboard, DashboardEmptyMessage %>"></asp:Literal>
             </h3>
         </asp:Panel>
     </FooterTemplate>
