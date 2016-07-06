@@ -2,6 +2,7 @@
 
 <%@ Register Src="~/UserControls/Dashboard/KpiDashboard.ascx" TagName="KpiDashboard" TagPrefix="app" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <script src="../Scripts/kpiUtils.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
     <div class="row">

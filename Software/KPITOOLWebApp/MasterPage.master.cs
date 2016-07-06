@@ -94,7 +94,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
             LoginStatus1.LogoutText = "<i class='zmdi zmdi-run'></i> <span class='hidden-xs'>" + Resources.InitMasterPage.Logout;
             LoadMainMenuScript();
             ConstructMenu();
-            ConstructFeedbackIFrame();
         }
         else
         {
@@ -106,75 +105,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
         //LoadCalendarItems(CurrentUserIDHiddenField.Value);
 
         log.Debug("############# Master Page ending Page Load #############");
-    }
-
-    public void ConstructFeedbackIFrame()
-    {
-        bool feedbackEnabled = false;
-        try
-        {
-            feedbackEnabled = Convert.ToBoolean(ConfigurationManager.AppSettings["FeedbackEnabled"]);
-        }
-        catch (Exception q)
-        {
-            log.Warn("Either feedbackEnabled is not defined in the web.config or has an invalid value.", q);
-            feedbackEnabled = false;
-        }
-        if (!feedbackEnabled)
-        {
-            string code = "<p>" + Resources.InitMasterPage.NoFeedback + "</p>";
-
-            FeedbackIframeCode.Text = code;
-            return;
-        }
-
-
-        string usernameLogged = HttpContext.Current.User.Identity.Name;
-        Artexacta.App.User.User objUser = null;
-        try
-        {
-            objUser = UserBLL.GetUserByUsername(usernameLogged);
-        }
-        catch
-        {
-            log.Info("Could not load user, dealing with an anonymous user here.");
-            objUser = null;
-        }
-
-        try
-        {
-            string username = (objUser == null ? Artexacta.App.Configuration.Configuration.GetAnonymousUser() : objUser.Username);
-            string email = (objUser == null ? Artexacta.App.Configuration.Configuration.GetAnonymousEmail() : objUser.Email);
-            string application = Artexacta.App.Configuration.Configuration.GetApplicationName();
-            string applicationKey = Artexacta.App.Configuration.Configuration.GetApplicationKey();
-            string applicationVersion = VersionUtilities.getApplicationVersionstring();
-
-            string lang = Artexacta.App.Utilities.LanguageUtilities.GetLanguageFromContext();
-            string page = Request.Url.OriginalString;
-            string context = "";
-
-            string feedbackUrl = Artexacta.App.Configuration.Configuration.GetFeedbackUrl() + "?" +
-                (string.IsNullOrEmpty(application) ? "" : "appName=" + application + "&") +
-                (string.IsNullOrEmpty(applicationVersion) ? "" : "appVersion=" + applicationVersion + "&") +
-                (string.IsNullOrEmpty(applicationKey) ? "" : "appKey=" + applicationKey + "&") +
-                (string.IsNullOrEmpty(username) ? "" : "username=" + username + "&") +
-                (string.IsNullOrEmpty(email) ? "" : "email=" + email + "&") +
-                (string.IsNullOrEmpty(page) ? "" : "page=" + page + "&") +
-                (string.IsNullOrEmpty(lang) ? "" : "lang=" + lang + "&") +
-                (string.IsNullOrEmpty(context) ? "" : "context=" + context);
-
-            if (feedbackUrl.EndsWith("&"))
-                feedbackUrl = feedbackUrl.Substring(0, feedbackUrl.Length - 1);
-
-            string code = "<iframe src=\"" + feedbackUrl + "\" scrolling=\"auto\" " +
-                "style=\"width:600px; height:400px; border:solid 1px #fff \"></iframe>";
-
-            FeedbackIframeCode.Text = code;
-        }
-        catch (Exception err)
-        {
-            log.Error("Error forming the iframe code for the feedback call", err);
-        }
     }
 
     private void ConstructMenu()

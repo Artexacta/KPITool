@@ -26,7 +26,7 @@
                     </div>
                     <div id="loginFormContainer">
                         <asp:Login ID="Login1" runat="server" OnLoggingIn="Login1_LoggingIn" OnLoggedIn="Login1_LoggedIn"
-                            OnLoginError="Login1_LoginError" FailureText="Your login was not successful. Please try again." RenderOuterTable="false">
+                            OnLoginError="Login1_LoginError" FailureText="<%$ Resources: LoginGlossary, LoginFailureText %>" RenderOuterTable="false">
                             <LayoutTemplate>
                                 <asp:Panel ID="pnlLoginControl" runat="server" DefaultButton="LoginButton">
                                     <div class="form-group">
