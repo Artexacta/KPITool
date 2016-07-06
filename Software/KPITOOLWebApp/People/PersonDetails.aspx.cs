@@ -69,22 +69,22 @@ public partial class People_PersonDetails : System.Web.UI.Page
     private void LoadData()
     {
         //-- verify is user is OWNER
-        PermissionObject theUser = new PermissionObject();
-        try
-        {
-            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PERSON.ToString(), Convert.ToInt32(PersonIdHiddenField.Value));
-        }
-        catch (Exception exc)
-        {
-            SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/Personas/ListaPersonas.aspx");
-        }
+        //PermissionObject theUser = new PermissionObject();
+        //try
+        //{
+        //    theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PERSON.ToString(), Convert.ToInt32(PersonIdHiddenField.Value));
+        //}
+        //catch (Exception exc)
+        //{
+        //    SystemMessages.DisplaySystemErrorMessage(exc.Message);
+        //    Response.Redirect("~/Personas/ListaPersonas.aspx");
+        //}
 
-        if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
-        {
-            SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
-            Response.Redirect("~/Personas/ListaPersonas.aspx");
-        }
+        //if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        //{
+        //    SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
+        //    Response.Redirect("~/Personas/ListaPersonas.aspx");
+        //}
 
         //-- show Data
         People theData = null;

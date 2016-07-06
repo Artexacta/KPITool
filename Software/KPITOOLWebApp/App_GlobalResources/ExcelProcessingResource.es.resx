@@ -141,8 +141,26 @@
   <data name="DuplicateColumnErrorMessage" xml:space="preserve">
     <value>Columna duplicada "{0}"</value>
   </data>
+  <data name="EmptyFile" xml:space="preserve">
+    <value>El archivo está vacío.</value>
+  </data>
+  <data name="InvalidBooleanData" xml:space="preserve">
+    <value>Valor de tipo booleano inválido.</value>
+  </data>
+  <data name="InvalidDateData" xml:space="preserve">
+    <value>Valor de tipo fecha inválido.</value>
+  </data>
+  <data name="InvalidDoubleData" xml:space="preserve">
+    <value>Valor de tipo double inválido.</value>
+  </data>
+  <data name="InvalidGeoData" xml:space="preserve">
+    <value>Valor de tipo Get tag inválido.</value>
+  </data>
   <data name="InvalidMultipleValueForColumnErrorMessage" xml:space="preserve">
     <value>Error en la celda {0} : alguno de los valores no es válido para la columna "{1}" o hay valores duplicados</value>
+  </data>
+  <data name="InvalidStringData" xml:space="preserve">
+    <value>Valor de tipo texto inválido</value>
   </data>
   <data name="InvalidValueErrorMessage" xml:space="preserve">
     <value>Error en la celda {0} : el valor no es válido</value>

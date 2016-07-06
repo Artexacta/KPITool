@@ -70,22 +70,22 @@ public partial class Project_ProjectDetails : System.Web.UI.Page
     private void LoadData()
     {
         //-- verify is user is OWNER
-        PermissionObject theUser = new PermissionObject();
-        try
-        {
-            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PROJECT.ToString(), Convert.ToInt32(ProjectIdHiddenField.Value));
-        }
-        catch (Exception exc)
-        {
-            SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/Project/ProjectList.aspx");
-        }
+        //PermissionObject theUser = new PermissionObject();
+        //try
+        //{
+        //    theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.PROJECT.ToString(), Convert.ToInt32(ProjectIdHiddenField.Value));
+        //}
+        //catch (Exception exc)
+        //{
+        //    SystemMessages.DisplaySystemErrorMessage(exc.Message);
+        //    Response.Redirect("~/Project/ProjectList.aspx");
+        //}
 
-        if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
-        {
-            SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
-            Response.Redirect("~/Project/ProjectList.aspx");
-        }
+        //if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        //{
+        //    SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
+        //    Response.Redirect("~/Project/ProjectList.aspx");
+        //}
 
         //-- show Data
         Project theData = null;

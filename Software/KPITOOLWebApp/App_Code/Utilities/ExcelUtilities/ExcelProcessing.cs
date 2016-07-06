@@ -113,7 +113,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 return DBNull.Value;
 
             if (!(value is Boolean))
-                throw new ArgumentException("Invalid boolean parameter passed");
+                throw new ArgumentException(Resources.ExcelProcessingResource.InvalidBooleanData);
 
             return (bool)value;
         }
@@ -317,7 +317,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                     return 0d;
 
             if (!(value is double))
-                throw new ArgumentException("Invalid double value passed.");
+                throw new ArgumentException(Resources.ExcelProcessingResource.InvalidDoubleData);
 
             return (double)value;
         }
@@ -488,7 +488,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 return DBNull.Value;
 
             if (!(value is String))
-                throw new ArgumentException("Invalid Geo Tag passed");
+                throw new ArgumentException(Resources.ExcelProcessingResource.InvalidGeoData);
 
             Regex format1 = new Regex("^([-+]?\\d{1,2}([.]\\d+)?),\\s*([-+]?\\d{1,3}([.]\\d+)?)$");
             Regex format2 = new Regex("^(N|S)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+|\\d+.\\d+)\\s*,\\s*(W|E)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+|\\d+.\\d+)$");
@@ -524,7 +524,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 return result;
             }
 
-            throw new ArgumentException("Invalid GeoTag passed");
+            throw new ArgumentException(Resources.ExcelProcessingResource.InvalidGeoData);
         }
     }
 
@@ -576,7 +576,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 return DateTime.FromOADate(Convert.ToDouble(value));
 
             if (!(value is DateTime))
-                throw new ArgumentException("Invalid date object passed");
+                throw new ArgumentException(Resources.ExcelProcessingResource.InvalidDateData);
 
             return value;
         }
@@ -642,7 +642,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 return DBNull.Value;
 
             if (!(value is String))
-                throw new ArgumentException("Invalid string value passed.");
+                throw new ArgumentException(Resources.ExcelProcessingResource.InvalidStringData);
 
             return value;
         }
@@ -718,7 +718,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
                 return DBNull.Value;
 
             if (!(value is String))
-                throw new ArgumentException("Invalid string value passed.");
+                throw new ArgumentException(Resources.ExcelProcessingResource.InvalidStringData);
 
             // Convertimos la lista a una lista separada por comas SIN espacios raros
 
@@ -1369,7 +1369,7 @@ namespace Artexacta.App.Utilities.ExcelProcessing
 
                 if (worksheet.Dimension == null)
                 {
-                    errors.Add("El archivo está vacío.");
+                    errors.Add(Resources.ExcelProcessingResource.EmptyFile);
                     return null;
                 }
 

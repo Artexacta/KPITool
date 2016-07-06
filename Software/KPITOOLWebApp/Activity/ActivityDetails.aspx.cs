@@ -69,22 +69,22 @@ public partial class Activity_ActivityDetails : System.Web.UI.Page
     private void LoadData()
     {
         //-- verify is user is OWNER
-        PermissionObject theUser = new PermissionObject();
-        try
-        {
-            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ACTIVITY.ToString(), Convert.ToInt32(ActivityIdHiddenField.Value));
-        }
-        catch (Exception exc)
-        {
-            SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/Activity/ActivitiesList.aspx");
-        }
+        //PermissionObject theUser = new PermissionObject();
+        //try
+        //{
+        //    theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ACTIVITY.ToString(), Convert.ToInt32(ActivityIdHiddenField.Value));
+        //}
+        //catch (Exception exc)
+        //{
+        //    SystemMessages.DisplaySystemErrorMessage(exc.Message);
+        //    Response.Redirect("~/Activity/ActivitiesList.aspx");
+        //}
 
-        if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
-        {
-            SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
-            Response.Redirect("~/Activity/ActivitiesList.aspx");
-        }
+        //if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        //{
+        //    SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
+        //    Response.Redirect("~/Activity/ActivitiesList.aspx");
+        //}
 
         //-- show Data
         Activity theData = null;

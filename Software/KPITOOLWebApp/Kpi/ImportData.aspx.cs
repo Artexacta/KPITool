@@ -449,7 +449,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 }
             }
 
-            string timeFormat = "^P(([0-9]|10)Y)(([0-9]|10|11)M)?(([0-9]|[1-2][0-9]|30)D)?(T(([0-9]|1[0-9]|2[0-3])H)?(([0-9]|[1-5][0-9])M)?)?$";
+            string timeFormat = Resources.Validations.TimeDataFormat;
             Regex regexTime = new Regex(timeFormat);
             //-- leer Excel
             List<ExColumn> columns = new List<ExColumn>();
