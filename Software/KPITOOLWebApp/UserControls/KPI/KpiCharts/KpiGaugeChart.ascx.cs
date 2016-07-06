@@ -92,6 +92,10 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
             .SetTitle(new Title(){
                 Text = ""
             })
+            .SetTooltip(new Tooltip()
+            {
+                ValueSuffix = "%"
+            })
             .SetPane(new Pane()
             {
                 StartAngle = -150,
