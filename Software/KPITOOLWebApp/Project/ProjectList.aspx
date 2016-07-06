@@ -44,25 +44,25 @@
                             DataSourceID="ProjectsObjectDataSource" OnItemCommand="ProjectsRepeater_ItemCommand">
                             <ItemTemplate>
                                 <div class="row">
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="ViewProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
                                             CssClass="viewBtn detailsBtn" CommandName="ViewProject">
                                             <i class="zmdi zmdi-eye zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="EditProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
                                             CssClass="viewBtn editBtn" CommandName="EditProject">
                                             <i class="zmdi zmdi-edit zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </div>
-                                    <asp:Panel ID="pnlShare" runat="server" CssClass="col-md-1">
+                                    <asp:Panel ID="pnlShare" runat="server" CssClass="col-md-1 col-sm-1 col-xs-3">
                                         <asp:LinkButton ID="ShareProject" CommandArgument='<%# Eval("ProjectID") %>' runat="server"
                                             CssClass="viewBtn shareBtn" CommandName="ShareProject">
                                             <i class="zmdi zmdi-share zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </asp:Panel>
-                                    <asp:Panel ID="pnlDelete" runat="server" CssClass="col-md-1">
+                                    <asp:Panel ID="pnlDelete" runat="server" CssClass="col-md-1 col-sm-1 col-xs-3">
                                         <asp:HiddenField ID="IsOwnerHiddenField" runat="server" Value='<%# Eval("IsOwner") %>' />
                                         <asp:LinkButton ID="DeleteProject" data-id='<%# Eval("ProjectID") %>' CommandArgument='<%# Eval("ProjectID") %>'
                                             CommandName="DeleteProject" runat="server" CssClass="viewBtn deleteBtn"
@@ -70,8 +70,7 @@
                                             <i class="zmdi zmdi-minus-circle-outline zmdi-hc-fw"></i>
                                         </asp:LinkButton>
                                     </asp:Panel>
-
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
                                         <p style="font-size: 14px; padding-top: 2px;">
                                             <%# Eval("Name") %>
                                             (
@@ -87,12 +86,13 @@
                                     </div>
                                 </div>
                                 <div class="row m-b-20">
-                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-11 col-md-offset-4 m-t-5" Visible="false">
+                                    <div class="col-md-3"></div>
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-9 m-t-5" Visible="false">
                                         <asp:Label ID="NoObjectLabel" runat="server" Text="<% $Resources: Project, MessageProjectNoObject %>"></asp:Label>
                                         <i class="zmdi zmdi-plus-circle-o"></i>
                                         <asp:Label ID="IconLabel" runat="server" Text="<% $Resources: Project, MessageProjectIconAbove %>"></asp:Label>
                                     </asp:Panel>
-                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="PROJECT" OwnerId='<%# Eval("ProjectID") %>' />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="detailsContainer" class="col-md-6 m-t-5" Visible="false">

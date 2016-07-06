@@ -86,13 +86,13 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
                 Panel panelDelete = (Panel)e.Item.FindControl("pnlDelete");
                 if (panelDelete != null)
                 {
-                    panelDelete.CssClass = "col-md-1 disabled";
+                    panelDelete.CssClass = "col-md-1 col-sm-1 col-xs-3 disabled";
                 }
 
                 Panel panelShare = (Panel)e.Item.FindControl("pnlShare");
                 if (panelShare != null)
                 {
-                    panelShare.CssClass = "col-md-1 disabled";
+                    panelShare.CssClass = "col-md-1 col-sm-1 col-xs-3 disabled";
                 }
             }
         }

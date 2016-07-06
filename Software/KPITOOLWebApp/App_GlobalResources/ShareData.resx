@@ -256,7 +256,7 @@
     <value>User</value>
   </data>
   <data name="UserCustomValidator" xml:space="preserve">
-    <value>You must select an User.</value>
+    <value>'You must select an User.'</value>
   </data>
   <data name="UserLabel" xml:space="preserve">
     <value>User:</value>
@@ -368,5 +368,11 @@
   </data>
   <data name="UserPermissionsProjectLabel" xml:space="preserve">
     <value>Users with permissions for this project:</value>
+  </data>
+  <data name="UserActualCustomValidator" xml:space="preserve">
+    <value>'You cannot register permissions to yourself.'</value>
+  </data>
+  <data name="VerifyActualUserFail" xml:space="preserve">
+    <value>"It could not be verified if the selected user is the user in session."</value>
   </data>
 </root>

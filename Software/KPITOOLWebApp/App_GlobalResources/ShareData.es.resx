@@ -256,7 +256,7 @@
     <value>Usuario</value>
   </data>
   <data name="UserCustomValidator" xml:space="preserve">
-    <value>Debe seleccionar un usuario.</value>
+    <value>'Debe seleccionar un usuario.'</value>
   </data>
   <data name="UserLabel" xml:space="preserve">
     <value>Usuario:</value>
@@ -368,5 +368,11 @@
   </data>
   <data name="UserPermissionsProjectLabel" xml:space="preserve">
     <value>Usuarios que tienen permisos para este proyecto:</value>
+  </data>
+  <data name="UserActualCustomValidator" xml:space="preserve">
+    <value>'No puede registrar permisos a usted mismo.'</value>
+  </data>
+  <data name="VerifyActualUserFail" xml:space="preserve">
+    <value>"No se pudo verificar si el usuario seleccionado es el mismo que registra."</value>
   </data>
 </root>
