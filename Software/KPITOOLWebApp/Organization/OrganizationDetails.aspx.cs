@@ -73,22 +73,22 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
     private void LoadData()
     {
         //-- verify is user is OWNER
-        PermissionObject theUser = new PermissionObject();
-        try
-        {
-            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ORGANIZATION.ToString(), Convert.ToInt32(OrganizationIdHiddenField.Value));
-        }
-        catch (Exception exc)
-        {
-            SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/MainPage.aspx");
-        }
+        //PermissionObject theUser = new PermissionObject();
+        //try
+        //{
+        //    theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.ORGANIZATION.ToString(), Convert.ToInt32(OrganizationIdHiddenField.Value));
+        //}
+        //catch (Exception exc)
+        //{
+        //    SystemMessages.DisplaySystemErrorMessage(exc.Message);
+        //    Response.Redirect("~/MainPage.aspx");
+        //}
 
-        if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
-        {
-            SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
-            Response.Redirect("~/MainPage.aspx");
-        }
+        //if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        //{
+        //    SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
+        //    Response.Redirect("~/MainPage.aspx");
+        //}
 
         //-- show Data
         Organization theData = null;

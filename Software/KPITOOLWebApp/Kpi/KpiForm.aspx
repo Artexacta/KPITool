@@ -266,7 +266,7 @@
                             <asp:Label ID="SDLabel" runat="server" Text="<% $Resources: Kpi, LabelStartingDate %>"></asp:Label></label>
                         <div class="row">
                             <div class="col-md-4">
-                                <asp:TextBox ID="StartingDateTextBox" runat="server" TextMode="Date"></asp:TextBox>
+                                <asp:TextBox ID="StartingDateTextBox" runat="server" TextMode="Date" data-polyfill="desktop"></asp:TextBox>
                             </div>
                         </div>
                         <div class="row">

@@ -102,22 +102,6 @@
             ShouldDisplayToolTipWS="~/ToolTipWS/ToolTipUse.asmx/ShouldDisplayToolTip" />--%>
 
 
-        <!-- Feedback Panel -->
-        <div id="feedbackPanel" class="feedback_Panel frame">
-            <div class="columnHead">
-                <asp:Label ID="Label2" runat="server" Text="<%$ Resources: InitMasterPage, EnterFeedbackTitle %>"
-                    CssClass="title" />
-                <div class="commands">
-                    <a href="#" class="secondaryButton" id="cancelFeedbackButton">
-                        <asp:Literal ID="CloseLabel" runat="server" Text="<%$ Resources: Glossary, CloseLabel %>"></asp:Literal>
-                    </a>
-                </div>
-            </div>
-            <div class="columnContent">
-                <br />
-                <asp:Literal ID="FeedbackIframeCode" runat="server" Visible="false"></asp:Literal>
-            </div>
-        </div>
         <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js" type="text/javascript"></script>
         <script type="text/javascript">
             webshims.setOptions('forms-ext', { types: 'date' });

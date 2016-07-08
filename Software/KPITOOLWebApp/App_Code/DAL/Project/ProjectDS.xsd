@@ -195,7 +195,7 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="organizationID" msprop:Generator_ColumnVarNameInTable="columnorganizationID" msprop:Generator_ColumnPropNameInRow="organizationID" msprop:Generator_ColumnPropNameInTable="organizationIDColumn" msprop:Generator_UserColumnName="organizationID" type="xs:int" />
-              <xs:element name="organizationName" msprop:Generator_ColumnVarNameInTable="columnorganizationName" msprop:Generator_ColumnPropNameInRow="organizationName" msprop:Generator_ColumnPropNameInTable="organizationNameColumn" msprop:Generator_UserColumnName="organizationName">
+              <xs:element name="organizationName" msprop:Generator_ColumnVarNameInTable="columnorganizationName" msprop:Generator_ColumnPropNameInRow="organizationName" msprop:Generator_ColumnPropNameInTable="organizationNameColumn" msprop:Generator_UserColumnName="organizationName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />

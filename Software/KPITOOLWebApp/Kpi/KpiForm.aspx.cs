@@ -206,7 +206,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (theKpi.StartDate > DateTime.MinValue)
         {
-            StartingDateTextBox.Text = theKpi.StartDate.ToString("d");
+            StartingDateTextBox.Text = theKpi.StartDate.ToString("yyyy-MM-dd");
         }
         else
         {

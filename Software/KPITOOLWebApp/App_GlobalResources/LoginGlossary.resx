@@ -355,4 +355,7 @@ An email has been sent to the email address you&lt;br/&gt;provided. Follow the i
   <data name="RecoverPasswordSuccessMessage" xml:space="preserve">
     <value>New password was sent to your email</value>
   </data>
+  <data name="LoginFailureText" xml:space="preserve">
+    <value>Your username or password is incorrect.</value>
+  </data>
 </root>

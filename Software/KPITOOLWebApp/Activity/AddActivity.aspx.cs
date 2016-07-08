@@ -33,8 +33,6 @@ public partial class Activity_AddActivity : System.Web.UI.Page
         }
     }
 
-    private Artexacta.App.FRTWB.Activity currentObject;
-
     public string ParentPage
     {
         set { ParentPageHiddenField.Value = value; }

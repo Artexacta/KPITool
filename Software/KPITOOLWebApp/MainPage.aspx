@@ -16,7 +16,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <asp:Panel ID="OrganizationsPanel" runat="server" CssClass="container">
         <div class="row">
@@ -89,13 +88,14 @@
                                         <p style="font-size: 14px; padding-top: 2px;"><%# Eval("Name") %></p>
                                     </div>
                                 </div>
-                                <div class="row m-b-15">
-                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-8 col-md-offset-4 m-t-5" Visible="false">
+                                <div class="row m-b-20">
+                                    <div class="col-md-3"></div>
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-9 m-t-5" Visible="false">
                                         <asp:Label ID="Label1" runat="server" Text="<% $Resources: Organization, MessageNoObjects %>"></asp:Label>
                                         <i class="zmdi zmdi-plus-circle-o" id=""></i>
                                         <asp:Label ID="Label2" runat="server" Text="<% $resources: Organization, MessageNoObtects2 %>"></asp:Label>
                                     </asp:Panel>
-                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 col-md-offset-3 m-t-5" Visible="false">
+                                    <asp:Panel ID="KpiImageContainer" runat="server" CssClass="col-md-1 m-t-5" Visible="false">
                                         <app:KpiImage ID="ImageOfKpi" runat="server" OwnerType="ORGANIZATION" OwnerId='<%# Eval("OrganizationId") %>' />
                                     </asp:Panel>
                                     <asp:Panel runat="server" ID="detailsContainer" CssClass="col-md-6 m-t-5" Visible="false">

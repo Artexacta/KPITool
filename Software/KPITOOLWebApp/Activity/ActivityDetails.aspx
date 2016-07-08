@@ -25,7 +25,7 @@
             </div>
             <div class="t-body tb-padding">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-12">
                         <div class="table-responsive">
                             <asp:GridView ID="KpisGridView" runat="server" AutoGenerateColumns="false" Width="100%" GridLines="None" 
                                 CssClass="table table-striped table-bordered table-hover" DataSourceID="KPIObjectDataSource" DataKeyNames="KpiID" 

@@ -123,6 +123,9 @@
   <data name="BackToListButton" xml:space="preserve">
     <value>Back to KPI List</value>
   </data>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="CompleteLabel" xml:space="preserve">
     <value>Complete</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="NoTargetLabel" xml:space="preserve">
     <value>No target Specified</value>
+  </data>
+  <data name="SaveLabel" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="SelectDashboardLabel" xml:space="preserve">
     <value>-- Select a Dashboard --</value>

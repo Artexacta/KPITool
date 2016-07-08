@@ -246,4 +246,14 @@ public partial class Activity_ShareActivity : System.Web.UI.Page
             return true;
     }
 
+    [WebMethod]
+    public static bool VerifiyActualUser(int userId)
+    {
+        User theData = UserBLL.GetUserByUsername(HttpContext.Current.User.Identity.Name);
+        if (theData != null && theData.UserId == userId)
+            return true;
+        else
+            return false;
+    }
+
 }

@@ -2,6 +2,8 @@
 using Artexacta.App.Categories.BLL;
 using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
+using Artexacta.App.PermissionObject;
+using Artexacta.App.PermissionObject.BLL;
 using Artexacta.App.Utilities;
 using Artexacta.App.Utilities.ExcelProcessing;
 using Artexacta.App.Utilities.SystemMessages;
@@ -66,6 +68,48 @@ public partial class Kpi_ImportData : System.Web.UI.Page
 
     private void LoadData()
     {
+        //-- verify is user has permissions
+        PermissionObject theUser = new PermissionObject();
+        try
+        {
+            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.KPI.ToString(), Convert.ToInt32(KPIIdHiddenField.Value));
+        }
+        catch (Exception exc)
+        {
+            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            Response.Redirect("~/Kpi/KpiList.aspx");
+        }
+
+        if (theUser == null)
+        {
+            SystemMessages.DisplaySystemWarningMessage(Resources.ShareData.UserNotOwnKpi);
+            Response.Redirect("~/Kpi/KpiList.aspx");
+        }
+
+        if (theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
+        {
+            pnlUploadFile.Visible = true;
+            pnlEnterData.Visible = false;
+            KpiMeasurementGridView.Columns[0].Visible = true;
+        }
+        else if (theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("ENTER_DATA")))
+        {
+            pnlUploadFile.Visible = true;
+            pnlEnterData.Visible = false;
+            KpiMeasurementGridView.Columns[0].Visible = false;
+        }
+        else if (theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("VIEW_KPI")))
+        {
+            pnlUploadFile.Visible = false;
+            pnlEnterData.Visible = false;
+            KpiMeasurementGridView.Columns[0].Visible = false;
+        }
+        else 
+        {
+            SystemMessages.DisplaySystemWarningMessage(Resources.ShareData.UserNotOwnKpi);
+            Response.Redirect("~/Kpi/KpiList.aspx");
+        }
+
         //-- show Data
         KPI theData = null;
         try
@@ -405,7 +449,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 }
             }
 
-            string timeFormat = "^P(([0-9]|10)Y)(([0-9]|10|11)M)?(([0-9]|[1-2][0-9]|30)D)?(T(([0-9]|1[0-9]|2[0-3])H)?(([0-9]|[1-5][0-9])M)?)?$";
+            string timeFormat = Resources.Validations.TimeDataFormat;
             Regex regexTime = new Regex(timeFormat);
             //-- leer Excel
             List<ExColumn> columns = new List<ExColumn>();

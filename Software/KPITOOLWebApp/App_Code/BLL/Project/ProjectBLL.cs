@@ -104,7 +104,7 @@ namespace Artexacta.App.Project.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía los proyectos by search =" + whereClause, exc);
+                log.Error("Ocurrió un error mientras se obtenía los proyectos by search " + whereClause, exc);
                 throw new Exception(Resources.Project.MessageErrorLoadProject);
             }
 
