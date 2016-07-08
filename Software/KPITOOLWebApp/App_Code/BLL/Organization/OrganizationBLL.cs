@@ -246,5 +246,20 @@ namespace Artexacta.App.Organization.BLL
 
             return theClass;
         }
+
+        public static void DeletePermanently(int organizationId)
+        {
+            OrganizationTableAdapter adapter = new OrganizationTableAdapter();
+
+            try
+            {
+                adapter.DeletePermanentlyOrganization(organizationId);
+            }
+            catch (Exception ex)
+            {
+                log.Error(Resources.Organization.MessageErrorDelete, ex);
+                throw new Exception(Resources.Organization.MessageErrorDelete);
+            }
+        }
     }
 }

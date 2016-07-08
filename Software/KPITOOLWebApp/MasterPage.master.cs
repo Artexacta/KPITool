@@ -359,7 +359,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Kpi/KpiList.aspx",
              "~/Kpi/KpiDataEntry.aspx",
              "~/Kpi/ShareKpi.aspx",
-             "~/Kpi/ImportData.aspx"
+             "~/Kpi/ImportData.aspx",
+
+             "~/Trash/TrashList.aspx"
         };
 
         for (int i = 0; i < openPages.Length; i++)

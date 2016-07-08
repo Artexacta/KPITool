@@ -11,6 +11,8 @@ using Artexacta.App.KPI.BLL;
 using Artexacta.App.Categories.BLL;
 using Artexacta.App.Categories;
 using System.Web.UI.HtmlControls;
+using Artexacta.App.PermissionObject;
+using Artexacta.App.PermissionObject.BLL;
 
 public partial class Kpi_KpiForm : System.Web.UI.Page
 {
@@ -56,6 +58,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         DateRangeValidator.MinimumValue = DateTime.MinValue.ToString("d");
         DateRangeValidator.MaximumValue = DateTime.Today.AddYears(50).ToString("d");
         Session["LIST_CATEGORIES"] = null;
+        ReadOnlyHiddenField.Value = "false";
         ProcessSessionParametes();
         LoadKpiData();
     }
@@ -87,6 +90,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
     private void LoadKpiData()
     {
         int kpiId = KpiId;
+
         if (kpiId <= 0)
             return;
 
@@ -100,17 +104,46 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (theKpi == null)
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to obtain the Kpi information.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorKpiInformation);
             return;
         }
 
+        //Verificar los permisos del usuario
+        PermissionObject theUser = new PermissionObject();
+        try
+        {
+            theUser = PermissionObjectBLL.GetPermissionsByUser(PermissionObject.ObjectType.KPI.ToString(), kpiId);
+        }
+        catch (Exception exc)
+        {
+            SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            Response.Redirect("~/MainPage.aspx");
+        }
+
+        bool readOnly = false;
+
+        if (theUser == null ||
+            !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")
+                || i.ObjectActionID.Equals("MAN_KPI")
+                || i.ObjectActionID.Equals("MAN_ACTIVITY")
+                || i.ObjectActionID.Equals("MAN_PEOPLE")
+                || i.ObjectActionID.Equals("MAN_PROJECT")))
+        {
+            ReadOnlyHiddenField.Value = "true";
+            readOnly = true;
+        }
+
+        TitleLabel.Text = theKpi.Name;
         KpiNameTextBox.Text = theKpi.Name;
+        KpiNameTextBox.Enabled = !readOnly;
+        DataControl.ReadOnly = readOnly;
         DataControl.OrganizationId = theKpi.OrganizationID;
         DataControl.AreaId = theKpi.AreaID;
         DataControl.ProjectId = theKpi.ProjectID;
         DataControl.ActivityId = theKpi.ActivityID;
         DataControl.PersonId = theKpi.PersonID;
         KPITypeCombobox.SelectedValue = theKpi.KpiTypeID;
+        KPITypeCombobox.Enabled = !readOnly;
 
         //Get de KPI Type information for enable controls
         KPIType theType = null;
@@ -124,11 +157,12 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (theType == null)
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to get the KPI type information.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorKpiInformation);
             return;
         }
 
         UnitCombobox.SelectedValue = theKpi.UnitID;
+        UnitCombobox.Enabled = !readOnly;
         SelectedUnitHiddenField.Value = theKpi.UnitID;
 
         if (theType.UnitID.Trim() != "NA")
@@ -138,8 +172,10 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         {
             CurrencyPanel.Style["display"] = "block";
             CurrencyCombobox.SelectedValue = theKpi.Currency;
+            CurrencyCombobox.Enabled = !readOnly;
             SelectedCurrencyHiddenField.Value = theKpi.Currency;
             MeasuredInCombobox.SelectedValue = theKpi.CurrencyUnitID;
+            MeasuredInCombobox.Enabled = !readOnly;
             UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text + " of " + CurrencyCombobox.SelectedItem.Text;
         }
         if (theKpi.UnitID == "PERCENT")
@@ -150,19 +186,23 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
 
         DirectionCombobox.SelectedValue = theKpi.DirectionID;
+        DirectionCombobox.Enabled = !readOnly;
         SelectedDirectionHiddenField.Value = theKpi.DirectionID;
         if (theType.DirectionID.Trim() != "NA")
             DirectionCombobox.Enabled = false;
 
         StrategyCombobox.SelectedValue = theKpi.StrategyID;
+        StrategyCombobox.Enabled = !readOnly;
         SelectedStrategyHiddenFields.Value = theKpi.StrategyID;
         if (theType.StrategyID.Trim() != "NA")
             StrategyCombobox.Enabled = false;
 
         ReportingPeriodCombobox.SelectedValue = theKpi.ReportingUnitID;
+        ReportingPeriodCombobox.Enabled = !readOnly;
         ReportingPeriodHiddenfield.Value = theKpi.ReportingUnitID;
         UnitLabel.Text = theKpi.ReportingUnitID;
         TargetPeriodTextBox.Text = theKpi.TargetPeriod.ToString();
+        TargetPeriodTextBox.Enabled = !readOnly;
 
         if (theKpi.StartDate > DateTime.MinValue)
         {
@@ -172,8 +212,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         {
             StartingDateTextBox.Text = null;
         }
-
+        StartingDateTextBox.Enabled = !readOnly;
         categoryCheckBox.Checked = theKpi.AllowCategories;
+        categoryCheckBox.Visible = !readOnly;
 
         //Get the single target Value
         KPITarget theTarget = null;
@@ -194,6 +235,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             NumericSingleTargetPanel.Style["display"] = "block";
             TimeSingleTargetPanel.Style["display"] = "none";
             SingleTargetTextBox.Text = "0";
+            SingleTargetTextBox.Enabled = !readOnly;
         }
 
         if (theTarget != null && !theKpi.AllowCategories)
@@ -217,10 +259,15 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 if (theTime != null)
                 {
                     YearsSingleCombobox.SelectedValue = theTime.Year.ToString();
+                    YearsSingleCombobox.Enabled = !readOnly;
                     MonthsSingleCombobox.SelectedValue = theTime.Month.ToString();
+                    MonthsSingleCombobox.Enabled = !readOnly;
                     DaysSingleCombobox.SelectedValue = theTime.Day.ToString();
+                    DaysSingleCombobox.Enabled = !readOnly;
                     HoursSingleCombobox.SelectedValue = theTime.Hour.ToString();
+                    HoursSingleCombobox.Enabled = !readOnly;
                     MinutesSingleCombobox.SelectedValue = theTime.Minute.ToString();
+                    MinutesSingleCombobox.Enabled = !readOnly;
                 }
             }
             else
@@ -234,7 +281,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 }
                 catch
                 {
-                    SystemMessages.DisplaySystemErrorMessage("No se pudo obtener el valor del target, es inválido.");
+                    SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorGetTarget);
                 }
             }
         }
@@ -254,7 +301,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             }
             catch
             {
-                SystemMessages.DisplaySystemErrorMessage("Error to obtain the categories from the KPI.");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorGetCategories);
             }
 
             Session["LIST_CATEGORIES"] = theCList;
@@ -269,15 +316,32 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             }
             catch
             {
-                SystemMessages.DisplaySystemErrorMessage("Error to obtain the categories items from the KPI.");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorGetCategoriesItems);
             }
 
             Session["LIST_ITEMS"] = theItems;
             targetsRepeater.DataSource = theItems;
             targetsRepeater.DataBind();
+
+            pnlCategorySelect.Visible = !readOnly;
+
+        }
+
+        SaveButton.Visible = !readOnly;
+
+        //Hide the required labels
+        if (readOnly)
+        {
+            spRequired1.Visible = false;
+            spRequired2.Visible = false;
+            spRequired3.Visible = false;
+            spRequired4.Visible = false;
+            spRequired5.Visible = false;
+            spRequired6.Visible = false;
+            spRequired7.Visible = false;
+            spRequired8.Visible = false;
         }
     }
-
 
     protected void SaveButton_Click(object sender, EventArgs e)
     {
@@ -310,7 +374,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
         catch
         {
-            SystemMessages.DisplaySystemErrorMessage("El Target Period no es un valor númerico válido.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorFormatTargetPeriod);
             return;
         }
 
@@ -342,7 +406,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 }
                 catch
                 {
-                    SystemMessages.DisplaySystemErrorMessage("Error to get the target from the time values.");
+                    SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorTimeValue);
                 }
 
                 theTarget.Target = targetTime;
@@ -373,7 +437,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 catch (Exception ex)
                 {
                     log.Error("Error to get the targets by categories.", ex);
-                    SystemMessages.DisplaySystemErrorMessage("Error to get the categories.");
+                    SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorCategoryList);
                     return;
                 }
             }
@@ -441,9 +505,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             {
                 KPIBLL.UpdateKPI(theKpi, theTarget, theItems);
             }
-            catch
+            catch (Exception ex)
             {
-                SystemMessages.DisplaySystemErrorMessage("Error to update the KPI.");
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
         }
@@ -456,9 +520,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             {
                 KpiId = KPIBLL.CreateKPI(theKpi, theTarget, theItems, username);
             }
-            catch
+            catch (Exception ex)
             {
-                SystemMessages.DisplaySystemErrorMessage("Error to create the KPI.");
+                SystemMessages.DisplaySystemErrorMessage(ex.Message);
                 return;
             }
         }
@@ -527,7 +591,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (theType == null)
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to get the KPI type information.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorKpiInformation);
             return;
         }
 
@@ -645,7 +709,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
         catch (Exception)
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to get the new combination of items categories.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorCombineItems);
             return;
         }
 
@@ -676,7 +740,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (string.IsNullOrEmpty(categoryId))
         {
-            SystemMessages.DisplaySystemErrorMessage("Could not complete the requested action");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageNotAction);
             return;
         }
 
@@ -722,9 +786,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 {
                     theCombinations = KPICategoryCombinationBLL.GetKPITargetCategoriesByKpiId(theCategories);
                 }
-                catch (Exception)
+                catch
                 {
-                    SystemMessages.DisplaySystemErrorMessage("Error to get the new combination of items categories.");
+                    SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorCombineItems);
                     return;
                 }
             }
@@ -1097,7 +1161,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             catch (Exception ex)
             {
                 log.Error("Error to get the targets by categories.", ex);
-                SystemMessages.DisplaySystemErrorMessage("Error to get the categories.");
+                SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorCategoryList);
                 return;
             }
 
@@ -1106,5 +1170,21 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
 
         UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
+    }
+    protected void CategoriesRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem)
+            return;
+
+        LinkButton buttonDelete = (LinkButton)e.Item.FindControl("RemoveButton");
+        if (buttonDelete != null)
+        {
+            if (Convert.ToBoolean(ReadOnlyHiddenField.Value))
+                buttonDelete.Visible = false;
+            else
+                buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Kpi.MessageDeleteCategory);
+        }
+
+
     }
 }

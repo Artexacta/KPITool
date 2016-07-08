@@ -34,7 +34,7 @@
                     </div>
                     <div class="t-body tb-padding">
                         <app:SearchControl ID="KPISearchControl" runat="server"
-                            Title="Búsqueda"
+                            Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                             DisplayHelp="true"
                             DisplayContextualHelp="true"
                             CssSearch="CSearch"
@@ -48,7 +48,8 @@
                         <div class="table-responsive">
                             <br />
                             <asp:GridView ID="KpisGridView" runat="server" DataSourceID="KPIListObjectDataSource" AutoGenerateColumns="false"
-                                OnRowCommand="KpisGridView_RowCommand" CssClass="table table-striped table-bordered table-hover" DataKeyNames="IsOwner" OnRowDataBound="KpisGridView_RowDataBound">
+                                OnRowCommand="KpisGridView_RowCommand" CssClass="table table-striped table-bordered table-hover" DataKeyNames="IsOwner" 
+                                OnRowDataBound="KpisGridView_RowDataBound">
                                 <Columns>
                                     <asp:TemplateField ItemStyle-Width="60px" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>

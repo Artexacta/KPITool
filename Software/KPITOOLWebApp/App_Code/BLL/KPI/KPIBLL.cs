@@ -85,8 +85,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía el KPI de id: " + kpiId, exc);
-                throw exc;
+                log.Error(Resources.Kpi.MessageErrorKpiInformation + " KpiId: " + kpiId, exc);
+                throw new Exception(Resources.Kpi.MessageErrorKpiInformation);
             }
 
             return theData;
@@ -117,8 +117,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception exc)
             {
-                log.Error("Ocurrió un error mientras se obtenía los KPIs.", exc);
-                throw exc;
+                log.Error(Resources.Kpi.MessageErrorKPIList + " by search.", exc);
+                throw new Exception(Resources.Kpi.MessageErrorKPIList);
             }
 
             return theList;
@@ -422,8 +422,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception ex)
             {
-                log.Error("Failed to create a KPI", ex);
-                throw ex;
+                log.Error(Resources.Kpi.MessageErrorCreate, ex);
+                throw new Exception(Resources.Kpi.MessageErrorCreate);
             }
 
             return kpiID;
@@ -548,8 +548,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception ex)
             {
-                log.Error("Failed to create a KPI", ex);
-                throw ex;
+                log.Error(Resources.Kpi.MessageErrorCreate, ex);
+                throw new Exception(Resources.Kpi.MessageErrorCreate);
             }
 
             return kpiID;
@@ -687,8 +687,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception ex)
             {
-                log.Error("Failed to create a KPI", ex);
-                throw ex;
+                log.Error(Resources.Kpi.MessageErrorUpdate, ex);
+                throw new Exception(Resources.Kpi.MessageErrorUpdate);
             }
         }
 
@@ -708,6 +708,20 @@ namespace Artexacta.App.KPI.BLL
             }
         }
 
+        public static void DeletePermanentlyKPI(int kpiId)
+        {
+            KPIDSTableAdapters.KPITableAdapter adapter = new KPITableAdapter();
+
+            try
+            {
+                adapter.DeletePermanentlyKPI(kpiId);
+            }
+            catch (Exception ex)
+            {
+                log.Error(Resources.Kpi.MessageErrorDelete, ex);
+                throw new Exception(Resources.Kpi.MessageErrorDelete);
+            }
+        }
         public static void InsertKPIMeasurements(List<KPIMeasurement> measurements)
         {
             try
@@ -750,8 +764,8 @@ namespace Artexacta.App.KPI.BLL
             }
             catch (Exception ex)
             {
-                log.Error("Failed to create a KPI", ex);
-                throw ex;
+                log.Error(Resources.Kpi.MessageErrorCreateMeasurement, ex);
+                throw new Exception(Resources.Kpi.MessageErrorCreateMeasurement);
             }
 
         }
@@ -759,7 +773,7 @@ namespace Artexacta.App.KPI.BLL
         public static decimal GetKpiProgress(int kpiId, string categoryId, string categoryItemId, ref bool hasTarget, ref decimal currentValue)
         {
             if (kpiId <= 0)
-                throw new ArgumentException("KpiId cannnot be equals or less than zero");
+                throw new ArgumentException(Resources.Kpi.MessageKpiIDZero);
 
             bool? paramHasTarget = false;
             decimal? paramCurrentValue = 0;
@@ -777,7 +791,7 @@ namespace Artexacta.App.KPI.BLL
                                         ref decimal maxValue, ref decimal avgValue, ref decimal progress, ref decimal trend)
         {
             if (kpiId <= 0)
-                throw new ArgumentException("KpiId cannnot be equals or less than zero");
+                throw new ArgumentException(Resources.Kpi.MessageKpiIDZero);
 
             decimal? paramCurrentValue = 0;
             decimal? paramLowestValue = 0;            

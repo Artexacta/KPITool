@@ -117,139 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActivityMenu" xml:space="preserve">
-    <value>Activities</value>
+  <data name="LabelActivityDelete" xml:space="preserve">
+    <value>Actividades Eliminadas</value>
   </data>
-  <data name="CloseLabel" xml:space="preserve">
-    <value>Close</value>
+  <data name="LabelBy" xml:space="preserve">
+    <value>por</value>
   </data>
-  <data name="EnterFeedbackTitle" xml:space="preserve">
-    <value>Subit comment</value>
+  <data name="LabelDeleteOn" xml:space="preserve">
+    <value>Eliminado en</value>
   </data>
-  <data name="KpiDashboardMenu" xml:space="preserve">
-    <value>KPI Dashboard</value>
+  <data name="labelDeletePermanentlyOrg" xml:space="preserve">
+    <value>Eliminar esta Organización permanentemente</value>
   </data>
-  <data name="KPIMenu" xml:space="preserve">
-    <value>KPIs</value>
+  <data name="LabelKpiDelete" xml:space="preserve">
+    <value>KPIs Eliminados</value>
   </data>
-  <data name="MensajeArchivoVacio" xml:space="preserve">
-    <value>Empty resourceFile in menu item</value>
+  <data name="LabelOrgDelete" xml:space="preserve">
+    <value>Organizaciones Eliminadas</value>
   </data>
-  <data name="MensajeItemPublicoVacio" xml:space="preserve">
-    <value>Menu doesn't have a public item</value>
+  <data name="LabelPersonDelete" xml:space="preserve">
+    <value>Personas Eliminadas</value>
   </data>
-  <data name="MensajeMenuNoPublico" xml:space="preserve">
-    <value>Item del menu no es público y no tiene una clase definida en el item</value>
+  <data name="LabelProjectDelete" xml:space="preserve">
+    <value>Proyectos Eliminados</value>
   </data>
-  <data name="MensajeValorInvalidoItem" xml:space="preserve">
-    <value>Valor inválido para un item público</value>
+  <data name="LabelTitle" xml:space="preserve">
+    <value>Eliminados</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>About</value>
+  <data name="MessageErrorRestore" xml:space="preserve">
+    <value>Error al restablecer la información.</value>
   </data>
-  <data name="MenuAccount" xml:space="preserve">
-    <value>My Account</value>
+  <data name="labelDeletePermanentlyAct" xml:space="preserve">
+    <value>Eliminar esta Actividad permanentemente</value>
   </data>
-  <data name="MenuAssignRoles" xml:space="preserve">
-    <value>Assign Roles</value>
+  <data name="labelDeletePermanentlyKpi" xml:space="preserve">
+    <value>Eliminar este Kpi permanentemente</value>
   </data>
-  <data name="MenuAssignRolesByUser" xml:space="preserve">
-    <value>Assign Roles by User</value>
+  <data name="labelDeletePermanentlyPerson" xml:space="preserve">
+    <value>Eliminar esta Persona permanentemente</value>
   </data>
-  <data name="MenuChangePassword" xml:space="preserve">
-    <value>Change Password</value>
+  <data name="labelDeletePermanentlyProj" xml:space="preserve">
+    <value>Eliminar este Proyecto permanentemente</value>
   </data>
-  <data name="MenuChanges" xml:space="preserve">
-    <value>Changes in the Application</value>
+  <data name="MessageNoActivity" xml:space="preserve">
+    <value>No hay Actividades eliminadas.</value>
   </data>
-  <data name="MenuClasificadores" xml:space="preserve">
-    <value>Classifiers</value>
+  <data name="MessageNoKpi" xml:space="preserve">
+    <value>No hay KPIs eliminados.</value>
   </data>
-  <data name="MenuConcepto" xml:space="preserve">
-    <value>Concepts</value>
+  <data name="MessageNoOrganizations" xml:space="preserve">
+    <value>No hay Organizaciones eliminadas.</value>
   </data>
-  <data name="MenuCredits" xml:space="preserve">
-    <value>Credits</value>
+  <data name="MessageNoPeople" xml:space="preserve">
+    <value>No hay Personas eliminadas.</value>
   </data>
-  <data name="MenuDefinePermissionRole" xml:space="preserve">
-    <value>Define permission to roles</value>
+  <data name="MessageNoProjects" xml:space="preserve">
+    <value>No hay Proyectos eliminados.</value>
   </data>
-  <data name="MenuDefinePermissionUser" xml:space="preserve">
-    <value>Define permission to users</value>
+  <data name="labelRestoreActivity" xml:space="preserve">
+    <value>Restablecer esta Actividad</value>
   </data>
-  <data name="MenuDepartamentos" xml:space="preserve">
-    <value>Departamentos</value>
+  <data name="labelRestoreKpi" xml:space="preserve">
+    <value>Restablecer este Kpi</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
-    <value>Home</value>
+  <data name="labelRestoreOrg" xml:space="preserve">
+    <value>Restablecer esta Organización</value>
   </data>
-  <data name="MenuListaEventosBitacora" xml:space="preserve">
-    <value>View Log</value>
+  <data name="labelRestorePerson" xml:space="preserve">
+    <value>Restablecer esta Persona</value>
   </data>
-  <data name="MenuOficinas" xml:space="preserve">
-    <value>Offices</value>
-  </data>
-  <data name="MenuPersonas" xml:space="preserve">
-    <value>Persons</value>
-  </data>
-  <data name="MenuPersonasListado" xml:space="preserve">
-    <value>Administrador de Personas</value>
-  </data>
-  <data name="MenuPreferences" xml:space="preserve">
-    <value>User Preferences</value>
-  </data>
-  <data name="MenuSecurity" xml:space="preserve">
-    <value>Security</value>
-  </data>
-  <data name="MenuSeguimiento" xml:space="preserve">
-    <value>Seguimiento a Comerciales</value>
-  </data>
-  <data name="MenuTests" xml:space="preserve">
-    <value>WBT</value>
-  </data>
-  <data name="MenuTestsImport" xml:space="preserve">
-    <value>Import Test from Surveys</value>
-  </data>
-  <data name="MenuTestsList" xml:space="preserve">
-    <value>List of available tests</value>
-  </data>
-  <data name="MenuTipoCambio" xml:space="preserve">
-    <value>Tipos de Cambio</value>
-  </data>
-  <data name="MenuUserList" xml:space="preserve">
-    <value>User's list</value>
-  </data>
-  <data name="NoFeedback" xml:space="preserve">
-    <value>No feedback configured for this application</value>
-  </data>
-  <data name="NoJScriptLabel" xml:space="preserve">
-    <value>Para esta aplicación es imprescindible tener javascript habilitado.</value>
-  </data>
-  <data name="ProjectMenu" xml:space="preserve">
-    <value>Projects</value>
-  </data>
-  <data name="SubmitfeedbackLabel" xml:space="preserve">
-    <value>Submit problem</value>
-  </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Change Password</value>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
-  </data>
-  <data name="SelectLanguageLabel" xml:space="preserve">
-    <value>Select Language:</value>
-  </data>
-  <data name="MenuEditUser" xml:space="preserve">
-    <value>Edit my account</value>
-  </data>
-  <data name="CategoryMenu" xml:space="preserve">
-    <value>Manage Categories</value>
-  </data>
-  <data name="PersonMenu" xml:space="preserve">
-    <value>People</value>
-  </data>
-  <data name="MenuTrash" xml:space="preserve">
-    <value>Trash</value>
+  <data name="labelRestoreProject" xml:space="preserve">
+    <value>Restablecer este Proyecto</value>
   </data>
 </root>

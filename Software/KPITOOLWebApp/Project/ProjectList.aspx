@@ -24,7 +24,7 @@
                 <div class="tile">
                     <div class="t-header">
                         <div class="th-title">
-                            <asp:Label ID="Label1" runat="server" Text="<% $Resources: Project, TitleProjects %>"></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text="<% $Resources: Trash, LabelTitle %>"></asp:Label>
                         </div>
                     </div>
                     <div class="t-body tb-padding">

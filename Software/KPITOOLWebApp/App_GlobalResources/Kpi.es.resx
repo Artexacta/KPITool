@@ -174,4 +174,580 @@
   <data name="UpLabel" xml:space="preserve">
     <value>Subió</value>
   </data>
+  <data name="label0Minutes" xml:space="preserve">
+    <value>0 minutos</value>
+  </data>
+  <data name="label1Minute" xml:space="preserve">
+    <value>1 minuto</value>
+  </data>
+  <data name="label2Minutes" xml:space="preserve">
+    <value>2 minutos</value>
+  </data>
+  <data name="label3Minutes" xml:space="preserve">
+    <value>3 minutos</value>
+  </data>
+  <data name="label4Minutes" xml:space="preserve">
+    <value>4 minutos</value>
+  </data>
+  <data name="label5Minutes" xml:space="preserve">
+    <value>5 minutos</value>
+  </data>
+  <data name="label6Minutes" xml:space="preserve">
+    <value>6 minutos</value>
+  </data>
+  <data name="label7Minutes" xml:space="preserve">
+    <value>7 minutos</value>
+  </data>
+  <data name="label8Minutes" xml:space="preserve">
+    <value>8 minutos</value>
+  </data>
+  <data name="label9Minutes" xml:space="preserve">
+    <value>9 minutos</value>
+  </data>
+  <data name="label10Minutes" xml:space="preserve">
+    <value>10 minutos</value>
+  </data>
+  <data name="label11Minutes" xml:space="preserve">
+    <value>11 minutos</value>
+  </data>
+  <data name="label12Minutes" xml:space="preserve">
+    <value>12 minutos</value>
+  </data>
+  <data name="label13Minutes" xml:space="preserve">
+    <value>13 minutos</value>
+  </data>
+  <data name="label14Minutes" xml:space="preserve">
+    <value>14 minutos</value>
+  </data>
+  <data name="label15Minutes" xml:space="preserve">
+    <value>15 minutos</value>
+  </data>
+  <data name="label16Minutes" xml:space="preserve">
+    <value>16 minutos</value>
+  </data>
+  <data name="label17Minutes" xml:space="preserve">
+    <value>17 minutos</value>
+  </data>
+  <data name="label18Minutes" xml:space="preserve">
+    <value>18 minutos</value>
+  </data>
+  <data name="label19Minutes" xml:space="preserve">
+    <value>19 minutos</value>
+  </data>
+  <data name="label20Minutes" xml:space="preserve">
+    <value>20 minutos</value>
+  </data>
+  <data name="label21Minutes" xml:space="preserve">
+    <value>21 minutos</value>
+  </data>
+  <data name="label22Minutes" xml:space="preserve">
+    <value>22 minutos</value>
+  </data>
+  <data name="label23Minutes" xml:space="preserve">
+    <value>23 minutos</value>
+  </data>
+  <data name="label24Minutes" xml:space="preserve">
+    <value>24 minutos</value>
+  </data>
+  <data name="label25Minutes" xml:space="preserve">
+    <value>25 minutos</value>
+  </data>
+  <data name="label26Minutes" xml:space="preserve">
+    <value>26 minutos</value>
+  </data>
+  <data name="label27Minutes" xml:space="preserve">
+    <value>27 minutos</value>
+  </data>
+  <data name="label28Minutes" xml:space="preserve">
+    <value>28 minutos</value>
+  </data>
+  <data name="label29Minutes" xml:space="preserve">
+    <value>29 minutos</value>
+  </data>
+  <data name="label30Minutes" xml:space="preserve">
+    <value>30 minutos</value>
+  </data>
+  <data name="label31Minutes" xml:space="preserve">
+    <value>31 minutos</value>
+  </data>
+  <data name="label32Minutes" xml:space="preserve">
+    <value>32 minutos</value>
+  </data>
+  <data name="label33Minutes" xml:space="preserve">
+    <value>33 minutos</value>
+  </data>
+  <data name="label34Minutes" xml:space="preserve">
+    <value>34 minutos</value>
+  </data>
+  <data name="label35Minutes" xml:space="preserve">
+    <value>35 minutos</value>
+  </data>
+  <data name="label36Minutes" xml:space="preserve">
+    <value>36 minutos</value>
+  </data>
+  <data name="label37Minutes" xml:space="preserve">
+    <value>37 minutos</value>
+  </data>
+  <data name="label38Minutes" xml:space="preserve">
+    <value>38 minutos</value>
+  </data>
+  <data name="label39Minutes" xml:space="preserve">
+    <value>39 minutos</value>
+  </data>
+  <data name="label40Minutes" xml:space="preserve">
+    <value>40 minutos</value>
+  </data>
+  <data name="label41Minutes" xml:space="preserve">
+    <value>41 minutos</value>
+  </data>
+  <data name="label42Minutes" xml:space="preserve">
+    <value>42 minutos</value>
+  </data>
+  <data name="label43Minutes" xml:space="preserve">
+    <value>43 minutos</value>
+  </data>
+  <data name="label44Minutes" xml:space="preserve">
+    <value>44 minutos</value>
+  </data>
+  <data name="label45Minutes" xml:space="preserve">
+    <value>45 minutos</value>
+  </data>
+  <data name="label46Minutes" xml:space="preserve">
+    <value>46 minutos</value>
+  </data>
+  <data name="label47Minutes" xml:space="preserve">
+    <value>47 minutos</value>
+  </data>
+  <data name="label48Minutes" xml:space="preserve">
+    <value>48 minutos</value>
+  </data>
+  <data name="label49Minutes" xml:space="preserve">
+    <value>49 minutos</value>
+  </data>
+  <data name="label50Minutes" xml:space="preserve">
+    <value>50 minutos</value>
+  </data>
+  <data name="label51Minutes" xml:space="preserve">
+    <value>51 minutos</value>
+  </data>
+  <data name="label52Minutes" xml:space="preserve">
+    <value>52 minutos</value>
+  </data>
+  <data name="label53Minutes" xml:space="preserve">
+    <value>53 minutos</value>
+  </data>
+  <data name="label54Minutes" xml:space="preserve">
+    <value>54 minutos</value>
+  </data>
+  <data name="label55Minutes" xml:space="preserve">
+    <value>55 minutos</value>
+  </data>
+  <data name="label56Minutes" xml:space="preserve">
+    <value>56 minutos</value>
+  </data>
+  <data name="label57Minutes" xml:space="preserve">
+    <value>57 minutos</value>
+  </data>
+  <data name="label58Minutes" xml:space="preserve">
+    <value>58 minutos</value>
+  </data>
+  <data name="label59Minutes" xml:space="preserve">
+    <value>59 minutos</value>
+  </data>
+  <data name="label0Hours" xml:space="preserve">
+    <value>0 horas</value>
+  </data>
+  <data name="label1Hour" xml:space="preserve">
+    <value>1 hora</value>
+  </data>
+  <data name="label2Hours" xml:space="preserve">
+    <value>2 horas</value>
+  </data>
+  <data name="label3Hours" xml:space="preserve">
+    <value>3 horas</value>
+  </data>
+  <data name="label4Hours" xml:space="preserve">
+    <value>4 horas</value>
+  </data>
+  <data name="label5Hours" xml:space="preserve">
+    <value>5 horas</value>
+  </data>
+  <data name="label6Hours" xml:space="preserve">
+    <value>6 horas</value>
+  </data>
+  <data name="label7Hours" xml:space="preserve">
+    <value>7 horas</value>
+  </data>
+  <data name="label8Hours" xml:space="preserve">
+    <value>8 horas</value>
+  </data>
+  <data name="label9Hours" xml:space="preserve">
+    <value>9 horas</value>
+  </data>
+  <data name="label10Hours" xml:space="preserve">
+    <value>10 horas</value>
+  </data>
+  <data name="label11Hours" xml:space="preserve">
+    <value>11 horas</value>
+  </data>
+  <data name="label12Hours" xml:space="preserve">
+    <value>12 horas</value>
+  </data>
+  <data name="label13Hours" xml:space="preserve">
+    <value>13 horas</value>
+  </data>
+  <data name="label14Hours" xml:space="preserve">
+    <value>14 horas</value>
+  </data>
+  <data name="label15Hours" xml:space="preserve">
+    <value>15 horas</value>
+  </data>
+  <data name="label16Hours" xml:space="preserve">
+    <value>16 horas</value>
+  </data>
+  <data name="label17Hours" xml:space="preserve">
+    <value>17 horas</value>
+  </data>
+  <data name="label18Hours" xml:space="preserve">
+    <value>18 horas</value>
+  </data>
+  <data name="label19Hours" xml:space="preserve">
+    <value>19 horas</value>
+  </data>
+  <data name="label20Hours" xml:space="preserve">
+    <value>20 horas</value>
+  </data>
+  <data name="label21Hours" xml:space="preserve">
+    <value>21 horas</value>
+  </data>
+  <data name="label22Hours" xml:space="preserve">
+    <value>22 horas</value>
+  </data>
+  <data name="label23Hours" xml:space="preserve">
+    <value>23 horas</value>
+  </data>
+  <data name="label0Days" xml:space="preserve">
+    <value>0 días</value>
+  </data>
+  <data name="label1Day" xml:space="preserve">
+    <value>1 día</value>
+  </data>
+  <data name="label2Days" xml:space="preserve">
+    <value>2 días</value>
+  </data>
+  <data name="label3Days" xml:space="preserve">
+    <value>3 días</value>
+  </data>
+  <data name="label4Days" xml:space="preserve">
+    <value>4 días</value>
+  </data>
+  <data name="label5Days" xml:space="preserve">
+    <value>5 días</value>
+  </data>
+  <data name="label6Days" xml:space="preserve">
+    <value>6 días</value>
+  </data>
+  <data name="label7Days" xml:space="preserve">
+    <value>7 días</value>
+  </data>
+  <data name="label8Days" xml:space="preserve">
+    <value>8 días</value>
+  </data>
+  <data name="label9Days" xml:space="preserve">
+    <value>9 días</value>
+  </data>
+  <data name="label10Days" xml:space="preserve">
+    <value>10 días</value>
+  </data>
+  <data name="label11Days" xml:space="preserve">
+    <value>11 días</value>
+  </data>
+  <data name="label12Days" xml:space="preserve">
+    <value>12 días</value>
+  </data>
+  <data name="label13Days" xml:space="preserve">
+    <value>13 días</value>
+  </data>
+  <data name="label14Days" xml:space="preserve">
+    <value>14 días</value>
+  </data>
+  <data name="label15Days" xml:space="preserve">
+    <value>15 días</value>
+  </data>
+  <data name="label16Days" xml:space="preserve">
+    <value>16 días</value>
+  </data>
+  <data name="label17Days" xml:space="preserve">
+    <value>17 días</value>
+  </data>
+  <data name="label18Days" xml:space="preserve">
+    <value>18 días</value>
+  </data>
+  <data name="label19Days" xml:space="preserve">
+    <value>19 días</value>
+  </data>
+  <data name="label20Days" xml:space="preserve">
+    <value>20 días</value>
+  </data>
+  <data name="label21Days" xml:space="preserve">
+    <value>21 días</value>
+  </data>
+  <data name="label22Days" xml:space="preserve">
+    <value>22 días</value>
+  </data>
+  <data name="label23Days" xml:space="preserve">
+    <value>23 días</value>
+  </data>
+  <data name="label24Days" xml:space="preserve">
+    <value>24 días</value>
+  </data>
+  <data name="label25Days" xml:space="preserve">
+    <value>25 días</value>
+  </data>
+  <data name="label26Days" xml:space="preserve">
+    <value>26 días</value>
+  </data>
+  <data name="label27Days" xml:space="preserve">
+    <value>27 días</value>
+  </data>
+  <data name="label28Days" xml:space="preserve">
+    <value>28 días</value>
+  </data>
+  <data name="label29Days" xml:space="preserve">
+    <value>29 días</value>
+  </data>
+  <data name="label30Days" xml:space="preserve">
+    <value>30 días</value>
+  </data>
+  <data name="label31Days" xml:space="preserve">
+    <value>31 días</value>
+  </data>
+  <data name="label0Months" xml:space="preserve">
+    <value>0 meses</value>
+  </data>
+  <data name="label0Years" xml:space="preserve">
+    <value>0 años</value>
+  </data>
+  <data name="label10Months" xml:space="preserve">
+    <value>10 meses</value>
+  </data>
+  <data name="label10Years" xml:space="preserve">
+    <value>10 años</value>
+  </data>
+  <data name="label11Months" xml:space="preserve">
+    <value>11 meses</value>
+  </data>
+  <data name="label12Months" xml:space="preserve">
+    <value>12 meses</value>
+  </data>
+  <data name="label1Month" xml:space="preserve">
+    <value>1 mes</value>
+  </data>
+  <data name="label1Year" xml:space="preserve">
+    <value>1 año</value>
+  </data>
+  <data name="label2Months" xml:space="preserve">
+    <value>2 meses</value>
+  </data>
+  <data name="label2Years" xml:space="preserve">
+    <value>2 años</value>
+  </data>
+  <data name="label3Months" xml:space="preserve">
+    <value>3 meses</value>
+  </data>
+  <data name="label3Years" xml:space="preserve">
+    <value>3 años</value>
+  </data>
+  <data name="label4Months" xml:space="preserve">
+    <value>4 meses</value>
+  </data>
+  <data name="label4Years" xml:space="preserve">
+    <value>4 años</value>
+  </data>
+  <data name="label5Months" xml:space="preserve">
+    <value>5 meses</value>
+  </data>
+  <data name="label5Years" xml:space="preserve">
+    <value>5 años</value>
+  </data>
+  <data name="label6Months" xml:space="preserve">
+    <value>6 meses</value>
+  </data>
+  <data name="label6Years" xml:space="preserve">
+    <value>6 años</value>
+  </data>
+  <data name="label7Months" xml:space="preserve">
+    <value>7 meses</value>
+  </data>
+  <data name="label7Years" xml:space="preserve">
+    <value>7 años</value>
+  </data>
+  <data name="label8Months" xml:space="preserve">
+    <value>8 meses</value>
+  </data>
+  <data name="label8Years" xml:space="preserve">
+    <value>8 años</value>
+  </data>
+  <data name="label9Months" xml:space="preserve">
+    <value>9 meses</value>
+  </data>
+  <data name="label9Years" xml:space="preserve">
+    <value>9 años</value>
+  </data>
+  <data name="LabelCreateKpi" xml:space="preserve">
+    <value>Crear KPI</value>
+  </data>
+  <data name="LabelCurrency" xml:space="preserve">
+    <value>Moneda</value>
+  </data>
+  <data name="LabelDeleteConfirmation" xml:space="preserve">
+    <value>¿Está seguro de eliminar el KPI seleccionado?</value>
+  </data>
+  <data name="LabelDirection" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="LabelEnterNameKpi" xml:space="preserve">
+    <value>Ingrese el nombre del KPI</value>
+  </data>
+  <data name="LabelMeasureCurrency" xml:space="preserve">
+    <value>Medido en</value>
+  </data>
+  <data name="LabelNameKpi" xml:space="preserve">
+    <value>Nombre del KPI</value>
+  </data>
+  <data name="LabelReportingByCategories" xml:space="preserve">
+    <value>KPI permite reportar por categorías</value>
+  </data>
+  <data name="LabelReportingPeriod" xml:space="preserve">
+    <value>Periodo de Reportaje</value>
+  </data>
+  <data name="LabelSelectCurrency" xml:space="preserve">
+    <value>[Seleccione una Moneda]</value>
+  </data>
+  <data name="LabelSelectDirection" xml:space="preserve">
+    <value>[Seleccione una Dirección]</value>
+  </data>
+  <data name="LabelSelectMeasure" xml:space="preserve">
+    <value>[Seleccione una Medida]</value>
+  </data>
+  <data name="LabelSelectReporting" xml:space="preserve">
+    <value>[Seleccione un Periodo de Reportaje]</value>
+  </data>
+  <data name="LabelSelectStrategy" xml:space="preserve">
+    <value>[Seleccione una Estratégia de Acumulación]</value>
+  </data>
+  <data name="LabelSelectType" xml:space="preserve">
+    <value>[Seleccione el Tipo de KPI]</value>
+  </data>
+  <data name="LabelSelectUnit" xml:space="preserve">
+    <value>[Seleccione una Unidad]</value>
+  </data>
+  <data name="LabelStartingDate" xml:space="preserve">
+    <value>Fecha de Inicio</value>
+  </data>
+  <data name="LabelStrategy" xml:space="preserve">
+    <value>Estratégia de Acumulación</value>
+  </data>
+  <data name="LabelTarget" xml:space="preserve">
+    <value>Objetivo del KPI</value>
+  </data>
+  <data name="LabelTargetPeriod" xml:space="preserve">
+    <value>Periodo del Objetivo</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>Tipo de KPI</value>
+  </data>
+  <data name="LabelUnit" xml:space="preserve">
+    <value>Unidad</value>
+  </data>
+  <data name="LabelUsingWS" xml:space="preserve">
+    <value>Permitir reportar valores mediante Web Services</value>
+  </data>
+  <data name="LabelWebServiceID" xml:space="preserve">
+    <value>Nombre del Web Service</value>
+  </data>
+  <data name="MessageCurrencyRequired" xml:space="preserve">
+    <value>Debe seleccionar una Moneda</value>
+  </data>
+  <data name="MessageDirectionRequired" xml:space="preserve">
+    <value>Debe seleccionar una Dirección</value>
+  </data>
+  <data name="MessageEnterWS" xml:space="preserve">
+    <value>Ingrese el nombre del Web Service</value>
+  </data>
+  <data name="MessageErrorCreate" xml:space="preserve">
+    <value>Error al crear un KPI.</value>
+  </data>
+  <data name="MessageErrorCreateMeasurement" xml:space="preserve">
+    <value>Error al crear la una medida del KPI.</value>
+  </data>
+  <data name="MessageErrorKpiID" xml:space="preserve">
+    <value>Error al obtener el ID del KPI.</value>
+  </data>
+  <data name="MessageErrorKpiInformation" xml:space="preserve">
+    <value>Error al obtener la información del KPI.</value>
+  </data>
+  <data name="MessageErrorKPIList" xml:space="preserve">
+    <value>Error al obtener la lista de KPIs.</value>
+  </data>
+  <data name="MessageErrorUpdate" xml:space="preserve">
+    <value>Error al actualizar el KPI.</value>
+  </data>
+  <data name="MessageKpiIDZero" xml:space="preserve">
+    <value>El ID del KPI no puede ser cero.</value>
+  </data>
+  <data name="MessageMeasureRequired" xml:space="preserve">
+    <value>Debe selecconar una Medida</value>
+  </data>
+  <data name="MessageNameRequired" xml:space="preserve">
+    <value>Debe ingresar el Nombre del KPI</value>
+  </data>
+  <data name="MessageReportingRequired" xml:space="preserve">
+    <value>Debe seleccionar el Periodo de Reportaje</value>
+  </data>
+  <data name="MessageStrategyRequired" xml:space="preserve">
+    <value>Debe seleccionar una Estratégia de Acumulación</value>
+  </data>
+  <data name="MessageTypeRequired" xml:space="preserve">
+    <value>Debe seleccionar el tipo de KPI</value>
+  </data>
+  <data name="MessageWS" xml:space="preserve">
+    <value>Para registrar el "Tiempo entre fallas" utilizando Web Services debe ingresar en formato ISO 8601: P[ n ]Y[ n ]M[ n ]DT[ n ]H[ n ]M[ n ]S.  En esta representación, [ n ] es reemplazada por el valor de cada fecha y hora de los elemontos que siguen a [ n ]. Por ejemplo, "P3Y6M4DT12H30M5S" representa la duración de "tres años, seis meses, cuatro días, doce horas, treinta minutos, y cinco segundos".</value>
+  </data>
+  <data name="MessageWSRequired" xml:space="preserve">
+    <value>Debe registrar el nombre del Web Service</value>
+  </data>
+  <data name="LabelCategoryTargets" xml:space="preserve">
+    <value>Objetivos por Categoría</value>
+  </data>
+  <data name="LabelSelectCategories" xml:space="preserve">
+    <value>Seleccione las Categorías</value>
+  </data>
+  <data name="LabelSelectCategory" xml:space="preserve">
+    <value>[Seleccione una Categoría]</value>
+  </data>
+  <data name="MessageDeleteCategory" xml:space="preserve">
+    <value>¿Esta seguro de eliminar la categoría, toda la información será eliminada?</value>
+  </data>
+  <data name="MessageErrorCombineItems" xml:space="preserve">
+    <value>Error al obtener la nueva combinación de items de las categorías.</value>
+  </data>
+  <data name="MessageErrorFormatTargetPeriod" xml:space="preserve">
+    <value>El Periodo del Objetivo no es un valor númerico válido.</value>
+  </data>
+  <data name="MessageErrorGetCategories" xml:space="preserve">
+    <value>Error al obtener las categorías del KPI.</value>
+  </data>
+  <data name="MessageErrorGetCategoriesItems" xml:space="preserve">
+    <value>Error al obtener los items de las categorías del KPI.</value>
+  </data>
+  <data name="MessageErrorGetTarget" xml:space="preserve">
+    <value>No se pudo obtener el valor del target, es inválido.</value>
+  </data>
+  <data name="MessageErrorTimeValue" xml:space="preserve">
+    <value>Error al obtener el objetivo de un valor tipo tiempo.</value>
+  </data>
+  <data name="ButtonBack" xml:space="preserve">
+    <value>Volver a la lista de KPIs</value>
+  </data>
 </root>

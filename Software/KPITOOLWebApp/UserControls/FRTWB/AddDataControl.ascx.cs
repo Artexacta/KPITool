@@ -216,6 +216,8 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                     pnlAddProject.Style["display"] = "none";
                     pnlKPIProject.Style["display"] = "inline";
                     KPIProjectText.Text = theData.Name;
+                    KPIProjectText.Enabled = !ReadOnly;
+                    RemoveProjectButton.Visible = !ReadOnly;
 
                     pnlAddPeople.Style["display"] = "none";
                     pnlKPIPeople.Style["display"] = "none";
@@ -228,7 +230,6 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 OrganizationId = theData.OrganizationID;
                 AreaId = theData.AreaID;
 
-                KPIProjectText.Enabled = !ReadOnly;
                 ProjectTextBox.Enabled = !ReadOnly;
             }
         }
@@ -254,6 +255,8 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                     pnlAddActivity.Style["display"] = "none";
                     pnlKPIActivity.Style["display"] = "inline";
                     KPIActivityText.Text = theData.Name;
+                    KPIActivityText.Enabled = !ReadOnly;
+                    RemoveActivityButton.Visible = !ReadOnly;
 
                     pnlAddProject.Style["display"] = "none";
                     pnlAddPeople.Style["display"] = "none";
@@ -266,7 +269,7 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 OrganizationId = theData.OrganizationID;
                 AreaId = theData.AreaID;
                 ProjectId = theData.ProjectID;
-                KPIActivityText.Enabled = !ReadOnly;
+                
             }
         }
     }
@@ -291,6 +294,8 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                     pnlAddPeople.Style["display"] = "none";
                     pnlKPIPeople.Style["display"] = "inline";
                     KPIPeopleText.Text = theData.Name;
+                    KPIPeopleText.Enabled = !ReadOnly;
+                    RemovePeopleButton.Visible = !ReadOnly;
 
                     pnlKPIProject.Style["display"] = "none";
                     pnlAddProject.Style["display"] = "none";
@@ -303,7 +308,6 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
 
                 OrganizationId = theData.OrganizationId;
                 AreaId = theData.AreaId;
-                KPIPeopleText.Enabled = !ReadOnly;
             }
         }
     }
@@ -350,6 +354,8 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                     pnlAddArea.Style["display"] = "none";
                     pnlKPIArea.Style["display"] = "inline";
                     KPIAreaText.Text = theData.Name;
+                    AreaTextBox.Enabled = !ReadOnly;
+                    RemoveAreaButton.Visible = !ReadOnly;
                 }
                 else
                     AreaTextBox.Text = theData.Name;
@@ -357,7 +363,6 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
         }
 
         KPIActivityText.Enabled = !ReadOnly;
-        AreaTextBox.Enabled = !ReadOnly;
     }
 
     private void LoadKPI()
@@ -387,7 +392,9 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
                 }
 
                 if (theData.AreaID > 0 || theData.ProjectID > 0 || theData.ActivityID > 0 || theData.PersonID > 0)
+                {
                     pnlKPIData.Style["display"] = "block";
+                }
                 else
                     pnlKPIData.Style["display"] = "none";
 

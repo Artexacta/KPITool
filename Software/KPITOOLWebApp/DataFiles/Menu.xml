@@ -117,7 +117,7 @@ class:         if the menu is not public, the name of the class that the user
 				resourceItem="PersonMenu"
 				url="~/Personas/ListaPersonas.aspx"
 				public="true"
-        icon="zmdi zmdi-picture-in-picture">
+        icon="zmdi zmdi-local-wc">
   </Menu>
   
   <Menu resourceFile="InitMasterPage"
@@ -134,7 +134,15 @@ class:         if the menu is not public, the name of the class that the user
         icon="zmdi zmdi-view-dashboard">
   </Menu>
 
-  <!-- Sixth Menu: About -->
+  <!--Sixth Menu:Trash-->
+  <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuTrash"
+			  public="true"
+        icon="zmdi fa fa-trash"
+        url="~/Trash/TrashList.aspx">
+  </Menu>
+
+    <!-- Seventh Menu: About -->
   <Menu resourceFile="InitMasterPage"
 			  resourceItem="MenuAbout"
 			  public="true"
