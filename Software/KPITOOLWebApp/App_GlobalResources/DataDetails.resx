@@ -250,7 +250,7 @@
     <value>Back to Activities list</value>
   </data>
   <data name="ReturnOrganizationLink" xml:space="preserve">
-    <value>Back to Organizationes list</value>
+    <value>Back to Organizations list</value>
   </data>
   <data name="ReturnPersonLink" xml:space="preserve">
     <value>Back to People list</value>
