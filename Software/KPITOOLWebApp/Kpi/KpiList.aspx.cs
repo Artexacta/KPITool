@@ -54,7 +54,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
     {
         if (e.Exception != null)
         {
-            SystemMessages.DisplaySystemErrorMessage("Error to get KPI List.");
+            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorKPIList);
             e.ExceptionHandled = true;
         }
     }
@@ -68,7 +68,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            log.Error("Error getting object id", ex);
+            log.Error(Resources.Kpi.MessageErrorKpiID, ex);
         }
 
         if (kpiId <= 0)
@@ -136,6 +136,10 @@ public partial class Kpi_KpiList : System.Web.UI.Page
 
             if (theData == null)
                 return;
+
+            LinkButton buttonDelete = (LinkButton)e.Row.FindControl("DeleteKpi");
+            if (buttonDelete != null)
+                buttonDelete.OnClientClick = String.Format("return confirm('{0}')", Resources.Kpi.LabelDeleteConfirmation);
 
             Panel theDelete = (Panel)e.Row.FindControl("pnlDelete");
             if (theDelete != null && !theData.IsOwner)

@@ -240,4 +240,7 @@
   <data name="PersonMenu" xml:space="preserve">
     <value>Personas</value>
   </data>
+  <data name="MenuTrash" xml:space="preserve">
+    <value>Eliminados</value>
+  </data>
 </root>

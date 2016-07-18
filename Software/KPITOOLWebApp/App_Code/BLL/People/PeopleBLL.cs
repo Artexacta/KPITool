@@ -223,5 +223,20 @@ namespace Artexacta.App.People.BLL
                 throw new Exception(Resources.People.MessageErrorDeletePerson);
             }
         }
+
+        public static void DeletePermanently(int personId)
+        {
+            PeopleTableAdapter adapter = new PeopleTableAdapter();
+
+            try
+            {
+                adapter.DeletePermanentlyPerson(personId);
+            }
+            catch (Exception ex)
+            {
+                log.Error(Resources.People.MessageErrorDeletePerson, ex);
+                throw new Exception(Resources.People.MessageErrorDeletePerson);
+            }
+        }
     }
 }

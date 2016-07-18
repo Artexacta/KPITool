@@ -39,11 +39,13 @@ namespace Artexacta.App.Activities.BLL
                 row.organizationID,
                 row.IsareaIDNull() ? 0 : row.areaID,
                 row.IsprojectIDNull() ? 0 : row.projectID);
+
             theNewRecord.OrganizationName = row.organizationName;
             theNewRecord.AreaName = row.IsareaNameNull() ? "" : row.areaName;
             theNewRecord.ProjectName = row.IsprojectNameNull() ? "" : row.projectName;
             theNewRecord.NumberOfKpis = row.IsnumberKPIsNull() ? 0 : row.numberKPIs;
             theNewRecord.IsOwner = row.IsisOwnerNull() ? false : Convert.ToBoolean(row.isOwner);
+
             return theNewRecord;
         }
 
@@ -260,6 +262,24 @@ namespace Artexacta.App.Activities.BLL
             catch (Exception exc)
             {
                 log.Error(Resources.Activity.MessageErrorDelete, exc);
+                throw new Exception(Resources.Activity.MessageErrorDelete);
+            }
+        }
+
+        public static void DeletePermanently(int activityID)
+        {
+            if (activityID <= 0)
+                throw new ArgumentException(Resources.Organization.MessageZeroActivityId);
+
+            ActivitiesTableAdapter adapter = new ActivitiesTableAdapter();
+
+            try
+            {
+                adapter.DeletePermanentlyActivity(activityID);
+            }
+            catch (Exception ex)
+            {
+                log.Error(Resources.Activity.MessageErrorDelete, ex);
                 throw new Exception(Resources.Activity.MessageErrorDelete);
             }
         }

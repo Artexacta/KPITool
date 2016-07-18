@@ -241,5 +241,20 @@ namespace Artexacta.App.Project.BLL
             return theList;
         }
 
+        public static void DeletePermanently(int projectId)
+        {
+            ProjectsTableAdapter adapter = new ProjectsTableAdapter();
+
+            try
+            {
+                adapter.DeletePermanentlyProject(projectId);
+            }
+            catch (Exception ex)
+            {
+                log.Error(Resources.Project.MessageErrorDeleteProject, ex);
+                throw new Exception(Resources.Project.MessageErrorDeleteProject);
+            }
+        }
+
     }
 }
