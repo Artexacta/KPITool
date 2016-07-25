@@ -277,6 +277,9 @@ Se necesita al menos una organización para que pueda crear evaluaciones, proyec
   <data name="TitleActivityName" xml:space="preserve">
     <value>Nombre de la Actividad</value>
   </data>
+  <data name="TitleArea" xml:space="preserve">
+    <value>Área</value>
+  </data>
   <data name="TitleKPIName" xml:space="preserve">
     <value>Nombre del KPI</value>
   </data>

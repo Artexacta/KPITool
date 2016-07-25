@@ -145,7 +145,7 @@
     <value>icon above --</value>
   </data>
   <data name="LabelPersonNoCreated" xml:space="preserve">
-    <value>-- There are no person registered. Create one by clicking on the</value>
+    <value>-- There are no people registered. Create one by clicking on the</value>
   </data>
   <data name="LabelPersonNoObjects" xml:space="preserve">
     <value>This person does not have any objects. Create one by clicking on the</value>

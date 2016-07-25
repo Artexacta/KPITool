@@ -277,6 +277,9 @@ At least one organization is needed and you won't be able to create evaluations,
   <data name="TitleActivityName" xml:space="preserve">
     <value>Activity Name</value>
   </data>
+  <data name="TitleArea" xml:space="preserve">
+    <value>Area</value>
+  </data>
   <data name="TitleKPIName" xml:space="preserve">
     <value>KPI Name</value>
   </data>

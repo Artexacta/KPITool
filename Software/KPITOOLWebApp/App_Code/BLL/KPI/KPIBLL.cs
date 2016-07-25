@@ -530,11 +530,11 @@ namespace Artexacta.App.KPI.BLL
                                 SqlCommand command5 = new SqlCommand("usp_KPI_UpdateKPITargetCategory", connection);
                                 command5.CommandType = System.Data.CommandType.StoredProcedure;
 
-                                command5.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = theKpi.KpiID;
+                                command5.Parameters.Add("@kpiID", System.Data.SqlDbType.Int).Value = kpiID;
                                 command5.Parameters.Add("@targetID", System.Data.SqlDbType.Int).Value = theItem.TargetID;
                                 command5.Parameters.Add("@items", System.Data.SqlDbType.VarChar, 1000).Value = theItem.Detalle;
                                 command5.Parameters.Add("@categories", System.Data.SqlDbType.VarChar, 1000).Value = theItem.Categories;
-                                command5.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theItem.TargetID;
+                                command5.Parameters.Add("@target", System.Data.SqlDbType.Decimal).Value = theItem.Target;
 
                                 command5.ExecuteNonQuery();
                             }

@@ -36,7 +36,8 @@ namespace Artexacta.App.Currency.BLL
             CurrencyUnit theNewRecord = new CurrencyUnit(
                 row.currencyID,
                 row.currencyUnitID,
-                row.name);
+                row.name,
+                row.hasMeasure);
 
             return theNewRecord;
         }
@@ -66,6 +67,28 @@ namespace Artexacta.App.Currency.BLL
             }
 
             return theList;
+        }
+
+        public CurrencyUnit GetCurrencyUnitsById(string language, string currencyId, string currencyUnitId)
+        {
+            CurrencyUnit theData = null;
+
+            try
+            {
+                CurrencyDS.CurrencyUnitsForCurrencyDataTable theTable = theAdapter.GetCurrencyUnitByID(language, currencyId, currencyUnitId);
+
+                if (theTable != null && theTable.Rows.Count > 0)
+                {
+                    theData = FillRecord(theTable[0]);
+                }
+            }
+            catch (Exception exc)
+            {
+                log.Error("Ocurrió un error al obtener un CurrencyUnit de la Base de Datos", exc);
+                throw exc;
+            }
+
+            return theData;
         }
 
     }

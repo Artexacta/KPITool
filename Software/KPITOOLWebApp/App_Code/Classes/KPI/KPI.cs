@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using Artexacta.App.Currency.BLL;
+using Artexacta.App.Currency;
 
 namespace Artexacta.App.KPI
 {
@@ -29,13 +31,15 @@ namespace Artexacta.App.KPI
         private string _currency;
         private string _currencyUnitID;
         private string _kpiTypeID;
+        private string _currencyUnitDisplay;
+        private bool _currencyHasMeasure;
 
         public KPI()
         {
         }
 
-        public KPI(int kpiID, string name, int organizationID, int areaID, int projectID, int activityID, int personID, 
-            string unitID, string directionID, string strategyID, DateTime startDate, string reportingUnitID, int targetPeriod, 
+        public KPI(int kpiID, string name, int organizationID, int areaID, int projectID, int activityID, int personID,
+            string unitID, string directionID, string strategyID, DateTime startDate, string reportingUnitID, int targetPeriod,
             bool allowCategories, string currency, string currencyUnitID, string kpiTypeID)
         {
             this._kpiID = kpiID;
@@ -153,6 +157,60 @@ namespace Artexacta.App.KPI
             set { _currencyUnitID = value; }
         }
 
+        public string CurrencyUnitForDisplay
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_currencyUnitDisplay))
+                {
+                    CurrencyUnit theClass = null;
+                    CurrencyUnitBLL theBLL = new CurrencyUnitBLL();
+                    string language = LanguageUtilities.GetLanguageFromContext();
+
+                    try
+                    {
+                        theClass = theBLL.GetCurrencyUnitsById(language, _currency, _currencyUnitID);
+                    }
+                    catch { }
+
+                    if (theClass != null)
+                    {
+                        _currencyUnitDisplay = theClass.Name;
+                        _currencyHasMeasure = theClass.HasMeasure;
+                    }
+                }
+
+                return _currencyUnitDisplay;
+            }
+        }
+
+        public bool CurrencyHasMeasure
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_currencyUnitDisplay))
+                {
+                    CurrencyUnit theClass = null;
+                    CurrencyUnitBLL theBLL = new CurrencyUnitBLL();
+                    string language = LanguageUtilities.GetLanguageFromContext();
+
+                    try
+                    {
+                        theClass = theBLL.GetCurrencyUnitsById(language,_currency, _currencyUnitID);
+                    }
+                    catch { }
+
+                    if (theClass != null)
+                    {
+                        _currencyUnitDisplay = theClass.Name;
+                        _currencyHasMeasure = theClass.HasMeasure;
+                    }
+                }
+
+                return _currencyHasMeasure;
+            }
+        }
+
         public string KpiTypeID
         {
             get { return _kpiTypeID; }
@@ -181,7 +239,7 @@ namespace Artexacta.App.KPI
                 string className = "progress-bar";
                 if (this.Progress < 25)
                     className = className + " progress-bar-danger";
-                else if(this.Progress < 75)
+                else if (this.Progress < 75)
                     className = className + " progress-bar-warning";
                 else
                     className = className + " progress-bar-success";

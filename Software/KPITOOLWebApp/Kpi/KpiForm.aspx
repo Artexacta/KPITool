@@ -20,7 +20,8 @@
                     <div class="col-sm-6">
                         <label>
                             <asp:Label ID="NameLabel" runat="server" Text="<% $Resources: Kpi, LabelName %>"></asp:Label>
-                            <span class="label label-danger" id="spRequired1" runat="server"><asp:Label ID="RequiredLabel" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label></span>
+                            <span class="label label-danger" id="spRequired1" runat="server">
+                                <asp:Label ID="RequiredLabel" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label></span>
                         </label>
                         <asp:TextBox ID="KpiNameTextBox" runat="server" CssClass="form-control" placeholder="<% $Resources: Kpi, LabelEnterNameKpi %>"></asp:TextBox>
                         <div class="has-error m-b-10">
@@ -49,7 +50,6 @@
                                 <asp:ControlParameter ControlID="LanguageHiddenField" Name="language" PropertyName="Value" Type="String" />
                             </SelectParameters>
                         </asp:ObjectDataSource>
-
                         <div class="has-error m-b-10">
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="KPITypeCombobox"
                                 Display="Dynamic"
@@ -57,14 +57,18 @@
                                 ErrorMessage="<% $Resources: Kpi, MessageTypeRequired %>">
                             </asp:RequiredFieldValidator>
                         </div>
-                        <div class="m-b-10">
+                        <div id="divKpiTypeDescription" runat="server" visible="false" style="border: 1px solid #e8e8e8; padding: 2px 2px 2px 2px;">
+                            <asp:Literal ID="TypeKpiLiteral" runat="server"></asp:Literal>
+                        </div>
+                        <div style="padding-top: 5px">&nbsp;</div>
+                        <div class="m-b-10" runat="server" visible="false">
                             <label class="checkbox checkbox-inline cr-alt">
                                 <asp:CheckBox runat="server" ID="ReportingServicesCheckbox" />
                                 <i class="input-helper"></i>
                                 <asp:Label ID="WSLabel" runat="server" Text="<% $Resources: Kpi, LabelUsingWS %>"></asp:Label>
                             </label>
                         </div>
-                        <div id="webServicePanel" class="m-b-10 hidden">
+                        <div id="webServicePanel" class="m-b-10 hidden" runat="server" visible="false">
                             <div class="m-b-10">
                                 <asp:Literal ID="WSLiteral" runat="server" Text="<% $Resources: Kpi, MessageWS %>"></asp:Literal>
                             </div>
@@ -206,6 +210,7 @@
                                             <asp:ControlParameter ControlID="SelectedCurrencyHiddenField" Name="currencyID" PropertyName="Value" Type="String" />
                                         </SelectParameters>
                                     </asp:ObjectDataSource>
+                                    <asp:HiddenField runat="server" ID="SelectedMeasureHiddenField" />
                                 </div>
                             </div>
                             <div class="row">
@@ -487,20 +492,19 @@
                         <%--Multiple Targets--%>
                         <div id="MultipleTargetPanel" runat="server" style="border: thin; display: none">
                             <div class="row" id="pnlCategorySelect" runat="server">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                <asp:Label ID="CatLabel" runat="server" Text="<% $Resources: Kpi, LabelSelectCategories %>"></asp:Label></label>
-                                            <asp:DropDownList ID="CategoryComboBox" runat="server" CssClass="form-control m-b-10" AppendDataBoundItems="True"
-                                                DataSourceID="CategoryObjectDataSource" DataTextField="Name" DataValueField="ID">
-                                                <asp:ListItem Text="<% $Resources: Kpi, LabelSelectCategory %>" Value="" />
-                                            </asp:DropDownList></td>
-                                        <td>
-                                            <asp:LinkButton ID="AddCategory" runat="server" CssClass="viewBtn" OnClick="AddCategory_Click"
-                                                CausesValidation="false"><i class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></asp:LinkButton></td>
-                                    </tr>
-                                </table>
+                                <div class="col-md-4">
+                                    <label>
+                                        <asp:Label ID="CatLabel" runat="server" Text="<% $Resources: Kpi, LabelSelectCategories %>"></asp:Label></label>
+                                    <asp:DropDownList ID="CategoryComboBox" runat="server" CssClass="form-control m-b-10" AppendDataBoundItems="True"
+                                        DataSourceID="CategoryObjectDataSource" DataTextField="Name" DataValueField="ID">
+                                        <asp:ListItem Text="<% $Resources: Kpi, LabelSelectCategory %>" Value="" />
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="col-md-1" style="text-align:left">
+                                    <br />
+                                    <asp:LinkButton ID="AddCategory" runat="server" CssClass="viewBtn" OnClick="AddCategory_Click"
+                                        CausesValidation="false" ToolTip="<% $Resources: Kpi, LabelAddCategory %>"><i class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></asp:LinkButton>
+                                </div>
                             </div>
                             <div class="row">
                                 <asp:Repeater ID="CategoriesRepeater" runat="server" OnItemCommand="CategoriesRepeater_ItemCommand" OnItemDataBound="CategoriesRepeater_ItemDataBound">
@@ -809,7 +813,11 @@
         function LoadReportingPeriod() {
             var ddlPeriod = document.getElementById("<%=ReportingPeriodCombobox.ClientID %>");
             var txt = document.getElementById("<%= UnitLabel.ClientID %>");
-            txt.innerText = ddlPeriod.options[ddlPeriod.selectedIndex].innerHTML;
+
+            if (ddlPeriod.selectedIndex > 0)
+                txt.innerText = ddlPeriod.options[ddlPeriod.selectedIndex].innerHTML;
+            else
+                txt.innerText = "";
         }
         function LoadCurrency() {
             var ddlCurrency = document.getElementById("<%=CurrencyCombobox.ClientID %>");
