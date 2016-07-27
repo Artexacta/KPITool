@@ -214,7 +214,7 @@
     <value>Starting Date:</value>
   </data>
   <data name="TimeDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value". The values are time span and they must be in ISO 8601 format: durations are represented by the format P[n]Y[n]M[n]DT[n]H[n]M[n]. In these representations the [n] is replaced by the value for each date and time elements that follow the [n]. Leading zeros are not required.&lt;br /&gt;For example: P1Y2M10DT2H30M (1 year, 2 months, 10 days, 2 hours and 30 minutes).&lt;/p&gt;</value>
+    <value>&lt;p&gt;To load values from an Excel file you must have at least two columns int the Excel file named "Date" and "Value". The values are time span and they must be in ISO 8601 format: durations are represented by the format P[n]Y[n]M[n]DT[n]H[n]M. In these representations the [n] is replaced by the value for each date and time elements that follow the [n]. Leading zeros are not required.&lt;br /&gt;For example: P1Y2M10DT2H30M (1 year, 2 months, 10 days, 2 hours and 30 minutes).&lt;/p&gt;</value>
   </data>
   <data name="TypeUploadItemAdd" xml:space="preserve">
     <value>Add new value to the old one</value>
