@@ -1,4 +1,5 @@
 ﻿using Artexacta.App.LoginSecurity;
+using Artexacta.App.User;
 using Artexacta.App.User.BLL;
 using Artexacta.App.Utilities.VersionUtilities;
 using log4net;
@@ -69,6 +70,16 @@ public partial class MasterPage : System.Web.UI.MasterPage
                     log.Debug("Current page IS NOT Role Management");
             }
 
+            try
+            {
+                User objUser = UserBLL.GetUserById(userID);
+                LoginStatus1.LogoutText = "<i class='zmdi zmdi-run'></i> " + Resources.InitMasterPage.Logout + ", " + objUser.FullName;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting user name information", ex);
+            }
+
             if (userIsAdministrator && currentPageRoleManagement)
             {
                 // If the current page is the Role Management or the User Management pages then
@@ -91,7 +102,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
             // lblUseName.Text = HttpContext.Current.User.Identity.Name;
 
-            LoginStatus1.LogoutText = "<i class='zmdi zmdi-run'></i> <span class='hidden-xs'>" + Resources.InitMasterPage.Logout;
+            
             LoadMainMenuScript();
             ConstructMenu();
         }

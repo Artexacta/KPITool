@@ -89,16 +89,27 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         bool hasTarget = target != -1;
         bool isSum = strategyId == "SUM";
         bool isTargetUsable = false;
+        bool isSerieUsable = false;
 
         decimal sumMeasurement = 0;
         decimal sumTarget = 0;
         foreach (var item in measurements)
         {
-            standardSerie.Add(item.Period, item.Measurement);
+            if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
+                isSerieUsable = true;
+            if (isSerieUsable)
+                standardSerie.Add(item.Period, item.Measurement);
+            else
+                standardSerie.Add(item.Period, null);
+
             if (isSum)
             {
                 sumMeasurement = sumMeasurement + item.Measurement;
-                sumSerie.Add(item.Period, sumMeasurement);
+                
+                if (isSerieUsable)
+                    sumSerie.Add(item.Period, sumMeasurement);
+                else
+                    sumSerie.Add(item.Period, null);
                 if (hasTarget)
                 {
                     if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
