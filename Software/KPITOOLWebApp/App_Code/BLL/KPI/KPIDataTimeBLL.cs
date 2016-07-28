@@ -72,7 +72,7 @@ namespace Artexacta.App.KPI.BLL
             if (theData.Year <= 0 && theData.Month <= 0 && theData.Day <= 0 && theData.Hour <= 0 && theData.Minute <= 0)
                 throw new ArgumentException("The data cannot be zero.");
 
-            double? valor = 0;
+            decimal? valor = 0;
             try
             {
                 KPIDataTimeTableAdapter localAdapter = new KPIDataTimeTableAdapter();

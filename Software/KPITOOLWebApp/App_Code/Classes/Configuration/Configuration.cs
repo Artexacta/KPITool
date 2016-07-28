@@ -19,6 +19,20 @@ namespace Artexacta.App.Configuration
         {
         }
 
+        public static int GetFirstDayOfWeek()
+        {
+            int firstDayOfWeek = 7;
+            try
+            {
+                firstDayOfWeek = Convert.ToInt32(ConfigurationManager.AppSettings.Get("FirstDateOfWeek"));
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting First day of week from configuration", ex);
+            }
+            return firstDayOfWeek;
+        }
+
         public static string GetDocumentStorageDirectory()
         {
             return ConfigurationManager.AppSettings.Get("DocumentStorageDirectory");

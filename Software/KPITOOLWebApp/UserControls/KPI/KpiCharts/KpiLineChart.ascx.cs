@@ -77,7 +77,9 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         string strategyId = "";
         string startingPeriod = "";
         decimal target = 0;
-        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, ref strategyId, ref target, ref startingPeriod);
+        int firstDayOfWeek = Artexacta.App.Configuration.Configuration.GetFirstDayOfWeek();
+
+        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, firstDayOfWeek, ref strategyId, ref target, ref startingPeriod);
         Dictionary<string, object> standardSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetStandardSerie = new Dictionary<string, object>();
 
@@ -89,27 +91,27 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         bool hasTarget = target != -1;
         bool isSum = strategyId == "SUM";
         bool isTargetUsable = false;
-        bool isSerieUsable = false;
+        //bool isSerieUsable = false;
 
         decimal sumMeasurement = 0;
         decimal sumTarget = 0;
         foreach (var item in measurements)
         {
-            if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
-                isSerieUsable = true;
-            if (isSerieUsable)
+            //if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
+            //    isSerieUsable = true;
+            //if (isSerieUsable)
                 standardSerie.Add(item.Period, item.Measurement);
-            else
-                standardSerie.Add(item.Period, null);
+            //else
+            //    standardSerie.Add(item.Period, null);
 
             if (isSum)
             {
                 sumMeasurement = sumMeasurement + item.Measurement;
                 
-                if (isSerieUsable)
+                //if (isSerieUsable)
                     sumSerie.Add(item.Period, sumMeasurement);
-                else
-                    sumSerie.Add(item.Period, null);
+                //else
+                //    sumSerie.Add(item.Period, null);
                 if (hasTarget)
                 {
                     if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
