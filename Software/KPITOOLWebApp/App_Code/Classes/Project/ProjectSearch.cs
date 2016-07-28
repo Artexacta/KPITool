@@ -19,13 +19,19 @@ namespace Artexacta.App.Project
             col.Description = Resources.Organization.TitleProjectName;
             this.Cols.Add(col);
 
-            col = new Column("[p].[organizationID]", "organizationID", Column.ColumnType.Numeric);
+            col = new Column("[p].[organizationID]", "organizationId", Column.ColumnType.Numeric);
             col.AppearInStandardSearch = false;
             col.DisplayHelp = false;
             col.Description = Resources.Organization.TitleOrganizationName;
             this.Cols.Add(col);
 
-            col = new Column("[p].[projectID]", "ProjectID", Column.ColumnType.Numeric);
+            col = new Column("[p].[areaID]", "areaId", Column.ColumnType.Numeric);
+            col.AppearInStandardSearch = false;
+            col.DisplayHelp = false;
+            col.Description = Resources.Organization.TitleArea;
+            this.Cols.Add(col);
+
+            col = new Column("[p].[projectID]", "ProjectId", Column.ColumnType.Numeric);
             col.AppearInStandardSearch = false;
             col.DisplayHelp = false;
             col.Description = Resources.Organization.TitleProjectName;

@@ -750,4 +750,7 @@
   <data name="ButtonBack" xml:space="preserve">
     <value>Volver a la lista de KPIs</value>
   </data>
+  <data name="LabelAddCategory" xml:space="preserve">
+    <value>Adicionar Categoría</value>
+  </data>
 </root>

@@ -13,6 +13,8 @@ using Artexacta.App.Categories;
 using System.Web.UI.HtmlControls;
 using Artexacta.App.PermissionObject;
 using Artexacta.App.PermissionObject.BLL;
+using Artexacta.App.Currency;
+using Artexacta.App.Currency.BLL;
 
 public partial class Kpi_KpiForm : System.Web.UI.Page
 {
@@ -161,6 +163,12 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             return;
         }
 
+        if (!string.IsNullOrEmpty(theType.Description))
+        {
+            divKpiTypeDescription.Visible = true;
+            TypeKpiLiteral.Text = theType.Description;
+        }
+
         UnitCombobox.SelectedValue = theKpi.UnitID;
         UnitCombobox.Enabled = !readOnly;
         SelectedUnitHiddenField.Value = theKpi.UnitID;
@@ -176,7 +184,10 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             SelectedCurrencyHiddenField.Value = theKpi.Currency;
             MeasuredInCombobox.SelectedValue = theKpi.CurrencyUnitID;
             MeasuredInCombobox.Enabled = !readOnly;
-            UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text + " of " + CurrencyCombobox.SelectedItem.Text;
+            SelectedMeasureHiddenField.Value = theKpi.CurrencyUnitID;
+            UnitTargetLabel.Text = theKpi.CurrencyUnitForDisplay;
+            if (theKpi.CurrencyHasMeasure)
+                UnitTargetLabel.Text = UnitTargetLabel.Text + Resources.Kpi.LabelOf + theKpi.Currency;
         }
         if (theKpi.UnitID == "PERCENT")
         {
@@ -277,7 +288,10 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
                 try
                 {
-                    SingleTargetTextBox.Text = theTarget.Target.ToString();
+                    if (theKpi.UnitID == "INT")
+                        SingleTargetTextBox.Text = theTarget.Target.ToString("#,##0");
+                    else
+                        SingleTargetTextBox.Text = theTarget.Target.ToString("#,##0.000");
                 }
                 catch
                 {
@@ -580,6 +594,9 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         if (string.IsNullOrEmpty(KPITypeCombobox.SelectedValue))
             return;
 
+        divKpiTypeDescription.Visible = false;
+        TypeKpiLiteral.Text = "";
+
         KPIType theType = null;
         KPITypeBLL theBLL = new KPITypeBLL();
 
@@ -593,6 +610,12 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         {
             SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorKpiInformation);
             return;
+        }
+
+        if (!string.IsNullOrEmpty(theType.Description))
+        {
+            divKpiTypeDescription.Visible = true;
+            TypeKpiLiteral.Text = theType.Description;
         }
 
         if (theType.UnitID.Trim() != "NA")
@@ -657,9 +680,28 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         MeasuredInCombobox.Items.Clear();
         MeasuredInCombobox.DataBind();
 
-        UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
+        if (ReportingPeriodCombobox.SelectedIndex > 0)
+            UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
 
-        //MeasuredInCombobox.SelectedValue = "";
+        if (!string.IsNullOrEmpty(MeasuredInCombobox.SelectedValue))
+        {
+            UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text;
+
+            CurrencyUnit theClass = null;
+            CurrencyUnitBLL theBLL = new CurrencyUnitBLL();
+
+            try
+            {
+                theClass = theBLL.GetCurrencyUnitsById(LanguageHiddenField.Value, SelectedCurrencyHiddenField.Value, MeasuredInCombobox.SelectedValue);
+            }
+            catch { }
+
+            if (theClass != null && theClass.HasMeasure)
+            {
+                UnitTargetLabel.Text = UnitTargetLabel.Text + Resources.Kpi.LabelOf + CurrencyCombobox.SelectedItem.Text;
+            }
+        }
+
     }
     protected void CategoryObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {
@@ -927,7 +969,10 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
                     if (valuetarget > 0 && theTarget != null)
                     {
-                        theTarget.Text = valuetarget.ToString();
+                        if (SelectedUnitHiddenField.Value == "INT")
+                            theTarget.Text = valuetarget.ToString("#,##0");
+                        else
+                            theTarget.Text = valuetarget.ToString("#,##0.000");
                     }
                 }
                 catch { }
@@ -942,11 +987,28 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             }
 
             //Currency Label
-            if (SelectedUnitHiddenField.Value == "MONEY" && !string.IsNullOrEmpty(CurrencyCombobox.SelectedValue) && !string.IsNullOrEmpty(MeasuredInCombobox.SelectedValue))
+            if (SelectedUnitHiddenField.Value == "MONEY" && !string.IsNullOrEmpty(SelectedCurrencyHiddenField.Value) && !string.IsNullOrEmpty(SelectedMeasureHiddenField.Value))
             {
                 Label UnitLabel = (Label)e.Item.FindControl("UnitTargetLabel");
                 if (UnitLabel != null)
-                    UnitLabel.Text = MeasuredInCombobox.SelectedItem.Text + " of " + CurrencyCombobox.SelectedItem.Text;
+                {
+                    CurrencyUnit theClass = null;
+                    CurrencyUnitBLL theBLL = new CurrencyUnitBLL();
+
+                    try
+                    {
+                        theClass = theBLL.GetCurrencyUnitsById(LanguageHiddenField.Value, SelectedCurrencyHiddenField.Value, SelectedMeasureHiddenField.Value);
+                    }
+                    catch { }
+
+                    if (theClass != null)
+                    {
+                        UnitLabel.Text = theClass.Name;
+
+                        if (theClass.HasMeasure)
+                            UnitLabel.Text = UnitLabel.Text + Resources.Kpi.LabelOf + theClass.CurrencyID;
+                    }
+                }
             }
         }
     }
@@ -1148,7 +1210,21 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
     }
     protected void MeasuredInCombobox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text + Resources.Kpi.LabelOf + CurrencyCombobox.SelectedItem.Text;
+        UnitTargetLabel.Text = MeasuredInCombobox.SelectedItem.Text;
+
+        CurrencyUnit theClass = null;
+        CurrencyUnitBLL theBLL = new CurrencyUnitBLL();
+
+        try
+        {
+            theClass = theBLL.GetCurrencyUnitsById(LanguageHiddenField.Value, CurrencyCombobox.SelectedValue, MeasuredInCombobox.SelectedValue);
+        }
+        catch { }
+
+        if (theClass != null && theClass.HasMeasure)
+        {
+            UnitTargetLabel.Text = UnitTargetLabel.Text + Resources.Kpi.LabelOf + CurrencyCombobox.SelectedItem.Text;
+        }
 
         List<KPITarget> theItems = new List<KPITarget>();
 
@@ -1169,7 +1245,8 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             targetsRepeater.DataBind();
         }
 
-        UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
+        if (!string.IsNullOrEmpty(ReportingPeriodCombobox.SelectedValue))
+            UnitLabel.Text = ReportingPeriodCombobox.SelectedItem.Text;
     }
     protected void CategoriesRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {

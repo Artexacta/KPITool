@@ -244,7 +244,7 @@
     <value>Permissions:</value>
   </data>
   <data name="ReturnOrganizationLink" xml:space="preserve">
-    <value>Back to Organizationes list</value>
+    <value>Back to Organizations list</value>
   </data>
   <data name="SaveUserButton" xml:space="preserve">
     <value>Add User</value>

@@ -24,7 +24,7 @@
                 <div class="tile">
                     <div class="t-header">
                         <div class="th-title">
-                            <asp:Label ID="Label1" runat="server" Text="<% $Resources: Trash, LabelTitle %>"></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text="<% $Resources: Project, TitleProjects %>"></asp:Label>
                         </div>
                     </div>
                     <div class="t-body tb-padding">
@@ -35,9 +35,12 @@
                             CssSearch="CSearch"
                             CssSearchHelp="CSearchHelpPanel"
                             CssSearchError="CSearchErrorPanel"
-                            SavedSearches="true" SavedSearchesID="ProjectSavedSearch"
+                            CssSearchAdvanced="CSearch_Advanced_Panel"
+                            SavedSearches="true"
+                            SavedSearchesID="ProjectSavedSearch"
                             ImageHelpUrl="Images/Neutral/Help.png"
                             ImageErrorUrl="~/images/exclamation.png" />
+                        <%--AdvancedSearchForm="~/UserControls/AdvancedSearch/ProjectAdvancedSearch.ascx"--%>
                     </div>
                     <div class="t-body tb-padding" id="ProjectList">
                         <asp:Repeater ID="ProjectsRepeater" runat="server" OnItemDataBound="ProjectsRepeater_ItemDataBound"
@@ -87,7 +90,7 @@
                                 </div>
                                 <div class="row m-b-20">
                                     <div class="col-md-3"></div>
-                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-9 m-t-5" Visible="false">
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-6 m-t-5 col-md-offset-1" Visible="false">
                                         <asp:Label ID="NoObjectLabel" runat="server" Text="<% $Resources: Project, MessageProjectNoObject %>"></asp:Label>
                                         <i class="zmdi zmdi-plus-circle-o"></i>
                                         <asp:Label ID="IconLabel" runat="server" Text="<% $Resources: Project, MessageProjectIconAbove %>"></asp:Label>

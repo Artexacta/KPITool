@@ -214,7 +214,7 @@
     <value>Fecha de inicio:</value>
   </data>
   <data name="TimeDataDescription" xml:space="preserve">
-    <value>&lt;p&gt;Para cargar los datos de un archivo Excel se deben tener al menos dos columnas de nombres "Fecha" y "Valor". Los valores son lapsos de tiempo y deben estar en formato ISO8601: las duraciones de tiempo son representadas por el formato P[n]Y[n]M[n]DT[n]H[n]M[n]. En esta representación [n] es reemplazada por el valor de cada elemento de tiempo que sigue después de [n]. No se requieren ceros a la izquierda.&lt;br /&gt;Ejemplo: P1Y2M10DT2H30M (1 año, 2 meses, 10 días, 2 horas y 30 minutos).&lt;/p&gt;</value>
+    <value>&lt;p&gt;Para cargar los datos de un archivo Excel se deben tener al menos dos columnas de nombres "Fecha" y "Valor". Los valores son lapsos de tiempo y deben estar en formato ISO8601: las duraciones de tiempo son representadas por el formato P[n]Y[n]M[n]DT[n]H[n]M. En esta representación [n] es reemplazada por el valor de cada elemento de tiempo que sigue después de [n]. No se requieren ceros a la izquierda.&lt;br /&gt;Ejemplo: P1Y2M10DT2H30M (1 año, 2 meses, 10 días, 2 horas y 30 minutos).&lt;/p&gt;</value>
   </data>
   <data name="TypeUploadItemAdd" xml:space="preserve">
     <value>Añadir un nuevo valor al antiguo</value>
