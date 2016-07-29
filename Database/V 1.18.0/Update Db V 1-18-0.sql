@@ -1,5 +1,48 @@
-USE [KPIDB]
+* 
+	Updates de the KPIDB database to version 1.17.0 
+*/
+
+Use [Master]
+GO 
+
+IF  NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'KPIDB')
+	RAISERROR('KPIDB database Doesn´t exists. Create the database first',16,127)
 GO
+
+PRINT 'Updating KPIDB database to version 1.18.0'
+
+Use [KPIDB]
+GO
+PRINT 'Verifying database version'
+
+/*
+ * Verify that we are using the right database version
+ */
+
+IF  NOT ((EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_GetVersionMajor]') AND type in (N'P', N'PC'))) 
+	AND 
+	(EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_GetVersionMinor]') AND type in (N'P', N'PC'))))
+		RAISERROR('KPIDB database has not been initialized.  Cant find version stored procedures',16,127)
+
+
+declare @smiMajor smallint 
+declare @smiMinor smallint
+
+exec [dbo].[usp_GetVersionMajor] @smiMajor output
+exec [dbo].[usp_GetVersionMinor] @smiMinor output
+
+IF NOT (@smiMajor = 1 AND @smiMinor = 17) 
+BEGIN
+	RAISERROR('KPIDB database is not in version 1.17 This program only applies to version 1.17',16,127)
+	RETURN;
+END
+
+PRINT 'KPIDB Database version OK'
+GO
+
+--===================================================================================================
+
+
 
 /****** Object:  StoredProcedure [dbo].[usp_KPI_GetNumberFromTime]    Script Date: 07/28/2016 12:29:53 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_KPI_GetNumberFromTime]') AND type in (N'P', N'PC'))
@@ -642,3 +685,14 @@ END
 GO
 
 
+
+--=================================================================================================
+
+/*
+ * We are done, mark the database as a 1.18.0 database.
+ */
+DELETE FROM [dbo].[tbl_DatabaseInfo] 
+INSERT INTO [dbo].[tbl_DatabaseInfo] 
+	([majorversion], [minorversion], [releaseversion])
+	VALUES (1,18,0)
+GO
