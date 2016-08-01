@@ -14,6 +14,7 @@ using Artexacta.App.Area.BLL;
 using Artexacta.App.Project;
 using Artexacta.App.Project.BLL;
 using Artexacta.App.KPI.BLL;
+using Artexacta.App.User.BLL;
 
 public partial class Kpi_KpiList : System.Web.UI.Page
 {
@@ -33,7 +34,17 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         if (!IsPostBack)
         {
             ProcessSessionParameters();
+            //try
+            //{
+            //    int userId = UserBLL.GetUserIdByUsername(User.Identity.Name);
+            //    Tour.UserId = userId;
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error("Error getting userId from session", ex);
+            //}
         }
+        
     }
 
     void KPISearchControl_OnSearch()

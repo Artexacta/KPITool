@@ -16,6 +16,7 @@ using Artexacta.App.Organization.BLL;
 using Artexacta.App.Organization;
 using Artexacta.App.Area;
 using Artexacta.App.Area.BLL;
+using Artexacta.App.User.BLL;
 
 public partial class Project_ProjectList : System.Web.UI.Page
 {
@@ -34,6 +35,15 @@ public partial class Project_ProjectList : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            try
+            {
+                int userId = UserBLL.GetUserIdByUsername(User.Identity.Name);
+                Tour.UserId = userId;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting userId from session", ex);
+            }
             Tour.Show();
             if (Session["SEARCH_PARAMETER"] != null && !string.IsNullOrEmpty(Session["SEARCH_PARAMETER"].ToString()))
             {

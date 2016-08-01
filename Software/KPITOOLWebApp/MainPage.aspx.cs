@@ -20,6 +20,7 @@ using Artexacta.App.KPI;
 using Artexacta.App.People.BLL;
 using Artexacta.App.People;
 using Artexacta.App.Utilities.Quantity;
+using Artexacta.App.User.BLL;
 
 public partial class MainPage : SqlViewStatePage
 {
@@ -71,6 +72,16 @@ public partial class MainPage : SqlViewStatePage
 
         OrganizationsRepeater.DataSource = theOrganizations;
         OrganizationsRepeater.DataBind();
+
+        try
+        {
+            int userId = UserBLL.GetUserIdByUsername(User.Identity.Name);
+            Tour.UserId = userId;
+        }
+        catch (Exception ex)
+        {
+            log.Error("Error getting userId from session", ex);
+        }
 
         if (theOrganizations.Count == 0)
         {

@@ -157,7 +157,7 @@
                             </Items>
                         </app:TourSettings>
                         <div class="col-md-12" style="overflow: hidden">
-                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right" TourId="Organizations" ></app:TourControl>
                         </div>
                         <br />
                     </div>

@@ -1,4 +1,5 @@
-﻿using Artexacta.App.Utilities;
+﻿using Artexacta.App.Tour;
+using Artexacta.App.Utilities;
 using Artexacta.App.Utilities.Controls;
 using log4net;
 using System;
@@ -25,6 +26,30 @@ public partial class UserControls_TourControl : UserControl
     {
         set { ControlSettingsControlName.Text = value; }
         get { return ControlSettingsControlName.Text; }
+    }
+
+    public int UserId
+    {
+        set { UserIdHiddenField.Value = value.ToString(); }
+        get
+        {
+            int value = 0;
+            try
+            {
+                value = Convert.ToInt32(UserIdHiddenField.Value);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error trying to convert UserIdHiddenField.Value to integer value", ex);
+            }
+            return value;
+        }
+    }
+
+    public string TourId
+    {
+        set { TourIdHiddenField.Value = value; }
+        get { return TourIdHiddenField.Value; }
     }
 
     protected override void OnPreRender(EventArgs e)
@@ -57,6 +82,20 @@ public partial class UserControls_TourControl : UserControl
         }
 
         ItemsHiddenField.Value = js.Serialize(items);
+
+        try
+        {
+            bool wasViewed = TourBLL.CheckIfUserViewTour(UserId, TourId);
+            if (!wasViewed)
+                ShowTourHiddenField.Value = "true";
+            else
+                ShowTourHiddenField.Value = "false";
+        }
+        catch (Exception ex)
+        {
+            log.Error("Error checking tour visibility", ex);
+        }
+
     }
 
     private void setContentFromFile(TourItem item)
@@ -105,7 +144,7 @@ public partial class UserControls_TourControl : UserControl
 
     public void Show()
     {
-        ShowTourHiddenField.Value = "true";
+        ShowTourHiddenField.Value = "true";        
     }
 
     public void Hide()
