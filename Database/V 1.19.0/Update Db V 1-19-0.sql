@@ -164,6 +164,122 @@ END
 GO
 
 
+/****** Object:  StoredProcedure [dbo].[usp_KPI_GetKpiStats]    Script Date: 08/01/2016 10:42:58 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_KPI_GetKpiStats]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[usp_KPI_GetKpiStats]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_KPI_GetKpiStats]    Script Date: 08/01/2016 10:42:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		José Carlos Gutiérrez
+-- Create date: 2016/Jun/16
+-- Description:	Gets stats of a KPI
+-- =============================================
+CREATE PROCEDURE [dbo].[usp_KPI_GetKpiStats]
+	@intKpiId			INT,
+	@varCategoryId		VARCHAR(20),
+	@varCategoryItemId	VARCHAR(20),
+	@intFirstDayOfWeek	INT,
+	@decCurrentValue DECIMAL(21,3) OUTPUT,
+	@decLowestValue  DECIMAL(21,3) OUTPUT,
+	@decMaxValue	 DECIMAL(21,3) OUTPUT,
+	@decAvgValue	 DECIMAL(21,3) OUTPUT,
+	@decProgress	 DECIMAL(5,2) OUTPUT,
+	@decTrend	     DECIMAL(9,2) OUTPUT
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+	DECLARE @tabResult TABLE(
+		[period] VARCHAR(50),
+		[measurement] DECIMAL(21,3)
+	) 
+	
+	SELECT @decTrend = [dbo].[svf_GetKpiTrend](@intKpiId)
+	
+	INSERT INTO @tabResult
+	EXEC [dbo].[usp_KPI_GetKpiMeasurementsForChart] 
+		@intKpiId, 
+		@varCategoryId, 
+		@varCategoryItemId, 
+		@intFirstDayOfWeek,
+		0,
+		0,
+		''
+	
+	
+	EXEC [dbo].[usp_KPI_GetKpiProgress] 
+		@intKpiId, 
+		@varCategoryId, 
+		@varCategoryItemId, 
+		0, 
+		@decCurrentValue OUTPUT, 
+		@decProgress OUTPUT
+		
+	--DECLARE @varStrategyId CHAR(3)
+	DECLARE @varReportingUnitId CHAR(5)	
+
+	SELECT --@varStrategyId = [strategyID],
+		@varReportingUnitId = [reportingUnitId]
+	FROM [dbo].[tbl_KPI] 
+	WHERE [kpiID] = @intKpiId
+		
+	DECLARE @days INT 
+	SELECT @days = p.[days]
+	FROM [dbo].[tbl_KpiReportingPeriod] p
+	WHERE p.[reportingUnitId] = @varReportingUnitId
+	
+	DECLARE @dateFrom DATE = DATEADD(DAY, -@days, GETDATE())
+		
+	
+	--IF 	@varCategoryId = '' OR @varCategoryId IS NULL
+	--BEGIN
+	
+		--SELECT @decMaxValue = MAX([measurement]),
+		--	@decLowestValue = MIN([measurement]),
+		--	@decAvgValue = AVG([measurement])
+		--FROM [dbo].[tbl_KPIMeasurements]
+		--WHERE [kpiID] = @intKpiId
+		--	AND [date] BETWEEN @dateFrom AND GETDATE()		
+	
+		SELECT @decMaxValue = MAX([measurement]),
+			@decLowestValue = MIN([measurement]),
+			@decAvgValue = AVG([measurement])
+		FROM @tabResult
+	
+	--END
+	--ELSE
+	--BEGIN
+	
+		--SELECT @decMaxValue = MAX([measurement]),
+		--	@decLowestValue = MIN([measurement]),
+		--	@decAvgValue = AVG([measurement])
+		--FROM [dbo].[tbl_KPIMeasurements]
+		--WHERE [kpiID] = @intKpiId
+		--	AND [date] BETWEEN @dateFrom AND GETDATE()
+		--	AND [measurmentID] IN (SELECT [measurmentID] FROM [dbo].[tbl_KPIMeasurementCategories] WHERE [categoryID] = @varCategoryId AND [categoryItemID] = @varCategoryItemId)
+	
+	--END
+
+
+END
+
+
+GO
+
+
+
+
 
 
 --=================================================================================================
