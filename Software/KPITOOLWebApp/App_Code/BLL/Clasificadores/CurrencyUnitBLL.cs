@@ -37,7 +37,7 @@ namespace Artexacta.App.Currency.BLL
                 row.currencyID,
                 row.currencyUnitID,
                 row.name,
-                row.hasMeasure);
+                row.IshasMeasureNull() ? false : row.hasMeasure);
 
             return theNewRecord;
         }

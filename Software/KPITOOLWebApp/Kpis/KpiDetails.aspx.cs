@@ -1,9 +1,12 @@
-﻿using Artexacta.App.Dashboard;
+﻿using Artexacta.App.Currency;
+using Artexacta.App.Currency.BLL;
+using Artexacta.App.Dashboard;
 using Artexacta.App.Dashboard.BLL;
 using Artexacta.App.FRTWB;
 using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
 using Artexacta.App.User.BLL;
+using Artexacta.App.Utilities;
 using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
@@ -100,9 +103,12 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
             CategoriesPanel.Visible = true;
         }
         //Inicializo los valores conocidos
-        KpiType.Text = kpi.KpiTypeID ;
+        string lang = LanguageUtilities.GetLanguageFromContext();
+        KPITypeBLL theBll = new KPITypeBLL();
+        KPIType type = theBll.GetKPITypesByID(kpi.KpiTypeID, lang);
+        KpiType.Text = type != null ? type.TypeName : kpi.KpiTypeID ;
         //WebServiceId.Text = "<div class='col-md-4 col-sm-4'>Web Service ID:</div><div class='col-md-8 col-sm-8'>SERV-Reliavility</div>";
-        ReportingUnit.Text =  kpi.ReportingUnitID;
+        ReportingUnit.Text = kpi.ReportingUnitName;
         KpiTarget.Text = (kpi.TargetPeriod == 0 ? Resources.KpiDetails.NoTargetLabel : kpi.TargetPeriod + " " + kpi.ReportingUnitID);
 
         //if (caso <= 50)
@@ -122,6 +128,9 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         MeasurementsControl.KpiId = kpiId;
         
         MeasurementsControl.Unit = kpi.UnitID;
+
+        //CurrencyUnitBLL currencyUnitBll = new CurrencyUnitBLL();
+        //CurrencyUnit currencyUnit = currencyUnitBll.GetCurrencyUnitsById(lang, ;
 
         //MeasurementsControl.Currency = kpi.Currency;
 

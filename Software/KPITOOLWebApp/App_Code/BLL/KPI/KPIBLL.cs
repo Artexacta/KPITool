@@ -787,11 +787,13 @@ namespace Artexacta.App.KPI.BLL
             return progress.Value;
         }
 
-        public static void GetKpiStats(int kpiId, string categoryId, string categoryItemId, ref decimal currentValue, ref decimal lowestValue,
+        public static void GetKpiStats(int kpiId, string categoryId, string categoryItemId, int firstDayOfWeek, ref decimal currentValue, ref decimal lowestValue,
                                         ref decimal maxValue, ref decimal avgValue, ref decimal progress, ref decimal trend)
         {
             if (kpiId <= 0)
                 throw new ArgumentException(Resources.Kpi.MessageKpiIDZero);
+            if (firstDayOfWeek <= 0 || firstDayOfWeek > 7)
+                throw new ArgumentException("firstDayOfWeek value must be through 1 to 7");
 
             decimal? paramCurrentValue = 0;
             decimal? paramLowestValue = 0;            
@@ -800,7 +802,7 @@ namespace Artexacta.App.KPI.BLL
             decimal? paramProgress = 0;
             decimal? paramTrend = 0;
             KPIDSTableAdapters.KPITableAdapter adapter = new KPITableAdapter();
-            adapter.GetKpiStats(kpiId, categoryId, categoryItemId, ref paramCurrentValue, ref paramLowestValue, ref paramMaxValue, ref paramAvgValue, ref paramProgress, ref paramTrend);
+            adapter.GetKpiStats(kpiId, categoryId, categoryItemId, firstDayOfWeek, ref paramCurrentValue, ref paramLowestValue, ref paramMaxValue, ref paramAvgValue, ref paramProgress, ref paramTrend);
 
             currentValue = paramCurrentValue == null ? decimal.MinValue : paramCurrentValue.Value;
             lowestValue = paramLowestValue == null ? decimal.MinValue : paramLowestValue.Value;
