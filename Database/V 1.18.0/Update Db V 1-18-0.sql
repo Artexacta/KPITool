@@ -1,4 +1,4 @@
-* 
+/* 
 	Updates de the KPIDB database to version 1.17.0 
 */
 
