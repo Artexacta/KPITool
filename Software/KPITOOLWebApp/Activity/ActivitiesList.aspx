@@ -8,7 +8,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-md-1">
-                        <app:AddButton ID="TheAddButton" runat="server" />
+                        <app:AddButton ID="TheAddButton" runat="server" ClientIDMode="Static" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
                         <asp:Label ID="OwnerObjectLabel" runat="server" Style="font-size: 10px"></asp:Label>
@@ -26,7 +26,7 @@
                             <asp:Label ID="TitleActivyLabel" runat="server" Text="<% $Resources: Activity, TitleActivities %>"></asp:Label>
                         </div>
                     </div>
-                    <div class="t-body tb-padding">
+                    <div class="t-body tb-padding" id="SearchPanel">
                         <app:SearchControl ID="ActivitySearchControl" runat="server"
                             Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                             DisplayHelp="true"
@@ -122,20 +122,22 @@
                                     element="#TheAddButton" />
                                 <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
                                     content="<%$ Resources: ActivitiesList, TourStep2 %>"
-                                    element="#OrganizationList .editBtn:first" />
+                                    element="#ActivityList .editBtn:first" />
                                 <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
                                     content="<%$ Resources: ActivitiesList, TourStep3 %>"
-                                    element="#OrganizationList .detailsBtn:first" />
+                                    element="#ActivityList .detailsBtn:first" />
                                 <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
                                     content="<%$ Resources: ActivitiesList, TourStep4 %>"
-                                    element="#OrganizationList .shareBtn:first" />
+                                    element="#ActivityList .shareBtn:first" />
                                 <app:TourItem title="<%$ Resources: ActivitiesList, TourStepTitle %>"
                                     content="<%$ Resources: ActivitiesList, TourStep5 %>"
-                                    element="#SearchPanel" />
+                                    element="#SearchPanel"
+                                    placement="bottom" />
                             </Items>
                         </app:TourSettings>
                         <div style="overflow: hidden">
-                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"
+                                TourId="ActivityList"></app:TourControl>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,8 @@
-﻿using Artexacta.App.KPI;
+﻿using Artexacta.App.Currency;
+using Artexacta.App.Currency.BLL;
+using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
+using Artexacta.App.Utilities;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -74,7 +77,8 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
             decimal progress = 0;
             decimal trend = 0;
             bool isTime = objKpi.UnitID == "TIME";
-            KPIBLL.GetKpiStats(KpiId, CategoryId, CategoryItemId, ref currentValue, ref lowestValue, ref highestValue, ref averageValue, ref progress, ref trend);
+            int firstDayOfWeek = Artexacta.App.Configuration.Configuration.GetFirstDayOfWeek();
+            KPIBLL.GetKpiStats(KpiId, CategoryId, CategoryItemId, firstDayOfWeek, ref currentValue, ref lowestValue, ref highestValue, ref averageValue, ref progress, ref trend);
 
             CurrentValueLiteral.Text = GetValue(currentValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
             LowestValueLiteral.Text = GetValue(lowestValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
@@ -99,12 +103,13 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
             {
                 IconLabel.Text = "-";
                 TrendLiteral.Text = Resources.KpiStats.NoChangesLabel;
-                PeriodLiteral.Text = objKpi.ReportingUnitID.ToLower();
+                
+                PeriodLiteral.Text = objKpi.ReportingUnitName.ToLower();
                 return;
             }
 
             TrendPercentageLiteral.Text = Math.Abs(trend).ToString() + " %";
-            PeriodLiteral.Text = objKpi.ReportingUnitID.ToLower();
+            PeriodLiteral.Text = objKpi.ReportingUnitName.ToLower();
 
         }
         catch (Exception ex)
@@ -135,11 +140,39 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
         }
         else if (unit == "PERCENT")
         {
-            return value.ToString("#.##") + " %";
+            return (value != 0 ? value.ToString("#.##") : "0" ) + " %";
         }
         else if (unit == "MONEY")
         {
-            return value.ToString("#.##") + " " + currency + " " + currencyUnit;
+            string lang = LanguageUtilities.GetLanguageFromContext();
+            string name = "";
+            try
+            {
+                CurrencyUnitBLL cuBll = new CurrencyUnitBLL();
+                CurrencyBLL cBll = new CurrencyBLL();
+                List<Currency> currencies = cBll.GetCurrencys(lang);
+                CurrencyUnit cu = cuBll.GetCurrencyUnitsById(lang, currency, currencyUnit);
+                Currency selected = null;
+                foreach (var item in currencies)
+                {
+                    if (item.CurrencyID == currency)
+                    {
+                        selected = item;
+                        break;
+                    }
+                }
+                string currencyUnitLabel = currencyUnit == "DOL" ? "" : cu.Name + " " + Resources.KpiStats.OfLabel + " ";
+                
+                if (selected != null)
+                    name = currencyUnitLabel + selected.Name;
+                else
+                    name = currencyUnitLabel + currency;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting currency data", ex);
+            }
+            return (value != 0 ? value.ToString("#.##") : "0") + " " + name;
         }
         else if (unit == "INT")
         {
@@ -147,7 +180,7 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
         }
         else
         {
-            return value.ToString("#.##");
+            return (value != 0 ? value.ToString("#.##") : "0");
         }
         
     }

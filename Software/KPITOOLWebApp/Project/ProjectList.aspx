@@ -8,7 +8,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-md-1">
-                        <app:AddButton ID="TheAddButton" runat="server" />
+                        <app:AddButton ID="TheAddButton" runat="server" ClientIDMode="Static" />
                     </div>
                     <div class="col-md-8 col-md-offset-3">
                         <asp:Label ID="OwnerObjectLabel" runat="server" Style="font-size: 10px"></asp:Label>
@@ -27,7 +27,7 @@
                             <asp:Label ID="Label1" runat="server" Text="<% $Resources: Project, TitleProjects %>"></asp:Label>
                         </div>
                     </div>
-                    <div class="t-body tb-padding">
+                    <div class="t-body tb-padding" id="SearchPanel">
                         <app:SearchControl ID="ProjectSearchControl" runat="server"
                             Title="<% $Resources: Glossary, AdvancedSearchLabel %>"
                             DisplayHelp="true"
@@ -125,23 +125,30 @@
                             <Items>
                                 <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
                                     content="<%$ Resources: ProjectList, TourStep1 %>"
+                                    SourceType="Resource"
                                     element="#TheAddButton" />
                                 <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
                                     content="<%$ Resources: ProjectList, TourStep2 %>"
-                                    element="#OrganizationList .editBtn:first" />
+                                    SourceType="Resource"
+                                    element="#ProjectsPanel .editBtn:first" />
                                 <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
                                     content="<%$ Resources: ProjectList, TourStep3 %>"
-                                    element="#OrganizationList .detailsBtn:first" />
+                                    SourceType="Resource"
+                                    element="#ProjectsPanel .detailsBtn:first" />
                                 <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
                                     content="<%$ Resources: ProjectList, TourStep4 %>"
-                                    element="#OrganizationList .shareBtn:first" />
+                                    SourceType="Resource"
+                                    element="#ProjectsPanel .shareBtn:first" />
                                 <app:TourItem title="<%$ Resources: ProjectList, TourStepTitle %>"
                                     content="<%$ Resources: ProjectList, TourStep5 %>"
+                                    SourceType="Resource"
+                                    placement="bottom"
                                     element="#SearchPanel" />
                             </Items>
                         </app:TourSettings>
                         <div style="overflow: hidden">
-                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"></app:TourControl>
+                            <app:TourControl ID="Tour" runat="server" TourSettingsId="Settings" CssClass="btn btn-default pull-right"
+                                TourId="ProjectList"></app:TourControl>
                         </div>
                     </div>
                 </div>

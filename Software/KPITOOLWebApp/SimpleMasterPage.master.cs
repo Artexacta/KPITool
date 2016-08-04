@@ -19,9 +19,9 @@ public partial class SimpleMasterPage : System.Web.UI.MasterPage
     /// </summary>
     private void LoadIcon()
     {
-        StringBuilder scriptText = new StringBuilder("<link rel=\"icon\" href=\"");
-        scriptText.Append(ResolveUrl("~/Images/favicon.png"));
-        scriptText.Append("\" type=\"image/png\" >\n"); ;
+        StringBuilder scriptText = new StringBuilder("<link rel=\"shortcut icon\" href=\"");
+        scriptText.Append(ResolveUrl("~/Images/favicon.ico"));
+        scriptText.Append("\" type=\"image/x-icon\" >\n"); ;
 
         JqueryAndMainMenuScript.Text = scriptText.ToString();
     }

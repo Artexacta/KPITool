@@ -123,6 +123,9 @@
   <data name="CurrentValue" xml:space="preserve">
     <value>Valor Actual</value>
   </data>
+  <data name="FromLastLabel" xml:space="preserve">
+    <value>desde el pasado</value>
+  </data>
   <data name="HighestValue" xml:space="preserve">
     <value>Valor mas alto</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="NoChangesLabel" xml:space="preserve">
     <value>Sin cambios</value>
+  </data>
+  <data name="OfLabel" xml:space="preserve">
+    <value>de</value>
   </data>
   <data name="ProgressLabel" xml:space="preserve">
     <value>de progreso</value>

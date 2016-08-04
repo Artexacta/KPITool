@@ -8,7 +8,7 @@
     </asp:Label>
     <asp:Literal ID="TrendLiteral" runat="server"></asp:Literal> 
     <asp:Literal ID="TrendPercentageLiteral" runat="server"></asp:Literal>
-    <asp:Literal runat="server" Text="<%$ Resources: Kpi, FromLastLabel %>"></asp:Literal>
+    <asp:Literal runat="server" Text="<%$ Resources: KpiStats, FromLastLabel %>"></asp:Literal>
     <asp:Literal ID="PeriodLiteral" runat="server"></asp:Literal>
 </p>
 <p>

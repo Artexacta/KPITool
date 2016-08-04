@@ -175,9 +175,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append(ResolveClientUrl("~/Scripts/functions.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
-        scriptText.Append("<link rel=\"icon\" href=\"");
-        scriptText.Append(ResolveUrl("~/Images/favicon.png"));
-        scriptText.Append("\" type=\"image/png\" >\n");
+        scriptText.Append("<link rel=\"shortcut icon\" href=\"");
+        scriptText.Append(ResolveUrl("~/Images/favicon.ico"));
+        scriptText.Append("\" type=\"image/x-icon\" >\n");
 
         scriptText.Append("<script src=\"");
         scriptText.Append(ResolveClientUrl("~/Scripts/aehelper.js"));

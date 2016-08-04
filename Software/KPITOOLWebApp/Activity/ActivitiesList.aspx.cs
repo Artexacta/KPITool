@@ -14,6 +14,7 @@ using Artexacta.App.Project.BLL;
 using Artexacta.App.KPI.BLL;
 using Artexacta.App.KPI;
 using Artexacta.App.Activities.BLL;
+using Artexacta.App.User.BLL;
 
 public partial class Activity_ActivitiesList : System.Web.UI.Page
 {
@@ -32,6 +33,15 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            try
+            {
+                int userId = UserBLL.GetUserIdByUsername(User.Identity.Name);
+                Tour.UserId = userId;
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error getting userId from session", ex);
+            }
             Tour.Show();
             ProcessSessionParameters();
         }
