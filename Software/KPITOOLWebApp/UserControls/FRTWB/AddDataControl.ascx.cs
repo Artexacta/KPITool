@@ -151,6 +151,22 @@ public partial class UserControls_FRTWB_AddDataControl : System.Web.UI.UserContr
             LoadProject();
             LoadArea();
             LoadOrganization();
+
+            if (OrganizationId == 0)
+            {
+                List<Organization> theOrgList = new List<Organization>();
+                try
+                {
+                    theOrgList = OrganizationBLL.GetOrganizationsByUser("1 = 1");
+                }
+                catch { }
+
+                if (theOrgList.Count == 1)
+                {
+                    OrganizationTextBox.Text = theOrgList[0].Name;
+                    OrganizationId = theOrgList[0].OrganizationID;
+                }
+            }
         }
     }
 
