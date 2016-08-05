@@ -353,7 +353,6 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             spRequired5.Visible = false;
             spRequired6.Visible = false;
             spRequired7.Visible = false;
-            spRequired8.Visible = false;
         }
     }
 
@@ -382,15 +381,20 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             theKpi.CurrencyUnitID = MeasuredInCombobox.SelectedValue;
         }
 
-        try
+        if (!string.IsNullOrEmpty(TargetPeriodTextBox.Text))
         {
-            theKpi.TargetPeriod = Convert.ToInt32(TargetPeriodTextBox.Text);
+            try
+            {
+                theKpi.TargetPeriod = Convert.ToInt32(TargetPeriodTextBox.Text);
+            }
+            catch
+            {
+                SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorFormatTargetPeriod);
+                return;
+            }
         }
-        catch
-        {
-            SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorFormatTargetPeriod);
-            return;
-        }
+        else
+            theKpi.TargetPeriod = 0;
 
         if (!string.IsNullOrEmpty(StartingDateTextBox.Text) && Convert.ToDateTime(StartingDateTextBox.Text) > DateTime.MinValue)
             theKpi.StartDate = Convert.ToDateTime(StartingDateTextBox.Text);
@@ -414,13 +418,17 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 int minutes = Convert.ToInt32(MinutesSingleCombobox.SelectedValue);
 
                 decimal targetTime = 0;
-                try
+
+                if (years > 0 || months > 0 || days > 0 || hours > 0 || minutes > 0)
                 {
-                    targetTime = KPITargetTimeBLL.GetNumberFromTime(years, months, days, hours, minutes);
-                }
-                catch
-                {
-                    SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorTimeValue);
+                    try
+                    {
+                        targetTime = KPITargetTimeBLL.GetNumberFromTime(years, months, days, hours, minutes);
+                    }
+                    catch
+                    {
+                        SystemMessages.DisplaySystemErrorMessage(Resources.Kpi.MessageErrorTimeValue);
+                    }
                 }
 
                 theTarget.Target = targetTime;
@@ -474,20 +482,28 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                     theDay = (DropDownList)itemRepeater.FindControl("DaysCombobox");
                     theHour = (DropDownList)itemRepeater.FindControl("HoursCombobox");
                     theMinute = (DropDownList)itemRepeater.FindControl("MinutesCombobox");
+
                     if (theYear != null && theMonth != null && theDay != null && theHour != null && theMinute != null)
                     {
-                        try
+                        if (Convert.ToInt32(theYear.SelectedValue) > 0 || Convert.ToInt32(theMonth.SelectedValue) > 0 ||
+                            Convert.ToInt32(theDay.SelectedValue) > 0 || Convert.ToInt32(theHour.SelectedValue) > 0 ||
+                            Convert.ToInt32(theMinute.SelectedValue) > 0)
                         {
-                            valueTarget = KPITargetTimeBLL.GetNumberFromTime(Convert.ToInt32(theYear.SelectedValue),
-                                Convert.ToInt32(theMonth.SelectedValue),
-                                Convert.ToInt32(theDay.SelectedValue),
-                                Convert.ToInt32(theHour.SelectedValue),
-                                Convert.ToInt32(theMinute.SelectedValue));
+                            try
+                            {
+                                valueTarget = KPITargetTimeBLL.GetNumberFromTime(Convert.ToInt32(theYear.SelectedValue),
+                                    Convert.ToInt32(theMonth.SelectedValue),
+                                    Convert.ToInt32(theDay.SelectedValue),
+                                    Convert.ToInt32(theHour.SelectedValue),
+                                    Convert.ToInt32(theMinute.SelectedValue));
+                            }
+                            catch (Exception ex)
+                            {
+                                log.Error("Error to get the target from the time values.", ex);
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            log.Error("Error to get the target from the time values.", ex);
-                        }
+                        else
+                            valueTarget = 0;
                     }
                 }
                 else
@@ -596,6 +612,8 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         divKpiTypeDescription.Visible = false;
         TypeKpiLiteral.Text = "";
+        CurrencyRequiredFieldValidator.ValidationGroup = "";
+        MeasuredRequiredFieldValidator.ValidationGroup = "";
 
         KPIType theType = null;
         KPITypeBLL theBLL = new KPITypeBLL();
@@ -1263,5 +1281,62 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         }
 
 
+    }
+    protected void TargetPeriodCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = true;
+
+        DateTime startingDate = DateTime.MinValue;
+        int targetPeriod = 0;
+
+        if (!string.IsNullOrEmpty(StartingDateTextBox.Text))
+        {
+            try
+            {
+                startingDate = Convert.ToDateTime(StartingDateTextBox.Text);
+            }
+            catch { }
+        }
+
+        if (!string.IsNullOrEmpty(TargetPeriodTextBox.Text))
+        {
+            try
+            {
+                targetPeriod = Convert.ToInt32(TargetPeriodTextBox.Text);
+            }
+            catch { }
+        }
+
+        if (startingDate > DateTime.MinValue && targetPeriod == 0)
+            args.IsValid = false;
+
+    }
+    protected void StartingDateCustomValidator2_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        args.IsValid = true;
+
+        DateTime startingDate = DateTime.MinValue;
+        int targetPeriod = 0;
+
+        if (!string.IsNullOrEmpty(StartingDateTextBox.Text))
+        {
+            try
+            {
+                startingDate = Convert.ToDateTime(StartingDateTextBox.Text);
+            }
+            catch { }
+        }
+
+        if (!string.IsNullOrEmpty(TargetPeriodTextBox.Text))
+        {
+            try
+            {
+                targetPeriod = Convert.ToInt32(TargetPeriodTextBox.Text);
+            }
+            catch { }
+        }
+
+        if (targetPeriod > 0 && startingDate == DateTime.MinValue)
+            args.IsValid = false;
     }
 }

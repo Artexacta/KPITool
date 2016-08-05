@@ -236,11 +236,11 @@
 
                         <%--Target Period--%>
                         <label>
-                            <asp:Label ID="TargetPeriodLabel" runat="server" Text="<% $Resources: Kpi, LabelTargetPeriod %>"></asp:Label><span class="label label-danger" id="spRequired8" runat="server">
-                                <asp:Label ID="req7Label" runat="server" Text="<% $Resources: Glossary, RequiredLabel %>"></asp:Label></span></label>
+                            <asp:Label ID="TargetPeriodLabel" runat="server" Text="<% $Resources: Kpi, LabelTargetPeriod %>"></asp:Label>
+                        </label>
                         <div class="row">
                             <div class="col-md-2">
-                                <asp:TextBox ID="TargetPeriodTextBox" runat="server" TextMode="Number"></asp:TextBox>
+                                <asp:TextBox ID="TargetPeriodTextBox" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-2 col-md-offset-1">
                                 <asp:Label ID="UnitLabel" runat="server" Text=""></asp:Label>
@@ -249,11 +249,17 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="has-error m-b-10">
-                                    <asp:RequiredFieldValidator ID="TargetRequiredFieldValidator" runat="server" ControlToValidate="TargetPeriodTextBox"
+                                   <%-- <asp:RequiredFieldValidator ID="TargetRequiredFieldValidator" runat="server" ControlToValidate="TargetPeriodTextBox"
                                         Display="Dynamic"
                                         ValidationGroup="AddData"
                                         ErrorMessage="<% $Resources: Kpi, MessageTargetPeriodRequired %>">
-                                    </asp:RequiredFieldValidator>
+                                    </asp:RequiredFieldValidator>--%>
+                                     <asp:CustomValidator ID="TargetPeriodCustomValidator" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, MessageTargetPeriodRequired %>"
+                                        Display="Dynamic"
+                                        ValidationGroup="AddData"
+                                        OnServerValidate="TargetPeriodCustomValidator_ServerValidate">
+                                    </asp:CustomValidator>
                                     <asp:RangeValidator ID="TargetRangeValidator" runat="server"
                                         ErrorMessage="<% $Resources: Kpi, ErrorFormatTargetPeriod %>"
                                         ControlToValidate="TargetPeriodTextBox"
@@ -271,7 +277,7 @@
                             <asp:Label ID="SDLabel" runat="server" Text="<% $Resources: Kpi, LabelStartingDate %>"></asp:Label></label>
                         <div class="row">
                             <div class="col-md-4">
-                                <asp:TextBox ID="StartingDateTextBox" runat="server" TextMode="Date" data-polyfill="desktop"></asp:TextBox>
+                                <asp:TextBox ID="StartingDateTextBox" runat="server" CssClass="form-control" TextMode="Date" data-polyfill="desktop" />
                             </div>
                         </div>
                         <div class="row">
@@ -282,6 +288,12 @@
                                         Display="Dynamic"
                                         ValidationGroup="AddData"
                                         OnServerValidate="StartingDateCustomValidator_ServerValidate">
+                                    </asp:CustomValidator>
+                                     <asp:CustomValidator ID="StartingDateCustomValidator2" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, MessageStartingDateRequired %>"
+                                        Display="Dynamic"
+                                        ValidationGroup="AddData"
+                                        OnServerValidate="StartingDateCustomValidator2_ServerValidate">
                                     </asp:CustomValidator>
                                     <asp:RangeValidator ID="DateRangeValidator" runat="server"
                                         ErrorMessage="<% $Resources: Kpi, MessageStartingDateFormat %>"
@@ -309,7 +321,7 @@
                             <div id="NumericSingleTargetPanel" runat="server">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" TextMode="Number"></asp:TextBox>
+                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3 col-md-offset-1">
                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>

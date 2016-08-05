@@ -24,6 +24,65 @@ class:         if the menu is not public, the name of the class that the user
         icon="zmdi zmdi-home">
   </Menu>
 
+  <!--Menu Organizaciones-->
+  <Menu resourceFile="InitMasterPage"
+       resourceItem="MenuOrganizations"
+       url="~/Organization/ListOrganizations.aspx"
+       public="true"
+       icon="zmdi fa fa-building-o">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="ProjectMenu"
+				url="~/Project/ProjectList.aspx"
+				public="true"
+        icon="zmdi zmdi-book">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="ActivityMenu"
+				url="~/Activity/ActivitiesList.aspx"
+				public="true"
+        icon="zmdi zmdi-format-list-bulleted">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="PersonMenu"
+				url="~/Personas/ListaPersonas.aspx"
+				public="true"
+        icon="zmdi zmdi-local-wc">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="KpiMenu"
+				url="~/Kpi/KpiList.aspx"
+				public="true"
+        icon="zmdi zmdi-trending-up">
+  </Menu>
+
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="KpiDashboardMenu"
+				url="~/Kpis/KpiDashboard.aspx"
+				public="true"
+        icon="zmdi zmdi-view-dashboard">
+  </Menu>
+ 
+  <!-- Menu:Trash-->
+  <Menu resourceFile="InitMasterPage"
+			  resourceItem="MenuTrash"
+			  public="true"
+        icon="zmdi fa fa-trash"
+        url="~/Trash/TrashList.aspx">
+  </Menu>
+  <!-- Menu: Categories -->
+  <Menu resourceFile="InitMasterPage"
+				resourceItem="CategoryMenu"
+				url="~/Category/CategoriesList.aspx"
+				public="false"
+        class="CATEGORY"
+        icon="zmdi zmdi-format-list-numbered">
+  </Menu>
+
   <!-- Menu: Security -->
   <Menu resourceFile="InitMasterPage"
 		  resourceItem="MenuSecurity"
@@ -67,17 +126,8 @@ class:         if the menu is not public, the name of the class that the user
 			  url="~/Bitacora/ListaEventosBitacora.aspx">
     </Menu>-->
   </Menu>
-  
-  <!-- Menu: Categories -->
-  <Menu resourceFile="InitMasterPage"
-				resourceItem="CategoryMenu"
-				url="~/Category/CategoriesList.aspx"
-				public="false" 
-        class="CATEGORY"
-        icon="zmdi zmdi-format-list-numbered">
-  </Menu>
-  
-  <!-- Menu: My Account -->
+
+    <!-- Menu: My Account -->
   <Menu resourceFile="InitMasterPage"
 			  resourceItem="MenuAccount"
 			  public="true"
@@ -98,51 +148,10 @@ class:         if the menu is not public, the name of the class that the user
 					url="~/UserConfiguration/UserConfiguration.aspx">
     </Menu>-->
   </Menu>
+
   
-  <Menu resourceFile="InitMasterPage"
-				resourceItem="ProjectMenu"
-				url="~/Project/ProjectList.aspx"
-				public="true"
-        icon="zmdi zmdi-book">
-  </Menu>
 
-  <Menu resourceFile="InitMasterPage"
-				resourceItem="ActivityMenu"
-				url="~/Activity/ActivitiesList.aspx"
-				public="true"
-        icon="zmdi zmdi-format-list-bulleted">
-  </Menu>
-
-  <Menu resourceFile="InitMasterPage"
-				resourceItem="PersonMenu"
-				url="~/Personas/ListaPersonas.aspx"
-				public="true"
-        icon="zmdi zmdi-local-wc">
-  </Menu>
-  
-  <Menu resourceFile="InitMasterPage"
-				resourceItem="KpiMenu"
-				url="~/Kpi/KpiList.aspx"
-				public="true"
-        icon="zmdi zmdi-trending-up">
-  </Menu>
-
-  <Menu resourceFile="InitMasterPage"
-				resourceItem="KpiDashboardMenu"
-				url="~/Kpis/KpiDashboard.aspx"
-				public="true"
-        icon="zmdi zmdi-view-dashboard">
-  </Menu>
-
-  <!--Sixth Menu:Trash-->
-  <Menu resourceFile="InitMasterPage"
-			  resourceItem="MenuTrash"
-			  public="true"
-        icon="zmdi fa fa-trash"
-        url="~/Trash/TrashList.aspx">
-  </Menu>
-
-    <!-- Seventh Menu: About -->
+  <!-- Menu: About -->
   <Menu resourceFile="InitMasterPage"
 			  resourceItem="MenuAbout"
 			  public="true"

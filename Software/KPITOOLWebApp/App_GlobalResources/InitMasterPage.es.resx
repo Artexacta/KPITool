@@ -243,4 +243,7 @@
   <data name="MenuTrash" xml:space="preserve">
     <value>Eliminados</value>
   </data>
+  <data name="MenuOrganizations" xml:space="preserve">
+    <value>Organizaciones</value>
+  </data>
 </root>
