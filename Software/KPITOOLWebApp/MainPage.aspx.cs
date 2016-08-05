@@ -57,12 +57,10 @@ public partial class MainPage : SqlViewStatePage
     private void BindOrganizations()
     {
         //Get the list of organizations
-        OrganizationBLL theBLL = new OrganizationBLL();
         List<Organization> theOrganizations = new List<Organization>();
-
         try
         {
-            theOrganizations = theBLL.GetOrganizationsByUser(OrgSearchControl.Sql);
+            theOrganizations = OrganizationBLL.GetOrganizationsByUser(OrgSearchControl.Sql);
         }
         catch (Exception exc)
         {

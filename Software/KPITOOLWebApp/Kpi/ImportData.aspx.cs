@@ -223,6 +223,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     private void LoadFormEnterData()
     {
         DateTextBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
+        DateTextBox.Attributes.Add("onchange", "DateTextBox_OnChange()");
 
         //-- get CategoriesItems combinated
         List<KPICategoyCombination> theCombinatedList = new List<KPICategoyCombination>();

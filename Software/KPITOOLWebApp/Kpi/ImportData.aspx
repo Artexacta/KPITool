@@ -180,7 +180,8 @@
                                                     <asp:TextBox ID="ValueTextBox" runat="server" CssClass="form-control dataText" TextMode="Number" />
                                                 </div>
                                                 <div class="p-t-5 text-warning">
-                                                    <asp:Label ID="ImageUpdate" runat="server" Text="<i class='fa fa-warning'></i>" style="display: none; " ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
+                                                    <asp:Label ID="ImageUpdate" runat="server" Text="<i class='fa fa-warning'></i>" CssClass="imageUpdate" 
+                                                        style="display: none; " ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -217,7 +218,8 @@
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="p-t-5 text-warning">
-                                                    <asp:Label ID="ImageTimeUpdate" runat="server" Text="<i class='fa fa-warning'></i>" style="display: none; " ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
+                                                    <asp:Label ID="ImageTimeUpdate" runat="server" Text="<i class='fa fa-warning'></i>" CssClass="imageTimeUpdate" 
+                                                        style="display: none; " ToolTip="<%$ Resources:ImportData, ImageAlert %>" />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -336,7 +338,7 @@
             if (value != "") {
                 var regexInt = new RegExp('^[0-9]{1,21}$');
                 var regexDecimal = new RegExp('^[0-9]{1,17}([\.\,][0-9]{1,3})*$');
-                var regexPercent = new RegExp('^([1-9]{1,2}([\.\,][0-9]{1,3})*|100)$');
+                var regexPercent = new RegExp('^([1-9]{1,2}([\.\,][0-9]{1,3})*|10|20|30|40|50|60|70|80|90|100)$');
 
                 if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "INT" && !regexInt.test(value)) {
                     $("#" + valueRequiredFileValidator).text(<%= Resources.ImportData.ValueRequireIntegerData %>);
@@ -432,6 +434,24 @@
             } else {
                 $("#" + measurementIDsHiddenField).val("");
                 $("#" + imageTimeUpdate).hide();
+            }
+        }
+
+        function DateTextBox_OnChange() {
+            if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "TIME") {
+                $(".rowData").each(function () {
+                    $(this).find('select.comboYear')[0].selectedIndex = 0;
+                    $(this).find('select.comboMonth')[0].selectedIndex = 0;
+                    $(this).find('select.comboDay')[0].selectedIndex = 0;
+                    $(this).find('select.comboHour')[0].selectedIndex = 0;
+                    $(this).find('select.comboMinute')[0].selectedIndex = 0;
+                    $(this).find('span.imageTimeUpdate').hide();
+                });
+            } else {
+                $(".rowData").each(function () {
+                    $(this).find('input.dataText').val("");
+                    $(this).find('span.imageUpdate').hide();
+                });
             }
         }
 
