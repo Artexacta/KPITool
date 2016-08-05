@@ -107,25 +107,25 @@
                             <div class="col-md-12">
                                 <button id="buttonCollapse" runat="server" class="btn btn-default btn-block m-b-20 btn-category" type="button"
                                     data-target='<%# "#" + Eval("HtmlId") %>' aria-expanded="false" aria-controls="collapseExample">
-                                    <asp:Literal ID="CategoryForDisplay" runat="server" Text='<%# Eval("ObjectForDisplay") %>'></asp:Literal>
+                                    <asp:Literal ID="CategoryForDisplay" runat="server" Text='<%# Eval("ItemsList") %>'></asp:Literal>
                                 </button>
                                 <asp:Literal ID="CollapseLiteral" runat="server">
                                 </asp:Literal>
                                     <div class="text-right">
                                         <app:ExcelExportKpiChart ID="ExportControl" runat="server" KpiId='<%# Eval("KpiId") %>'
-                                            CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>' />
+                                            CategoryId='<%# Eval("CategoriesList") %>' CategoryItemId='<%# Eval("ItemsList") %>' />
                                     </div>
                                     <app:KpiChart ID="KpiChartCategory" runat="server" KpiId='<%# Eval("KpiId") %>'
-                                        CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>' />
+                                        CategoryId='<%# Eval("CategoriesList") %>' CategoryItemId='<%# Eval("ItemsList") %>' />
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <app:KpiMeasurements ID="MeasurementsCategoryControl" runat="server" KpiId='<%# Eval("KpiId") %>'
-                                                    CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>'/>
+                                            <app:KpiStats ID="MeasurementsCategoryControl" runat="server" KpiId='<%# Eval("KpiId") %>'
+                                                    CategoryId='<%# Eval("CategoriesList") %>' CategoryItemId='<%# Eval("ItemsList") %>'/>
                                         </div>
                                         <div class="col-md-7">
                                             <div class="table-responsive" style="max-height: 200px;">
                                                 <app:KpiMeasurements ID="MeasurementsControl" runat="server" KpiId='<%# Eval("KpiId") %>'
-                                                    CategoryId='<%# Eval("CategoryId") %>' CategoryItemId='<%# Eval("CategoryItemId") %>'  />
+                                                    CategoryId='<%# Eval("CategoriesList") %>' CategoryItemId='<%# Eval("ItemsList") %>'  />
                                             </div>
                                         </div>
                                     </div>
