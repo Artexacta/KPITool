@@ -306,14 +306,14 @@
   <data name="NumeroTextBox" xml:space="preserve">
     <value>Número</value>
   </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Lista de Usuarios</value>
-  </data>
   <data name="PageTitleCreate" xml:space="preserve">
     <value>Crear Usuario</value>
   </data>
   <data name="PageTitleEdit" xml:space="preserve">
     <value>Editar Usuario</value>
+  </data>
+  <data name="PageTitleList" xml:space="preserve">
+    <value>Lista de Usuarios</value>
   </data>
   <data name="PageTitlePassword" xml:space="preserve">
     <value>Cambiar Contraseña</value>
@@ -328,13 +328,13 @@
     <value>Su contraseña fue modificado exitosamente.</value>
   </data>
   <data name="PasswordCompareValidator" xml:space="preserve">
-    <value>La contraseña y confirmación de contraseña deben ser iguales.</value>
+    <value>La nueva contraseña y la confirmación deben ser iguales.</value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
-    <value>Contraseña:</value>
+    <value>Contraseña actual:</value>
   </data>
   <data name="PasswordRegularExpressionValidator" xml:space="preserve">
-    <value>Error en la constraseña. Debe contener por lo menos 7 caracteres, entre números, letras alfanumericas y no alfanumericos.</value>
+    <value>Contraseña actual incorrecta o nueva contraseña inválida. Longitud mínima de nueva contraseña: {0}. Caracteres  no alfanuméricos requeridos: {1}. Ej: @ # %  - _! +</value>
   </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>La contraseña es requerida.</value>

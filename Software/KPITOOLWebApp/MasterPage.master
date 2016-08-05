@@ -44,12 +44,12 @@
                 <li>
                     <msg:Messages ID="MessagesContent" runat="server" />
                 </li> 
-                <li>
+                <%--<li>
                     <asp:HyperLink ID="HyperLink1" NavigateUrl="~/Security/ChangePassword.aspx" runat="server">
                         <i class='zmdi zmdi-key'></i> 
                         <asp:Label runat="server" CssClass="hidden-xs" Text="<%$ Resources: InitMasterPage, ChangePassword %>"></asp:Label>
                     </asp:HyperLink>
-                </li>
+                </li>--%>
                 <li>
                     <app:LanguageSelector ID="LanguageSelectorControl" runat="server"  />
                 </li>

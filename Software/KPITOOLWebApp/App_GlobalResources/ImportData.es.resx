@@ -241,7 +241,7 @@
     <value>Fecha:</value>
   </data>
   <data name="ValueRequireDecimalData" xml:space="preserve">
-    <value>"El valor debe ser decimal de hasta tres decimales."</value>
+    <value>"El valor debe ser número de hasta tres decimales."</value>
   </data>
   <data name="ValueRequireIntegerData" xml:space="preserve">
     <value>"El valor debe ser un entero."</value>
@@ -250,7 +250,7 @@
     <value>"No se pudo verificar si ya existe un registro con los mismos datos."</value>
   </data>
   <data name="ValueRequirePercentData" xml:space="preserve">
-    <value>"El valor debe ser un número entre 1 y 100"</value>
+    <value>"El valor debe ser un número entre 1 y 100 y hasta 3 decimales."</value>
   </data>
   <data name="DeleteMeasurementError" xml:space="preserve">
     <value>Ocurrió un error al eliminar la medición.</value>

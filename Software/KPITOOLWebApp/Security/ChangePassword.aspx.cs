@@ -15,7 +15,8 @@ public partial class Security_ChangePassword : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        ChangePassword1.Visible = true;
+        if (!IsPostBack)
+            ChangePassword1.Visible = true;
     }
 
     protected void ChangePassword1_CancelButtonClick(object sender, EventArgs e)

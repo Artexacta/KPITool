@@ -69,7 +69,7 @@ namespace Artexacta.App.Organization.BLL
             return theData;
         }
 
-        public List<Organization> GetOrganizationsByUser(string whereClause)
+        public static List<Organization> GetOrganizationsByUser(string whereClause)
         {
             List<Organization> theList = new List<Organization>();
             Organization theData = null;
@@ -78,7 +78,8 @@ namespace Artexacta.App.Organization.BLL
 
             try
             {
-                OrganizationDS.OrganizationDataTable theTable = theAdapter.GetOrganizationsByUser(userName, whereClause);
+                OrganizationTableAdapter localAdapter = new OrganizationTableAdapter();
+                OrganizationDS.OrganizationDataTable theTable = localAdapter.GetOrganizationsByUser(userName, whereClause);
 
                 if (theTable != null && theTable.Rows.Count > 0)
                 {

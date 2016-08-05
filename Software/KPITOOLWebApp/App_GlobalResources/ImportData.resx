@@ -241,7 +241,7 @@
     <value>Value Date:</value>
   </data>
   <data name="ValueRequireDecimalData" xml:space="preserve">
-    <value>"The value must be decimal with at most three decimals."</value>
+    <value>"The value must be number with at most three decimals."</value>
   </data>
   <data name="ValueRequireIntegerData" xml:space="preserve">
     <value>"The value must be integer."</value>
@@ -250,7 +250,7 @@
     <value>"It could not be verified if a record already exists with the same data."</value>
   </data>
   <data name="ValueRequirePercentData" xml:space="preserve">
-    <value>"The value must be a number between 1 and 100"</value>
+    <value>"The value must be a number between 1 and 100 and at most three decimals."</value>
   </data>
   <data name="DeleteMeasurementError" xml:space="preserve">
     <value>There was an error while deleting the measurement.</value>

@@ -14,12 +14,10 @@ public partial class UserControls_FRTWB_AddButton : System.Web.UI.UserControl
     {
         if (!Page.IsPostBack)
         {
-            OrganizationBLL theBLL = new OrganizationBLL();
             List<Organization> theOrganizations = new List<Organization>();
-
             try
             {
-                theOrganizations = theBLL.GetOrganizationsByUser("1=1");
+                theOrganizations = OrganizationBLL.GetOrganizationsByUser("1 = 1");
             }
             catch (Exception exc)
             {
