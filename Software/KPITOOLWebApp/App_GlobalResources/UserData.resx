@@ -328,13 +328,13 @@
     <value>Your password was changed successfully.</value>
   </data>
   <data name="PasswordCompareValidator" xml:space="preserve">
-    <value>The password and password confirmation must be equal.</value>
+    <value>The new password and confirm password must be equal.</value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
-    <value>Password:</value>
+    <value>Current Password:</value>
   </data>
   <data name="PasswordRegularExpressionValidator" xml:space="preserve">
-    <value>Error in password. It must contain at least 7 characters, including numbers, alphanumeric and non-alphanumeric characters.</value>
+    <value>Password incorrect or New Password invalid. New Password length minimum: {0}. Non-alphanumeric characters required: {1}. Example: @ # %  - _! +</value>
   </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>The password is required.</value>

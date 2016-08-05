@@ -34,7 +34,6 @@ public partial class MainPage : SqlViewStatePage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-       
     }
 
 }
