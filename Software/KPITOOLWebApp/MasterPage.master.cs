@@ -273,6 +273,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
              "~/Test/TestAddData.aspx",
              "~/Test/TestVisitKpi.aspx",
              "~/HelpManager/Default.aspx",
+             "~/Test/TestDatePicker.aspx",
 
              "~/Organization/EditOrganization.aspx",
              "~/Organization/OrganizationDetails.aspx",

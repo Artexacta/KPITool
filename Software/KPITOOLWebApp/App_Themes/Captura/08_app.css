@@ -12281,3 +12281,7 @@ margin-top: 70px;
 .block{
     display:block;
 }
+
+.validators span {
+    color: red;
+}
