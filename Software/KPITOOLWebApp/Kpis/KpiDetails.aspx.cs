@@ -95,7 +95,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         KPI kpi = KPIBLL.GetKPIById(kpiId);
         KpiNameLiteral.Text = kpi.Name;
 
-        List<KPICategory> categories = KPICategoryBLL.GetKpiCategoriesByKpiId(kpiId);
+        List<KPICategoyCombination> categories = KPICategoryCombinationBLL.GetCategoryItemsCombinatedByKpiId(kpiId);
         if(categories.Count > 0)
         {
             CategoriesRepeater.DataSource = categories;
@@ -224,7 +224,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         Literal lt = (Literal)e.Item.FindControl("CollapseLiteral");
         if (lt == null)
             return;
-        KPICategory obj = (KPICategory) e.Item.DataItem;
+        KPICategoyCombination obj = (KPICategoyCombination)e.Item.DataItem;
         if (obj == null)
             return;
         lt.Text = "<div class='collapse m-b-20' id='" + obj.HtmlId + "'>";
