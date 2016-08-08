@@ -9,7 +9,7 @@
         label{
             margin-top: 10px !important;
             display: block !important;
-            font-weight:bold;
+            font-weight: bold !important;
         }
     </style>
     <script src="../Scripts/kpiUtils.js?a=<%= DateTime.Now.Ticks %>"></script>
@@ -31,42 +31,27 @@
     </div>
 
     <div class="container">
-
         <div class="tile">
             <div class="t-body tb-padding">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>
-                                    <asp:Literal runat="server" Text="<%$ Resources:KpiDetails, KpiTypeLabel %>"></asp:Literal>
-                                </label>
-                                <asp:Literal ID="KpiType" runat="server"></asp:Literal>
+                                <label><asp:Literal ID="KpiTypeLabel" runat="server" Text="<%$ Resources:KpiDetails, KpiTypeLabel %>" /></label>
+                                <asp:Label ID="KpiType" runat="server"></asp:Label>
                             </div>
                             <div class="col-md-6">                                
-                                <label>
-                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, KpiReportingUnitLabel %>"></asp:Literal>
-                                </label>
-                                <asp:Literal ID="ReportingUnit" runat="server"></asp:Literal>
+                                <label><asp:Literal ID="ReportingUnitLabel" runat="server" Text="<%$ Resources: KpiDetails, KpiReportingUnitLabel %>" /></label>
+                                <asp:Label ID="ReportingUnit" runat="server"></asp:Label>
                             </div>
                             <div class="col-md-6">
-                                <label>
-                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, KpiTargetLabel %>"></asp:Literal>
-                                </label>
-                                <asp:Literal ID="KpiTarget" runat="server"></asp:Literal>
+                                <label><asp:Literal ID="KpiTargetLabel" runat="server" Text="<%$ Resources: KpiDetails, KpiTargetLabel %>" /></label>
+                                <asp:Label ID="KpiTarget" runat="server"></asp:Label>
                             </div>
                             <div class="col-md-6">
-                                <label>
-                                    <asp:Literal runat="server" Text="<%$ Resources: KpiDetails, StartingDateLabel %>"></asp:Literal>
-                                </label>
-                                <asp:Literal ID="StartingDate" runat="server"></asp:Literal>
+                                <label><asp:Literal ID="StartingDateLabel" runat="server" Text="<%$ Resources: KpiDetails, StartingDateLabel %>" /></label>
+                                <asp:Label ID="StartingDate" runat="server"></asp:Label>
                             </div>
-                            
-                            <%--<asp:Literal ID="WebServiceId" runat="server"></asp:Literal>--%>
-                            
-                            
-                            
-
                         </div>
                     </div>
                 </div>
@@ -98,8 +83,7 @@
                 </div>
                 
                 <asp:Panel ID="CategoriesPanel" runat="server" CssClass="row" Visible="false">
-                    <asp:Repeater ID="CategoriesRepeater" runat="server"
-                        OnItemDataBound="CategoriesRepeater_ItemDataBound">
+                    <asp:Repeater ID="CategoriesRepeater" runat="server" OnItemDataBound="CategoriesRepeater_ItemDataBound">
                         <HeaderTemplate>
                             <div class="row m-t-20">
                         </HeaderTemplate>
@@ -131,7 +115,6 @@
                                     </div>
                                 <asp:Literal ID="CloseCollapseLiteral" runat="server" Text="</div>"></asp:Literal>
                             </div>
-                            
                         </ItemTemplate>
                         <FooterTemplate>
                             </div>
@@ -191,7 +174,6 @@
         </div>
         <asp:LinkButton ID="BackToListButton" runat="server" OnClick="BackToListButton_Click" CssClass="btn btn-info" Text="<%$ Resources: KpiDetails, BackToListButton %>"></asp:LinkButton>
     </div>
-
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -258,5 +240,8 @@
     <asp:HiddenField ID="Progress" runat="server" />
     <asp:HiddenField ID="KpiIdHiddenField" runat="server" Value="0" />
     <asp:HiddenField ID="UserIdHiddenField" runat="server" Value="0" />
+    <asp:HiddenField ID="UnitIdHiddenField" runat="server" />
+    <asp:HiddenField ID="CurrencyHiddenField" runat="server" />
+    <asp:HiddenField ID="CurrencyUnitHiddenField" runat="server" />
 </asp:Content>
 

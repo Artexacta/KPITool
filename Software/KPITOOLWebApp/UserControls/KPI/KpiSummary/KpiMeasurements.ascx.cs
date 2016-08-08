@@ -19,7 +19,6 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
         set
         {
             KpiIdHiddenField.Value = value.ToString();
-            
         }
         get
         {
@@ -116,10 +115,10 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
             MeasurementsGridView.DataSource = theList;
             MeasurementsGridView.DataBind();
 
-            if (theList.FindAll(i => !string.IsNullOrEmpty(i.Detalle)).Count > 0)
-                MeasurementsGridView.Columns[2].Visible = true;
+            if (theList.FindAll(i => !string.IsNullOrEmpty(i.Detalle)).Count > 0 && string.IsNullOrEmpty(CategoryItemId))
+                MeasurementsGridView.Columns[1].Visible = true;
             else
-                MeasurementsGridView.Columns[2].Visible = false;
+                MeasurementsGridView.Columns[1].Visible = false;
         }
     }
 
@@ -141,7 +140,7 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
                     valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " %";
                     break;
                 case "MONEY":
-                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " " + Currency + " " + CurrencyUnit;
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " " + Currency;
                     break;
                 default:
                     valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture);
