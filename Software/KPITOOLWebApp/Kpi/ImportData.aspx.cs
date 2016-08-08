@@ -129,6 +129,8 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             ReportingPeriod.Text = theData.ReportingUnitName;
             StartingDate.Text = theData.StartDate == DateTime.MinValue ? " - " : TextUtilities.GetDateTimeToString(theData.StartDate);
             UnitIdHiddenField.Value = theData.UnitID;
+            CurrencyHiddenField.Value = theData.Currency;
+            CurrencyUnitHiddenField.Value = theData.CurrencyUnitForDisplay;
 
             switch (UnitIdHiddenField.Value)
             {
@@ -154,9 +156,9 @@ public partial class Kpi_ImportData : System.Web.UI.Page
         try
         {
             if (UnitIdHiddenField.Value.Equals("TIME"))
-                theList = KpiMeasurementBLL.GetKPIMeasurementCategoriesTimeByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
+                theList = KpiMeasurementBLL.GetKPIMeasurementCategoriesTimeByKpiId(Convert.ToInt32(KPIIdHiddenField.Value), "", "");
             else
-                theList = KpiMeasurementBLL.GetKPIMeasurementCategoriesByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
+                theList = KpiMeasurementBLL.GetKPIMeasurementCategoriesByKpiId(Convert.ToInt32(KPIIdHiddenField.Value), "", "");
         }
         catch (Exception exc)
         {
@@ -185,6 +187,12 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                     break;
                 case "INT":
                     valueLabel.Text = Convert.ToInt32(theData.Measurement).ToString();
+                    break;
+                case "PERCENT":
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " %";
+                    break;
+                case "MONEY":
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " " + CurrencyHiddenField.Value;
                     break;
                 default:
                     valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture);
@@ -428,7 +436,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
         List<KPIMeasurements> theMeasurementList = new List<KPIMeasurements>();
         try
         {
-            theMeasurementList = KpiMeasurementBLL.GetKPIMeasurementCategoriesByKpiId(Convert.ToInt32(KPIIdHiddenField.Value));
+            theMeasurementList = KpiMeasurementBLL.GetKPIMeasurementCategoriesByKpiId(Convert.ToInt32(KPIIdHiddenField.Value), "", "");
         }
         catch (Exception exc)
         {
@@ -488,6 +496,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             List<string> theItemList = null;
             string itemCategories = "";
             DateTime date = DateTime.MinValue;
+            string value = "";
 
             for (int i = 0; i < newDataSet.Tables[0].Rows.Count; i++)
             {
@@ -498,7 +507,32 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 if (UnitIdHiddenField.Value.Equals("TIME"))
                     theData.DataTime = GetMeasurementTime(theRow[Resources.ImportData.ValueColumn].ToString().Trim(), regexTime);
                 else
-                    theData.Measurement = Convert.ToDecimal(theRow[Resources.ImportData.ValueColumn].ToString().Trim());
+                {
+                    value = theRow[Resources.ImportData.ValueColumn].ToString().Trim();
+                    switch (UnitIdHiddenField.Value)
+                    {
+                        case "INT":
+                            Regex formatInt = new Regex("^[0-9]{1,21}$");
+                            Match matchesInt = formatInt.Match(value.ToString());
+                            if (!matchesInt.Success)
+                                errors.Add(string.Format(Resources.ImportData.ErrorValueIntInFile, (i + 2).ToString(), value));
+                            break;
+                        case "PERCENT":
+                            Regex formatPercent = new Regex("^([1-9]{1,2}([\\.\\,][0-9]{1,3})*|10|20|30|40|50|60|70|80|90|100)$");
+                            Match matchesPercent = formatPercent.Match(value.ToString());
+                            if (!matchesPercent.Success)
+                                errors.Add(string.Format(Resources.ImportData.ErrorValuePercentInFile, (i + 2).ToString(), value));
+                            break;
+                        default:
+                            Regex formatDecimal = new Regex("^[0-9]{1,17}([\\.\\,][0-9]{1,3})*$");
+                            Match matchesDecimal = formatDecimal.Match(value.ToString());
+                            if (!matchesDecimal.Success)
+                                errors.Add(string.Format(Resources.ImportData.ErrorValueDecimalInFile, (i + 2).ToString(), value));
+                            break;
+                    }
+
+                    theData.Measurement = Convert.ToDecimal(value);
+                }
 
                 //--verifiy item categories
                 if (theCategoryList.Count > 0)
@@ -552,6 +586,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                 theItemList = null;
                 itemCategories = "";
                 date = DateTime.MinValue;
+                value = "";
             }
 
             if (errors.Count > 0)

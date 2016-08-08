@@ -18,7 +18,7 @@
                         registrado.&nbsp;  Si este problema persiste, contáctese con el administrador de su sistema.
                     </p>
                     <p>
-                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MainPage.aspx">Retornar a la página principal</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Organization/ListOrganizations.aspx">Retornar a la página principal</asp:HyperLink>
                     </p>
                 </div>
             </div>

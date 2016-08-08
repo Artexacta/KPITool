@@ -34,7 +34,7 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
             if (!string.IsNullOrEmpty(OrganizationIdHiddenField.Value))
                 LoadData();
             else
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
     }
 
@@ -81,13 +81,13 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
         //catch (Exception exc)
         //{
         //    SystemMessages.DisplaySystemErrorMessage(exc.Message);
-        //    Response.Redirect("~/MainPage.aspx");
+        //    Response.Redirect("~/Organization/ListOrganizations.aspx");
         //}
 
         //if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         //{
         //    SystemMessages.DisplaySystemWarningMessage(Resources.DataDetails.UserNotOwner);
-        //    Response.Redirect("~/MainPage.aspx");
+        //    Response.Redirect("~/Organization/ListOrganizations.aspx");
         //}
 
         //-- show Data
@@ -100,7 +100,7 @@ public partial class Organization_OrganizationDetails : System.Web.UI.Page
         {
             log.Error(exc.Message);
             SystemMessages.DisplaySystemErrorMessage(Resources.DataDetails.MessageErrorGetOrganization);
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
 
         if (theData != null)

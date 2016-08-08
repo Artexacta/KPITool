@@ -50,7 +50,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
 
             if (organizationId <= 0)
             {
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/Organization/ListOrganizations.aspx");
                 return;
             }
 
@@ -62,7 +62,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             catch (Exception exc)
             {
                 SystemMessages.DisplaySystemErrorMessage(exc.Message);
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/Organization/ListOrganizations.aspx");
             }
 
             bool readOnly = false;
@@ -189,7 +189,7 @@ public partial class Organization_EditOrganization : System.Web.UI.Page
             SystemMessages.DisplaySystemMessage(Resources.Organization.MessageUpdateOk);
         }
 
-        Response.Redirect("~/MainPage.aspx");
+        Response.Redirect("~/Organization/ListOrganizations.aspx");
     }
     protected void AreasObjectDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
     {

@@ -508,6 +508,8 @@
 
     <asp:HiddenField ID="KPIIdHiddenField" runat="server" />
     <asp:HiddenField ID="UnitIdHiddenField" runat="server" />
+    <asp:HiddenField ID="CurrencyHiddenField" runat="server" />
+    <asp:HiddenField ID="CurrencyUnitHiddenField" runat="server" />
 
 </asp:Content>
 

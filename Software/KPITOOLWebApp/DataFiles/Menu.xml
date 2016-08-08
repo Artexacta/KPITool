@@ -17,12 +17,12 @@ class:         if the menu is not public, the name of the class that the user
 
 <Home>
   <!-- Menu: Inicio -->
-  <Menu resourceFile="InitMasterPage"
+  <!--<Menu resourceFile="InitMasterPage"
 				resourceItem="MenuHome"
 				url="~/MainPage.aspx"
 				public="true"
         icon="zmdi zmdi-home">
-  </Menu>
+  </Menu>-->
 
   <!--Menu Organizaciones-->
   <Menu resourceFile="InitMasterPage"

@@ -137,8 +137,8 @@ public partial class Security_UserList : System.Web.UI.Page
                 if (!string.IsNullOrEmpty(password))
                 {
                     string toMail = theUser.Email;
-                    string link = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority + 
-                        HttpContext.Current.Request.ApplicationPath + "/MainPage.aspx";
+                    string link = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
+                        HttpContext.Current.Request.ApplicationPath + "/Organization/ListOrganizations.aspx";
 
                     List<EmailFileParameter> theParams = new List<EmailFileParameter>();
                     theParams.Add(new EmailFileParameter("UserName", userName));

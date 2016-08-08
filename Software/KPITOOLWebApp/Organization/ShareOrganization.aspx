@@ -84,7 +84,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/MainPage.aspx" Text="<%$ Resources:ShareData, ReturnOrganizationLink %>" CssClass="btn btn-info">
+                <asp:HyperLink ID="ReturnLink" runat="server" NavigateUrl="~/Organization/ListOrganizations.aspx" Text="<%$ Resources:ShareData, ReturnOrganizationLink %>" CssClass="btn btn-info">
                 </asp:HyperLink>
             </div>
         </div>

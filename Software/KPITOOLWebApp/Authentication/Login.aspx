@@ -54,7 +54,7 @@
                                         ValidationExpression="<% $ Resources:Validations, GenericLength50 %>" CssClass="validation"
                                         Display="Dynamic" ValidationGroup="Login1" ErrorMessage="<%$ Resources: LoginGlossary, PasswordLengthErrorMessage %>">
                                     </asp:RegularExpressionValidator>
-                                    <asp:Label ID="FailureText" runat="server" CssClass="error" EnableViewState="False" />
+                                    <asp:Label ID="FailureText" runat="server" CssClass="error" EnableViewState="False" ForeColor="Red" />
 
                                     <div class="buttonsPanel">
                                         <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-block btn-primary btn-float m-t-25" CommandName="Login" ValidationGroup="Login1">
@@ -76,11 +76,13 @@
                     <p>
                         <small>
                             <asp:Literal ID="lblRecover" runat="server" Text="<%$Resources: LoginGlossary, CantRememberPasswordLabel %>" />
+                        </small>
                     </p>
                     <p>
                         <small>
                             <asp:LinkButton ID="RecoverLinkButton" runat="server" Text="<% $ Resources : LoginGlossary, RecoverPasswordLink %>"
-                                OnClick="RecoverLinkButton_Click" /></small>
+                                OnClick="RecoverLinkButton_Click" />
+                        </small>
                     </p>
                 </div>
 

@@ -74,7 +74,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
 
     private void ProcessSessionParameters()
     {
-        if(Session["KpiId"] != null && !string.IsNullOrEmpty(Session["KpiId"].ToString()))
+        if (!string.IsNullOrEmpty(Request["ID"]))
+        {
+            KpiIdHiddenField.Value = Request["ID"].ToString();
+        }
+        else if (Session["KpiId"] != null && !string.IsNullOrEmpty(Session["KpiId"].ToString()))
         {
             KpiIdHiddenField.Value = Session["KpiId"].ToString();
         }
@@ -83,7 +87,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         {
             SearchQuery.Value = Session["SEARCH_PARAMETER"].ToString();
         }
-        Session["SEARCH_PARAMETER"] = null;
+        Session["SEARCH_PARAMETER"] = null;        
     }
 
     private void LoadKpiData()

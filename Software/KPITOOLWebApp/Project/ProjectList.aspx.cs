@@ -202,7 +202,7 @@ public partial class Project_ProjectList : System.Web.UI.Page
         if (e.CommandName == "ViewOrganization")
         {
             Session["SEARCH_PARAMETER"] = "@organizationID " + projectId.ToString();
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
             return;
         }
         if (e.CommandName == "ViewArea")

@@ -179,7 +179,7 @@ public partial class Activity_ActivitiesList : System.Web.UI.Page
         if (e.CommandName == "ViewOrganization")
         {
             Session["SEARCH_PARAMETER"] = "@organizationID " + activityId.ToString();
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
         if (e.CommandName == "ViewProject")
         {

@@ -359,6 +359,6 @@
     <value>Se envió su nueva contraseña al correo electronico ingresado.</value>
   </data>
   <data name="LoginFailureText" xml:space="preserve">
-    <value>Su nombre de usuario o password son incorrectos.</value>
+    <value>Su nombre de usuario o contraseña son incorrectos.</value>
   </data>
 </root>
