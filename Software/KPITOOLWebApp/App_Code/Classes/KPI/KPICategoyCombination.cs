@@ -12,9 +12,18 @@ namespace Artexacta.App.KPI
     {
         public string ItemsList { get; set; }
         public string CategoriesList { get; set; }
+        public int KpiId { get; set; }
 
         public KPICategoyCombination()
         {
+        }
+
+        public string HtmlId
+        {
+            get
+            {
+                return (ItemsList + "-" + CategoriesList).Replace(" ", "-").Replace(",","-");
+            }
         }
 
         public KPICategoyCombination(string itemsList, string categoriesList)

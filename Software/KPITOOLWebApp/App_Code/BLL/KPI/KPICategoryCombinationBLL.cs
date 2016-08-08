@@ -97,6 +97,7 @@ namespace Artexacta.App.KPI.BLL
                     foreach (KPICategoryCombinationDS.KPICombinationCategoryRow theRow in theTable)
                     {
                         theData = FillRecord(theRow);
+                        theData.KpiId = kpiId;
                         theList.Add(theData);
                     }
                 }
