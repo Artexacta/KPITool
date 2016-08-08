@@ -168,7 +168,7 @@ public partial class Security_EditUser : System.Web.UI.Page
         if (MyAccountHiddenField.Value.Equals("false"))
             Response.Redirect("~/Security/UserList.aspx");
         else
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
     }
 
     protected void CancelButton_Click(object sender, EventArgs e)
@@ -176,7 +176,7 @@ public partial class Security_EditUser : System.Web.UI.Page
         if (MyAccountHiddenField.Value.Equals("false"))
             Response.Redirect("~/Security/UserList.aspx");
         else
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
     }
 
 }

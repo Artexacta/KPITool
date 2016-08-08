@@ -74,7 +74,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
 
     private void ProcessSessionParameters()
     {
-        if(Session["KpiId"] != null && !string.IsNullOrEmpty(Session["KpiId"].ToString()))
+        if (!string.IsNullOrEmpty(Request["ID"]))
+        {
+            KpiIdHiddenField.Value = Request["ID"].ToString();
+        }
+        else if (Session["KpiId"] != null && !string.IsNullOrEmpty(Session["KpiId"].ToString()))
         {
             KpiIdHiddenField.Value = Session["KpiId"].ToString();
         }
@@ -83,7 +87,7 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         {
             SearchQuery.Value = Session["SEARCH_PARAMETER"].ToString();
         }
-        Session["SEARCH_PARAMETER"] = null;
+        Session["SEARCH_PARAMETER"] = null;        
     }
 
     private void LoadKpiData()
@@ -95,13 +99,6 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         KPI kpi = KPIBLL.GetKPIById(kpiId);
         KpiNameLiteral.Text = kpi.Name;
 
-        List<KPICategoyCombination> categories = KPICategoryCombinationBLL.GetCategoryItemsCombinatedByKpiId(kpiId);
-        if(categories.Count > 0)
-        {
-            CategoriesRepeater.DataSource = categories;
-            CategoriesRepeater.DataBind();
-            CategoriesPanel.Visible = true;
-        }
         //Inicializo los valores conocidos
         string lang = LanguageUtilities.GetLanguageFromContext();
         KPITypeBLL theBll = new KPITypeBLL();
@@ -126,8 +123,13 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         ExportControl.KpiId = kpiId;
         StatsControl.KpiId = kpiId;
         MeasurementsControl.KpiId = kpiId;
-        
         MeasurementsControl.Unit = kpi.UnitID;
+        MeasurementsControl.Currency = kpi.Currency;
+        MeasurementsControl.CurrencyUnit = kpi.CurrencyUnitForDisplay;
+
+        UnitIdHiddenField.Value = kpi.UnitID;
+        CurrencyHiddenField.Value = kpi.Currency;
+        CurrencyUnitHiddenField.Value = kpi.CurrencyUnitForDisplay;
 
         //CurrencyUnitBLL currencyUnitBll = new CurrencyUnitBLL();
         //CurrencyUnit currencyUnit = currencyUnitBll.GetCurrencyUnitsById(lang, ;
@@ -135,6 +137,14 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         //MeasurementsControl.Currency = kpi.Currency;
 
         //}
+
+        List<KPICategoyCombination> categories = KPICategoryCombinationBLL.GetCategoryItemsCombinatedByKpiId(kpiId);
+        if (categories.Count > 0)
+        {
+            CategoriesRepeater.DataSource = categories;
+            CategoriesRepeater.DataBind();
+            CategoriesPanel.Visible = true;
+        }
     }
 
     protected void UserDashboardDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
@@ -228,6 +238,11 @@ public partial class Kpis_KpiDetails : System.Web.UI.Page
         if (obj == null)
             return;
         lt.Text = "<div class='collapse m-b-20' id='" + obj.HtmlId + "'>";
+
+        UserControls_KPI_KpiSummary_KpiMeasurements measurementsControl = (UserControls_KPI_KpiSummary_KpiMeasurements)e.Item.FindControl("MeasurementsControl");
+        measurementsControl.Unit = UnitIdHiddenField.Value;
+        measurementsControl.Currency = CurrencyHiddenField.Value;
+        measurementsControl.CurrencyUnit = CurrencyUnitHiddenField.Value;
     }
 
     protected void BackToListButton_Click(object sender, EventArgs e)

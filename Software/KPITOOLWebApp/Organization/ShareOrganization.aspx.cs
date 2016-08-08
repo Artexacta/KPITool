@@ -33,7 +33,7 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
             if (!string.IsNullOrEmpty(OrganizationIdHiddenField.Value))
                 LoadData();
             else
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/Organization/ListOrganizations.aspx");
 
             UserTextBox.Attributes.Add("onchange", "UserTextBox_OnChange()");
             ObjectTypeIdHiddenField.Value = PermissionObject.ObjectType.ORGANIZATION.ToString();
@@ -83,13 +83,13 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
         catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
 
         if (theUser == null || !theUser.TheActionList.Exists(i => i.ObjectActionID.Equals("OWN")))
         {
             SystemMessages.DisplaySystemWarningMessage(Resources.ShareData.UserNotOwnOrganization);
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
 
         //-- show Data
@@ -101,7 +101,7 @@ public partial class Organization_ShareOrganization : System.Web.UI.Page
         catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
 
         if (theData != null)

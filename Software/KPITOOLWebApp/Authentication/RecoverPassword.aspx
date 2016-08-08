@@ -31,7 +31,7 @@
 								    ValidationGroup="PasswordRecovery1" CommandName="Submit">
 								    <asp:label ID="Label1" text="Submit" runat="server" />		
 							    </asp:LinkButton>
-							     <asp:LinkButton ID="GotoMainLinkButton" CssClass="secondaryButton" runat="server" CausesValidation="False" PostBackUrl="~/MainPage.aspx"
+							     <asp:LinkButton ID="GotoMainLinkButton" CssClass="secondaryButton" runat="server" CausesValidation="False" PostBackUrl="~/Organization/ListOrganizations.aspx"
 								    Text="Ir a la Página Principal"></asp:LinkButton>
 						    </div>
 				    </UserNameTemplate>

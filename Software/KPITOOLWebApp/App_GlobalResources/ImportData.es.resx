@@ -241,7 +241,7 @@
     <value>Fecha:</value>
   </data>
   <data name="ValueRequireDecimalData" xml:space="preserve">
-    <value>"El valor debe ser número de hasta tres decimales."</value>
+    <value>"El valor debe ser un número de hasta tres decimales."</value>
   </data>
   <data name="ValueRequireIntegerData" xml:space="preserve">
     <value>"El valor debe ser un entero."</value>
@@ -272,5 +272,14 @@
   </data>
   <data name="ConfirmDeleteMeasurement" xml:space="preserve">
     <value>return confirm('¿Está seguro de eliminar la medición?')</value>
+  </data>
+  <data name="ErrorValueDecimalInFile" xml:space="preserve">
+    <value>Error en la fila: {0}, el valor '{1}' debe ser debe ser un número de hasta tres decimales.</value>
+  </data>
+  <data name="ErrorValueIntInFile" xml:space="preserve">
+    <value>Error en la fila: {0}, el valor '{1}' debe ser un entero.</value>
+  </data>
+  <data name="ErrorValuePercentInFile" xml:space="preserve">
+    <value>Error en la fila: {0}, el valor '{1}' debe ser debe ser un número entre 1 y 100 y hasta 3 decimales.</value>
   </data>
 </root>

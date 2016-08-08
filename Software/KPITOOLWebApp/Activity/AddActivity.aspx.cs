@@ -36,7 +36,7 @@ public partial class Activity_AddActivity : System.Web.UI.Page
     public string ParentPage
     {
         set { ParentPageHiddenField.Value = value; }
-        get { return string.IsNullOrEmpty(ParentPageHiddenField.Value) ? "~/MainPage.aspx" : ParentPageHiddenField.Value; }
+        get { return string.IsNullOrEmpty(ParentPageHiddenField.Value) ? "~/Organization/ListOrganizations.aspx" : ParentPageHiddenField.Value; }
     }
     protected override void InitializeCulture()
     {
@@ -105,7 +105,7 @@ public partial class Activity_AddActivity : System.Web.UI.Page
             catch (Exception exc)
             {
                 SystemMessages.DisplaySystemErrorMessage(exc.Message);
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/Organization/ListOrganizations.aspx");
             }
 
             bool readOnly = false;

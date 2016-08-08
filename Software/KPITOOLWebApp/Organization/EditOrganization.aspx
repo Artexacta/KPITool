@@ -104,7 +104,7 @@
                             <asp:LinkButton ID="SaveOrganizationButton" runat="server" CssClass="btn btn-primary"
                                 OnClick="SaveOrganizationButton_Click" ValidationGroup="EditOrganizationValidator" Text="<% $Resources: Glossary, GenericSaveLabel %>">
                             </asp:LinkButton>
-                            <asp:HyperLink runat="server" NavigateUrl="~/MainPage.aspx" CssClass="btn btn-danger">
+                            <asp:HyperLink runat="server" NavigateUrl="~/Organization/ListOrganizations.aspx" CssClass="btn btn-danger">
                                 <asp:Label ID="BackListLabel" runat="server" Text="<% $Resources: Organization, LabelBackListOrganization %>"></asp:Label>
                             </asp:HyperLink>
                         </div>

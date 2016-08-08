@@ -18,7 +18,7 @@ public partial class Authentication_Login : System.Web.UI.Page
     {
         if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
-            Response.Redirect("~/MainPage.aspx", true);
+            Response.Redirect("~/Organization/ListOrganizations.aspx", true);
         }
     }
 
@@ -103,7 +103,7 @@ public partial class Authentication_Login : System.Web.UI.Page
         {
             if (Login1.UserName != loggedOutUser)
             {
-                Response.Redirect("~/MainPage.aspx");
+                Response.Redirect("~/Organization/ListOrganizations.aspx");
                 return;
             }
         }
@@ -117,7 +117,7 @@ public partial class Authentication_Login : System.Web.UI.Page
         else
         {
             theBitacora.RecordTrace(Bitacora.TraceType.UserLogin, Login1.UserName, "Seguridad", userId.ToString(), "Inicio de sesión de usuario " + Login1.UserName);
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
     }
 

@@ -119,7 +119,7 @@ public partial class Security_CreateUser : System.Web.UI.Page
         try
         {
             string confirmURL = HttpContext.Current.Request.Url.Scheme + "://" +
-                HttpContext.Current.Request.Url.Authority + HttpContext.Current.Request.ApplicationPath + "/MainPage.aspx";
+                HttpContext.Current.Request.Url.Authority + HttpContext.Current.Request.ApplicationPath + "/Organization/ListOrganizations.aspx";
 
             e.Message.From = new System.Net.Mail.MailAddress(Configuration.GetReturnEmailAddress(), Configuration.GetReturnEmailName());
             e.Message.Body = e.Message.Body.Replace("<%UserName%>", CreateUserWizard1.UserName);

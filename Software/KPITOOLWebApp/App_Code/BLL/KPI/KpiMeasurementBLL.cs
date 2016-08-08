@@ -106,7 +106,7 @@ namespace Artexacta.App.KPI.BLL
             return list;
         }
 
-        public static List<KPIMeasurements> GetKPIMeasurementCategoriesByKpiId(int kpiId)
+        public static List<KPIMeasurements> GetKPIMeasurementCategoriesByKpiId(int kpiId, string categoryId, string categoryItemId)
         {
             if (kpiId <= 0)
                 throw new ArgumentException(Resources.ImportData.ZeroKpiId);
@@ -116,7 +116,7 @@ namespace Artexacta.App.KPI.BLL
             try
             {
                 KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
-                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.GetKpiMeasurementCategoriesByKpiId(kpiId);
+                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.GetKpiMeasurementCategoriesByKpiId(kpiId, categoryId, categoryItemId);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (KpiMeasurementDS.KpiMeasurementRow theRow in theTable)
@@ -137,7 +137,7 @@ namespace Artexacta.App.KPI.BLL
             return theList;
         }
 
-        public static List<KPIMeasurements> GetKPIMeasurementCategoriesTimeByKpiId(int kpiId)
+        public static List<KPIMeasurements> GetKPIMeasurementCategoriesTimeByKpiId(int kpiId, string categoryId, string categoryItemId)
         {
             if (kpiId <= 0)
                 throw new ArgumentException(Resources.ImportData.ZeroKpiId);
@@ -147,7 +147,7 @@ namespace Artexacta.App.KPI.BLL
             try
             {
                 KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter localAdapter = new KpiMeasurementDSTableAdapters.KpiMeasurementTableAdapter();
-                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.GetKpiMeasurementCategoriesByKpiId(kpiId);
+                KpiMeasurementDS.KpiMeasurementDataTable theTable = localAdapter.GetKpiMeasurementCategoriesByKpiId(kpiId, categoryId, categoryItemId);
                 if (theTable != null && theTable.Rows.Count > 0)
                 {
                     foreach (KpiMeasurementDS.KpiMeasurementRow theRow in theTable)

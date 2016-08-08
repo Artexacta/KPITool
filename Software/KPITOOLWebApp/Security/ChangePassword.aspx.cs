@@ -21,7 +21,7 @@ public partial class Security_ChangePassword : System.Web.UI.Page
 
     protected void ChangePassword1_CancelButtonClick(object sender, EventArgs e)
     {
-        Response.Redirect("~/MainPage.aspx");
+        Response.Redirect("~/Organization/ListOrganizations.aspx");
     }
 
 }

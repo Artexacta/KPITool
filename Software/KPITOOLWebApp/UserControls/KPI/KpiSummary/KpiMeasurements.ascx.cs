@@ -1,8 +1,10 @@
 ﻿using Artexacta.App.KPI;
 using Artexacta.App.KPI.BLL;
+using Artexacta.App.Utilities.SystemMessages;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,7 +19,6 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
         set
         {
             KpiIdHiddenField.Value = value.ToString();
-            
         }
         get
         {
@@ -33,6 +34,7 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
             return kpiId;
         }
     }
+
     public string CategoryId
     {
         set
@@ -93,66 +95,58 @@ public partial class UserControls_KPI_KpiSummary_KpiMeasurements : System.Web.UI
         }
     }
 
-
     protected void Page_Load(object sender, EventArgs e)
     {
-       // LoadMeasurements();
-    }
+        if (!IsPostBack)
+        {
+            List<KPIMeasurements> theList = new List<KPIMeasurements>();
+            try
+            {
+                if (Unit.Equals("TIME"))
+                    theList = KpiMeasurementBLL.GetKPIMeasurementCategoriesTimeByKpiId(KpiId, CategoryId, CategoryItemId);
+                else
+                    theList = KpiMeasurementBLL.GetKPIMeasurementCategoriesByKpiId(KpiId, CategoryId, CategoryItemId);
+            }
+            catch (Exception exc)
+            {
+                SystemMessages.DisplaySystemErrorMessage(exc.Message);
+            }
 
-    protected override void OnPreRender(EventArgs e)
-    {
-        base.OnPreRender(e);
-        
-    }
+            MeasurementsGridView.DataSource = theList;
+            MeasurementsGridView.DataBind();
 
-
-    protected void MeasurementsDataSource_Selected(object sender, ObjectDataSourceStatusEventArgs e)
-    {
-        if (e.Exception == null)
-            return;
-
-        log.Error("Error loading measurements", e.Exception);
-        e.ExceptionHandled = true;
+            if (theList.FindAll(i => !string.IsNullOrEmpty(i.Detalle)).Count > 0 && string.IsNullOrEmpty(CategoryItemId))
+                MeasurementsGridView.Columns[1].Visible = true;
+            else
+                MeasurementsGridView.Columns[1].Visible = false;
+        }
     }
 
     protected void MeasurementsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        if (!(e.Row.DataItem is KPIMeasurement))
-            return;
-
-        KPIMeasurement measurement = (KPIMeasurement) e.Row.DataItem;
-        if (measurement == null)
-            return;
-        Literal valueLiteral = (Literal)e.Row.FindControl("ValueLiteral");
-        string unit = this.Unit;
-        if(unit == "TIME")
+        if (e.Row.DataItem is KPIMeasurements)
         {
-            try
+            KPIMeasurements theData = (KPIMeasurements)e.Row.DataItem;
+            Label valueLabel = (Label)e.Row.FindControl("ValueLabel");
+            switch (Unit)
             {
-                KPIDataTime datatime = KPIDataTimeBLL.GetKPIDataTimeFromValue(measurement.Measurement);
-                valueLiteral.Text = datatime.TimeDescription;
+                case "TIME":
+                    valueLabel.Text = theData.DataTime.TimeDescription;
+                    break;
+                case "INT":
+                    valueLabel.Text = Convert.ToInt32(theData.Measurement).ToString();
+                    break;
+                case "PERCENT":
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " %";
+                    break;
+                case "MONEY":
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture) + " " + Currency;
+                    break;
+                default:
+                    valueLabel.Text = theData.Measurement.ToString(CultureInfo.InvariantCulture);
+                    break;
             }
-            catch (Exception ex)
-            {
-                log.Error("Error getting datatime for measurement value", ex);
-            }
         }
-        else if(unit == "PERCENT")
-        {
-            valueLiteral.Text = measurement.Measurement.ToString("#.##") + " %";
-        }
-        else if(unit == "MONEY")
-        {
-            valueLiteral.Text = measurement.Measurement.ToString("#.##") + " " + Currency + " " + CurrencyUnit;
-        }
-        else if (unit == "INT")
-        {
-            valueLiteral.Text = Convert.ToInt32(measurement.Measurement).ToString();
-        }
-        else
-        {
-            valueLiteral.Text = measurement.Measurement.ToString("#.##");
-        }
-
     }
+
 }

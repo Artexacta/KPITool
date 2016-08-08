@@ -14,7 +14,7 @@
                 </asp:Literal>
             </p>
             <p>
-                <asp:HyperLink ID="StartHyperLink" runat="server" NavigateUrl="~/MainPage.aspx" CssClass="btn btn-primary m-t"
+                <asp:HyperLink ID="StartHyperLink" runat="server" NavigateUrl="~/Organization/ListOrganizations.aspx" CssClass="btn btn-primary m-t"
                     Text="<% $ Resources : FatalError, StartHyperLinkText %>">
                 </asp:HyperLink>
             </p>

@@ -112,7 +112,7 @@ public partial class Kpi_KpiList : System.Web.UI.Page
         if (e.CommandName == "ViewOrganization")
         {
             Session["SEARCH_PARAMETER"] = "@organizationID " + kpiId.ToString();
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
         if (e.CommandName == "ViewProject")
         {

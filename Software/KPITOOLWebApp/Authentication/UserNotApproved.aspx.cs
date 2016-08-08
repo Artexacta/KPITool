@@ -18,7 +18,7 @@ public partial class Authentication_UserNotApproved : System.Web.UI.Page
     protected void ReturnLinkButton_Click(object sender, EventArgs e)
     {
         FormsAuthentication.SignOut();
-        Response.Redirect("~/MainPage.aspx");
+        Response.Redirect("~/Organization/ListOrganizations.aspx");
     }
 
 }

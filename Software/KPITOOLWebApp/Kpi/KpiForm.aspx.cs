@@ -119,7 +119,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         catch (Exception exc)
         {
             SystemMessages.DisplaySystemErrorMessage(exc.Message);
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
         }
 
         bool readOnly = false;

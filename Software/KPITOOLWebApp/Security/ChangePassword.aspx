@@ -18,7 +18,7 @@
         <div class="t-body tb-padding">
             <div class="row">
                 <div class="col-md-6">
-                    <asp:ChangePassword ID="ChangePassword1" runat="server" ContinueDestinationPageUrl="~/MainPage.aspx" Width="100%"  
+                    <asp:ChangePassword ID="ChangePassword1" runat="server" ContinueDestinationPageUrl="~/Organization/ListOrganizations.aspx" Width="100%"  
                         OnCancelButtonClick="ChangePassword1_CancelButtonClick" ChangePasswordFailureText="<%$ Resources:UserData, PasswordRegularExpressionValidator %>">
                         <ChangePasswordTemplate>
                             <div class="form-group">

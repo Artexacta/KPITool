@@ -241,10 +241,10 @@
     <value>Value Date:</value>
   </data>
   <data name="ValueRequireDecimalData" xml:space="preserve">
-    <value>"The value must be number with at most three decimals."</value>
+    <value>"The value must be a number with at most three decimals."</value>
   </data>
   <data name="ValueRequireIntegerData" xml:space="preserve">
-    <value>"The value must be integer."</value>
+    <value>"The value must be an integer."</value>
   </data>
   <data name="VerifiyDataFail" xml:space="preserve">
     <value>"It could not be verified if a record already exists with the same data."</value>
@@ -272,5 +272,14 @@
   </data>
   <data name="ConfirmDeleteMeasurement" xml:space="preserve">
     <value>return confirm('Are you sure to delete the measurement?')</value>
+  </data>
+  <data name="ErrorValueDecimalInFile" xml:space="preserve">
+    <value>Error in row: {0}, the value '{1}' must be a number with at most three decimals.</value>
+  </data>
+  <data name="ErrorValueIntInFile" xml:space="preserve">
+    <value>Error in row: {0}, the value '{1}' must be an integer.</value>
+  </data>
+  <data name="ErrorValuePercentInFile" xml:space="preserve">
+    <value>Error in row: {0}, the value '{1}' must be a number between 1 and 100 and at most three decimals.</value>
   </data>
 </root>

@@ -15,7 +15,7 @@
             </p>
             <p>
                 <asp:HyperLink ID="StartHyperLink" runat="server" 
-                    NavigateUrl="~/MainPage.aspx" Text="<% $ Resources : FatalError, StartHyperLinkText %>" ></asp:HyperLink>
+                    NavigateUrl="~/Organization/ListOrganizations.aspx" Text="<% $ Resources : FatalError, StartHyperLinkText %>" ></asp:HyperLink>
             </p>
         </div>
     </div>

@@ -153,7 +153,7 @@ public partial class Personas_ListaPersonas : System.Web.UI.Page
         if (e.CommandName == "ViewOrganization")
         {
             Session["SEARCH_PARAMETER"] = "@organizationID " + personId.ToString();
-            Response.Redirect("~/MainPage.aspx");
+            Response.Redirect("~/Organization/ListOrganizations.aspx");
             return;
         }
         if (e.CommandName == "ViewArea")

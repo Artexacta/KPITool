@@ -69,7 +69,7 @@ public partial class UserControls_FRTWB_AddButton : System.Web.UI.UserControl
         }
 
         SystemMessages.DisplaySystemMessage(Resources.Organization.MessageCreateOk);
-        Response.Redirect("~/MainPage.aspx");
+        Response.Redirect("~/Organization/ListOrganizations.aspx");
     }
 
     protected void ProjectButton_Click(object sender, EventArgs e)
