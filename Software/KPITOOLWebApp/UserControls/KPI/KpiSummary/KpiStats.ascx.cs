@@ -6,6 +6,7 @@ using Artexacta.App.Utilities;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -85,8 +86,8 @@ public partial class UserControls_KPI_KpiSummary_KpiStats : System.Web.UI.UserCo
             HighestValueLiteral.Text = GetValue(highestValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
             AverageLiteral.Text = GetValue(averageValue, objKpi.UnitID, objKpi.Currency, objKpi.CurrencyUnitID);
             
-            ProgressLiteral.Text = progress == decimal.MinValue ? "-" : progress != 0 ? progress.ToString("#.##") + "%": "0%";
-
+            ProgressLiteral.Text = progress == decimal.MinValue ? "-" : progress != 0 ? progress.ToString(CultureInfo.InvariantCulture) + "%": "0%";
+            
             if(trend < 0)
             {
                 IconLabel.CssClass = "text-danger";
