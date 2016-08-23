@@ -5,6 +5,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -72,10 +73,11 @@ public partial class UserControls_KPI_KpiCharts_KpiGaugeChart : System.Web.UI.Us
     {
         bool hasTarget = true;
         decimal currentValue = 0;
-        decimal progress = KPIBLL.GetKpiProgress(KpiId, CategoryId, CategoryItemId, ref hasTarget, ref currentValue);
+        int firstDayOfWeek = Artexacta.App.Configuration.Configuration.GetFirstDayOfWeek();
+        decimal progress = KPIBLL.GetKpiProgress(KpiId, CategoryId, CategoryItemId, firstDayOfWeek, ref hasTarget, ref currentValue);
         if (!hasTarget)
         {
-            CurrentValueLiteral.Text = currentValue.ToString("#.##");
+            CurrentValueLiteral.Text = currentValue.ToString(CultureInfo.InvariantCulture);
             CurrentValuePanel.Visible = true;
             return;
         }

@@ -76,10 +76,12 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
         int kpiId = KpiId;
         string strategyId = "";
         string startingPeriod = "";
+        string endingPeriod = "";
         decimal target = 0;
         int firstDayOfWeek = Artexacta.App.Configuration.Configuration.GetFirstDayOfWeek();
 
-        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, firstDayOfWeek, ref strategyId, ref target, ref startingPeriod);
+        List<KpiChartData> measurements = KpiMeasurementBLL.GetKPIMeasurementForChart(kpiId, CategoryId, CategoryItemId, firstDayOfWeek, 
+            ref strategyId, ref target, ref startingPeriod, ref endingPeriod);
         Dictionary<string, object> standardSerie = new Dictionary<string, object>();
         Dictionary<string, object> targetStandardSerie = new Dictionary<string, object>();
 
@@ -117,6 +119,9 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
                     if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
                         isTargetUsable = true;
 
+                    if (!string.IsNullOrEmpty(endingPeriod) && item.Period == endingPeriod)
+                        isTargetUsable = false;
+
                     if (isTargetUsable)
                     {
                         sumTarget = sumTarget + target;
@@ -131,6 +136,9 @@ public partial class UserControls_KPI_KpiCharts_KpiLineChart : System.Web.UI.Use
             {
                 if (!string.IsNullOrEmpty(startingPeriod) && item.Period == startingPeriod)
                     isTargetUsable = true;
+
+                if (!string.IsNullOrEmpty(endingPeriod) && item.Period == endingPeriod)
+                    isTargetUsable = false;
 
                 if (isTargetUsable)
                     targetStandardSerie.Add(item.Period, target);
