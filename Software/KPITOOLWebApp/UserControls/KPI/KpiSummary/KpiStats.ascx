@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="KpiStats.ascx.cs" Inherits="UserControls_KPI_KpiSummary_KpiStats" %>
-<p>
+<p id="progressContainer" runat="server">
     <asp:Literal ID="ProgressLiteral" runat="server"></asp:Literal>
     <asp:Literal runat="server" Text="<%$ Resources: KpiStats, ProgressLabel %>"></asp:Literal>
 </p>

@@ -11,7 +11,7 @@
         <HeaderTemplate><ul class="dropdown-menu"></HeaderTemplate>
         <ItemTemplate>
             <li>
-                <asp:LinkButton ID="Button" runat="server" CommandArgument='<%# Eval("LanguageId") %>' CommandName="SelectLanguage">
+                <asp:LinkButton ID="Button" runat="server" CommandArgument='<%# Eval("LanguageId") %>' CommandName="SelectLanguage" CausesValidation="false">
                     <asp:Literal ID="LanguageLiteral" runat="server"                    
                         Text='<%# Eval("LanguageName") %>'>
                     </asp:Literal>
