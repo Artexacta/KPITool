@@ -176,7 +176,7 @@
                                         </div>
                                         <div id="pnlDataDecimal" runat="server" class="col-md-10">
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <asp:TextBox ID="ValueTextBox" runat="server" CssClass="form-control dataText" TextMode="Number" />
                                                 </div>
                                                 <div class="p-t-5 text-warning">
@@ -337,7 +337,7 @@
             var value = $("#" + valueTextBox).val();
             if (value != "") {
                 var regexInt = new RegExp('^[0-9]{1,21}$');
-                var regexDecimal = new RegExp('^[0-9]{1,17}([\.\,][0-9]{1,3})*$');
+                var regexDecimal = new RegExp('^[0-9]{1,18}([\.\,][0-9]{1,3})*$');
                 var regexPercent = new RegExp('^([1-9]{1,2}([\.\,][0-9]{1,3})*|10|20|30|40|50|60|70|80|90|100)$');
 
                 if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "INT" && !regexInt.test(value)) {
