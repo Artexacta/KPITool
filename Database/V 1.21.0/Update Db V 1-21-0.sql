@@ -1773,10 +1773,10 @@ GO
 --=================================================================================================
 
 /*
- * We are done, mark the database as a 1.20.0 database.
+ * We are done, mark the database as a 1.21.0 database.
  */
 DELETE FROM [dbo].[tbl_DatabaseInfo] 
 INSERT INTO [dbo].[tbl_DatabaseInfo] 
 	([majorversion], [minorversion], [releaseversion])
-	VALUES (1,20,0)
+	VALUES (1,21,0)
 GO
