@@ -241,10 +241,10 @@
     <value>Fecha:</value>
   </data>
   <data name="ValueRequireDecimalData" xml:space="preserve">
-    <value>"El valor debe ser un número de hasta tres decimales."</value>
+    <value>"El valor debe ser un número de máximo 21 caracteres y de hasta tres decimales."</value>
   </data>
   <data name="ValueRequireIntegerData" xml:space="preserve">
-    <value>"El valor debe ser un entero."</value>
+    <value>"El valor debe ser un entero de máximo 21 caracteres."</value>
   </data>
   <data name="VerifiyDataFail" xml:space="preserve">
     <value>"No se pudo verificar si ya existe un registro con los mismos datos."</value>
@@ -259,7 +259,7 @@
     <value>Ocurrió un error al obtener el listado de mediciones registradas.</value>
   </data>
   <data name="ImageAlert" xml:space="preserve">
-    <value>Los datos ya existen</value>
+    <value>Los datos ya existen para esta fecha</value>
   </data>
   <data name="InsertMeasurementError" xml:space="preserve">
     <value>Ocurrió un error, la información no se registró.</value>
@@ -274,10 +274,10 @@
     <value>return confirm('¿Está seguro de eliminar la medición?')</value>
   </data>
   <data name="ErrorValueDecimalInFile" xml:space="preserve">
-    <value>Error en la fila: {0}, el valor '{1}' debe ser debe ser un número de hasta tres decimales.</value>
+    <value>Error en la fila: {0}, el valor '{1}' debe ser debe ser un número de máximo 21 caracteres de y de hasta tres decimales.</value>
   </data>
   <data name="ErrorValueIntInFile" xml:space="preserve">
-    <value>Error en la fila: {0}, el valor '{1}' debe ser un entero.</value>
+    <value>Error en la fila: {0}, el valor '{1}' debe ser un entero de máximo 21 caracteres.</value>
   </data>
   <data name="ErrorValuePercentInFile" xml:space="preserve">
     <value>Error en la fila: {0}, el valor '{1}' debe ser debe ser un número entre 1 y 100 y hasta 3 decimales.</value>

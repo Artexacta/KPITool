@@ -524,7 +524,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                                 errors.Add(string.Format(Resources.ImportData.ErrorValuePercentInFile, (i + 2).ToString(), value));
                             break;
                         default:
-                            Regex formatDecimal = new Regex("^[0-9]{1,17}([\\.\\,][0-9]{1,3})*$");
+                            Regex formatDecimal = new Regex("^[0-9]{1,18}([\\.\\,][0-9]{1,3})*$");
                             Match matchesDecimal = formatDecimal.Match(value.ToString());
                             if (!matchesDecimal.Success)
                                 errors.Add(string.Format(Resources.ImportData.ErrorValueDecimalInFile, (i + 2).ToString(), value));
@@ -742,6 +742,12 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     {
         pnlUploadFile.Visible = false;
         pnlEnterData.Visible = true;
+
+        ValidateFile.Text = "";
+        pnlErrorData.Visible = false;
+        ErrorFileLabel.Text = "";
+        pnlData.Visible = false;
+        pnlMeasurement.Visible = true;
 
         LoadFormEnterData();
     }
