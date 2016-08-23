@@ -151,7 +151,12 @@
                             <p><asp:Label ID="ValueDateLabel" runat="server" Text="<%$ Resources:ImportData, ValueDateLabel %>" Font-Bold="true" /></p>
                         </div>
                         <div class="col-md-3">
-                            <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" TextMode="Date" data-polyfill="desktop" />
+                            <div class="input-group date" id="datePicker">
+                                <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </span>
+                            </div>
                             <div class="has-error m-b-10">
                                 <asp:RequiredFieldValidator ID="DateRequiredFieldValidator" runat="server" ControlToValidate="DateTextBox"
                                     Display="Dynamic" ValidationGroup="EnterData" ErrorMessage="<%$ Resources:ImportData, RequiereDateValue %>" ForeColor="Red">
@@ -333,6 +338,35 @@
     </div>
 
     <script type="text/javascript">
+        var lang = <%= Resources.ImportData.Language %>
+        $(function () {
+            $('#datePicker').datetimepicker({
+                format: 'L',
+                locale: lang
+            });
+            $('#datePicker').on('dp.change', function (e) {
+                if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "TIME") {
+                    $(".rowData").each(function () {
+                        $(this).find('select.comboYear')[0].selectedIndex = 0;
+                        $(this).find('select.comboMonth')[0].selectedIndex = 0;
+                        $(this).find('select.comboDay')[0].selectedIndex = 0;
+                        $(this).find('select.comboHour')[0].selectedIndex = 0;
+                        $(this).find('select.comboMinute')[0].selectedIndex = 0;
+                        $(this).find('span.imageTimeUpdate').hide();
+                    });
+                } else {
+                    $(".rowData").each(function () {
+                        $(this).find('input.dataText').val("");
+                        $(this).find('span.imageUpdate').hide();
+                    });
+                }
+
+                for (i = 0; i < Page_Validators.length; i++) {
+                    $(Page_Validators[i]).css('display', 'none');
+                }
+            })
+        });
+
         function ValueTextBox_OnChange(valueTextBox, measurementIDsHiddenField, valueRequiredFileValidator, imageUpdate, detalle, categories) {
             var value = $("#" + valueTextBox).val();
             if (value != "") {
@@ -434,24 +468,6 @@
             } else {
                 $("#" + measurementIDsHiddenField).val("");
                 $("#" + imageTimeUpdate).hide();
-            }
-        }
-
-        function DateTextBox_OnChange() {
-            if ($("#<%= UnitIdHiddenField.ClientID %>").val() == "TIME") {
-                $(".rowData").each(function () {
-                    $(this).find('select.comboYear')[0].selectedIndex = 0;
-                    $(this).find('select.comboMonth')[0].selectedIndex = 0;
-                    $(this).find('select.comboDay')[0].selectedIndex = 0;
-                    $(this).find('select.comboHour')[0].selectedIndex = 0;
-                    $(this).find('select.comboMinute')[0].selectedIndex = 0;
-                    $(this).find('span.imageTimeUpdate').hide();
-                });
-            } else {
-                $(".rowData").each(function () {
-                    $(this).find('input.dataText').val("");
-                    $(this).find('span.imageUpdate').hide();
-                });
             }
         }
 

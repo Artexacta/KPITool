@@ -18,7 +18,12 @@
             <div class="t-body tb-padding" style="padding-top: 0; ">
                 <div class="row">
                     <div class="col-md-6">
-                        <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" />
+                        <div class="input-group date" id="datePicker">
+                            <asp:TextBox ID="DateTextBox" runat="server" CssClass="form-control" />
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,11 +31,11 @@
     </div>
 
     <script type="text/javascript">
-        $(function () {
-            $('#<%= DateTextBox.ClientID %>').datetimepicker({
-                defaultDate: "08/05/2016",
-                locale: 'es',
-                format: 'DD-MMM-YYYY'
+        var lang = <%= Resources.ImportData.Language %>
+        $(document).ready(function () {
+            $('#datePicker').datetimepicker({
+                format: 'L',
+                locale: lang
             });
         });
     </script>

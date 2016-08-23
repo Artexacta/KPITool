@@ -282,4 +282,7 @@
   <data name="ErrorValuePercentInFile" xml:space="preserve">
     <value>Error in row: {0}, the value '{1}' must be a number between 1 and 100 and at most three decimals.</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>'en'</value>
+  </data>
 </root>
