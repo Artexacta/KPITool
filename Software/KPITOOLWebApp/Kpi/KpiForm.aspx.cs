@@ -222,13 +222,10 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (theKpi.StartDate > DateTime.MinValue)
         {
-            StartingDateTextBox.Text = theKpi.StartDate.ToString("yyyy-MM-dd");
-        }
-        else
-        {
-            StartingDateTextBox.Text = null;
+            StartingDateTextBox.Text = theKpi.StartDate.ToString();
         }
         StartingDateTextBox.Enabled = !readOnly;
+        pnlDate.Visible = !readOnly;
         categoryCheckBox.Checked = theKpi.AllowCategories;
         categoryCheckBox.Visible = !readOnly;
 

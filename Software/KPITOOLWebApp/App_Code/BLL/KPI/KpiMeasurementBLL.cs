@@ -76,7 +76,7 @@ namespace Artexacta.App.KPI.BLL
         }
 
         public static List<KpiChartData> GetKPIMeasurementForChart(int kpiId, string categoryId, string categoryItemId, int fisrtDayOfWeek,
-            ref string strategyId, ref decimal target, ref string startingPeriod)
+            ref string strategyId, ref decimal target, ref string startingPeriod, ref string endingPeriod)
         {
             if (kpiId <= 0)
             {
@@ -91,7 +91,7 @@ namespace Artexacta.App.KPI.BLL
             decimal? paramTarget = 0;
             KpiMeasurementDSTableAdapters.KpiMeasurementsForChartTableAdapter adapter = new KpiMeasurementDSTableAdapters.KpiMeasurementsForChartTableAdapter();
             KpiMeasurementDS.KpiMeasurementsForChartDataTable table = adapter.GetKpiMeasurementsForChart(kpiId, categoryId, categoryItemId, fisrtDayOfWeek,
-                ref strategyId, ref paramTarget, ref startingPeriod);
+                ref strategyId, ref paramTarget, ref startingPeriod, ref endingPeriod);
             target = paramTarget == null ? 0 :  paramTarget.Value;
 
             List<KpiChartData> list = new List<KpiChartData>();

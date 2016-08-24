@@ -277,7 +277,12 @@
                             <asp:Label ID="SDLabel" runat="server" Text="<% $Resources: Kpi, LabelStartingDate %>"></asp:Label></label>
                         <div class="row">
                             <div class="col-md-4">
-                                <asp:TextBox ID="StartingDateTextBox" runat="server" CssClass="form-control" TextMode="Date" data-polyfill="desktop" />
+                                <div class="input-group date" id="datePicker">
+                                    <asp:TextBox ID="StartingDateTextBox" runat="server" CssClass="form-control" />
+                                    <span id="pnlDate" runat="server" class="input-group-addon">
+                                        <span class="fa fa-calendar"></span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -765,6 +770,14 @@
         SelectMethod="GetCategories" TypeName="Artexacta.App.Categories.BLL.CategoryBLL" OnSelected="CategoryObjectDataSource_Selected"></asp:ObjectDataSource>
 
     <script type="text/javascript">
+        var lang = <%= Resources.ImportData.Language %>
+        $(function () {
+            $('#datePicker').datetimepicker({
+                format: 'L',
+                locale: lang
+            });
+        });
+
         var unitCombo;
         var directionCombo;
         var kpiCombo;
