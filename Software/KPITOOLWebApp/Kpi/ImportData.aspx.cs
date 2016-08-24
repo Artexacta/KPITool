@@ -379,6 +379,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
 
         SystemMessages.DisplaySystemMessage(Resources.ImportData.RegisteredData);
         BindGridView();
+        LoadFormEnterData();
     }
     #endregion
 
@@ -752,7 +753,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     [WebMethod]
     public static string VerifiyData(int kpiId, string date, string detalle, string categories)
     {
-        string listIds = KpiMeasurementBLL.VerifyKPIMeasurements(kpiId, Convert.ToDateTime(date), detalle, categories);
+        string listIds = KpiMeasurementBLL.VerifyKPIMeasurements(kpiId, TextUtilities.GetStringToDateTime(date), detalle, categories);
         return listIds;
     }
 

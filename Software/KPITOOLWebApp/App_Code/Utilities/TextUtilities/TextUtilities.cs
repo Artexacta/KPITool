@@ -1212,5 +1212,22 @@ namespace Artexacta.App.Utilities.Text
             return date.ToString("dd-MMM-yyyy", culture);
         }
 
+        public static DateTime GetStringToDateTime(string dateText)
+        {
+            string lang = LanguageUtilities.GetLanguageFromContext();
+            string dateFormat = "";
+            switch (lang)
+            {
+                case "es":
+                    dateFormat = "dd/MM/yyyy";
+                    break;
+                case "en":
+                    dateFormat = "MM/dd/yyyy";
+                    break;
+            }
+            DateTime date = DateTime.ParseExact(dateText, dateFormat, CultureInfo.InvariantCulture);
+            return date;
+        }
+
     }
 }
