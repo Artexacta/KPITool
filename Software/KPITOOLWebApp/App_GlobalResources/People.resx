@@ -150,6 +150,9 @@
   <data name="LabelPersonNoObjects" xml:space="preserve">
     <value>This person does not have any objects. Create one by clicking on the</value>
   </data>
+  <data name="LabelSelectPerson" xml:space="preserve">
+    <value>[Select a person]</value>
+  </data>
   <data name="MessageCodeFormat" xml:space="preserve">
     <value>The code has invalid characters.</value>
   </data>

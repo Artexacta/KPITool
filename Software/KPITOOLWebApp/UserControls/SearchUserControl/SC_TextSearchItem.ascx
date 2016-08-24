@@ -15,8 +15,7 @@
         <asp:Label ID="lblTitle" runat="server" 
                 CssClass="CSearch_Item_Label"></asp:Label>
         <div id="CSearch_Item_Control">
-            <asp:TextBox ID="CSearch_Item_AspnetControl" runat="server" 
-                    CssClass="normalField"></asp:TextBox>
+            <asp:TextBox ID="CSearch_Item_AspnetControl" runat="server" CssClass="form-control"></asp:TextBox>
         </div>
     </div>
 </div>

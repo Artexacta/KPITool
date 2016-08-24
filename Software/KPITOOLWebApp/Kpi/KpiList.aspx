@@ -33,9 +33,11 @@
                             CssSearch="CSearch"
                             CssSearchHelp="CSearchHelpPanel"
                             CssSearchError="CSearchErrorPanel"
+                            CssSearchAdvanced="CSearch_Advanced_Panel"
                             SavedSearches="true" SavedSearchesID="KPISavedSearch"
                             ImageHelpUrl="Images/Neutral/Help.png"
-                            ImageErrorUrl="~/images/exclamation.png" />
+                            ImageErrorUrl="~/images/exclamation.png"
+                            AdvancedSearchForm="~/UserControls/AdvancedSearch/KpiAdvancedSearch.ascx" />
                     </div>
                     <div class="t-body tb-padding">
                         <div class="table-responsive">

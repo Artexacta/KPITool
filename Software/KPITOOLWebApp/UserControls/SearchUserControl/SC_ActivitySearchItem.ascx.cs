@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.PermissionObject;
 
-public partial class UserControls_SearchUserControl_SC_DataSearchItem : AbstractSearchItem
+public partial class UserControls_SearchUserControl_SC_ActivitySearchItem : AbstractSearchItem
 {
     public string TypeControl { get; set; }
 
@@ -15,7 +15,7 @@ public partial class UserControls_SearchUserControl_SC_DataSearchItem : Abstract
         rbtnOperation.Visible = ShowAndOrButtons;
         lblSpace.Visible = !ShowAndOrButtons;
         lblTitle.Text = this._title;
-        SearchDataControl.DataType = UserControls_FRTWB_SearchDataControl.AddType.PRJ.ToString();
+        SearchDataControl.DataType = UserControls_FRTWB_SearchDataControl.AddType.ACT.ToString();
     }
 
     public override string GetValue()
@@ -32,6 +32,12 @@ public partial class UserControls_SearchUserControl_SC_DataSearchItem : Abstract
         {
             if (SearchDataControl.AreaId > 0)
                 sentence += " and @areaID " + SearchDataControl.AreaId.ToString();
+        }
+
+        if (!string.IsNullOrEmpty(SearchDataControl.ProjectId.ToString()))
+        {
+            if (SearchDataControl.ProjectId > 0)
+                sentence += " and @projectID " + SearchDataControl.ProjectId.ToString();
         }
 
         return sentence;

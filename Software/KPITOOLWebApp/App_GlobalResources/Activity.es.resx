@@ -126,6 +126,9 @@
   <data name="LabelName" xml:space="preserve">
     <value>Nombre de la Actividad</value>
   </data>
+  <data name="LabelSelectActivity" xml:space="preserve">
+    <value>[Seleccione una actividad]</value>
+  </data>
   <data name="MessageActivityHas" xml:space="preserve">
     <value>Esta actividad tiene</value>
   </data>

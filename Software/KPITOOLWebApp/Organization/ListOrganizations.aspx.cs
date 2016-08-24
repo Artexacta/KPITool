@@ -53,6 +53,7 @@ public partial class ListOrganizations : SqlViewStatePage
     void OrgSearchControl_OnSearch()
     {
         log.Debug(OrgSearchControl.Sql);
+        BindOrganizations();
     }
 
     private void BindOrganizations()

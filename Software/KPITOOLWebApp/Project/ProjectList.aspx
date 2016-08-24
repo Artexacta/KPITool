@@ -39,8 +39,8 @@
                             SavedSearches="true"
                             SavedSearchesID="ProjectSavedSearch"
                             ImageHelpUrl="Images/Neutral/Help.png"
-                            ImageErrorUrl="~/images/exclamation.png" />
-                        <%--AdvancedSearchForm="~/UserControls/AdvancedSearch/ProjectAdvancedSearch.ascx"--%>
+                            ImageErrorUrl="~/images/exclamation.png" 
+                            AdvancedSearchForm="~/UserControls/AdvancedSearch/ProjectAdvancedSearch.ascx"/>
                     </div>
                     <div class="t-body tb-padding" id="ProjectList">
                         <asp:Repeater ID="ProjectsRepeater" runat="server" OnItemDataBound="ProjectsRepeater_ItemDataBound"

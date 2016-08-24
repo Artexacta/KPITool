@@ -171,4 +171,7 @@
   <data name="MessageProjectNoObject" xml:space="preserve">
     <value>Este proyecto no tienen ningún objeto. Cree un objeto haciendo click en</value>
   </data>
+  <data name="LabelSelectProject" xml:space="preserve">
+    <value>[ Seleccione un proyecto ]</value>
+  </data>
 </root>

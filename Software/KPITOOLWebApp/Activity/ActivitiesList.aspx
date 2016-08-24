@@ -34,9 +34,11 @@
                             CssSearch="CSearch"
                             CssSearchHelp="CSearchHelpPanel"
                             CssSearchError="CSearchErrorPanel"
+                            CssSearchAdvanced="CSearch_Advanced_Panel"
                             SavedSearches="true" SavedSearchesID="ActivitySavedSearch"
                             ImageHelpUrl="Images/Neutral/Help.png"
-                            ImageErrorUrl="~/images/exclamation.png" />
+                            ImageErrorUrl="~/images/exclamation.png"
+                            AdvancedSearchForm="~/UserControls/AdvancedSearch/ActivityAdvancedSearch.ascx" />
                     </div>
                     <div class="t-body tb-padding" id="ActivityList">
                         <asp:Repeater ID="ActivityRepeater" runat="server" OnItemDataBound="ActivityRepeater_ItemDataBound"
@@ -90,7 +92,7 @@
                                 </div>
                                 <div class="row m-b-20">
                                     <div class="col-md-3"></div>
-                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-9 m-t-5" Visible="false">
+                                    <asp:Panel runat="server" ID="emptyMessage" class="col-md-6 m-t-5 col-md-offset-1" Visible="false">
                                         <asp:Label ID="NoObjectLabel" runat="server" Text="<% $Resources: Activity, MessageActivityNoObject %>"></asp:Label>
                                         <i class="zmdi zmdi-plus-circle-o"></i>
                                         <asp:Label ID="IconLabel" runat="server" Text="<% $Resources: Activity, MessageActivityIconAbove %>"></asp:Label>

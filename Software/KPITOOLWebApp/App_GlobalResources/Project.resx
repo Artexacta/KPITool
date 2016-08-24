@@ -171,4 +171,7 @@
   <data name="TitleProjects" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="LabelSelectProject" xml:space="preserve">
+    <value>[ Select a project ]</value>
+  </data>
 </root>

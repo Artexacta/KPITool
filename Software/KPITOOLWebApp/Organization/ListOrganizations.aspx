@@ -2,7 +2,6 @@
     AutoEventWireup="true" CodeFile="ListOrganizations.aspx.cs" Inherits="ListOrganizations" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link href="App_Themes/Default/09_search.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" runat="Server">
     <div class="row">

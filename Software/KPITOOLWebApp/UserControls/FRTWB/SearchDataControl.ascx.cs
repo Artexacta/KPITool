@@ -141,6 +141,8 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
     {
         if (!IsPostBack)
         {
+            OrganizationTextBox.Text = "";
+
             OrganizationTextBox.Attributes.Add("onchange", "OrganizationTextBox_OnChange()");
             AreaTextBox.Attributes.Add("onchange", "AreaTextBox_OnChange()");
             ProjectTextBox.Attributes.Add("onchange", "ProjectTextBox_OnChange()");
@@ -163,7 +165,6 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
                 pnlProject.Visible = false;
                 pnlActivity.Visible = false;
                 pnlPeople.Visible = false;
-                pnlKPI.Visible = false;
                 break;
 
             case "ACT":
@@ -171,7 +172,6 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
                 pnlProject.Visible = true;
                 pnlActivity.Visible = false;
                 pnlPeople.Visible = false;
-                pnlKPI.Visible = false;
                 break;
 
             case "PPL":
@@ -179,15 +179,13 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
                 pnlProject.Visible = false;
                 pnlActivity.Visible = false;
                 pnlPeople.Visible = false;
-                pnlKPI.Visible = false;
                 break;
 
             case "KPI":
-                pnlArea.Style["display"] = "none";
-                pnlProject.Visible = false;
-                pnlActivity.Visible = false;
-                pnlPeople.Visible = false;
-                pnlKPI.Visible = true;
+                pnlArea.Style["display"] = "block";
+                pnlProject.Visible = true;
+                pnlActivity.Visible = true;
+                pnlPeople.Visible = true;
                 break;
         }
     }
@@ -207,12 +205,7 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
             }
             if (theData != null)
             {
-                if (DataTypeHiddenField.Value.Equals("KPI"))
-                {
-                    pnlAddProject.Style["display"] = "none";
-                    pnlAddPeople.Style["display"] = "none";
-                }
-                else
+                if (!DataTypeHiddenField.Value.Equals("KPI"))
                     ProjectTextBox.Text = theData.Name;
 
                 OrganizationId = theData.OrganizationID;
@@ -238,19 +231,9 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
             }
             if (theData != null)
             {
-                if (DataTypeHiddenField.Value.Equals("KPI"))
-                {
-                    pnlAddActivity.Style["display"] = "none";
-
-                    pnlAddProject.Style["display"] = "none";
-                    pnlAddPeople.Style["display"] = "none";
-                    pnlKPI.Style["display"] = "none";
-                }
-
                 OrganizationId = theData.OrganizationID;
                 AreaId = theData.AreaID;
                 ProjectId = theData.ProjectID;
-
             }
         }
     }
@@ -270,14 +253,6 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
             }
             if (theData != null)
             {
-                if (DataTypeHiddenField.Value.Equals("KPI"))
-                {
-                    pnlAddPeople.Style["display"] = "none";
-                    pnlAddProject.Style["display"] = "none";
-                    pnlAddActivity.Style["display"] = "none";
-                    pnlKPI.Style["display"] = "none";
-                }
-
                 OrganizationId = theData.OrganizationId;
                 AreaId = theData.AreaId;
             }
@@ -320,13 +295,8 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
             }
             if (theData != null)
             {
-                if (DataTypeHiddenField.Value.Equals("KPI"))
-                {
-                    pnlAddArea.Style["display"] = "none";
-                    AreaTextBox.Enabled = !ReadOnly;
-                }
-                else
-                    AreaTextBox.Text = theData.Name;
+                AreaTextBox.Enabled = !ReadOnly;
+                AreaTextBox.Text = theData.Name;
             }
         }
     }
@@ -346,17 +316,6 @@ public partial class UserControls_FRTWB_SearchDataControl : System.Web.UI.UserCo
             }
             if (theData != null)
             {
-                if (theData.OrganizationID > 0)
-                {
-                    pnlKPIEnabled.Style["display"] = "block";
-                    pnlKPIDisabled.Style["display"] = "none";
-                }
-                else
-                {
-                    pnlKPIEnabled.Style["display"] = "none";
-                    pnlKPIDisabled.Style["display"] = "block";
-                }
-
                 OrganizationId = theData.OrganizationID;
                 AreaId = theData.AreaID;
                 ProjectId = theData.ProjectID;

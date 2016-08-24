@@ -162,6 +162,12 @@
   <data name="LabelProjects" xml:space="preserve">
     <value>Project(s)</value>
   </data>
+  <data name="LabelSelectArea" xml:space="preserve">
+    <value>[ Select an area ]</value>
+  </data>
+  <data name="LabelSelectOrganization" xml:space="preserve">
+    <value>[ Select an organization ]</value>
+  </data>
   <data name="MessageActivityProjectError" xml:space="preserve">
     <value>The activity is not in the project.</value>
   </data>

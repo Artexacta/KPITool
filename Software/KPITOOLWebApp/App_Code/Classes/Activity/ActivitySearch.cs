@@ -25,6 +25,12 @@ namespace Artexacta.App.Activities
             col.Description = Resources.Organization.TitleOrganizationName;
             this.Cols.Add(col);
 
+            col = new Column("[a].[areaID]", "areaId", Column.ColumnType.Numeric);
+            col.AppearInStandardSearch = false;
+            col.DisplayHelp = false;
+            col.Description = Resources.Organization.TitleArea;
+            this.Cols.Add(col);
+
             col = new Column("[a].[projectID]", "projectID", Column.ColumnType.Numeric);
             col.AppearInStandardSearch = false;
             col.DisplayHelp = false;

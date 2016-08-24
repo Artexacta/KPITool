@@ -189,8 +189,8 @@
     </div>
 </asp:Panel>
 
-<asp:Panel ID="CSearch_Advanced_Panel" runat="server"
-    DefaultButton="btnSearch_Advanced">
+<asp:Panel ID="CSearch_Advanced_Panel" runat="server" DefaultButton="btnSearch_Advanced">
+
     <div class="frame">
         <div class="columnHead">
             <asp:Label ID="lblAdvancedSearchTitle" runat="server"
@@ -218,6 +218,7 @@
             <div class="clear"></div>
         </div>
     </div>
+
 </asp:Panel>
 
 <asp:Literal ID="AdvancedSearchJqueryFunctionality" runat="server"></asp:Literal>

@@ -15,6 +15,8 @@ using Artexacta.App.PermissionObject;
 using Artexacta.App.PermissionObject.BLL;
 using Artexacta.App.Currency;
 using Artexacta.App.Currency.BLL;
+using System.Globalization;
+using System.Threading;
 
 public partial class Kpi_KpiForm : System.Web.UI.Page
 {
@@ -186,8 +188,11 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             MeasuredInCombobox.Enabled = !readOnly;
             SelectedMeasureHiddenField.Value = theKpi.CurrencyUnitID;
             UnitTargetLabel.Text = theKpi.CurrencyUnitForDisplay;
+
             if (theKpi.CurrencyHasMeasure)
+            {
                 UnitTargetLabel.Text = UnitTargetLabel.Text + Resources.Kpi.LabelOf + theKpi.Currency;
+            }
         }
         if (theKpi.UnitID == "PERCENT")
         {
@@ -288,10 +293,17 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
                 try
                 {
+                    CultureInfo currentCulture = Thread.CurrentThread.CurrentUICulture;
+
                     if (theKpi.UnitID == "INT")
-                        SingleTargetTextBox.Text = theTarget.Target.ToString("#,##0");
+                    {
+                        SingleTargetTextBox.Text = theTarget.Target.ToString("#,##0", currentCulture);
+                    }
                     else
-                        SingleTargetTextBox.Text = theTarget.Target.ToString("#,##0.000");
+                    {
+                        SingleTargetTextBox.Text = theTarget.Target.ToString("N3", currentCulture);
+
+                    }
                 }
                 catch
                 {
@@ -660,19 +672,22 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
                 case "INT":
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
-                    SingleTargetRangeValidator.Type = ValidationDataType.Integer;
+                    SingleTargetRangeValidator.ValidationGroup = "";
+                    //SingleTargetRangeValidator.Type = ValidationDataType.Integer;
                     CurrencyPanel.Style["display"] = "none";
                     break;
                 case "DECIMAL":
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
-                    SingleTargetRangeValidator.Type = ValidationDataType.Double;
+                    SingleTargetRangeValidator.ValidationGroup = "";
+                    //SingleTargetRangeValidator.Type = ValidationDataType.Double;
                     CurrencyPanel.Style["display"] = "none";
                     break;
                 case "MONEY":
                     NumericSingleTargetPanel.Style["display"] = "block";
                     TimeSingleTargetPanel.Style["display"] = "none";
-                    SingleTargetRangeValidator.Type = ValidationDataType.Double;
+                    SingleTargetRangeValidator.ValidationGroup = "";
+                    //SingleTargetRangeValidator.Type = ValidationDataType.Double;
                     CurrencyPanel.Style["display"] = "block";
                     CurrencyRequiredFieldValidator.ValidationGroup = "AddData";
                     MeasuredRequiredFieldValidator.ValidationGroup = "AddData";
@@ -685,11 +700,21 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             DirectionCombobox.SelectedValue = theType.DirectionID.Trim();
             DirectionCombobox.Enabled = false;
         }
+        else
+        {
+            DirectionCombobox.ClearSelection();
+            DirectionCombobox.Enabled = true;
+        }
 
         if (theType.StrategyID.Trim() != "NA")
         {
             StrategyCombobox.SelectedValue = theType.StrategyID.Trim();
             StrategyCombobox.Enabled = false;
+        }
+        else
+        {
+            StrategyCombobox.ClearSelection();
+            StrategyCombobox.Enabled = true;
         }
     }
     protected void CurrencyCombobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1021,10 +1046,13 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
                     if (theClass != null)
                     {
+                        UnitLabel.Font.Size = 8;
                         UnitLabel.Text = theClass.Name;
 
                         if (theClass.HasMeasure)
+                        {
                             UnitLabel.Text = UnitLabel.Text + Resources.Kpi.LabelOf + theClass.CurrencyID;
+                        }
                     }
                 }
             }
@@ -1338,5 +1366,28 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (targetPeriod > 0 && startingDate == DateTime.MinValue)
             args.IsValid = false;
+    }
+    protected void FormatTargetCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        if (string.IsNullOrEmpty(SingleTargetTextBox.Text))
+        {
+            args.IsValid = true;
+        }
+
+        char a = Convert.ToChar(CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator);
+        char e = new char();
+        string sNumber = SingleTargetTextBox.Text.Replace(a, e);
+        decimal dNumber = 0;
+
+        try
+        {
+            dNumber = Convert.ToDecimal(sNumber);
+        }
+        catch
+        {
+            args.IsValid = false;
+        }
+
+        args.IsValid = true;
     }
 }

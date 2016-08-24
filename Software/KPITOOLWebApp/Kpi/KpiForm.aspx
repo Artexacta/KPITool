@@ -240,7 +240,7 @@
                         </label>
                         <div class="row">
                             <div class="col-md-2">
-                                <asp:TextBox ID="TargetPeriodTextBox" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="TargetPeriodTextBox" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-2 col-md-offset-1">
                                 <asp:Label ID="UnitLabel" runat="server" Text=""></asp:Label>
@@ -249,12 +249,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="has-error m-b-10">
-                                   <%-- <asp:RequiredFieldValidator ID="TargetRequiredFieldValidator" runat="server" ControlToValidate="TargetPeriodTextBox"
+                                    <%-- <asp:RequiredFieldValidator ID="TargetRequiredFieldValidator" runat="server" ControlToValidate="TargetPeriodTextBox"
                                         Display="Dynamic"
                                         ValidationGroup="AddData"
                                         ErrorMessage="<% $Resources: Kpi, MessageTargetPeriodRequired %>">
                                     </asp:RequiredFieldValidator>--%>
-                                     <asp:CustomValidator ID="TargetPeriodCustomValidator" runat="server"
+                                    <asp:CustomValidator ID="TargetPeriodCustomValidator" runat="server"
                                         ErrorMessage="<% $Resources: Kpi, MessageTargetPeriodRequired %>"
                                         Display="Dynamic"
                                         ValidationGroup="AddData"
@@ -289,7 +289,7 @@
                                         ValidationGroup="AddData"
                                         OnServerValidate="StartingDateCustomValidator_ServerValidate">
                                     </asp:CustomValidator>
-                                     <asp:CustomValidator ID="StartingDateCustomValidator2" runat="server"
+                                    <asp:CustomValidator ID="StartingDateCustomValidator2" runat="server"
                                         ErrorMessage="<% $Resources: Kpi, MessageStartingDateRequired %>"
                                         Display="Dynamic"
                                         ValidationGroup="AddData"
@@ -321,13 +321,19 @@
                             <div id="NumericSingleTargetPanel" runat="server">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3 col-md-offset-1">
                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
                                     </div>
                                 </div>
                                 <div class="has-error m-b-10">
+                                    <asp:CustomValidator ID="FormatTargetCustomValidator" runat="server"
+                                        ErrorMessage="<% $Resources: Kpi, ErrorFormatTarget %>"
+                                        Display="Dynamic"
+                                        ControlToValidate="SingleTargetTextBox"
+                                        ValidationGroup="AddData"
+                                        OnServerValidate="FormatTargetCustomValidator_ServerValidate"></asp:CustomValidator>
                                     <asp:RangeValidator ID="SingleTargetRangeValidator" runat="server"
                                         ErrorMessage="<% $Resources: Kpi, ErrorFormatTarget %>"
                                         Display="Dynamic"
@@ -512,7 +518,7 @@
                                         <asp:ListItem Text="<% $Resources: Kpi, LabelSelectCategory %>" Value="" />
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-md-1" style="text-align:left">
+                                <div class="col-md-1" style="text-align: left">
                                     <br />
                                     <asp:LinkButton ID="AddCategory" runat="server" CssClass="viewBtn" OnClick="AddCategory_Click"
                                         CausesValidation="false" ToolTip="<% $Resources: Kpi, LabelAddCategory %>"><i class="zmdi zmdi-plus-circle-o zmdi-hc-fw"></i></asp:LinkButton>
