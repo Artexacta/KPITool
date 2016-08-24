@@ -753,4 +753,7 @@
   <data name="LabelAddCategory" xml:space="preserve">
     <value>Adicionar Categoría</value>
   </data>
+  <data name="MessageTargetInt" xml:space="preserve">
+    <value>El valor del objetivo del KPI debe ser entero.</value>
+  </data>
 </root>

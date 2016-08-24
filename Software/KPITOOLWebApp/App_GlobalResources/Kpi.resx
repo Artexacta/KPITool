@@ -750,4 +750,7 @@
   <data name="LabelAddCategory" xml:space="preserve">
     <value>Add Category</value>
   </data>
+  <data name="MessageTargetInt" xml:space="preserve">
+    <value>The value of KPI target must be integer.</value>
+  </data>
 </root>
