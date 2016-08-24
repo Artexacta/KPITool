@@ -146,7 +146,6 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             }
             
             BindGridView();
-            LoadFormEnterData();
         }
     }
 
@@ -230,8 +229,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
     #region EnterData Manually
     private void LoadFormEnterData()
     {
-        DateTextBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
-        DateTextBox.Attributes.Add("onchange", "DateTextBox_OnChange()");
+        DateTextBox.Text = DateTime.Now.ToString();
 
         //-- get CategoriesItems combinated
         List<KPICategoyCombination> theCombinatedList = new List<KPICategoyCombination>();
@@ -381,7 +379,6 @@ public partial class Kpi_ImportData : System.Web.UI.Page
 
         SystemMessages.DisplaySystemMessage(Resources.ImportData.RegisteredData);
         BindGridView();
-        LoadFormEnterData();
     }
     #endregion
 
