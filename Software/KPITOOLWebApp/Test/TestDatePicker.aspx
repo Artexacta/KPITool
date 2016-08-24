@@ -24,6 +24,11 @@
                                 <span class="fa fa-calendar"></span>
                             </span>
                         </div>
+
+                        <br />
+
+                        <asp:TextBox ID="DecimalTextBox" runat="server" TextMode="Number" CssClass="form-control" />
+
                     </div>
                 </div>
             </div>

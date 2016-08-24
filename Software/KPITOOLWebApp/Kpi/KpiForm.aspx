@@ -239,10 +239,10 @@
                             <asp:Label ID="TargetPeriodLabel" runat="server" Text="<% $Resources: Kpi, LabelTargetPeriod %>"></asp:Label>
                         </label>
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <asp:TextBox ID="TargetPeriodTextBox" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
-                            <div class="col-md-2 col-md-offset-1">
+                            <div class="col-md-2" style="vertical-align: middle; height: 34px; padding: 6px 6px; ">
                                 <asp:Label ID="UnitLabel" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
@@ -322,11 +322,12 @@
                         <%--Single Target--%>
                         <div id="SingleTargetPanel" runat="server" class="m-b-10">
                             <label>
-                                <asp:Label ID="TargetLabel" runat="server" Text="<% $Resources: Kpi, LabelTarget %>"></asp:Label></label>
+                                <asp:Label ID="TargetLabel" runat="server" Text="<% $Resources: Kpi, LabelTarget %>"></asp:Label>
+                            </label>
                             <div id="NumericSingleTargetPanel" runat="server">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <div class="col-md-4">
+                                        <asp:TextBox ID="SingleTargetTextBox" runat="server" CssClass="form-control" TextMode="Number" />
                                     </div>
                                     <div class="col-md-3 col-md-offset-1">
                                         <asp:Label ID="UnitTargetLabel" runat="server" Text=""></asp:Label>
@@ -449,7 +450,7 @@
                                             <asp:ListItem Text="<% $Resources: Kpi, label0Minutes %>" Value="0"></asp:ListItem>
                                             <asp:ListItem Text="<% $Resources: Kpi, label1Minute %>" Value="1"></asp:ListItem>
                                             <asp:ListItem Text="<% $Resources: Kpi, label2Minutes %>" Value="2"></asp:ListItem>
-                                            <asp:ListItem Text="<% $Resources: Kpi, label3Minutes %>s" Value="3"></asp:ListItem>
+                                            <asp:ListItem Text="<% $Resources: Kpi, label3Minutes %>" Value="3"></asp:ListItem>
                                             <asp:ListItem Text="<% $Resources: Kpi, label4Minutes %>" Value="4"></asp:ListItem>
                                             <asp:ListItem Text="<% $Resources: Kpi, label5Minutes %>" Value="5"></asp:ListItem>
                                             <asp:ListItem Text="<% $Resources: Kpi, label6Minutes %>" Value="6"></asp:ListItem>
@@ -671,7 +672,7 @@
                                                             <asp:ListItem Text="<% $Resources: Kpi, label0Minutes %>" Value="0"></asp:ListItem>
                                                             <asp:ListItem Text="<% $Resources: Kpi, label1Minute %>" Value="1"></asp:ListItem>
                                                             <asp:ListItem Text="<% $Resources: Kpi, label2Minutes %>" Value="2"></asp:ListItem>
-                                                            <asp:ListItem Text="<% $Resources: Kpi, label3Minutes %>s" Value="3"></asp:ListItem>
+                                                            <asp:ListItem Text="<% $Resources: Kpi, label3Minutes %>" Value="3"></asp:ListItem>
                                                             <asp:ListItem Text="<% $Resources: Kpi, label4Minutes %>" Value="4"></asp:ListItem>
                                                             <asp:ListItem Text="<% $Resources: Kpi, label5Minutes %>" Value="5"></asp:ListItem>
                                                             <asp:ListItem Text="<% $Resources: Kpi, label6Minutes %>" Value="6"></asp:ListItem>

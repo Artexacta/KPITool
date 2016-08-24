@@ -17,6 +17,10 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         DateTextBox.Text = DateTime.Now.ToString();
+
+        decimal valor = Convert.ToDecimal(500.563);
+
+        DecimalTextBox.Text = valor.ToString(CultureInfo.InvariantCulture);
     }
 
 }
