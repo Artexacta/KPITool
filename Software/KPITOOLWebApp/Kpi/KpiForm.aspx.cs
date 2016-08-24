@@ -222,7 +222,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
         if (theKpi.StartDate > DateTime.MinValue)
         {
-            StartingDateTextBox.Text = theKpi.StartDate.ToString();
+            StartingDateTextBox.Text = theKpi.StartDate.ToString("d");
         }
         StartingDateTextBox.Enabled = !readOnly;
         pnlDate.Visible = !readOnly;
@@ -1364,25 +1364,35 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
         if (targetPeriod > 0 && startingDate == DateTime.MinValue)
             args.IsValid = false;
     }
+
     protected void FormatTargetCustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
     {
         if (string.IsNullOrEmpty(SingleTargetTextBox.Text))
         {
             args.IsValid = true;
+            return;
         }
 
-        char a = Convert.ToChar(CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator);
-        char e = new char();
-        string sNumber = SingleTargetTextBox.Text.Replace(a, e);
-        decimal dNumber = 0;
+        decimal originalNumber = 0;
 
         try
         {
-            dNumber = Convert.ToDecimal(sNumber);
+            originalNumber = Convert.ToDecimal(SingleTargetTextBox.Text);
         }
-        catch
+        catch 
         {
             args.IsValid = false;
+            return;   
+        }
+
+        if (SelectedUnitHiddenField.Value == "INT")
+        {
+            if (originalNumber != Convert.ToInt32(originalNumber))
+            {
+                FormatTargetCustomValidator.ErrorMessage = Resources.Kpi.MessageTargetInt;
+                args.IsValid = false;
+                return;
+            }
         }
 
         args.IsValid = true;
