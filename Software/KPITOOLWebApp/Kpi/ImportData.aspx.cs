@@ -460,7 +460,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             Regex regexTime = new Regex(timeFormat);
             //-- leer Excel
             List<ExColumn> columns = new List<ExColumn>();
-            columns.Add(new DateExColumn(Resources.ImportData.DateColumn, true, true));
+            columns.Add(new DateExColumn(Resources.ImportData.DateColumn, true, false));
             foreach (Category theCategory in theCategoryList)
             {
                 columns.Add(new ListExColumn(theCategory.ID, true, true, theCategory.ItemsList.Split(';').ToList().FindAll(i => !string.IsNullOrEmpty(i))));
@@ -468,13 +468,13 @@ public partial class Kpi_ImportData : System.Web.UI.Page
             switch (UnitIdHiddenField.Value)
             {
                 case "TIME":
-                    columns.Add(new StringExColumn(Resources.ImportData.ValueColumn, true, true, timeFormat));
+                    columns.Add(new StringExColumn(Resources.ImportData.ValueColumn, true, false, timeFormat));
                     break;
                 case "INT":
-                    columns.Add(new IntegerExColumn(Resources.ImportData.ValueColumn, true, true, true));
+                    columns.Add(new IntegerExColumn(Resources.ImportData.ValueColumn, true, false, true));
                     break;
                 default:
-                    columns.Add(new DecimalExColumn(Resources.ImportData.ValueColumn, true, true, true));
+                    columns.Add(new DecimalExColumn(Resources.ImportData.ValueColumn, true, false, true));
                     break;
             }
 
@@ -516,7 +516,7 @@ public partial class Kpi_ImportData : System.Web.UI.Page
                                 errors.Add(string.Format(Resources.ImportData.ErrorValueIntInFile, (i + 2).ToString(), value));
                             break;
                         case "PERCENT":
-                            Regex formatPercent = new Regex("^([1-9]{1,2}([\\.\\,][0-9]{1,3})*|10|20|30|40|50|60|70|80|90|100)$");
+                            Regex formatPercent = new Regex("^([0-9]{1,2}([\\.\\,][0-9]{1,3})*|10|20|30|40|50|60|70|80|90|100)$");
                             Match matchesPercent = formatPercent.Match(value.ToString());
                             if (!matchesPercent.Success)
                                 errors.Add(string.Format(Resources.ImportData.ErrorValuePercentInFile, (i + 2).ToString(), value));

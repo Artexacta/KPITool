@@ -290,16 +290,13 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
 
                 try
                 {
-                    CultureInfo currentCulture = Thread.CurrentThread.CurrentUICulture;
-
                     if (theKpi.UnitID == "INT")
                     {
-                        SingleTargetTextBox.Text = theTarget.Target.ToString("#,##0", currentCulture);
+                        SingleTargetTextBox.Text = Convert.ToInt32(theTarget.Target).ToString(CultureInfo.InvariantCulture);
                     }
                     else
                     {
-                        SingleTargetTextBox.Text = theTarget.Target.ToString("N3", currentCulture);
-
+                        SingleTargetTextBox.Text = Math.Round(theTarget.Target, 3).ToString(CultureInfo.InvariantCulture);
                     }
                 }
                 catch
@@ -446,7 +443,7 @@ public partial class Kpi_KpiForm : System.Web.UI.Page
             {
                 try
                 {
-                    theTarget.Target = Convert.ToDecimal(SingleTargetTextBox.Text);
+                    theTarget.Target = Convert.ToDecimal(SingleTargetTextBox.Text, CultureInfo.InvariantCulture);
                 }
                 catch
                 {
