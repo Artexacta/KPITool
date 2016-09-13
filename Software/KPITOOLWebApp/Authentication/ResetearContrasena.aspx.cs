@@ -94,8 +94,8 @@ public partial class Authentication_ResetearContrasena : System.Web.UI.Page
             return;
         }
 
-        mailText.Replace("<%UserName%>", userName);
-        mailText.Replace("<%Password%>", newPass);
+        mailText.Replace("{UserName}", userName);
+        mailText.Replace("{Password}", newPass);
 
         try
         {

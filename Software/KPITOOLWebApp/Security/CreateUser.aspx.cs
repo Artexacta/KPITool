@@ -10,6 +10,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Artexacta.App.Configuration;
 using Artexacta.App.Utilities.SystemMessages;
+using System.Net.Mail;
+using System.Net.Mime;
 
 public partial class Security_CreateUser : System.Web.UI.Page
 {
@@ -126,6 +128,40 @@ public partial class Security_CreateUser : System.Web.UI.Page
             e.Message.Body = e.Message.Body.Replace("<%Password%>", CreateUserWizard1.Password);
             e.Message.Body = e.Message.Body.Replace("<%Link%>", "<a href=\"" + confirmURL + "\">" + confirmURL + "</a>");
             e.Message.Subject = Resources.UserData.UserCreatedSubject;
+
+            string logoMessage = "";
+            try
+            {
+                //Path to save the image
+                //string appPath = HttpContext.Current.Request.PhysicalApplicationPath;
+                string appPath = AppDomain.CurrentDomain.BaseDirectory.ToString();
+                string file = appPath + "Images\\logo.png";
+                LinkedResource logo = new LinkedResource(file);
+                logo.ContentId = "companylogo";
+                int imageHeight = 102;
+                int imageWidth = 120;
+
+                logoMessage = logoMessage + "<table>";
+                logoMessage = logoMessage + "<tr>";
+                logoMessage = logoMessage + "<td><img src=\"cid:companylogo" + "\"";
+                logoMessage = logoMessage + " width=\"" + imageWidth.ToString();
+                logoMessage = logoMessage + "\"";
+                logoMessage = logoMessage + " height=\"" + imageHeight.ToString();
+                logoMessage = logoMessage + "\"></td>";
+                logoMessage = logoMessage + "</tr>";
+                logoMessage = logoMessage + "</table>";
+                logoMessage = logoMessage + "<br />";
+
+                AlternateView av1 = AlternateView.CreateAlternateViewFromString(logoMessage + e.Message.Body, null, MediaTypeNames.Text.Html);
+                av1.LinkedResources.Add(logo);
+
+                e.Message.AlternateViews.Add(av1);
+            }
+            catch (Exception q)
+            {
+                log.Warn("Failed to add logo to email new User", q);
+            }
+
             e.Message.IsBodyHtml = true;
         }
         catch (Exception exc)

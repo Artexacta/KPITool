@@ -45,8 +45,6 @@
     </style> -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cp" Runat="Server">
-
-
     <div class="lc-block toggled" id="l-login">
         <div class="lcb-float"><i class="zmdi zmdi-key"></i></div>
         <div id="loginContainer">
@@ -58,7 +56,6 @@
                     </h3>
                     <br />  
                     <div class="form-group">
-                            
                         <asp:TextBox ID="EmailTextBox" runat="server" CssClass="form-control"
                             placeholder="<%$ Resources: LoginGlossary, EmailHint %>"></asp:TextBox>
                         <asp:RegularExpressionValidator ID="FormatRegularExpressionValidator" runat="server"
@@ -83,9 +80,12 @@
                     <asp:Button ID="ResetButton" runat="server" OnClick="ResetButton_Click"
                         Text="<%$ Resources: LoginGlossary, BotonResetear %>"
                         CssClass="btn btn-block btn-primary" />
-                    <asp:HyperLink runat="server" CssClass="text-center block"
-                        NavigateUrl="~/Authentication/Login.aspx"
-                        Text="<%$ Resources: LoginGlossary, LoginLink %>"></asp:HyperLink>
+                    <br />
+                    <p>
+                        <asp:HyperLink runat="server" CssClass="text-center block"
+                            NavigateUrl="~/Authentication/Login.aspx"
+                            Text="<%$ Resources: LoginGlossary, LoginLink %>"></asp:HyperLink>
+                    </p>
                 </div>
             </div>
         </div>
