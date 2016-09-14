@@ -77,7 +77,7 @@ namespace Artexacta.App.Utilities.Email
                 string file = appPath + "Images\\logo.png";
                 LinkedResource logo = new LinkedResource(file);
                 logo.ContentId = "companylogo";
-                int imageHeight = 44;
+                int imageHeight = 102;
                 int imageWidth = 120;
 
                 logoMessage = logoMessage + "<table>";

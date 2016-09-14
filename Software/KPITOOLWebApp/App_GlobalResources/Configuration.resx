@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmationPasswordSubject" xml:space="preserve">
-    <value>ConfirmationPasswordSubject</value>
+    <value>Reset password</value>
   </data>
   <data name="CreationEmailSubject" xml:space="preserve">
-    <value>CreationEmailSubject</value>
+    <value>New user account</value>
   </data>
   <data name="MensajeErrorArchivoConfiguracion" xml:space="preserve">
     <value>Cannot find a valid TimeToShowSystemMessages configuration string in system configuration file</value>
