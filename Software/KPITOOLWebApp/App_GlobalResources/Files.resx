@@ -139,7 +139,7 @@
     <value>Unkown File Type</value>
   </data>
   <data name="NewPasswordFileLocation" xml:space="preserve">
-    <value>~/DataFiles/Emails/NewPasswordEmail.txt</value>
+    <value>~/DataFiles/Emails/ResetPassword.en.txt</value>
   </data>
   <data name="UnkownFileSize" xml:space="preserve">
     <value>Unkown File Size</value>

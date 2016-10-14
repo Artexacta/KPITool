@@ -137,13 +137,10 @@ public partial class Security_UserList : System.Web.UI.Page
                 if (!string.IsNullOrEmpty(password))
                 {
                     string toMail = theUser.Email;
-                    string link = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Authority +
-                        HttpContext.Current.Request.ApplicationPath + "/Organization/ListOrganizations.aspx";
 
                     List<EmailFileParameter> theParams = new List<EmailFileParameter>();
                     theParams.Add(new EmailFileParameter("UserName", userName));
                     theParams.Add(new EmailFileParameter("Password", password));
-                    theParams.Add(new EmailFileParameter("Link", link));
 
                     EmailUtilities.SendEmailFile(Resources.Files.ResetPassword, Resources.UserData.SubjectResetPassword, userName, toMail, theParams);
                     SystemMessages.DisplaySystemMessage(string.Format(Resources.UserData.MessagePasswordReset, userName));
