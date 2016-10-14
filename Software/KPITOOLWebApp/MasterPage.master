@@ -102,12 +102,8 @@
             NoApplyToSelector="*[class|=ru], *[class|=Rad],*[class|=Rad]"
             ShouldDisplayToolTipWS="~/ToolTipWS/ToolTipUse.asmx/ShouldDisplayToolTip" />--%>
 
-
-        <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            webshims.setOptions('forms-ext', { types: 'date' });
-            webshims.polyfill('forms forms-ext');
-        </script>
+        
+       
         <script type="text/javascript">
             $(document).ready(function () {
                 updateOnResize();
@@ -164,11 +160,6 @@
                 updateOnResize();
             });
 
-        </script>
-        <script src="//cdn.jsdelivr.net/webshim/1.14.5/polyfiller.js"></script>
-        <script>
-            webshims.setOptions('forms-ext', {types: 'date'});
-            webshims.polyfill('forms forms-ext');
         </script>
     </form>
 </body>

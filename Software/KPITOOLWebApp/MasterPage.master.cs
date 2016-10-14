@@ -264,6 +264,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
         JqueryAndMainMenuScript.Text = scriptText.ToString();
+
     }
 
     private bool IsUserAuthorizedPage()
