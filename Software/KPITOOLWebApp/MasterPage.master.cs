@@ -179,9 +179,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
         scriptText.Append(ResolveClientUrl("~/Scripts/bootstrap.min.js"));
         scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
-        scriptText.Append("<script src=\"");
-        scriptText.Append(ResolveClientUrl("~/Scripts/jquery.mCustomScrollbar.js"));
-        scriptText.Append("\" type=\"text/javascript\"></script>\n");
+        //scriptText.Append("<script src=\"");
+        //scriptText.Append(ResolveClientUrl("~/Scripts/jquery.mCustomScrollbar.js"));
+        //scriptText.Append("\" type=\"text/javascript\"></script>\n");
 
         scriptText.Append("<script src=\"");
         scriptText.Append(ResolveClientUrl("~/Scripts/functions.js"));
