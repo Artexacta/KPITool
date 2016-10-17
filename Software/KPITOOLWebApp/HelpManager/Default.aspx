@@ -2,7 +2,7 @@
     ValidateRequest="false" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="ContextHelpManager_Default" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="Server">
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.css" rel="stylesheet" />
+    <link href="Style/summernote.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="body" ContentPlaceHolderID="cp" runat="Server">
 
@@ -232,8 +232,7 @@
     </div>
 
     <asp:TextBox ID="CodeHtmlTextBox" runat="server" TextMode="MultiLine" CssClass="hide"></asp:TextBox>
-
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/summernote.js" type="text/javascript"></script>
+    <script src="../Scripts/summernote.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#summernote').summernote({
